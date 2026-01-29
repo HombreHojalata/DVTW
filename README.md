@@ -8,3 +8,8 @@
 Gestión de recuros, toma de decisión y parodia.
 
 ### 1.3 Setting
+La ciudad de _____ es una metrópolis moderna, habitada completamente por animales: cada especie representa intereses, problemas y opiniones distintas, pero todas comparten algo en común: están cansadas de la política.
+Tú eres el presidente de la ciudad: fuiste elegido con grandes promesas, eslóganes llamativos y sonrisas frente a las cámaras. Sin embargo, durante tu mandato, la gestión de la ciudad ha sido cuestionable.
+Ahora solo quedan 10 días para las elecciones. Las encuestas no son favorables y en este clima de desconfianza, tu objetivo es claro: ser reelegido.
+No tienes que ser un buen presidente.
+Solo tienes que parecerlo.
