@@ -21,7 +21,7 @@ Esquema:
 
 Ambientación:
 
-La mafia esta escondida por las calles de Quackinton D.C., una sucia organización criminal con mucha influencia en los barrios bajos de la ciudad. En una ciudad donde todos son los animales son veganos, en la mafia están desarrollando barritas de proteínas para contrabando ilegal, la procedencia de la proteína, un misterio que nadie quiere averiguar.
+La mafia está escondida por las calles de Quackinton D.C., una sucia organización criminal con mucha influencia en los barrios bajos de la ciudad. En una ciudad donde todos son los animales son veganos, en la mafia están desarrollando barritas de proteínas para contrabando ilegal, la procedencia de la proteína, un misterio que nadie quiere averiguar.
 
 
 
@@ -129,7 +129,7 @@ Hacerse con el poder de VenePuebla: Sale más barato, pero tiene repercusiones n
 
 Sobornar a GreenPark: Sale carísimo, pero no tiene repercusiones internas en cuanto al apoyo en las elecciones.
 
-Hacerse con el poder de uno de los 2 pueblos: Se optienen X más beneficios diarios.
+Hacerse con el poder de uno de los 2 pueblos: Se obtienen X más beneficios diarios.
 
 
 
@@ -139,13 +139,13 @@ Hacerse con el poder de uno de los 2 pueblos: Se optienen X más beneficios diar
 
 Ambientación:
 
-Hay un problema con el abastecimiento de la comida, y un consejero tiene la tremenda idea de probar otras fuentes de alimento. Resulta que una de esas nuevas fuentes de alimento trae sorpresa, se empieza a esparcir un virus por toda la población. Que hará el alcalde con este problemón.
+Hay un problema con el abastecimiento de la comida, y un consejero tiene la tremenda idea de probar otras fuentes de alimento. Resulta que una de esas nuevas fuentes de alimento trae sorpresa, se empieza a esparcir un virus por toda la población. ¿Qué hará el alcalde con este problemón?
 
 
 
 Story line:
 
-Día 3: Llega un consegero al alcalde informando de un problema de abastecimiento de alimentos en la ciudad. Y le propone extraer unas setas que hay en las cuevas subterráneas de debajo de las fabricas, y asi tener mas alimentos. Si el alcalde no acepta se acaba el story line.
+Día 3: Llega un consejero al alcalde informando de un problema de abastecimiento de alimentos en la ciudad. Y le propone extraer unas setas que hay en las cuevas subterráneas de debajo de las fabricas, y asi tener mas alimentos. Si el alcalde no acepta se acaba el story line.
 
 Día4: Comienza el día con las noticias hablando de un nuevo virus que se está esparciendo a toda leche, con un origen todavía desconocido. El alcalde tiene 2 elecciones que hacer, establecer un confinamiento, depedir al consejero.
 
@@ -153,7 +153,7 @@ Día 4 (Más tarde): Se empiezan a colapsar los hospitales, otro consejero propo
 
 Día 4 (Más tarde todavía): Un consejero que tiene la nariz sospechosamente manchada de polvos blancos le sugiere enviar pelotones del ejercito y cargarse a todos los infectados que no son votantes del alcalde. El alcalde puede aceptar o no.
 
-Día 5: Un científico a descubierto una vacuna que puede parar los contagios, pero no la quiere regalar y el precio esta muy por encima del alcance de todos. El alcalde pude suvencionar la vacuna si tiene fondos suficientes.
+Día 5: Un científico ha descubierto una vacuna que puede parar los contagios, pero no la quiere regalar y el precio está muy por encima del alcance de todos. El alcalde pude subvencionar la vacuna si tiene fondos suficientes.
 
 
 
@@ -169,9 +169,9 @@ Apobar protocolo alhuso: decrecen las muertes en jovenes, y se disparan en los a
 
 Enviar al ejercito a por opositores: Muere el 40% de los animales que votan a la oposición, decrece la velocidad de muertes del virus. Tus apoyos electorales bajan mucho.
 
-Subencionar las vacunas: El efecto del virus decrece a casi 0, y mejora el numero de votos para el alcalde.
+Subencionar las vacunas: El efecto del virus decrece a casi 0, y mejora el número de votos para el alcalde.
 
-No subencionar las vacunas: El virus deja de tener efecto en los ricos, pero en el resto sigue igual.
+No subvencionar las vacunas: El virus deja de tener efecto en los ricos, pero en el resto sigue igual.
 
 
 
