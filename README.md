@@ -1,8 +1,8 @@
-# [EL JUEGO]
+# LAME DUCK
 
 ## 1. Resumen
 ### 1.1 Descripción
-[EL JUEGO] es un juego en el que controlaremos al presidente pato de una ciudad de animales durante los últimos 10 días de su mandato. Tendremos que ir escuchando las propuestas de los habitantes de los distintos distritos de la ciudad para ganarnos su apoyo frente a las elecciones venideras y así volver a ser elegidos como presidente.
+**Lame Duck** es un juego en el que controlaremos al presidente pato de una ciudad de animales durante los últimos *5 días* de su mandato. Tendremos que ir escuchando las propuestas de los habitantes de los distintos distritos de la ciudad para ganarnos su apoyo frente a las elecciones venideras y así volver a ser elegidos como presidente.
 
 ### 1.2 Género
 Gestión de recursos, simulación de político, toma de decisión y parodia.
@@ -10,7 +10,7 @@ Gestión de recursos, simulación de político, toma de decisión y parodia.
 ### 1.3 Setting
 La ciudad de Quackington DC es una metrópolis moderna, habitada únicamente por animales. Cada especie representa intereses, problemas y opiniones distintas, pero todas comparten algo en común: están insatisfechos con la política de la ciudad.
 Tú eres el presidente de la ciudad, un carismático pato que fuiste elegido por tus grandes promesas y eslóganes llamativos (además de por las grandes riquezas de su familia). Sin embargo, durante tu mandato, tu gestión de la ciudad ha dejado mucho que desear.
-Ahora solo quedan 10 días para las nuevas elecciones. Las encuestas no son favorables, por lo que tu objetivo está claro: si quieres ser reelegido tendrás que ganarte el apoyo de tus habitantes.
+Ahora solo quedan unos pocos días para las nuevas elecciones. Las encuestas no son favorables, por lo que tu objetivo está claro: si quieres ser reelegido tendrás que ganarte el apoyo de tus habitantes.
 *No tienes que ser un buen presidente. Solo tienes que parecerlo.*
 
 ### 1.4 Características principales
@@ -24,11 +24,11 @@ Ahora solo quedan 10 días para las nuevas elecciones. Las encuestas no son favo
 
 ## 2. Gameplay
 ### 2.1 Objetivo del juego
-La principal misión es, una vez hayan pasado los 10 días, haber conseguido un número específico de votos a favor para ser reelegido como presidente.
+La principal misión es, una vez hayan pasado todos días, haber conseguido un número específico de votos a favor para ser reelegido como presidente.
 
 Para esto, es importante mantener a los distritos satisfechos cumpliendo con sus demandas, pero teniendo en cuenta que muchas de estas serán conflictivas entre ellas.
 
-El juego termina si: han pasado los 10 días, mostrando el resultado de nuestras acciones; en caso de quedarse sin dinero, donde la ciudad entrará en caos; o en otros escenarios de derrota, como un golpe de estado, una derrota política o una invasión de la ciudad.
+El juego termina si: han pasado todos días, mostrando el resultado de nuestras acciones; en caso de quedarse sin dinero, donde la ciudad entrará en caos; o en otros escenarios de derrota, como un golpe de estado, una derrota política o una invasión de la ciudad.
 
 ## 2.2 Core loops
 Cada día funciona de la siguiente manera:
@@ -87,7 +87,7 @@ Uno de los recursos a tener en cuenta es la opinión pública. Si esta baja dema
 Cuando se gaste toda la energía del día, nuevas misiones dejarán de aparecer, aunque se puede seguir gestionando los distritos o comprando cosas en el mercado negro. Una vez el jugador no quiera seguir con el día, puede pulsar el botón de "Terminar el día" para volver a su hogar y ver en las noticias un pequeño resumen de sus acciones de hoy. El jugador puede elegir terminar el día antes de tiempo, si así lo desea. Al empezar cada día, la ciudad genera cierta cantidad de dinero dependiendo de la situación del jugador (por ejemplo: si ha construido fábricas en distritos, estas producen más dinero cada día, lo mismo con los  hoteles).
 
 ## 3.9 Votantes
-Subir la satisfacción de los distritos aumenta la cantidad de votantes. Al acabar los 10 días, es necesario tener cierto número de estos para poder ganar la partida y ser reelegido.
+Subir la satisfacción de los distritos aumenta la cantidad de votantes. Al acabar todos los días, es necesario tener cierto número de estos para poder ganar la partida y ser reelegido.
 
 # 3.10 Haters
 Las acciones del jugador pueden llevarle a que consiga que grupos de habitantes le odien completamente. Estos son más complicados de convencer de volverse votantes a tu favor (aunque no imposible), y cuando más grande sea este número, más eventos agresivos harán (revueltas, manifestaciones, intentos de golpe de estado, etc).
@@ -122,7 +122,11 @@ El el protagonista del juego: Donald J. Duck, el presidente pato. Es un pato bla
 *Aquí podemos pensar más personajes. De momento estaría bien pensar un poco los distintos NPC's que necesitaremos, como el/la secretario/a del presidente, el/la jefe/a de policiía, el/la líder de los mafiosos, etc.*
 
 ## 5.2 Recursos
-*He pensado que en lugar de tener varios recursos que controlar directamente, el jugador solo controla el dinero, y que el resto de recursos (energía, votantes, opinión pública) sean más consecuencias de como gestiona el dinero el jugador. Si preferís, se pueden añadir más recursos como comida o materias primas, pero no estoy seguro de si complicarían innecesariamente el juego.*
+El principal recurso a conseguir son los **votantes**, ya que se necesita ganar cierto número para conseguir la victoria. Para ello, el jugadpr tiene control directo del **dinero** de la ciudad, pudiendo invertirlo en contruir edificios, hacer misiones, comprar mejoras y manejar distritos. Cada día el jugador empieza con el dinero que sobró el día anterior, más un extra que varía dependiendo de ciertos factores (mejoras desbloqueadas, impuestos aplicados, cobros por edificios, etc). 
+
+Cada día se recarga la barra de **energía**, y esta se va reduciendo poco a poco, sirviendo como temporizador. La energías e usa para realizar misiones, consumiendo cierta cantidad de esta cada vez que se acepten. La propia barra en sí está dividida en secciones, cuando una sección se vacía se cuenta como un _ciclo_. Los ciclos son la forma en la que las acciones pasivas tomen lugar (por ejemplo, algunos edificios generan dinero cada ciclo).
+
+Además de esos recursos, el jugador tiene que controlar la **opinión pública**, que se reduce cada vez que este hace un acto corrupto. Cuanto más disminuye la opiniópn pública, más aumenta el porcentaje de respuestas violentas por parte de los habitantes (revueltas, quejas, etc). Esta se puede manipular pagando a la prensa para recuparar cierta reputación, ó haciendo misiones que suban la **satisfacción** en los distritos. Este último recurso es independiente de cada distrito, y cuando más alta este, mayor es la cantidad de votantes conseguidos pora acciones. Si disminuye demasiado, afectará a la opinión pública.
 
 *Propuestas de posibles recursos:*
 - *Dinero*
@@ -130,16 +134,16 @@ El el protagonista del juego: Donald J. Duck, el presidente pato. Es un pato bla
 - *Energía*
 
 ## 5.3 Ciudad
-*Hay que diseñar un poco los distintos distritos.*
+La ciudad está dividida en 6 distritos principales. Cada distrito tiene un habitad distitnta con sus habitantes preparados para vivir en esos ambientes. Además, los ditritos también tienen características diferenciables más allá de lo estético:
+- **El Nido:** La zona más prestigiosa de la ciudad, situada en el pico de la montaña central. Aquí es donde viven casi todos los pájaros y aves. Los edificios comerciales (hoteles, centros comerciales, etc) de esta zona generan más dinero a cambio de ser más caros. Es raro enfadar a sus vecinos, pero las pocas cosas que les molesta, lo hacen mucho (por ejemplo, la suciedad en las calles).
+- **Nueva Pradera:** La zona de los suburbios de clase media, lleno de edificios y oficinas. Aquí es donde van todos los animales que no se me ocurren donde poner: perros, leones, vacas, etc. Es la zona más "básica", por lo que se puede construir un número variado de edificios y los vecinos no tienen un comportamiento distintivo.
+- **Somosagua:** El distrito de los animales acuáticos. Es una zona industrial, por lo que construir fábricas y otros edificios similares no reducirá tanto como en otros distritos la satisfacción de los vecinos.
+- **Borrascal:** La zona con temperaturas heladas donde habitan animales como osos polares, pingüinos, y focas marinas. Debido a la posibilidad de que las obras derritan la zona, se pueden contruír muy pocos edificios en el lugar, pero a cambio son más efectivos. Los vecinos están muy concienciados con el cambio climático, por lo que reducirán mucho la satifacción ante las fábricas y similares.
+- **Sahar:** Una gran zona desértica alejada del centro. Aquí habitan animales como camellos, elefantes, lagartos, etc. Está muy vacía, por lo que se pueden construir muchos edificios allí y más baratos que en otros distritos, pero al haber menos gente, tienen menor efectividad.
+- **Guinea:** La zona tropical con un montón de animales de jungla o pantano. Es una zona muy turística debido a sus famosos festivales y fiestas. Las ordenanzas del presidente (manejar los horarios laborales, subir la seguridad del distrito, etc) son menos efectivas aquí ya que muchos vecinos son turistas, pero los hoteles y zonas públicas son más eficientes.
 
-*MI propuesta es esta, pero tenemos que llegar todos a un acuerdo:*
-- ***El Nido:** La zona más prestigiosa de la ciudad, situada en el pico de la montaña central. Aquí es donde viven casi todos los pájaros y aves. En esta zona se aprecia mucho el comercio, por lo que construir centros comerciales podría ser beneficioso.*
-- ***Nueva Pradera:** La zona de los suburbios de clase media, lleno de edificios y oficinas. Aquí es donde van todos los animales que no se me ocurren donde poner: perros, leones, vacas, etc.*
-- ***Little Vermintown:** Un pequeño barrio extrarradio en mitad de Nueva Pradera. Originalmente fue construido para segregar a los animales considerados como "plagas" (ratas, mapaches, mofetas, hienas) del resto de la población, pero ha ido desarrollando mucha cultura por las clases más oprimidas. Aquí es donde surge la mafia y otros grupos en contra del presidente, por lo que es complicado conseguir votantes aquí.*
-- ***Somosagua:** El distrito de los animales acuáticos. Es una zona industrial, por lo que construir fábricas aquí no bajará demasiado la satisfacción del lugar.*
-- ***Borrascal:** La zona con temperaturas heladas donde habitan animales como osos polares, pingüinos, y focas marinas. Están muy en contra de las fábricas, pues derriten sus casas, por lo que construir aquí puede ser muy negativo para la reputación del jugador.*
-- ***Sahar:** Una gran zona desértica alejada del centro. Está muy vacía, por lo que se pueden construir muchos edificios allí. Aquí habitan animales como camellos, elefantes, lagartos, etc.*
-- ***Guinea:** La zona tropical con un montón de animales de jungla o pantano. Este lugar es muy visitado por los turistas, por lo que premia más construir hoteles aquí.*
+Además de estos distritos principales, dentro de **Nueva Pradera** se encuentra también un suburbio de animales considerados "plagas" (ratas, mapaches, mofetas, hienas, buitres, etc), pero con el tiempo fue desarrollando su propia culutra por la mezcla de minorias oprimidas:
+- **Little Vermintown:** Un pequeño barrio extrarradio en mitad de Nueva Pradera. Aquí es donde surge la mafia y otros grupos en contra del presidente, por lo que tanto los edificios como las ordenanzas del presidetne pierden efectividad. Si la mafia se ve amenazada, esta se puede mover a otro distrito, reduciendo la efectividad de este.
 
 ## 6. Estética y contenido
 *POR DISCUTIR*
