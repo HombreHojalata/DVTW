@@ -237,7 +237,7 @@ El panel muestra una imágen del distrito escogido y una pequeña descripción d
 <p align="center">
   <img width="700" alt="prototipoDistrito" src="https://github.com/user-attachments/assets/cfd0993f-e7c4-48f7-9bd6-59d4d5253c96" />
   <br>
-  <i>Prototipo del HUD del distrito de Borrascal/i>
+  <i>Prototipo del HUD del distrito de Borrascal</i>
 </p>
 
 ### 4.2.4. HUD del Mercado Negro
@@ -247,7 +247,7 @@ Muestra una lista ordenada de nombres de mejoras o productos junto a una pequeñ
 <p align="center">
   <img width="700" alt="prototipoMercado" src="https://github.com/user-attachments/assets/0bfd869d-7294-4b89-824f-c4751ed33ddb" />
   <br>
-  <i>Prototipo del HUD del distrito de Borrascal/i>
+  <i>Prototipo del HUD del Mercado Negro</i>
 </p>
 
 
@@ -271,6 +271,7 @@ La secretaria del presidente es la encargada de hacer los tutoriales y comentarl
 ## 5.2. Ciudad
 
 <img align="right" width="400" alt="mapa" src="https://github.com/user-attachments/assets/f5258648-e26f-4e59-8951-3cd9dffb928b" />
+
 Cada distrito cuenta con un número de habitantes independiente, además de otras características:
 - **El Nido:** Es la zona más prestigiosa de la ciudad y donde reside el ayuntamiento. Situada en el pico de la montaña central, esta zona es el hogar de los ciudadanos de primera clase compuestos por la mayoría de aves.
 - **Nueva Pradera:** La zona de suburbios de clase media, llena de edificios y oficinas. Está habitada por animales de todos los tipos, en especial mamíferos como perros, leones o vacas. Es donde más ciudadanos residen.
