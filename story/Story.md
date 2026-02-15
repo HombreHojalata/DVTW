@@ -2,49 +2,6 @@ There could be many story lines, depending on what the user does, so this docume
 
 
 
-Esquema:
-
-|Día 1|Día 2|Día 3|Día 4|Día 5|
-|-|-|-|-|-|
-|Tutorial|Mafia|Mafia|Mafia|Mafia|
-||Empieza Purga|Colonianismo Moderno|Colonialisomo Moderno||
-||Empieza FIRE|Pandemia|Pandemia|Pandemia|
-||||||
-
-
-
-
-
-
-
-**La Mafia**
-
-Ambientación:
-
-La mafia está escondida por las calles de Quackinton D.C., una sucia organización criminal con mucha influencia en los barrios bajos de la ciudad. En una ciudad donde todos son los animales son veganos, en la mafia están desarrollando barritas de proteínas para contrabando ilegal, la procedencia de la proteína, un misterio que nadie quiere averiguar.
-
-
-
-Story line:
-
-Día 2: El camello del presidente el entrega al presidente su pedido habitual (mariguana, cocaína...), y le propone el camello comprarle un poco de proteína. Decision del presidente el coger la proteína o no.
-
-Día 3: El presidente se ha despertado con mono de proteína y llama al camello para que le traiga mucho más. Elección del jugador cuanto más quiere.
-
-Día 4: El presidente quiere encontrar al proveedor de proteína para hacer negocios con el, manda al servicio secreto a buscar e investigar. Este día no hay proteína pues el camello no vino.
-
-Día5: El servicio secreto vuelve pues han encontrado al jefe de la mafia, y han concertado una reunión con el en esa tarde. En la reunión el jefe de la mafia le ofrece mayor suministro personal de proteína, y apoyo de cara a las eleciones, a cambio de legalizar las barras de proteína.
-
-
-
-Posibles efectos:
-
-Consumir proteína: sube la energía de ese día pero al día siguiente empiezas con menos energía.(Acomulable)
-
-Aceptar el trato: sube el apoyo de los barrios pobres, baja lijeramente en los barrios medios, y empieza a disminuir la población de vacas y cerdos...
-
-
-
 
 
 
@@ -157,7 +114,7 @@ Día 5: Un científico ha descubierto una vacuna que puede parar los contagios, 
 
 
 
-Posibles efectos: 
+Posibles efectos:
 
 Si se aprueba comer setas: Se empieza a esparcir el virus y a partir del siguiente día los habitantes empiezan a morir de grandes cantidades.
 
@@ -172,6 +129,4 @@ Enviar al ejercito a por opositores: Muere el 40% de los animales que votan a la
 Subencionar las vacunas: El efecto del virus decrece a casi 0, y mejora el número de votos para el alcalde.
 
 No subvencionar las vacunas: El virus deja de tener efecto en los ricos, pero en el resto sigue igual.
-
-
 
