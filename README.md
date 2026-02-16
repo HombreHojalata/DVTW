@@ -282,6 +282,9 @@ Cada distrito cuenta con un número de habitantes independiente, además de otra
 
 ## 6. Estética y contenido
 *POR DISCUTIR*
+La estética que vamos a implementar va a ser mixta:
+- **Arte animado:** Para los personajes/NPC del juego, historietas/cutscenes, mercado negro, mapa del juego.
+- **PixelArt: ** Para los iconos de los edificios construibles en cada distrito.
 
 ## 7. Experiencia de juego
 *POR DISCUTIR*
