@@ -4,40 +4,6 @@ There could be many story lines, depending on what the user does, so this docume
 
 
 
-
-
-**La purga**
-
-Ambientación:
-
-El presidente está deseperado en conseguir el apoyo de los habitantes con las rentas más bajas, pero se presenta una solución, y si nos quitamos de en medio a todos esos que no tienen dinero y me quito a todos esos votantes de la opsición. Y si hacemos un evento en el que entre el anochecer y el amanecer no hay normas, no hay ley, todo está permitido, y se incita a la violencia.
-
-
-
-Story line:
-
-Día 2: Un consejero que tiene la nariz sospechosamente manchada de polvos blancos le sugiere cargarse a todos los votantes de la oposición. Se desbloquea el plan purga en el mercado negro.
-
-Día X(cuando se active el plan purga): El presidente dará un mitin anunciando la noche sin normas, la noche de soltar toda la vielenccia interior, y anunciará la fecha. (cuanto más tarde, más efectos tendrá pues se ha hecho más eco y se motiva más a la gente a hacer la purga)
-
-Día Y(Noche de la purga): El presidente tendrá 3 opciones, esconderse y pasar la noche, invertir en seguridad y seguir en su palacete, salir  a las calles a matar.
-
-
-
-Posibles efectos:
-
-General por completar la mison de la purga: el numero de personas con renta baja, decrece dependiendo del numero de días entre el anuncio y la noche de la purga.
-
-Esconderse: Nadie te encontró, el pato supo esconderse.
-
-Invertir en seguridad: tienes oleadas de animales llegando a tu palacete para hace pato a la naranja, y al cabo de un rato, penetran en tu seguridad y mueres.
-
-Salir a hacer la purga: puedes matar a opositores políticos, y casi seguro que mueres.
-
-
-
-
-
 **FIRE:**
 
 Ambientación:
