@@ -105,7 +105,7 @@ Las misiones de elección proporcionan más de una opción de resolverlas. Puede
 Las misiones corruptas son menos comunes que el resto. Estas pueden ser de cualquier tipo, y prometen una recompensa mucho mayor a las misiones corrientes. A cambio, estas suelen venir con alguna penalización, normalmente en forma de bajar la satisfacción en algún distrito. Además, aceptar una misión corrupta subirá el nivel de *corrupción* general.
 
 ## 3.4. Eventos
-Los eventos eventos son misiones obligatorias. A lo largo del día y de forma aleatoria, aunque también surgen como respuesta a las acciones del jugador, aparecen eventos que frenan la acción y obligan al jugador a realizar una misión. Estas pueden ser de cualquier tipo: básicas, de probabilidad, de minijuegos, de elección y hasta corruptas.
+Los eventos son misiones obligatorias. A lo largo del día y de forma aleatoria, aunque también surgen como respuesta a las acciones del jugador, aparecen eventos que frenan la acción y obligan al jugador a realizar una misión. Estas pueden ser de cualquier tipo: básicas, de probabilidad, de minijuegos, de elección y hasta corruptas.
 
 En ocasiones, pueden surgir eventos que no tengan ningún beneficio, como una invasión, o una huelga. Estos sirven para asegurarse que el jugador nunca esté muy cómodo en su situación y tenga que reaccionar a esto. En contraposición, también existen eventos meramente positivos, como la inauguración de una nueva estatua que sube la satisfacción de su distrito.
 
