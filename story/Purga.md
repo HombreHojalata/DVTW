@@ -4,8 +4,8 @@
 
 |Día 2|Día 3|Día 4|Día 5|
 |-|-|-|-|
-|||||
-|||||
+|El conserje|Asamblea|Preparativos|La purga|
+|Problemas en el paraiso||Estrategias||
 
 
 
