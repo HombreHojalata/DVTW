@@ -251,7 +251,7 @@ Muestra una lista ordenada de nombres de mejoras o productos junto a una pequeñ
 </p>
 
 
-# 5. Mudo del juego
+# 5. Mundo del juego
 ## 5.1. Personajes
 ### 5.1.1. Presidente
 El protagonista del juego: Donald J. Duck, el presidente pato. Es un pato blanco con plumas amarillas en la cabeza y una corbata. *En un futuro, puede existir la opción de tener más presidentes desbloqueables.*
