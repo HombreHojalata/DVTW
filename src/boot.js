@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 
 import image from '../assets/sprites/Cine1Real.png'
+import fabrica from '../assets/sprites/Fabrica.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -23,7 +24,8 @@ export default class Boot extends Phaser.Scene {
   preload() {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
-    this.loadl.image('cine1real', image);
+    this.load.image('cine1real', image);
+    this.load.image('fabrica', fabrica);
   }
 
   /**

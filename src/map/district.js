@@ -1,7 +1,5 @@
-import Phaser from 'phaser'
-import Base from './base.js';
-
-export default class District extends Phaser.GameObjects.Sprite{
+export default class District {
+    
     constructor(name, desc, population, satisfaction, buildings, space_building, special_building, opositors, parameters, parameters_multipliers) {
         if (new.target === District) {
             throw new TypeError("Cannot instantiate abstract class District");
@@ -32,5 +30,3 @@ export default class District extends Phaser.GameObjects.Sprite{
         throw new Error("getInfo() must be implemented");
     }
 }
-
-module.exports = District;

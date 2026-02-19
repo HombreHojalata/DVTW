@@ -22,18 +22,10 @@ export default class Level extends Phaser.Scene {
      * Creación de los elementos de la escena principal de juego
      */
     create() {
+        console.log("LEVEL");
         const d = new DistrictBorrascal("Borrascal","Any",1000,100,["Parque","Jardin"],2,["Hotel"],10,["Satisfacción","Peligro"],[1,1.5]);
-        this.add.text(500, 250, d.getName() + d.getDescription());
-        this.add.image(400, 300, 'cine1real');
-        this.spawn();
+        this.add.text(500, 250, d.getName() + " - " + d.getDescription());
+        this.add.image(200,50, 'cine1real');
+        this.add.image(0,0, 'fabrica');
     }
-
-        /**
-         * Genera una estrella en una de las bases del escenario
-         * @param {Array<Base>} from Lista de bases sobre las que se puede crear una estrella
-         * Si es null, entonces se crea aleatoriamente sobre cualquiera de las bases existentes
-         */
-        spawn(from = null) {
-            Phaser.Math.RND.pick(from || this.bases.children.entries).spawn();
-        }
-    }
+}

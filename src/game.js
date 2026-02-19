@@ -9,8 +9,8 @@ import Phaser from 'phaser';
  */
 let config = {
     type: Phaser.AUTO,
-    width: 1000,
-    height: 500,
+    width: 1500,
+    height: 750,
     parent: 'juego',
     scale: {
         //mode: Phaser.Scale.FIT,  
