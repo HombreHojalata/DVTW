@@ -24,6 +24,7 @@ export default class Level extends Phaser.Scene {
     create() {
         const d = new DistrictBorrascal("Borrascal","Any",1000,100,["Parque","Jardin"],2,["Hotel"],10,["Satisfacción","Peligro"],[1,1.5]);
         this.add.text(500, 250, d.getName() + d.getDescription());
+        this.add.image(400, 300, 'cine1real');
         this.spawn();
     }
 
