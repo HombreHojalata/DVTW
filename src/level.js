@@ -25,23 +25,23 @@ export default class Level extends Phaser.Scene {
      */
     create() {
         console.log("LEVEL");
-        const d = new DistrictBorrascal("Borrascal","Any",1000,100,["Parque","Jardin"],2,["Hotel"],10,["Satisfacción","Peligro"],[1,1.5]);
-        this.add.text(500, 250, d.getName() + " - " + d.getDescription());
+        const d = new DistrictBorrascal("Borrascal","Any",1000,10,100,["Casino"],["Parque","Jardin"],2,["Hotel"],10,["Satisfacción","Peligro"],[1,1.5]);
+        this.add.text(0, 0, d.getName() + " - " + d.getDescription());
+        this.add.text(0, 50, "Población: " + d.getPopulationDensity());
+        this.add.text(0, 100, "Aumento de población: " + d.getPopulationIncrease());
+        this.add.text(0, 150, "Satisfacción: " + d.getSatisfaction());
         
-        // Crear contenedor para las imágenes
-        let mapDiv = document.createElement('div');
+        let mapDiv = document.createElement('div');                                             //CONTAINER FOR THE MAP
         mapDiv.className = 'map';
         
-        // Primera imagen
-        let img1 = document.createElement('img');
+        let img1 = document.createElement('img');                                               //FIRST IMAGE 
         img1.src = cine1realImg;
         img1.className = 'game-image';
         img1.style.left = '150px';
         img1.style.top = '50px';
         mapDiv.appendChild(img1);
         
-        // Segunda imagen
-        let img2 = document.createElement('img');
+        let img2 = document.createElement('img');                                               //SECOND IMAGE
         img2.src = fabricaImg;
         img2.className = 'game-image';
         img2.style.left = '0px';
