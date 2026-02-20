@@ -2,6 +2,8 @@ import Phaser from 'phaser'
 
 import image from '../assets/sprites/Cine1Real.png'
 import fabrica from '../assets/sprites/Fabrica.png'
+import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
+import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -26,6 +28,8 @@ export default class Boot extends Phaser.Scene {
     //this.load.setPath('assets/sprites/');
     this.load.image('cine1real', image);
     this.load.image('fabrica', fabrica);
+    this.load.image('carga', cargaPantalla);
+    this.load.image('inicio', iniPantalla);
   }
 
   /**
@@ -33,6 +37,12 @@ export default class Boot extends Phaser.Scene {
    * nivel del juego
    */
   create() {
-    this.scene.start('level');
+    this.add.image(750, 375, 'carga');
+    this.time.delayedCall(5000, () => {
+      this.add.image(750, 375, 'inicio');
+      let button = this.add.text(750, 450, 'Nueva Partida', { fontSize: '32px', fill: '#000' });
+      button.setInteractive();
+      button.on('pointerdown', () => { this.scene.start('level'); });
+    });
   }
 }

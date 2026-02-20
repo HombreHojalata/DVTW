@@ -1,5 +1,7 @@
 import DistrictBorrascal from './map/districtBorrascal.js';
 import Phaser from 'phaser';
+import cine1realImg from '../assets/sprites/Cine1Real.png';
+import fabricaImg from '../assets/sprites/Fabrica.png';
 
 
 /**
@@ -25,7 +27,27 @@ export default class Level extends Phaser.Scene {
         console.log("LEVEL");
         const d = new DistrictBorrascal("Borrascal","Any",1000,100,["Parque","Jardin"],2,["Hotel"],10,["Satisfacción","Peligro"],[1,1.5]);
         this.add.text(500, 250, d.getName() + " - " + d.getDescription());
-        this.add.image(200,50, 'cine1real');
-        this.add.image(0,0, 'fabrica');
+        
+        // Crear contenedor para las imágenes
+        let mapDiv = document.createElement('div');
+        mapDiv.className = 'map';
+        
+        // Primera imagen
+        let img1 = document.createElement('img');
+        img1.src = cine1realImg;
+        img1.className = 'game-image';
+        img1.style.left = '150px';
+        img1.style.top = '50px';
+        mapDiv.appendChild(img1);
+        
+        // Segunda imagen
+        let img2 = document.createElement('img');
+        img2.src = fabricaImg;
+        img2.className = 'game-image';
+        img2.style.left = '0px';
+        img2.style.top = '0px';
+        mapDiv.appendChild(img2);
+        
+        this.add.dom(750, 375, mapDiv);
     }
 }
