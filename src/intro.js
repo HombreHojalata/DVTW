@@ -1,8 +1,4 @@
-import DistrictBorrascal from './map/districtBorrascal.js';
 import Phaser from 'phaser';
-import cine1realImg from '../assets/sprites/Cine1Real.png';
-import fabricaImg from '../assets/sprites/Fabrica.png';
-
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -13,18 +9,22 @@ import fabricaImg from '../assets/sprites/Fabrica.png';
  * @extends Phaser.Scene
  */
 export default class Intro extends Phaser.Scene {
-    /**
-     * Constructor de la escena
-     */
     constructor() {
         super({ key: 'intro' });
     }
 
-    /**
-     * Creación de los elementos de la escena principal de juego
-     */
     create() {
         console.log("INTRO");
-        
+        this.add.text(0, 0, "Intro");
+        this.add.image(750, 375, 'inicio');
+        let buttonInitGame = this.add.text(1000, 450, 'New Game', { fontSize: '32px', fill: '#000' });
+        buttonInitGame.setInteractive();
+        buttonInitGame.on('pointerdown', () => { this.scene.start('level'); });
+        let buttonConfiguration = this.add.text(1000, 500, 'Configuration', { fontSize: '32px', fill: '#000' });
+        buttonConfiguration.setInteractive();
+        buttonConfiguration.on('pointerdown', () => { 
+            this.scene.remove('inicio');
+            this.scene.start('configuration'); 
+        })
     }
 }

@@ -1,6 +1,8 @@
 import Boot from './boot.js';
-import End from './end.js';
+import Intro from './intro.js';
+import Configuration from './configuration.js';
 import Level from './level.js';
+import End from './end.js';
 import Phaser from 'phaser';
 
 /**
@@ -20,7 +22,7 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, Level, End],
+    scene: [Boot, Intro, Configuration, Level, End],
     physics: {
         default: 'arcade',
         arcade: {

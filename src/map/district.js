@@ -52,6 +52,12 @@ export default class District {
     increaseBoostedPopulation(populationIncrease) {
         this.population += populationIncrease;
     }
+    decreaseBoostedPopulation(populationDecrease) {                             
+        this.population -= populationDecrease;
+        if(this.population < 0) {
+            this.population = 0;
+        }
+    }
     increasePopulationIncrease(populationIncrease) {
         this.populationIncrease += populationIncrease;
     }
