@@ -12,7 +12,7 @@ import Phaser from 'phaser';
 let config = {
     type: Phaser.AUTO,
     width: 1500,
-    height: 750,
+    height: 850,
     parent: 'juego',
     scale: {
         //mode: Phaser.Scale.FIT,  
