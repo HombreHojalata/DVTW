@@ -1,6 +1,8 @@
 import Boot from './boot.js';
-import End from './end.js';
+import Intro from './intro.js';
+import Configuration from './configuration.js';
 import Level from './level.js';
+import End from './end.js';
 import Phaser from 'phaser';
 
 /**
@@ -9,15 +11,18 @@ import Phaser from 'phaser';
  */
 let config = {
     type: Phaser.AUTO,
-    width: 1000,
-    height: 500,
+    width: 1500,
+    height: 750,
     parent: 'juego',
     scale: {
         //mode: Phaser.Scale.FIT,  
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, Level, End],
+    dom: {
+        createContainer: true
+    },
+    scene: [Boot, Intro, Configuration, Level, End],
     physics: {
         default: 'arcade',
         arcade: {

@@ -1,10 +1,11 @@
 import Phaser from 'phaser'
 
+import image from '../assets/sprites/Cine1Real.png'
+import fabrica from '../assets/sprites/Fabrica.png'
+import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
+import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
+import worldMap from '../assets/sprites/Mapa.png'
 
-import platform from '../assets/sprites/platform.png'
-import base from '../assets/sprites/base.png'
-import star from '../assets/sprites/star.png'
-import player from '../assets/sprites/player.png'
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
  * Esta escena se puede mejorar añadiendo una imagen del juego y una 
@@ -13,30 +14,26 @@ import player from '../assets/sprites/player.png'
  * sobre cómo hacer una barra de progreso.
  */
 export default class Boot extends Phaser.Scene {
-  /**
-   * Constructor de la escena
-   */
   constructor() {
     super({ key: 'boot' });
   }
 
-  /**
-   * Carga de los assets del juego
-   */
   preload() {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
-    this.load.image('platform', platform);
-    this.load.image('base', base);
-    this.load.image('star', star);
-    this.load.image('player', player);
+    this.load.image('cine1real', image);
+    this.load.image('fabrica', fabrica);
+    this.load.image('carga', cargaPantalla);
+    this.load.image('inicio', iniPantalla);
+    this.load.image('map', worldMap);
   }
 
-  /**
-   * Creación de la escena. En este caso, solo cambiamos a la escena que representa el
-   * nivel del juego
-   */
   create() {
-    this.scene.start('level');
+    this.add.image(750, 375, 'carga');                                                                //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.add.text(0, 0, "Boot");
+    this.time.delayedCall(500, () => {   //5000
+      this.scene.remove('carga');
+      this.scene.start('intro');
+    });
   }
 }
