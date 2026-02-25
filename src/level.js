@@ -1,4 +1,10 @@
-import DistrictBorrascal from './map/districtBorrascal.js';
+import DistrictBorrascal from './map/district/districtBorrascal.js';
+import DistrictSahar from './map/district/districtSahar.js';
+import DistrictSomosagua from './map/district/districtSomosagua.js';
+import DistrictElNido from './map/district/districtElNido.js';
+import DistrictGuinea from './map/district/districtGuinea.js';
+import DistrictNuevaPradera from './map/district/districtNuevaPradera.js';
+import Map from './map/map.js';
 import Phaser from 'phaser';
 
 /**
@@ -15,120 +21,89 @@ export default class Level extends Phaser.Scene {
     }
 
     init(data) {
-    //TO PREPARE ALL THE DISTRICT HERE
-    this.fromScene = data && data.from ? data.from : null;
-    //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
-    if (!this.registry.get('borrascal')) {
-        const borrascal = new DistrictBorrascal(
-            "Borrascal", "Any", 1000, 10, 100,
-            ["Casino"], ["Parque", "Jardin"], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
-        );
-        this.registry.set('borrascal', borrascal);
-    }
+        //TO PREPARE ALL THE DISTRICT HERE
+        this.fromScene = data && data.from ? data.from : null;
+        //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
+        if (!this.registry.get('borrascal')) {
+            const borrascal = new DistrictBorrascal(
+                "Borrascal", "Any", 1000, 10, 100,
+                ["Casino"], ["Parque", "Jardin"], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+            );
+            this.registry.set('borrascal', borrascal);
+        }
 
-    //FROM THIS POINT ON, TEST VALUES ONLY, LATER CHANGE TO ACTUAL ONES...
-    if (!this.registry.get('sahar')) {
-        this.registry.set('sahar', {
-            getName: () => "Sahar",
-            getDescription: () => "Any",
-            getPopulationDensity: () => 600,
-            getPopulationIncrease: () => 20,
-            getSatisfaction: () => 15
-        });
-    }
+        //FROM THIS POINT ON, TEST VALUES ONLY, LATER CHANGE TO ACTUAL ONES...
+        if (!this.registry.get('sahar')) {
+            const sahar = new DistrictSahar(
+                "Sahar", "Any", 600, 20, 15,
+                ["Casino"], ["Parque", "Jardin"], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+            );
+            this.registry.set('sahar', sahar);
+        }
 
-    if (!this.registry.get('somosagua')) {
-        this.registry.set('somosagua', {
-            getName: () => "Somosagua",
-            getDescription: () => "Any",
-            getPopulationDensity: () => 800,
-            getPopulationIncrease: () => 12,
-            getSatisfaction: () => 10
-        });
-    }
+        if (!this.registry.get('somosagua')) {
+            const somosagua = new DistrictSomosagua(
+                "Somosagua", "Any", 800, 12, 10,
+                ["Casino"], ["Parque", "Jardin"], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+            );
+            this.registry.set('somosagua', somosagua);
+        }
 
-    if (!this.registry.get('guinea')) {
-        this.registry.set('guinea', {
-            getName: () => "Guinea",
-            getDescription: () => "Any",
-            getPopulationDensity: () => 700,
-            getPopulationIncrease: () => 14,
-            getSatisfaction: () => 30
-        });
-    }
+        if (!this.registry.get('guinea')) {
+            const guinea = new DistrictGuinea(
+                "Guinea", "Any", 700, 14, 30,
+                ["Casino"], ["Parque", "Jardin"], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+            );
+            this.registry.set('guinea', guinea);
+        }
 
-    if (!this.registry.get('nueva_pradera')) {
-        this.registry.set('nueva_pradera', {
-            getName: () => "Nueva Pradera",
-            getDescription: () => "Any",
-            getPopulationDensity: () => 1400,
-            getPopulationIncrease: () => 18,
-            getSatisfaction: () => 5
-        });
-    }
+        if (!this.registry.get('nueva_pradera')) {
+            const nuevaPradera = new DistrictNuevaPradera(
+                "Nueva Pradera", "Any", 1400, 18, 5,
+                ["Casino"], ["Parque", "Jardin"], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+            );
+            this.registry.set('nueva_pradera', nuevaPradera);
+        }
 
-    if (!this.registry.get('el_nido')) {
-        this.registry.set('el_nido', {
-            getName: () => "El Nido",
-            getDescription: () => "Any",
-            getPopulationDensity: () => 500,
-            getPopulationIncrease: () => 8,
-            getSatisfaction: () => 40
-        });
-    }
-}
+        if (!this.registry.get('el_nido')) {
+            const elNido = new DistrictElNido(
+                "El Nido", "Any", 500, 8, 40,
+                ["Casino"], ["Parque", "Jardin"], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+            );
+            this.registry.set('el_nido', elNido);
+        }
 
-    create() {
-        console.log("LEVEL");
-        this.add.text(0, 0, "Level");
-        this.d = this.registry.get('borrascal');    //WE WILL NEED TO CREATE 1 OF THIS FOR EACH DISTRICT, AND THEN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
-        //this.add.text(0, 50, this.d.getName() + " - " + this.d.getDescription());
-        this.districtTitleText = this.add.text(0, 50, this.d.getName() + " - " + this.d.getDescription());
-        this.populationText = this.add.text(0, 100, "Población: " + this.d.getPopulationDensity());
-        this.populationIncreaseText = this.add.text(0, 150, "Aumento de población: " + this.d.getPopulationIncrease());
-        this.satisfactionText = this.add.text(0, 200, "Satisfacción: " + this.d.getSatisfaction());
-
-        this.districts = {
+        this.map = new Map({
             BORRASCAL: this.registry.get('borrascal'),
             SAHAR: this.registry.get('sahar'),
             SOMOSAGUA: this.registry.get('somosagua'),
             GUINEA: this.registry.get('guinea'),
             NUEVA_PRADERA: this.registry.get('nueva_pradera'),
             EL_NIDO: this.registry.get('el_nido')
-            };
+        });
+        this.registry.set('map', this.map);
+    }
 
-        this.districtNames = {
-            BORRASCAL: 'Borrascal',
-            SAHAR: 'Sahar',
-            SOMOSAGUA: 'Somosagua',
-            GUINEA: 'Guinea',
-            NUEVA_PRADERA: 'Nueva Pradera',
-            EL_NIDO: 'El Nido'
-        };
+    create() {
+        console.log("LEVEL");
+        this.add.text(0, 0, "Level");
+        //this.d = this.registry.get('borrascal');    //WE WILL NEED TO CREATE 1 OF THIS FOR EACH DISTRICT, AND THEN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
+        this.districtTitleText = this.add.text(0, 50,"" );
+        this.populationText = this.add.text(0, 100,"");
+        this.populationIncreaseText = this.add.text(0, 150,"");
+        this.satisfactionText = this.add.text(0, 200,"");
 
         const configBtn = this.add.text(200, 0, 'Configuration', { fontSize: '18px', backgroundColor: '#0066cc', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
         configBtn.on('pointerover', () => configBtn.setStyle({ backgroundColor: '#005bb5' }));
         configBtn.on('pointerout', () => configBtn.setStyle({ backgroundColor: '#0066cc' }));
         configBtn.on('pointerup', () => {
             this.scene.start('configuration', { from: 'level' });
-        });
-
-        const increaseBtn = this.add.text(200, 50, '+ Population', { fontSize: '18px', backgroundColor: '#228822', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
-        increaseBtn.on('pointerover', () => increaseBtn.setStyle({ backgroundColor: '#1f7a1f' }));
-        increaseBtn.on('pointerout', () => increaseBtn.setStyle({ backgroundColor: '#228822' }));
-        increaseBtn.on('pointerup', () => {
-            this.d.increaseBoostedPopulation(1000);
-            //this.registry.set('district', this.d);
-            this.populationText.setText('Población: ' + this.d.getPopulationDensity());
-        });
-        const decreaseBtn = this.add.text(200, 100, '- Population', { fontSize: '18px', backgroundColor: '#882222', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
-        decreaseBtn.on('pointerover', () => decreaseBtn.setStyle({ backgroundColor: '#7a1f1f' }));
-        decreaseBtn.on('pointerout', () => decreaseBtn.setStyle({ backgroundColor: '#882222' }));
-        decreaseBtn.on('pointerup', () => {
-            this.d.decreaseBoostedPopulation(1000);
-            //this.registry.set('district', this.d);
-            this.populationText.setText('Población: ' + this.d.getPopulationDensity());
         });
         
         this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
@@ -288,14 +263,11 @@ export default class Level extends Phaser.Scene {
 
     selectDistrict(key) { //ONCE WE CLICK ON EACH POLYGON, CHANGES WHAT HAPPENS, WE CAN ADD DISPLAY ANOTHER POP-UP TAB ONCE WE CLICK ON IT.
 
-        
-        const dist = this.districts[key];
-
+        const dist = this.map.getDistricts(key);
         if (!dist) {
             this.clearSelection();
             return;
         }
-
         this.d = dist;
         //updates the district text now..
         this.districtTitleText.setText(this.d.getName() + " - " + this.d.getDescription());
@@ -309,6 +281,21 @@ export default class Level extends Phaser.Scene {
         this.popupText.setText(`${this.d.getName()} seleccionado`);
 
         this.drawSelection(key);
+
+        const increaseBtn = this.add.text(200, 50, '+ Population', { fontSize: '18px', backgroundColor: '#228822', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
+        increaseBtn.on('pointerover', () => increaseBtn.setStyle({ backgroundColor: '#1f7a1f' }));
+        increaseBtn.on('pointerout', () => increaseBtn.setStyle({ backgroundColor: '#228822' }));
+        increaseBtn.on('pointerup', () => {
+            this.map.modifyDistrict(key,1000)
+            this.populationText.setText('Población: ' + this.d.getPopulationDensity());
+        });
+        const decreaseBtn = this.add.text(200, 100, '- Population', { fontSize: '18px', backgroundColor: '#882222', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
+        decreaseBtn.on('pointerover', () => decreaseBtn.setStyle({ backgroundColor: '#7a1f1f' }));
+        decreaseBtn.on('pointerout', () => decreaseBtn.setStyle({ backgroundColor: '#882222' }));
+        decreaseBtn.on('pointerup', () => {
+            this.map.modifyDistrict(key,-1000)
+            this.populationText.setText('Población: ' + this.d.getPopulationDensity());
+        }); 
 
     }
 
