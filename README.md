@@ -15,7 +15,7 @@ El juego muestra una visión aérea de un mapa de la ciudad dividida en sus resp
 
 A medida que la partida avanza se van desbloqueando nuevas formas de controlar la ciudad, como construyendo edificios o gestionando parámetros de los diferentes distritos.
 
-## 1.2. Pilares de diseño
+## 1.2. Pilares del diseño
 - **Gestión de recursos:** La idea es manejar varios recursos al mismo tiempo para conseguir manipular variables de satisfacción, recaudando así votos.
 - **Sátira política:** El juego es muy crítico, de forma cómica, de la situación política de la actualidad. Está diseñado para que sea complicado ganar sin hacer ninguna acción corrupta, reflejando el comportamiento de los políticos de nuestra época.
 - **Toma de decisiones:** Durante el desarrollo de las partidas se puede observar cómo surge una narrativa en las misiones y eventos que suceden. El jugador puede decidir que caminos tomar y qué medidas implantar para responder a la historias presentada.
