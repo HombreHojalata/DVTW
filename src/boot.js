@@ -1,13 +1,17 @@
 import Phaser from 'phaser'
-
-import image from '../assets/sprites/Cine1Real.png'
-import fabrica from '../assets/sprites/Fabrica.png'
 import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
 import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 import worldMap from '../assets/sprites/Mapa.png'
 import presidente from '../assets/sprites/Presidente.png'
+
+//PROTOTYPE ASSETS, TO BE REPLACED
+import image from '../assets/sprites/Cine1Real.png'
+import fabrica from '../assets/sprites/Fabrica.png'
 import testSahar from '../assets/sprites/test1.png'
 import missionIconPng from '../assets/sprites/missionIcon2.png'
+import configurationIcon from '../assets/sprites/configurationIcon.png'
+import district from '../assets/sprites/prototipoDistrict.png'
+import blackMarket from '../assets/sprites/prototipoBlackMarket.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -24,14 +28,19 @@ export default class Boot extends Phaser.Scene {
   preload() {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
-    this.load.image('cine1real', image);
-    this.load.image('fabrica', fabrica);
+
     this.load.image('carga', cargaPantalla);
     this.load.image('inicio', iniPantalla);
     this.load.image('map', worldMap);
     this.load.image('presidente', presidente);
+    //PROTOTYPE ASSETS, TO BE REPLACED
+    this.load.image('cine1real', image);
+    this.load.image('fabrica', fabrica);
     this.load.image('testSahar', testSahar);
     this.load.image('missionIcon', missionIconPng);
+    this.load.image('configurationIcon', configurationIcon);
+    this.load.image('district', district);
+    this.load.image('blackMarket', blackMarket);
   }
 
   create() {

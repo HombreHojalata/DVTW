@@ -92,7 +92,10 @@ export default class Level extends Phaser.Scene {
 
     create() {
         console.log("LEVEL");
-        this.add.text(0, 0, "Level");       
+        this.add.text(0, 0, "Level");      
+        // "HEADER"
+        this.spawnConfigurationIcon();
+
         // ASSETS
         this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
         this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
@@ -141,7 +144,7 @@ export default class Level extends Phaser.Scene {
             g.lineStyle(2, 0x007700); // border matches footer (lighter green)
             g.strokeRoundedRect(x, y, w, h, radius);
         }
-        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QuackingtonDC', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
+        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QUACKINGTON DC', { fontSize: '23px', color: '#fff' }).setOrigin(0.5);
         // THIRD SECTION - BLACK MARKET
         {
             const g = this.add.graphics();
@@ -155,11 +158,12 @@ export default class Level extends Phaser.Scene {
             g.lineStyle(2, 0x007700);
             g.strokeRoundedRect(x, y, w, h, radius);
         }
-        const configBtn = this.add.text(footerX + sectionMoney + sectionDistrict + sectionBlackMarket/2, footerY + footerHeight/2, 'Configuration', { fontSize: '18px', backgroundColor: '#0066cc', padding: { x: 8, y: 4 }, color: '#fff' }).setOrigin(0.5).setInteractive({ useHandCursor: true });
-        configBtn.on('pointerover', () => configBtn.setStyle({ backgroundColor: '#005bb5' }));
-        configBtn.on('pointerout', () => configBtn.setStyle({ backgroundColor: '#0066cc' }));
-        configBtn.on('pointerup', () => {
-            this.scene.start('configuration', { from: 'level' });
+        const blackMarket = this.add.text(footerX + sectionMoney + sectionDistrict + sectionBlackMarket/2, footerY + footerHeight/2, 'BLACK MARKET', { fontSize: '18px', backgroundColor: '#e03b1e', padding: { x: 8, y: 4 }, color: '#fff' }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+        blackMarket.on('pointerover', () => blackMarket.setStyle({ backgroundColor: '#e99b15' }));
+        blackMarket.on('pointerout', () => blackMarket.setStyle({ backgroundColor: '#cc7a00' }));
+        blackMarket.on('pointerup', () => {
+            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5);
+            //this.scene.start('configuration', { from: 'level' });
         });
 
         this.hl = this.add.graphics();
@@ -326,9 +330,10 @@ export default class Level extends Phaser.Scene {
         this.d = dist;
         this.districtTitleText.setText(this.d.getName() + " - " + this.d.getDescription());
         this.drawSelection(key);
-
-        if (this.d.getName() === "Sahar")
-            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'testSahar').setOrigin(0.5);
+        
+        if(dist.getName() == "Borrascal")
+            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'district').setOrigin(0.5);
+        
         /*const increaseBtn = this.add.text(200, 500, '+ Population', { fontSize: '18px', backgroundColor: '#228822', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
         increaseBtn.on('pointerover', () => increaseBtn.setStyle({ backgroundColor: '#1f7a1f' }));
         increaseBtn.on('pointerout', () => increaseBtn.setStyle({ backgroundColor: '#228822' }));
@@ -376,36 +381,33 @@ export default class Level extends Phaser.Scene {
 
 
     spawnMissionIcon() {
-    if (this.missionIcon) return;
+        if (this.missionIcon) return;
+        const pos = this.mapToWorld(880, 1120);
 
-    const pos = this.mapToWorld(880, 1120);
+        this.missionIcon = this.add.image(pos.x, pos.y, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
+        this.missionIcon.on('pointerover', () => {this.missionIcon.setScale(0.09);});
+        this.missionIcon.on('pointerout', () => {this.missionIcon.setScale(0.08);});
+        this.missionIcon.on('pointerup', () => {
+            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'testSahar').setOrigin(0.5);
+        });
 
-    this.missionIcon = this.add.image(pos.x, pos.y, 'missionIcon')
-        .setOrigin(0.5)
-        .setScale(0.08)
-        .setInteractive({ useHandCursor: true });
+    }
 
-    this.missionIcon.on('pointerover', () => {
-        this.missionIcon.setScale(0.09);
-    });
+    spawnConfigurationIcon() {
+        this.configBtn = this.add.image(1400, 50, 'configurationIcon').setOrigin(0.5).setScale(0.12).setInteractive({ useHandCursor: true });
+        this.configBtn.on('pointerover', () => {this.configBtn.setScale(0.09);});
+        this.configBtn.on('pointerout', () => {this.configBtn.setScale(0.08);});
+        this.configBtn.on('pointerup', () => {
+            this.scene.start('configuration', { from: 'level' });
+        });
+    }
 
-    this.missionIcon.on('pointerout', () => {
-        this.missionIcon.setScale(0.08);
-    });
-
-    this.missionIcon.on('pointerup', () => {
-        this.openMissionPanel();
-    });
-}
-
-
-
-mapToWorld(mx, my) {
-    const s = this.mapImg.scaleX;
-    return {
-        x: this.mapImg.x + mx * s,
-        y: this.mapImg.y + my * s
-    };
-}
+    mapToWorld(mx, my) {
+        const s = this.mapImg.scaleX;
+        return {
+            x: this.mapImg.x + mx * s,
+            y: this.mapImg.y + my * s
+        };
+    }
 
 }
