@@ -92,27 +92,75 @@ export default class Level extends Phaser.Scene {
 
     create() {
         console.log("LEVEL");
-        this.add.text(0, 0, "Level");
-        //this.d = this.registry.get('borrascal');    //WE WILL NEED TO CREATE 1 OF THIS FOR EACH DISTRICT, AND THEN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
-        this.districtTitleText = this.add.text(0, 50,"" );
-        this.populationText = this.add.text(0, 100,"");
-        this.populationIncreaseText = this.add.text(0, 150,"");
-        this.satisfactionText = this.add.text(0, 200,"");
+        this.add.text(0, 0, "Level");       
+        // ASSETS
+        this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
+        this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
+        this.fabricaImg = this.add.image(this.mapImg.x + 150, this.mapImg.y + 180, 'fabrica').setOrigin(0).setScale(0.07);
+        this.presidente = this.add.image(175, 200, 'presidente').setDisplaySize(350, 500);
 
-        const configBtn = this.add.text(200, 0, 'Configuration', { fontSize: '18px', backgroundColor: '#0066cc', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
+        // FOOTER
+        const gameWidth = this.sys.game.config.width;
+        const gameHeight = this.sys.game.config.height;
+        const footerWidth = 1500;
+        const footerHeight = 75;
+        const footerX = (gameWidth - footerWidth) / 2;
+        const footerY = gameHeight - footerHeight;
+        // FOOTER VISUAL (lighter green)
+        this.footerBg = this.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0);
+        // FOOTER SECTIONS
+        const sectionMoney = footerWidth / 4;
+        const sectionDistrict = footerWidth / 2;
+        const sectionBlackMarket = footerWidth / 4;
+        const innerScale = 0.75; // 75% of section width
+        const innerHeight = footerHeight * innerScale; // 75% of section height
+        // FIRST SECTION - MONEY 
+        {
+            const g = this.add.graphics();
+            const x = footerX + (sectionMoney - sectionMoney * innerScale) / 2;
+            const y = footerY + (footerHeight - innerHeight) / 2;
+            const w = sectionMoney * innerScale;
+            const h = innerHeight;
+            const radius = 10;
+            g.fillStyle(0x000000);
+            g.fillRoundedRect(x, y, w, h, radius);
+            g.lineStyle(2, 0x007700); // border matches footer (lighter green)
+            g.strokeRoundedRect(x, y, w, h, radius);
+        }
+        this.moneyText = this.add.text(footerX + sectionMoney/2, footerY + footerHeight/2, 'Dinero: 1000L', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
+        // SECOND SECTION - DISTRICT INFO 
+        {
+            const g = this.add.graphics();
+            const x = footerX + sectionMoney + (sectionDistrict - sectionDistrict * innerScale) / 2;
+            const y = footerY + (footerHeight - innerHeight) / 2;
+            const w = sectionDistrict * innerScale;
+            const h = innerHeight;
+            const radius = 10;
+            g.fillStyle(0x000000);
+            g.fillRoundedRect(x, y, w, h, radius);
+            g.lineStyle(2, 0x007700); // border matches footer (lighter green)
+            g.strokeRoundedRect(x, y, w, h, radius);
+        }
+        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QuackingtonDC', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
+        // THIRD SECTION - BLACK MARKET
+        {
+            const g = this.add.graphics();
+            const x = footerX + sectionMoney + sectionDistrict + (sectionBlackMarket - sectionBlackMarket * innerScale) / 2;
+            const y = footerY + (footerHeight - innerHeight) / 2;
+            const w = sectionBlackMarket * innerScale;
+            const h = innerHeight;
+            const radius = 10;
+            g.fillStyle(0x000000);
+            g.fillRoundedRect(x, y, w, h, radius);
+            g.lineStyle(2, 0x007700);
+            g.strokeRoundedRect(x, y, w, h, radius);
+        }
+        const configBtn = this.add.text(footerX + sectionMoney + sectionDistrict + sectionBlackMarket/2, footerY + footerHeight/2, 'Configuration', { fontSize: '18px', backgroundColor: '#0066cc', padding: { x: 8, y: 4 }, color: '#fff' }).setOrigin(0.5).setInteractive({ useHandCursor: true });
         configBtn.on('pointerover', () => configBtn.setStyle({ backgroundColor: '#005bb5' }));
         configBtn.on('pointerout', () => configBtn.setStyle({ backgroundColor: '#0066cc' }));
         configBtn.on('pointerup', () => {
             this.scene.start('configuration', { from: 'level' });
         });
-        
-        this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
-        this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
-        this.fabricaImg = this.add.image(this.mapImg.x + 150, this.mapImg.y + 180, 'fabrica').setOrigin(0).setScale(0.07);
-        this.fabricaNuevaImg = this.add.image(200, 200, 'fabrica').setDisplaySize(350, 500);
-
-        this.popupBg = this.add.rectangle(750, 60, 620, 70, 0x000000, 0.75).setVisible(false);
-        this.popupText = this.add.text(470, 40, '', { fontSize: '22px', color: '#ffffff' }).setVisible(false);
 
         this.hl = this.add.graphics();
 
@@ -270,33 +318,25 @@ export default class Level extends Phaser.Scene {
             return;
         }
         this.d = dist;
-        //updates the district text now..
         this.districtTitleText.setText(this.d.getName() + " - " + this.d.getDescription());
-
-        this.populationText.setText("Población: " + this.d.getPopulationDensity());
-        this.populationIncreaseText.setText("Aumento de población: " + this.d.getPopulationIncrease());
-        this.satisfactionText.setText("Satisfacción: " + this.d.getSatisfaction());
-
-        this.popupBg.setVisible(true);
-        this.popupText.setVisible(true);
-        this.popupText.setText(`${this.d.getName()} seleccionado`);
-
         this.drawSelection(key);
 
-        const increaseBtn = this.add.text(200, 50, '+ Population', { fontSize: '18px', backgroundColor: '#228822', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
+        if (this.d.getName() === "Sahar")
+            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'testSahar').setOrigin(0.5);
+        /*const increaseBtn = this.add.text(200, 500, '+ Population', { fontSize: '18px', backgroundColor: '#228822', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
         increaseBtn.on('pointerover', () => increaseBtn.setStyle({ backgroundColor: '#1f7a1f' }));
         increaseBtn.on('pointerout', () => increaseBtn.setStyle({ backgroundColor: '#228822' }));
         increaseBtn.on('pointerup', () => {
             this.map.modifyDistrict(key,1000)
             this.populationText.setText('Población: ' + this.d.getPopulationDensity());
         });
-        const decreaseBtn = this.add.text(200, 100, '- Population', { fontSize: '18px', backgroundColor: '#882222', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
+        const decreaseBtn = this.add.text(200, 600, '- Population', { fontSize: '18px', backgroundColor: '#882222', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
         decreaseBtn.on('pointerover', () => decreaseBtn.setStyle({ backgroundColor: '#7a1f1f' }));
         decreaseBtn.on('pointerout', () => decreaseBtn.setStyle({ backgroundColor: '#882222' }));
         decreaseBtn.on('pointerup', () => {
             this.map.modifyDistrict(key,-1000)
             this.populationText.setText('Población: ' + this.d.getPopulationDensity());
-        }); 
+        }); */
 
     }
 
