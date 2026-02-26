@@ -109,6 +109,7 @@ export default class Level extends Phaser.Scene {
         this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
         this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
         this.fabricaImg = this.add.image(this.mapImg.x + 150, this.mapImg.y + 180, 'fabrica').setOrigin(0).setScale(0.07);
+        this.fabricaNuevaImg = this.add.image(200, 200, 'fabrica').setDisplaySize(350, 500);
 
         this.popupBg = this.add.rectangle(750, 60, 620, 70, 0x000000, 0.75).setVisible(false);
         this.popupText = this.add.text(470, 40, '', { fontSize: '22px', color: '#ffffff' }).setVisible(false);

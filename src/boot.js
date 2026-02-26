@@ -31,9 +31,36 @@ export default class Boot extends Phaser.Scene {
   create() {
     this.add.image(750, 375, 'carga');                                                                //WE CAN ADD MUSIC AND LOADING BAR HERE
     this.add.text(0, 0, "Boot");
-    this.time.delayedCall(500, () => {   //5000
-      this.scene.remove('carga');
-      this.scene.start('intro');
+
+    // Crear la barra de carga
+    const barWidth = 600;
+    const barHeight = 30;
+    const barX = this.cameras.main.centerX - barWidth / 2;
+    const barY = this.cameras.main.centerY + 300;
+
+    // Fondo de la barra
+    const barBg = this.add.graphics();
+    barBg.fillStyle(0x000000, 0.5);
+    barBg.fillRect(barX, barY, barWidth, barHeight);
+
+    // Barra de progreso
+    const progressBar = this.add.graphics();
+    progressBar.fillStyle(0xffff00, 1);
+
+    this.tweens.add({
+      targets: { width: 0 },
+      width: barWidth,
+      duration: 4000,                                 //4 SECONDS
+      ease: 'Linear',
+      onUpdate: (tween) => {
+        progressBar.clear();
+        progressBar.fillStyle(0xffff00, 1);
+        progressBar.fillRect(barX, barY, tween.getValue(), barHeight);
+      },
+      onComplete: () => {
+        this.scene.remove('carga');
+        this.scene.start('intro');
+      }
     });
   }
 }
