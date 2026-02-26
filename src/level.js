@@ -250,6 +250,12 @@ export default class Level extends Phaser.Scene {
             const hit = this.pickDistrictAt(p.x, p.y);
             this.drawHover(hit);
         });
+
+        this.missionIcon = null;
+        this.missionTimer = this.time.delayedCall(1200, () => {
+            this.spawnMissionIcon();
+        });
+
     }
 
     pickDistrictAt(screenX, screenY) {
@@ -367,4 +373,39 @@ export default class Level extends Phaser.Scene {
         if (!key) return;
         this.drawSelection(key);
     }
+
+
+    spawnMissionIcon() {
+    if (this.missionIcon) return;
+
+    const pos = this.mapToWorld(880, 1120);
+
+    this.missionIcon = this.add.image(pos.x, pos.y, 'missionIcon')
+        .setOrigin(0.5)
+        .setScale(0.08)
+        .setInteractive({ useHandCursor: true });
+
+    this.missionIcon.on('pointerover', () => {
+        this.missionIcon.setScale(0.09);
+    });
+
+    this.missionIcon.on('pointerout', () => {
+        this.missionIcon.setScale(0.08);
+    });
+
+    this.missionIcon.on('pointerup', () => {
+        this.openMissionPanel();
+    });
+}
+
+
+
+mapToWorld(mx, my) {
+    const s = this.mapImg.scaleX;
+    return {
+        x: this.mapImg.x + mx * s,
+        y: this.mapImg.y + my * s
+    };
+}
+
 }

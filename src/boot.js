@@ -7,6 +7,7 @@ import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 import worldMap from '../assets/sprites/Mapa.png'
 import presidente from '../assets/sprites/Presidente.png'
 import testSahar from '../assets/sprites/test1.png'
+import missionIconPng from '../assets/sprites/missionIcon2.png'
 
 /**
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -30,6 +31,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('map', worldMap);
     this.load.image('presidente', presidente);
     this.load.image('testSahar', testSahar);
+    this.load.image('missionIcon', missionIconPng);
   }
 
   create() {
