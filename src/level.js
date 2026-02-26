@@ -6,6 +6,7 @@ import DistrictGuinea from './map/district/districtGuinea.js';
 import DistrictNuevaPradera from './map/district/districtNuevaPradera.js';
 import Map from './map/map.js';
 import Phaser from 'phaser';
+import Player from './manager/player.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -23,6 +24,12 @@ export default class Level extends Phaser.Scene {
     init(data) {
         //TO PREPARE ALL THE DISTRICT HERE
         this.fromScene = data && data.from ? data.from : null;
+
+        const player = new Player(1000000, 100, 20, 80);
+
+        this.player = player;
+        this.registry.set('player', player);
+
         //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
         if (!this.registry.get('borrascal')) {
             const borrascal = new DistrictBorrascal(
@@ -93,79 +100,15 @@ export default class Level extends Phaser.Scene {
     create() {
         console.log("LEVEL");
         this.add.text(0, 0, "Level");      
-        // "HEADER"
-        this.spawnConfigurationIcon();
-
         // ASSETS
-        this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
-        this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
-        this.fabricaImg = this.add.image(this.mapImg.x + 150, this.mapImg.y + 180, 'fabrica').setOrigin(0).setScale(0.07);
-        this.presidente = this.add.image(175, 200, 'presidente').setDisplaySize(350, 500);
-
+        this.spawnAssets();
+        // "HEADER"
+        this.spawnPopularityBar();
+        this.spawnConfigurationIcon();
+        this.spawnEnergyBar();
         // FOOTER
-        const gameWidth = this.sys.game.config.width;
-        const gameHeight = this.sys.game.config.height;
-        const footerWidth = 1500;
-        const footerHeight = 75;
-        const footerX = (gameWidth - footerWidth) / 2;
-        const footerY = gameHeight - footerHeight;
-        // FOOTER VISUAL (lighter green)
-        this.footerBg = this.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0);
-        // FOOTER SECTIONS
-        const sectionMoney = footerWidth / 4;
-        const sectionDistrict = footerWidth / 2;
-        const sectionBlackMarket = footerWidth / 4;
-        const innerScale = 0.75; // 75% of section width
-        const innerHeight = footerHeight * innerScale; // 75% of section height
-        // FIRST SECTION - MONEY 
-        {
-            const g = this.add.graphics();
-            const x = footerX + (sectionMoney - sectionMoney * innerScale) / 2;
-            const y = footerY + (footerHeight - innerHeight) / 2;
-            const w = sectionMoney * innerScale;
-            const h = innerHeight;
-            const radius = 10;
-            g.fillStyle(0x000000);
-            g.fillRoundedRect(x, y, w, h, radius);
-            g.lineStyle(2, 0x007700); // border matches footer (lighter green)
-            g.strokeRoundedRect(x, y, w, h, radius);
-        }
-        this.moneyText = this.add.text(footerX + sectionMoney/2, footerY + footerHeight/2, '100.000.000.00$', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
-        // SECOND SECTION - DISTRICT INFO 
-        {
-            const g = this.add.graphics();
-            const x = footerX + sectionMoney + (sectionDistrict - sectionDistrict * innerScale) / 2;
-            const y = footerY + (footerHeight - innerHeight) / 2;
-            const w = sectionDistrict * innerScale;
-            const h = innerHeight;
-            const radius = 10;
-            g.fillStyle(0x000000);
-            g.fillRoundedRect(x, y, w, h, radius);
-            g.lineStyle(2, 0x007700); // border matches footer (lighter green)
-            g.strokeRoundedRect(x, y, w, h, radius);
-        }
-        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QUACKINGTON DC', { fontSize: '23px', color: '#fff', fontStyle: 'bold' }).setOrigin(0.5);
-        // THIRD SECTION - BLACK MARKET
-        {
-            const g = this.add.graphics();
-            const x = footerX + sectionMoney + sectionDistrict + (sectionBlackMarket - sectionBlackMarket * innerScale) / 2;
-            const y = footerY + (footerHeight - innerHeight) / 2;
-            const w = sectionBlackMarket * innerScale;
-            const h = innerHeight;
-            const radius = 10;
-            g.fillStyle(0x000000);
-            g.fillRoundedRect(x, y, w, h, radius);
-            g.lineStyle(2, 0x007700);
-            g.strokeRoundedRect(x, y, w, h, radius);
-        }
-        const blackMarket = this.add.text(footerX + sectionMoney + sectionDistrict + sectionBlackMarket/2, footerY + footerHeight/2, 'BLACK MARKET', { fontSize: '18px', backgroundColor: '#e03b1e', padding: { x: 8, y: 4 }, color: '#fff' }).setOrigin(0.5).setInteractive({ useHandCursor: true });
-        blackMarket.on('pointerover', () => blackMarket.setStyle({ backgroundColor: '#e99b15' }));
-        blackMarket.on('pointerout', () => blackMarket.setStyle({ backgroundColor: '#cc7a00' }));
-        blackMarket.on('pointerup', () => {
-            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5);
-            //this.scene.start('configuration', { from: 'level' });
-        });
-
+        this.spawnFooter();
+       
         this.hl = this.add.graphics();
 
         this.useIdMap = this.textures.exists('map_id');
@@ -379,7 +322,107 @@ export default class Level extends Phaser.Scene {
         this.drawSelection(key);
     }
 
-
+    spawnAssets() {
+        this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
+        this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
+        this.fabricaImg = this.add.image(this.mapImg.x + 150, this.mapImg.y + 180, 'fabrica').setOrigin(0).setScale(0.07);
+        this.presidente = this.add.image(175, 200, 'presidente').setDisplaySize(350, 500);
+    }
+    spawnConfigurationIcon() {
+        this.configBtn = this.add.image(1400, 50, 'configurationIcon').setOrigin(0.5).setScale(0.12).setInteractive({ useHandCursor: true });
+        this.configBtn.on('pointerover', () => {this.configBtn.setScale(0.09);});
+        this.configBtn.on('pointerout', () => {this.configBtn.setScale(0.08);});
+        this.configBtn.on('pointerup', () => {
+            this.scene.start('configuration', { from: 'level' });
+        });
+    }
+    spawnPopularityBar(){
+        const barWidth = 400;
+        const barHeight = 25;
+        const barX = 700;
+        const barY = 50;    
+        this.popularityBarBg = this.add.rectangle(barX, barY, barWidth, barHeight, 0x000000).setOrigin(0);
+        this.popularityBarFill = this.add.rectangle(barX, barY, barWidth * (this.player.getPopularity() / 100), barHeight, 0x00ff00).setOrigin(0);
+        this.popularityText = this.add.text(barX + barWidth / 2, barY + barHeight / 2, 'Popularity: ' + this.player.getPopularity() + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5);
+        this.corruptionBarbg = this.add.rectangle(barX, barY + barHeight + 20, barWidth, barHeight, 0x000000).setOrigin(0);
+        this.corruptionBarFill = this.add.rectangle(barX, barY + barHeight + 20, barWidth * (this.player.getCorruption() / 100), barHeight, 0xff0000).setOrigin(0);
+        this.corruptionText = this.add.text(barX + barWidth / 2, barY + barHeight + 25, 'Corruption: ' + this.player.getCorruption() + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5);
+    }
+    spawnEnergyBar(){   
+    //VERTICAL ENERGY BAR ON THE RIGHT SIDE OF THE SCREEN
+        const barWidth = 200;
+        const barHeight = 500;
+        const barX = this.sys.game.config.width - 250;
+        const barY = 150;    
+        this.energyBarBg = this.add.rectangle(barX, barY, barWidth, barHeight, 0x000000).setOrigin(0);
+        this.energyBarFill = this.add.rectangle(barX, barY + barHeight * (1 - this.player.getEnergy() / 100), barWidth, barHeight * (this.player.getEnergy() / 100), 0x0000ff).setOrigin(0);
+        this.energyText = this.add.text(barX + barWidth / 2, barY + barHeight / 2, 'Energy: ' + this.player.getEnergy() + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5).setAngle(-90);
+    }
+    spawnFooter() {
+    // FOOTER
+        const gameWidth = this.sys.game.config.width;
+        const gameHeight = this.sys.game.config.height;
+        const footerWidth = 1500;
+        const footerHeight = 75;
+        const footerX = (gameWidth - footerWidth) / 2;
+        const footerY = gameHeight - footerHeight;
+        // FOOTER VISUAL (lighter green)
+        this.footerBg = this.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0);
+        // FOOTER SECTIONS
+        const sectionMoney = footerWidth / 4;
+        const sectionDistrict = footerWidth / 2;
+        const sectionBlackMarket = footerWidth / 4;
+        const innerScale = 0.75; // 75% of section width
+        const innerHeight = footerHeight * innerScale; // 75% of section height
+        // FIRST SECTION - MONEY 
+        {
+            const g = this.add.graphics();
+            const x = footerX + (sectionMoney - sectionMoney * innerScale) / 2;
+            const y = footerY + (footerHeight - innerHeight) / 2;
+            const w = sectionMoney * innerScale;
+            const h = innerHeight;
+            const radius = 10;
+            g.fillStyle(0x000000);
+            g.fillRoundedRect(x, y, w, h, radius);
+            g.lineStyle(2, 0x007700); // border matches footer (lighter green)
+            g.strokeRoundedRect(x, y, w, h, radius);
+        }
+        this.moneyText = this.add.text(footerX + sectionMoney/2, footerY + footerHeight/2, this.player.getMoney() + '$', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
+        // SECOND SECTION - DISTRICT INFO 
+        {
+            const g = this.add.graphics();
+            const x = footerX + sectionMoney + (sectionDistrict - sectionDistrict * innerScale) / 2;
+            const y = footerY + (footerHeight - innerHeight) / 2;
+            const w = sectionDistrict * innerScale;
+            const h = innerHeight;
+            const radius = 10;
+            g.fillStyle(0x000000);
+            g.fillRoundedRect(x, y, w, h, radius);
+            g.lineStyle(2, 0x007700); // border matches footer (lighter green)
+            g.strokeRoundedRect(x, y, w, h, radius);
+        }
+        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QUACKINGTON DC', { fontSize: '23px', color: '#fff', fontStyle: 'bold' }).setOrigin(0.5);
+        // THIRD SECTION - BLACK MARKET
+        {
+            const g = this.add.graphics();
+            const x = footerX + sectionMoney + sectionDistrict + (sectionBlackMarket - sectionBlackMarket * innerScale) / 2;
+            const y = footerY + (footerHeight - innerHeight) / 2;
+            const w = sectionBlackMarket * innerScale;
+            const h = innerHeight;
+            const radius = 10;
+            g.fillStyle(0x000000);
+            g.fillRoundedRect(x, y, w, h, radius);
+            g.lineStyle(2, 0x007700);
+            g.strokeRoundedRect(x, y, w, h, radius);
+        }
+        const blackMarket = this.add.text(footerX + sectionMoney + sectionDistrict + sectionBlackMarket/2, footerY + footerHeight/2, 'BLACK MARKET', { fontSize: '18px', backgroundColor: '#e03b1e', padding: { x: 8, y: 4 }, color: '#fff' }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+        blackMarket.on('pointerover', () => blackMarket.setStyle({ backgroundColor: '#e99b15' }));
+        blackMarket.on('pointerout', () => blackMarket.setStyle({ backgroundColor: '#cc7a00' }));
+        blackMarket.on('pointerup', () => {
+            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5);
+            //this.scene.start('configuration', { from: 'level' });
+        });
+    }
     spawnMissionIcon() {
         if (this.missionIcon) return;
         const pos = this.mapToWorld(880, 1120);
@@ -392,16 +435,6 @@ export default class Level extends Phaser.Scene {
         });
 
     }
-
-    spawnConfigurationIcon() {
-        this.configBtn = this.add.image(1400, 50, 'configurationIcon').setOrigin(0.5).setScale(0.12).setInteractive({ useHandCursor: true });
-        this.configBtn.on('pointerover', () => {this.configBtn.setScale(0.09);});
-        this.configBtn.on('pointerout', () => {this.configBtn.setScale(0.08);});
-        this.configBtn.on('pointerup', () => {
-            this.scene.start('configuration', { from: 'level' });
-        });
-    }
-
     mapToWorld(mx, my) {
         const s = this.mapImg.scaleX;
         return {
