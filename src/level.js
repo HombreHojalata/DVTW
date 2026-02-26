@@ -130,7 +130,7 @@ export default class Level extends Phaser.Scene {
             g.lineStyle(2, 0x007700); // border matches footer (lighter green)
             g.strokeRoundedRect(x, y, w, h, radius);
         }
-        this.moneyText = this.add.text(footerX + sectionMoney/2, footerY + footerHeight/2, 'Dinero: 1000L', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
+        this.moneyText = this.add.text(footerX + sectionMoney/2, footerY + footerHeight/2, '100.000.000.00$', { fontSize: '18px', color: '#fff' }).setOrigin(0.5);
         // SECOND SECTION - DISTRICT INFO 
         {
             const g = this.add.graphics();
@@ -144,7 +144,7 @@ export default class Level extends Phaser.Scene {
             g.lineStyle(2, 0x007700); // border matches footer (lighter green)
             g.strokeRoundedRect(x, y, w, h, radius);
         }
-        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QUACKINGTON DC', { fontSize: '23px', color: '#fff' }).setOrigin(0.5);
+        this.districtTitleText = this.add.text(footerX + sectionMoney + sectionDistrict/2, footerY + footerHeight/2, 'QUACKINGTON DC', { fontSize: '23px', color: '#fff', fontStyle: 'bold' }).setOrigin(0.5);
         // THIRD SECTION - BLACK MARKET
         {
             const g = this.add.graphics();
