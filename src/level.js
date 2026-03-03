@@ -100,15 +100,23 @@ export default class Level extends Phaser.Scene {
     create() {
         console.log("LEVEL");
         this.add.text(0, 0, "Level");      
+
+        // LO QUE NECESITAMOS ES QUE SE CREE UNA VEZ Y LUEGO QUE TODAS LAS VARIABLES SE GUARDEN EN EL REGISTRY, ASI SI VOLVEMOS A LA ESCENA, NO SE RECREAN LOS ELEMENTOS, SOLO SE ACTUALIZAN LOS DATOS EN EL REGISTRY Y SE REFLEJAN EN LOS ELEMENTOS CREADOS.
         // ASSETS
         this.spawnAssets();
         // "HEADER"
-        this.spawnPopularityBar();
-        this.spawnConfigurationIcon();
-        this.spawnEnergyBar();
+        this.PopularityContainer = this.spawnPopularityBar();
+        this.ConfigurationIcon = this.spawnConfigurationIcon();
+        this.EnergyBar = this.spawnEnergyBar();
         // FOOTER
-        this.spawnFooter();
-       
+        this.Footer = this.spawnFooter();
+
+        // ICONS - MISSING ONES FOR EACH
+        this.closeIcon = null;
+        this.missionIcon = null;
+        this.missionTimer = this.time.delayedCall(1200, () => {
+            this.spawnMissionIcon();
+        });
         this.hl = this.add.graphics();
 
         this.useIdMap = this.textures.exists('map_id');
@@ -118,7 +126,6 @@ export default class Level extends Phaser.Scene {
         this.colorToDistrict = {
             '255,0,0': 'BORRASCAL'
         };
-
 
         //USED POLYGONS TO TRY TO TEST MOCK ZONE AREAS; WE CAN REFACTOR IF NEEDED TO FIT THE MAP BETTER LATER ON OR ANOTHER METHOD
         this.polygons = {
@@ -198,13 +205,7 @@ export default class Level extends Phaser.Scene {
             this.drawHover(hit);
         });
 
-        this.missionIcon = null;
-        this.missionTimer = this.time.delayedCall(1200, () => {
-            this.spawnMissionIcon();
-        });
-
     }
-
     pickDistrictAt(screenX, screenY) {
         const local = this.toMapLocal(screenX, screenY);
         if (!local) return null;
@@ -216,7 +217,6 @@ export default class Level extends Phaser.Scene {
 
         return this.pickByPolygons(local.x, local.y);
     }
-
     toMapLocal(screenX, screenY) {
         const s = this.mapImg.scaleX;
         const w = this.mapImg.width * s;
@@ -229,14 +229,12 @@ export default class Level extends Phaser.Scene {
         const ly = (screenY - this.mapImg.y) / s;
         return { x: lx, y: ly };
     }
-
     pickByPolygons(lx, ly) {
         for (const key of Object.keys(this.polygons)) {
             if (Phaser.Geom.Polygon.Contains(this.polygons[key], lx, ly)) return key;
         }
         return null;
     }
-
     ensureIdCanvas() {
         if (this.idCanvas) return;
 
@@ -262,7 +260,6 @@ export default class Level extends Phaser.Scene {
             return null;
         }
     }
-
     selectDistrict(key) { //ONCE WE CLICK ON EACH POLYGON, CHANGES WHAT HAPPENS, WE CAN ADD DISPLAY ANOTHER POP-UP TAB ONCE WE CLICK ON IT.
 
         const dist = this.map.getDistricts(key);
@@ -274,32 +271,26 @@ export default class Level extends Phaser.Scene {
         this.districtTitleText.setText(this.d.getName() + " - " + this.d.getDescription());
         this.drawSelection(key);
         
-        if(dist.getName() == "Borrascal")
-            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'district').setOrigin(0.5);
-        
-        /*const increaseBtn = this.add.text(200, 500, '+ Population', { fontSize: '18px', backgroundColor: '#228822', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
-        increaseBtn.on('pointerover', () => increaseBtn.setStyle({ backgroundColor: '#1f7a1f' }));
-        increaseBtn.on('pointerout', () => increaseBtn.setStyle({ backgroundColor: '#228822' }));
-        increaseBtn.on('pointerup', () => {
-            this.map.modifyDistrict(key,1000)
-            this.populationText.setText('Población: ' + this.d.getPopulationDensity());
-        });
-        const decreaseBtn = this.add.text(200, 600, '- Population', { fontSize: '18px', backgroundColor: '#882222', padding: { x: 8, y: 4 }, color: '#fff' }).setInteractive({ useHandCursor: true });
-        decreaseBtn.on('pointerover', () => decreaseBtn.setStyle({ backgroundColor: '#7a1f1f' }));
-        decreaseBtn.on('pointerout', () => decreaseBtn.setStyle({ backgroundColor: '#882222' }));
-        decreaseBtn.on('pointerup', () => {
-            this.map.modifyDistrict(key,-1000)
-            this.populationText.setText('Población: ' + this.d.getPopulationDensity());
-        }); */
+        if(dist.getName() == "Borrascal") {
+            this.missionIcon.setVisible(false);
+            const pos = this.mapToWorld(3400, 250);
 
+            this.districtDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'district').setOrigin(0.5);
+            this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(0.8).setInteractive({ useHandCursor: true });
+            this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(0.8);});
+            this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(0.6);});
+            this.closeIcon.on('pointerup', () => {
+                this.closeIcon.destroy();
+                this.districtDetails.destroy();
+                this.missionIcon.setVisible(true);
+            });
+        }
     }
-
     clearSelection() {
         this.popupBg.setVisible(false);
         this.popupText.setVisible(false);
         this.hl.clear();
     }
-
     drawSelection(key) {
         this.hl.clear();
         const s = this.mapImg.scaleX;
@@ -316,12 +307,11 @@ export default class Level extends Phaser.Scene {
             this.hl.strokePath();
         }
     }
-
     drawHover(key) {
         if (!key) return;
         this.drawSelection(key);
     }
-
+    
     spawnAssets() {
         this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
         this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
@@ -419,7 +409,20 @@ export default class Level extends Phaser.Scene {
         blackMarket.on('pointerover', () => blackMarket.setStyle({ backgroundColor: '#e99b15' }));
         blackMarket.on('pointerout', () => blackMarket.setStyle({ backgroundColor: '#cc7a00' }));
         blackMarket.on('pointerup', () => {
-            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5);
+            this.missionIcon.setVisible(false);
+            this.blackMarketDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5).setScale(0.8);
+            
+            const pos = this.mapToWorld(3163, 70);
+            this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
+            this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(1);});
+            this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(1);});
+            this.closeIcon.on('pointerup', () => {
+                this.blackMarketDetails.destroy();
+                this.closeIcon.destroy();
+                this.missionDetails.destroy();
+                this.missionIcon.setVisible(true);
+            });
+
             //this.scene.start('configuration', { from: 'level' });
         });
     }
@@ -431,9 +434,105 @@ export default class Level extends Phaser.Scene {
         this.missionIcon.on('pointerover', () => {this.missionIcon.setScale(0.09);});
         this.missionIcon.on('pointerout', () => {this.missionIcon.setScale(0.08);});
         this.missionIcon.on('pointerup', () => {
-            this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'testSahar').setOrigin(0.5);
+            this.missionDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'testSahar').setOrigin(0.5);
+
+            // CHOICES COINTAINER
+            // this.spawnMissionTypeTwoChoices();
+            if (!this.buttonContainer) {
+            this.buttonContainer = document.createElement('div');
+            this.buttonContainer.style.position = 'absolute';
+            this.buttonContainer.style.top = '0';
+            this.buttonContainer.style.left = '0';
+            this.buttonContainer.style.width = '100%';
+            this.buttonContainer.style.height = '100%';
+            this.buttonContainer.style.pointerEvents = 'none'; // Permite que los clicks pasen a través del contenedor
+            document.body.appendChild(this.buttonContainer);
+            }
+
+            // Eliminar botones anteriores si existen
+            if (this.missionTypeTwoChoice1) this.missionTypeTwoChoice1.remove();
+            if (this.missionTypeTwoChoice2) this.missionTypeTwoChoice2.remove();
+
+            // Crear botón 1 en coordenadas 500x800
+            this.missionTypeTwoChoice1 = document.createElement('button');
+            this.missionTypeTwoChoice1.style.position = 'absolute';
+            this.missionTypeTwoChoice1.style.left = '315px';           // X
+            this.missionTypeTwoChoice1.style.top = '550px';            // Y
+            this.missionTypeTwoChoice1.style.width = '350px';
+            this.missionTypeTwoChoice1.style.height = '190px';
+            this.missionTypeTwoChoice1.style.opacity = '0';
+            this.missionTypeTwoChoice1.style.border = '2px solid #ccc';
+            this.missionTypeTwoChoice1.style.backgroundColor = '#ffffff';
+            this.missionTypeTwoChoice1.style.borderRadius = '30px';
+            this.missionTypeTwoChoice1.style.cursor = 'pointer';
+            this.missionTypeTwoChoice1.style.transition = 'border-color 0.3s ease';
+            this.missionTypeTwoChoice1.style.pointerEvents = 'auto'; // Permite interacción con el botón
+            this.missionTypeTwoChoice1.onmouseover = () => this.missionTypeTwoChoice1.style.borderColor = 'green';
+            this.missionTypeTwoChoice1.onmouseout = () => this.missionTypeTwoChoice1.style.borderColor = '#ccc';
+
+            // Crear botón 2 en coordenadas 800x800
+            this.missionTypeTwoChoice2 = document.createElement('button');
+            this.missionTypeTwoChoice2.style.position = 'absolute';
+            this.missionTypeTwoChoice2.style.left = '695px';
+            this.missionTypeTwoChoice2.style.top = '550px';
+            this.missionTypeTwoChoice2.style.width = '350px';
+            this.missionTypeTwoChoice2.style.height = '190px';
+            this.missionTypeTwoChoice2.style.opacity = '0';
+            this.missionTypeTwoChoice2.style.border = '2px solid #ccc';
+            this.missionTypeTwoChoice2.style.backgroundColor = '#f0f0f0';
+            this.missionTypeTwoChoice2.style.borderRadius = '30px';
+            this.missionTypeTwoChoice2.style.cursor = 'pointer';
+            this.missionTypeTwoChoice2.style.transition = 'border-color 0.3s ease';
+            this.missionTypeTwoChoice2.style.pointerEvents = 'auto'; // Permite interacción con el botón
+            this.missionTypeTwoChoice2.onmouseover = () => this.missionTypeTwoChoice2.style.borderColor = 'green';
+            this.missionTypeTwoChoice2.onmouseout = () => this.missionTypeTwoChoice2.style.borderColor = '#ccc';
+
+            // Agregar botones al contenedor
+            this.buttonContainer.appendChild(this.missionTypeTwoChoice1);
+            this.buttonContainer.appendChild(this.missionTypeTwoChoice2);
+
+            this.missionTypeTwoChoice1.onclick = () => {
+                this.missionTypeTwoChoice1.remove();
+                this.missionTypeTwoChoice2.remove();
+                this.closeIcon.destroy();
+                this.missionDetails.destroy();
+                this.missionIcon.setVisible(false);
+                // HERE WE CAN ADD THE CONSEQUENCES OF CHOOSING THIS OPTION, FOR EXAMPLE, INCREASING POPULARITY BUT DECREASING ENERGY OR SOMETHING LIKE THAT
+                this.player.updateMoney(-30000);
+                this.player.updateEnergy(-10);
+                this.player.updatePopularity(7);
+                this.player.updateCorruption(12);
+                // WE WILL NEED A FUNC TO UPDATE DATA
+                this.PopularityContainer = this.spawnPopularityBar();
+                this.EnergyBar = this.spawnEnergyBar();
+                this.Footer = this.spawnFooter();
+            }
+            this.missionTypeTwoChoice2.onclick = () => {
+                this.missionTypeTwoChoice1.remove();
+                this.missionTypeTwoChoice2.remove();
+                this.closeIcon.destroy();
+                this.missionDetails.destroy();
+                this.missionIcon.setVisible(false);
+                // HERE WE CAN ADD THE CONSEQUENCES OF CHOOSING THIS OPTION, FOR EXAMPLE, INCREASING ENERGY BUT DECREASING POPULARITY OR SOMETHING LIKE THAT
+                this.player.updateMoney(-42000);
+                this.player.updateEnergy(-10);
+                this.player.updatePopularity(2);
+                this.PopularityContainer = this.spawnPopularityBar();
+                this.EnergyBar = this.spawnEnergyBar();
+                this.Footer = this.spawnFooter();
+            }
+            const pos = this.mapToWorld(3163, -75);
+            this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
+            this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(1);});
+            this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(1);});
+            this.closeIcon.on('pointerup', () => {
+                this.closeIcon.destroy();
+                this.missionDetails.destroy();
+            });
         });
 
+    }
+    spawnMissionTypeTwoChoices(){
     }
     mapToWorld(mx, my) {
         const s = this.mapImg.scaleX;
@@ -442,5 +541,4 @@ export default class Level extends Phaser.Scene {
             y: this.mapImg.y + my * s
         };
     }
-
 }

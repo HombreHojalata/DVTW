@@ -10,6 +10,7 @@ import fabrica from '../assets/sprites/Fabrica.png'
 import testSahar from '../assets/sprites/test1.png'
 import missionIconPng from '../assets/sprites/missionIcon2.png'
 import configurationIcon from '../assets/sprites/configurationIcon.png'
+import closeIcon from '../assets/sprites/closeIcon.png'
 import district from '../assets/sprites/prototipoDistrict.png'
 import blackMarket from '../assets/sprites/prototipoBlackMarket.png'
 
@@ -39,6 +40,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('testSahar', testSahar);
     this.load.image('missionIcon', missionIconPng);
     this.load.image('configurationIcon', configurationIcon);
+    this.load.image('closeIcon', closeIcon);
     this.load.image('district', district);
     this.load.image('blackMarket', blackMarket);
   }
