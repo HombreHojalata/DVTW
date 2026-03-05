@@ -25,12 +25,11 @@ export default class Level extends Phaser.Scene {
         //TO PREPARE ALL THE DISTRICT HERE
         this.fromScene = data && data.from ? data.from : null;
 
-        const player = new Player(1000000, 100, 20, 80);
+        const player = new Player(1000000, 100, 20, 80 , 'presidente');
 
         this.player = player;
         this.registry.set('player', player);
-
-        //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
+ //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
         if (!this.registry.get('borrascal')) {
             const borrascal = new DistrictBorrascal(
                 "Borrascal", "Any", 1000, 10, 100,
@@ -85,8 +84,8 @@ export default class Level extends Phaser.Scene {
             );
             this.registry.set('el_nido', elNido);
         }
-
-        this.map = new Map({
+        //WE CREATE THE MAP WITH ALL THE DISTRICTS
+        this.map = new Map('map', null, null,{                  //faltan los JSON
             BORRASCAL: this.registry.get('borrascal'),
             SAHAR: this.registry.get('sahar'),
             SOMOSAGUA: this.registry.get('somosagua'),
@@ -99,9 +98,7 @@ export default class Level extends Phaser.Scene {
 
     create() {
         console.log("LEVEL");
-        this.add.text(0, 0, "Level");      
 
-        // LO QUE NECESITAMOS ES QUE SE CREE UNA VEZ Y LUEGO QUE TODAS LAS VARIABLES SE GUARDEN EN EL REGISTRY, ASI SI VOLVEMOS A LA ESCENA, NO SE RECREAN LOS ELEMENTOS, SOLO SE ACTUALIZAN LOS DATOS EN EL REGISTRY Y SE REFLEJAN EN LOS ELEMENTOS CREADOS.
         // ASSETS
         this.spawnAssets();
         // "HEADER"
@@ -117,206 +114,12 @@ export default class Level extends Phaser.Scene {
         this.missionTimer = this.time.delayedCall(1200, () => {
             this.spawnMissionIcon();
         });
-        this.hl = this.add.graphics();
 
-        this.useIdMap = this.textures.exists('map_id');
-        this.idCanvas = null;
-        this.idCtx = null;
-
-        this.colorToDistrict = {
-            '255,0,0': 'BORRASCAL'
-        };
-
-        //USED POLYGONS TO TRY TO TEST MOCK ZONE AREAS; WE CAN REFACTOR IF NEEDED TO FIT THE MAP BETTER LATER ON OR ANOTHER METHOD
-        this.polygons = {
-            SOMOSAGUA: new Phaser.Geom.Polygon([
-                434, 876,
-                467, 674,
-                567, 539,
-                801, 505,
-                935, 640,
-                868, 808,
-                801, 977,
-                634, 1078,
-                501, 1044,
-                467, 943
-            ]),
-            SAHAR: new Phaser.Geom.Polygon([
-                668, 707,
-                1001, 707,
-                1101, 909,
-                1202, 1415,
-                834, 1415,
-                668, 1280,
-                601, 1078,
-                601, 842
-            ]),
-            GUINEA: new Phaser.Geom.Polygon([
-                834, 505,
-                1368, 505,
-                1569, 573,
-                1569, 674,
-                1335, 741,
-                1001, 741,
-                834, 640
-            ]),
-            BORRASCAL: new Phaser.Geom.Polygon([
-                1402, 135,
-                1902, 168,
-                2103, 303,
-                2169, 539,
-                2036, 707,
-                1736, 707,
-                1502, 539,
-                1368, 371
-            ]),
-            NUEVA_PRADERA: new Phaser.Geom.Polygon([
-                1335, 606,
-                1736, 573,
-                2169, 741,
-                2136, 1112,
-                1869, 1179,
-                1402, 1213,
-                1202, 1078,
-                1168, 775
-            ]),
-            EL_NIDO: new Phaser.Geom.Polygon([
-                1068, 741,
-                1202, 691,
-                1368, 707,
-                1435, 808,
-                1368, 876,
-                1202, 893,
-                1101, 842
-            ])
-        };
-
-        this.input.on('pointerdown', (p) => {
-            const hit = this.pickDistrictAt(p.x, p.y);
-            if (hit) {
-                this.selectDistrict(hit);
-            } else {
-                this.clearSelection();
-            }
-        });
-
-        this.input.on('pointermove', (p) => {
-            const hit = this.pickDistrictAt(p.x, p.y);
-            this.drawHover(hit);
-        });
-
-    }
-    pickDistrictAt(screenX, screenY) {
-        const local = this.toMapLocal(screenX, screenY);
-        if (!local) return null;
-
-        if (this.useIdMap) {
-            const k = this.pickByIdMap(local.x, local.y);
-            if (k) return k;
-        }
-
-        return this.pickByPolygons(local.x, local.y);
-    }
-    toMapLocal(screenX, screenY) {
-        const s = this.mapImg.scaleX;
-        const w = this.mapImg.width * s;
-        const h = this.mapImg.height * s;
-
-        if (screenX < this.mapImg.x || screenY < this.mapImg.y) return null;
-        if (screenX > this.mapImg.x + w || screenY > this.mapImg.y + h) return null;
-
-        const lx = (screenX - this.mapImg.x) / s;
-        const ly = (screenY - this.mapImg.y) / s;
-        return { x: lx, y: ly };
-    }
-    pickByPolygons(lx, ly) {
-        for (const key of Object.keys(this.polygons)) {
-            if (Phaser.Geom.Polygon.Contains(this.polygons[key], lx, ly)) return key;
-        }
-        return null;
-    }
-    ensureIdCanvas() {
-        if (this.idCanvas) return;
-
-        const img = this.textures.get('map_id').getSourceImage();
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
-        ctx.drawImage(img, 0, 0);
-        this.idCanvas = canvas;
-        this.idCtx = ctx;
-    }
-
-    pickByIdMap(lx, ly) {
-        try {
-            this.ensureIdCanvas();
-            const x = Math.floor(lx);
-            const y = Math.floor(ly);
-            const data = this.idCtx.getImageData(x, y, 1, 1).data;
-            const key = `${data[0]},${data[1]},${data[2]}`;
-            return this.colorToDistrict[key] || null;
-        } catch (e) {
-            return null;
-        }
-    }
-    selectDistrict(key) { //ONCE WE CLICK ON EACH POLYGON, CHANGES WHAT HAPPENS, WE CAN ADD DISPLAY ANOTHER POP-UP TAB ONCE WE CLICK ON IT.
-
-        const dist = this.map.getDistricts(key);
-        if (!dist) {
-            this.clearSelection();
-            return;
-        }
-        this.d = dist;
-        this.districtTitleText.setText(this.d.getName() + " - " + this.d.getDescription());
-        this.drawSelection(key);
-        
-        if(dist.getName() == "Borrascal") {
-            this.missionIcon.setVisible(false);
-            const pos = this.mapToWorld(3400, 250);
-
-            this.districtDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'district').setOrigin(0.5);
-            this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(0.8).setInteractive({ useHandCursor: true });
-            this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(0.8);});
-            this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(0.6);});
-            this.closeIcon.on('pointerup', () => {
-                this.closeIcon.destroy();
-                this.districtDetails.destroy();
-                this.missionIcon.setVisible(true);
-            });
-        }
-    }
-    clearSelection() {
-        this.popupBg.setVisible(false);
-        this.popupText.setVisible(false);
-        this.hl.clear();
-    }
-    drawSelection(key) {
-        this.hl.clear();
-        const s = this.mapImg.scaleX;
-
-        if (this.polygons[key]) {
-            const pts = this.polygons[key].points;
-            this.hl.lineStyle(3, 0xff0000, 1);
-            this.hl.beginPath();
-            this.hl.moveTo(this.mapImg.x + pts[0].x * s, this.mapImg.y + pts[0].y * s);
-            for (let i = 1; i < pts.length; i++) {
-                this.hl.lineTo(this.mapImg.x + pts[i].x * s, this.mapImg.y + pts[i].y * s);
-            }
-            this.hl.closePath();
-            this.hl.strokePath();
-        }
-    }
-    drawHover(key) {
-        if (!key) return;
-        this.drawSelection(key);
     }
     
     spawnAssets() {
-        this.mapImg = this.add.image(350, 100, 'map').setOrigin(0).setScale(0.3);
-        this.cineImg = this.add.image(this.mapImg.x + 500, this.mapImg.y + 70, 'cine1real').setOrigin(0).setScale(0.07);
-        this.fabricaImg = this.add.image(this.mapImg.x + 150, this.mapImg.y + 180, 'fabrica').setOrigin(0).setScale(0.07);
-        this.presidente = this.add.image(175, 200, 'presidente').setDisplaySize(350, 500);
+        this.mapImg = this.map.spawnMap(this);
+        this.presidente = this.player.spawnPresident(this);
     }
     spawnConfigurationIcon() {
         this.configBtn = this.add.image(1400, 50, 'configurationIcon').setOrigin(0.5).setScale(0.12).setInteractive({ useHandCursor: true });
@@ -412,8 +215,7 @@ export default class Level extends Phaser.Scene {
             this.missionIcon.setVisible(false);
             this.blackMarketDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5).setScale(0.8);
             
-            const pos = this.mapToWorld(3163, 70);
-            this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
+            this.closeIcon = this.add.image(3163, 70, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
             this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(1);});
             this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(1);});
             this.closeIcon.on('pointerup', () => {
@@ -428,9 +230,7 @@ export default class Level extends Phaser.Scene {
     }
     spawnMissionIcon() {
         if (this.missionIcon) return;
-        const pos = this.mapToWorld(880, 1120);
-
-        this.missionIcon = this.add.image(pos.x, pos.y, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
+        this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
         this.missionIcon.on('pointerover', () => {this.missionIcon.setScale(0.09);});
         this.missionIcon.on('pointerout', () => {this.missionIcon.setScale(0.08);});
         this.missionIcon.on('pointerup', () => {
@@ -531,14 +331,5 @@ export default class Level extends Phaser.Scene {
             });
         });
 
-    }
-    spawnMissionTypeTwoChoices(){
-    }
-    mapToWorld(mx, my) {
-        const s = this.mapImg.scaleX;
-        return {
-            x: this.mapImg.x + mx * s,
-            y: this.mapImg.y + my * s
-        };
     }
 }
