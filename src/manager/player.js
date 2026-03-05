@@ -1,13 +1,15 @@
 import Phaser from 'phaser';
 
 export default class Player {
-    constructor(money, energy, corruption, popularity){
+    constructor(money, energy, corruption, popularity, PNGpresident){
         this.money = money;
         this.energy = energy;
         this.corruption = corruption;
         this.popularity = popularity;
+        this.PNGpresident = PNGpresident;
     }
 
+    spawnPresident(scene) {return scene.add.image(120, 150, this.PNGpresident).setDisplaySize(200, 350);}
     getMoney(){ return this.money; }
     updateMoney(amount){ this.money += amount;}
     getEnergy(){ return this.energy; }
