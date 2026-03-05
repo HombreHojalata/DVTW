@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 
-class Story{
+export default class Story{
     constructor(){
         //Cargar la historia, con sus eventos, sus decisiones, etc.
     }
