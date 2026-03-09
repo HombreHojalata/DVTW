@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
 import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 import worldMap from '../assets/sprites/mapTemplate.png'
-import presidente from '../assets/sprites/Presidente.png'
+import presidente from '../assets/sprites/presidente.png'
 
 //PROTOTYPE ASSETS, TO BE REPLACED
 import testSahar from '../assets/sprites/test1.png'
