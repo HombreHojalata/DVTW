@@ -22,7 +22,7 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, Intro, Configuration, Level, End],
+    scene: [Boot,Intro, Configuration, Level, End],
     physics: {
         default: 'arcade',
         arcade: {
