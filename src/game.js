@@ -3,7 +3,7 @@ import Intro from './intro.js';
 import Configuration from './configuration.js';
 import Level from './level.js';
 import End from './end.js';
-import Phaser from 'phaser';
+import Phaser from 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.esm.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
