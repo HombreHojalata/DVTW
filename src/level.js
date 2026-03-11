@@ -88,7 +88,7 @@ export default class Level extends Phaser.Scene {
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
                 'closeIcon', 'closeIcon', 900, 550
             );
-            this.registry.set('sahar', sahar);
+            this.registry.set('nueva_pradera', nuevaPradera);
         }
         //WE CREATE THE MAP WITH ALL THE DISTRICTS
         this.map = new Map('map', null, null,{                  //faltan los JSON
@@ -171,7 +171,7 @@ export default class Level extends Phaser.Scene {
         const footerWidth = 1500;
         const footerHeight = 75;
         const footerX = (gameWidth - footerWidth) / 2;
-        const footerY = gameHeight - footerHeight;
+                const footerY = gameHeight - footerHeight;
         // FOOTER VISUAL (lighter green)
         this.footerBg = this.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0);
         // FOOTER SECTIONS
@@ -225,20 +225,9 @@ export default class Level extends Phaser.Scene {
         blackMarket.on('pointerover', () => blackMarket.setStyle({ backgroundColor: '#e99b15' }));
         blackMarket.on('pointerout', () => blackMarket.setStyle({ backgroundColor: '#cc7a00' }));
         blackMarket.on('pointerup', () => {
-            this.missionIcon.setVisible(false);
-            this.blackMarketDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'blackMarket').setOrigin(0.5).setScale(0.8);
-            
-            this.closeIcon = this.add.image(3163, 70, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
-            this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(1);});
-            this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(1);});
-            this.closeIcon.on('pointerup', () => {
-                this.blackMarketDetails.destroy();
-                this.closeIcon.destroy();
-                this.missionDetails.destroy();
-                this.missionIcon.setVisible(true);
-            });
-
-            //this.scene.start('configuration', { from: 'level' });
+            if (this.missionIcon)
+                this.missionIcon.setVisible(false);
+            this.scene.start('blackmarket');
         });
     }
     spawnMissionIcon() {
