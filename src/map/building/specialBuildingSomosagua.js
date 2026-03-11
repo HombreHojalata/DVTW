@@ -1,6 +1,6 @@
-import SpecialBuilding from "./specialBuilding";   
+import Building from "./building";   
 
-export default class BuildingGuinea extends SpecialBuilding {
+export default class SpecialBuildingSomosagua extends Building {
     constructor(PNGBuilding,coste,beneficio,satisfaccion,energia,poblacion) {
         super(PNGBuilding,coste,beneficio,satisfaccion,energia,poblacion);
     }   

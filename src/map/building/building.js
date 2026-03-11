@@ -7,4 +7,5 @@ export default class Building {
         this.energia = energia;
         this.poblacion = poblacion;
     }
+    getBuildingMoney() { return this.beneficio; }
 }

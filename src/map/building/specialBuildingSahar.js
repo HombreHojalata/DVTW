@@ -1,6 +1,6 @@
-import Building from '../building';
+import Building from "./building";   
 
-export default class BuildingHotel extends Building {
+export default class SpecialBuildingSahar extends Building {
     constructor(PNGBuilding,coste,beneficio,satisfaccion,energia,poblacion) {
         super(PNGBuilding,coste,beneficio,satisfaccion,energia,poblacion);
     }   

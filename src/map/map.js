@@ -24,4 +24,9 @@ export default class Map {
             this.districtList[key].increaseBoostedPopulation(value);
         }
     }
+    generateDistrictsMoney() {
+        let money = 0;
+        for(let key of this.districtsKey) money += this.districtList[key].generateMoneyFromBuildings();
+        return money;
+    }
 }
