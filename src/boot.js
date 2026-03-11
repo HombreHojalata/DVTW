@@ -4,6 +4,11 @@ import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 import worldMap from '../assets/sprites/mapTemplate.png'
 import presidente from '../assets/sprites/presidente.png'
 
+// BLACK MARKET ASSETS
+import vendedor from '../assets/sprites/Vendedor.png'
+import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
+import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
+
 //PROTOTYPE ASSETS, TO BE REPLACED
 import testSahar from '../assets/sprites/test1.png'
 import missionIconPng from '../assets/sprites/missionIcon2.png'
@@ -39,6 +44,9 @@ export default class Boot extends Phaser.Scene {
     this.load.image('closeIcon', closeIcon);
     this.load.image('district', district);
     this.load.image('blackMarket', blackMarket);
+    this.load.image('vendedor', vendedor);
+    this.load.image('pensa_icon', prensa_icon);
+    this.load.image('hotel_icon', hotel_icon);
   }
 
   create() {
@@ -63,7 +71,7 @@ export default class Boot extends Phaser.Scene {
     this.tweens.add({
       targets: { width: 0 },
       width: barWidth,
-      duration: 4000,                                 //4 SECONDS
+      duration: 1500, //1.5 SECONDS
       ease: 'Linear',
       onUpdate: (tween) => {
         progressBar.clear();
