@@ -32,7 +32,7 @@ export default class Configuration extends Phaser.Scene {
 
         this.add.rectangle(width / 2, height / 2, width, height, bgRed);
 
-        this.add.text(width / 2, 95, 'CONFIGURATION', {
+        this.add.text(width / 2, 95, 'Opciones', {
             fontSize: '64px',
             fontStyle: 'bold',
             color: softWhite,
