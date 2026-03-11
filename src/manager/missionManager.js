@@ -8,7 +8,7 @@ import Day from './day.js';
 export default class missionManager{
     constructor(){
         this.player = new Player();
-        this.missions = [];
+        this.regularMissions = [];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
         this.day=new Day();
 
@@ -33,14 +33,15 @@ export default class missionManager{
     async loadMissions(){
 
 
-        const response = await fetch("DVTW/files/missions.json");
+        const response = await fetch("DVTW/files/regularMissions.json");
         const missionsData = await response.json();
         missionsData.forEach(m => {
             const mission = new Mission(
                 m.name,
                 m.description,
                 m.event,
-                m.corrupt
+                m.corrupt,
+                m.minigame
             );
 
             m.options.forEach(o => {
@@ -54,7 +55,7 @@ export default class missionManager{
                 );
             });
 
-            this.missions.push(mission);
+            this.regularMissions.push(mission);
         });
 
         /*console.log("Number of missions:", this.missions.length);

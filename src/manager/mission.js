@@ -1,11 +1,12 @@
 
 
 export default class Mission{
-    constructor(name,description, ev, co){
+    constructor(name,description, ev, co, mi){
         this.name = name;//String
         this.description = description;//String
         this.event = ev;//Bool
         this.corrupt = co;//Bool
+        this.minigame= mi;//Bool
         this.numberOfOptions=0;       
         this.options=[];//Array de opciones, cada una con sus consecuencias.
     }

@@ -1,0 +1,402 @@
+[
+  {
+    "name": "Corte de cinta exprés",
+    "description": "Una inauguración relámpago para la foto: luces, aplausos y un poco de improvisación.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 70,
+        "description": "Dar un discurso breve y sonreír",
+        "energy": -5,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 3
+      },
+      {
+        "probability": 30,
+        "description": "Alargar el evento para salir en más fotos",
+        "energy": -10,
+        "money": 20,
+        "corruption": 0,
+        "popularity": 5
+      }
+    ]
+  },
+  {
+    "name": "Reparación milagrosa",
+    "description": "Un bache que apareció justo antes de que paseara la prensa.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 60,
+        "description": "Taparlo con asfalto exprés (equipo municipal)",
+        "energy": -6,
+        "money": -10,
+        "corruption": 0,
+        "popularity": 2
+      },
+      {
+        "probability": 40,
+        "description": "Ignorarlo y prometer una solución a largo plazo",
+        "energy": 0,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Charla con comerciantes",
+    "description": "Encuentro con dos o tres tenderos que piden facilidades.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 75,
+        "description": "Ofrecer subvenciones pequeñas y foto de grupo",
+        "energy": -4,
+        "money": -30,
+        "corruption": 0,
+        "popularity": 4
+      },
+      {
+        "probability": 25,
+        "description": "Prometer que lo estudiará (y no pasar factura)",
+        "energy": 0,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "Patrulla de parques",
+    "description": "Colocar unas jardineras nuevas para aparentar mantenimiento.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 80,
+        "description": "Poner jardineras compradas localmente",
+        "energy": -3,
+        "money": -20,
+        "corruption": 0,
+        "popularity": 2
+      },
+      {
+        "probability": 20,
+        "description": "Pedir a voluntarios que limpien gratis",
+        "energy": -5,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "El informe 'perdido'",
+    "description": "Un informe incómodo que nadie encuentra en delegación.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 50,
+        "description": "Aplazar su publicación con excusas administrativas",
+        "energy": -2,
+        "money": 0,
+        "corruption": 1,
+        "popularity": -1
+      },
+      {
+        "probability": 50,
+        "description": "Publicarlo y afrontar las consecuencias",
+        "energy": -6,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -3
+      }
+    ]
+  },
+  {
+    "name": "La placa dedicada",
+    "description": "Colocar una placa conmemorativa en un colegio municipal.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 65,
+        "description": "Encargarla a un proveedor caro pero rápido",
+        "energy": -2,
+        "money": -60,
+        "corruption": 0,
+        "popularity": 4
+      },
+      {
+        "probability": 35,
+        "description": "Hacer la placa con material económico",
+        "energy": -1,
+        "money": -15,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Encuesta relámpago",
+    "description": "Hacer una encuesta local para mejorar la imagen en redes.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 70,
+        "description": "Contratar microencuestas y publicar resultados favorables",
+        "energy": -3,
+        "money": -25,
+        "corruption": 0,
+        "popularity": 3
+      },
+      {
+        "probability": 30,
+        "description": "No publicar nada y atender quejas personalmente",
+        "energy": -8,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 0
+      }
+    ]
+  },
+  {
+    "name": "Visita al asilo",
+    "description": "Visitar un centro de mayores para fotos y discursos sensibles.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 85,
+        "description": "Llevar obsequios simbólicos",
+        "energy": -4,
+        "money": -10,
+        "corruption": 0,
+        "popularity": 2
+      },
+      {
+        "probability": 15,
+        "description": "Prometer mejoras a largo plazo",
+        "energy": 0,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "Contrato amistoso",
+    "description": "Un pequeño contrato con una empresa local para arreglos menores.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 60,
+        "description": "Adjuntar cláusulas favorables y repartir comisiones",
+        "energy": -2,
+        "money": -40,
+        "corruption": 2,
+        "popularity": 1
+      },
+      {
+        "probability": 40,
+        "description": "Elegir la oferta más barata públicamente",
+        "energy": -3,
+        "money": -40,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "La farola restaurada",
+    "description": "Restaurar una farola histórica que se ve en el plano centro.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 75,
+        "description": "Pagar restauración profesional",
+        "energy": -3,
+        "money": -50,
+        "corruption": 0,
+        "popularity": 3
+      },
+      {
+        "probability": 25,
+        "description": "Dejarla tal cual y tomar la foto en sombra",
+        "energy": 0,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Campaña 'verde'",
+    "description": "Plantación simbólica de árboles para la campaña final.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 80,
+        "description": "Plantar unos pocos árboles con voluntarios",
+        "energy": -6,
+        "money": -5,
+        "corruption": 0,
+        "popularity": 2
+      },
+      {
+        "probability": 20,
+        "description": "Contratar empresa para plantar rápido",
+        "energy": -3,
+        "money": -40,
+        "corruption": 0,
+        "popularity": 4
+      }
+    ]
+  },
+  {
+    "name": "Recorte de impuestos local",
+    "description": "Prometer una bonificación fiscal pequeña para un barrio clave.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 50,
+        "description": "Aplicar la bonificación y admitir menor recaudación",
+        "energy": -2,
+        "money": -30,
+        "corruption": 0,
+        "popularity": 3
+      },
+      {
+        "probability": 50,
+        "description": "Postergar la medida por trámites",
+        "energy": -1,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "Entrevista en la tele local",
+    "description": "Un presentador incisivo y un público deseoso de titulares.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 70,
+        "description": "Responder con anécdotas y evitar promesas concretas",
+        "energy": -5,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 2
+      },
+      {
+        "probability": 30,
+        "description": "Prometer medidas ambiciosas que no están listas",
+        "energy": -8,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 4
+      }
+    ]
+  },
+  {
+    "name": "Regalo institucional",
+    "description": "Donar un lote de material escolar en temporada de fotos.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 85,
+        "description": "Comprarlo con fondos municipales y aparecer en la foto",
+        "energy": -3,
+        "money": -35,
+        "corruption": 0,
+        "popularity": 3
+      },
+      {
+        "probability": 15,
+        "description": "Aceptar donación privada (complicado de justificar)",
+        "energy": -1,
+        "money": 0,
+        "corruption": 1,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Cierre temporal de la plaza",
+    "description": "Cerrar la plaza por un día para limpieza ‘profunda’ antes de la visita.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 60,
+        "description": "Cerrar y limpiar con brigada municipal",
+        "energy": -4,
+        "money": -10,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 40,
+        "description": "Dejarla abierta y organizar voluntariado",
+        "energy": -7,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 0
+      }
+    ]
+  },
+  {
+    "name": "Foto con mascota",
+    "description": "Una mascota local se acerca y la prensa lo amplifica todo.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 90,
+        "description": "Hacer la foto y publicar en redes",
+        "energy": -2,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 2
+      },
+      {
+        "probability": 10,
+        "description": "Evitar la foto para no manchar la imagen",
+        "energy": 0,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  }
+]
