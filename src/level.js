@@ -25,11 +25,17 @@ export default class Level extends Phaser.Scene {
         //TO PREPARE ALL THE DISTRICT HERE
         this.fromScene = data && data.from ? data.from : null;
 
-        const player = new Player(1000000, 100, 20, 80 , 'presidente');
+        // Comprueba que no haya un jugador ya registrado (por ejemplo, al volver del Mercado Negro)
+        let existingPlayer = this.registry.get('player');
+        if (!existingPlayer) {
+            const player = new Player(1000000, 100, 20, 80 , 'presidente' , 'presidente');
+            this.player = player;
+            this.registry.set('player', player);
+        } else {
+            this.player = existingPlayer;
+        }
 
-        this.player = player;
-        this.registry.set('player', player);
-
+ //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
         if (!this.registry.get('guinea')) {
             const guinea = new DistrictGuinea(
                 "GUINEA", "Any", 700, 14, 30,
@@ -82,7 +88,7 @@ export default class Level extends Phaser.Scene {
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
                 'closeIcon', 'closeIcon', 900, 550
             );
-            this.registry.set('nueva_pradera', nuevaPradera);
+            this.registry.set('sahar', sahar);
         }
         //WE CREATE THE MAP WITH ALL THE DISTRICTS
         this.map = new Map('map', null, null,{                  //faltan los JSON
@@ -115,6 +121,7 @@ export default class Level extends Phaser.Scene {
             this.spawnMissionIcon();
         });
 
+
     }
     
     spawnAssets() {
@@ -142,10 +149,10 @@ export default class Level extends Phaser.Scene {
         const barY = 50;    
         this.popularityBarBg = this.add.rectangle(barX, barY, barWidth, barHeight, 0x000000).setOrigin(0);
         this.popularityBarFill = this.add.rectangle(barX, barY, barWidth * (this.player.getPopularity() / 100), barHeight, 0x00ff00).setOrigin(0);
-        this.popularityText = this.add.text(barX + barWidth / 2, barY + barHeight / 2, 'Popularity: ' + this.player.getPopularity() + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5);
+        this.popularityText = this.add.text(barX + barWidth / 2, barY + barHeight / 2, 'Popularity: ' + Math.floor(this.player.getPopularity()) + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5); // He puesto un Math.floor (no necesitamos decimales de porcentaje)
         this.corruptionBarbg = this.add.rectangle(barX, barY + barHeight + 20, barWidth, barHeight, 0x000000).setOrigin(0);
         this.corruptionBarFill = this.add.rectangle(barX, barY + barHeight + 20, barWidth * (this.player.getCorruption() / 100), barHeight, 0xff0000).setOrigin(0);
-        this.corruptionText = this.add.text(barX + barWidth / 2, barY + barHeight + 25, 'Corruption: ' + this.player.getCorruption() + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5);
+        this.corruptionText = this.add.text(barX + barWidth / 2, barY + barHeight + 25, 'Corruption: ' + Math.floor(this.player.getCorruption()) + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5); // He puesto un Math.floor (no necesitamos decimales de porcentaje)
     }
     spawnEnergyBar(){   
     //VERTICAL ENERGY BAR ON THE RIGHT SIDE OF THE SCREEN
@@ -236,6 +243,7 @@ export default class Level extends Phaser.Scene {
     }
     spawnMissionIcon() {
         if (this.missionIcon) return;
+        this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
         this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
         this.missionIcon.on('pointerover', () => {this.missionIcon.setScale(0.09);});
         this.missionIcon.on('pointerout', () => {this.missionIcon.setScale(0.08);});
