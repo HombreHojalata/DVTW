@@ -14,6 +14,11 @@ export default class Map {
     getDistricts(key) {
         return this.districtList[key];
     }
+    selectDistrict(key) {
+        if(this.districtsKey.includes(key)) {
+            return this.districts[key];
+        }
+    }
     modifyDistrict(key, value) {
         if(this.districtsKey.includes(key)) {
             this.districtList[key].increaseBoostedPopulation(value);
