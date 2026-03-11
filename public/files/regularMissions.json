@@ -7,7 +7,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 70,
+        "probability": 100,
         "description": "Dar un discurso breve y sonreír",
         "energy": -5,
         "money": 0,
@@ -15,7 +15,7 @@
         "popularity": 3
       },
       {
-        "probability": 30,
+        "probability": 100,
         "description": "Alargar el evento para salir en más fotos",
         "energy": -10,
         "money": 20,
@@ -32,7 +32,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 60,
+        "probability": 100,
         "description": "Taparlo con asfalto exprés (equipo municipal)",
         "energy": -6,
         "money": -10,
@@ -40,7 +40,7 @@
         "popularity": 2
       },
       {
-        "probability": 40,
+        "probability": 100,
         "description": "Ignorarlo y prometer una solución a largo plazo",
         "energy": 0,
         "money": 0,
@@ -57,7 +57,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 75,
+        "probability": 100,
         "description": "Ofrecer subvenciones pequeñas y foto de grupo",
         "energy": -4,
         "money": -30,
@@ -65,7 +65,7 @@
         "popularity": 4
       },
       {
-        "probability": 25,
+        "probability": 100,
         "description": "Prometer que lo estudiará (y no pasar factura)",
         "energy": 0,
         "money": 0,
@@ -82,7 +82,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 80,
+        "probability": 100,
         "description": "Poner jardineras compradas localmente",
         "energy": -3,
         "money": -20,
@@ -90,7 +90,7 @@
         "popularity": 2
       },
       {
-        "probability": 20,
+        "probability": 100,
         "description": "Pedir a voluntarios que limpien gratis",
         "energy": -5,
         "money": 0,
@@ -107,7 +107,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 50,
+        "probability": 100,
         "description": "Aplazar su publicación con excusas administrativas",
         "energy": -2,
         "money": 0,
@@ -115,7 +115,7 @@
         "popularity": -1
       },
       {
-        "probability": 50,
+        "probability": 100,
         "description": "Publicarlo y afrontar las consecuencias",
         "energy": -6,
         "money": 0,
@@ -132,7 +132,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 65,
+        "probability": 100,
         "description": "Encargarla a un proveedor caro pero rápido",
         "energy": -2,
         "money": -60,
@@ -140,7 +140,7 @@
         "popularity": 4
       },
       {
-        "probability": 35,
+        "probability": 100,
         "description": "Hacer la placa con material económico",
         "energy": -1,
         "money": -15,
@@ -157,7 +157,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 70,
+        "probability": 100,
         "description": "Contratar microencuestas y publicar resultados favorables",
         "energy": -3,
         "money": -25,
@@ -165,7 +165,7 @@
         "popularity": 3
       },
       {
-        "probability": 30,
+        "probability": 100,
         "description": "No publicar nada y atender quejas personalmente",
         "energy": -8,
         "money": 0,
@@ -182,7 +182,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 85,
+        "probability": 100,
         "description": "Llevar obsequios simbólicos",
         "energy": -4,
         "money": -10,
@@ -190,7 +190,7 @@
         "popularity": 2
       },
       {
-        "probability": 15,
+        "probability": 100,
         "description": "Prometer mejoras a largo plazo",
         "energy": 0,
         "money": 0,
@@ -207,7 +207,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 60,
+        "probability": 100,
         "description": "Adjuntar cláusulas favorables y repartir comisiones",
         "energy": -2,
         "money": -40,
@@ -215,7 +215,7 @@
         "popularity": 1
       },
       {
-        "probability": 40,
+        "probability": 100,
         "description": "Elegir la oferta más barata públicamente",
         "energy": -3,
         "money": -40,
@@ -232,7 +232,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 75,
+        "probability": 100,
         "description": "Pagar restauración profesional",
         "energy": -3,
         "money": -50,
@@ -240,7 +240,7 @@
         "popularity": 3
       },
       {
-        "probability": 25,
+        "probability": 100,
         "description": "Dejarla tal cual y tomar la foto en sombra",
         "energy": 0,
         "money": 0,
@@ -257,7 +257,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 80,
+        "probability": 100,
         "description": "Plantar unos pocos árboles con voluntarios",
         "energy": -6,
         "money": -5,
@@ -265,7 +265,7 @@
         "popularity": 2
       },
       {
-        "probability": 20,
+        "probability": 100,
         "description": "Contratar empresa para plantar rápido",
         "energy": -3,
         "money": -40,
@@ -282,7 +282,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 50,
+        "probability": 100,
         "description": "Aplicar la bonificación y admitir menor recaudación",
         "energy": -2,
         "money": -30,
@@ -290,7 +290,7 @@
         "popularity": 3
       },
       {
-        "probability": 50,
+        "probability": 100,
         "description": "Postergar la medida por trámites",
         "energy": -1,
         "money": 0,
@@ -307,7 +307,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 70,
+        "probability": 100,
         "description": "Responder con anécdotas y evitar promesas concretas",
         "energy": -5,
         "money": 0,
@@ -315,7 +315,7 @@
         "popularity": 2
       },
       {
-        "probability": 30,
+        "probability": 100,
         "description": "Prometer medidas ambiciosas que no están listas",
         "energy": -8,
         "money": 0,
@@ -332,7 +332,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 85,
+        "probability": 100,
         "description": "Comprarlo con fondos municipales y aparecer en la foto",
         "energy": -3,
         "money": -35,
@@ -340,7 +340,7 @@
         "popularity": 3
       },
       {
-        "probability": 15,
+        "probability": 100,
         "description": "Aceptar donación privada (complicado de justificar)",
         "energy": -1,
         "money": 0,
@@ -357,7 +357,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 60,
+        "probability": 100,
         "description": "Cerrar y limpiar con brigada municipal",
         "energy": -4,
         "money": -10,
@@ -365,7 +365,7 @@
         "popularity": 1
       },
       {
-        "probability": 40,
+        "probability": 100,
         "description": "Dejarla abierta y organizar voluntariado",
         "energy": -7,
         "money": 0,
@@ -382,7 +382,7 @@
     "minigame": false,
     "options": [
       {
-        "probability": 90,
+        "probability": 100,
         "description": "Hacer la foto y publicar en redes",
         "energy": -2,
         "money": 0,
@@ -390,7 +390,7 @@
         "popularity": 2
       },
       {
-        "probability": 10,
+        "probability": 100,
         "description": "Evitar la foto para no manchar la imagen",
         "energy": 0,
         "money": 0,
