@@ -1,0 +1,377 @@
+[
+  {
+    "name": "Auditoría interna",
+    "description": "Decides iniciar una auditoría interna del ayuntamiento.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Auditoría completa de todas las cuentas",
+        "energy": -5,
+        "money": -120,
+        "corruption": -4,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Auditoría parcial",
+        "energy": -3,
+        "money": -70,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Donación a ONG",
+    "description": "El ayuntamiento dona dinero a una organización benéfica.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Gran donación pública",
+        "energy": -2,
+        "money": -150,
+        "corruption": -3,
+        "popularity": 3
+      },
+      {
+        "probability": 100,
+        "description": "Donación modesta",
+        "energy": -1,
+        "money": -80,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Expulsar a un concejal corrupto",
+    "description": "Un concejal cercano es acusado de corrupción.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Expulsarlo del gobierno",
+        "energy": -4,
+        "money": 0,
+        "corruption": -4,
+        "popularity": 3
+      },
+      {
+        "probability": 100,
+        "description": "Apartarlo discretamente",
+        "energy": -2,
+        "money": 0,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Portal de transparencia",
+    "description": "Se propone publicar todas las cuentas municipales online.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Portal completo con todos los datos",
+        "energy": -4,
+        "money": -100,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Publicar solo algunos datos",
+        "energy": -2,
+        "money": -50,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Investigación independiente",
+    "description": "Contratas una consultora externa para revisar contratos.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Investigación completa",
+        "energy": -4,
+        "money": -130,
+        "corruption": -4,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Investigación limitada",
+        "energy": -2,
+        "money": -70,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Ley de transparencia",
+    "description": "Impulsas una normativa municipal contra la corrupción.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Normativa estricta",
+        "energy": -5,
+        "money": -60,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Normativa básica",
+        "energy": -3,
+        "money": -30,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Revisión de contratos",
+    "description": "Se revisan contratos públicos sospechosos.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cancelar contratos sospechosos",
+        "energy": -4,
+        "money": -80,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Revisarlos discretamente",
+        "energy": -2,
+        "money": -40,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Donación personal",
+    "description": "Donas parte de tu salario como gesto simbólico.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Gran donación personal",
+        "energy": -1,
+        "money": -120,
+        "corruption": -3,
+        "popularity": 3
+      },
+      {
+        "probability": 100,
+        "description": "Donación pequeña",
+        "energy": -1,
+        "money": -60,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Colaboración con fiscalía",
+    "description": "La fiscalía investiga contratos municipales.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Colaborar totalmente",
+        "energy": -4,
+        "money": -20,
+        "corruption": -4,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Colaboración limitada",
+        "energy": -2,
+        "money": -10,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Programa anticorrupción",
+    "description": "Se lanza una campaña institucional contra la corrupción.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Gran campaña pública",
+        "energy": -3,
+        "money": -110,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Campaña modesta",
+        "energy": -2,
+        "money": -60,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Reformar licitaciones",
+    "description": "Se cambian las normas de contratación pública.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Reforma profunda",
+        "energy": -5,
+        "money": -90,
+        "corruption": -4,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Pequeños cambios",
+        "energy": -3,
+        "money": -40,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Publicar patrimonio",
+    "description": "Decides hacer público tu patrimonio personal.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Publicarlo todo",
+        "energy": -2,
+        "money": 0,
+        "corruption": -3,
+        "popularity": 3
+      },
+      {
+        "probability": 100,
+        "description": "Publicar parte",
+        "energy": -1,
+        "money": 0,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Despedir a un asesor corrupto",
+    "description": "Un asesor cercano aparece en un escándalo.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Despedirlo públicamente",
+        "energy": -3,
+        "money": 0,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Forzar su dimisión",
+        "energy": -2,
+        "money": 0,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Código ético",
+    "description": "El ayuntamiento adopta un nuevo código ético.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Código ético estricto",
+        "energy": -4,
+        "money": -50,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Código ético básico",
+        "energy": -2,
+        "money": -20,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Apoyo a periodistas",
+    "description": "Facilitas acceso a periodistas para investigar contratos públicos.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Acceso completo a información",
+        "energy": -3,
+        "money": -30,
+        "corruption": -3,
+        "popularity": 2
+      },
+      {
+        "probability": 100,
+        "description": "Acceso limitado",
+        "energy": -2,
+        "money": -10,
+        "corruption": -2,
+        "popularity": 1
+      }
+    ]
+  }
+]
