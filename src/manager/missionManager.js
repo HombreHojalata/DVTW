@@ -16,16 +16,44 @@ export default class missionManager{
         this.downCorruptionMissions = [];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
         this.day=new Day();
-
+        this.espectedResources = {
+            money: 400,
+            corruption: 30,
+            popularity: 51
+        }
         this.loadMissions();
     }
 
     
 
 
-    getEvent(){
-        //Aqui se devuelve un evento de forma aleatoria, dependiendo de la historia que se haya cargado.
-        return this.events[0];//Devolver el evento propicio para los recursos del jugador.
+    getMission(){
+        const playerMoney = this.player.getMoney();
+        const playerPopularity = this.player.getPopularity();
+        const playerCorruption = this.player.getCorruption();
+
+        const moneyDiff = Math.abs(playerMoney - this.espectedResources.money)/15;
+        const popularityDiff = Math.abs(playerPopularity - this.espectedResources.popularity)/7;
+        const corruptionDiff = playerCorruption - this.espectedResources.corruption;
+
+        if(moneyDiff > popularityDiff && moneyDiff > corruptionDiff && this.espectedResources.money/moneyDiff > 2){
+            if(playerMoney > this.espectedResources.money){
+                return this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
+            }else{
+                return this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
+            }
+        }else if(popularityDiff > corruptionDiff && this.espectedResources.popularity/popularityDiff > 2){
+            if(playerPopularity > this.espectedResources.popularity){
+                return this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
+            }else{
+                return this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
+            }
+        }else if(playerCorruption > this.espectedResources.corruption && this.espectedResources.corruption/corruptionDiff > 2){
+            return this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
+        }
+        else{
+            return this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
+        }
     }
 
     finishDay(){
