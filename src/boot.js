@@ -1,11 +1,9 @@
 import Phaser from 'phaser'
-// WINDOW ASSETS
 import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
 import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
+import worldMap from '../assets/sprites/mapTemplate.png'
 import presidente from '../assets/sprites/presidente.png'
-// MAP ASSETS
-import map from '../assets/sprites/map/mapTemplate.png'
-import districtGuinea from '../assets/sprites/map/districtGuinea.png'
+
 // BLACK MARKET ASSETS
 import vendedor from '../assets/sprites/Vendedor.png'
 import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
@@ -37,10 +35,7 @@ export default class Boot extends Phaser.Scene {
 
     this.load.image('carga', cargaPantalla);
     this.load.image('inicio', iniPantalla);
-    // MAP ASSETS
-    this.load.image('map', map);
-    this.load.image('districtGuinea', districtGuinea);
-    //
+    this.load.image('map', worldMap);
     this.load.image('presidente', presidente);
     //PROTOTYPE ASSETS, TO BE REPLACED
     this.load.image('testSahar', testSahar);
