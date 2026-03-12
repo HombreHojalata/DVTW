@@ -1,6 +1,6 @@
 import District from './district';
 
-export default class DistrictBorrascal extends District {
+export default class DistrictBorrascal extends District{
     constructor(name, desc, population, populationIncrease, satisfaction, district_building, built_buildings, space_building, special_building,
          opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
         super(name, desc, population, populationIncrease, satisfaction, district_building, built_buildings, space_building, special_building,
@@ -21,9 +21,24 @@ export default class DistrictBorrascal extends District {
             button.setScale(0.5);
         });
 
-        button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
+        button.on('pointerup', () => {
+
             scene.updateDistrictFooter(this);
-            scene.add.image(150,50,'district').setOrigin(0).setScale(0.8);
+
+            // Crear container en (700,350)
+            const container = scene.add.container(700, 350);
+
+            // Background negro
+            const bg = scene.add.rectangle(0, 0, 400, 300, 0x000000)
+                .setOrigin(0.5);
+
+            // Imagen del distrito
+            const img = scene.add.image(0, 0, 'district')
+                .setOrigin(0.5)
+                .setScale(0.8);
+
+            // Añadir al container
+            container.add([bg, img]);
         });
 
         return button;
