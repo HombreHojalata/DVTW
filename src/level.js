@@ -28,7 +28,7 @@ export default class Level extends Phaser.Scene {
         // Comprueba que no haya un jugador ya registrado (por ejemplo, al volver del Mercado Negro)
         let existingPlayer = this.registry.get('player');
         if (!existingPlayer) {
-            const player = new Player(1000000, 100, 20, 80 , 'presidente');
+            const player = new Player(1000000, 100, 20, 80 , 'presidente' , 'presidente');
             this.player = player;
             this.registry.set('player', player);
         } else {
@@ -36,68 +36,69 @@ export default class Level extends Phaser.Scene {
         }
 
  //THIS FOR ALL THE DISTRICTS, WE CAN CREATE A MAP TO STORE THEM ALL IN THE REGISTRY, SO WE CAN ACCESS THEM FROM ANY SCENE
-        if (!this.registry.get('borrascal')) {
-            const borrascal = new DistrictBorrascal(
-                "Borrascal", "Any", 1000, 10, 100,
+        if (!this.registry.get('GUINEA')) {
+            const GUINEA = new DistrictGuinea(
+                "GUINEA", "Any", 700, 14, 30,
                 ["Casino"], ["Parque", "Jardin"], 2,
-                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+                'districtGuinea', 'districtGuinea', 62, 105
             );
-            this.registry.set('borrascal', borrascal);
+            this.registry.set('GUINEA', GUINEA);
         }
-
-        //FROM THIS POINT ON, TEST VALUES ONLY, LATER CHANGE TO ACTUAL ONES...
-        if (!this.registry.get('sahar')) {
-            const sahar = new DistrictSahar(
-                "Sahar", "Any", 600, 20, 15,
-                ["Casino"], ["Parque", "Jardin"], 2,
-                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+        if (!this.registry.get('SOMOSAGUA')) {
+            const SOMOSAGUA = new DistrictSomosagua(
+                "SOMOSAGUA", "Any", 800, 12, 10,
+                ["Casino"], [], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+                'closeIcon', 'closeIcon', 700, 200
             );
-            this.registry.set('sahar', sahar);
+            this.registry.set('SOMOSAGUA', SOMOSAGUA);
         }
-
-        if (!this.registry.get('somosagua')) {
-            const somosagua = new DistrictSomosagua(
-                "Somosagua", "Any", 800, 12, 10,
-                ["Casino"], ["Parque", "Jardin"], 2,
-                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+        if (!this.registry.get('BORRASCAL')) {
+            const BORRASCAL = new DistrictBorrascal(
+                "BORRASCAL", "Any", 1000, 10, 100,
+                ["Casino"], [], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+                'closeIcon', 'closeIcon', 1200, 150
             );
-            this.registry.set('somosagua', somosagua);
+            this.registry.set('BORRASCAL', BORRASCAL);
         }
-
-        if (!this.registry.get('guinea')) {
-            const guinea = new DistrictGuinea(
-                "Guinea", "Any", 700, 14, 30,
-                ["Casino"], ["Parque", "Jardin"], 2,
-                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+        if (!this.registry.get('SAHAR')) {
+            const SAHAR = new DistrictSahar(
+                "SAHAR", "Any", 600, 20, 15,
+                //BUILDINGS LIST, BUILDINGS BUILT
+                ["Casino"], [], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+                'closeIcon', 'closeIcon', 400, 550
             );
-            this.registry.set('guinea', guinea);
+            this.registry.set('SAHAR', SAHAR);
         }
-
-        if (!this.registry.get('nueva_pradera')) {
-            const nuevaPradera = new DistrictNuevaPradera(
-                "Nueva Pradera", "Any", 1400, 18, 5,
-                ["Casino"], ["Parque", "Jardin"], 2,
-                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+        if (!this.registry.get('EL_NIDO')) {
+            const EL_NIDO = new DistrictElNido(
+                "EL NIDO", "Any", 500, 8, 40,
+                ["Casino"], [], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+                'closeIcon', 'closeIcon ', 800, 400
             );
-            this.registry.set('nueva_pradera', nuevaPradera);
+            this.registry.set('EL_NIDO', EL_NIDO);
         }
-
-        if (!this.registry.get('el_nido')) {
-            const elNido = new DistrictElNido(
-                "El Nido", "Any", 500, 8, 40,
-                ["Casino"], ["Parque", "Jardin"], 2,
-                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5]
+        if (!this.registry.get('NUEVA_PRADERA')) {
+            const NUEVA_PRADERA = new DistrictNuevaPradera(
+                "NUEVA PRADERA", "Any", 1400, 18, 5,
+                ["Casino"], [], 2,
+                ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+                'closeIcon', 'closeIcon', 900, 550
             );
-            this.registry.set('el_nido', elNido);
+            this.registry.set('NUEVA_PRADERA', NUEVA_PRADERA);
         }
         //WE CREATE THE MAP WITH ALL THE DISTRICTS
         this.map = new Map('map', null, null,{                  //faltan los JSON
-            BORRASCAL: this.registry.get('borrascal'),
-            SAHAR: this.registry.get('sahar'),
-            SOMOSAGUA: this.registry.get('somosagua'),
-            GUINEA: this.registry.get('guinea'),
-            NUEVA_PRADERA: this.registry.get('nueva_pradera'),
-            EL_NIDO: this.registry.get('el_nido')
+            BORRASCAL: this.registry.get('BORRASCAL'),
+            SAHAR: this.registry.get('SAHAR'),
+            SOMOSAGUA: this.registry.get('SOMOSAGUA'),
+            GUINEA: this.registry.get('GUINEA'),
+            NUEVA_PRADERA: this.registry.get('NUEVA_PRADERA'),
+            EL_NIDO: this.registry.get('EL_NIDO')
         });
         this.registry.set('map', this.map);
     }
@@ -114,6 +115,8 @@ export default class Level extends Phaser.Scene {
         // FOOTER
         this.Footer = this.spawnFooter();
 
+        this.map.generateDistrictsMoney();
+
         // ICONS - MISSING ONES FOR EACH
         this.closeIcon = null;
         this.missionIcon = null;
@@ -121,10 +124,17 @@ export default class Level extends Phaser.Scene {
             this.spawnMissionIcon();
         });
 
+
     }
     
     spawnAssets() {
         this.mapImg = this.map.spawnMap(this);
+        this.borrascal = this.map.getDistricts('BORRASCAL').spawnDistrict(this);        
+        this.elNido = this.map.getDistricts('EL_NIDO').spawnDistrict(this);
+        this.guinea = this.map.getDistricts('GUINEA').spawnDistrict(this);
+        this.nuevaPradera = this.map.getDistricts('NUEVA_PRADERA').spawnDistrict(this);
+        this.sahar = this.map.getDistricts('SAHAR').spawnDistrict(this);
+        this.somosagua = this.map.getDistricts('SOMOSAGUA').spawnDistrict(this);
         this.presidente = this.player.spawnPresident(this);
     }
     spawnConfigurationIcon() {
@@ -164,7 +174,7 @@ export default class Level extends Phaser.Scene {
         const footerWidth = 1500;
         const footerHeight = 75;
         const footerX = (gameWidth - footerWidth) / 2;
-        const footerY = gameHeight - footerHeight;
+                const footerY = gameHeight - footerHeight;
         // FOOTER VISUAL (lighter green)
         this.footerBg = this.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0);
         // FOOTER SECTIONS
@@ -225,6 +235,7 @@ export default class Level extends Phaser.Scene {
     }
     spawnMissionIcon() {
         if (this.missionIcon) return;
+        this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
         this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
         this.missionIcon.on('pointerover', () => {this.missionIcon.setScale(0.09);});
         this.missionIcon.on('pointerout', () => {this.missionIcon.setScale(0.08);});
@@ -326,5 +337,8 @@ export default class Level extends Phaser.Scene {
             });
         });
 
+    }
+    updateDistrictFooter(district) {
+        this.districtTitleText.setText(district.getName());
     }
 }
