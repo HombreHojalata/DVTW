@@ -10,22 +10,14 @@ export default class DistrictElNido extends District {
     spawnDistrict(scene){
          const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
             .setOrigin(0)
-            .setScale(0.5)
+            .setScale(1)
             .setInteractive({ useHandCursor: true });
-
-        button.on('pointerover', () => {
-            button.setScale(0.8);
-        });
-
-        button.on('pointerout', () => {
-            button.setScale(0.5);
-        });
-
+        button.on('pointerover', () => {button.setScale(1.01);});
+        button.on('pointerout', () => {button.setScale(0.5);});
         button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
             scene.updateDistrictFooter(this);
             scene.add.image(150,50,'testSahar').setOrigin(0).setScale(0.8);
         });
-
         return button;
     }
 };

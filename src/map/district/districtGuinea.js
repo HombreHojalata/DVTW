@@ -11,20 +11,12 @@ export default class DistrictGuinea extends District {
             .setOrigin(0)
             .setScale(1)
             .setInteractive({ useHandCursor: true });
-
-        button.on('pointerover', () => {
-            button.setScale(1.01);
-        });
-
-        button.on('pointerout', () => {
-            button.setScale(1);
-        });
-
+        button.on('pointerover', () => {button.setScale(1.01);});
+        button.on('pointerout', () => {button.setScale(1);});
         button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
             scene.updateDistrictFooter(this);
             scene.add.image(150,50,'testSahar').setOrigin(0).setScale(0.8);
         });
-
         return button;
     }
 };
