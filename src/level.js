@@ -41,7 +41,8 @@ export default class Level extends Phaser.Scene {
                 "GUINEA", "Any", 700, 14, 30,
                 ["Casino"], ["Parque", "Jardin"], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'districtGuinea', 'districtGuinea', 62, 105
+                //'districtGuinea', 'districtGuineaSpecial', 62, 103
+                'districtGuineaSpecial', 'districtGuineaSpecial', 62, 103
             );
             this.registry.set('GUINEA', GUINEA);
         }
@@ -50,7 +51,7 @@ export default class Level extends Phaser.Scene {
                 "SOMOSAGUA", "Any", 800, 12, 10,
                 ["Casino"], [], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'closeIcon', 'closeIcon', 700, 200
+                'districtSomosagua', 'districtSomosaguaSpecial', 700, 200
             );
             this.registry.set('SOMOSAGUA', SOMOSAGUA);
         }
@@ -59,7 +60,7 @@ export default class Level extends Phaser.Scene {
                 "BORRASCAL", "Any", 1000, 10, 100,
                 ["Casino"], [], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'closeIcon', 'closeIcon', 1200, 150
+                'districtBorrascal', 'districtBorrascalSpecial', 1200, 150
             );
             this.registry.set('BORRASCAL', BORRASCAL);
         }
@@ -69,7 +70,7 @@ export default class Level extends Phaser.Scene {
                 //BUILDINGS LIST, BUILDINGS BUILT
                 ["Casino"], [], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'closeIcon', 'closeIcon', 400, 550
+                'districtSahar', 'districtSaharSpecial', 182, 280
             );
             this.registry.set('SAHAR', SAHAR);
         }
@@ -78,7 +79,7 @@ export default class Level extends Phaser.Scene {
                 "EL NIDO", "Any", 500, 8, 40,
                 ["Casino"], [], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'closeIcon', 'closeIcon ', 800, 400
+                'districtElNido', 'districtElNidoSpecial', 800, 400
             );
             this.registry.set('EL_NIDO', EL_NIDO);
         }
@@ -87,7 +88,7 @@ export default class Level extends Phaser.Scene {
                 "NUEVA PRADERA", "Any", 1400, 18, 5,
                 ["Casino"], [], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'closeIcon', 'closeIcon', 900, 550
+                'districtNuevaPradera', 'districtNuevaPraderaSpecial', 900, 550
             );
             this.registry.set('NUEVA_PRADERA', NUEVA_PRADERA);
         }

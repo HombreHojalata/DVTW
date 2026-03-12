@@ -1,9 +1,11 @@
+
 export default class District {
     
     constructor(name, desc, population,populationIncrease, satisfaction, district_building ,built_buildings, space_building, special_building, opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
         if (new.target === District) {
             throw new TypeError("Cannot instantiate abstract class District");
         }
+        
         this.name = name;                                                                                       // Name of the district
         this.desc = desc;                                                                                       // Description of the district                              
         this.population = population;                                                                           // Population of the district    
@@ -20,6 +22,7 @@ export default class District {
         this.PNGwithSpecial = PNGwithSpecial;                                                                   // PNG of the district with the special building         
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
+        
         /*COMO JAVA
         String name;
         String desc;
@@ -40,6 +43,28 @@ export default class District {
         */
     
     }
+    spawnDistrict(scene){
+         const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
+            .setOrigin(0)
+            .setScale(1)
+            .setInteractive({ useHandCursor: true });
+
+        button.on('pointerover', () => {
+            button.setScale(1.01);
+        });
+
+        button.on('pointerout', () => {
+            button.setScale(1);
+        });
+
+        button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
+            scene.updateDistrictFooter(this);
+            scene.add.image(150,50,'testSahar').setOrigin(0).setScale(0.8);
+        });
+
+        return button;
+    }
+
     getName() {return this.name;}
     getDescription() {return this.desc;}
     getPopulationDensity() {return this.population;}
@@ -89,27 +114,6 @@ export default class District {
         }        
     }
 
-    spawnDistrict(scene) {                  //OVERRIDE IN EACH DISTRICT WITH SPECIFIC IMAGE/CONTAINER OR SCENE
-        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
-            .setOrigin(0)
-            .setScale(0.60)
-            .setInteractive({ useHandCursor: true });
-
-        button.on('pointerover', () => {
-            button.setScale(0.65);
-        });
-
-        button.on('pointerout', () => {
-            button.setScale(0.60);
-        });
-
-        button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
-            scene.updateDistrictFooter(this);
-            scene.add.image(150,50,'district').setOrigin(0).setScale(0.8);
-        });
-
-        return button;
-    }
     swapDistrict(scene) {
         if(this.special_building) {
             return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);

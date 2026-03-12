@@ -5,9 +5,21 @@ import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 import presidente from '../assets/sprites/presidente.png'
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
+import districtBorrascal from '../assets/sprites/map/districtBorrascal.png'
+import districtBorrascalSpecial from '../assets/sprites/map/districtBorrascalSpecial.png'
+import districtElNido from '../assets/sprites/map/districtElNido.png'
+import districtElNidoSpecial from '../assets/sprites/map/districtElNidoSpecial.png'
 import districtGuinea from '../assets/sprites/map/districtGuinea.png'
+import districtGuineaSpecial from '../assets/sprites/map/districtGuineaSpecial.png'
+import districtNuevaPradera from '../assets/sprites/map/districtNuevaPradera.png'
+import districtNuevaPraderaSpecial from '../assets/sprites/map/districtNuevaPraderaSpecial.png'
+import districtSahar from '../assets/sprites/map/districtSahar.png'
+import districtSaharSpecial from '../assets/sprites/map/districtSaharSpecial.png'
+import districtSomosagua from '../assets/sprites/map/districtSomosagua.png'
+import districtSomosaguaSpecial from '../assets/sprites/map/districtSomosaguaSpecial.png'
+
 // BLACK MARKET ASSETS
-import vendedor from '../assets/sprites/Vendedor.png'
+import vendedor from '../assets/sprites/Vendedor.png' 
 import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
 import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
 
@@ -39,7 +51,20 @@ export default class Boot extends Phaser.Scene {
     this.load.image('inicio', iniPantalla);
     // MAP ASSETS
     this.load.image('map', map);
+    // DISTRICT ASSETS
+    this.load.image('districtBorrascal', districtBorrascal);
+    this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);
+    this.load.image('districtNuevaPradera', districtNuevaPradera);
+    this.load.image('districtSahar', districtSahar);
+    this.load.image('districtSomosagua', districtSomosagua);
+    // SPECIAL DISTRICT ASSETS
+    this.load.image('districtBorrascalSpecial', districtBorrascalSpecial);
+    this.load.image('districtElNidoSpecial', districtElNidoSpecial);
+    this.load.image('districtGuineaSpecial', districtGuineaSpecial);
+    this.load.image('districtNuevaPraderaSpecial', districtNuevaPraderaSpecial);
+    this.load.image('districtSaharSpecial', districtSaharSpecial);
+    this.load.image('districtSomosaguaSpecial', districtSomosaguaSpecial);
     //
     this.load.image('presidente', presidente);
     //PROTOTYPE ASSETS, TO BE REPLACED
