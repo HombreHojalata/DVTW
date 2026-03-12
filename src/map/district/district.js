@@ -92,15 +92,15 @@ export default class District {
     spawnDistrict(scene) {                  //OVERRIDE IN EACH DISTRICT WITH SPECIFIC IMAGE/CONTAINER OR SCENE
         const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
             .setOrigin(0)
-            .setScale(0.5)
+            .setScale(0.60)
             .setInteractive({ useHandCursor: true });
 
         button.on('pointerover', () => {
-            button.setScale(0.8);
+            button.setScale(0.65);
         });
 
         button.on('pointerout', () => {
-            button.setScale(0.5);
+            button.setScale(0.60);
         });
 
         button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO

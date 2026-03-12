@@ -41,7 +41,7 @@ export default class Level extends Phaser.Scene {
                 "GUINEA", "Any", 700, 14, 30,
                 ["Casino"], ["Parque", "Jardin"], 2,
                 ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-                'closeIcon', 'closeIcon', 300, 300
+                'districtGuinea', 'districtGuinea', 62, 105
             );
             this.registry.set('GUINEA', GUINEA);
         }
