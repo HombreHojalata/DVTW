@@ -24,6 +24,8 @@ export default class Level extends Phaser.Scene {
         this.player = this.gameManager.getPlayer();
         this.day = this.gameManager.getDay();
         this.map = this.gameManager.getMap();
+
+        
     }
 
     create() {
@@ -35,6 +37,9 @@ export default class Level extends Phaser.Scene {
         this.popularityContainer = this.spawnPopularityBar();
         this.configurationIcon = this.spawnConfigurationIcon();
         this.energyBar = this.spawnEnergyBar();
+
+        this.startEnergyDrain(); //empezar drenado de energia
+
         // FOOTER
         this.Footer = this.spawnFooter();
         this.map.generateDistrictsMoney();
@@ -149,7 +154,7 @@ export default class Level extends Phaser.Scene {
     }
 
 
-    //La batería con sus delimitaciones al 25, 50, 75% 
+    //La batería con sus delimitaciones al 25, 50, 75%, y el diseñoñ
     spawnEnergyBar(){   
         const batteryX = this.sys.game.config.width - 205;
         const batteryY = 145;
@@ -378,9 +383,7 @@ export default class Level extends Phaser.Scene {
                 // WE WILL NEED A FUNC TO UPDATE DATA
 
                 this.refreshTopStatsPanel();
-                // this.PopularityContainer = this.spawnPopularityBar();
-                // this.EnergyBar = this.spawnEnergyBar();
-                // this.Footer = this.spawnFooter();
+                
             }
             this.missionTypeTwoChoice2.onclick = () => {
                 this.missionTypeTwoChoice1.remove();
@@ -392,9 +395,7 @@ export default class Level extends Phaser.Scene {
                 this.player.updateMoney(-42000);
                 this.player.updateEnergy(-10);
                 this.player.updatePopularity(2);
-                this.PopularityContainer = this.spawnPopularityBar();
-                this.EnergyBar = this.spawnEnergyBar();
-                this.Footer = this.spawnFooter();
+                this.refreshTopStatsPanel();
             }
             const pos = this.mapToWorld(3163, -75);
             this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
@@ -407,7 +408,10 @@ export default class Level extends Phaser.Scene {
         });
 
     }
-
+    /*
+    Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
+    
+    */
     refreshTopStatsPanel() {
         const opinionBarWidth = 390;
 
@@ -445,26 +449,21 @@ export default class Level extends Phaser.Scene {
             this.moneyText.setText(this.player.getMoney() + '$');
         }
 
-        if (this.energyBarFill) {
-            const barHeight = 500;
-            this.energyBarFill.y = 150 + barHeight * (1 - this.player.getEnergy() / 100);
-            this.energyBarFill.height = barHeight * (this.player.getEnergy() / 100);
-        }
-
-        if (this.energyText) {
-            this.energyText.setText('Energy: ' + Math.floor(this.player.getEnergy()) + '%');
-        }
+        this.refreshEnergyBattery();
     }
 
 
 
     refreshEnergyBattery() {
+
+        if (!this.energySectionsFill || !this.energyPercentText || !this.energyStageText) return;
+
         const energy = Phaser.Math.Clamp(this.player.getEnergy(), 0, 100);
 
         let filledSections = 0;
         let sectionColor = 0x3d8bff;
         let stageLabel = 'ZONE 1';
-
+        //Más tarde añadiremos la lógica aquí, sobre lo q pase al bajar de thresholds de energias
         if (energy > 75) {
             filledSections = 4;
             sectionColor = 0x4fc96b;
@@ -503,7 +502,7 @@ export default class Level extends Phaser.Scene {
         if (this.energyStageText) {
             this.energyStageText.setText(stageLabel);
         }
-
+        //estados de energía de momento, por si necesitaasemos mas tarde
         if (energy <= 25) {
             this.energyPlaceholderState = 'LOWEST_THRESHOLD';
         } else if (energy <= 50) {
@@ -518,4 +517,29 @@ export default class Level extends Phaser.Scene {
     updateDistrictFooter(district) {
         this.districtTitleText.setText(district.getName());
     }
+
+    startEnergyDrain() {
+        //puesto a 1 MIN para testear, cambiar a valores definitvos si necesario
+    this.totalDayDurationMs = 1 * 60 * 1000;
+    this.energyTickMs = 250;
+    this.energyDrainPerTick = 100 / (this.totalDayDurationMs / this.energyTickMs);
+
+    if (this.energyTimerEvent) {
+        this.energyTimerEvent.remove(false);
+    }
+
+    this.energyTimerEvent = this.time.addEvent({
+        delay: this.energyTickMs,
+        loop: true,
+        callback: () => {
+            this.player.updateEnergy(-this.energyDrainPerTick);
+            this.refreshTopStatsPanel();
+
+            if (this.player.getEnergy() <= 0) {
+                this.energyTimerEvent.remove(false);
+                console.log('ENERGÍA AGOTADA');
+            }
+        }
+    });
+}
 }
