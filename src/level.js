@@ -149,17 +149,91 @@ export default class Level extends Phaser.Scene {
     }
 
 
-
+    //La batería con sus delimitaciones al 25, 50, 75% 
     spawnEnergyBar(){   
-    //VERTICAL ENERGY BAR ON THE RIGHT SIDE OF THE SCREEN
-        const barWidth = 200;
-        const barHeight = 500;
-        const barX = this.sys.game.config.width - 250;
-        const barY = 150;    
-        this.energyBarBg = this.add.rectangle(barX, barY, barWidth, barHeight, 0x000000).setOrigin(0);
-        this.energyBarFill = this.add.rectangle(barX, barY + barHeight * (1 - this.player.getEnergy() / 100), barWidth, barHeight * (this.player.getEnergy() / 100), 0x0000ff).setOrigin(0);
-        this.energyText = this.add.text(barX + barWidth / 2, barY + barHeight / 2, 'Energy: ' + this.player.getEnergy() + '%', { fontSize: '14px', color: '#fff' }).setOrigin(0.5).setAngle(-90);
+        const batteryX = this.sys.game.config.width - 205;
+        const batteryY = 145;
+        const batteryWidth = 110;
+        const batteryHeight = 430;
+        const terminalWidth = 42;
+        const terminalHeight = 18;
+        const innerPadding = 10;
+        const sectionGap = 6;
+        const sections = 4;
+
+        this.energyFrame = this.add.rectangle(batteryX, batteryY, batteryWidth, batteryHeight, 0x232323, 0.96).setOrigin(0);
+        this.energyFrameBorder = this.add.rectangle(batteryX, batteryY, batteryWidth, batteryHeight).setOrigin(0).setStrokeStyle(4, 0xf0dfb6);
+
+        this.energyTerminal = this.add.rectangle(
+            batteryX + batteryWidth / 2 - terminalWidth / 2,
+            batteryY - terminalHeight,
+            terminalWidth,
+            terminalHeight,
+            0x232323,
+            0.96
+        ).setOrigin(0);
+        this.energyTerminalBorder = this.add.rectangle(
+            batteryX + batteryWidth / 2 - terminalWidth / 2,
+            batteryY - terminalHeight,
+            terminalWidth,
+            terminalHeight
+        ).setOrigin(0).setStrokeStyle(4, 0xf0dfb6);
+
+        this.energyTitle = this.add.text(batteryX + batteryWidth / 2, batteryY + batteryHeight + 18, 'ENERGY', {
+            fontSize: '16px',
+            color: '#f3e7c7',
+            fontStyle: 'bold',
+            fontFamily: 'Georgia'
+        }).setOrigin(0.5);
+
+        const innerX = batteryX + innerPadding;
+        const innerY = batteryY + innerPadding;
+        const innerWidth = batteryWidth - innerPadding * 2;
+        const innerHeight = batteryHeight - innerPadding * 2;
+        const sectionHeight = (innerHeight - sectionGap * (sections - 1)) / sections;
+
+        this.energySectionsBg = [];
+        this.energySectionsFill = [];
+        this.energyThresholdMarkers = [];
+
+        for (let i = 0; i < sections; i++) {
+            const y = innerY + (sections - 1 - i) * (sectionHeight + sectionGap);
+
+            const bg = this.add.rectangle(innerX, y, innerWidth, sectionHeight, 0x1b1b1b).setOrigin(0);
+            const fill = this.add.rectangle(innerX, y, innerWidth, sectionHeight, 0x3d8bff).setOrigin(0);
+
+            this.energySectionsBg.push(bg);
+            this.energySectionsFill.push(fill);
+
+            if (i < sections - 1) {
+                const markerY = y - sectionGap / 2 - 1;
+                const marker = this.add.line(
+                    0, 0,
+                    innerX, markerY,
+                    innerX + innerWidth, markerY,
+                    0xf0dfb6
+                ).setOrigin(0, 0).setLineWidth(2, 2);
+                this.energyThresholdMarkers.push(marker);
+            }
+        }
+
+        this.energyPercentText = this.add.text(batteryX + batteryWidth / 2, batteryY + batteryHeight / 2, Math.floor(this.player.getEnergy()) + '%', {
+            fontSize: '18px',
+            color: '#ffffff',
+            fontStyle: 'bold',
+            fontFamily: 'Georgia'
+        }).setOrigin(0.5).setAngle(-90);
+
+        this.energyStageText = this.add.text(batteryX + batteryWidth / 2, batteryY + batteryHeight + 42, 'ZONE 4', {
+            fontSize: '13px',
+            color: '#d8d8d8',
+            fontStyle: 'bold',
+            fontFamily: 'Georgia'
+        }).setOrigin(0.5);
+
+        this.refreshEnergyBattery();
     }
+
     spawnFooter() {
     // FOOTER
         const gameWidth = this.sys.game.config.width;
@@ -382,6 +456,64 @@ export default class Level extends Phaser.Scene {
         }
     }
 
+
+
+    refreshEnergyBattery() {
+        const energy = Phaser.Math.Clamp(this.player.getEnergy(), 0, 100);
+
+        let filledSections = 0;
+        let sectionColor = 0x3d8bff;
+        let stageLabel = 'ZONE 1';
+
+        if (energy > 75) {
+            filledSections = 4;
+            sectionColor = 0x4fc96b;
+            stageLabel = 'Energia muy alta';
+        } else if (energy > 50) {
+            filledSections = 3;
+            sectionColor = 0xb7d94b;
+            stageLabel = 'Energia alta';
+        } else if (energy > 25) {
+            filledSections = 2;
+            sectionColor = 0xe0a93b;
+            stageLabel = 'Energia media';
+        } else if (energy > 0) {
+            filledSections = 1;
+            sectionColor = 0xc94a4a;
+            stageLabel = 'Energia baja';
+        } else {
+            filledSections = 0;
+            sectionColor = 0x5a1f1f;
+            stageLabel = 'SIN ENERGIA';
+        }
+
+        for (let i = 0; i < this.energySectionsFill.length; i++) {
+            if (i < filledSections) {
+                this.energySectionsFill[i].setVisible(true);
+                this.energySectionsFill[i].setFillStyle(sectionColor, 1);
+            } else {
+                this.energySectionsFill[i].setVisible(false);
+            }
+        }
+
+        if (this.energyPercentText) {
+            this.energyPercentText.setText(Math.floor(energy) + '%');
+        }
+
+        if (this.energyStageText) {
+            this.energyStageText.setText(stageLabel);
+        }
+
+        if (energy <= 25) {
+            this.energyPlaceholderState = 'LOWEST_THRESHOLD';
+        } else if (energy <= 50) {
+            this.energyPlaceholderState = 'LOW_THRESHOLD';
+        } else if (energy <= 75) {
+            this.energyPlaceholderState = 'MID_THRESHOLD';
+        } else {
+            this.energyPlaceholderState = 'HIGH_THRESHOLD';
+        }
+    }
 
     updateDistrictFooter(district) {
         this.districtTitleText.setText(district.getName());
