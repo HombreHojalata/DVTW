@@ -1,13 +1,11 @@
-import Phaser from 'phaser';
-import Player from './player.js';
 import Story from './story.js';
 import Mission from './mission.js';
-import Day from './day.js';
+
 
 
 export default class missionManager{
     constructor(){
-        this.player = new Player();
+        
         this.regularMissions = [];
         this.upMoneyMissions = [];
         this.upPopularityMissions = [];
@@ -15,7 +13,7 @@ export default class missionManager{
         this.downMoneyMissions = [];
         this.downCorruptionMissions = [];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
-        this.day=new Day();
+
         this.espectedResources = {
             money: 400,
             corruption: 30,
