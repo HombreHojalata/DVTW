@@ -122,6 +122,27 @@ export default class District {
         }
     }
 
+    spawnDistrict(scene) {
+        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
+            .setOrigin(0)
+            .setScale(0.5)
+            .setInteractive({ useHandCursor: true });
+
+        button.on('pointerover', () => {
+            button.setScale(0.8);
+        });
+
+        button.on('pointerout', () => {
+            button.setScale(0.5);
+        });
+
+        button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
+            scene.updateDistrictFooter(this);
+            scene.add.image(150,50,'district').setOrigin(0).setScale(0.8);
+        });
+
+        return button;
+    }
     swapDistrict(scene) {
         if(this.special_building) {
             return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
