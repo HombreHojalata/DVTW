@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
+// PRINCIPAL SCENE ASSETS
 import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
-import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
-import presidente from '../assets/sprites/presidente.png'
+import iniPantalla from '../assets/sprites/pantallaInicio.png'
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
 import districtBorrascal from '../assets/sprites/map/districtBorrascal.png'
@@ -23,6 +23,7 @@ import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
 import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
 
 //PROTOTYPE ASSETS, TO BE REPLACED
+import presidente from '../assets/sprites/presidente.png'
 import testSahar from '../assets/sprites/test1.png'
 import missionIconPng from '../assets/sprites/missionIcon2.png'
 import configurationIcon from '../assets/sprites/configurationIcon.png'
