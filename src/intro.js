@@ -16,7 +16,7 @@ export default class Intro extends Phaser.Scene {
     create() {
         console.log("INTRO");
         this.add.text(0, 0, "Intro");
-        this.add.image(750, 375, 'inicio');
+        this.add.image(0, 0, 'inicio').setOrigin(0);
 
         const createMenuButton = (x, y, text, callback) => {
             const width = 300;
