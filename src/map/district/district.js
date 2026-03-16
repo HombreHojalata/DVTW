@@ -1,7 +1,7 @@
 
 export default class District {
     
-    constructor(name, desc, population,populationIncrease, satisfaction, district_building ,built_buildings, space_building, special_building, opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
+    constructor(name, desc, population,populationIncrease, satisfaction, district_building ,buildings, space_building, special_building, opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
         if (new.target === District) {
             throw new TypeError("Cannot instantiate abstract class District");
         }
@@ -12,7 +12,7 @@ export default class District {
         this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
         this.district_building = district_building;                                                             // District building that can be built in the district
-        this.built_buildings = built_buildings;                                                                       // List of buildings built in the district
+        this.buildings = buildings;                                                                             // List of buildings built in the district
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
         this.special_building = special_building;                                                               // Special building that can be built in the district
         this.oppositors = opositors;                                                                            // Opositors that can be found in the district
@@ -70,7 +70,7 @@ export default class District {
     getPopulationDensity() {return this.population;}
     getPopulationIncrease() {return this.populationIncrease;}
     getSatisfaction() {return this.satisfaction;}
-    getBuildings() {return this.built_buildings;}
+    getBuildings() {return this.buildings;}
     getSpaceBuilding() {return this.space_building;}
     getSpecialBuilding() {return this.special_building;}
     getOpositors() {return this.oppositors;}
@@ -95,9 +95,9 @@ export default class District {
     modifySatisfaction(satisfaction) {this.satisfaction += satisfaction;}
 
     addBuilding(building) {
-        if (this.built_buildings.includes(building)) {
-            if(this.built_buildings.length < this.space_building)
-                this.built_buildings.push(building);
+        if (this.buildings.includes(building)) {
+            if(this.district_building.length < this.space_building)
+                this.district_building.push(building);
             else{
                 console.log("You can't add more buildings. No more space in the district.");
                 throw new Error("No more space in the district.");
@@ -108,10 +108,18 @@ export default class District {
         }
     }
     addSpecialBuilding(building) {
-        if(this.built_buildings.length < this.space_building){
-            this.special_building = true;
-            this.built_buildings.push(building);
-        }        
+        if (this.special_building === building) {
+            if(this.district_building.length < this.space_building)
+            this.district_building.push(building); 
+            else{
+                console.log("You can't add more buildings. No more space in the district.");
+                throw new Error("No more space in the district.");
+            }
+        }
+        else{
+            console.log("This building can't be built in this district.");
+            throw new Error("This building can't be built in this district.");
+        }
     }
 
     swapDistrict(scene) {
@@ -120,13 +128,5 @@ export default class District {
         }else{
             return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
         }
-    }
-    generateMoneyFromBuildings() {
-        if (!this.built_buildings) return 0;
-        let money = 0;
-        for (const building of this.built_buildings) 
-            if (building && typeof building.getBuildingMoney === "function") 
-                money += building.getBuildingMoney();
-        return money;
     }
 }

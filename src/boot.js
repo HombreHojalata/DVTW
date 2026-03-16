@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-// WINDOW ASSETS
 import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
 import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
 import presidente from '../assets/sprites/presidente.png'
