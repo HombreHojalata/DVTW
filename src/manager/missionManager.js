@@ -13,6 +13,7 @@ export default class missionManager{
         this.downMoneyMissions = [];
         this.downCorruptionMissions = [];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
+        this.districtsWithMissions=[false,false,false,false,false,false];
 
         this.espectedResources = {
             money: 400,
@@ -33,25 +34,59 @@ export default class missionManager{
         const moneyDiff = Math.abs(playerMoney - this.espectedResources.money)/15;
         const popularityDiff = Math.abs(playerPopularity - this.espectedResources.popularity)/7;
         const corruptionDiff = playerCorruption - this.espectedResources.corruption;
-
+        const missionSelected = null;
         if(moneyDiff > popularityDiff && moneyDiff > corruptionDiff && this.espectedResources.money/moneyDiff > 2){
             if(playerMoney > this.espectedResources.money){
-                return this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
+                missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
             }else{
-                return this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
+                missionSelected = this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
             }
         }else if(popularityDiff > corruptionDiff && this.espectedResources.popularity/popularityDiff > 2){
             if(playerPopularity > this.espectedResources.popularity){
-                return this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
+                missionSelected = this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
             }else{
-                return this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
+                missionSelected = this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
             }
         }else if(playerCorruption > this.espectedResources.corruption && this.espectedResources.corruption/corruptionDiff > 2){
-            return this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
+            missionSelected = this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
         }
         else{
-            return this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
+            missionSelected = this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
         }
+        const districtIndex = Math.floor(Math.random() * 6);
+        if(this.districtsWithMissions[districtIndex]){
+            if(!this.districtsWithMissions[0] || !this.districtsWithMissions[1] || !this.districtsWithMissions[2] || !this.districtsWithMissions[3] || !this.districtsWithMissions[4] || !this.districtsWithMissions[5]){
+                while(this.districtsWithMissions[districtIndex]){
+                    districtIndex = Math.floor(Math.random() * 6);
+                }
+                this.districtsWithMissions[districtIndex] = true;
+            }
+            else {
+                districtIndex=-1;
+            }
+        }
+        if(districtIndex == -1){
+            missionSelected.district = "null";
+        }
+        else if(districtIndex == 0){
+            missionSelected.district = "Borrascal";
+        }
+        else if(districtIndex == 1){
+            missionSelected.district = "El Nido";
+        }
+        else if(districtIndex == 2){
+            missionSelected.district = "Guinea";
+        }
+        else if(districtIndex == 3){
+            missionSelected.district = "Nueva Pradera";
+        }
+        else if(districtIndex == 4){
+            missionSelected.district = "Sahar";
+        }
+        else{//districtIndex == 5
+            missionSelected.district = "Somosagua";
+        }
+        return missionSelected;
     }
 
     finishDay(){

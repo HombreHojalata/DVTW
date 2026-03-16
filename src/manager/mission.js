@@ -9,6 +9,7 @@ export default class Mission{
         this.minigame= mi;//Bool
         this.numberOfOptions=0;       
         this.options=[];//Array de opciones, cada una con sus consecuencias.
+        this.district = null;//String, se asigna a un distrito aleatorio.
     }
 
     addOption(Pr, De, En, Mo, Cor, Po){
