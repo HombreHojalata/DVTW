@@ -34,7 +34,7 @@ export default class missionManager{
         const moneyDiff = Math.abs(playerMoney - this.espectedResources.money)/15;
         const popularityDiff = Math.abs(playerPopularity - this.espectedResources.popularity)/7;
         const corruptionDiff = playerCorruption - this.espectedResources.corruption;
-        const missionSelected = null;
+        let missionSelected = null;
         if(moneyDiff > popularityDiff && moneyDiff > corruptionDiff && this.espectedResources.money/moneyDiff > 2){
             if(playerMoney > this.espectedResources.money){
                 missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
@@ -53,7 +53,7 @@ export default class missionManager{
         else{
             missionSelected = this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
         }
-        const districtIndex = Math.floor(Math.random() * 6);
+        let districtIndex = Math.floor(Math.random() * 6);
         if(this.districtsWithMissions[districtIndex]){
             if(!this.districtsWithMissions[0] || !this.districtsWithMissions[1] || !this.districtsWithMissions[2] || !this.districtsWithMissions[3] || !this.districtsWithMissions[4] || !this.districtsWithMissions[5]){
                 while(this.districtsWithMissions[districtIndex]){
