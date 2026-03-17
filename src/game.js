@@ -2,6 +2,7 @@ import Boot from './boot.js';
 import Intro from './intro.js';
 import Configuration from './configuration.js';
 import Level from './level.js';
+import DistrictScene from './districtScene.js';
 import BlackMarket from './market/blackmarket.js';
 import End from './end.js';
 import Phaser from 'phaser';
@@ -23,7 +24,7 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, Intro, Configuration, Level, BlackMarket, End],
+    scene: [Boot, Intro, Configuration, Level, DistrictScene, BlackMarket, End],
     physics: {
         default: 'arcade',
         arcade: {

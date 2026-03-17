@@ -20,7 +20,7 @@ export default class Map {
             'districtBorrascal', 'districtBorrascalSpecial', 1200, 150
         );
         const EL_NIDO = new DistrictElNido(
-            "EL NIDO", "Any", 500, 8, 40,
+            "EL_NIDO", "Any", 500, 8, 40,
             ["Casino"], [], 2,
             ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
             'districtElNido', 'districtElNidoSpecial', 800, 400
@@ -33,7 +33,7 @@ export default class Map {
             'districtGuineaSpecial', 'districtGuineaSpecial', 62, 103
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
-            "NUEVA PRADERA", "Any", 1400, 18, 5,
+            "NUEVA_PRADERA", "Any", 1400, 18, 5,
             ["Casino"], [], 2,
             ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
             'districtNuevaPradera', 'districtNuevaPraderaSpecial', 900, 550

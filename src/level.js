@@ -41,12 +41,7 @@ export default class Level extends Phaser.Scene {
         // FOOTER
         this.Footer = this.spawnFooter();
         //this.map.generateDistrictsMoney();
-        // ICONS - MISSING ONES FOR EACH
-        this.closeIcon = null;
-        this.missionIcon = null;
-        this.missionTimer = this.time.delayedCall(1200, () => {
-            this.spawnMissionIcon();
-        });
+
     }
  
     spawnConfigurationIcon(){
@@ -298,109 +293,7 @@ export default class Level extends Phaser.Scene {
             this.scene.start('blackmarket');
         });
     }
-    spawnMissionIcon() {
-        if (this.missionIcon) return;
-        this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
-        this.missionIcon = this.add.image(880, 1120, 'missionIcon').setOrigin(0.5).setScale(0.08).setInteractive({ useHandCursor: true });
-        this.missionIcon.on('pointerover', () => {this.missionIcon.setScale(0.09);});
-        this.missionIcon.on('pointerout', () => {this.missionIcon.setScale(0.08);});
-        this.missionIcon.on('pointerup', () => {
-            this.missionDetails = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'testSahar').setOrigin(0.5);
-
-            // CHOICES COINTAINER
-            // this.spawnMissionTypeTwoChoices();
-            if (!this.buttonContainer) {
-            this.buttonContainer = document.createElement('div');
-            this.buttonContainer.style.position = 'absolute';
-            this.buttonContainer.style.top = '0';
-            this.buttonContainer.style.left = '0';
-            this.buttonContainer.style.width = '100%';
-            this.buttonContainer.style.height = '100%';
-            this.buttonContainer.style.pointerEvents = 'none'; // Permite que los clicks pasen a través del contenedor
-            document.body.appendChild(this.buttonContainer);
-            }
-
-            // Eliminar botones anteriores si existen
-            if (this.missionTypeTwoChoice1) this.missionTypeTwoChoice1.remove();
-            if (this.missionTypeTwoChoice2) this.missionTypeTwoChoice2.remove();
-
-            // Crear botón 1 en coordenadas 500x800
-            this.missionTypeTwoChoice1 = document.createElement('button');
-            this.missionTypeTwoChoice1.style.position = 'absolute';
-            this.missionTypeTwoChoice1.style.left = '315px';           // X
-            this.missionTypeTwoChoice1.style.top = '550px';            // Y
-            this.missionTypeTwoChoice1.style.width = '350px';
-            this.missionTypeTwoChoice1.style.height = '190px';
-            this.missionTypeTwoChoice1.style.opacity = '0';
-            this.missionTypeTwoChoice1.style.border = '2px solid #ccc';
-            this.missionTypeTwoChoice1.style.backgroundColor = '#ffffff';
-            this.missionTypeTwoChoice1.style.borderRadius = '30px';
-            this.missionTypeTwoChoice1.style.cursor = 'pointer';
-            this.missionTypeTwoChoice1.style.transition = 'border-color 0.3s ease';
-            this.missionTypeTwoChoice1.style.pointerEvents = 'auto'; // Permite interacción con el botón
-            this.missionTypeTwoChoice1.onmouseover = () => this.missionTypeTwoChoice1.style.borderColor = 'green';
-            this.missionTypeTwoChoice1.onmouseout = () => this.missionTypeTwoChoice1.style.borderColor = '#ccc';
-
-            // Crear botón 2 en coordenadas 800x800
-            this.missionTypeTwoChoice2 = document.createElement('button');
-            this.missionTypeTwoChoice2.style.position = 'absolute';
-            this.missionTypeTwoChoice2.style.left = '695px';
-            this.missionTypeTwoChoice2.style.top = '550px';
-            this.missionTypeTwoChoice2.style.width = '350px';
-            this.missionTypeTwoChoice2.style.height = '190px';
-            this.missionTypeTwoChoice2.style.opacity = '0';
-            this.missionTypeTwoChoice2.style.border = '2px solid #ccc';
-            this.missionTypeTwoChoice2.style.backgroundColor = '#f0f0f0';
-            this.missionTypeTwoChoice2.style.borderRadius = '30px';
-            this.missionTypeTwoChoice2.style.cursor = 'pointer';
-            this.missionTypeTwoChoice2.style.transition = 'border-color 0.3s ease';
-            this.missionTypeTwoChoice2.style.pointerEvents = 'auto'; // Permite interacción con el botón
-            this.missionTypeTwoChoice2.onmouseover = () => this.missionTypeTwoChoice2.style.borderColor = 'green';
-            this.missionTypeTwoChoice2.onmouseout = () => this.missionTypeTwoChoice2.style.borderColor = '#ccc';
-
-            // Agregar botones al contenedor
-            this.buttonContainer.appendChild(this.missionTypeTwoChoice1);
-            this.buttonContainer.appendChild(this.missionTypeTwoChoice2);
-
-            this.missionTypeTwoChoice1.onclick = () => {
-                this.missionTypeTwoChoice1.remove();
-                this.missionTypeTwoChoice2.remove();
-                this.closeIcon.destroy();
-                this.missionDetails.destroy();
-                this.missionIcon.setVisible(false);
-                // HERE WE CAN ADD THE CONSEQUENCES OF CHOOSING THIS OPTION, FOR EXAMPLE, INCREASING POPULARITY BUT DECREASING ENERGY OR SOMETHING LIKE THAT
-                this.player.updateMoney(-30000);
-                this.player.updateEnergy(-10);
-                this.player.updatePopularity(7);
-                this.player.updateCorruption(12);
-                // WE WILL NEED A FUNC TO UPDATE DATA
-
-                this.refreshTopStatsPanel();
-                
-            }
-            this.missionTypeTwoChoice2.onclick = () => {
-                this.missionTypeTwoChoice1.remove();
-                this.missionTypeTwoChoice2.remove();
-                this.closeIcon.destroy();
-                this.missionDetails.destroy();
-                this.missionIcon.setVisible(false);
-                // HERE WE CAN ADD THE CONSEQUENCES OF CHOOSING THIS OPTION, FOR EXAMPLE, INCREASING ENERGY BUT DECREASING POPULARITY OR SOMETHING LIKE THAT
-                this.player.updateMoney(-42000);
-                this.player.updateEnergy(-10);
-                this.player.updatePopularity(2);
-                this.refreshTopStatsPanel();
-            }
-            const pos = this.mapToWorld(3163, -75);
-            this.closeIcon = this.add.image(pos.x, pos.y, 'closeIcon').setOrigin(0.5).setScale(1).setInteractive({ useHandCursor: true });
-            this.closeIcon.on('pointerover', () => {this.closeIcon.setScale(1);});
-            this.closeIcon.on('pointerout', () => {this.closeIcon.setScale(1);});
-            this.closeIcon.on('pointerup', () => {
-                this.closeIcon.destroy();
-                this.missionDetails.destroy();
-            });
-        });
-
-    }
+   
     /*
     Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
     

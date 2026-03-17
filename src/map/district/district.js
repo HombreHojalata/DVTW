@@ -1,6 +1,5 @@
 
 export default class District {
-    
     constructor(name, desc, population,populationIncrease, satisfaction, district_building ,buildings, space_building, special_building, opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
         if (new.target === District) {
             throw new TypeError("Cannot instantiate abstract class District");
@@ -44,24 +43,18 @@ export default class District {
     
     }
     spawnDistrict(scene){
-         const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
+        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
             .setOrigin(0)
             .setScale(1)
             .setInteractive({ useHandCursor: true });
-
-        button.on('pointerover', () => {
-            button.setScale(1.01);
-        });
-
-        button.on('pointerout', () => {
-            button.setScale(1);
-        });
-
+        button.on('pointerover', () => {button.setScale(1.01);});
+        button.on('pointerout', () => {button.setScale(1);});
         button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
             scene.updateDistrictFooter(this);
-            scene.add.image(150,50,'testSahar').setOrigin(0).setScale(0.8);
+            scene.scene.pause('level');
+            scene.scene.launch('districtScene', { district: this });
+            scene.scene.bringToTop('districtScene');
         });
-
         return button;
     }
 
@@ -122,27 +115,6 @@ export default class District {
         }
     }
 
-    spawnDistrict(scene) {
-        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
-            .setOrigin(0)
-            .setScale(0.5)
-            .setInteractive({ useHandCursor: true });
-
-        button.on('pointerover', () => {
-            button.setScale(0.8);
-        });
-
-        button.on('pointerout', () => {
-            button.setScale(0.5);
-        });
-
-        button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
-            scene.updateDistrictFooter(this);
-            scene.add.image(150,50,'district').setOrigin(0).setScale(0.8);
-        });
-
-        return button;
-    }
     swapDistrict(scene) {
         if(this.special_building) {
             return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
