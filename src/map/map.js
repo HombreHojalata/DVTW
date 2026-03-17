@@ -16,39 +16,40 @@ export default class Map {
         const BORRASCAL = new DistrictBorrascal(
             "BORRASCAL", "Any", 1000, 10, 100,
             ["Casino"], [], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+            ["Hotel"], 10,
             'districtBorrascal', 'districtBorrascalSpecial', 1200, 150
         );
         const EL_NIDO = new DistrictElNido(
             "EL_NIDO", "Any", 500, 8, 40,
             ["Casino"], [], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+            ["Hotel"], 10,
             'districtElNido', 'districtElNidoSpecial', 800, 400
         );
         const GUINEA = new DistrictGuinea(
             "GUINEA", "Any", 700, 14, 30,
             ["Casino"], ["Parque", "Jardin"], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+            ["Hotel"], 10,
             //'districtGuinea', 'districtGuineaSpecial', 62, 103
             'districtGuineaSpecial', 'districtGuineaSpecial', 62, 103
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
             "NUEVA_PRADERA", "Any", 1400, 18, 5,
             ["Casino"], [], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
-            'districtNuevaPradera', 'districtNuevaPraderaSpecial', 900, 550
-        );
+            ["Hotel"], 10, 
+            //'districtNuevaPradera', 'districtNuevaPraderaSpecial', 900, 550
+            'districtNuevaPraderaSpecial', 'districtNuevaPraderaSpecial', 506, 252
+        )
         const SAHAR = new DistrictSahar(
-            "SAHAR", "Any", 600, 20, 15,
+            "SAHAR", "En el extrarradio de la ciudad se extiende el distrito de Sahar, una larga explanada bajo el sol. Los reptiles y animales deserticos de esta zona viven en condiciones humildes, pero un presidente no se debe preocupar por problemas tan insignificantes como ese. Es mucho mas interesante todo el terreno de construcion.",600, 20, 15,
             //BUILDINGS LIST, BUILDINGS BUILT
             ["Casino"], [], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+            ["Hotel"], 10,
             'districtSahar', 'districtSaharSpecial', 182, 280
         );
         const SOMOSAGUA = new DistrictSomosagua(
             "SOMOSAGUA", "Any", 800, 12, 10,
             ["Casino"], [], 2,
-            ["Hotel"], 10, ["Satisfacción", "Peligro"], [1, 1.5],
+            ["Hotel"], 10,
             'districtSomosagua', 'districtSomosaguaSpecial', 700, 200
         );
         const districtArray = [

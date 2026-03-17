@@ -4,6 +4,7 @@ import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
 import iniPantalla from '../assets/sprites/pantallaInicio.png'
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
+import districtTemplate from '../assets/sprites/map/districtTemplate.png'
 import districtBorrascal from '../assets/sprites/map/districtBorrascal.png'
 import districtBorrascalSpecial from '../assets/sprites/map/districtBorrascalSpecial.png'
 import districtElNido from '../assets/sprites/map/districtElNido.png'
@@ -28,7 +29,6 @@ import testSahar from '../assets/sprites/test1.png'
 import missionIconPng from '../assets/sprites/missionIcon2.png'
 import configurationIcon from '../assets/sprites/configurationIcon.png'
 import closeIcon from '../assets/sprites/closeIcon.png'
-import district from '../assets/sprites/prototipoDistrict.png'
 import blackMarket from '../assets/sprites/prototipoBlackMarket.png'
 
 /**
@@ -52,6 +52,7 @@ export default class Boot extends Phaser.Scene {
     // MAP ASSETS
     this.load.image('map', map);
     // DISTRICT ASSETS
+    this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtBorrascal', districtBorrascal);
     this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);
@@ -72,7 +73,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('missionIcon', missionIconPng);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
-    this.load.image('district', district);
     this.load.image('blackMarket', blackMarket);
     this.load.image('vendedor', vendedor);
     this.load.image('pensa_icon', prensa_icon);

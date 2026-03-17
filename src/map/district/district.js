@@ -1,6 +1,6 @@
 
 export default class District {
-    constructor(name, desc, population,populationIncrease, satisfaction, district_building ,buildings, space_building, special_building, opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
+    constructor(name, desc, population,populationIncrease, satisfaction, district_building ,buildings, space_building, special_building, opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY) {
         if (new.target === District) {
             throw new TypeError("Cannot instantiate abstract class District");
         }
@@ -15,12 +15,14 @@ export default class District {
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
         this.special_building = special_building;                                                               // Special building that can be built in the district
         this.oppositors = opositors;                                                                            // Opositors that can be found in the district
-        this.parameters = parameters;                                                                           // List of parameters that can be affected by the district   
-        this.parameters_multipliers = parameters_multipliers;                                                   // List of multipliers for the parameters that can be affected by the district
         this.PNGwithOutSpecial = PNGwithOutSpecial;                                                             // PNG of the district without the special building
         this.PNGwithSpecial = PNGwithSpecial;                                                                   // PNG of the district with the special building         
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
+        this.taxes = 50;                                                                                        // Percentage 0-100
+        this.security = 50;
+        this.workSchedule = 50;
+        this.cleaning = 50;
         
         /*COMO JAVA
         String name;
@@ -67,14 +69,11 @@ export default class District {
     getSpaceBuilding() {return this.space_building;}
     getSpecialBuilding() {return this.special_building;}
     getOpositors() {return this.oppositors;}
-    getParameters() {return this.parameters;}
-    getParametersMultipliers() {return this.parameters_multipliers;}
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}
     getPosX() {return this.posX;}
     getPosY() {return this.posY;}
 
-    getInfo() {throw new Error("getInfo() must be implemented");}
 
     increaseNormalPopulation() {this.population += this.populationIncrease;}
     increaseBoostedPopulation(populationIncrease) {this.population += populationIncrease;}
@@ -116,10 +115,34 @@ export default class District {
     }
 
     swapDistrict(scene) {
-        if(this.special_building) {
-            return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
-        }else{
-            return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
-        }
+        if(this.special_building) return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
+        else return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
     }
+    //DISTRICT PERCENTAGE
+    getTaxesPercentage() {return this.taxes;}
+    getSecurityPercentage() {return this.security;}
+    getWorkSchedulePercentage() {return this.workSchedule;}
+    getCleaningPercentage() {return this.cleaning;}
+
+    addTaxesPercentage(quantity){
+        if((quantity+this.taxes)>=100) this.taxes = 100;
+        else if((quantity+this.taxes)<=0) this.taxes = 0;
+        else this.taxes+=quantity;
+    }
+    addSecurityPercentage(quantity){
+        if((quantity+this.security)>=100) this.security = 100;
+        else if((quantity+this.security)<=0) this.security = 0;
+        else this.security+=quantity;
+    }
+    addWorkSchedulePercentage(quantity){
+        if((quantity+this.workSchedule)>=100) this.workSchedule = 100;
+        else if((quantity+this.workSchedule)<=0) this.workSchedule = 0;
+        else this.workSchedule+=quantity;
+    }
+    addCleaningPercentage(quantity){
+        if((quantity+this.cleaning)>=100) this.cleaning = 100;
+        else if((quantity+this.cleaning)<=0) this.cleaning = 0;
+        else this.cleaning+=quantity;
+    }
+
 }
