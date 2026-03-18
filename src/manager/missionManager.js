@@ -99,7 +99,7 @@ export default class missionManager{
     async loadMissions(){
 
 
-        const response = await fetch("DVTW/files/regularMissions.json");
+        const response = await fetch("/files/regularMissions.json");
         const missionsData = await response.json();
         missionsData.forEach(m => {
             const mission = new Mission(
@@ -123,6 +123,20 @@ export default class missionManager{
 
             this.regularMissions.push(mission);
         });
+
+
+        console.log("Number of missions:", this.regularMissions.length);
+
+        this.regularMissions.forEach(m => {
+            console.log("----");
+            console.log("Mission:", m.name);
+            console.log("Description:", m.description);
+
+            m.options.forEach(o => {
+                console.log("Option:", o.description, "Probability:", o.probability);
+            });
+        });
+
 
         const responseUM = await fetch("DVTW/files/upMoney.json");
         const missionsDataUM = await responseUM.json();
