@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import gameManager from './gameManager.js';
-import topUI from './UI/topUI.js';
-import footerUI from './UI/footerUI.js';
-import bateriaUI from './UI/bateriaUI.js';
+import gameManager from '../gameManager.js';
+import topUI from '../UI/topUI.js';
+import footerUI from '../UI/footerUI.js';
+import bateriaUI from '../UI/bateriaUI.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -12,7 +12,7 @@ import bateriaUI from './UI/bateriaUI.js';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Level extends Phaser.Scene {
+export default class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'level' });
     }

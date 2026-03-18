@@ -8,7 +8,7 @@ import Phaser from 'phaser';
  * El juego termina cuando el jugador ha recogido 10 estrellas.
  * @extends Phaser.Scene
  */
-export default class Intro extends Phaser.Scene {
+export default class IntroScene extends Phaser.Scene {
     constructor() {
         super({ key: 'intro' });
     }

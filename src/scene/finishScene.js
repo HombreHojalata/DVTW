@@ -5,7 +5,7 @@ import Phaser from 'phaser'
  * texto que indica que el juego se ha acabado.
  * Si se pulsa cualquier tecla, se vuelve a iniciar el juego.
  */
-export default class End extends Phaser.Scene {
+export default class FinishScene extends Phaser.Scene {
   /**
    * Constructor de la escena
    */
