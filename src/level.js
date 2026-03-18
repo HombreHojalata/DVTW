@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 import gameManager from './gameManager.js';
-import topUI from './UI/TopUI.js';
+import topUI from './UI/topUI.js';
 import footerUI from './UI/footerUI.js';
-import bateriaUI from './UI/BateriaUI.js';
+import bateriaUI from './UI/bateriaUI.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
