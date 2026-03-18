@@ -7,4 +7,6 @@ export default class Building {
         this.energia = energia;
         this.poblacion = poblacion;
     }
+
+    getBuildingPNG(){return this.PNGBuilding;}
 }
