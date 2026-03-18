@@ -99,7 +99,7 @@ export default class missionManager{
     async loadMissions(){
 
 
-        const response = await fetch("/files/regularMissions.json");
+        const response = await fetch("DVTW/files/regularMissions.json");
         const missionsData = await response.json();
         missionsData.forEach(m => {
             const mission = new Mission(
