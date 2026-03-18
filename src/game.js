@@ -33,5 +33,5 @@ let config = {
         }
     }
 };
-
+console.log("carga el juego?");
 new Phaser.Game(config);
