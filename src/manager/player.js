@@ -1,4 +1,3 @@
-import Phaser from 'phaser';
 
 export default class Player {
     constructor(money, energy, corruption, popularity, PNGpresident){
