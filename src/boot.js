@@ -31,7 +31,15 @@ import configurationIcon from '../assets/sprites/configurationIcon.png'
 import closeIcon from '../assets/sprites/closeIcon.png'
 import blackMarket from '../assets/sprites/prototipoBlackMarket.png'
 
+// JSON misiones
+import RegularMission from '../assets/jsons/regularMissions.json';
+import UpMoneyMission from '../assets/jsons/upMoney.json';
+import UpPopularityMission from '../assets/jsons/upPopularity.json';
+import downCorruptionMission from '../assets/jsons/downCorruption.json';
+import downPopularityMission from '../assets/jsons/downPopularity.json';
+import downMoneyMission from '../assets/jsons/downMoney.json';
 /**
+ * 
  * Escena para la precarga de los assets que se usarán en el juego.
  * Esta escena se puede mejorar añadiendo una imagen del juego y una 
  * barra de progreso de carga de los assets
@@ -46,6 +54,15 @@ export default class Boot extends Phaser.Scene {
   preload() {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
+
+    //LOAD de JSONS para las misiones
+    this.cache.json.add('regularMissions', RegularMission);
+    this.cache.json.add('upMoney', UpMoneyMission);
+    this.cache.json.add('upPopularity', UpPopularityMission);
+    this.cache.json.add('downCorruption', downCorruptionMission);
+    this.cache.json.add('downPopularity', downPopularityMission);
+    this.cache.json.add('downMoney', downMoneyMission);
+
 
     this.load.image('carga', cargaPantalla);
     this.load.image('inicio', iniPantalla);

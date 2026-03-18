@@ -20,7 +20,7 @@ export default class GameScene extends Phaser.Scene {
     init(data) {
         this.fromScene = data && data.from ? data.from : null;
         if(!this.registry.get('gameManager')){
-            const GM = new gameManager();
+            const GM = new gameManager(this);
             this.registry.set('gameManager',GM)
         }
         this.gameManager = this.registry.get('gameManager');
