@@ -52,7 +52,7 @@ export default class Map {
             false, 10,
             'districtSomosagua', 'districtSomosaguaSpecial', 700, 200
         );
-        districtArray = [
+        const districtArray = [
             BORRASCAL,
             EL_NIDO,
             GUINEA,
