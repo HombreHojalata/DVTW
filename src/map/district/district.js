@@ -1,3 +1,10 @@
+import BuildingCinema from "../building/buildingCinema.js";
+import BuildingComercialCenter from "../building/buildingComercialCenter.js";
+import BuildingFactory from "../building/buildingFactory.js";
+import BuildingHospital from "../building/buildingHospital.js";
+import BuildingHotel from "../building/buildingHotel.js";
+import BuildingHouse from "../building/buildingHouse.js";
+import BuildingPark from "../building/buildingPark.js";
 
 export default class District {
     constructor(name, desc, population,populationIncrease, satisfaction, 
@@ -13,7 +20,7 @@ export default class District {
         this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
         this.district_building = district_building;                                                             // District building that can be built in the district
-        this.buildings = this.createBuildings(buildings);                                                       // List of buildings built in the district
+        this.building_list = this.createBuildings(buildings);                                                       // List of buildings built in the district
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
         this.special_building = special_building;                                                               // Special building that can be built in the district
         this.oppositors = opositors;                                                                            // Opositors that can be found in the district
@@ -55,7 +62,7 @@ export default class District {
         button.on('pointerout', () => {button.setScale(1);});
         button.on('pointerup', () => {
             scene.updateDistrictFooter(this);
-            scene.scene.pause('level');
+            scene.scene.pause('gameScene');
             scene.scene.launch('districtScene', { district: this });
             scene.scene.bringToTop('districtScene');
         });
@@ -114,29 +121,33 @@ export default class District {
     }
     //BUILDINGS
     getBuildingsList() {return this.district_building;}
-    getBuildingsBuilt() {return this.buildings;}
+    getBuildingsBuilt() {return this.building_list;}
     getSpaceBuilding() {return this.space_building;}
     isSpecialBuildingBuilt() {return this.special_building;}
     createBuildings(buildings){
-        //falta una lista de building
-        //TODO CREATE OBJECT AND PUSHBACK LIST
+        const buildingList = [];
+        //Building(PNGBuilding,coste,beneficio,satisfaccion,energia,poblacion)
         for(let i = 0 ; i < buildings.length; i++){
-            if(buildings[i] === "CINEMA"){
-
-            }else if(buildings[i] === "COMERCIAL"){
-            
-            }else if(buildings[i] === "FACTORY"){
-            }else if(buildings[i] === "HOSPITAL"){
-            }else if(buildings[i] === "HOTEL"){
-            }else if(buildings[i] === "HOUSE"){
-            }else if(buildings[i] === "PARK"){
-            }
+            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',10000,5000,5,0,0));
+            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',30000,20000,10,0,0));
+            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',50000,30000,-5,0,0));
+            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',60000,40000,5,0,20));
+            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',20000,10000,5,0,5));
+            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',5000,500,5,0,5));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',10000,1000,15,0,0));
         }
+        return buildingList;
     }
     addBuilding(building) {
         if (this.buildings.includes(building)) {
-            if(this.district_building.length < this.space_building)
-                this.district_building.push(building);
+            if(this.building_list.length < this.space_building)
+                if(building === "CINEMA") building_list.push(new BuildingCinema('buildingCinema',10000,5000,5,0,0));
+                else if(building === "COMERCIAL") building_list.push(new BuildingComercialCenter('buildingComercialCenter',30000,20000,10,0,0));
+                else if(building === "FACTORY") building_list.push(new BuildingFactory('buildingFactory',50000,30000,-5,0,0));
+                else if(building === "HOSPITAL") building_list.push(new BuildingHospital('buildingHospital',60000,40000,5,0,20));
+                else if(building === "HOTEL") building_list.push(new BuildingHotel('buildingHotel',20000,10000,5,0,5));
+                else if(building === "HOUSE") building_list.push(new BuildingHouse('buildingHouse',5000,500,5,0,5));
+                else if(building === "PARK") building_list.push(new BuildingPark('buildingPark',10000,1000,15,0,0));
             else{
                 console.log("You can't add more buildings. No more space in the district.");
                 throw new Error("No more space in the district.");
@@ -146,6 +157,7 @@ export default class District {
             throw new Error("This building doesn't exist in this district.");
         }
     }
+    //TODO
     addSpecialBuilding(building) {
         if (this.special_building === building) {
             if(this.district_building.length < this.space_building)

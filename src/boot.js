@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
-import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
-import iniPantalla from '../assets/sprites/pantallaInicio.png'
+import introScene from '../assets/sprites/scenes/introScene.png'  
+import loadScene from '../assets/sprites/scenes/loadScene.png'          //NEED TO BE REPLACE
+
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
 import districtTemplate from '../assets/sprites/map/districtTemplate.png'
@@ -17,19 +18,33 @@ import districtSahar from '../assets/sprites/map/districtSahar.png'
 import districtSaharSpecial from '../assets/sprites/map/districtSaharSpecial.png'
 import districtSomosagua from '../assets/sprites/map/districtSomosagua.png'
 import districtSomosaguaSpecial from '../assets/sprites/map/districtSomosaguaSpecial.png'
+// BUILDING ASSETS
+import buildingCinema from '../assets/sprites/buildings/buildingCinema.png'
+import buildingComercialCenter from '../assets/sprites/buildings/buildingComercialCenter.png'
+import buildingFactory from '../assets/sprites/buildings/buildingFactory.png'
+import buildingHospital from '../assets/sprites/buildings/buildingHospital.png'
+import buildingHotel from '../assets/sprites/buildings/buildingHotel.png'
+import buildingHouse from '../assets/sprites/buildings/buildingHouse.png'
+import buildingPark from '../assets/sprites/buildings/buildingPark.png'
+import specialBuildingBorrascal from '../assets/sprites/buildings/specialBuildingBorrascal.png'
+import specialBuildingElNido from '../assets/sprites/buildings/specialBuildingElNido.png'
+import specialBuildingGuinea from '../assets/sprites/buildings/specialBuildingGuinea.png'
+import specialBuildingNuevaPradera from '../assets/sprites/buildings/specialBuildingNuevaPradera.png'
+import specialBuildingSahar from '../assets/sprites/buildings/specialBuildingSahar.png'
+import specialBuildingSomosagua from '../assets/sprites/buildings/specialBuildingSomosagua.png'
+import specialBuildingMafia from '../assets/sprites/buildings/specialBuildingMafia.png'
 
 // BLACK MARKET ASSETS
 import vendedor from '../assets/sprites/Vendedor.png' 
 import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
 import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
+// ICONS        NEED TO BE REPLACED
+import closeIcon from '../assets/sprites/icons/closeIcon.png'                 
+import configurationIcon from '../assets/sprites/icons/configurationIcon.png'     //NEED TO BE REPLACE
 
 //PROTOTYPE ASSETS, TO BE REPLACED
-import presidente from '../assets/sprites/presidente.png'
-import testSahar from '../assets/sprites/test1.png'
-import missionIconPng from '../assets/sprites/missionIcon2.png'
-import configurationIcon from '../assets/sprites/configurationIcon.png'
-import closeIcon from '../assets/sprites/closeIcon.png'
-import blackMarket from '../assets/sprites/prototipoBlackMarket.png'
+import presidente from '../assets/sprites/presidente.png'                         //NEED TO BE REPLACE
+
 
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
@@ -64,8 +79,8 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
 
 
-    this.load.image('carga', cargaPantalla);
-    this.load.image('inicio', iniPantalla);
+    this.load.image('load', loadScene);
+    this.load.image('init', introScene);
     // MAP ASSETS
     this.load.image('map', map);
     // DISTRICT ASSETS
@@ -83,23 +98,35 @@ export default class Boot extends Phaser.Scene {
     this.load.image('districtNuevaPraderaSpecial', districtNuevaPraderaSpecial);
     this.load.image('districtSaharSpecial', districtSaharSpecial);
     this.load.image('districtSomosaguaSpecial', districtSomosaguaSpecial);
-    //
-    this.load.image('presidente', presidente);
-    //PROTOTYPE ASSETS, TO BE REPLACED
-    this.load.image('testSahar', testSahar);
-    this.load.image('missionIcon', missionIconPng);
+    // NORMAL BUILDING ASSETS
+    this.load.image('buildingCinema', buildingCinema);
+    this.load.image('buildingComercialCenter', buildingComercialCenter);
+    this.load.image('buildingFactory', buildingFactory);
+    this.load.image('buildingHospital', buildingHospital);
+    this.load.image('buildingHotel', buildingHotel);
+    this.load.image('buildingHouse', buildingHouse);
+     this.load.image('buildingPark', buildingPark);
+    // SPECIAL BUILDING ASSETS
+    this.load.image('specialBuildingBorrascal', specialBuildingBorrascal);
+    this.load.image('specialBuildingElNido', specialBuildingElNido);
+    this.load.image('specialBuildingGuinea', specialBuildingGuinea);
+    this.load.image('specialBuildingNuevaPradera', specialBuildingNuevaPradera);
+    this.load.image('specialBuildingSahar', specialBuildingSahar);
+    this.load.image('specialBuildingSomosagua', specialBuildingSomosagua);
+    this.load.image('specialBuildingMafia', specialBuildingMafia);
+    // ICONS ASSETS
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
-    this.load.image('blackMarket', blackMarket);
+    // PRESIDENTE ASSET
+    this.load.image('presidente', presidente);
+    //PROTOTYPE ASSETS, TO BE REPLACED
     this.load.image('vendedor', vendedor);
     this.load.image('pensa_icon', prensa_icon);
     this.load.image('hotel_icon', hotel_icon);
   }
 
   create() {
-    this.add.image(750, 375, 'carga');                                                                //WE CAN ADD MUSIC AND LOADING BAR HERE
-    this.add.text(0, 0, "Boot");
-
+    this.add.image(750, 375, 'load');                                                                //WE CAN ADD MUSIC AND LOADING BAR HERE
     // Crear la barra de carga
     const barWidth = 600;
     const barHeight = 30;
@@ -126,8 +153,7 @@ export default class Boot extends Phaser.Scene {
         progressBar.fillRect(barX, barY, tween.getValue(), barHeight);
       },
       onComplete: () => {
-        this.scene.remove('carga');
-        this.scene.start('intro');
+        this.scene.start('introScene');
       }
     });
   }

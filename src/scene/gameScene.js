@@ -14,7 +14,7 @@ import bateriaUI from '../UI/bateriaUI.js';
  */
 export default class GameScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'level' });
+        super({ key: 'gameScene' });
     }
 
     init(data) {
@@ -30,7 +30,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        console.log("LEVEL");
+        console.log("GAME");
 
         this.gameManager.spawnAssets(this);
 
