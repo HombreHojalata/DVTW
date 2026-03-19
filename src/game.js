@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import Boot from './boot.js';
+console.log("boot");
 /*import IntroScene from './scene/introScene.js';
 import ConfigurationScene from './scene/configurationScene.js';
 import GameScene from './scene/gameScene.js';
