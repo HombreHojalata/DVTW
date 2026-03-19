@@ -6,8 +6,9 @@ import DistrictScene from './scene/districtScene.js';
 import BlackMarketScene from './scene/blackMarketScene.js';
 import FinishScene from './scene/finishScene.js';
 
+console.log("antes");
 import Phaser from 'phaser';
-
+console.log("despues");
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
  * la clase Game de Phaser, encargada de crear e iniciar el juego.
