@@ -1,6 +1,5 @@
 console.log("111");
 import Phaser from 'phaser';
-import IntroScene from './scene/introScene.js';
 console.log("boot");
 
 import Boot from './boot.js';
