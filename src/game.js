@@ -1,8 +1,10 @@
+console.log("111");
 import Phaser from 'phaser';
-
-import Boot from './boot.js';
+import IntroScene from './scene/introScene.js';
 console.log("boot");
-/*import IntroScene from './scene/introScene.js';
+
+/*import Boot from './boot.js';
+import IntroScene from './scene/introScene.js';
 import ConfigurationScene from './scene/configurationScene.js';
 import GameScene from './scene/gameScene.js';
 import DistrictScene from './scene/districtScene.js';
@@ -27,7 +29,7 @@ let config = {
         createContainer: true
     },
     //scene: [Boot, IntroScene, ConfigurationScene, GameScene, DistrictScene, BlackMarketScene, FinishScene],
-    scene: [Boot],
+    scene: [IntroScene],
 
     physics: {
         default: 'arcade',
