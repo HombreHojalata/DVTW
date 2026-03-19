@@ -10,13 +10,12 @@ import Phaser from 'phaser';
  */
 export default class IntroScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'intro' });
+        super({ key: 'introScene' });
     }
 
     create() {
         console.log("INTRO");
-        this.add.text(0, 0, "Intro");
-        this.add.image(0, 0, 'inicio').setOrigin(0);
+        this.add.image(0, 0, 'init').setOrigin(0);
 
         const createMenuButton = (x, y, text, callback) => {
             const width = 300;
@@ -68,12 +67,11 @@ export default class IntroScene extends Phaser.Scene {
         };
 
         createMenuButton(1120, 470, 'Nueva Partida', () => {
-            this.scene.start('level');
+            this.scene.start('gameScene');
         });
 
         createMenuButton(1120, 560, 'Opciones', () => {
-            this.scene.remove('inicio');
-            this.scene.start('configuration');
+            this.scene.start('configurationScene');
         });
     }
 }

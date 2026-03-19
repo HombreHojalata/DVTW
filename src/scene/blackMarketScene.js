@@ -3,7 +3,7 @@ import { PRODUCTS } from '../market/products.js';
 
 export default class BlackMarketScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'blackmarket' });
+        super({ key: 'blackMarketScene' });
     }
 
     init(data) {

@@ -33,28 +33,12 @@ export default class DistrictScene extends Phaser.Scene {
         //DISTRICT NAME
         this.districtNameText = this.spawnNameText(offsetX,offsetY);
         this.districtDescriptionText = this.spawnDescText(newWidth,offsetX,offsetY);
+        
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth,offsetX,offsetY);
-        this.taxesText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*15, this.district.getTaxesPercentage(), {
-            fontSize: '20px',
-            color: '#ffffff'
-        });
-        this.spawnTaxesButton(newWidth,offsetX,newHeight,offsetY);
-        this.securityText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*15, this.district.getSecurityPercentage(), {
-            fontSize: '20px',
-            color: '#ffffff'
-        });
-        this.spawnSecurityButton(newWidth,offsetX,newHeight,offsetY);
-        this.workScheduleText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*8, this.district.getWorkSchedulePercentage(), {
-            fontSize: '20px',
-            color: '#ffffff'
-        });
-        this.spawnWorkScheduleButton(newWidth,offsetX,newHeight,offsetY);
-        this.cleaningText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*8, this.district.getCleaningPercentage(), {
-            fontSize: '20px',
-            color: '#ffffff'
-        });
-        this.spawnCleaningButton(newWidth,offsetX,newHeight,offsetY);
+        this.storePositionX = this.spawnBuiltList(newWidth,offsetX,newHeight);
+        this.storeButton = this.spawnStoreButton(newHeight,this.storePositionX);
+        this.spawnAllFooter(newWidth,offsetX,newHeight,offsetY);
     }
     spawnTemplate(newWidth,newHeight,offsetX,offsetY){return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);}
     spawnNameText(offsetX,offsetY){
@@ -91,6 +75,55 @@ export default class DistrictScene extends Phaser.Scene {
         });
         return this.closeButton;
     }
+
+    // SPAWN BUILTS IMAGEN AND BUY BUILDING
+    spawnBuiltList(newWidth,offsetX,newHeight){
+        this.builtList = this.district.getBuildingsBuilt();
+        for (let i = 0; i < this.builtList.length; i++) {
+            const building = this.builtList[i];
+            const x = newWidth - offsetX*(9-i);
+            const y = newHeight - newHeight/2 ;
+            this.add.image(x, y, building.getBuildingPNG()).setOrigin(0);
+        }
+        return newWidth - offsetX*(9-this.builtList.length);
+    }  
+
+    //NEED TO BE FINISH
+    spawnStoreButton(newHeight,positionX){
+        this.storeButton = this.add.image(positionX,newHeight - newHeight/2,'closeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
+        this.storeButton.on('pointerover', () => {this.storeButton.setScale(1.1);});
+        this.storeButton.on('pointerout', () => {this.storeButton.setScale(1);});
+        this.storeButton.on('pointerup', () => {
+            this.scene.pause('districtScene');
+            this.scene.launch('districtStoreScene', { district: this });
+            this.scene.bringToTop('districtStoreScene');
+        });
+        return this.storeButton;
+    }
+    
+    // FOOTER
+    spawnAllFooter(newWidth,offsetX,newHeight,offsetY){
+        this.taxesText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*15, this.district.getTaxesPercentage(), {
+            fontSize: '20px',
+            color: '#ffffff'
+        });
+        this.spawnTaxesButton(newWidth,offsetX,newHeight,offsetY);
+        this.securityText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*15, this.district.getSecurityPercentage(), {
+            fontSize: '20px',
+            color: '#ffffff'
+        });
+        this.spawnSecurityButton(newWidth,offsetX,newHeight,offsetY);
+        this.workScheduleText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*8, this.district.getWorkSchedulePercentage(), {
+            fontSize: '20px',
+            color: '#ffffff'
+        });
+        this.spawnWorkScheduleButton(newWidth,offsetX,newHeight,offsetY);
+        this.cleaningText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*8, this.district.getCleaningPercentage(), {
+            fontSize: '20px',
+            color: '#ffffff'
+        });
+        this.spawnCleaningButton(newWidth,offsetX,newHeight,offsetY);
+    }
     createButton(x, y, text, colorNormal, colorHover, colorPress, callback) {
         const container = this.add.container(x, y);
         const background = this.add.rectangle(0, 0, 100, 50, colorNormal).setStrokeStyle(2, 0xffffff);
@@ -122,12 +155,6 @@ export default class DistrictScene extends Phaser.Scene {
             if (callback) callback();
         });
         return container;
-    }
-    updatePercentageText(){
-        this.taxesText.setText(this.district.getTaxesPercentage());
-        this.securityText.setText(this.district.getSecurityPercentage());
-        this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
-        this.cleaningText.setText(this.district.getCleaningPercentage());
     }
     spawnTaxesButton(newWidth,offsetX,newHeight,offsetY){
         this.botonAumentar = this.createButton(
@@ -212,5 +239,11 @@ export default class DistrictScene extends Phaser.Scene {
             0x009900,  // color press
             () =>  {this.district.addCleaningPercentage(-5);this.updatePercentageText()}
         );
+    }
+    updatePercentageText(){
+        this.taxesText.setText(this.district.getTaxesPercentage());
+        this.securityText.setText(this.district.getSecurityPercentage());
+        this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
+        this.cleaningText.setText(this.district.getCleaningPercentage());
     }
 }

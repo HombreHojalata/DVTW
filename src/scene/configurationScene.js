@@ -10,7 +10,7 @@ import Phaser from 'phaser';
  */
 export default class ConfigurationScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'configuration' });
+        super({ key: 'configurationScene' });
     }
 
     init(data) {
@@ -125,12 +125,12 @@ export default class ConfigurationScene extends Phaser.Scene {
 
         backBtn.rect.on('pointerup', () => {
             if (this.returnScene) this.scene.start(this.returnScene);
-            else this.scene.start('intro');
+            else this.scene.start('introScene');
         });
 
         saveBtn.rect.on('pointerup', () => {
             if (this.returnScene) this.scene.start(this.returnScene);
-            else this.scene.start('intro');
+            else this.scene.start('introScene');
         });
 
         this.add.text(width / 2, height - 28, 'QUACKINGTON DC — INTERNAL PRESIDENTIAL SETTINGS', {
