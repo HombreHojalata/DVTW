@@ -1,32 +1,33 @@
 {
-    "name": "plantillaphaser",
+    "name": "Lame Duck",
     "version": "1.0.0",
     "main": "./main.js",
-    "description": "Plantilla para juegos con Phaser",
+    "description": "Jueguito de pato",
     "scripts": {
         "build:win": "npm run electron && npx electron-builder --win --config",
         "build:mac": "npm run electron && npx electron-builder --mac --config",
         "build:linux": "npm run electron && npx electron-builder --linux --config",
         "electron": "npx electron-vite build",
-        "start": "npm i && npx vite",
-        "build": "npm i && npx vite build --outDir docs/"
+        "start": "npx vite",
+        "build": "npx vite build --outDir docs/"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/cleongh/plantillaphaser.git"
+        "url": "git+https://https://github.com/HombreHojalata/DVTW/"
     },
     "keywords": [],
-    "author": "Carlos León <cleon@ucm.es>",
+    "author": "Pedro Tobalina",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/cleongh/plantillaphaser/issues"
+        "url": "https://https://github.com/HombreHojalata/DVTW/"
     },
-    "homepage": "https://github.com/cleongh/plantillaphaser#readme",
+    "homepage": "https://https://github.com/HombreHojalata/DVTW/blob/main/README.md",
     "type": "module",
     "devDependencies": {
         "electron": "^34.0.1",
         "electron-builder": "^25.1.8",
         "electron-vite": "^2.3.0",
+        "eslint": "^10.0.2",
         "rollup": "^4.32.1",
         "vite": "5.4.6"
     },
