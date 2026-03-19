@@ -32,7 +32,7 @@ export default class District {
         int population;
         int populationIncrease;
         int satisfaction;
-        List<Building> district_building;
+        List<String> district_building;
         List<Building> buildings;
         int space_building;
         boolean special_building;
@@ -118,9 +118,7 @@ export default class District {
     getSpaceBuilding() {return this.space_building;}
     isSpecialBuildingBuilt() {return this.special_building;}
     createBuildings(buildings){
-        for(auto b ; buildings){
-
-        }
+        
     }
     addBuilding(building) {
         if (this.buildings.includes(building)) {
