@@ -13,7 +13,7 @@ export default class District {
         this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
         this.district_building = district_building;                                                             // District building that can be built in the district
-        this.buildings = this.createBuildings(buildings);                                                                             // List of buildings built in the district
+        this.buildings = this.createBuildings(buildings);                                                       // List of buildings built in the district
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
         this.special_building = special_building;                                                               // Special building that can be built in the district
         this.oppositors = opositors;                                                                            // Opositors that can be found in the district
@@ -32,7 +32,7 @@ export default class District {
         int population;
         int populationIncrease;
         int satisfaction;
-        List<String> district_building;
+        List<Building> district_building;
         List<Building> buildings;
         int space_building;
         boolean special_building;
@@ -118,7 +118,20 @@ export default class District {
     getSpaceBuilding() {return this.space_building;}
     isSpecialBuildingBuilt() {return this.special_building;}
     createBuildings(buildings){
-        
+        //falta una lista de building
+        //TODO CREATE OBJECT AND PUSHBACK LIST
+        for(let i = 0 ; i < buildings.length; i++){
+            if(buildings[i] === "CINEMA"){
+
+            }else if(buildings[i] === "COMERCIAL"){
+            
+            }else if(buildings[i] === "FACTORY"){
+            }else if(buildings[i] === "HOSPITAL"){
+            }else if(buildings[i] === "HOTEL"){
+            }else if(buildings[i] === "HOUSE"){
+            }else if(buildings[i] === "PARK"){
+            }
+        }
     }
     addBuilding(building) {
         if (this.buildings.includes(building)) {

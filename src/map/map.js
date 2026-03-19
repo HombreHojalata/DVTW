@@ -15,26 +15,25 @@ export default class Map {
     createList(){
         const BORRASCAL = new DistrictBorrascal(
             "BORRASCAL", "Any", 1000, 10, 100,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 4,
-            //MAL, es boolean
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOTEL"], 4,
             false, 10,
             'districtBorrascal', 'districtBorrascalSpecial', 0, 0
         );
         const EL_NIDO = new DistrictElNido(
             "EL_NIDO", "Any", 500, 8, 40,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 4,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOSPITAL"], 4,
             false, 10,
             'districtElNido', 'districtElNidoSpecial', 0, 0
         );
         const GUINEA = new DistrictGuinea(
             "GUINEA", "Any", 700, 14, 30,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 4,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["COMERCIAL"], 4,
             false, 10,
             'districtGuinea', 'districtGuineaSpecial', 0, 0
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
             "NUEVA_PRADERA", "Any", 1400, 18, 5,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 4,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["CINEMA"], 4,
             false, 10, 
             'districtNuevaPradera', 'districtNuevaPraderaSpecial', 0, 0
         )
@@ -46,7 +45,7 @@ export default class Map {
         );
         const SOMOSAGUA = new DistrictSomosagua(
             "SOMOSAGUA", "Any", 800, 12, 10,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 4,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["FACTORY"], 4,
             false, 10,
             'districtSomosagua', 'districtSomosaguaSpecial', 0, 0
         );
