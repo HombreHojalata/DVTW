@@ -1,5 +1,5 @@
 console.log("111");
-import Phaser from "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.esm.js";
+import Phaser from 'phaser';
 console.log("boot");
 
 import Boot from './boot.js';
