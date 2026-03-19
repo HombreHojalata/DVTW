@@ -4,8 +4,8 @@ import Mission from './mission.js';
 
 
 export default class missionManager{
-    constructor(){
-        
+    constructor(scene){
+        this.scene = scene;
         this.regularMissions = [];
         this.upMoneyMissions = [];
         this.upPopularityMissions = [];
@@ -99,168 +99,155 @@ export default class missionManager{
     async loadMissions(){
 
 
-        const response = await fetch("/DVTW/public/files/regularMissions.json");
-        const missionsData = await response.json();
-        missionsData.forEach(m => {
-            const mission = new Mission(
-                m.name,
-                m.description,
-                m.event,
-                m.corrupt,
-                m.minigame
+        const regularMissionData = this.scene.cache.json.get('regularMissions');
+
+        regularMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
+
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
             );
-
-            m.options.forEach(o => {
-                mission.addOption(
-                    o.probability,
-                    o.description,
-                    o.energy,
-                    o.money,
-                    o.corruption,
-                    o.popularity
-                );
-            });
-
-            this.regularMissions.push(mission);
         });
 
+        this.regularMissions.push(mission);
+    });
 
-        console.log("Number of missions:", this.regularMissions.length);
+    const upMoneyMissionData = this.scene.cache.json.get('upMoney');
 
-        this.regularMissions.forEach(m => {
-            console.log("----");
-            console.log("Mission:", m.name);
-            console.log("Description:", m.description);
+        upMoneyMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
 
-            m.options.forEach(o => {
-                console.log("Option:", o.description, "Probability:", o.probability);
-            });
-        });
-
-
-        const responseUM = await fetch("DVTW/files/upMoney.json");
-        const missionsDataUM = await responseUM.json();
-        missionsDataUM.forEach(m => {
-            const mission = new Mission(
-                m.name,
-                m.description,
-                m.event,
-                m.corrupt,
-                m.minigame
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
             );
-
-            m.options.forEach(o => {
-                mission.addOption(
-                    o.probability,
-                    o.description,
-                    o.energy,
-                    o.money,
-                    o.corruption,
-                    o.popularity
-                );
-            });
-
-            this.upMoneyMissions.push(mission);
         });
 
-        const responseUP = await fetch("DVTW/files/upPopularity.json");
-        const missionsDataUP = await responseUP.json();
-        missionsDataUP.forEach(m => {
-            const mission = new Mission(
-                m.name,
-                m.description,
-                m.event,
-                m.corrupt,
-                m.minigame
+        this.upMoneyMissions.push(mission);
+    });
+
+    const upPopularityMissionData = this.scene.cache.json.get('upPopularity');
+
+        upPopularityMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
+
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
             );
-
-            m.options.forEach(o => {
-                mission.addOption(
-                    o.probability,
-                    o.description,
-                    o.energy,
-                    o.money,
-                    o.corruption,
-                    o.popularity
-                );
-            });
-
-            this.upPopularityMissions.push(mission);
         });
 
-        const responseDP = await fetch("DVTW/files/downPopularity.json");
-        const missionsDataDP = await responseDP.json();
-        missionsDataDP.forEach(m => {
-            const mission = new Mission(
-                m.name,
-                m.description,
-                m.event,
-                m.corrupt,
-                m.minigame
+        this.upPopularityMissions.push(mission);
+    });
+
+    const downCorruptionMissionData = this.scene.cache.json.get('downCorruption');
+
+        downCorruptionMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
+
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
             );
-
-            m.options.forEach(o => {
-                mission.addOption(
-                    o.probability,
-                    o.description,
-                    o.energy,
-                    o.money,
-                    o.corruption,
-                    o.popularity
-                );
-            });
-
-            this.downPopularityMissions.push(mission);
         });
 
-        const responseDM = await fetch("DVTW/files/downMoney.json");
-        const missionsDataDM = await responseDM.json();
-        missionsDataDM.forEach(m => {
-            const mission = new Mission(
-                m.name,
-                m.description,
-                m.event,
-                m.corrupt,
-                m.minigame
+        this.downCorruptionMissions.push(mission);
+    });
+
+    const downPopularityMissionData = this.scene.cache.json.get('downPopularity');
+
+        downPopularityMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
+
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
             );
-
-            m.options.forEach(o => {
-                mission.addOption(
-                    o.probability,
-                    o.description,
-                    o.energy,
-                    o.money,
-                    o.corruption,
-                    o.popularity
-                );
-            });
-
-            this.downMoneyMissions.push(mission);
         });
 
-        const responseDC = await fetch("DVTW/files/downCorruption.json");
-        const missionsDataDC = await responseDC.json();
-        missionsDataDC.forEach(m => {
-            const mission = new Mission(
-                m.name,
-                m.description,
-                m.event,
-                m.corrupt,
-                m.minigame
+        this.downPopularityMissions.push(mission);
+    });
+    const downMoneyMissionData = this.scene.cache.json.get('downMoney');
+
+        downMoneyMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
+
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
             );
-
-            m.options.forEach(o => {
-                mission.addOption(
-                    o.probability,
-                    o.description,
-                    o.energy,
-                    o.money,
-                    o.corruption,
-                    o.popularity
-                );
-            });
-
-            this.downCorruptionMissions.push(mission);
         });
+
+        this.downMoneyMissions.push(mission);
+    });
+
+        
     }
 }

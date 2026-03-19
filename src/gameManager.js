@@ -5,11 +5,12 @@ import Map from './map/map.js'
 
 
 export default class gameManager{
-    constructor(scene){
+    constructor(scene,game){
         this.scene = scene;
+        this.game = game;
         this.player = new Player(1000000, 100, 20, 80 , 'presidente' , 'presidente');
         this.day=new Day(0);
-        this.missionManager = new MissionManager();
+        this.missionManager = new MissionManager(scene);
         this.map = new Map('map',null,null);
     }
     getPlayer(){return this.player};
