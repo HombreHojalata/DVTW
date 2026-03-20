@@ -57,8 +57,8 @@ export default class DistrictScene extends Phaser.Scene {
     spawnScene(newWidth,newHeight,offsetX,offsetY){
         const list = this.district.getSceneList();
         const randomIndex = Math.floor(Math.random() * list.length);
-        this.scene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]);
-        return this.scene;
+        this.districtScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]);
+        return this.districtScene;
     }
     // SPAWN BUILTS IMAGE
     spawnBuiltList(newWidth, offsetX, newHeight) {
@@ -94,14 +94,14 @@ export default class DistrictScene extends Phaser.Scene {
         this.storeButton.on('pointerout', () => {this.storeButton.setScale(1);});
         this.storeButton.on('pointerup', () => {
             this.scene.pause('districtScene');
-            this.scene.launch('districtStoreScene', { district: this });
-            this.scene.bringToTop('districtStoreScene');
+            this.scene.launch('districtStoreScene', { district: this.district });
+            //this.scene.bringToTop('districtStoreScene');
         });
         return this.storeButton;
     }
     spawnCloseButton(newWidth,offsetX,offsetY){
         this.closeButton = this.add.image(offsetX + newWidth - 40,offsetY + 120,'closeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
-        this.closeButton.on('pointerover', () => {this.closeButtons.setScale(1.1);});
+        this.closeButton.on('pointerover', () => {this.closeButton.setScale(1.1);});
         this.closeButton.on('pointerout', () => {this.closeButton.setScale(1);});
         this.closeButton.on('pointerup', () => {
             this.scene.stop();

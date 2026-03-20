@@ -5,6 +5,7 @@ import IntroScene from './scene/introScene.js';
 import ConfigurationScene from './scene/configurationScene.js';
 import GameScene from './scene/gameScene.js';
 import DistrictScene from './scene/districtScene.js';
+import DistrictStoreScene from './scene/districtStoreScene.js';
 import BlackMarketScene from './scene/blackMarketScene.js';
 import FinishScene from './scene/finishScene.js';
 
@@ -25,7 +26,7 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, IntroScene, ConfigurationScene, GameScene, DistrictScene, BlackMarketScene, FinishScene],
+    scene: [Boot, IntroScene, ConfigurationScene, GameScene, DistrictScene, DistrictStoreScene, BlackMarketScene, FinishScene],
     physics: {
         default: 'arcade',
         arcade: {
