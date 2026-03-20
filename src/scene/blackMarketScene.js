@@ -58,7 +58,7 @@ export default class BlackMarketScene extends Phaser.Scene {
         }).setOrigin(0.5).setInteractive({ useHandCursor: true }).setDepth(10);
 
         backButton.on('pointerup', () => {
-            this.scene.resume('level');
+            this.scene.resume('gameScene');
             this.scene.stop();
         });
     }

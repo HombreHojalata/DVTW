@@ -8,4 +8,5 @@ export default class Building {
     }
 
     getBuildingPNG(){return this.PNGBuilding;}
+    getBuildingInfo(){return `Este edificio genera:\nBeneficio - ${this.beneficio}, Satisfaccion - ${this.satisfaccion}, Poblacion - ${this.poblacion} `;}
 }

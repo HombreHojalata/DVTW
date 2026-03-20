@@ -1,13 +1,5 @@
 import Phaser from 'phaser';
 
-/**
- * Escena principal del juego. La escena se compone de una serie de plataformas 
- * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
- * El juego comienza generando aleatoriamente una base sobre la que generar una estrella. 
- * @abstract Cada vez que el jugador recoge la estrella, aparece una nueva en otra base.
- * El juego termina cuando el jugador ha recogido 10 estrellas.
- * @extends Phaser.Scene
- */
 export default class DistrictScene extends Phaser.Scene {
     constructor() {
         super({ key: 'districtScene' });
@@ -20,20 +12,17 @@ export default class DistrictScene extends Phaser.Scene {
     create() {
         const baseWidth = this.scale.width;
         const baseHeight = this.scale.height;
-        this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
-
         const newWidth = baseWidth * 0.9;
         const newHeight = baseHeight * 0.85;
-
         const offsetX = (baseWidth - newWidth) / 2;
         const offsetY = (baseHeight - newHeight) / 2 - 50;
-        console.log(this.district.getName());
+        this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
         //DISTRICT NAME
         this.districtNameText = this.spawnNameText(offsetX,offsetY);
         this.districtDescriptionText = this.spawnDescText(newWidth,offsetX,offsetY);
-        
+        this.districtScene = this.spawnScene(newWidth,newHeight,offsetX,offsetY);
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth,offsetX,offsetY);
         this.storePositionX = this.spawnBuiltList(newWidth,offsetX,newHeight);
@@ -65,32 +54,42 @@ export default class DistrictScene extends Phaser.Scene {
         }); 
         return descText;
     }  
-    spawnCloseButton(newWidth,offsetX,offsetY){
-        this.closeButton = this.add.image(offsetX + newWidth - 40,offsetY + 120,'closeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
-        this.closeButton.on('pointerover', () => {this.closeButtons.setScale(1.1);});
-        this.closeButton.on('pointerout', () => {this.closeButton.setScale(1);});
-        this.closeButton.on('pointerup', () => {
-            this.scene.stop();
-            this.scene.resume('level');
-        });
-        return this.closeButton;
+    spawnScene(newWidth,newHeight,offsetX,offsetY){
+        const list = this.district.getSceneList();
+        const randomIndex = Math.floor(Math.random() * list.length);
+        this.scene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]);
+        return this.scene;
     }
-
-    // SPAWN BUILTS IMAGEN AND BUY BUILDING
-    spawnBuiltList(newWidth,offsetX,newHeight){
+    // SPAWN BUILTS IMAGE
+    spawnBuiltList(newWidth, offsetX, newHeight) {
         this.builtList = this.district.getBuildingsBuilt();
+
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '14px',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
+
         for (let i = 0; i < this.builtList.length; i++) {
             const building = this.builtList[i];
-            const x = newWidth - offsetX*(9-i);
-            const y = newHeight - newHeight/2 ;
-            this.add.image(x, y, building.getBuildingPNG()).setOrigin(0);
+            const x = newWidth - offsetX * (9 - i);
+            const y = newHeight - newHeight / 2;
+            const img = this.add.image(x, y, building.getBuildingPNG()).setOrigin(0).setInteractive(); 
+            img.on('pointerover', (pointer) => {
+                tooltip.setText(building.getBuildingInfo());
+                tooltip.setPosition(pointer.x + 10, pointer.y + 10);
+                tooltip.setVisible(true);
+                tooltip.setDepth(100);
+            });
+            img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
+            img.on('pointerout', () => {tooltip.setVisible(false);});
         }
-        return newWidth - offsetX*(9-this.builtList.length);
-    }  
-
-    //NEED TO BE FINISH
-    spawnStoreButton(newHeight,positionX){
-        this.storeButton = this.add.image(positionX,newHeight - newHeight/2,'closeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
+        return newWidth - offsetX * (9 - this.builtList.length - 1);
+    }
+    // BUTTON
+    spawnStoreButton(newHeight,positionX){ //NEED TO BE FINISH
+        this.storeButton = this.add.image(positionX,newHeight - newHeight/2,'storeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
         this.storeButton.on('pointerover', () => {this.storeButton.setScale(1.1);});
         this.storeButton.on('pointerout', () => {this.storeButton.setScale(1);});
         this.storeButton.on('pointerup', () => {
@@ -100,7 +99,16 @@ export default class DistrictScene extends Phaser.Scene {
         });
         return this.storeButton;
     }
-    
+    spawnCloseButton(newWidth,offsetX,offsetY){
+        this.closeButton = this.add.image(offsetX + newWidth - 40,offsetY + 120,'closeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
+        this.closeButton.on('pointerover', () => {this.closeButtons.setScale(1.1);});
+        this.closeButton.on('pointerout', () => {this.closeButton.setScale(1);});
+        this.closeButton.on('pointerup', () => {
+            this.scene.stop();
+            this.scene.resume('gameScene');
+        });
+        return this.closeButton;
+    }
     // FOOTER
     spawnAllFooter(newWidth,offsetX,newHeight,offsetY){
         this.taxesText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*15, this.district.getTaxesPercentage(), {

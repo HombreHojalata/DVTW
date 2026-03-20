@@ -20,12 +20,13 @@ export default class District {
         this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
         this.district_building = district_building;                                                             // District building that can be built in the district
-        this.building_list = this.createBuildings(buildings);                                                       // List of buildings built in the district
+        this.building_list = this.createBuildings(buildings);                                                   // List of buildings built in the district
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
         this.special_building = special_building;                                                               // Special building that can be built in the district
-        this.oppositors = opositors;                                                                            // Opositors that can be found in the district
+        this.opositors = opositors;                                                                             // Opositors that can be found in the district
         this.PNGwithOutSpecial = PNGwithOutSpecial;                                                             // PNG of the district without the special building
         this.PNGwithSpecial = PNGwithSpecial;                                                                   // PNG of the district with the special building         
+        this.scene_list = this.createSceneList();
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
         this.taxes = 50;                                                                                        // Percentage 0-100
@@ -53,6 +54,7 @@ export default class District {
         */
     
     }
+    // SCENES / IMAGES
     spawnDistrict(scene){
         const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
             .setOrigin(0)
@@ -68,15 +70,16 @@ export default class District {
         });
         return button;
     }
-
+    getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
+    getPNGwithSpecial() {return this.PNGwithSpecial;}
+    getSceneList() {return this.scene_list}
+    
     getName() {return this.name;}
     getDescription() {return this.desc;}
     getPopulationDensity() {return this.population;}
     getPopulationIncrease() {return this.populationIncrease;}
     getSatisfaction() {return this.satisfaction;}
-    getOpositors() {return this.oppositors;}
-    getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
-    getPNGwithSpecial() {return this.PNGwithSpecial;}
+    getOpositors() {return this.opositors;}
     getPosX() {return this.posX;}
     getPosY() {return this.posY;}
 

@@ -45,7 +45,7 @@ export default class Map {
         );
         const SOMOSAGUA = new DistrictSomosagua(
             "SOMOSAGUA", "Any", 800, 12, 10,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["FACTORY","FACTORY","FACTORY"], 4,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["FACTORY"], 4,
             false, 10,
             'districtSomosagua', 'districtSomosaguaSpecial', 0, 0
         );

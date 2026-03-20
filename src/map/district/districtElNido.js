@@ -6,4 +6,9 @@ export default class DistrictElNido extends District {
         super(name, desc, population, populationIncrease, satisfaction, district_building, buildings, space_building, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
+    createSceneList(){
+        const list = [];
+        list.push('districtElNidoScene1');
+        return list;
+    }
 };

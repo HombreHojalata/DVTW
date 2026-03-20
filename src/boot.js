@@ -5,34 +5,42 @@ import loadScene from '../assets/sprites/scenes/loadScene.png'          //NEED T
 
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
-import districtTemplate from '../assets/sprites/map/districtTemplate.png'
-import districtBorrascal from '../assets/sprites/map/districtBorrascal.png'
-import districtBorrascalSpecial from '../assets/sprites/map/districtBorrascalSpecial.png'
-import districtElNido from '../assets/sprites/map/districtElNido.png'
-import districtElNidoSpecial from '../assets/sprites/map/districtElNidoSpecial.png'
-import districtGuinea from '../assets/sprites/map/districtGuinea.png'
-import districtGuineaSpecial from '../assets/sprites/map/districtGuineaSpecial.png'
-import districtNuevaPradera from '../assets/sprites/map/districtNuevaPradera.png'
-import districtNuevaPraderaSpecial from '../assets/sprites/map/districtNuevaPraderaSpecial.png'
-import districtSahar from '../assets/sprites/map/districtSahar.png'
-import districtSaharSpecial from '../assets/sprites/map/districtSaharSpecial.png'
-import districtSomosagua from '../assets/sprites/map/districtSomosagua.png'
-import districtSomosaguaSpecial from '../assets/sprites/map/districtSomosaguaSpecial.png'
+// DISTRICT SCENE ASSETS
+import districtTemplate from '../assets/sprites/map/districtScenes/districtTemplate.png'
+import districtBorrascalScene1 from '../assets/sprites/map/districtScenes/districtBorrascalScene1.png'
+import districtElNidoScene1 from '../assets/sprites/map/districtScenes/districtElNidoScene1.png'
+import districtGuineaScene1 from '../assets/sprites/map/districtScenes/districtGuineaScene1.png'
+import districtNuevaPraderaScene1 from '../assets/sprites/map/districtScenes/districtNuevaPraderaScene1.png'
+import districtSaharScene1 from '../assets/sprites/map/districtScenes/districtSaharScene1.png'
+import districtSomosaguaScene1 from '../assets/sprites/map/districtScenes/districtSomosaguaScene1.png'
+// DISTRICT
+import districtBorrascal from '../assets/sprites/map/district/districtBorrascal.png'
+import districtBorrascalSpecial from '../assets/sprites/map/district/districtBorrascalSpecial.png'
+import districtElNido from '../assets/sprites/map/district/districtElNido.png'
+import districtElNidoSpecial from '../assets/sprites/map/district/districtElNidoSpecial.png'
+import districtGuinea from '../assets/sprites/map/district/districtGuinea.png'
+import districtGuineaSpecial from '../assets/sprites/map/district/districtGuineaSpecial.png'
+import districtNuevaPradera from '../assets/sprites/map/district/districtNuevaPradera.png'
+import districtNuevaPraderaSpecial from '../assets/sprites/map/district/districtNuevaPraderaSpecial.png'
+import districtSahar from '../assets/sprites/map/district/districtSahar.png'
+import districtSaharSpecial from '../assets/sprites/map/district/districtSaharSpecial.png'
+import districtSomosagua from '../assets/sprites/map/district/districtSomosagua.png'
+import districtSomosaguaSpecial from '../assets/sprites/map/district/districtSomosaguaSpecial.png'
 // BUILDING ASSETS
-import buildingCinema from '../assets/sprites/buildings/buildingCinema.png'
-import buildingComercialCenter from '../assets/sprites/buildings/buildingComercialCenter.png'
-import buildingFactory from '../assets/sprites/buildings/buildingFactory.png'
-import buildingHospital from '../assets/sprites/buildings/buildingHospital.png'
-import buildingHotel from '../assets/sprites/buildings/buildingHotel.png'
-import buildingHouse from '../assets/sprites/buildings/buildingHouse.png'
-import buildingPark from '../assets/sprites/buildings/buildingPark.png'
-import specialBuildingBorrascal from '../assets/sprites/buildings/specialBuildingBorrascal.png'
-import specialBuildingElNido from '../assets/sprites/buildings/specialBuildingElNido.png'
-import specialBuildingGuinea from '../assets/sprites/buildings/specialBuildingGuinea.png'
-import specialBuildingNuevaPradera from '../assets/sprites/buildings/specialBuildingNuevaPradera.png'
-import specialBuildingSahar from '../assets/sprites/buildings/specialBuildingSahar.png'
-import specialBuildingSomosagua from '../assets/sprites/buildings/specialBuildingSomosagua.png'
-import specialBuildingMafia from '../assets/sprites/buildings/specialBuildingMafia.png'
+import buildingCinema from '../assets/sprites/map/buildings/buildingCinema.png'
+import buildingComercialCenter from '../assets/sprites/map/buildings/buildingComercialCenter.png'
+import buildingFactory from '../assets/sprites/map/buildings/buildingFactory.png'
+import buildingHospital from '../assets/sprites/map/buildings/buildingHospital.png'
+import buildingHotel from '../assets/sprites/map/buildings/buildingHotel.png'
+import buildingHouse from '../assets/sprites/map/buildings/buildingHouse.png'
+import buildingPark from '../assets/sprites/map/buildings/buildingPark.png'
+import specialBuildingBorrascal from '../assets/sprites/map/buildings/specialBuildingBorrascal.png'
+import specialBuildingElNido from '../assets/sprites/map/buildings/specialBuildingElNido.png'
+import specialBuildingGuinea from '../assets/sprites/map/buildings/specialBuildingGuinea.png'
+import specialBuildingNuevaPradera from '../assets/sprites/map/buildings/specialBuildingNuevaPradera.png'
+import specialBuildingSahar from '../assets/sprites/map/buildings/specialBuildingSahar.png'
+import specialBuildingSomosagua from '../assets/sprites/map/buildings/specialBuildingSomosagua.png'
+import specialBuildingMafia from '../assets/sprites/map/buildings/specialBuildingMafia.png'
 
 // BLACK MARKET ASSETS
 import vendedor from '../assets/sprites/Vendedor.png' 
@@ -41,10 +49,10 @@ import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
 // ICONS        NEED TO BE REPLACED
 import closeIcon from '../assets/sprites/icons/closeIcon.png'                 
 import configurationIcon from '../assets/sprites/icons/configurationIcon.png'     //NEED TO BE REPLACE
+import storeIcon from '../assets/sprites/icons/storeIcon.png'                     //NEED TO BE REPLACE 
 
 //PROTOTYPE ASSETS, TO BE REPLACED
 import presidente from '../assets/sprites/presidente.png'                         //NEED TO BE REPLACE
-
 
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
@@ -83,8 +91,15 @@ export default class Boot extends Phaser.Scene {
     this.load.image('init', introScene);
     // MAP ASSETS
     this.load.image('map', map);
-    // DISTRICT ASSETS
+    // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);
+    this.load.image('districtBorrascalScene1', districtBorrascalScene1);
+    this.load.image('districtElNidoScene1', districtElNidoScene1);
+    this.load.image('districtGuineaScene1', districtGuineaScene1);
+    this.load.image('districtNuevaPraderaScene1', districtNuevaPraderaScene1);
+    this.load.image('districtSaharScene1', districtSaharScene1);
+    this.load.image('districtSomosaguaScene1', districtSomosaguaScene1);
+    // DISTRICT ASSETS
     this.load.image('districtBorrascal', districtBorrascal);
     this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);
@@ -117,6 +132,8 @@ export default class Boot extends Phaser.Scene {
     // ICONS ASSETS
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
+    this.load.image('storeIcon', storeIcon);
+    
     // PRESIDENTE ASSET
     this.load.image('presidente', presidente);
     //PROTOTYPE ASSETS, TO BE REPLACED

@@ -101,7 +101,7 @@ export default class footerUI {
                 this.scene.missionIcon.setVisible(false);
             }
 
-            this.scene.scene.launch('blackmarket', { page: 0 });
+            this.scene.scene.launch('blackMarketScene', { page: 0 });
             this.scene.scene.pause();
         });
     }
