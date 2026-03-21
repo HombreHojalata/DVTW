@@ -133,26 +133,27 @@ export default class District {
     createBuildings(buildings){
         const buildingList = [];
         for(let i = 0 ; i < buildings.length; i++){
-            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',10000,5000,5,0,0));
-            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',30000,20000,10,0,0));
-            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',50000,30000,-5,0,0));
-            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',60000,40000,5,0,20));
-            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',20000,10000,5,0,5));
-            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',5000,500,5,0,5));
-            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',10000,1000,15,0,0));
+            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINEMA",10000,5000,5,0,0));
+            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,20000,10,0,0));
+            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FACTORY",50000,30000,-5,0,0));
+            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,40000,5,0,20));
+            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,10000,5,0,5));
+            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOUSE",5000,500,5,0,5));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARK",10000,1000,15,0,0));
         }
         return buildingList;
     }
     addBuilding(building) {
         if (this.district_building.includes(building)) {
             if(this.building_list.length < this.space_building)
-                if(building === "CINEMA") building_list.push(new BuildingCinema('buildingCinema',10000,5000,5,0,0));
-                else if(building === "COMERCIAL") building_list.push(new BuildingComercialCenter('buildingComercialCenter',30000,20000,10,0,0));
-                else if(building === "FACTORY") building_list.push(new BuildingFactory('buildingFactory',50000,30000,-5,0,0));
-                else if(building === "HOSPITAL") building_list.push(new BuildingHospital('buildingHospital',60000,40000,5,0,20));
-                else if(building === "HOTEL") building_list.push(new BuildingHotel('buildingHotel',20000,10000,5,0,5));
-                else if(building === "HOUSE") building_list.push(new BuildingHouse('buildingHouse',5000,500,5,0,5));
-                else if(building === "PARK") building_list.push(new BuildingPark('buildingPark',10000,1000,15,0,0));
+                this.building_list.push(building);
+                //if(building === "CINEMA") building_list.push(new BuildingCinema('buildingCinema',"CINEMA",10000,5000,5,0,0));
+                //else if(building === "COMERCIAL") building_list.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,20000,10,0,0));
+                //else if(building === "FACTORY") building_list.push(new BuildingFactory('buildingFactory',"FACTORY",50000,30000,-5,0,0));
+                //else if(building === "HOSPITAL") building_list.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,40000,5,0,20));
+                //else if(building === "HOTEL") building_list.push(new BuildingHotel('buildingHotel',"HOTEL",20000,10000,5,0,5));
+                //else if(building === "HOUSE") building_list.push(new BuildingHouse('buildingHouse',"HOUSE",5000,500,5,0,5));
+                //else if(building === "PARK") building_list.push(new BuildingPark('buildingPark',"PARK",10000,1000,15,0,0));
             else{
                 console.log("You can't add more buildings. No more space in the district.");
                 throw new Error("No more space in the district.");
@@ -164,9 +165,11 @@ export default class District {
     }
     //TODO
     addSpecialBuilding(building) {
-        if (!this.is_special_built && this.special_building === building) {
-            if(this.district_building.length < this.space_building)
-            this.district_building.push(building); 
+        if (!this.is_special_built && this.special_building === building.getName()) {
+            if(this.building_list.length < this.space_building){
+                this.building_list.push(building); 
+                this.is_special_built = true;
+            }
             else{
                 console.log("You can't add more buildings. No more space in the district.");
                 throw new Error("No more space in the district.");

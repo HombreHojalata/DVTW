@@ -17,6 +17,9 @@ export default class DistrictScene extends Phaser.Scene {
         const offsetX = (baseWidth - newWidth) / 2;
         const offsetY = (baseHeight - newHeight) / 2 - 50;
         this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
+        //PLAYER INFO
+        this.player = this.registry.get('gameManager').getPlayer();
+        this.playerMoney = this.add.text(200,700,`Dinero - ${this.player.getMoney()}$ `);        // STILL NEED AN ASSET FOR OTHER INFO
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
         //DISTRICT NAME
@@ -89,13 +92,28 @@ export default class DistrictScene extends Phaser.Scene {
     }
     // BUTTON
     spawnStoreButton(newHeight,positionX){ //NEED TO BE FINISH
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '14px',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
         this.storeButton = this.add.image(positionX,newHeight - newHeight/2,'storeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
-        this.storeButton.on('pointerover', () => {this.storeButton.setScale(1.1);});
-        this.storeButton.on('pointerout', () => {this.storeButton.setScale(1);});
+        this.storeButton.on('pointerover', (pointer) => {
+            tooltip.setText('Dale al boton si quieres ir al mercado de EDIFICIOS');
+            tooltip.setPosition(pointer.x + 15, pointer.y + 35);
+            tooltip.setVisible(true);
+            tooltip.setDepth(100);
+            this.storeButton.setScale(1.1);
+        });
+        this.storeButton.on('pointerout', () => {
+            tooltip.setVisible(false);
+            this.storeButton.setScale(1);
+        });
         this.storeButton.on('pointerup', () => {
+            tooltip.setVisible(false);
             this.scene.pause('districtScene');
             this.scene.launch('districtStoreScene', { district: this.district });
-            //this.scene.bringToTop('districtStoreScene');
         });
         return this.storeButton;
     }
@@ -132,120 +150,141 @@ export default class DistrictScene extends Phaser.Scene {
         });
         this.spawnCleaningButton(newWidth,offsetX,newHeight,offsetY);
     }
-    createButton(x, y, text, colorNormal, colorHover, colorPress, callback) {
-        const container = this.add.container(x, y);
-        const background = this.add.rectangle(0, 0, 100, 50, colorNormal).setStrokeStyle(2, 0xffffff);
-        const textoBoton = this.add.text(0, 0, text, {
-            fontSize: '20px',
-            fontFamily: 'Arial Black',
-            color: '#ffffff'
-        }).setOrigin(0.5);
-        container.add([background, textoBoton]);
-        container.setSize(100, 50);
-        container.setInteractive({ useHandCursor: true });
-        container.on('pointerover', () => {
-            container.setScale(1.1);
-            background.fillColor = colorHover;
+    createButton(x, y, image, swapImage, callback) {
+        const button = this.add.image(x, y, image).setScale(1);
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '14px',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
+        button.setInteractive({ useHandCursor: true });
+        button.on('pointerover', (pointer) => {
+            tooltip.setText('Darle al boton cuesta 5000$');
+            tooltip.setPosition(pointer.x + 15, pointer.y + 35);
+            tooltip.setVisible(true);
+            tooltip.setDepth(100);
+            button.setScale(1.1);
+            button.setTexture(swapImage);
         });
-        container.on('pointerout', () => {
-            container.setScale(1);
-            background.fillColor = colorNormal;
+        button.on('pointerout', () => {
+            tooltip.setVisible(false);
+            button.setScale(1); 
+            button.setTexture(image);
         });
-        
-        container.on('pointerdown', () => {
-            container.setScale(0.95);
-            background.fillColor = colorPress;
-        });
-        
-        container.on('pointerup', () => {
-            container.setScale(1);
-            background.fillColor = colorNormal;
+        button.on('pointerdown', () => {button.setScale(1); button.setTexture(image);});
+        button.on('pointerup', () => {
+            button.setScale(1);
+            button.setTexture(swapImage);
             if (callback) callback();
         });
-        return container;
+        return button;
     }
     spawnTaxesButton(newWidth,offsetX,newHeight,offsetY){
         this.botonAumentar = this.createButton(
             newWidth - offsetX*7, 
             newHeight - offsetY*15, 
-            'Aumentar', 
-            0xff0000,  // color normal
-            0xcc0000,  // color hover
-            0x990000,  // color press
-            () => {this.district.addTaxesPercentage(5);this.updatePercentageText();}
+            'increaseIcon',
+            'increaseSelectIcon',
+            () => {
+                this.district.addTaxesPercentage(5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
-        
         this.botonReducir = this.createButton(
             newWidth - offsetX*6, 
             newHeight - offsetY*15, 
-            'Reducir', 
-            0x00ff00,  // color normal
-            0x00cc00,  // color hover
-            0x009900,  // color press
-            () =>  {this.district.addTaxesPercentage(-5);this.updatePercentageText();}
+            'decreaseIcon', 
+            'decreaseSelectIcon',
+            () =>  {
+                this.district.addTaxesPercentage(-5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
     }
     spawnSecurityButton(newWidth,offsetX,newHeight,offsetY){
         this.botonAumentar = this.createButton(
             newWidth-offsetX*2, 
             newHeight - offsetY*15, 
-            'Aumentar', 
-            0xff0000,  // color normal
-            0xcc0000,  // color hover
-            0x990000,  // color press
-            () =>  {this.district.addSecurityPercentage(5);this.updatePercentageText();}
+            'increaseIcon',
+            'increaseSelectIcon',
+            () => {
+                this.district.addTaxesPercentage(5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
         
         this.botonReducir = this.createButton(
             newWidth-offsetX, 
             newHeight - offsetY*15, 
-            'Reducir', 
-            0x00ff00,  // color normal
-            0x00cc00,  // color hover
-            0x009900,  // color press
-            () =>  {this.district.addSecurityPercentage(-5);this.updatePercentageText()}
+            'decreaseIcon', 
+            'decreaseSelectIcon',
+            () =>  {
+                this.district.addTaxesPercentage(-5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
     }
     spawnWorkScheduleButton(newWidth,offsetX,newHeight,offsetY){
         this.botonAumentar = this.createButton(
             newWidth - offsetX*7, 
             newHeight - offsetY*8, 
-            'Aumentar', 
-            0xff0000,  // color normal
-            0xcc0000,  // color hover
-            0x990000,  // color press
-            () =>  {this.district.addWorkSchedulePercentage(5);this.updatePercentageText()}
+            'increaseIcon',
+            'increaseSelectIcon',
+            () => {
+                this.district.addTaxesPercentage(5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
         
         this.botonReducir = this.createButton(
             newWidth - offsetX*6, 
             newHeight - offsetY*8, 
-            'Reducir', 
-            0x00ff00,  // color normal
-            0x00cc00,  // color hover
-            0x009900,  // color press
-            () =>  {this.district.addWorkSchedulePercentage(-5);this.updatePercentageText()}
+            'decreaseIcon', 
+            'decreaseSelectIcon',
+            () =>  {
+                this.district.addTaxesPercentage(-5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
     }
     spawnCleaningButton(newWidth,offsetX,newHeight,offsetY){
         this.botonAumentar = this.createButton(
             newWidth-offsetX*2, 
             newHeight - offsetY*8, 
-            'Aumentar', 
-            0xff0000,  // color normal
-            0xcc0000,  // color hover
-            0x990000,  // color press
-            () =>  {this.district.addCleaningPercentage(5);this.updatePercentageText()}
+            'increaseIcon',
+            'increaseSelectIcon',
+            () => {
+                this.district.addTaxesPercentage(5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
         
         this.botonReducir = this.createButton(
             newWidth-offsetX, 
             newHeight - offsetY*8, 
-            'Reducir', 
-            0x00ff00,  // color normal
-            0x00cc00,  // color hover
-            0x009900,  // color press
-            () =>  {this.district.addCleaningPercentage(-5);this.updatePercentageText()}
+            'decreaseIcon', 
+            'decreaseSelectIcon',
+            () =>  {
+                this.district.addTaxesPercentage(-5);
+                this.updatePercentageText();
+                this.player.updateMoney(-5000);
+                this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+            }
         );
     }
     updatePercentageText(){

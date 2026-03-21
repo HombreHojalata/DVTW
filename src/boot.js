@@ -51,6 +51,11 @@ import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
 import closeIcon from '../assets/sprites/icons/closeIcon.png'                 
 import configurationIcon from '../assets/sprites/icons/configurationIcon.png'     //NEED TO BE REPLACE
 import storeIcon from '../assets/sprites/icons/storeIcon.png'                     //NEED TO BE REPLACE 
+import increaseIcon from '../assets/sprites/icons/increaseIcon.png'               //MAYBE CHANGE pxp
+import increaseSelectIcon from '../assets/sprites/icons/increaseSelectIcon.png'
+import decreaseIcon from '../assets/sprites/icons/decreaseIcon.png'
+import decreaseSelectIcon from '../assets/sprites/icons/decreaseSelectIcon.png'
+
 
 //PROTOTYPE ASSETS, TO BE REPLACED
 import presidente from '../assets/sprites/presidente.png'                         //NEED TO BE REPLACE
@@ -135,6 +140,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
+    this.load.image('increaseIcon', increaseIcon);
+    this.load.image('increaseSelectIcon', increaseSelectIcon);
+    this.load.image('decreaseIcon', decreaseIcon);
+    this.load.image('decreaseSelectIcon', decreaseSelectIcon);
     
     // PRESIDENTE ASSET
     this.load.image('presidente', presidente);
