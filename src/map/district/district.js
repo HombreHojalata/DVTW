@@ -103,7 +103,7 @@ export default class District {
     getSecurityPercentage() {return this.security;}
     getWorkSchedulePercentage() {return this.workSchedule;}
     getCleaningPercentage() {return this.cleaning;}
-
+    
     addTaxesPercentage(quantity){
         if((quantity+this.taxes)>=100) this.taxes = 100;
         else if((quantity+this.taxes)<=0) this.taxes = 0;
