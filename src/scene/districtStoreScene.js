@@ -29,11 +29,12 @@ export default class DistrictScene extends Phaser.Scene {
         this.player = this.registry.get('gameManager').getPlayer();
         this.playerMoney = this.add.text(200,700,`Dinero - ${this.player.getMoney()}$ `);        // STILL NEED AN ASSET FOR OTHER INFO
         //BUTTONS
-        this.buildingList = this.spawnBuiltList(newWidth,offsetX,newHeight);
+        this.iconList = this.spawnIconList(newWidth,offsetX,newHeight);
     }
     // BUILDING LIST
-    spawnBuiltList(newWidth, offsetX, newHeight) { 
+    spawnIconList(newWidth, offsetX, newHeight) { 
         //TODO swap closeButton and container assets
+        // if cant build more have "sleep" 2sec to see the msg
         this.builtList = this.district.getBuildingsList();
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '14px',
@@ -62,11 +63,19 @@ export default class DistrictScene extends Phaser.Scene {
             img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
             img.on('pointerout', () => {tooltip.setVisible(false);});
             img.on('pointerup', () => {
-                if(this.player.getMoney() >= building.getBuildingPrice()){
-                    this.district.addBuilding(building);
-                    this.player.updateMoney(-building.getBuildingPrice());
-                } 
-                else tooltip.setText(`No tienes el suficiente dinero para comprar este edificio. Dinero - ${this.player.getMoney()}$ `);
+                if(this.district.canBuildMore()){
+                    if(this.player.getMoney() >= building.getBuildingPrice()){
+                        this.district.addBuilding(building);
+                        this.player.updateMoney(-building.getBuildingPrice());
+                    } 
+                    else {
+                        tooltip.setVisible(true);
+                        tooltip.setText(`No tienes suficiente dinero para comprar este edificio. Dinero - ${this.player.getMoney()}$ `);
+                    }
+                }else{
+                    tooltip.setVisible(true);
+                    tooltip.setText('No tienes suficiente espacio para construir');
+                }
                 tooltip.setVisible(false);
                 this.scene.stop();
                 this.scene.get('districtScene').scene.restart();
@@ -88,13 +97,18 @@ export default class DistrictScene extends Phaser.Scene {
             img.on('pointerout', () => {tooltip.setVisible(false);});
             img.on('pointerup', () => {
                 tooltip.setVisible(false);
-                if(this.player.getMoney() >= building.getBuildingPrice()){
-                    this.district.addSpecialBuilding(building);
-                    this.player.updateMoney(-building.getBuildingPrice());
-                } 
-                else {
+                if(this.district.canBuildMore()){
+                    if(this.player.getMoney() >= building.getBuildingPrice()){
+                        this.district.addSpecialBuilding(building);
+                        this.player.updateMoney(-building.getBuildingPrice());
+                    } 
+                    else {
+                        tooltip.setVisible(true);
+                        tooltip.setText(`No tienes suficiente dinero para comprar este edificio. Dinero - ${this.player.getMoney()}$ `);
+                    }
+                }else{
                     tooltip.setVisible(true);
-                    tooltip.setText(`No tienes el suficiente dinero para comprar este edificio. Dinero - ${this.player.getMoney()}$ `);
+                    tooltip.setText('No tienes suficiente espacio para construir');
                 }
                 tooltip.setVisible(false);
                 this.scene.stop();

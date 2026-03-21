@@ -130,6 +130,7 @@ export default class District {
     getSpaceBuilding() {return this.space_building;}
     isSpecialBuildingBuilt() {return this.is_special_built;}
     getSpecialBuilding() {throw new Error('createSceneList() debe implementarse en la subclase');}
+    canBuildMore() {return this.building_list.length < this.space_building;}
     createBuildings(buildings){
         const buildingList = [];
         for(let i = 0 ; i < buildings.length; i++){
@@ -163,7 +164,6 @@ export default class District {
             throw new Error("This building doesn't exist in this district.");
         }
     }
-    //TODO
     addSpecialBuilding(building) {
         if (!this.is_special_built && this.special_building === building.getName()) {
             if(this.building_list.length < this.space_building){

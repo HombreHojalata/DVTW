@@ -22,7 +22,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.playerMoney = this.add.text(200,700,`Dinero - ${this.player.getMoney()}$ `);        // STILL NEED AN ASSET FOR OTHER INFO
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
-        //DISTRICT NAME
+        //DISTRICT INFO
         this.districtNameText = this.spawnNameText(offsetX,offsetY);
         this.districtDescriptionText = this.spawnDescText(newWidth,offsetX,offsetY);
         this.districtScene = this.spawnScene(newWidth,newHeight,offsetX,offsetY);
@@ -57,10 +57,11 @@ export default class DistrictScene extends Phaser.Scene {
         }); 
         return descText;
     }  
+    //NEED TO CHANGE SETSCALE
     spawnScene(newWidth,newHeight,offsetX,offsetY){
         const list = this.district.getSceneList();
         const randomIndex = Math.floor(Math.random() * list.length);
-        this.districtScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]);
+        this.districtScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]).setScale(0.34);
         return this.districtScene;
     }
     // SPAWN BUILTS IMAGE
