@@ -1,78 +1,141 @@
+import BuildingCinema from "../building/buildingCinema.js";
+import BuildingComercialCenter from "../building/buildingComercialCenter.js";
+import BuildingFactory from "../building/buildingFactory.js";
+import BuildingHospital from "../building/buildingHospital.js";
+import BuildingHotel from "../building/buildingHotel.js";
+import BuildingHouse from "../building/buildingHouse.js";
+import BuildingPark from "../building/buildingPark.js";
+
 export default class District {
-    
-    constructor(name, desc, population,populationIncrease, satisfaction, district_building ,buildings, space_building, special_building, opositors, parameters, parameters_multipliers, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
-        if (new.target === District) {
-            throw new TypeError("Cannot instantiate abstract class District");
-        }
+    constructor(name, desc, population,populationIncrease, satisfaction, 
+        district_building ,buildings, space_building, 
+        is_special_built, special_building, opositors, 
+        PNGwithOutSpecial, PNGwithSpecial, posX, posY) {
+
         this.name = name;                                                                                       // Name of the district
         this.desc = desc;                                                                                       // Description of the district                              
         this.population = population;                                                                           // Population of the district    
         this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
-        this.district_building = district_building;                                                             // District building that can be built in the district
-        this.buildings = buildings;                                                                             // List of buildings built in the district
+        this.district_building = this.createBuildings(district_building);                                       // District building that can be built in the district
+        this.building_list = this.createBuildings(buildings);                                                   // List of buildings built in the district
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
+        this.is_special_built = is_special_built;                                                               // Is the special building built in this district
         this.special_building = special_building;                                                               // Special building that can be built in the district
-        this.oppositors = opositors;                                                                            // Opositors that can be found in the district
-        this.parameters = parameters;                                                                           // List of parameters that can be affected by the district   
-        this.parameters_multipliers = parameters_multipliers;                                                   // List of multipliers for the parameters that can be affected by the district
+        this.opositors = opositors;                                                                             // Opositors that can be found in the district
         this.PNGwithOutSpecial = PNGwithOutSpecial;                                                             // PNG of the district without the special building
         this.PNGwithSpecial = PNGwithSpecial;                                                                   // PNG of the district with the special building         
+        this.scene_list = this.createSceneList();                                                               // List of scenes for each districtScene
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
-        /*COMO JAVA
-        String name;
-        String desc;
-        int population;
-        int populationIncrease;
-        int satisfaction;
-        List<Building> district_building;
-        List<Building> buildings;
-        int space_building;
-        boolean special_building;
-        int opositors;
-        List<String> parameters;
-        List<Double> parameters_multipliers;
-        String PNGwithOutSpecial;
-        String PNGwithSpecial;
-        int posX;
-        int posY;
-        */
-    
+        this.taxes = 50;                                                                                        // Percentage 0-100
+        this.security = 50;
+        this.workSchedule = 50;
+        this.cleaning = 50;
     }
-    getName() {return this.name;}
-    getDescription() {return this.desc;}
-    getPopulationDensity() {return this.population;}
-    getPopulationIncrease() {return this.populationIncrease;}
-    getSatisfaction() {return this.satisfaction;}
-    getBuildings() {return this.buildings;}
-    getSpaceBuilding() {return this.space_building;}
-    getSpecialBuilding() {return this.special_building;}
-    getOpositors() {return this.oppositors;}
-    getParameters() {return this.parameters;}
-    getParametersMultipliers() {return this.parameters_multipliers;}
+    // ASSETS
+    spawnDistrict(scene){
+        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
+            .setOrigin(0)
+            .setScale(1)
+            .setInteractive({ useHandCursor: true });
+        button.on('pointerover', () => {button.setScale(1.01);});
+        button.on('pointerout', () => {button.setScale(1);});
+        button.on('pointerup', () => {
+            scene.updateDistrictFooter(this);
+            scene.scene.pause('gameScene');
+            scene.scene.launch('districtScene', { district: this });
+            //scene.scene.bringToTop('districtScene');
+        });
+        return button;
+    }
+    swapDistrict(scene) {
+        if(this.special_building) return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
+        else return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
+    }
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}
-    getPosX() {return this.posX;}
-    getPosY() {return this.posY;}
+    // SCENES
+    getSceneList() {return this.scene_list}
+    createSceneList(){throw new Error('createSceneList() debe implementarse en la subclase');}
+    
+    getName() {return this.name;}
+    getDescription() {return this.desc;}
+    getOpositors() {return this.opositors;}
+    //getPosX() {return this.posX;}
+    //getPosY() {return this.posY;}
 
-    getInfo() {throw new Error("getInfo() must be implemented");}
-
-    increaseNormalPopulation() {this.population += this.populationIncrease;}
-    increaseBoostedPopulation(populationIncrease) {this.population += populationIncrease;}
-    decreaseBoostedPopulation(populationDecrease) {                             
-        this.population -= populationDecrease;
-        if(this.population < 0) {
-            this.population = 0;
-        }
+    //POPULATION
+    getPopulation() {return this.population;}
+    increasePopulationCicle(){this.population += this.populationIncrease;}
+    increasePopulation(value) {
+        if(this.population += value <= 0) this.population = 0;
+        else this.population += value;
     }
-    increasePopulationIncrease(populationIncrease) {this.populationIncrease += populationIncrease;}
-    modifySatisfaction(satisfaction) {this.satisfaction += satisfaction;}
-
+    increasePopulationPercetange(value){
+        if(this.populationIncrease += value <= 0) this.populationIncrease = 0;
+        else this.populationIncrease += value;
+    }
+    getPopulationIncrease() {return this.populationIncrease;}
+    //SATISFACTION
+    getSatisfaction() {return this.satisfaction;}
+    updateSatisfaction(satisfaction) {this.satisfaction += satisfaction;}
+    //DISTRICT PERCENTAGE
+    getTaxesPercentage() {return this.taxes;}
+    getSecurityPercentage() {return this.security;}
+    getWorkSchedulePercentage() {return this.workSchedule;}
+    getCleaningPercentage() {return this.cleaning;}
+    addTaxesPercentage(quantity){
+        if((quantity+this.taxes)>=100) this.taxes = 100;
+        else if((quantity+this.taxes)<=0) this.taxes = 0;
+        else this.taxes+=quantity;
+    }
+    addSecurityPercentage(quantity){
+        if((quantity+this.security)>=100) this.security = 100;
+        else if((quantity+this.security)<=0) this.security = 0;
+        else this.security+=quantity;
+    }
+    addWorkSchedulePercentage(quantity){
+        if((quantity+this.workSchedule)>=100) this.workSchedule = 100;
+        else if((quantity+this.workSchedule)<=0) this.workSchedule = 0;
+        else this.workSchedule+=quantity;
+    }
+    addCleaningPercentage(quantity){
+        if((quantity+this.cleaning)>=100) this.cleaning = 100;
+        else if((quantity+this.cleaning)<=0) this.cleaning = 0;
+        else this.cleaning+=quantity;
+    }
+    //BUILDINGS
+    getBuildingsList() {return this.district_building;}         
+    getBuildingsBuilt() {return this.building_list;}
+    getSpaceBuilding() {return this.space_building;}
+    isSpecialBuildingBuilt() {return this.is_special_built;}
+    getSpecialBuilding() {throw new Error('createSceneList() debe implementarse en la subclase');}
+    canBuildMore() {return this.building_list.length < this.space_building;}
+    createBuildings(buildings){
+        const buildingList = [];
+        for(let i = 0 ; i < buildings.length; i++){
+            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINEMA",10000,5000,5,0));
+            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,20000,10,0));
+            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FACTORY",50000,30000,-5,0));
+            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,40000,5,20));
+            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,10000,5,5));
+            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOUSE",5000,500,5,5));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARK",10000,1000,15,0));
+        }
+        return buildingList;
+    }
     addBuilding(building) {
-        if (this.buildings.includes(building)) {
-            if(this.district_building.length < this.space_building)
-                this.district_building.push(building);
+        if (this.district_building.includes(building)) {
+            if(this.building_list.length < this.space_building)
+                this.building_list.push(building);
+                //if(building === "CINEMA") building_list.push(new BuildingCinema('buildingCinema',"CINEMA",10000,5000,5,0,0));
+                //else if(building === "COMERCIAL") building_list.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,20000,10,0,0));
+                //else if(building === "FACTORY") building_list.push(new BuildingFactory('buildingFactory',"FACTORY",50000,30000,-5,0,0));
+                //else if(building === "HOSPITAL") building_list.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,40000,5,0,20));
+                //else if(building === "HOTEL") building_list.push(new BuildingHotel('buildingHotel',"HOTEL",20000,10000,5,0,5));
+                //else if(building === "HOUSE") building_list.push(new BuildingHouse('buildingHouse',"HOUSE",5000,500,5,0,5));
+                //else if(building === "PARK") building_list.push(new BuildingPark('buildingPark',"PARK",10000,1000,15,0,0));
             else{
                 console.log("You can't add more buildings. No more space in the district.");
                 throw new Error("No more space in the district.");
@@ -83,9 +146,11 @@ export default class District {
         }
     }
     addSpecialBuilding(building) {
-        if (this.special_building === building) {
-            if(this.district_building.length < this.space_building)
-            this.district_building.push(building); 
+        if (!this.is_special_built && this.special_building === building.getName()) {
+            if(this.building_list.length < this.space_building){
+                this.building_list.push(building); 
+                this.is_special_built = true;
+            }
             else{
                 console.log("You can't add more buildings. No more space in the district.");
                 throw new Error("No more space in the district.");
@@ -94,35 +159,6 @@ export default class District {
         else{
             console.log("This building can't be built in this district.");
             throw new Error("This building can't be built in this district.");
-        }
-    }
-
-    spawnDistrict(scene) {
-        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
-            .setOrigin(0)
-            .setScale(0.5)
-            .setInteractive({ useHandCursor: true });
-
-        button.on('pointerover', () => {
-            button.setScale(0.8);
-        });
-
-        button.on('pointerout', () => {
-            button.setScale(0.5);
-        });
-
-        button.on('pointerup', () => {          // MODIFICAR EL TEXTO DEL FOOTER CON LA DESCRIPCION DEL DISTRITO
-            scene.updateDistrictFooter(this);
-            scene.add.image(150,50,'district').setOrigin(0).setScale(0.8);
-        });
-
-        return button;
-    }
-    swapDistrict(scene) {
-        if(this.special_building) {
-            return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
-        }else{
-            return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
         }
     }
 }
