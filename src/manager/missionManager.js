@@ -4,9 +4,8 @@ import Mission from './mission.js';
 
 
 export default class missionManager{
-    constructor(scene,player){
+    constructor(scene){
         this.scene = scene;
-        this.player = player;
         this.regularMissions = [];
         this.upMoneyMissions = [];
         this.upPopularityMissions = [];
@@ -67,25 +66,25 @@ export default class missionManager{
             }
         }
         if(districtIndex == -1){
-            missionSelected.setDistrict("NULL");
+            missionSelected.district = "null";
         }
         else if(districtIndex == 0){
-            missionSelected.setDistrict("BORRASCAL");
+            missionSelected.district = "Borrascal";
         }
         else if(districtIndex == 1){
-            missionSelected.setDistrict("EL_NIDO")
+            missionSelected.district = "El Nido";
         }
         else if(districtIndex == 2){
-            missionSelected.setDistrict("GUINEA");
+            missionSelected.district = "Guinea";
         }
         else if(districtIndex == 3){
-            missionSelected.setDistrict("NUEVA_PRADERA");
+            missionSelected.district = "Nueva Pradera";
         }
         else if(districtIndex == 4){
-            missionSelected.setDistrict("SAHAR");
+            missionSelected.district = "Sahar";
         }
         else{//districtIndex == 5
-            missionSelected.setDistrict("SOMOSAGUA");
+            missionSelected.district = "Somosagua";
         }
         return missionSelected;
     }

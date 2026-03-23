@@ -11,13 +11,15 @@ export default class District {
         district_building ,buildings, space_building, 
         is_special_built, special_building, opositors, 
         PNGwithOutSpecial, PNGwithSpecial, posX, posY) {
-
+        if (new.target === District) {
+            throw new TypeError("Cannot instantiate abstract class District");
+        }
         this.name = name;                                                                                       // Name of the district
         this.desc = desc;                                                                                       // Description of the district                              
         this.population = population;                                                                           // Population of the district    
         this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
-        this.district_building = this.createBuildings(district_building);                                       // District building that can be built in the district
+        this.district_building = this.createBuildings(district_building);                                   // District building that can be built in the district
         this.building_list = this.createBuildings(buildings);                                                   // List of buildings built in the district
         this.space_building = space_building;                                                                   // Space where buildings its posible in the district
         this.is_special_built = is_special_built;                                                               // Is the special building built in this district
@@ -25,15 +27,35 @@ export default class District {
         this.opositors = opositors;                                                                             // Opositors that can be found in the district
         this.PNGwithOutSpecial = PNGwithOutSpecial;                                                             // PNG of the district without the special building
         this.PNGwithSpecial = PNGwithSpecial;                                                                   // PNG of the district with the special building         
-        this.scene_list = this.createSceneList();                                                               // List of scenes for each districtScene
+        this.scene_list = this.createSceneList();
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
         this.taxes = 50;                                                                                        // Percentage 0-100
         this.security = 50;
         this.workSchedule = 50;
         this.cleaning = 50;
+        
+        /*COMO JAVA
+        String name;
+        String desc;
+        int population;
+        int populationIncrease;
+        int satisfaction;
+        List<Building> district_building;
+        List<Building> buildings;
+        int space_building;
+        boolean special_building;
+        int opositors;
+        List<String> parameters;
+        List<Double> parameters_multipliers;
+        String PNGwithOutSpecial;
+        String PNGwithSpecial;
+        int posX;
+        int posY;
+        */
+    
     }
-    // ASSETS
+    // SCENES / IMAGES
     spawnDistrict(scene){
         const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
             .setOrigin(0)
@@ -49,42 +71,39 @@ export default class District {
         });
         return button;
     }
+    createSceneList(){throw new Error('createSceneList() debe implementarse en la subclase');}
+    getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
+    getPNGwithSpecial() {return this.PNGwithSpecial;}
+    getSceneList() {return this.scene_list}
+    
+    getName() {return this.name;}
+    getDescription() {return this.desc;}
+    getPopulationDensity() {return this.population;}
+    getPopulationIncrease() {return this.populationIncrease;}
+    getSatisfaction() {return this.satisfaction;}
+    getOpositors() {return this.opositors;}
+    getPosX() {return this.posX;}
+    getPosY() {return this.posY;}
+
+    increaseNormalPopulation() {this.population += this.populationIncrease;}
+    increaseBoostedPopulation(populationIncrease) {this.population += populationIncrease;}
+    decreaseBoostedPopulation(populationDecrease) {                             
+        this.population -= populationDecrease;
+        if(this.population < 0)
+            this.population = 0;
+    }
+    increasePopulationIncrease(populationIncrease) {this.populationIncrease += populationIncrease;}
+    modifySatisfaction(satisfaction) {this.satisfaction += satisfaction;}
     swapDistrict(scene) {
         if(this.special_building) return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
         else return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
     }
-    getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
-    getPNGwithSpecial() {return this.PNGwithSpecial;}
-    // SCENES
-    getSceneList() {return this.scene_list}
-    createSceneList(){throw new Error('createSceneList() debe implementarse en la subclase');}
-    
-    getName() {return this.name;}
-    getDescription() {return this.desc;}
-    getOpositors() {return this.opositors;}
-    //getPosX() {return this.posX;}
-    //getPosY() {return this.posY;}
-
-    //POPULATION
-    getPopulation() {return this.population;}
-    increasePopulationCicle(){this.population += this.populationIncrease;}
-    increasePopulation(value) {
-        if(this.population += value <= 0) this.population = 0;
-        else this.population += value;
-    }
-    increasePopulationPercetange(value){
-        if(this.populationIncrease += value <= 0) this.populationIncrease = 0;
-        else this.populationIncrease += value;
-    }
-    getPopulationIncrease() {return this.populationIncrease;}
-    //SATISFACTION
-    getSatisfaction() {return this.satisfaction;}
-    updateSatisfaction(satisfaction) {this.satisfaction += satisfaction;}
     //DISTRICT PERCENTAGE
     getTaxesPercentage() {return this.taxes;}
     getSecurityPercentage() {return this.security;}
     getWorkSchedulePercentage() {return this.workSchedule;}
     getCleaningPercentage() {return this.cleaning;}
+    
     addTaxesPercentage(quantity){
         if((quantity+this.taxes)>=100) this.taxes = 100;
         else if((quantity+this.taxes)<=0) this.taxes = 0;
@@ -115,13 +134,13 @@ export default class District {
     createBuildings(buildings){
         const buildingList = [];
         for(let i = 0 ; i < buildings.length; i++){
-            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINEMA",10000,5000,5,0));
-            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,20000,10,0));
-            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FACTORY",50000,30000,-5,0));
-            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,40000,5,20));
-            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,10000,5,5));
-            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOUSE",5000,500,5,5));
-            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARK",10000,1000,15,0));
+            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINEMA",10000,5000,5,0,0));
+            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,20000,10,0,0));
+            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FACTORY",50000,30000,-5,0,0));
+            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,40000,5,0,20));
+            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,10000,5,0,5));
+            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOUSE",5000,500,5,0,5));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARK",10000,1000,15,0,0));
         }
         return buildingList;
     }

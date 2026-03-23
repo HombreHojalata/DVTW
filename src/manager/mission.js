@@ -11,17 +11,7 @@ export default class Mission{
         this.options=[];//Array de opciones, cada una con sus consecuencias.
         this.district = null;//String, se asigna a un distrito aleatorio.
     }
-    
 
-    getName() {return this.name;}
-    getDescription() {return this.description;}
-    itIsEvent() {return this.event;}
-    itIsCorrupt() {return this.corrupt;}
-    itIsMinigame() {return this.minigame;}
-    getOptions() {return this.options;}
-    getNumOptions() {return this.numberOfOptions;}
-    setDistrict(district) {this.district = district;}
-    getDistrict() {return this.district;}
     addOption(Pr, De, En, Mo, Cor, Po){
         const option = new Option(Pr, De, En, Mo, Cor, Po);
         this.options.push(option);
