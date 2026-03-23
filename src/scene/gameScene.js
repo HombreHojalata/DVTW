@@ -47,7 +47,6 @@ export default class GameScene extends Phaser.Scene {
         });
 
         this.startEnergyDrain();
-
         //MISSION TEST
         this.thisDayMission = this.gameManager.getMission();
         this.missionButton = this.add.image(350,350,'closeIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
@@ -55,10 +54,11 @@ export default class GameScene extends Phaser.Scene {
         this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
         this.missionButton.on('pointerup', () => {
             this.scene.pause('gameScene');
-            this.scene.launch('missionScene', { mission: this.thisDayMission });
+            this.scene.launch('missionScene', { mission: this.thisDayMission});         //falta pasarle player y map o solo gameManager
         });
     }
- 
+    //CHECK THIS
+    swapDistrict(district){this.map.getDistrictByName(district).swapDistrict(this);}
     /*
     Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
     

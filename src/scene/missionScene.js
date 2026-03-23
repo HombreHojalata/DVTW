@@ -8,6 +8,9 @@ export default class MissionScene extends Phaser.Scene {
 
     init(data) {
         this.mission = data.mission;
+        //this.gameManager = data.gameManager;
+        //this.player = gameManager.getPlayer();
+        //this.map = gameManager.getMap();
     }
        
     create() {
@@ -28,11 +31,29 @@ export default class MissionScene extends Phaser.Scene {
         this.missionNameText = this.spawnNameText(offsetX,offsetY);
         this.missionDescriptionText = this.spawnDescText(newWidth,offsetX,offsetY);
         this.missionScene = this.spawnScene(newWidth,newHeight,offsetX,offsetY);
+        //OPTIONS
+        this.options = this.spawnButtons();
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth,offsetX,offsetY);
     }
 
-    spawnTemplate(newWidth,newHeight,offsetX,offsetY){return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'missionTemplate').setDisplaySize(newWidth, newHeight);}
+    //spawnTemplate(newWidth,newHeight,offsetX,offsetY){return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'missionTemplate').setDisplaySize(newWidth, newHeight);}
+    spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
+        const x = newWidth / 2 + offsetX;
+        const y = newHeight / 2 + offsetY;
+
+        const rect = this.add.graphics();
+
+        rect.fillStyle(0xffffff, 1); // blanco
+        rect.fillRect(
+            x - newWidth / 2,
+            y - newHeight / 2,
+            newWidth,
+            newHeight
+        );
+
+        return rect;
+    }
     spawnNameText(offsetX,offsetY){
         const leftCorner = offsetX*3 - 40;
         const rightCorner = offsetX*6;
@@ -78,35 +99,62 @@ export default class MissionScene extends Phaser.Scene {
         });
         return this.closeButton;
     }
-    createButton(x, y, image, swapImage,callback) {
-        const button = this.add.image(x, y, image).setScale(1);
-        const tooltip = this.add.text(0, 0, '', {
-            fontSize: '14px',
-            backgroundColor: '#000',
-            color: '#fff',
-            padding: { x: 5, y: 5 }
-        }).setVisible(false);
-        button.setInteractive({ useHandCursor: true });
-        button.on('pointerover', (pointer) => {
-            tooltip.setText('Darle al boton cuesta 5000$');
-            tooltip.setPosition(pointer.x + 15, pointer.y + 35);
-            tooltip.setVisible(true);
-            tooltip.setDepth(100);
-            button.setScale(1.1);
-            button.setTexture(swapImage);
+    createOptionButton(x, y, option) {
+        const getColor = (value) => value >= 0 ? '#00ff00' : '#ff0000';
+        const buttonWidth = 300;   // ancho fijo del botón
+        const buttonHeight = 180;  // alto fijo del botón
+        const padding = 20;
+        const lineSpacing = 6;
+        const lines = [
+            { text: option.description, color: '#ffffff', size: '16px' },
+            { text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) },
+            { text: `Energía: ${option.energy}`, color: getColor(option.energy) },
+            { text: `Coste: ${option.money}`, color: getColor(-option.money) },                         //JUSTO LA INVERSA SI DA DINERO VERDE, SI CUESTA ROJO
+            { text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) },
+            { text: `Población: ${option.popularity}`, color: getColor(option.popularity) }
+        ];
+        const bg = this.add.graphics();
+        bg.fillStyle(0x007BFF, 1);
+        bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
+        const startY = y - buttonHeight / 2 + padding;
+        let currentY = startY;
+        const textObjects = lines.map(line => {
+            const txt = this.add.text(x, currentY, line.text, {
+                fontSize: line.size || '14px',
+                color: line.color,
+                align: 'center',
+                wordWrap: { width: buttonWidth - padding * 2 }
+            }).setOrigin(0.5, 0);
+
+            currentY += txt.height + lineSpacing;
+            return txt;
         });
-        button.on('pointerout', () => {
-            tooltip.setVisible(false);
-            button.setScale(1); 
-            button.setTexture(image);
+        const hitArea = new Phaser.Geom.Rectangle(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight);
+        bg.setInteractive(hitArea, Phaser.Geom.Rectangle.Contains, { useHandCursor: true }).setDepth(0);
+        textObjects.forEach(t => t.setDepth(1));
+        this.district = this.map.getDistrictByName(this.mission.getDistrict());
+        bg.on('pointerover', () => {
+            bg.clear();
+            bg.fillStyle(0x0056b3, 1);
+            bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
+            textObjects.forEach(t => t.setScale(1.05));
         });
-        button.on('pointerdown', () => {button.setScale(1); button.setTexture(image);});
-        button.on('pointerup', () => {
-            button.setScale(1);
-            button.setTexture(swapImage);
-            if (callback) callback();
+        bg.on('pointerout', () => {
+            bg.clear();
+            bg.fillStyle(0x007BFF, 1);
+            bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
+            textObjects.forEach(t => t.setScale(1));
         });
-        return button;
+        bg.on('pointerdown', () => textObjects.forEach(t => t.setScale(1)));
+        bg.on('pointerup', () =>{
+            textObjects.forEach(t => t.setScale(1.1));
+            //AQUI TODAVIA DA ERROR
+            this.district.increasePopulation(option.popularity);
+            this.player.updateEnergy(option.energy);
+            this.player.updateCorruption(option.corruption);
+            this.player.updateMoney(option.money);
+        });
+        return { bg, texts: textObjects };
     }
     spawnButtons(){
         //this.isEvent = this.mission.itIsEvent();
@@ -117,6 +165,16 @@ export default class MissionScene extends Phaser.Scene {
         }else{
             this.numberOfOptions = this.mission.getNumOptions();
             this.optionsList = this.mission.getOptions();
+            this.optionsList.forEach((option, index) => {
+                const x = 400 + (index * 350);; // ajusta posición
+                const y = 500; // para que no se monten
+                this.createOptionButton(
+                    x,
+                    y,
+                    option
+                );
+
+            });
         }
     }
 }

@@ -49,6 +49,10 @@ export default class District {
         });
         return button;
     }
+    swapDistrict(scene) {
+        if(this.special_building) return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
+        else return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
+    }
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}
     // SCENES
@@ -57,26 +61,25 @@ export default class District {
     
     getName() {return this.name;}
     getDescription() {return this.desc;}
-    getPopulationDensity() {return this.population;}
-    getPopulationIncrease() {return this.populationIncrease;}
-    getSatisfaction() {return this.satisfaction;}
     getOpositors() {return this.opositors;}
     //getPosX() {return this.posX;}
     //getPosY() {return this.posY;}
 
-    increaseNormalPopulation() {this.population += this.populationIncrease;}
-    increaseBoostedPopulation(populationIncrease) {this.population += populationIncrease;}
-    decreaseBoostedPopulation(populationDecrease) {                             
-        this.population -= populationDecrease;
-        if(this.population < 0)
-            this.population = 0;
+    //POPULATION
+    getPopulation() {return this.population;}
+    increasePopulationCicle(){this.population += this.populationIncrease;}
+    increasePopulation(value) {
+        if(this.population += value <= 0) this.population = 0;
+        else this.population += value;
     }
-    increasePopulationIncrease(populationIncrease) {this.populationIncrease += populationIncrease;}
-    modifySatisfaction(satisfaction) {this.satisfaction += satisfaction;}
-    swapDistrict(scene) {
-        if(this.special_building) return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
-        else return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
+    increasePopulationPercetange(value){
+        if(this.populationIncrease += value <= 0) this.populationIncrease = 0;
+        else this.populationIncrease += value;
     }
+    getPopulationIncrease() {return this.populationIncrease;}
+    //SATISFACTION
+    getSatisfaction() {return this.satisfaction;}
+    updateSatisfaction(satisfaction) {this.satisfaction += satisfaction;}
     //DISTRICT PERCENTAGE
     getTaxesPercentage() {return this.taxes;}
     getSecurityPercentage() {return this.security;}

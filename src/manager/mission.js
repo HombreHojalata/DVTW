@@ -20,6 +20,7 @@ export default class Mission{
     itIsMinigame() {return this.minigame;}
     getOptions() {return this.options;}
     getNumOptions() {return this.numberOfOptions;}
+    setDistrict(district) {this.district = district;}
     getDistrict() {return this.district;}
     addOption(Pr, De, En, Mo, Cor, Po){
         const option = new Option(Pr, De, En, Mo, Cor, Po);

@@ -61,19 +61,10 @@ export default class Map {
     }
     spawnMap(scene){return scene.add.image(0,-10, this.mapSiluete).setOrigin(0);}
     spawnDistricts(scene){this.districtList.forEach(d => d.spawnDistrict(scene));}
-    /*getDistricts(key) {return this.districtMap[key];}
-    selectDistrict(key) {
-        if(this.districtsKey.includes(key)) {
-            return this.districts[key];
-        }
-    }*/             //SHOULD BE WITH GEO...
-    modifyDistrict(key, value) {
-        if(this.districtsKey.includes(key))
-            this.districtList[key].increaseBoostedPopulation(value);
-    }
-    generateDistrictsMoney() {
+    getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
+    /*generateDistrictsMoney() {
         let money = 0;
         this.districtList.forEach(d => money += d.generateMoneyFromBuildings());
         return money;
-    }
+    }*/
 }

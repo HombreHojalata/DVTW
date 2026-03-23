@@ -111,7 +111,6 @@ import UpPopularityMission from '../assets/jsons/upPopularity.json';
 import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
-import { normalizeOptions } from 'electron-builder/out/builder'
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
