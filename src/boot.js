@@ -51,7 +51,7 @@ import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
 import closeIcon from '../assets/sprites/icons/closeIcon.png'                 
 import configurationIcon from '../assets/sprites/icons/configurationIcon.png'     //NEED TO BE REPLACE
 import storeIcon from '../assets/sprites/icons/storeIcon.png'                     //NEED TO BE REPLACE 
-import increaseIcon from '../assets/sprites/icons/increaseIcon.png'               //MAYBE CHANGE pxp
+import increaseIcon from '../assets/sprites/icons/increaseIcon.png'
 import increaseSelectIcon from '../assets/sprites/icons/increaseSelectIcon.png'
 import decreaseIcon from '../assets/sprites/icons/decreaseIcon.png'
 import decreaseSelectIcon from '../assets/sprites/icons/decreaseSelectIcon.png'
@@ -61,6 +61,49 @@ import decreaseSelectIcon from '../assets/sprites/icons/decreaseSelectIcon.png'
 import presidente from '../assets/sprites/presidente.png'                         //NEED TO BE REPLACE
 // MISSION ASSETS
 import missionTemplate from '../assets/sprites/mission/missionTemplate.png'
+// MISSION DISTRICT BORRASCAL SCENE ASSETS
+import regularSceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/regularScene.png'
+import upMoneySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/upMoneyScene.png'
+import downMoneySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/downMoneyScene.png'
+import upPopularitySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/upPopularityScene.png'
+import downPopularitySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/downPopularityScene.png'
+import downCorruptionSceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/downCorruptionScene.png'
+// MISSION DISTRICT EL NIDO SCENE ASSETS
+import regularSceneElNido from '../assets/sprites/mission/scenes/districtElNido/regularScene.png'
+import upMoneySceneElNido from '../assets/sprites/mission/scenes/districtElNido/upMoneyScene.png'
+import downMoneySceneElNido from '../assets/sprites/mission/scenes/districtElNido/downMoneyScene.png'
+import upPopularitySceneElNido from '../assets/sprites/mission/scenes/districtElNido/upPopularityScene.png'
+import downPopularitySceneElNido from '../assets/sprites/mission/scenes/districtElNido/downPopularityScene.png'
+import downCorruptionSceneElNido from '../assets/sprites/mission/scenes/districtElNido/downCorruptionScene.png'
+// MISSION DISTRICT GUINEA SCENE ASSETS
+import regularSceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/regularScene.png'
+import upMoneySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/upMoneyScene.png'
+import downMoneySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/downMoneyScene.png'
+import upPopularitySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/upPopularityScene.png'
+import downPopularitySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/downPopularityScene.png'
+import downCorruptionSceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/downCorruptionScene.png'
+// MISSION DISTRICT NUEVA PRADERA SCENE ASSETS
+import regularSceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/regularScene.png'
+import upMoneySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/upMoneyScene.png'
+import downMoneySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/downMoneyScene.png'
+import upPopularitySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/upPopularityScene.png'
+import downPopularitySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/downPopularityScene.png'
+import downCorruptionSceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/downCorruptionScene.png'
+// MISSION DISTRICT SAHAR SCENE ASSETS
+import regularSceneSahar from '../assets/sprites/mission/scenes/districtSahar/regularScene.png'
+import upMoneySceneSahar from '../assets/sprites/mission/scenes/districtSahar/upMoneyScene.png'
+import downMoneySceneSahar from '../assets/sprites/mission/scenes/districtSahar/downMoneyScene.png'
+import upPopularitySceneSahar from '../assets/sprites/mission/scenes/districtSahar/upPopularityScene.png'
+import downPopularitySceneSahar from '../assets/sprites/mission/scenes/districtSahar/downPopularityScene.png'
+import downCorruptionSceneSahar from '../assets/sprites/mission/scenes/districtSahar/downCorruptionScene.png'
+// MISSION DISTRICT SOMOSAGUA SCENE ASSETS
+import regularSceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/regularScene.png'
+import upMoneySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/upMoneyScene.png'
+import downMoneySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/downMoneyScene.png'
+import upPopularitySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/upPopularityScene.png'
+import downPopularitySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/downPopularityScene.png'
+import downCorruptionSceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/downCorruptionScene.png'
+
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
 import UpMoneyMission from '../assets/jsons/upMoney.json';
@@ -68,6 +111,7 @@ import UpPopularityMission from '../assets/jsons/upPopularity.json';
 import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
+import { normalizeOptions } from 'electron-builder/out/builder'
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -149,6 +193,48 @@ export default class Boot extends Phaser.Scene {
     this.load.image('presidente', presidente);
     // MISSION ASSETS
     this.load.image('missionTemplate',missionTemplate);
+    // MISSION DISTRICT BORRASCAL SCENE ASSETS
+    this.load.image('regularSceneBorrascal', regularSceneBorrascal);
+    this.load.image('upMoneySceneBorrascal', upMoneySceneBorrascal);
+    this.load.image('downMoneySceneBorrascal', downMoneySceneBorrascal);
+    this.load.image('upPopularitySceneBorrascal', upPopularitySceneBorrascal);
+    this.load.image('downPopularitySceneBorrascal', downPopularitySceneBorrascal);
+    this.load.image('downCorruptionSceneBorrascal', downCorruptionSceneBorrascal);
+    // MISSION DISTRICT EL NIDO SCENE ASSETS
+    this.load.image('regularSceneElNido', regularSceneElNido);
+    this.load.image('upMoneySceneElNido', upMoneySceneElNido);
+    this.load.image('downMoneySceneElNido', downMoneySceneElNido);
+    this.load.image('upPopularitySceneElNido', upPopularitySceneElNido);
+    this.load.image('downPopularitySceneElNido', downPopularitySceneElNido);
+    this.load.image('downCorruptionSceneElNido', downCorruptionSceneElNido);
+    // MISSION DISTRICT GUINEA SCENE ASSETS
+    this.load.image('regularSceneGuinea', regularSceneGuinea);
+    this.load.image('upMoneySceneGuinea', upMoneySceneGuinea);
+    this.load.image('downMoneySceneGuinea', downMoneySceneGuinea);
+    this.load.image('upPopularitySceneGuinea', upPopularitySceneGuinea);
+    this.load.image('downPopularitySceneGuinea', downPopularitySceneGuinea);
+    this.load.image('downCorruptionSceneGuinea', downCorruptionSceneGuinea);
+    // MISSION DISTRICT NUEVA PRADERA SCENE ASSETS
+    this.load.image('regularSceneNuevaPradera', regularSceneNuevaPradera);
+    this.load.image('upMoneySceneNuevaPradera', upMoneySceneNuevaPradera);
+    this.load.image('downMoneySceneNuevaPradera', downMoneySceneNuevaPradera);
+    this.load.image('upPopularitySceneNuevaPradera', upPopularitySceneNuevaPradera);
+    this.load.image('downPopularitySceneNuevaPradera', downPopularitySceneNuevaPradera);
+    this.load.image('downCorruptionSceneNuevaPradera', downCorruptionSceneNuevaPradera);
+    // MISSION DISTRICT SAHAR SCENE ASSETS
+    this.load.image('regularSceneSahar', regularSceneSahar);
+    this.load.image('upMoneySceneSahar', upMoneySceneSahar);
+    this.load.image('downMoneySceneSahar', downMoneySceneSahar);
+    this.load.image('upPopularitySceneSahar', upPopularitySceneSahar);
+    this.load.image('downPopularitySceneSahar', downPopularitySceneSahar);
+    this.load.image('downCorruptionSceneSahar', downCorruptionSceneSahar);
+    // MISSION DISTRICT SOMOSAGUA SCENE ASSETS
+    this.load.image('regularSceneSomosagua', regularSceneSomosagua);
+    this.load.image('upMoneySceneSomosagua', upMoneySceneSomosagua);
+    this.load.image('downMoneySceneSomosagua', downMoneySceneSomosagua);
+    this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
+    this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
+    this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);  
     //PROTOTYPE ASSETS, TO BE REPLACED
     this.load.image('vendedor', vendedor);
     this.load.image('pensa_icon', prensa_icon);

@@ -7,7 +7,7 @@ export default class MissionScene extends Phaser.Scene {
     }
 
     init(data) {
-        //this.district = data.district;
+        this.mission = data.mission;
     }
        
     create() {
@@ -31,12 +31,13 @@ export default class MissionScene extends Phaser.Scene {
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth,offsetX,offsetY);
     }
+
     spawnTemplate(newWidth,newHeight,offsetX,offsetY){return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'missionTemplate').setDisplaySize(newWidth, newHeight);}
     spawnNameText(offsetX,offsetY){
         const leftCorner = offsetX*3 - 40;
         const rightCorner = offsetX*6;
-        //const nameText = this.add.text(0, offsetY + 80, this.mission.getName(), {
-        const nameText = this.add.text(0, offsetY + 80, 'MISSION X', {
+        const nameText = this.add.text(0, offsetY + 80, this.mission.getName(), {
+        //const nameText = this.add.text(0, offsetY + 80, 'MISSION X', {
             fontSize: '40px',
             fontFamily: 'Impact',
             fontStyle: 'italic',
@@ -47,8 +48,8 @@ export default class MissionScene extends Phaser.Scene {
         return nameText;
     }
     spawnDescText(newWidth,offsetX,offsetY){
-        //const descText = this.add.text(offsetX*8 + 20, offsetY + 150, this.mission.getDescription(), {
-        const descText = this.add.text(offsetX*8 + 20, offsetY + 150, 'TEST DE LA MEJOR MISSION QUE EXISTE', {
+        const descText = this.add.text(offsetX*8 + 20, offsetY + 150, this.mission.getDescription(), {
+        //const descText = this.add.text(offsetX*8 + 20, offsetY + 150, 'TEST DE LA MEJOR MISSION QUE EXISTE', {
             fontSize: '14px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
@@ -59,6 +60,10 @@ export default class MissionScene extends Phaser.Scene {
         return descText;
     }  
     spawnScene(newWidth,newHeight,offsetX,offsetY){
+        //could take it from a list in the district of the mission
+        //this.district = this.mission.getDistrict(); and this.scene = this.district.getSceneFromMission();
+        //better getScene from mission
+
         //this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,this.mission.getScene());
         this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,'districtBorrascalScene1');
         return this.districtScene;
@@ -73,7 +78,6 @@ export default class MissionScene extends Phaser.Scene {
         });
         return this.closeButton;
     }
-    
     createButton(x, y, image, swapImage,callback) {
         const button = this.add.image(x, y, image).setScale(1);
         const tooltip = this.add.text(0, 0, '', {
@@ -103,5 +107,16 @@ export default class MissionScene extends Phaser.Scene {
             if (callback) callback();
         });
         return button;
+    }
+    spawnButtons(){
+        //this.isEvent = this.mission.itIsEvent();
+        //this.isCorrupt = this.mission.itIsCorrupt();
+        this.isMinigame = this.mission.itIsMinigame();
+        if(this.isMinigame){
+
+        }else{
+            this.numberOfOptions = this.mission.getNumOptions();
+            this.optionsList = this.mission.getOptions();
+        }
     }
 }

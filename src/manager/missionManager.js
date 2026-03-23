@@ -4,8 +4,9 @@ import Mission from './mission.js';
 
 
 export default class missionManager{
-    constructor(scene){
+    constructor(scene,player){
         this.scene = scene;
+        this.player = player;
         this.regularMissions = [];
         this.upMoneyMissions = [];
         this.upPopularityMissions = [];
