@@ -8,7 +8,7 @@ export default class gameManager{
     constructor(scene,game){
         this.scene = scene;
         this.game = game;
-        this.player = new Player(1000000, 100, 20, 80 , 'presidente' , 'presidente');
+        this.player = new Player(1000000, 100, 100, 20, 80 , 'presidente' , 'presidente');
         this.day=new Day(0);
         this.missionManager = new MissionManager(scene,this.player);
         this.map = new Map('map',null,null);
