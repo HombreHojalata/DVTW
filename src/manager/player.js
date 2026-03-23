@@ -1,7 +1,8 @@
 
 export default class Player {
-    constructor(money, energy, corruption, popularity, PNGpresident){
+    constructor(money, maxEnergy, energy, corruption, popularity, PNGpresident){
         this.money = money;
+        this.maxEnergy = maxEnergy;
         this.energy = energy;
         this.corruption = corruption;
         this.popularity = popularity;
@@ -14,6 +15,8 @@ export default class Player {
         if(this.money + amount < 0) this.money = 0;
         else this.money += amount;
     }
+    getMaxEnergy() { return this.maxEnergy; }
+    updateMaxEnergy(amount) { this.maxEnergy += amount; }
     getEnergy(){ return this.energy; }
     updateEnergy(amount){ this.energy += amount;}
     getCorruption(){ return this.corruption; }

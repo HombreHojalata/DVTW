@@ -5,6 +5,7 @@ import loadScene from '../assets/sprites/scenes/loadScene.png'          //NEED T
 
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
+import battery from '../assets/sprites/battery.png'
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/sprites/map/districtScenes/districtTemplate.png'
 import districtStoreTemplate from '../assets/sprites/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
@@ -141,6 +142,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('init', introScene);
     // MAP ASSETS
     this.load.image('map', map);
+    this.load.image('battery', battery);
     // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
