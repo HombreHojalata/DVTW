@@ -59,7 +59,8 @@ import decreaseSelectIcon from '../assets/sprites/icons/decreaseSelectIcon.png'
 
 //PROTOTYPE ASSETS, TO BE REPLACED
 import presidente from '../assets/sprites/presidente.png'                         //NEED TO BE REPLACE
-
+// MISSION ASSETS
+import missionTemplate from '../assets/sprites/mission/missionTemplate.png'
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
 import UpMoneyMission from '../assets/jsons/upMoney.json';
@@ -127,7 +128,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('buildingHospital', buildingHospital);
     this.load.image('buildingHotel', buildingHotel);
     this.load.image('buildingHouse', buildingHouse);
-     this.load.image('buildingPark', buildingPark);
+    this.load.image('buildingPark', buildingPark);
     // SPECIAL BUILDING ASSETS
     this.load.image('specialBuildingBorrascal', specialBuildingBorrascal);
     this.load.image('specialBuildingElNido', specialBuildingElNido);
@@ -144,9 +145,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image('increaseSelectIcon', increaseSelectIcon);
     this.load.image('decreaseIcon', decreaseIcon);
     this.load.image('decreaseSelectIcon', decreaseSelectIcon);
-    
     // PRESIDENTE ASSET
     this.load.image('presidente', presidente);
+    // MISSION ASSETS
+    this.load.image('missionTemplate',missionTemplate);
     //PROTOTYPE ASSETS, TO BE REPLACED
     this.load.image('vendedor', vendedor);
     this.load.image('pensa_icon', prensa_icon);

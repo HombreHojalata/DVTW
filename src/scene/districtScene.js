@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import footerUI from '../UI/footerUI.js';
 
 export default class DistrictScene extends Phaser.Scene {
     constructor() {
@@ -10,6 +11,7 @@ export default class DistrictScene extends Phaser.Scene {
     }
        
     create() {
+        console.log("DISTRICT");
         const baseWidth = this.scale.width;
         const baseHeight = this.scale.height;
         const newWidth = baseWidth * 0.9;
@@ -19,7 +21,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
-        this.playerMoney = this.add.text(200,700,`Dinero - ${this.player.getMoney()}$ `);        // STILL NEED AN ASSET FOR OTHER INFO
+        this.footerUI = new footerUI(this, this.player).create();
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
         //DISTRICT INFO
@@ -91,7 +93,7 @@ export default class DistrictScene extends Phaser.Scene {
         return newWidth - offsetX * (9 - this.builtList.length - 1);
     }
     // BUTTON
-    spawnStoreButton(newHeight,positionX){ //NEED TO BE FINISH
+    spawnStoreButton(newHeight,positionX){
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '14px',
             backgroundColor: '#000',
@@ -150,7 +152,7 @@ export default class DistrictScene extends Phaser.Scene {
         });
         this.spawnCleaningButton(newWidth,offsetX,newHeight,offsetY);
     }
-    createButton(x, y, image, swapImage, callback) {
+    createButton(x, y, image, swapImage,callback) {
         const button = this.add.image(x, y, image).setScale(1);
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '14px',
@@ -189,9 +191,9 @@ export default class DistrictScene extends Phaser.Scene {
             () => {
                 if(this.district.getTaxesPercentage() < 100){
                     this.district.addTaxesPercentage(5);
-                    this.updatePercentageText();
+                    this.taxesText.setText(this.district.getTaxesPercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
@@ -203,9 +205,9 @@ export default class DistrictScene extends Phaser.Scene {
             () =>  {
                 if(this.district.getTaxesPercentage() > 0){
                     this.district.addTaxesPercentage(-5);
-                    this.updatePercentageText();
+                    this.taxesText.setText(this.district.getTaxesPercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
@@ -219,13 +221,12 @@ export default class DistrictScene extends Phaser.Scene {
             () => {
                 if(this.district.getSecurityPercentage() < 100){
                     this.district.addSecurityPercentage(5);
-                    this.updatePercentageText();
+                    this.securityText.setText(this.district.getSecurityPercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
-        
         this.botonReducir = this.createButton(
             newWidth-offsetX, 
             newHeight - offsetY*15, 
@@ -234,9 +235,9 @@ export default class DistrictScene extends Phaser.Scene {
             () =>  {
                 if(this.district.getSecurityPercentage() > 0){
                     this.district.addSecurityPercentage(-5);
-                    this.updatePercentageText();
+                    this.securityText.setText(this.district.getSecurityPercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
@@ -250,13 +251,12 @@ export default class DistrictScene extends Phaser.Scene {
             () => {
                 if(this.district.getWorkSchedulePercentage() < 100){
                     this.district.addWorkSchedulePercentage(5);
-                    this.updatePercentageText();
+                    this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();             
                 }
             }
         );
-        
         this.botonReducir = this.createButton(
             newWidth - offsetX*6, 
             newHeight - offsetY*8, 
@@ -265,9 +265,9 @@ export default class DistrictScene extends Phaser.Scene {
             () =>  {
                 if(this.district.getWorkSchedulePercentage() > 0){
                     this.district.addWorkSchedulePercentage(-5);
-                    this.updatePercentageText();
+                    this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
@@ -281,13 +281,12 @@ export default class DistrictScene extends Phaser.Scene {
             () => {
                 if(this.district.getWorkSchedulePercentage() < 100){
                     this.district.addCleaningPercentage(5);
-                    this.updatePercentageText();
+                    this.cleaningText.setText(this.district.getCleaningPercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
-        
         this.botonReducir = this.createButton(
             newWidth-offsetX, 
             newHeight - offsetY*8, 
@@ -296,17 +295,11 @@ export default class DistrictScene extends Phaser.Scene {
             () =>  {
                 if(this.district.getCleaningPercentage() > 0){
                     this.district.addCleaningPercentage(-5);
-                    this.updatePercentageText();
+                    this.cleaningText.setText(this.district.getCleaningPercentage());
                     this.player.updateMoney(-5000);
-                    this.playerMoney.setText(`Dinero - ${this.player.getMoney()}`);
+                    this.footerUI.refreshMoney();
                 }
             }
         );
-    }
-    updatePercentageText(){
-        this.taxesText.setText(this.district.getTaxesPercentage());
-        this.securityText.setText(this.district.getSecurityPercentage());
-        this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
-        this.cleaningText.setText(this.district.getCleaningPercentage());
     }
 }

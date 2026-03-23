@@ -13,5 +13,5 @@ export default class DistrictElNido extends District {
         return list;
     }
     // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingElNido',this.special_building,50000,40000,0,0,0);}
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingElNido',this.special_building,50000,40000,0,100);}
 };

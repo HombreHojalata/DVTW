@@ -88,33 +88,18 @@ export default class footerUI {
             }
         ).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-        this.blackMarketText.on('pointerover', () => {
-            this.blackMarketText.setStyle({ backgroundColor: '#e99b15' });
-        });
-
-        this.blackMarketText.on('pointerout', () => {
-            this.blackMarketText.setStyle({ backgroundColor: '#cc7a00' });
-        });
-
+        this.blackMarketText.on('pointerover', () => {this.blackMarketText.setStyle({ backgroundColor: '#e99b15' });});
+        this.blackMarketText.on('pointerout', () => {this.blackMarketText.setStyle({ backgroundColor: '#cc7a00' });});
         this.blackMarketText.on('pointerup', () => {
-            if (this.scene.missionIcon) {
-                this.scene.missionIcon.setVisible(false);
+            if (this.scene.scene.key === 'gameScene'){
+                if (this.scene.missionIcon) {this.scene.missionIcon.setVisible(false);}
+                this.scene.scene.pause();
+                this.scene.scene.launch('blackMarketScene', { page: 0});
             }
-
-            this.scene.scene.launch('blackMarketScene', { page: 0 });
-            this.scene.scene.pause();
         });
+        return this;
     }
 
-    refreshMoney() {
-        if (this.moneyText) {
-            this.moneyText.setText(this.player.getMoney() + '$');
-        }
-    }
-
-    updateDistrictFooter(district) {
-        if (this.districtTitleText) {
-            this.districtTitleText.setText(district.getName());
-        }
-    }
+    refreshMoney() {if(this.moneyText) {this.moneyText.setText(this.player.getMoney() + '$');}}
+    updateDistrictFooter(district) {if(this.districtTitleText) {this.districtTitleText.setText(district.getName());}}
 }
