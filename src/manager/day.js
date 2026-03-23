@@ -1,7 +1,6 @@
-import Phaser from 'phaser';
 
 
-class day{
+export default class day{
 
     constructor(previousDay){
         this.dayNumber = previousDay ? previousDay.dayNumber + 1 : 1;

@@ -1,9 +1,17 @@
-import Boot from './boot.js';
-import Intro from './intro.js';
-import Configuration from './configuration.js';
-import Level from './level.js';
-import End from './end.js';
+console.log("111");
 import Phaser from 'phaser';
+import IntroScene from './scene/introScene.js';
+console.log("boot");
+
+import Boot from './boot.js';
+import IntroScene from './scene/introScene.js';
+import ConfigurationScene from './scene/configurationScene.js';
+import GameScene from './scene/gameScene.js';
+import DistrictScene from './scene/districtScene.js';
+import BlackMarketScene from './scene/blackMarketScene.js';
+import FinishScene from './scene/finishScene.js';
+
+console.log("222");
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -22,7 +30,7 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, Intro, Configuration, Level, End],
+    scene: [Boot, IntroScene, ConfigurationScene, GameScene, DistrictScene, BlackMarketScene, FinishScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -31,5 +39,4 @@ let config = {
         }
     }
 };
-
 new Phaser.Game(config);

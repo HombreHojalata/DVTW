@@ -1,20 +1,45 @@
 import Phaser from 'phaser'
+// PRINCIPAL SCENE ASSETS
 import cargaPantalla from '../assets/sprites/PrototipoCargaPantalla.png'
-import iniPantalla from '../assets/sprites/PrototipoIniPantalla.png'
-import worldMap from '../assets/sprites/Mapa.png'
-import presidente from '../assets/sprites/Presidente.png'
+import iniPantalla from '../assets/sprites/pantallaInicio.png'
+// MAP ASSETS
+import map from '../assets/sprites/map/mapTemplate.png'
+import districtTemplate from '../assets/sprites/map/districtTemplate.png'
+import districtBorrascal from '../assets/sprites/map/districtBorrascal.png'
+import districtBorrascalSpecial from '../assets/sprites/map/districtBorrascalSpecial.png'
+import districtElNido from '../assets/sprites/map/districtElNido.png'
+import districtElNidoSpecial from '../assets/sprites/map/districtElNidoSpecial.png'
+import districtGuinea from '../assets/sprites/map/districtGuinea.png'
+import districtGuineaSpecial from '../assets/sprites/map/districtGuineaSpecial.png'
+import districtNuevaPradera from '../assets/sprites/map/districtNuevaPradera.png'
+import districtNuevaPraderaSpecial from '../assets/sprites/map/districtNuevaPraderaSpecial.png'
+import districtSahar from '../assets/sprites/map/districtSahar.png'
+import districtSaharSpecial from '../assets/sprites/map/districtSaharSpecial.png'
+import districtSomosagua from '../assets/sprites/map/districtSomosagua.png'
+import districtSomosaguaSpecial from '../assets/sprites/map/districtSomosaguaSpecial.png'
+
+// BLACK MARKET ASSETS
+import vendedor from '../assets/sprites/Vendedor.png' 
+import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
+import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
 
 //PROTOTYPE ASSETS, TO BE REPLACED
-import image from '../assets/sprites/Cine1Real.png'
-import fabrica from '../assets/sprites/Fabrica.png'
+import presidente from '../assets/sprites/presidente.png'
 import testSahar from '../assets/sprites/test1.png'
 import missionIconPng from '../assets/sprites/missionIcon2.png'
 import configurationIcon from '../assets/sprites/configurationIcon.png'
 import closeIcon from '../assets/sprites/closeIcon.png'
-import district from '../assets/sprites/prototipoDistrict.png'
 import blackMarket from '../assets/sprites/prototipoBlackMarket.png'
 
+// JSON misiones
+import RegularMission from '../assets/jsons/regularMissions.json';
+import UpMoneyMission from '../assets/jsons/upMoney.json';
+import UpPopularityMission from '../assets/jsons/upPopularity.json';
+import downCorruptionMission from '../assets/jsons/downCorruption.json';
+import downPopularityMission from '../assets/jsons/downPopularity.json';
+import downMoneyMission from '../assets/jsons/downMoney.json';
 /**
+ * 
  * Escena para la precarga de los assets que se usarán en el juego.
  * Esta escena se puede mejorar añadiendo una imagen del juego y una 
  * barra de progreso de carga de los assets
@@ -30,19 +55,45 @@ export default class Boot extends Phaser.Scene {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
 
+    //LOAD de JSONS para las misiones
+    this.cache.json.add('regularMissions', RegularMission);
+    this.cache.json.add('upMoney', UpMoneyMission);
+    this.cache.json.add('upPopularity', UpPopularityMission);
+    this.cache.json.add('downCorruption', downCorruptionMission);
+    this.cache.json.add('downPopularity', downPopularityMission);
+    this.cache.json.add('downMoney', downMoneyMission);
+
+
     this.load.image('carga', cargaPantalla);
     this.load.image('inicio', iniPantalla);
-    this.load.image('map', worldMap);
+    // MAP ASSETS
+    this.load.image('map', map);
+    // DISTRICT ASSETS
+    this.load.image('districtTemplate', districtTemplate);
+    this.load.image('districtBorrascal', districtBorrascal);
+    this.load.image('districtElNido', districtElNido);
+    this.load.image('districtGuinea', districtGuinea);
+    this.load.image('districtNuevaPradera', districtNuevaPradera);
+    this.load.image('districtSahar', districtSahar);
+    this.load.image('districtSomosagua', districtSomosagua);
+    // SPECIAL DISTRICT ASSETS
+    this.load.image('districtBorrascalSpecial', districtBorrascalSpecial);
+    this.load.image('districtElNidoSpecial', districtElNidoSpecial);
+    this.load.image('districtGuineaSpecial', districtGuineaSpecial);
+    this.load.image('districtNuevaPraderaSpecial', districtNuevaPraderaSpecial);
+    this.load.image('districtSaharSpecial', districtSaharSpecial);
+    this.load.image('districtSomosaguaSpecial', districtSomosaguaSpecial);
+    //
     this.load.image('presidente', presidente);
     //PROTOTYPE ASSETS, TO BE REPLACED
-    this.load.image('cine1real', image);
-    this.load.image('fabrica', fabrica);
     this.load.image('testSahar', testSahar);
     this.load.image('missionIcon', missionIconPng);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
-    this.load.image('district', district);
     this.load.image('blackMarket', blackMarket);
+    this.load.image('vendedor', vendedor);
+    this.load.image('pensa_icon', prensa_icon);
+    this.load.image('hotel_icon', hotel_icon);
   }
 
   create() {
@@ -67,7 +118,7 @@ export default class Boot extends Phaser.Scene {
     this.tweens.add({
       targets: { width: 0 },
       width: barWidth,
-      duration: 4000,                                 //4 SECONDS
+      duration: 1500, //1.5 SECONDS
       ease: 'Linear',
       onUpdate: (tween) => {
         progressBar.clear();
