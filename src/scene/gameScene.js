@@ -69,7 +69,7 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 0.01 * 60 * 1000;
+        this.totalDayDurationMs = 8 * 60 * 1000;
         this.energyTickMs = 250;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
