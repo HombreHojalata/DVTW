@@ -45,6 +45,9 @@ export default class GameScene extends Phaser.Scene {
         this.endDayBtnUI.create();
         this.footerUI.create();
 
+        const { width, height } = this.sys.game.config;
+        this.nightOverlay = this.add.rectangle(0, 0, width, height - 75, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
+
         this.events.on('resume', () => {
             this.refreshHUD();
         });
@@ -66,7 +69,7 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 8 * 60 * 1000;
+        this.totalDayDurationMs = 0.01 * 60 * 1000;
         this.energyTickMs = 250;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
@@ -85,6 +88,12 @@ export default class GameScene extends Phaser.Scene {
                 if (this.player.getEnergy() <= 0) {
                     this.energyTimerEvent.remove(false);
                     console.log('ENERGÍA AGOTADA');
+                    this.tweens.add({
+                        targets: this.nightOverlay,
+                        alpha: 0.35,
+                        duration: 2000,
+                        ease: 'Power2'
+                    });
                 }
             }
         });
