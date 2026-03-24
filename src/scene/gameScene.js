@@ -2,7 +2,8 @@ import Phaser from 'phaser';
 import gameManager from '../gameManager.js';
 import topUI from '../UI/topUI.js';
 import footerUI from '../UI/footerUI.js';
-import bateriaUI from '../UI/bateriaUI.js';
+import batteryUI from '../UI/batteryUI.js';
+import endDayBtnUI from '../UI/endDayBtnUI.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -35,11 +36,13 @@ export default class GameScene extends Phaser.Scene {
         this.gameManager.spawnAssets(this);
 
         this.topUI = new topUI(this, this.player);
-        this.bateriaUI = new bateriaUI(this, this.player);
+        this.batteryUI = new batteryUI(this, this.player);
+        this.endDayBtnUI = new endDayBtnUI(this, this.player);
         this.footerUI = new footerUI(this, this.player);
 
         this.topUI.create();
-        this.bateriaUI.create();
+        this.batteryUI.create();
+        this.endDayBtnUI.create();
         this.footerUI.create();
 
         this.events.on('resume', () => {
@@ -63,7 +66,7 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 8 * 60 * 1000;
+        this.totalDayDurationMs = 0.05 * 60 * 1000;
         this.energyTickMs = 250;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
@@ -92,8 +95,8 @@ export default class GameScene extends Phaser.Scene {
             this.topUI.refresh();
         }
 
-        if (this.bateriaUI) {
-            this.bateriaUI.refresh();
+        if (this.batteryUI) {
+            this.batteryUI.refresh();
         }
 
         if (this.footerUI) {

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class bateriaUI {
+export default class batteryI {
     constructor(scene, player) {
         this.scene = scene;
         this.player = player;
