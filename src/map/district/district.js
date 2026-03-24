@@ -35,7 +35,8 @@ export default class District {
     }
     // ASSETS
     spawnDistrict(scene){
-        const button = scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial)
+        this.texture = this.is_special_built ? this.PNGwithSpecial : this.PNGwithOutSpecial;
+        const button = scene.add.image(this.posX, this.posY, this.texture)
             .setOrigin(0)
             .setScale(1)
             .setInteractive({ useHandCursor: true });
@@ -45,13 +46,8 @@ export default class District {
             scene.updateDistrictFooter(this);
             scene.scene.pause('gameScene');
             scene.scene.launch('districtScene', { district: this });
-            //scene.scene.bringToTop('districtScene');
         });
         return button;
-    }
-    swapDistrict(scene) {
-        if(this.special_building) return scene.add.image(this.posX, this.posY, this.PNGwithSpecial).setOrigin(0).setScale(0.6);
-        else return scene.add.image(this.posX, this.posY, this.PNGwithOutSpecial).setOrigin(0).setScale(0.6);
     }
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}
@@ -86,7 +82,7 @@ export default class District {
     getWorkSchedulePercentage() {return this.workSchedule;}
     getCleaningPercentage() {return this.cleaning;}
     addTaxesPercentage(quantity){
-        if((quantity+this.taxes)>=100) this.taxes = 100;
+        if((quantity+this.taxes)>=100) this.taxes = 100;                                            //THIS TWO IF,ELSE WE DONT REALLY NEED IT 
         else if((quantity+this.taxes)<=0) this.taxes = 0;
         else this.taxes+=quantity;
     }
