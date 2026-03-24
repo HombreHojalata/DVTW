@@ -149,7 +149,7 @@ export default class Boot extends Phaser.Scene {
     // UI ASSETS
     this.load.image('battery', battery);
     this.load.image('endDayNormal', endDayNormal);
-    this.load.image('endDayBrigth', endDayBright);
+    this.load.image('endDayBright', endDayBright);
     this.load.image('endDayPressed', endDayPressed);
     // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);

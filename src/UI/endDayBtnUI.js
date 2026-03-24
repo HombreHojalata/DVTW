@@ -1,54 +1,53 @@
 import Phaser from 'phaser';
+import DistrictNuevaPradera from '../map/district/districtNuevaPradera';
 
 export default class endDayBtnUI {
     constructor(scene, player) {
         this.scene = scene;
         this.player = player;
-        this.isReady = false;
+        this.isOver = false;
+        this.scaleValue = 0.8;
     }
 
     create() {
         const batteryWidth = 222;
         const batteryHeight = 466;
         const batteryX = this.scene.sys.game.config.width - batteryWidth - 20;
-        const batteryBottomY = 100 + batteryHeight;
+        const batteryBottomY = 80 + batteryHeight;
 
-        const btnWidth = 290;
         const x = batteryX + (batteryWidth / 2);
         const y = batteryBottomY + 60;
 
-        this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(5);
+        this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(5).setScale(this.scaleValue);
 
-        this.btn.on('pointover', () => {
-            if (this.isReady) {
-                this.scene.tweens.add({
-                    targets: this.btn,
-                    scale: 1.05,
-                    duration: 80
-                });
-            }
+        this.btn.on('pointerover', () => {
+            this.scene.tweens.add({
+                targets: this.btn,
+                scale: this.scaleValue * 1.05,
+                duration: 80,
+            });
         });
 
         this.btn.on('pointerout', () => {
-            if (this.isReady) {
-                this.btn.setTexture('endDayBright');
-                this.scene.tweens.add({
-                    targets: this.btn,
-                    scale: 1,
-                    duration: 80
-                });
-            }
+            this.btn.setTexture(this.isOver ? 'endDayBright' : 'endDayNormal');
+            this.scene.tweens.add({
+                targets:this.btn,
+                scale: this.scaleValue * 0.95,
+                duration: 80
+            })
         });
 
         this.btn.on('pointerdown', () => {
-            if (this.isReady)
-                this.btn.setTexture('endDayPressed');
+            this.btn.setTexture('endDayPressed');
         });
 
         this.btn.on('pointerup', () => {
-            if (this.isReady) {
+            if (this.isOver) {
                 this.btn.setTexture('endDayBright');
                 this.finishDay();
+            } else {
+                this.btn.setTexture('endDayNormal');
+                this.askConfirmation();
             }
         });
     }
@@ -56,20 +55,25 @@ export default class endDayBtnUI {
     refresh() {
         const energy = this.player.getEnergy();
 
-        if (energy <= 0 && !this.isReady) {
-            this.isReady = true;
+        if (energy <= 0 && !this.isOver) {
+            this.isOver = true;
             this.btn.setTexture('endDayBright');
 
             this.scene.tweens.add({
                 targets: this.btn,
-                scale: 1.1,
+                scale: this.scaleValue * 1.1,
                 duration: 100,
                 yoyo: true
             });
-        } else if (energy > 0) {
-            this.isReady = false;
+        } else if (energy > 0 && this.isOver) {
+            this.isOver = false;
             this.btn.setTexture('endDayNormal');
         }
+    }
+
+    askConfirmation() { // TODO: Completar
+        const asking = window.confirm("Aún te queda energía ¿segur@ que quieres terminar ya el día?");
+        if (asking) this.finishDay();
     }
 
     finishDay() { // TODO: Completar con lógica de acabar dñias...

@@ -23,6 +23,7 @@ export default class batteryI {
         this.energyBackground = this.scene.add.rectangle(this.innerX, this.innerY, this.innerWidth, this.innerHeight, 0x1b1b1b, 0.9).setOrigin(0).setDepth(1);
         this.energyFill = this.scene.add.rectangle(this.innerX, this.innerY + this.innerHeight, this.innerWidth, this.innerHeight, 0x3d8bff).setOrigin(0, 1).setDepth(2);
         this.batteryFrame = this.scene.add.image(batteryX, batteryY, 'battery').setOrigin(0).setDepth(3);
+        this.batteryFrame.postFX.addShadow(-5, 5, 0.5, 1, 0x000000, 0.8);
 
         const sections = 4;
         const sectionGap = 6;
@@ -35,7 +36,7 @@ export default class batteryI {
 
         const labelStyle = {
             fontSize: '14px',
-            color: '#d8d8d8',
+            color: '#ffffff',
             fontStyle: 'bold',
             fontFamily: 'Georgia'
         };
@@ -46,7 +47,7 @@ export default class batteryI {
             fontFamily: 'Georgia'
         };
 
-        this.energyLabelTitle = this.scene.add.text(textCenterX, bottomSectionY + 15, 'ENERGÍA:', labelStyle).setOrigin(0.5, 0).setDepth(4);
+        this.energyLabelTitle = this.scene.add.text(textCenterX, bottomSectionY + 20, 'ENERGÍA:', labelStyle).setOrigin(0.5, 0).setDepth(4);
         this.energyNumberText = this.scene.add.text(textCenterX, bottomSectionY + sectionHeight - 10, '', numberStyle).setOrigin(0.5, 1.5).setDepth(4);
 
         this.refresh();
@@ -55,12 +56,12 @@ export default class batteryI {
     refresh() {
         if (!this.energyNumberText || !this.energyFill) return;
 
-        const currentEnergy = Math.max(0, Math.floor(this.player.getEnergy()));
-        const maxEnergy = Math.floor(this.player.getMaxEnergy());
+        const currentEnergy = Math.max(0, this.player.getEnergy());
+        const maxEnergy = this.player.getMaxEnergy();
 
         if (!maxEnergy || maxEnergy === 0) return;
 
-        this.energyNumberText.setText(`${currentEnergy}/${maxEnergy}`);
+        this.energyNumberText.setText(Math.floor(`${currentEnergy}`) + '/' +  Math.floor(`${maxEnergy}`));
 
         const energyPercent = Phaser.Math.Clamp(currentEnergy / maxEnergy, 0, 1);
 
@@ -68,8 +69,13 @@ export default class batteryI {
         if (energyPercent > 0.75) sectionColor = 0x4fc96b;
         else if (energyPercent > 0.50) sectionColor = 0xb7d94b;
         else if (energyPercent > 0.25) sectionColor = 0xe0a93b;
-        else if (energyPercent > 0) sectionColor = 0xc94a4a;
-        else sectionColor = 0x5a1f1f;
+        else if (energyPercent > 0.05) {
+            sectionColor = 0xc94a4a;
+            this.energyNumberText.setColor('#fffb0b');
+        } else if (energyPercent > 0) {
+            sectionColor = 0x5a1f1f;
+            this.energyNumberText.setColor('#ff0000');
+        } else this.energyNumberText.setColor('#5a1f1f');
 
         this.energyFill.displayHeight = this.innerHeight * energyPercent;
         this.energyFill.setFillStyle(sectionColor, 1);
