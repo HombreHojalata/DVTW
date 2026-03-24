@@ -8,9 +8,8 @@ export default class MissionScene extends Phaser.Scene {
 
     init(data) {
         this.mission = data.mission;
-        //this.gameManager = data.gameManager;
-        //this.player = gameManager.getPlayer();
-        //this.map = gameManager.getMap();
+        this.player = data.player;
+        this.map = data.map;
     }
        
     create() {
@@ -23,8 +22,9 @@ export default class MissionScene extends Phaser.Scene {
         const offsetY = (baseHeight - newHeight) / 2 - 50;
         this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
         //PLAYER INFO
-        this.player = this.registry.get('gameManager').getPlayer();
-        this.footerUI = new footerUI(this, this.player).create();
+        //this.player = this.registry.get('gameManager').getPlayer();
+        //this.map = this.registry.get('gameManager').getMap();
+        //this.footerUI = new footerUI(this, this.player).create();
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
         //MISSION INFO
@@ -100,13 +100,13 @@ export default class MissionScene extends Phaser.Scene {
         return this.closeButton;
     }
     createOptionButton(x, y, option) {
-        const getColor = (value) => value >= 0 ? '#00ff00' : '#ff0000';
         const buttonWidth = 300;   // ancho fijo del botón
         const buttonHeight = 180;  // alto fijo del botón
         const padding = 20;
         const lineSpacing = 6;
+        const getColor = (value) => value >= 0 ? '#00ff00' : '#ff0000';
         const lines = [
-            { text: option.description, color: '#ffffff', size: '16px' },
+            { text: option.description, color: '#ffffff', size: '18px', style: 'bold'},
             { text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) },
             { text: `Energía: ${option.energy}`, color: getColor(option.energy) },
             { text: `Coste: ${option.money}`, color: getColor(-option.money) },                         //JUSTO LA INVERSA SI DA DINERO VERDE, SI CUESTA ROJO
@@ -120,7 +120,7 @@ export default class MissionScene extends Phaser.Scene {
         let currentY = startY;
         const textObjects = lines.map(line => {
             const txt = this.add.text(x, currentY, line.text, {
-                fontSize: line.size || '14px',
+                fontSize: line.size || '15px',
                 color: line.color,
                 align: 'center',
                 wordWrap: { width: buttonWidth - padding * 2 }
@@ -152,7 +152,9 @@ export default class MissionScene extends Phaser.Scene {
             this.district.increasePopulation(option.popularity);
             this.player.updateEnergy(option.energy);
             this.player.updateCorruption(option.corruption);
-            this.player.updateMoney(option.money);
+            this.player.updateMoney(-option.money);
+            this.scene.stop();
+            this.scene.resume('gameScene');
         });
         return { bg, texts: textObjects };
     }
@@ -165,16 +167,22 @@ export default class MissionScene extends Phaser.Scene {
         }else{
             this.numberOfOptions = this.mission.getNumOptions();
             this.optionsList = this.mission.getOptions();
-            this.optionsList.forEach((option, index) => {
-                const x = 400 + (index * 350);; // ajusta posición
-                const y = 500; // para que no se monten
-                this.createOptionButton(
-                    x,
-                    y,
-                    option
-                );
-
-            });
+            switch(this.numberOfOptions){
+                case 2: this.missionWithTwoOptions(this.optionsList); break;
+                case 1: this.missionWithOneOption(this.optionsList); break;
+            }
         }
+    }
+    missionWithTwoOptions(optionsList){
+        optionsList.forEach((option, index) => {
+            const x = 400 + (index * 350);
+            const y = 550;
+            this.createOptionButton(x,y,option);
+        });
+    }
+    missionWithOneOption(optionList){
+        const x = 750;
+        const y = 550;
+        this.createOptionButton(x,y,optionList[0]);
     }
 }
