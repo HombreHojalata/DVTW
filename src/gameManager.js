@@ -23,7 +23,7 @@ export default class gameManager{
         this.presidente = this.player.spawnPresident(scene);
     }
     nextDay() {
-        this.day++;
+        this.day.nextDayNumber();
         this.player.setEnergy(this.player.getMaxEnergy());
     }
 }
