@@ -12,7 +12,7 @@ export default class footerUI {
         const footerX = (gameWidth - footerWidth) / 2;
         const footerY = gameHeight - footerHeight;
 
-        this.footerBg = this.scene.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0);
+        this.footerBg = this.scene.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0).setDepth(10);
 
         const sectionMoney = footerWidth / 4;
         const sectionDistrict = footerWidth / 2;
@@ -21,7 +21,7 @@ export default class footerUI {
         const innerHeight = footerHeight * innerScale;
 
         {
-            const g = this.scene.add.graphics();
+            const g = this.scene.add.graphics().setDepth(11);
             const x = footerX + (sectionMoney - sectionMoney * innerScale) / 2;
             const y = footerY + (footerHeight - innerHeight) / 2;
             const w = sectionMoney * innerScale;
@@ -39,10 +39,10 @@ export default class footerUI {
             footerY + footerHeight / 2,
             this.player.getMoney() + '$',
             { fontSize: '18px', color: '#fff' }
-        ).setOrigin(0.5);
+        ).setOrigin(0.5).setDepth(12);
 
         {
-            const g = this.scene.add.graphics();
+            const g = this.scene.add.graphics().setDepth(11);
             const x = footerX + sectionMoney + (sectionDistrict - sectionDistrict * innerScale) / 2;
             const y = footerY + (footerHeight - innerHeight) / 2;
             const w = sectionDistrict * innerScale;
@@ -60,10 +60,10 @@ export default class footerUI {
             footerY + footerHeight / 2,
             'QUACKINGTON DC',
             { fontSize: '23px', color: '#fff', fontStyle: 'bold' }
-        ).setOrigin(0.5);
+        ).setOrigin(0.5).setDepth(12);
 
         {
-            const g = this.scene.add.graphics();
+            const g = this.scene.add.graphics().setDepth(11);
             const x = footerX + sectionMoney + sectionDistrict + (sectionBlackMarket - sectionBlackMarket * innerScale) / 2;
             const y = footerY + (footerHeight - innerHeight) / 2;
             const w = sectionBlackMarket * innerScale;
@@ -86,7 +86,7 @@ export default class footerUI {
                 padding: { x: 8, y: 4 },
                 color: '#fff'
             }
-        ).setOrigin(0.5).setInteractive({ useHandCursor: true });
+        ).setOrigin(0.5).setInteractive({ useHandCursor: true }).setDepth(12);
 
         this.blackMarketText.on('pointerover', () => {this.blackMarketText.setStyle({ backgroundColor: '#e99b15' });});
         this.blackMarketText.on('pointerout', () => {this.blackMarketText.setStyle({ backgroundColor: '#cc7a00' });});

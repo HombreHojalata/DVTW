@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import DistrictNuevaPradera from '../map/district/districtNuevaPradera';
+import confirmationUI from './confirmationUI';
 
 export default class endDayBtnUI {
     constructor(scene, player) {
@@ -18,7 +18,7 @@ export default class endDayBtnUI {
         const x = batteryX + (batteryWidth / 2);
         const y = batteryBottomY + 60;
 
-        this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(5).setScale(this.scaleValue);
+        this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(10).setScale(this.scaleValue);
 
         this.btn.on('pointerover', () => {
             this.scene.tweens.add({
@@ -32,7 +32,7 @@ export default class endDayBtnUI {
             this.btn.setTexture(this.isOver ? 'endDayBright' : 'endDayNormal');
             this.scene.tweens.add({
                 targets:this.btn,
-                scale: this.scaleValue * 0.95,
+                scale: this.scaleValue,
                 duration: 80
             })
         });
@@ -50,6 +50,9 @@ export default class endDayBtnUI {
                 this.askConfirmation();
             }
         });
+
+        this.confirmationUI = new confirmationUI(this.scene, () => this.finishDay());
+        this.confirmationUI.create();
     }
 
     refresh() {
@@ -71,9 +74,8 @@ export default class endDayBtnUI {
         }
     }
 
-    askConfirmation() { // TODO: Completar
-        const asking = window.confirm("Aún te queda energía ¿segur@ que quieres terminar ya el día?");
-        if (asking) this.finishDay();
+    askConfirmation() {
+        this.confirmationUI.show();
     }
 
     finishDay() { // TODO: Completar con lógica de acabar dñias...

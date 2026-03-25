@@ -46,7 +46,7 @@ export default class GameScene extends Phaser.Scene {
         this.footerUI.create();
 
         const { width, height } = this.sys.game.config;
-        this.nightOverlay = this.add.rectangle(0, 0, width, height - 75, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
+        this.nightOverlay = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
 
         this.events.on('resume', () => {
             this.refreshHUD();
@@ -69,7 +69,7 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 8 * 60 * 1000;
+        this.totalDayDurationMs = 0.5 * 60 * 1000;
         this.energyTickMs = 250;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);

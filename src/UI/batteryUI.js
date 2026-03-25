@@ -20,9 +20,9 @@ export default class batteryI {
         this.innerWidth = batteryWidth - (innerPadding * 2);
         this.innerHeight = (batteryHeight - terminalHeight) - (innerPadding * 2);
 
-        this.energyBackground = this.scene.add.rectangle(this.innerX, this.innerY, this.innerWidth, this.innerHeight, 0x1b1b1b, 0.9).setOrigin(0).setDepth(1);
-        this.energyFill = this.scene.add.rectangle(this.innerX, this.innerY + this.innerHeight, this.innerWidth, this.innerHeight, 0x3d8bff).setOrigin(0, 1).setDepth(2);
-        this.batteryFrame = this.scene.add.image(batteryX, batteryY, 'battery').setOrigin(0).setDepth(3);
+        this.energyBackground = this.scene.add.rectangle(this.innerX, this.innerY, this.innerWidth, this.innerHeight, 0x1b1b1b, 0.9).setOrigin(0).setDepth(10);
+        this.energyFill = this.scene.add.rectangle(this.innerX, this.innerY + this.innerHeight, this.innerWidth, this.innerHeight, 0x3d8bff).setOrigin(0, 1).setDepth(11);
+        this.batteryFrame = this.scene.add.image(batteryX, batteryY, 'battery').setOrigin(0).setDepth(12);
         this.batteryFrame.postFX.addShadow(-5, 5, 0.5, 1, 0x000000, 0.8);
 
         const sections = 4;
@@ -47,8 +47,8 @@ export default class batteryI {
             fontFamily: 'Georgia'
         };
 
-        this.energyLabelTitle = this.scene.add.text(textCenterX, bottomSectionY + 20, 'ENERGÍA:', labelStyle).setOrigin(0.5, 0).setDepth(4);
-        this.energyNumberText = this.scene.add.text(textCenterX, bottomSectionY + sectionHeight - 10, '', numberStyle).setOrigin(0.5, 1.5).setDepth(4);
+        this.energyLabelTitle = this.scene.add.text(textCenterX, bottomSectionY + 20, 'ENERGÍA:', labelStyle).setOrigin(0.5, 0).setDepth(13);
+        this.energyNumberText = this.scene.add.text(textCenterX, bottomSectionY + sectionHeight - 10, '', numberStyle).setOrigin(0.5, 1.5).setDepth(13);
 
         this.refresh();
     }
@@ -75,7 +75,7 @@ export default class batteryI {
         } else if (energyPercent > 0) {
             sectionColor = 0x5a1f1f;
             this.energyNumberText.setColor('#ff0000');
-        } else this.energyNumberText.setColor('#5a1f1f');
+        } else this.energyNumberText.setColor('#742020ff');
 
         this.energyFill.displayHeight = this.innerHeight * energyPercent;
         this.energyFill.setFillStyle(sectionColor, 1);
