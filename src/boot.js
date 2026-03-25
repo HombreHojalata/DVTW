@@ -112,6 +112,7 @@ import UpPopularityMission from '../assets/jsons/upPopularity.json';
 import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
+import somosaguaCutOut from '../assets/jsons/test_map.json';
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -136,6 +137,7 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downCorruption', downCorruptionMission);
     this.cache.json.add('downPopularity', downPopularityMission);
     this.cache.json.add('downMoney', downMoneyMission);
+    this.cache.json.add('somosaguasCutOut', somosaguaCutOut);
 
 
     this.load.image('load', loadScene);
