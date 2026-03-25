@@ -2,7 +2,8 @@ import Phaser from 'phaser';
 import gameManager from '../gameManager.js';
 import topUI from '../UI/topUI.js';
 import footerUI from '../UI/footerUI.js';
-import bateriaUI from '../UI/bateriaUI.js';
+import batteryUI from '../UI/batteryUI.js';
+import endDayBtnUI from '../UI/endDayBtnUI.js';
 
 /**
  * Escena principal del juego. La escena se compone de una serie de plataformas 
@@ -35,12 +36,17 @@ export default class GameScene extends Phaser.Scene {
         this.gameManager.spawnAssets(this);
 
         this.topUI = new topUI(this, this.player);
-        this.bateriaUI = new bateriaUI(this, this.player);
+        this.batteryUI = new batteryUI(this, this.player);
+        this.endDayBtnUI = new endDayBtnUI(this, this.player);
         this.footerUI = new footerUI(this, this.player);
 
         this.topUI.create();
-        this.bateriaUI.create();
+        this.batteryUI.create();
+        this.endDayBtnUI.create();
         this.footerUI.create();
+
+        const { width, height } = this.sys.game.config;
+        this.nightOverlay = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
 
         this.events.on('resume', () => {
             this.refreshHUD();
@@ -56,6 +62,8 @@ export default class GameScene extends Phaser.Scene {
             this.scene.pause('gameScene');
             this.scene.launch('missionScene', { mission: this.thisDayMission, player: this.player, map: this.map});         //falta pasarle player y map o solo gameManager
         });
+
+        this.showDayIntro();
     }
     /*
     Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
@@ -63,7 +71,7 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 8 * 60 * 1000;
+        this.totalDayDurationMs = 0.5 * 60 * 1000;
         this.energyTickMs = 250;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
@@ -82,6 +90,12 @@ export default class GameScene extends Phaser.Scene {
                 if (this.player.getEnergy() <= 0) {
                     this.energyTimerEvent.remove(false);
                     console.log('ENERGÍA AGOTADA');
+                    this.tweens.add({
+                        targets: this.nightOverlay,
+                        alpha: 0.35,
+                        duration: 2000,
+                        ease: 'Power2'
+                    });
                 }
             }
         });
@@ -92,8 +106,12 @@ export default class GameScene extends Phaser.Scene {
             this.topUI.refresh();
         }
 
-        if (this.bateriaUI) {
-            this.bateriaUI.refresh();
+        if (this.batteryUI) {
+            this.batteryUI.refresh();
+        }
+
+        if (this.endDayBtnUI) {
+            this.endDayBtnUI.refresh();
         }
 
         if (this.footerUI) {
@@ -105,5 +123,45 @@ export default class GameScene extends Phaser.Scene {
         if (this.footerUI) {
             this.footerUI.updateDistrictFooter(district);
         }
+    }
+
+    showDayIntro() {
+        const { width, height } = this.sys.game.config;
+        const currentDay = this.gameManager.getDay().getDayNumber();
+
+        const introContainer = this.add.container(0, 0).setDepth(100);
+        const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
+        const dayText = this.add.text(width / 2, height / 2, `DÍA ${currentDay}`, {
+            fontSize: '80px',
+            fontFamily: 'Times New Roman',
+            fontWeight: 'bolf',
+            color: '#ffffff'
+        }).setOrigin(0.5);
+
+        introContainer.add([bg, dayText]);
+
+        this.time.delayedCall(1500, () => {
+            this.tweens.add({
+                targets: introContainer,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => introContainer.destroy()
+            });
+        });
+    }
+
+    finishDay() {
+        console.log("DÍA TERMINADO");
+        
+        this.input.enabled = false;
+        if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
+
+        this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+            this.gameManager.nextDay();
+            this.scene.restart();
+        });
     }
 }

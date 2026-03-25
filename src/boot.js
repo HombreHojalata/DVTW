@@ -5,7 +5,12 @@ import loadScene from '../assets/sprites/scenes/loadScene.png'          //NEED T
 
 // MAP ASSETS
 import map from '../assets/sprites/map/mapTemplate.png'
+// UI ASSETS
 import battery from '../assets/sprites/battery.png'
+import endDayNormal from '../assets/sprites/endDayNormal.png'
+import endDayBright from '../assets/sprites/endDayBright.png'
+import endDayPressed from '../assets/sprites/endDayPressed.png'
+import confirmationUI from '../assets/sprites/confirmationUI.png'
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/sprites/map/districtScenes/districtTemplate.png'
 import districtStoreTemplate from '../assets/sprites/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
@@ -113,6 +118,10 @@ import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
 import somosaguaCutOut from '../assets/jsons/test_map.json';
+
+//audio
+import AudioManager from '../src/manager/audioManager.js'
+import gameAudio from '../assets/sprites/audio/il porco rosso.mp3';
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -144,7 +153,12 @@ export default class Boot extends Phaser.Scene {
     this.load.image('init', introScene);
     // MAP ASSETS
     this.load.image('map', map);
+    // UI ASSETS
     this.load.image('battery', battery);
+    this.load.image('endDayNormal', endDayNormal);
+    this.load.image('endDayBright', endDayBright);
+    this.load.image('endDayPressed', endDayPressed);
+    this.load.image('confirmationUI', confirmationUI);
     // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
@@ -242,10 +256,19 @@ export default class Boot extends Phaser.Scene {
     this.load.image('vendedor', vendedor);
     this.load.image('pensa_icon', prensa_icon);
     this.load.image('hotel_icon', hotel_icon);
+
+
+    //audio?
+    this.load.audio('bgMusic', gameAudio);
+
   }
 
   create() {
-    this.add.image(750, 375, 'load');                                                                //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.add.image(750, 375, 'load');  
+    
+    //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.audioManager = new AudioManager(this);
+    this.audioManager.playMusic('bgMusic');
     // Crear la barra de carga
     const barWidth = 600;
     const barHeight = 30;
