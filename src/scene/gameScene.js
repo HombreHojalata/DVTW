@@ -62,6 +62,8 @@ export default class GameScene extends Phaser.Scene {
             this.scene.pause('gameScene');
             this.scene.launch('missionScene', { mission: this.thisDayMission, player: this.player, map: this.map});         //falta pasarle player y map o solo gameManager
         });
+
+        this.showDayIntro();
     }
     /*
     Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
@@ -121,5 +123,45 @@ export default class GameScene extends Phaser.Scene {
         if (this.footerUI) {
             this.footerUI.updateDistrictFooter(district);
         }
+    }
+
+    showDayIntro() {
+        const { width, height } = this.sys.game.config;
+        const curretnDay = this.gameManager.getDay();
+
+        const introContainer = this.add.container(0, 0).setDepth(100);
+        const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
+        const dayText = this.add.text(width / 2, height / 2, `DÍA ${curretnDay}`, {
+            fontSize: '80px',
+            fontFamily: 'Courrier New',
+            fontWeight: 'bolf',
+            color: '#ffffff'
+        }).setOrigin(0.5);
+
+        introContainer.add([bg, dayText]);
+
+        this.time.delayedCall(1500, () => {
+            this.tweens.add({
+                targets: introContainer,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => introContainer.destroy()
+            });
+        });
+    }
+
+    finishDay() {
+        console.log("DÍA TERMINADO");
+        
+        this.input.enabled = false;
+        if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
+
+        this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+            this.gameManager.nextDay();
+            this.scene.restart();
+        });
     }
 }

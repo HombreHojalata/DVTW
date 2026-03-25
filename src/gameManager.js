@@ -22,5 +22,8 @@ export default class gameManager{
         this.districtList = this.map.spawnDistricts(scene);
         this.presidente = this.player.spawnPresident(scene);
     }
-
+    nextDay() {
+        this.day++;
+        this.player.setEnergy(this.player.getMaxEnergy());
+    }
 }

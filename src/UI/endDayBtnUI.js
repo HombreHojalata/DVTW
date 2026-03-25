@@ -78,7 +78,7 @@ export default class endDayBtnUI {
         this.confirmationUI.show();
     }
 
-    finishDay() { // TODO: Completar con lógica de acabar dñias...
-        console.log("DÍA TERMINADO");
+    finishDay() { 
+        this.scene.finishDay();
     }
 }
