@@ -13,6 +13,7 @@ export default class missionManager{
         this.downPopularityMissions = [];
         this.downMoneyMissions = [];
         this.downCorruptionMissions = [];
+        this.activeMissions = [];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
         this.districtsWithMissions=[false,false,false,false,false,false];
 
@@ -60,33 +61,42 @@ export default class missionManager{
                 while(this.districtsWithMissions[districtIndex]){
                     districtIndex = Math.floor(Math.random() * 6);
                 }
-                this.districtsWithMissions[districtIndex] = true;
+                
             }
             else {
                 districtIndex=-1;
             }
         }
+        this.districtsWithMissions[districtIndex] = true;
         if(districtIndex == -1){
             missionSelected.setDistrict("NULL");
+            missionSelected.setPos(0, 0);
         }
         else if(districtIndex == 0){
             missionSelected.setDistrict("BORRASCAL");
+            missionSelected.setPos(1160, 150);
         }
         else if(districtIndex == 1){
-            missionSelected.setDistrict("EL_NIDO")
+            missionSelected.setDistrict("EL_NIDO");
+            missionSelected.setPos(680, 390);
         }
         else if(districtIndex == 2){
             missionSelected.setDistrict("GUINEA");
+            missionSelected.setPos(250, 200);
         }
         else if(districtIndex == 3){
             missionSelected.setDistrict("NUEVA_PRADERA");
+            missionSelected.setPos(1020, 540);
         }
         else if(districtIndex == 4){
             missionSelected.setDistrict("SAHAR");
+            missionSelected.setPos(350, 450);
         }
         else{//districtIndex == 5
             missionSelected.setDistrict("SOMOSAGUA");
+            missionSelected.setPos(800, 160);
         }
+        this.activeMissions.push(missionSelected);
         return missionSelected;
     }
 
@@ -250,5 +260,27 @@ export default class missionManager{
     });
 
         
+    }
+    rmMission(mission){
+        const districtName = mission.getDistrict(); 
+        if(districtName == "BORRASCAL"){
+            this.districtsWithMissions[0] = false;
+        }
+        else if(districtName == "EL_NIDO"){
+            this.districtsWithMissions[1] = false;
+        }
+        else if(districtName == "GUINEA"){
+            this.districtsWithMissions[2] = false;
+        }
+        else if(districtName == "NUEVA_PRADERA"){
+            this.districtsWithMissions[3] = false;
+        }
+        else if(districtName == "SAHAR"){
+            this.districtsWithMissions[4] = false;
+        }
+        else{//districtName == "SOMOSAGUA"
+            this.districtsWithMissions[5] = false;
+        }
+        this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }
 }

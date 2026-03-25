@@ -61,6 +61,7 @@ import increaseIcon from '../assets/sprites/icons/increaseIcon.png'
 import increaseSelectIcon from '../assets/sprites/icons/increaseSelectIcon.png'
 import decreaseIcon from '../assets/sprites/icons/decreaseIcon.png'
 import decreaseSelectIcon from '../assets/sprites/icons/decreaseSelectIcon.png'
+import missionIcon from '../assets/sprites/icons/missionIcon.png'                         //NEED TO BE REPLACE
 
 
 //PROTOTYPE ASSETS, TO BE REPLACED
@@ -206,6 +207,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('increaseSelectIcon', increaseSelectIcon);
     this.load.image('decreaseIcon', decreaseIcon);
     this.load.image('decreaseSelectIcon', decreaseSelectIcon);
+    this.load.image('missionIcon', missionIcon);
     // PRESIDENTE ASSET
     this.load.image('presidente', presidente);
     // MISSION ASSETS
