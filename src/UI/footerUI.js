@@ -12,7 +12,7 @@ export default class footerUI {
         const footerX = (gameWidth - footerWidth) / 2;
         const footerY = gameHeight - footerHeight;
 
-        this.footerBg = this.scene.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x004d00).setOrigin(0).setDepth(10);
+        this.footerBg = this.scene.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x7fac92).setOrigin(0).setDepth(10);
 
         const sectionMoney = footerWidth / 4;
         const sectionDistrict = footerWidth / 2;
