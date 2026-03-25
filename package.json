@@ -13,15 +13,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://https://github.com/HombreHojalata/DVTW/"
+        "url": "git+https://github.com/HombreHojalata/DVTW/"
     },
     "keywords": [],
     "author": "Pedro Tobalina",
     "license": "MIT",
     "bugs": {
-        "url": "https://https://github.com/HombreHojalata/DVTW/"
+        "url": "https://github.com/HombreHojalata/DVTW/"
     },
-    "homepage": "https://https://github.com/HombreHojalata/DVTW/blob/main/README.md",
+    "homepage": "https://github.com/HombreHojalata/DVTW/blob/main/README.md",
     "type": "module",
     "devDependencies": {
         "electron": "^34.0.1",
