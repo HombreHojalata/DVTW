@@ -127,13 +127,13 @@ export default class GameScene extends Phaser.Scene {
 
     showDayIntro() {
         const { width, height } = this.sys.game.config;
-        const curretnDay = this.gameManager.getDay();
+        const currentDay = this.gameManager.getDay().getDayNumber();
 
         const introContainer = this.add.container(0, 0).setDepth(100);
         const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
-        const dayText = this.add.text(width / 2, height / 2, `DÍA ${curretnDay}`, {
+        const dayText = this.add.text(width / 2, height / 2, `DÍA ${currentDay}`, {
             fontSize: '80px',
-            fontFamily: 'Courrier New',
+            fontFamily: 'Times New Roman',
             fontWeight: 'bolf',
             color: '#ffffff'
         }).setOrigin(0.5);

@@ -1,9 +1,7 @@
-
-
 export default class day{
 
     constructor(previousDay){
-        this.dayNumber = previousDay ? previousDay.dayNumber + 1 : 1;
+        this.dayNumber = previousDay ? previousDay.dayNumber  + 1 : 1;
         this.decisionstaken=[];
         this.resourcesGained={
             money: 0,
@@ -13,13 +11,14 @@ export default class day{
         }
     }
 
-    updateResources(money, energy, corruption, popularity){
-        this.resourcesGained.money += money;
-        this.resourcesGained.energy += energy;
-        this.resourcesGained.corruption += corruption;
-        this.resourcesGained.popularity += popularity;
+    updateResources(money = 0, energy = 0, corruption = 0, popularity = 0) {
+        this.resourcesGained.money += Number(money);
+        this.resourcesGained.energy += Number(energy);
+        this.resourcesGained.corruption += Number(corruption);
+        this.resourcesGained.popularity += Number(popularity);
     }
-    addDecision(decision){
+
+    addDecision(decision) {
         this.decisionstaken.push(decision);
     }
 
@@ -30,4 +29,7 @@ export default class day{
             resourcesGained: this.resourcesGained
         }
     }
+
+    getDayNumber() { return this.dayNumber; }
+    nextDayNumber() { this.dayNumber++; }
 }
