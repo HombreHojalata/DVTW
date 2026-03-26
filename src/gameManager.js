@@ -19,7 +19,7 @@ export default class gameManager{
     getMission(){
         let missionL = this.missionManager.getMission();
         if(missionL.getDistrict() != "NULL"){
-            this.missionButton = this.scene.add.image(missionL.getPos()[0],missionL.getPos()[1],'closeIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
+            this.missionButton = this.scene.add.image(missionL.getPos()[0],missionL.getPos()[1],'missionIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
             this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
             this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
             this.missionButton.on('pointerup', () => {
