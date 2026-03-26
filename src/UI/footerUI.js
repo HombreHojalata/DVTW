@@ -6,75 +6,31 @@ export default class footerUI {
 
     create() {
         const gameWidth = this.scene.sys.game.config.width;
-        const gameHeight = this.scene.sys.game.config.height;
+        const gameHeight = this.scene.sys.game.config.height + 5;
         const footerWidth = 1500;
-        const footerHeight = 75;
+        const footerHeight = 81;
         const footerX = (gameWidth - footerWidth) / 2;
         const footerY = gameHeight - footerHeight;
 
-        this.footerBg = this.scene.add.rectangle(footerX, footerY, footerWidth, footerHeight, 0x7fac92).setOrigin(0).setDepth(10);
+        this.footerBg = this.scene.add.image(footerX, footerY, 'lowBarUI').setOrigin(0).setDepth(11);
 
         const sectionMoney = footerWidth / 4;
         const sectionDistrict = footerWidth / 2;
         const sectionBlackMarket = footerWidth / 4;
-        const innerScale = 0.75;
-        const innerHeight = footerHeight * innerScale;
 
-        {
-            const g = this.scene.add.graphics().setDepth(11);
-            const x = footerX + (sectionMoney - sectionMoney * innerScale) / 2;
-            const y = footerY + (footerHeight - innerHeight) / 2;
-            const w = sectionMoney * innerScale;
-            const h = innerHeight;
-            const radius = 10;
+        this.moneyText = this.scene.add.text(footerX + sectionMoney * 0.8, footerY + footerHeight / 2, this.player.getMoney(), {
+            fontFamily: 'Handjet',
+            fontSize: '34px',
+            fontStyle: 'bold',
+            color: '#2e6417'
+        }).setOrigin(1, 0.5).setDepth(11);
 
-            g.fillStyle(0x000000);
-            g.fillRoundedRect(x, y, w, h, radius);
-            g.lineStyle(2, 0x007700);
-            g.strokeRoundedRect(x, y, w, h, radius);
-        }
+        this.districtTitleText = this.scene.add.text(footerX + sectionMoney + sectionDistrict / 2, footerY + footerHeight / 2, 'QUACKINGTON DC', {
+            fontSize: '38px',
+            color: '#ffffff',
+            fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(11);
 
-        this.moneyText = this.scene.add.text(
-            footerX + sectionMoney / 2,
-            footerY + footerHeight / 2,
-            this.player.getMoney() + '$',
-            { fontSize: '18px', color: '#fff' }
-        ).setOrigin(0.5).setDepth(12);
-
-        {
-            const g = this.scene.add.graphics().setDepth(11);
-            const x = footerX + sectionMoney + (sectionDistrict - sectionDistrict * innerScale) / 2;
-            const y = footerY + (footerHeight - innerHeight) / 2;
-            const w = sectionDistrict * innerScale;
-            const h = innerHeight;
-            const radius = 10;
-
-            g.fillStyle(0x000000);
-            g.fillRoundedRect(x, y, w, h, radius);
-            g.lineStyle(2, 0x007700);
-            g.strokeRoundedRect(x, y, w, h, radius);
-        }
-
-        this.districtTitleText = this.scene.add.text(
-            footerX + sectionMoney + sectionDistrict / 2,
-            footerY + footerHeight / 2,
-            'QUACKINGTON DC',
-            { fontSize: '23px', color: '#fff', fontStyle: 'bold' }
-        ).setOrigin(0.5).setDepth(12);
-
-        {
-            const g = this.scene.add.graphics().setDepth(11);
-            const x = footerX + sectionMoney + sectionDistrict + (sectionBlackMarket - sectionBlackMarket * innerScale) / 2;
-            const y = footerY + (footerHeight - innerHeight) / 2;
-            const w = sectionBlackMarket * innerScale;
-            const h = innerHeight;
-            const radius = 10;
-
-            g.fillStyle(0x000000);
-            g.fillRoundedRect(x, y, w, h, radius);
-            g.lineStyle(2, 0x007700);
-            g.strokeRoundedRect(x, y, w, h, radius);
-        }
 
         this.blackMarketText = this.scene.add.text(
             footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2,
@@ -100,6 +56,6 @@ export default class footerUI {
         return this;
     }
 
-    refreshMoney() {if(this.moneyText) {this.moneyText.setText(this.player.getMoney() + '$');}}
+    refreshMoney() {if(this.moneyText) {this.moneyText.setText(this.player.getMoney());}}
     updateDistrictFooter(district) {if(this.districtTitleText) {this.districtTitleText.setText(district.getName());}}
 }

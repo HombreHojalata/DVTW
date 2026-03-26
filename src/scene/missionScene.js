@@ -91,9 +91,21 @@ export default class MissionScene extends Phaser.Scene {
         return this.districtScene;
     }
     spawnCloseButton(newWidth,offsetX,offsetY){
-        this.closeButton = this.add.image(offsetX + newWidth - 40,offsetY + 120,'closeIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
-        this.closeButton.on('pointerover', () => {this.closeButton.setScale(1.1);});
-        this.closeButton.on('pointerout', () => {this.closeButton.setScale(1);});
+        this.closeButton = this.add.image(offsetX + newWidth - 40,offsetY + 120,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
+        this.closeButton.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.closeButton,
+                scale: 1.1,
+                duration: 80
+            });
+        });
+        this.closeButton.on('pointerout', () => {
+            this.tweens.add({
+                targets: this.closeButton,
+                scale: 1,
+                duration: 80
+            });
+        });
         this.closeButton.on('pointerup', () => {
             this.scene.stop();
             this.scene.resume('gameScene');

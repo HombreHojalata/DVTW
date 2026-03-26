@@ -11,6 +11,7 @@ import endDayNormal from '../assets/sprites/endDayNormal.png'
 import endDayBright from '../assets/sprites/endDayBright.png'
 import endDayPressed from '../assets/sprites/endDayPressed.png'
 import confirmationUI from '../assets/sprites/confirmationUI.png'
+import lowBarUI from '../assets/sprites/lowBarUI.png'
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/sprites/map/districtScenes/districtTemplate.png'
 import districtStoreTemplate from '../assets/sprites/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
@@ -158,6 +159,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('endDayBright', endDayBright);
     this.load.image('endDayPressed', endDayPressed);
     this.load.image('confirmationUI', confirmationUI);
+    this.load.image('lowBarUI', lowBarUI);
     // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
