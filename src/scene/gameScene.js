@@ -54,10 +54,21 @@ export default class GameScene extends Phaser.Scene {
 
         this.startEnergyDrain();
         //MISSION TEST
-        this.gameManager.getMission();
+        this.scheduleNextMission();
 
 
         this.showDayIntro();
+    }
+
+    scheduleNextMission() {
+        const delay = Math.floor(Math.random() * (12000 - 3000 + 1)) + 3000;
+        this.missionTimer = this.time.addEvent({
+            delay: delay,
+            callback: () => {
+                this.gameManager.getMission();
+                this.scheduleNextMission();
+            }
+        });
     }
     /*
     Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
@@ -150,6 +161,7 @@ export default class GameScene extends Phaser.Scene {
         
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
+        if (this.missionTimer) this.missionTimer.remove(false);
 
         this.cameras.main.fadeOut(1000, 0, 0, 0);
 

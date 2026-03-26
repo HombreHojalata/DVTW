@@ -60,12 +60,13 @@ export default class missionManager{
                 while(this.districtsWithMissions[districtIndex]){
                     districtIndex = Math.floor(Math.random() * 6);
                 }
-                this.districtsWithMissions[districtIndex] = true;
+                
             }
             else {
                 districtIndex=-1;
             }
         }
+        this.districtsWithMissions[districtIndex] = true;
         if(districtIndex == -1){
             missionSelected.setDistrict("NULL");
             missionSelected.setPos(0, 0);
