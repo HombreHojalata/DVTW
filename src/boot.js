@@ -123,7 +123,7 @@ import downMoneyMission from '../assets/jsons/downMoney.json';
 //audio
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/il porco rosso.mp3';
-import quackAudio from '../assets/audio/quack.mp3;
+import quackAudio from '../assets/audio/quack.mp3';
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
