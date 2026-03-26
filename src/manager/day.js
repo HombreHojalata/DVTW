@@ -11,7 +11,7 @@ export default class day{
         }
     }
 
-    updateResources(money = 0, energy = 0, corruption = 0, popularity = 0) {
+    updateResources(money, energy, corruption, popularity) {
         this.resourcesGained.money += Number(money);
         this.resourcesGained.energy += Number(energy);
         this.resourcesGained.corruption += Number(corruption);
@@ -31,5 +31,5 @@ export default class day{
     }
 
     getDayNumber() { return this.dayNumber; }
-    nextDayNumber() { this.dayNumber++; }
+    nextDayNumber() { this.dayNumber + 1; }
 }

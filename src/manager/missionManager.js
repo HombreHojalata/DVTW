@@ -13,6 +13,7 @@ export default class missionManager{
         this.downPopularityMissions = [];
         this.downMoneyMissions = [];
         this.downCorruptionMissions = [];
+        this.activeMissions = [];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
         this.districtsWithMissions=[false,false,false,false,false,false];
 
@@ -95,6 +96,7 @@ export default class missionManager{
             missionSelected.setDistrict("SOMOSAGUA");
             missionSelected.setPos(800, 160);
         }
+        this.activeMissions.push(missionSelected);
         return missionSelected;
     }
 
@@ -258,5 +260,27 @@ export default class missionManager{
     });
 
         
+    }
+    rmMission(mission){
+        const districtName = mission.getDistrict(); 
+        if(districtName == "BORRASCAL"){
+            this.districtsWithMissions[0] = false;
+        }
+        else if(districtName == "EL_NIDO"){
+            this.districtsWithMissions[1] = false;
+        }
+        else if(districtName == "GUINEA"){
+            this.districtsWithMissions[2] = false;
+        }
+        else if(districtName == "NUEVA_PRADERA"){
+            this.districtsWithMissions[3] = false;
+        }
+        else if(districtName == "SAHAR"){
+            this.districtsWithMissions[4] = false;
+        }
+        else{//districtName == "SOMOSAGUA"
+            this.districtsWithMissions[5] = false;
+        }
+        this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }
 }

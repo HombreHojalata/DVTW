@@ -36,6 +36,9 @@ export default class gameManager{
             this.player.updateMoney(-option.money);
             let MissionButton = mission.getMisionButton();
             MissionButton.destroy();
+            this.day.addDecision(mission.getName() + ": " + option.description);
+            this.day.updateResources(-option.money, option.energy, option.corruption, option.popularity);
+            this.missionManager.rmMission(mission);
     }
     spawnAssets(scene){
         this.mapImg = this.map.spawnMap(scene);
