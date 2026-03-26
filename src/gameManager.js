@@ -40,6 +40,9 @@ export default class gameManager{
             this.day.updateResources(-option.money, option.energy, option.corruption, option.popularity);
             this.missionManager.rmMission(mission);
     }
+    deleteAllMissions(){
+        this.missionManager.deleteAllMissions();
+    }
     spawnAssets(scene){
         this.mapImg = this.map.spawnMap(scene);
         this.districtList = this.map.spawnDistricts(scene);

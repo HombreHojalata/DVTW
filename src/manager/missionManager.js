@@ -283,4 +283,8 @@ export default class missionManager{
         }
         this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }
+    deleteAllMissions(){
+        this.activeMissions = [];
+        this.districtsWithMissions=[false,false,false,false,false,false];
+    }
 }
