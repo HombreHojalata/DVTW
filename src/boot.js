@@ -117,6 +117,10 @@ import UpPopularityMission from '../assets/jsons/upPopularity.json';
 import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
+
+//audio
+import AudioManager from '../src/manager/audioManager.js'
+import gameAudio from '../assets/sprites/audio/il porco rosso.mp3';
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -250,10 +254,19 @@ export default class Boot extends Phaser.Scene {
     this.load.image('vendedor', vendedor);
     this.load.image('pensa_icon', prensa_icon);
     this.load.image('hotel_icon', hotel_icon);
+
+
+    //audio?
+    this.load.audio('bgMusic', gameAudio);
+
   }
 
   create() {
-    this.add.image(750, 375, 'load');                                                                //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.add.image(750, 375, 'load');  
+    
+    //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.audioManager = new AudioManager(this);
+    this.audioManager.playMusic('bgMusic');
     // Crear la barra de carga
     const barWidth = 600;
     const barHeight = 30;

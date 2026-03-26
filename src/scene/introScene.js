@@ -66,6 +66,7 @@ export default class IntroScene extends Phaser.Scene {
             return { shadow, bg, label };
         };
 
+        
         createMenuButton(1120, 470, 'Nueva Partida', () => {
             this.scene.start('gameScene');
         });
