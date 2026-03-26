@@ -6,12 +6,12 @@ import loadScene from '../assets/scenes/loadScene.png'          //NEED TO BE REP
 // MAP ASSETS
 import map from '../assets/map/mapTemplate.png'
 // UI ASSETS
-import battery from '../assets/sprites/battery.png'
-import endDayNormal from '../assets/sprites/endDayNormal.png'
-import endDayBright from '../assets/sprites/endDayBright.png'
-import endDayPressed from '../assets/sprites/endDayPressed.png'
-import confirmationUI from '../assets/sprites/confirmationUI.png'
-import lowBarUI from '../assets/sprites/lowBarUI.png'
+import battery from '../assets/UIs/battery.png'
+import endDayNormal from '../assets/UIs/endDayNormal.png'
+import endDayBright from '../assets/UIs/endDayBright.png'
+import endDayPressed from '../assets/UIs/endDayPressed.png'
+import confirmationUI from '../assets/UIs/confirmationUI.png'
+import lowBarUI from '../assets/UIs/lowBarUI.png'
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/map/districtScenes/districtTemplate.png'
 import districtStoreTemplate from '../assets/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
