@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import Boot from './boot.js';
 import IntroScene from './scene/introScene.js';
 import ConfigurationScene from './scene/configurationScene.js';
+import TutorialScene from './scene/tutorialScene.js'
 import GameScene from './scene/gameScene.js';
 import DistrictScene from './scene/districtScene.js';
 import DistrictStoreScene from './scene/districtStoreScene.js';
@@ -28,7 +29,7 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, IntroScene, ConfigurationScene, GameScene, DistrictScene, DistrictStoreScene, MissionScene, BlackMarketScene, FinishScene, WordleMiniGame],
+    scene: [Boot, IntroScene, ConfigurationScene, TutorialScene, GameScene, DistrictScene, DistrictStoreScene, MissionScene, BlackMarketScene, FinishScene, WordleMiniGame],
     physics: {
         default: 'arcade',
         arcade: {

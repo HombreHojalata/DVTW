@@ -7,17 +7,11 @@ export default class wordleScene extends Phaser.Scene {
         super({ key: 'wordleMiniGame' });
     }
 
-
-    init(data) {
-        this.returnScene = data?.returnScene || 'gameScene';
-        this.gameManager = data?.gameManager || null;
-    }
-
-
     create() {
         const width = this.scale.width;
         const height = this.scale.height;
 
+        this.gameManager = this.registry.get('gameManager');
 
         this.rows = 6;
         this.cols = 5;
@@ -275,14 +269,10 @@ export default class wordleScene extends Phaser.Scene {
             this.statusText.setText('Correct! Crisis contained.');
 
 
-            this.time.delayedCall(1000, () => {
-                this.scene.start(this.returnScene, {
-                    miniGameResult: {
-                        success: true,
-                        popularity: 8,
-                        corruption: -2
-                    }
-                });
+            this.time.delayedCall(3000, () => {
+                this.scene.stop();
+                this.registry.set('flagShow',false);
+                this.scene.get('gameScene').scene.restart();
             });
             return;
         }
@@ -298,14 +288,10 @@ export default class wordleScene extends Phaser.Scene {
             this.statusText.setText(`You lost. The word was ${secret}`);
 
 
-            this.time.delayedCall(1500, () => {
-                this.scene.start(this.returnScene, {
-                    miniGameResult: {
-                        success: false,
-                        popularity: -4,
-                        corruption: 2
-                    }
-                });
+            this.time.delayedCall(3000, () => {
+                this.scene.stop();
+                this.registry.set('flagShow',false);
+                this.scene.get('gameScene').scene.restart();
             });
         } else {
             this.statusText.setText(`Attempt ${this.currentRow + 1} of ${this.rows}`);

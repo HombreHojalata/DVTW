@@ -60,8 +60,9 @@ export default class Map {
         return districtArray;
     }
     spawnMap(scene){return scene.add.image(0,-10, this.mapSiluete).setOrigin(0);}
-    spawnDistricts(scene){this.districtList.forEach(d => d.spawnDistrict(scene));}
+    spawnDistricts(scene){this.districtList.forEach(d => d.spawnDistrict(scene,true));}
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
+
     /*generateDistrictsMoney() {
         let money = 0;
         this.districtList.forEach(d => money += d.generateMoneyFromBuildings());

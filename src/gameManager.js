@@ -17,16 +17,17 @@ export default class gameManager{
     getMap(){return this.map};
     getDay(){return this.day};
     getMission(){
-        let missionL = this.missionManager.getMission();
-        if(missionL.getDistrict() != "NULL"){
-            this.missionButton = this.scene.add.image(missionL.getPos()[0],missionL.getPos()[1],'missionIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
+        this.missionL = this.missionManager.getMission();
+        if(this.missionL.getDistrict() != "NULL"){
+            this.icon = this.missionL.itIsCorrupt() ? 'missionCorruptIcon' : 'missionIcon';
+            this.missionButton = this.scene.add.image(this.missionL.getPos()[0],this.missionL.getPos()[1],this.icon).setOrigin(0).setInteractive({ useHandCursor: true }); 
             this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
             this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
             this.missionButton.on('pointerup', () => {
                 this.scene.scene.pause('gameScene');
-                this.scene.scene.launch('missionScene', { mission: missionL});
+                this.scene.scene.launch('missionScene', { mission: this.missionL});
             });
-            missionL.setMissionButton(this.missionButton);
+            this.missionL.setMissionButton(this.missionButton);
         }
     }
     removeMission(mission, option, district){

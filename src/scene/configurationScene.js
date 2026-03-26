@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import configBg from '../../assets/sprites/scenes/configScene.png';
 
 export default class ConfigurationScene extends Phaser.Scene {
     constructor() {
@@ -8,10 +7,6 @@ export default class ConfigurationScene extends Phaser.Scene {
 
     init(data) {
         this.returnScene = (data && (data.from || data.fromScene || data.returnScene)) || null;
-    }
-
-    preload() {
-        this.load.image('configBg', configBg);
     }
 
     create() {
@@ -29,7 +24,7 @@ export default class ConfigurationScene extends Phaser.Scene {
         this.pendingSfxVolume = this.initialSfxVolume;
 
         // Background fitted to screen while keeping whole image visible
-        const bg = this.add.image(width / 2, height / 2, 'configBg');
+        const bg = this.add.image(width / 2, height / 2, 'configScene');
         const scale = Math.min(width / bg.width, height / bg.height);
         bg.setScale(scale);
 

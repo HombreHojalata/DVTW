@@ -33,6 +33,7 @@ export default class District {
         this.workSchedule = 50;
         this.cleaning = 50;
     }
+
     // ASSETS
     spawnDistrict(scene){
         this.texture = this.is_special_built ? this.PNGwithSpecial : this.PNGwithOutSpecial;

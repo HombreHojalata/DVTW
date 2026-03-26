@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
 import introScene from '../assets/scenes/introScene.png'  
 import loadScene from '../assets/scenes/loadScene.png'          //NEED TO BE REPLACE
+import configScene from '../assets/scenes/configScene.png'
 
 // MAP ASSETS
 import map from '../assets/map/mapTemplate.png'
@@ -56,19 +57,22 @@ import prensa_icon from '../assets/marketIcons/prensa.png'
 import hotel_icon from '../assets/marketIcons/hotel.png'
 // ICONS        NEED TO BE REPLACED
 import closeIcon from '../assets/icons/closeIcon.png'                 
-import configurationIcon from '../assets/icons/configurationIcon.png'     //NEED TO BE REPLACE
-import storeIcon from '../assets/icons/storeIcon.png'                     //NEED TO BE REPLACE 
+import configurationIcon from '../assets/icons/configurationIcon.png'
+import storeIcon from '../assets/icons/storeIcon.png'
 import increaseIcon from '../assets/icons/increaseIcon.png'
 import increaseSelectIcon from '../assets/icons/increaseSelectIcon.png'
 import decreaseIcon from '../assets/icons/decreaseIcon.png'
 import decreaseSelectIcon from '../assets/icons/decreaseSelectIcon.png'
-import missionIcon from '../assets/icons/missionIcon.png'                         //NEED TO BE REPLACE
+import missionIcon from '../assets/icons/missionIcon.png'
+import missionCorruptIcon from '../assets/icons/missionCorruptIcon.png'
 
 
 //PROTOTYPE ASSETS, TO BE REPLACED
 import presidente from '../assets/other/presidente.png'                         //NEED TO BE REPLACE
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
+import missionCorruptTemplate from '../assets/mission/missionCorruptTemplate.png'
+
 // MISSION DISTRICT BORRASCAL SCENE ASSETS
 import regularSceneBorrascal from '../assets/mission/scenes/districtBorrascal/regularScene.png'
 import upMoneySceneBorrascal from '../assets/mission/scenes/districtBorrascal/upMoneyScene.png'
@@ -154,8 +158,11 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('somosaguasCutOut', somosaguaCutOut);
 
 
-    this.load.image('load', loadScene);
-    this.load.image('init', introScene);
+    this.load.image('loadScene', loadScene);
+    this.load.image('introScene', introScene);
+    this.load.image('configScene', configScene);
+
+    
     // MAP ASSETS
     this.load.image('map', map);
     // UI ASSETS
@@ -213,10 +220,13 @@ export default class Boot extends Phaser.Scene {
     this.load.image('decreaseIcon', decreaseIcon);
     this.load.image('decreaseSelectIcon', decreaseSelectIcon);
     this.load.image('missionIcon', missionIcon);
+    this.load.image('missionCorruptIcon', missionCorruptIcon);
     // PRESIDENTE ASSET
     this.load.image('presidente', presidente);
     // MISSION ASSETS
     this.load.image('missionTemplate',missionTemplate);
+    this.load.image('missionCorruptTemplate',missionCorruptTemplate);
+    
     // MISSION DISTRICT BORRASCAL SCENE ASSETS
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
     this.load.image('upMoneySceneBorrascal', upMoneySceneBorrascal);
@@ -272,7 +282,7 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(750, 375, 'load');  
+    this.add.image(750, 375, 'loadScene');  
     
     //WE CAN ADD MUSIC AND LOADING BAR HERE
     this.audioManager = new AudioManager(this);

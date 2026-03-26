@@ -15,7 +15,7 @@ export default class IntroScene extends Phaser.Scene {
 
     create() {
         console.log("INTRO");
-        this.add.image(0, 0, 'init').setOrigin(0);
+        this.add.image(0, 0, 'introScene').setOrigin(0);
 
         const createMenuButton = (x, y, text, callback) => {
             const width = 300;
@@ -66,6 +66,9 @@ export default class IntroScene extends Phaser.Scene {
             return { shadow, bg, label };
         };
 
+        createMenuButton(1120, 380, 'Tutorial', () => {
+            this.scene.start('tutorialScene');
+        });
         
         createMenuButton(1120, 470, 'Nueva Partida', () => {
             this.scene.start('gameScene');
