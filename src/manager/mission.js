@@ -19,7 +19,7 @@ export default class Mission{
     getDescription() {return this.description;}
     itIsEvent() {return this.event;}
     itIsCorrupt() {return this.corrupt;}
-    itIsMinigame() {return this.minigame;}
+    isMinigame() {return this.minigame;}
     getOptions() {return this.options;}
     getNumOptions() {return this.numberOfOptions;}
     setDistrict(district) {this.district = district;}

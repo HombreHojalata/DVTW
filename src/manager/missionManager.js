@@ -14,6 +14,7 @@ export default class missionManager{
         this.downMoneyMissions = [];
         this.downCorruptionMissions = [];
         this.activeMissions = [];
+        this.minigameMissions=[];
         this.story = new Story();//Aqui se asigna una de las historias de forma aleatoria.
         this.districtsWithMissions=[false,false,false,false,false,false];
 
@@ -37,7 +38,11 @@ export default class missionManager{
         const popularityDiff = Math.abs(playerPopularity - this.espectedResources.popularity)/7;
         const corruptionDiff = playerCorruption - this.espectedResources.corruption;
         let missionSelected = null;
-        if(moneyDiff > popularityDiff && moneyDiff > corruptionDiff && this.espectedResources.money/moneyDiff > 2){
+        if(this.minigameMissions.length > 0 ){
+            missionSelected = this.minigameMissions[Math.floor(Math.random() * this.minigameMissions.length)];
+            this.minigameMissions = this.minigameMissions.filter(m => m !== missionSelected);
+        }
+        else if(moneyDiff > popularityDiff && moneyDiff > corruptionDiff && this.espectedResources.money/moneyDiff > 2){
             if(playerMoney > this.espectedResources.money){
                 missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
             }else{
@@ -258,7 +263,30 @@ export default class missionManager{
 
         this.downMoneyMissions.push(mission);
     });
+    const minigameMissionData = this.scene.cache.json.get('minigameMoney');
 
+        minigameMissionData.forEach(m => {
+        const mission = new Mission(
+            m.name,
+            m.description,
+            m.event,
+            m.corrupt,
+            m.minigame
+        );
+
+        m.options.forEach(o => {
+            mission.addOption(
+                o.probability,
+                o.description,
+                o.energy,
+                o.money,
+                o.corruption,
+                o.popularity
+            );
+        });
+
+        this.minigameMissions.push(mission);
+    });
         
     }
     rmMission(mission){
@@ -280,6 +308,9 @@ export default class missionManager{
         }
         else{//districtName == "SOMOSAGUA"
             this.districtsWithMissions[5] = false;
+        }
+        if(mission.isMinigame()){
+            this.minigameMissions = this.minigameMissions.filter(m => m !== mission);
         }
         this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }

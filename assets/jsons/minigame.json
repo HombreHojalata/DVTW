@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Cuackdle",
+    "description": "El presidente se enfrenta a un minijuego de palabras para mejorar su popularidad.",
+    "event": true,
+    "corrupt": false,
+    "minigame": true,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Juega a Wordle",
+        "energy": -2,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 45
+      }
+    ]
+  }
+]

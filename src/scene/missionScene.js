@@ -171,17 +171,14 @@ export default class MissionScene extends Phaser.Scene {
     spawnButtons(){
         //this.isEvent = this.mission.itIsEvent();
         //this.isCorrupt = this.mission.itIsCorrupt();
-        this.isMinigame = this.mission.itIsMinigame();
-        if(this.isMinigame){
 
-        }else{
-            this.numberOfOptions = this.mission.getNumOptions();
-            this.optionsList = this.mission.getOptions();
-            switch(this.numberOfOptions){
-                case 2: this.missionWithTwoOptions(this.optionsList); break;
-                case 1: this.missionWithOneOption(this.optionsList); break;
-            }
+        this.numberOfOptions = this.mission.getNumOptions();
+        this.optionsList = this.mission.getOptions();
+        switch(this.numberOfOptions){
+            case 2: this.missionWithTwoOptions(this.optionsList); break;
+            case 1: this.missionWithOneOption(this.optionsList); break;
         }
+        
     }
     missionWithTwoOptions(optionsList){
         optionsList.forEach((option, index) => {
@@ -191,8 +188,74 @@ export default class MissionScene extends Phaser.Scene {
         });
     }
     missionWithOneOption(optionList){
+        if(!this.mission.isMinigame()){
         const x = 750;
         const y = 550;
         this.createOptionButton(x,y,optionList[0]);
+        }
+        else{
+            if(this.mission.getName() == "Cuackdle"){
+                this.createMinigameButton(750,550,optionList[0], 'wordleMiniGame');
+                //this.scene.launch('minigameScene', { minigame: this.mission, player: this.player, map: this.map, gameManager: this.gameManager });
+            }
+        }
+    }
+
+    createMinigameButton(x, y, option, minigameScene) {
+        const buttonWidth = 300;   // ancho fijo del botón
+        const buttonHeight = 180;  // alto fijo del botón
+        const padding = 20;
+        const lineSpacing = 6;
+        const getColor = (value) => value >= 0 ? '#00ff00' : '#ff0000';
+        const lines = [
+            { text: option.description, color: '#ffffff', size: '18px', style: 'bold'},
+            { text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) },
+            { text: `Energía: ${option.energy}`, color: getColor(option.energy) },
+            { text: `Coste: ${option.money}`, color: getColor(-option.money) },                         //JUSTO LA INVERSA SI DA DINERO VERDE, SI CUESTA ROJO
+            { text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) },
+            { text: `Población: ${option.popularity}`, color: getColor(option.popularity) }
+        ];
+        const bg = this.add.graphics();
+        bg.fillStyle(0x007BFF, 1);
+        bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
+        const startY = y - buttonHeight / 2 + padding;
+        let currentY = startY;
+        const textObjects = lines.map(line => {
+            const txt = this.add.text(x, currentY, line.text, {
+                fontSize: line.size || '15px',
+                color: line.color,
+                align: 'center',
+                wordWrap: { width: buttonWidth - padding * 2 }
+            }).setOrigin(0.5, 0);
+
+            currentY += txt.height + lineSpacing;
+            return txt;
+        });
+        const hitArea = new Phaser.Geom.Rectangle(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight);
+        bg.setInteractive(hitArea, Phaser.Geom.Rectangle.Contains, { useHandCursor: true }).setDepth(0);
+        textObjects.forEach(t => t.setDepth(1));
+        this.district = this.map.getDistrictByName(this.mission.getDistrict());
+        bg.on('pointerover', () => {
+            bg.clear();
+            bg.fillStyle(0x0056b3, 1);
+            bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
+            textObjects.forEach(t => t.setScale(1.05));
+        });
+        bg.on('pointerout', () => {
+            bg.clear();
+            bg.fillStyle(0x007BFF, 1);
+            bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
+            textObjects.forEach(t => t.setScale(1));
+        });
+        bg.on('pointerdown', () => textObjects.forEach(t => t.setScale(1)));
+        bg.on('pointerup', () =>{
+            textObjects.forEach(t => t.setScale(1.1));
+            this.scene.stop();
+            this.scene.launch(minigameScene, { minigame: this.mission, player: this.player, map: this.map, gameManager: this.gameManager });
+            this.gameManager.removeMission(this.mission, option, this.district);
+            
+            
+        });
+        return { bg, texts: textObjects };
     }
 }

@@ -9,7 +9,7 @@ export default class wordleScene extends Phaser.Scene {
 
 
     init(data) {
-        this.returnScene = data?.returnScene || 'level';
+        this.returnScene = data?.returnScene || 'gameScene';
         this.gameManager = data?.gameManager || null;
     }
 
