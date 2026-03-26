@@ -125,7 +125,8 @@ export default class DistrictScene extends Phaser.Scene {
         this.closeButton.on('pointerout', () => {this.closeButton.setScale(1);});
         this.closeButton.on('pointerup', () => {
             this.scene.stop();
-            this.scene.resume('gameScene');
+            this.registry.set('flagShow',false);
+            this.scene.get('gameScene').scene.restart();
         });
         return this.closeButton;
     }

@@ -120,6 +120,7 @@ import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
 import minigameMission from '../assets/jsons/minigame.json';
+import somosaguaCutOut from '../assets/jsons/test_map.json';
 
 //audio
 import AudioManager from '../src/manager/audioManager.js'
@@ -150,6 +151,7 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downPopularity', downPopularityMission);
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
+    this.cache.json.add('somosaguasCutOut', somosaguaCutOut);
 
 
     this.load.image('load', loadScene);
