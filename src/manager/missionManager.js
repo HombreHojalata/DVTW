@@ -68,24 +68,31 @@ export default class missionManager{
         }
         if(districtIndex == -1){
             missionSelected.setDistrict("NULL");
+            missionSelected.setPos(0, 0);
         }
         else if(districtIndex == 0){
             missionSelected.setDistrict("BORRASCAL");
+            missionSelected.setPos(1160, 150);
         }
         else if(districtIndex == 1){
-            missionSelected.setDistrict("EL_NIDO")
+            missionSelected.setDistrict("EL_NIDO");
+            missionSelected.setPos(680, 390);
         }
         else if(districtIndex == 2){
             missionSelected.setDistrict("GUINEA");
+            missionSelected.setPos(250, 200);
         }
         else if(districtIndex == 3){
             missionSelected.setDistrict("NUEVA_PRADERA");
+            missionSelected.setPos(1020, 540);
         }
         else if(districtIndex == 4){
             missionSelected.setDistrict("SAHAR");
+            missionSelected.setPos(350, 450);
         }
         else{//districtIndex == 5
             missionSelected.setDistrict("SOMOSAGUA");
+            missionSelected.setPos(800, 160);
         }
         return missionSelected;
     }

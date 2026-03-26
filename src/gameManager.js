@@ -16,7 +16,26 @@ export default class gameManager{
     getPlayer(){return this.player};
     getMap(){return this.map};
     getDay(){return this.day};
-    getMission(){return this.missionManager.getMission();}
+    getMission(){
+        let missionL = this.missionManager.getMission();
+        this.missionButton = this.scene.add.image(missionL.getPos()[0],missionL.getPos()[1],'closeIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
+        this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
+        this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
+        this.missionButton.on('pointerup', () => {
+            this.scene.scene.pause('gameScene');
+            this.scene.scene.launch('missionScene', { mission: missionL, player: this.player, map: this.map, gameManager: this });         //falta pasarle player y map o solo gameManager
+        });
+        missionL.setMissionButton(this.missionButton);
+
+    }
+    removeMission(mission, option, district){
+            district.increasePopulation(option.popularity);
+            this.player.updateEnergy(option.energy);
+            this.player.updateCorruption(option.corruption);
+            this.player.updateMoney(-option.money);
+            let MissionButton = mission.getMisionButton();
+            MissionButton.destroy();
+    }
     spawnAssets(scene){
         this.mapImg = this.map.spawnMap(scene);
         this.districtList = this.map.spawnDistricts(scene);
@@ -26,4 +45,5 @@ export default class gameManager{
         this.day.nextDayNumber();
         this.player.setEnergy(this.player.getMaxEnergy());
     }
+
 }

@@ -54,14 +54,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.startEnergyDrain();
         //MISSION TEST
-        this.thisDayMission = this.gameManager.getMission();
-        this.missionButton = this.add.image(350,350,'closeIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
-        this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
-        this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
-        this.missionButton.on('pointerup', () => {
-            this.scene.pause('gameScene');
-            this.scene.launch('missionScene', { mission: this.thisDayMission, player: this.player, map: this.map});         //falta pasarle player y map o solo gameManager
-        });
+        this.gameManager.getMission();
+
 
         this.showDayIntro();
     }
@@ -163,5 +157,8 @@ export default class GameScene extends Phaser.Scene {
             this.gameManager.nextDay();
             this.scene.restart();
         });
+    }
+        startMissionScene(){
+        
     }
 }
