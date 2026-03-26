@@ -158,7 +158,7 @@ export default class GameScene extends Phaser.Scene {
 
     finishDay() {
         console.log("DÍA TERMINADO");
-        
+        this.gameManager.deleteAllMissions();
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
