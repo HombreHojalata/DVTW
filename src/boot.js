@@ -1,114 +1,115 @@
 import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
-import introScene from '../assets/sprites/scenes/introScene.png'  
-import loadScene from '../assets/sprites/scenes/loadScene.png'          //NEED TO BE REPLACE
+import introScene from '../assets/scenes/introScene.png'  
+import loadScene from '../assets/scenes/loadScene.png'          //NEED TO BE REPLACE
 
 // MAP ASSETS
-import map from '../assets/sprites/map/mapTemplate.png'
+import map from '../assets/map/mapTemplate.png'
 // UI ASSETS
-import battery from '../assets/sprites/battery.png'
-import endDayNormal from '../assets/sprites/endDayNormal.png'
-import endDayBright from '../assets/sprites/endDayBright.png'
-import endDayPressed from '../assets/sprites/endDayPressed.png'
-import confirmationUI from '../assets/sprites/confirmationUI.png'
+import battery from '../assets/UIs/battery.png'
+import endDayNormal from '../assets/UIs/endDayNormal.png'
+import endDayBright from '../assets/UIs/endDayBright.png'
+import endDayPressed from '../assets/UIs/endDayPressed.png'
+import confirmationUI from '../assets/UIs/confirmationUI.png'
 // DISTRICT SCENE ASSETS
-import districtTemplate from '../assets/sprites/map/districtScenes/districtTemplate.png'
-import districtStoreTemplate from '../assets/sprites/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
-import districtBorrascalScene1 from '../assets/sprites/map/districtScenes/districtBorrascalScene1.png'                //NEED TO BE REPLACE
-import districtElNidoScene1 from '../assets/sprites/map/districtScenes/districtElNidoScene1.png'                      //NEED TO BE REPLACE
-import districtGuineaScene1 from '../assets/sprites/map/districtScenes/districtGuineaScene1.png'                      //NEED TO BE REPLACE
-import districtNuevaPraderaScene1 from '../assets/sprites/map/districtScenes/districtNuevaPraderaScene1.png'          //NEED TO BE REPLACE
-import districtSaharScene1 from '../assets/sprites/map/districtScenes/districtSaharScene1.png'                        //NEED TO BE REPLACE
-import districtSomosaguaScene1 from '../assets/sprites/map/districtScenes/districtSomosaguaScene1.png'                //NEED TO BE REPLACE
+import districtTemplate from '../assets/map/districtScenes/districtTemplate.png'
+import districtStoreTemplate from '../assets/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
+import districtBorrascalScene1 from '../assets/map/districtScenes/districtBorrascalScene1.png'                //NEED TO BE REPLACE
+import districtElNidoScene1 from '../assets/map/districtScenes/districtElNidoScene1.png'                      //NEED TO BE REPLACE
+import districtGuineaScene1 from '../assets/map/districtScenes/districtGuineaScene1.png'                      //NEED TO BE REPLACE
+import districtNuevaPraderaScene1 from '../assets/map/districtScenes/districtNuevaPraderaScene1.png'          //NEED TO BE REPLACE
+import districtSaharScene1 from '../assets/map/districtScenes/districtSaharScene1.png'                        //NEED TO BE REPLACE
+import districtSomosaguaScene1 from '../assets/map/districtScenes/districtSomosaguaScene1.png'                //NEED TO BE REPLACE
 // DISTRICT
-import districtBorrascal from '../assets/sprites/map/district/districtBorrascal.png'
-import districtBorrascalSpecial from '../assets/sprites/map/district/districtBorrascalSpecial.png'                    //NEED TO BE REPLACE
-import districtElNido from '../assets/sprites/map/district/districtElNido.png'
-import districtElNidoSpecial from '../assets/sprites/map/district/districtElNidoSpecial.png'                          //NEED TO BE REPLACE
-import districtGuinea from '../assets/sprites/map/district/districtGuinea.png'
-import districtGuineaSpecial from '../assets/sprites/map/district/districtGuineaSpecial.png' 
-import districtNuevaPradera from '../assets/sprites/map/district/districtNuevaPradera.png'
-import districtNuevaPraderaSpecial from '../assets/sprites/map/district/districtNuevaPraderaSpecial.png'  
-import districtSahar from '../assets/sprites/map/district/districtSahar.png'
-import districtSaharSpecial from '../assets/sprites/map/district/districtSaharSpecial.png'                            //NEED TO BE REPLACE
-import districtSomosagua from '../assets/sprites/map/district/districtSomosagua.png'
-import districtSomosaguaSpecial from '../assets/sprites/map/district/districtSomosaguaSpecial.png'                    //NEED TO BE REPLACE
+import districtBorrascal from '../assets/map/district/districtBorrascal.png'
+import districtBorrascalSpecial from '../assets/map/district/districtBorrascalSpecial.png'                    //NEED TO BE REPLACE
+import districtElNido from '../assets/map/district/districtElNido.png'
+import districtElNidoSpecial from '../assets/map/district/districtElNidoSpecial.png'                          //NEED TO BE REPLACE
+import districtGuinea from '../assets/map/district/districtGuinea.png'
+import districtGuineaSpecial from '../assets/map/district/districtGuineaSpecial.png' 
+import districtNuevaPradera from '../assets/map/district/districtNuevaPradera.png'
+import districtNuevaPraderaSpecial from '../assets/map/district/districtNuevaPraderaSpecial.png'  
+import districtSahar from '../assets/map/district/districtSahar.png'
+import districtSaharSpecial from '../assets/map/district/districtSaharSpecial.png'                            //NEED TO BE REPLACE
+import districtSomosagua from '../assets/map/district/districtSomosagua.png'
+import districtSomosaguaSpecial from '../assets/map/district/districtSomosaguaSpecial.png'                    //NEED TO BE REPLACE
 // BUILDING ASSETS
-import buildingCinema from '../assets/sprites/map/buildings/buildingCinema.png'                                       //NEED TO BE REPLACE
-import buildingComercialCenter from '../assets/sprites/map/buildings/buildingComercialCenter.png'                     //NEED TO BE REPLACE
-import buildingFactory from '../assets/sprites/map/buildings/buildingFactory.png'                                     //NEED TO BE REPLACE
-import buildingHospital from '../assets/sprites/map/buildings/buildingHospital.png'                                   //NEED TO BE REPLACE
-import buildingHotel from '../assets/sprites/map/buildings/buildingHotel.png'                                         //NEED TO BE REPLACE
-import buildingHouse from '../assets/sprites/map/buildings/buildingHouse.png'                                         //NEED TO BE REPLACE
-import buildingPark from '../assets/sprites/map/buildings/buildingPark.png'                                           //NEED TO BE REPLACE
-import specialBuildingBorrascal from '../assets/sprites/map/buildings/specialBuildingBorrascal.png'                   //NEED TO BE REPLACE
-import specialBuildingElNido from '../assets/sprites/map/buildings/specialBuildingElNido.png'                         //NEED TO BE REPLACE
-import specialBuildingGuinea from '../assets/sprites/map/buildings/specialBuildingGuinea.png'                         //NEED TO BE REPLACE
-import specialBuildingNuevaPradera from '../assets/sprites/map/buildings/specialBuildingNuevaPradera.png'             //NEED TO BE REPLACE
-import specialBuildingSahar from '../assets/sprites/map/buildings/specialBuildingSahar.png'                           //NEED TO BE REPLACE
-import specialBuildingSomosagua from '../assets/sprites/map/buildings/specialBuildingSomosagua.png'                   //NEED TO BE REPLACE
-import specialBuildingMafia from '../assets/sprites/map/buildings/specialBuildingMafia.png'                           //NEED TO BE REPLACE
+import buildingCinema from '../assets/map/buildings/buildingCinema.png'                                       //NEED TO BE REPLACE
+import buildingComercialCenter from '../assets/map/buildings/buildingComercialCenter.png'                     //NEED TO BE REPLACE
+import buildingFactory from '../assets/map/buildings/buildingFactory.png'                                     //NEED TO BE REPLACE
+import buildingHospital from '../assets/map/buildings/buildingHospital.png'                                   //NEED TO BE REPLACE
+import buildingHotel from '../assets/map/buildings/buildingHotel.png'                                         //NEED TO BE REPLACE
+import buildingHouse from '../assets/map/buildings/buildingHouse.png'                                         //NEED TO BE REPLACE
+import buildingPark from '../assets/map/buildings/buildingPark.png'                                           //NEED TO BE REPLACE
+import specialBuildingBorrascal from '../assets/map/buildings/specialBuildingBorrascal.png'                   //NEED TO BE REPLACE
+import specialBuildingElNido from '../assets/map/buildings/specialBuildingElNido.png'                         //NEED TO BE REPLACE
+import specialBuildingGuinea from '../assets/map/buildings/specialBuildingGuinea.png'                         //NEED TO BE REPLACE
+import specialBuildingNuevaPradera from '../assets/map/buildings/specialBuildingNuevaPradera.png'             //NEED TO BE REPLACE
+import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.png'                           //NEED TO BE REPLACE
+import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'                   //NEED TO BE REPLACE
+import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'                           //NEED TO BE REPLACE
 
 // BLACK MARKET ASSETS
-import vendedor from '../assets/sprites/Vendedor.png' 
-import prensa_icon from '../assets/sprites/marketIcons/prensa.png'
-import hotel_icon from '../assets/sprites/marketIcons/hotel.png'
+import vendedor from '../assets/other/Vendedor.png' 
+import prensa_icon from '../assets/marketIcons/prensa.png'
+import hotel_icon from '../assets/marketIcons/hotel.png'
 // ICONS        NEED TO BE REPLACED
-import closeIcon from '../assets/sprites/icons/closeIcon.png'                 
-import configurationIcon from '../assets/sprites/icons/configurationIcon.png'     //NEED TO BE REPLACE
-import storeIcon from '../assets/sprites/icons/storeIcon.png'                     //NEED TO BE REPLACE 
-import increaseIcon from '../assets/sprites/icons/increaseIcon.png'
-import increaseSelectIcon from '../assets/sprites/icons/increaseSelectIcon.png'
-import decreaseIcon from '../assets/sprites/icons/decreaseIcon.png'
-import decreaseSelectIcon from '../assets/sprites/icons/decreaseSelectIcon.png'
+import closeIcon from '../assets/icons/closeIcon.png'                 
+import configurationIcon from '../assets/icons/configurationIcon.png'     //NEED TO BE REPLACE
+import storeIcon from '../assets/icons/storeIcon.png'                     //NEED TO BE REPLACE 
+import increaseIcon from '../assets/icons/increaseIcon.png'
+import increaseSelectIcon from '../assets/icons/increaseSelectIcon.png'
+import decreaseIcon from '../assets/icons/decreaseIcon.png'
+import decreaseSelectIcon from '../assets/icons/decreaseSelectIcon.png'
+import missionIcon from '../assets/icons/missionIcon.png'                         //NEED TO BE REPLACE
 
 
 //PROTOTYPE ASSETS, TO BE REPLACED
-import presidente from '../assets/sprites/presidente.png'                         //NEED TO BE REPLACE
+import presidente from '../assets/other/presidente.png'                         //NEED TO BE REPLACE
 // MISSION ASSETS
-import missionTemplate from '../assets/sprites/mission/missionTemplate.png'
+import missionTemplate from '../assets/mission/missionTemplate.png'
 // MISSION DISTRICT BORRASCAL SCENE ASSETS
-import regularSceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/regularScene.png'
-import upMoneySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/upMoneyScene.png'
-import downMoneySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/downMoneyScene.png'
-import upPopularitySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/upPopularityScene.png'
-import downPopularitySceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/downPopularityScene.png'
-import downCorruptionSceneBorrascal from '../assets/sprites/mission/scenes/districtBorrascal/downCorruptionScene.png'
+import regularSceneBorrascal from '../assets/mission/scenes/districtBorrascal/regularScene.png'
+import upMoneySceneBorrascal from '../assets/mission/scenes/districtBorrascal/upMoneyScene.png'
+import downMoneySceneBorrascal from '../assets/mission/scenes/districtBorrascal/downMoneyScene.png'
+import upPopularitySceneBorrascal from '../assets/mission/scenes/districtBorrascal/upPopularityScene.png'
+import downPopularitySceneBorrascal from '../assets/mission/scenes/districtBorrascal/downPopularityScene.png'
+import downCorruptionSceneBorrascal from '../assets/mission/scenes/districtBorrascal/downCorruptionScene.png'
 // MISSION DISTRICT EL NIDO SCENE ASSETS
-import regularSceneElNido from '../assets/sprites/mission/scenes/districtElNido/regularScene.png'
-import upMoneySceneElNido from '../assets/sprites/mission/scenes/districtElNido/upMoneyScene.png'
-import downMoneySceneElNido from '../assets/sprites/mission/scenes/districtElNido/downMoneyScene.png'
-import upPopularitySceneElNido from '../assets/sprites/mission/scenes/districtElNido/upPopularityScene.png'
-import downPopularitySceneElNido from '../assets/sprites/mission/scenes/districtElNido/downPopularityScene.png'
-import downCorruptionSceneElNido from '../assets/sprites/mission/scenes/districtElNido/downCorruptionScene.png'
+import regularSceneElNido from '../assets/mission/scenes/districtElNido/regularScene.png'
+import upMoneySceneElNido from '../assets/mission/scenes/districtElNido/upMoneyScene.png'
+import downMoneySceneElNido from '../assets/mission/scenes/districtElNido/downMoneyScene.png'
+import upPopularitySceneElNido from '../assets/mission/scenes/districtElNido/upPopularityScene.png'
+import downPopularitySceneElNido from '../assets/mission/scenes/districtElNido/downPopularityScene.png'
+import downCorruptionSceneElNido from '../assets/mission/scenes/districtElNido/downCorruptionScene.png'
 // MISSION DISTRICT GUINEA SCENE ASSETS
-import regularSceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/regularScene.png'
-import upMoneySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/upMoneyScene.png'
-import downMoneySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/downMoneyScene.png'
-import upPopularitySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/upPopularityScene.png'
-import downPopularitySceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/downPopularityScene.png'
-import downCorruptionSceneGuinea from '../assets/sprites/mission/scenes/districtGuinea/downCorruptionScene.png'
+import regularSceneGuinea from '../assets/mission/scenes/districtGuinea/regularScene.png'
+import upMoneySceneGuinea from '../assets/mission/scenes/districtGuinea/upMoneyScene.png'
+import downMoneySceneGuinea from '../assets/mission/scenes/districtGuinea/downMoneyScene.png'
+import upPopularitySceneGuinea from '../assets/mission/scenes/districtGuinea/upPopularityScene.png'
+import downPopularitySceneGuinea from '../assets/mission/scenes/districtGuinea/downPopularityScene.png'
+import downCorruptionSceneGuinea from '../assets/mission/scenes/districtGuinea/downCorruptionScene.png'
 // MISSION DISTRICT NUEVA PRADERA SCENE ASSETS
-import regularSceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/regularScene.png'
-import upMoneySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/upMoneyScene.png'
-import downMoneySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/downMoneyScene.png'
-import upPopularitySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/upPopularityScene.png'
-import downPopularitySceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/downPopularityScene.png'
-import downCorruptionSceneNuevaPradera from '../assets/sprites/mission/scenes/districtNuevaPradera/downCorruptionScene.png'
+import regularSceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/regularScene.png'
+import upMoneySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/upMoneyScene.png'
+import downMoneySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/downMoneyScene.png'
+import upPopularitySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/upPopularityScene.png'
+import downPopularitySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/downPopularityScene.png'
+import downCorruptionSceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/downCorruptionScene.png'
 // MISSION DISTRICT SAHAR SCENE ASSETS
-import regularSceneSahar from '../assets/sprites/mission/scenes/districtSahar/regularScene.png'
-import upMoneySceneSahar from '../assets/sprites/mission/scenes/districtSahar/upMoneyScene.png'
-import downMoneySceneSahar from '../assets/sprites/mission/scenes/districtSahar/downMoneyScene.png'
-import upPopularitySceneSahar from '../assets/sprites/mission/scenes/districtSahar/upPopularityScene.png'
-import downPopularitySceneSahar from '../assets/sprites/mission/scenes/districtSahar/downPopularityScene.png'
-import downCorruptionSceneSahar from '../assets/sprites/mission/scenes/districtSahar/downCorruptionScene.png'
+import regularSceneSahar from '../assets/mission/scenes/districtSahar/regularScene.png'
+import upMoneySceneSahar from '../assets/mission/scenes/districtSahar/upMoneyScene.png'
+import downMoneySceneSahar from '../assets/mission/scenes/districtSahar/downMoneyScene.png'
+import upPopularitySceneSahar from '../assets/mission/scenes/districtSahar/upPopularityScene.png'
+import downPopularitySceneSahar from '../assets/mission/scenes/districtSahar/downPopularityScene.png'
+import downCorruptionSceneSahar from '../assets/mission/scenes/districtSahar/downCorruptionScene.png'
 // MISSION DISTRICT SOMOSAGUA SCENE ASSETS
-import regularSceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/regularScene.png'
-import upMoneySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/upMoneyScene.png'
-import downMoneySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/downMoneyScene.png'
-import upPopularitySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/upPopularityScene.png'
-import downPopularitySceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/downPopularityScene.png'
-import downCorruptionSceneSomosagua from '../assets/sprites/mission/scenes/districtSomosagua/downCorruptionScene.png'
+import regularSceneSomosagua from '../assets/mission/scenes/districtSomosagua/regularScene.png'
+import upMoneySceneSomosagua from '../assets/mission/scenes/districtSomosagua/upMoneyScene.png'
+import downMoneySceneSomosagua from '../assets/mission/scenes/districtSomosagua/downMoneyScene.png'
+import upPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosagua/upPopularityScene.png'
+import downPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosagua/downPopularityScene.png'
+import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomosagua/downCorruptionScene.png'
 
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
@@ -120,8 +121,8 @@ import downMoneyMission from '../assets/jsons/downMoney.json';
 
 //audio
 import AudioManager from '../src/manager/audioManager.js'
-import gameAudio from '../assets/sprites/audio/il porco rosso.mp3';
-import quackAudio from '../assets/sprites/audio/quack.mp3';
+import gameAudio from '../assets/audio/il porco rosso.mp3';
+import quackAudio from '../assets/audio/quack.mp3;
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -205,6 +206,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('increaseSelectIcon', increaseSelectIcon);
     this.load.image('decreaseIcon', decreaseIcon);
     this.load.image('decreaseSelectIcon', decreaseSelectIcon);
+    this.load.image('missionIcon', missionIcon);
     // PRESIDENTE ASSET
     this.load.image('presidente', presidente);
     // MISSION ASSETS

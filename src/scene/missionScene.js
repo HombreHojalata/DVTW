@@ -10,6 +10,7 @@ export default class MissionScene extends Phaser.Scene {
         this.mission = data.mission;
         this.player = data.player;
         this.map = data.map;
+        this.gameManager = data.gameManager;
     }
        
     create() {
@@ -148,13 +149,10 @@ export default class MissionScene extends Phaser.Scene {
         bg.on('pointerdown', () => textObjects.forEach(t => t.setScale(1)));
         bg.on('pointerup', () =>{
             textObjects.forEach(t => t.setScale(1.1));
-            //AQUI TODAVIA DA ERROR
-            this.district.increasePopulation(option.popularity);
-            this.player.updateEnergy(option.energy);
-            this.player.updateCorruption(option.corruption);
-            this.player.updateMoney(-option.money);
+            this.gameManager.removeMission(this.mission, option, this.district);
             this.scene.stop();
             this.scene.resume('gameScene');
+            
         });
         return { bg, texts: textObjects };
     }

@@ -54,16 +54,21 @@ export default class GameScene extends Phaser.Scene {
 
         this.startEnergyDrain();
         //MISSION TEST
-        this.thisDayMission = this.gameManager.getMission();
-        this.missionButton = this.add.image(350,350,'closeIcon').setOrigin(0).setInteractive({ useHandCursor: true }); 
-        this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
-        this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
-        this.missionButton.on('pointerup', () => {
-            this.scene.pause('gameScene');
-            this.scene.launch('missionScene', { mission: this.thisDayMission, player: this.player, map: this.map});         //falta pasarle player y map o solo gameManager
-        });
+        this.scheduleNextMission();
+
 
         this.showDayIntro();
+    }
+
+    scheduleNextMission() {
+        const delay = Math.floor(Math.random() * (12000 - 3000 + 1)) + 3000;
+        this.missionTimer = this.time.addEvent({
+            delay: delay,
+            callback: () => {
+                this.gameManager.getMission();
+                this.scheduleNextMission();
+            }
+        });
     }
     /*
     Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
@@ -153,9 +158,10 @@ export default class GameScene extends Phaser.Scene {
 
     finishDay() {
         console.log("DÍA TERMINADO");
-        
+        this.gameManager.deleteAllMissions();
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
+        if (this.missionTimer) this.missionTimer.remove(false);
 
         this.cameras.main.fadeOut(1000, 0, 0, 0);
 
@@ -163,5 +169,8 @@ export default class GameScene extends Phaser.Scene {
             this.gameManager.nextDay();
             this.scene.restart();
         });
+    }
+        startMissionScene(){
+        
     }
 }
