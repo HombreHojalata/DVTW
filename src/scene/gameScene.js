@@ -20,19 +20,26 @@ export default class GameScene extends Phaser.Scene {
 
     init(data) {
         this.fromScene = data && data.from ? data.from : null;
-        if(!this.registry.get('gameManager')){
+        if (!this.registry.has('gameManager')) {
             const GM = new gameManager(this);
-            this.registry.set('gameManager',GM)
+            this.registry.set('gameManager', GM)
         }
         this.gameManager = this.registry.get('gameManager');
         this.player = this.gameManager.getPlayer();
         this.day = this.gameManager.getDay();
         this.map = this.gameManager.getMap();
+        if (!this.registry.has('flagShow')){
+
+            this.registry.set('flagShow', true);
+        }
     }
 
     create() {
         console.log("GAME");
-
+        // SPAWN DAY VISUAL
+        if (this.registry.get('flagShow')) {
+            this.showDayIntro();
+        }
         this.gameManager.spawnAssets(this);
 
         this.topUI = new topUI(this, this.player);
@@ -57,7 +64,6 @@ export default class GameScene extends Phaser.Scene {
         this.scheduleNextMission();
 
 
-        this.showDayIntro();
     }
 
     scheduleNextMission() {
@@ -134,6 +140,9 @@ export default class GameScene extends Phaser.Scene {
         const { width, height } = this.sys.game.config;
         const currentDay = this.gameManager.getDay().getDayNumber();
 
+        const blocker = this.add.zone(0, 0, width, height)
+            .setOrigin(0)
+            .setInteractive();
         const introContainer = this.add.container(0, 0).setDepth(100);
         const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
         const dayText = this.add.text(width / 2, height / 2, `DÍA ${currentDay}`, {
@@ -143,7 +152,7 @@ export default class GameScene extends Phaser.Scene {
             color: '#ffffff'
         }).setOrigin(0.5);
 
-        introContainer.add([bg, dayText]);
+        introContainer.add([blocker, bg, dayText]);
 
         this.time.delayedCall(1500, () => {
             this.tweens.add({
@@ -158,7 +167,7 @@ export default class GameScene extends Phaser.Scene {
 
     finishDay() {
         console.log("DÍA TERMINADO");
-        
+
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
@@ -170,7 +179,7 @@ export default class GameScene extends Phaser.Scene {
             this.scene.restart();
         });
     }
-        startMissionScene(){
-        
+    startMissionScene() {
+
     }
 }

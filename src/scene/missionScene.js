@@ -8,9 +8,6 @@ export default class MissionScene extends Phaser.Scene {
 
     init(data) {
         this.mission = data.mission;
-        this.player = data.player;
-        this.map = data.map;
-        this.gameManager = data.gameManager;
     }
        
     create() {
@@ -23,8 +20,8 @@ export default class MissionScene extends Phaser.Scene {
         const offsetY = (baseHeight - newHeight) / 2 - 50;
         this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
         //PLAYER INFO
-        //this.player = this.registry.get('gameManager').getPlayer();
-        //this.map = this.registry.get('gameManager').getMap();
+        this.player = this.registry.get('gameManager').getPlayer();
+        this.map = this.registry.get('gameManager').getMap();
         //this.footerUI = new footerUI(this, this.player).create();
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);

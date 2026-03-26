@@ -24,7 +24,7 @@ export default class gameManager{
             this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
             this.missionButton.on('pointerup', () => {
                 this.scene.scene.pause('gameScene');
-                this.scene.scene.launch('missionScene', { mission: missionL, player: this.player, map: this.map, gameManager: this });         //falta pasarle player y map o solo gameManager
+                this.scene.scene.launch('missionScene', { mission: missionL});
             });
             missionL.setMissionButton(this.missionButton);
         }
@@ -46,7 +46,7 @@ export default class gameManager{
         this.presidente = this.player.spawnPresident(scene);
     }
     nextDay() {
-        this.day.nextDayNumber();
+        this.day = new Day(this.day);
         this.player.setEnergy(this.player.getMaxEnergy());
     }
 

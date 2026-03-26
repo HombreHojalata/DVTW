@@ -45,7 +45,7 @@ export default class District {
         button.on('pointerup', () => {
             scene.updateDistrictFooter(this);
             scene.scene.pause('gameScene');
-            scene.scene.launch('districtScene', { district: this });
+            scene.scene.launch('districtScene', { district: this});
         });
         return button;
     }
