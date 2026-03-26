@@ -1,13 +1,6 @@
 import Phaser from 'phaser';
+import configBg from '../../assets/sprites/scenes/configScene.png';
 
-/**
- * Escena principal del juego. La escena se compone de una serie de plataformas 
- * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
- * El juego comienza generando aleatoriamente una base sobre la que generar una estrella. 
- * @abstract Cada vez que el jugador recoge la estrella, aparece una nueva en otra base.
- * El juego termina cuando el jugador ha recogido 10 estrellas.
- * @extends Phaser.Scene
- */
 export default class ConfigurationScene extends Phaser.Scene {
     constructor() {
         super({ key: 'configurationScene' });
@@ -17,126 +10,373 @@ export default class ConfigurationScene extends Phaser.Scene {
         this.returnScene = (data && (data.from || data.fromScene || data.returnScene)) || null;
     }
 
+    preload() {
+        this.load.image('configBg', configBg);
+    }
+
     create() {
-        console.log("CONFIGURACIÓN");
+        const width = this.scale.width;
+        const height = this.scale.height;
 
-        const width = Number(this.sys.game.config.width);
-        const height = Number(this.sys.game.config.height);
+        this.audioManager = this.registry.get('audioManager');
 
-        const bgRed = 0xa52a2a;
-        const darkRed = 0x7e1f1f;
-        const navy = 0x13293d;
-        const cream = '#f4efe6';
-        const gold = '#f0c24b';
-        const softWhite = '#f8f4ee';
+        // Saved values currently in the real audio manager
+        this.initialMusicVolume = this.audioManager?.musicVolume ?? 0.5;
+        this.initialSfxVolume = this.audioManager?.sfxVolume ?? 0.5;
 
-        this.add.rectangle(width / 2, height / 2, width, height, bgRed);
+        // Temporary values while user moves sliders
+        this.pendingMusicVolume = this.initialMusicVolume;
+        this.pendingSfxVolume = this.initialSfxVolume;
 
-        this.add.text(width / 2, 95, 'Opciones', {
-            fontSize: '64px',
+        // Background fitted to screen while keeping whole image visible
+        const bg = this.add.image(width / 2, height / 2, 'configBg');
+        const scale = Math.min(width / bg.width, height / bg.height);
+        bg.setScale(scale);
+
+        // Right metal panel bounds
+        const panel = {
+            x: 950,
+            y: 430,
+            width: 360,
+            height: 500
+        };
+
+        const panelLeft = panel.x - panel.width / 2;
+
+        // Subtle overlay
+        this.add.rectangle(panel.x, panel.y, panel.width, panel.height, 0xffffff, 0.04)
+            .setStrokeStyle(2, 0x6f6f6f, 0.35);
+
+        // Title
+        this.add.text(panel.x, 120, 'AUDIO SETTINGS', {
+            fontSize: '28px',
             fontStyle: 'bold',
-            color: softWhite,
+            color: '#1d1d1d',
             fontFamily: 'Arial'
         }).setOrigin(0.5);
 
-        this.add.text(width / 2, 175, 'Sr. Presidente, ajuste aquí sus preferencias de mandato:', {
-            fontSize: '24px',
-            color: softWhite,
+        this.add.text(panel.x, 155, 'Adjust your presidential audio controls', {
+            fontSize: '13px',
+            color: '#4a4a4a',
             fontFamily: 'Courier'
         }).setOrigin(0.5);
 
-        const panelY = 430;
-        const panelWidth = 610;
-        const panelHeight = 330;
-        const leftPanelX = width / 2 - 320;
-        const rightPanelX = width / 2 + 320;
+        // Slider layout
+        const labelX = panelLeft + 28;
+        const sliderX = panelLeft + 180;
+        const sliderWidth = 180;
+        const percentOffset = 34;
 
-        const drawPanel = (x, y, w, h, fillColor) => {
-            const g = this.add.graphics();
-            g.fillStyle(fillColor, 0.28);
-            g.fillRoundedRect(x - w / 2, y - h / 2, w, h, 20);
-            g.lineStyle(3, 0xf4efe6, 1);
-            g.strokeRoundedRect(x - w / 2, y - h / 2, w, h, 20);
-        };
+        this.add.text(labelX, 250, 'Música', {
+            fontSize: '22px',
+            color: '#222222',
+            fontFamily: 'Courier'
+        }).setOrigin(0, 0.5);
 
-        drawPanel(leftPanelX, panelY, panelWidth, panelHeight, darkRed);
-        drawPanel(rightPanelX, panelY, panelWidth, panelHeight, navy);
+        this.musicSlider = this.createMetalSlider(
+            sliderX,
+            270,
+            sliderWidth,
+            this.pendingMusicVolume,
+            percentOffset,
+            (value) => {
+                this.pendingMusicVolume = value;
+            }
+        );
 
-        this.add.text(leftPanelX, panelY - 110, 'AUDIO', {
-            fontSize: '34px',
-            fontStyle: 'bold',
-            color: gold,
-            fontFamily: 'Arial'
-        }).setOrigin(0.5);
+        this.add.text(labelX, 335, 'Sonido', {
+            fontSize: '22px',
+            color: '#222222',
+            fontFamily: 'Courier'
+        }).setOrigin(0, 0.5);
 
-        this.add.text(rightPanelX, panelY - 110, 'PARTIDA', {
-            fontSize: '34px',
-            fontStyle: 'bold',
-            color: gold,
-            fontFamily: 'Arial'
-        }).setOrigin(0.5);
+        this.sfxSlider = this.createMetalSlider(
+            sliderX,
+            355,
+            sliderWidth,
+            this.pendingSfxVolume,
+            percentOffset,
+            (value) => {
+                this.pendingSfxVolume = value;
+            }
+        );
 
-        const createOptionRow = (x, y, label, valueText, valueColor) => {
-            this.add.text(x - 165, y, label, {
-                fontSize: '24px',
-                color: softWhite,
-                fontFamily: 'Courier'
-            }).setOrigin(0, 0.5);
+        // Buttons aligned nicely at bottom
+        const buttonY = panel.y + panel.height / 2 - 55;
+        const buttonGap = 18;
+        const buttonWidth = 118;
+        const buttonHeight = 42;
 
-            const valueBg = this.add.rectangle(x + 165, y, 150, 42, 0x000000, 0.35)
-                .setStrokeStyle(2, 0xf4efe6);
+        const totalButtonsWidth = buttonWidth * 2 + buttonGap;
+        const firstButtonX = panel.x - totalButtonsWidth / 2 + buttonWidth / 2;
+        const secondButtonX = firstButtonX + buttonWidth + buttonGap;
 
-            const value = this.add.text(x + 165, y, valueText, {
-                fontSize: '20px',
-                color: valueColor,
-                fontStyle: 'bold',
-                fontFamily: 'Arial'
-            }).setOrigin(0.5);
+        this.backButton = this.createPanelButton(
+            firstButtonX,
+            buttonY,
+            'BACK',
+            buttonWidth,
+            buttonHeight,
+            0x35425a,
+            0x465674,
+            0x222b3a
+        );
 
-            return { valueBg, value };
-        };
+        this.saveButton = this.createPanelButton(
+            secondButtonX,
+            buttonY,
+            'SAVE',
+            buttonWidth,
+            buttonHeight,
+            0x99261d,
+            0xb13227,
+            0x6f1d17
+        );
 
-        createOptionRow(leftPanelX, panelY - 25, 'Música', 'ON', '#7CFF7A');
-        createOptionRow(leftPanelX, panelY + 45, 'Sonido', 'ON', '#7CFF7A');
-
-        createOptionRow(rightPanelX, panelY - 25, 'Dificultad', 'NORMAL', gold);
-        createOptionRow(rightPanelX, panelY + 45, 'Mandato', 'ESTÁNDAR', gold);
-
-        const createButton = (x, y, text, baseColor, hoverColor) => {
-            const rect = this.add.rectangle(x, y, 190, 58, baseColor)
-                .setStrokeStyle(3, 0xf4efe6)
-                .setInteractive({ useHandCursor: true });
-
-            const label = this.add.text(x, y, text, {
-                fontSize: '24px',
-                fontStyle: 'bold',
-                color: softWhite,
-                fontFamily: 'Arial'
-            }).setOrigin(0.5);
-
-            rect.on('pointerover', () => rect.setFillStyle(hoverColor));
-            rect.on('pointerout', () => rect.setFillStyle(baseColor));
-
-            return { rect, label };
-        };
-
-        const backBtn = createButton(width / 2 - 130, height - 90, 'BACK', navy, 0x1d3f5c);
-        const saveBtn = createButton(width / 2 + 130, height - 90, 'SAVE', darkRed, 0x9c2d2d);
-
-        backBtn.rect.on('pointerup', () => {
+        this.backButton.on('pointerup', () => {
             if (this.returnScene) this.scene.start(this.returnScene);
             else this.scene.start('introScene');
         });
 
-        saveBtn.rect.on('pointerup', () => {
+        this.saveButton.on('pointerup', () => {
+            if (this.audioManager?.setMusicVolume) {
+                this.audioManager.setMusicVolume(this.pendingMusicVolume);
+            }
+
+            if (this.audioManager?.setSfxVolume) {
+                this.audioManager.setSfxVolume(this.pendingSfxVolume);
+            }
+
             if (this.returnScene) this.scene.start(this.returnScene);
             else this.scene.start('introScene');
         });
 
-        this.add.text(width / 2, height - 28, 'QUACKINGTON DC — INTERNAL PRESIDENTIAL SETTINGS', {
-            fontSize: '14px',
-            color: '#f0d9d9',
-            fontFamily: 'Courier'
+        this.createLaunchButton();
+    }
+
+    createPanelButton(x, y, text, width, height, baseColor, hoverColor, pressedColor) {
+        const container = this.add.container(x, y);
+
+        const shadow = this.add.rectangle(0, 4, width, height, 0x000000, 0.22)
+            .setStrokeStyle(0);
+
+        const rect = this.add.rectangle(0, 0, width, height, baseColor)
+            .setStrokeStyle(2, 0x161616)
+            .setInteractive();
+
+        this.setPointerCursor(rect);
+
+        const highlight = this.add.rectangle(0, -height / 2 + 6, width - 6, 8, 0xffffff, 0.08);
+
+        const label = this.add.text(0, 0, text, {
+            fontSize: '17px',
+            fontStyle: 'bold',
+            color: '#f8f4ee',
+            fontFamily: 'Arial'
         }).setOrigin(0.5);
+
+        container.add([shadow, rect, highlight, label]);
+
+        rect.on('pointerover', () => {
+            rect.setFillStyle(hoverColor);
+            container.setScale(1.02);
+        });
+
+        rect.on('pointerout', () => {
+            rect.setFillStyle(baseColor);
+            container.setScale(1);
+            container.y = y;
+        });
+
+        rect.on('pointerdown', () => {
+            rect.setFillStyle(pressedColor);
+            container.y = y + 2;
+        });
+
+        rect.on('pointerup', () => {
+            rect.setFillStyle(hoverColor);
+            container.y = y;
+        });
+
+        return rect;
+    }
+
+    createMetalSlider(x, y, width, initialValue = 0.5, percentOffset = 34, onChange) {
+        const minX = x - width / 2;
+        const maxX = x + width / 2;
+
+        this.add.rectangle(x, y + 1, width, 10, 0x000000, 0.18);
+
+        const track = this.add.rectangle(x, y, width, 10, 0x505861)
+            .setStrokeStyle(2, 0x2b2b2b)
+            .setInteractive();
+
+        this.setPointerCursor(track);
+
+        const fill = this.add.rectangle(minX, y, width * initialValue, 10, 0x7acb68)
+            .setOrigin(0, 0.5)
+            .setInteractive();
+
+        this.setPointerCursor(fill);
+
+        const knobShadow = this.add.circle(minX + width * initialValue, y + 2, 12, 0x000000, 0.18);
+
+        const knob = this.add.circle(
+            minX + width * initialValue,
+            y,
+            12,
+            0xe4e4e4
+        )
+            .setStrokeStyle(3, 0x2e2e2e)
+            .setInteractive();
+
+        this.setPointerCursor(knob);
+        this.input.setDraggable(knob);
+
+        const percentText = this.add.text(maxX + percentOffset, y, `${Math.round(initialValue * 100)}%`, {
+            fontSize: '17px',
+            fontStyle: 'bold',
+            color: '#202020',
+            fontFamily: 'Arial'
+        }).setOrigin(0, 0.5);
+
+        const updateSlider = (pointerX) => {
+            const clampedX = Phaser.Math.Clamp(pointerX, minX, maxX);
+            const value = (clampedX - minX) / width;
+
+            knob.x = clampedX;
+            knobShadow.x = clampedX;
+            fill.width = clampedX - minX;
+            percentText.setText(`${Math.round(value * 100)}%`);
+
+            if (onChange) onChange(value);
+        };
+
+        knob.on('drag', (pointer, dragX) => {
+            updateSlider(dragX);
+        });
+
+        knob.on('pointerover', () => {
+            knob.setScale(1.05);
+        });
+
+        knob.on('pointerout', () => {
+            knob.setScale(1);
+        });
+
+        track.on('pointerdown', (pointer) => {
+            updateSlider(pointer.x);
+        });
+
+        fill.on('pointerdown', (pointer) => {
+            updateSlider(pointer.x);
+        });
+
+        return {
+            track,
+            fill,
+            knob,
+            percentText,
+            getValue: () => (knob.x - minX) / width
+        };
+    }
+
+    createLaunchButton() {
+        const x = 600;
+        const y = 580;
+
+        this.launchGlow = this.add.ellipse(x, y, 250, 185, 0xffd54a, 0.0)
+            .setStrokeStyle(4, 0xffd54a, 0.0)
+            .setDepth(5);
+
+        this.launchPressOverlay = this.add.ellipse(x, y + 2, 170, 120, 0x000000, 0)
+            .setDepth(6);
+
+        const hotspot = this.add.ellipse(x, y, 230, 180, 0xff0000, 0.001)
+            .setInteractive()
+            .setDepth(7);
+
+        this.setPointerCursor(hotspot);
+
+        hotspot.on('pointerover', () => {
+            this.tweens.killTweensOf(this.launchGlow);
+
+            this.launchGlow.setAlpha(0.18);
+            this.launchGlow.setStrokeStyle(4, 0xffd54a, 0.25);
+
+            this.tweens.add({
+                targets: this.launchGlow,
+                scaleX: 1.03,
+                scaleY: 1.03,
+                duration: 120
+            });
+        });
+
+        hotspot.on('pointerout', () => {
+            this.tweens.killTweensOf(this.launchGlow);
+
+            this.launchGlow.setAlpha(0);
+            this.launchGlow.setScale(1);
+            this.launchGlow.setStrokeStyle(4, 0xffd54a, 0);
+        });
+
+        hotspot.on('pointerdown', () => {
+            if (this.audioManager?.play) {
+                this.audioManager.play('quack');
+            }
+
+            this.launchPressOverlay.setAlpha(0.22);
+
+            this.tweens.killTweensOf(this.launchPressOverlay);
+            this.tweens.add({
+                targets: this.launchPressOverlay,
+                alpha: 0,
+                scaleX: 0.96,
+                scaleY: 0.96,
+                duration: 120,
+                yoyo: false,
+                onComplete: () => {
+                    this.launchPressOverlay.setScale(1);
+                    this.launchPressOverlay.setAlpha(0);
+                }
+            });
+
+            this.launchGlow.setAlpha(0.22);
+            this.launchGlow.setStrokeStyle(4, 0xffd54a, 0.35);
+            this.launchGlow.setScale(0.96);
+
+            this.tweens.killTweensOf(this.launchGlow);
+            this.tweens.add({
+                targets: this.launchGlow,
+                scaleX: 1.08,
+                scaleY: 1.08,
+                alpha: 0,
+                duration: 180,
+                onComplete: () => {
+                    this.launchGlow.setScale(1);
+                    this.launchGlow.setAlpha(0);
+                    this.launchGlow.setStrokeStyle(4, 0xffd54a, 0);
+                }
+            });
+
+            this.cameras.main.shake(100, 0.0015);
+        });
+
+        hotspot.on('pointerup', () => {
+            console.log('Launch activated');
+            // this.scene.start('someScene');
+        });
+
+        this.launchHotspot = hotspot;
+    }
+
+    setPointerCursor(gameObject) {
+        gameObject.on('pointerover', () => {
+            this.input.manager.canvas.style.cursor = 'pointer';
+        });
+
+        gameObject.on('pointerout', () => {
+            this.input.manager.canvas.style.cursor = 'default';
+        });
     }
 }
