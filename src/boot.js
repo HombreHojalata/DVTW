@@ -122,6 +122,7 @@ import downMoneyMission from '../assets/jsons/downMoney.json';
 //audio
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/il porco rosso.mp3';
+import quackAudio from '../assets/audio/quack.mp3;
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -260,6 +261,7 @@ export default class Boot extends Phaser.Scene {
 
     //audio?
     this.load.audio('bgMusic', gameAudio);
+    this.load.audio('quack', quackAudio);
 
   }
 
@@ -268,6 +270,7 @@ export default class Boot extends Phaser.Scene {
     
     //WE CAN ADD MUSIC AND LOADING BAR HERE
     this.audioManager = new AudioManager(this);
+    this.registry.set('audioManager', this.audioManager)
     this.audioManager.playMusic('bgMusic');
     // Crear la barra de carga
     const barWidth = 600;
