@@ -44,7 +44,7 @@ export default class endDayBtnUI {
         this.btn.on('pointerup', () => {
             if (this.isOver) {
                 this.btn.setTexture('endDayBright');
-                this.registry.set('flagShow',true);
+                this.scene.registry.set('flagShow',true);
                 this.finishDay();
             } else {
                 this.btn.setTexture('endDayNormal');

@@ -29,7 +29,6 @@ export default class GameScene extends Phaser.Scene {
         this.day = this.gameManager.getDay();
         this.map = this.gameManager.getMap();
         if (!this.registry.has('flagShow')){
-
             this.registry.set('flagShow', true);
         }
     }
@@ -164,7 +163,10 @@ export default class GameScene extends Phaser.Scene {
             });
         });
     }
+    startMissionScene() {
 
+    }    
+    //NO DEBE ESTAR AQUI
     finishDay() {
         console.log("DÍA TERMINADO");
 
@@ -178,8 +180,5 @@ export default class GameScene extends Phaser.Scene {
             this.gameManager.nextDay();
             this.scene.restart();
         });
-    }
-    startMissionScene() {
-
     }
 }

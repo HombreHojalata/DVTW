@@ -102,7 +102,7 @@ export default class confirmationUI {
     confirm() {
         this.hide();
         if (this.onConfirm){
-            this.registry.set('flagShow',true);
+            this.scene.registry.set('flagShow', true);             
             this.onConfirm();
         } 
     }
