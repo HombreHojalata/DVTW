@@ -59,8 +59,25 @@ export default class Map {
         ];
         return districtArray;
     }
-    spawnMap(scene){return scene.add.image(0,-10, this.mapSiluete).setOrigin(0);}
-    spawnDistricts(scene){this.districtList.forEach(d => d.spawnDistrict(scene,true));}
+    spawnMap(scene){return scene.add.image(0, -10, this.mapSiluete).setOrigin(0);}
+    //spawnDistricts(scene){this.districtList.forEach(d => d.spawnDistrict(scene,true));}
+    spawnDistricts(scene){
+        const cutouts = scene.cache.json.get('mapCutout');
+        let tiledObj = [];
+        if(cutouts && cutouts.layers){
+            const objLayer = cutouts.layers.find(layer => layer.type === 'objectgroup');
+            if(objLayer)
+                tiledObj = objLayer.objects;
+        }
+        this.districtList.forEach(d => {
+            const shape = tiledObj.find(obj => obj.name.toLowerCase() === d.getName().toLowerCase());
+            if(shape && shape.polygon)
+                d.polygonPts = shape.polygon.map(pt => {
+                    return {x: pt.x + shape.x, y: pt.y + shape.y};
+                });
+            d.spawnDistrict(scene, true);
+        });
+    }
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
 
     /*generateDistrictsMoney() {
