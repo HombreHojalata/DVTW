@@ -5,7 +5,7 @@ import Map from './map/map.js'
 
 
 export default class gameManager{
-    constructor(scene,game){
+    constructor(scene){
         this.player = new Player(1000000, 100, 100, 20, 80 , 'presidente' , 'presidente');
         this.day=new Day(0);
         this.missionManager = new MissionManager(scene,this.player);
@@ -31,8 +31,9 @@ export default class gameManager{
         this.day.updateResources(-option.money, option.energy, option.corruption, option.popularity);
         this.missionManager.rmMission(mission);
     }
-    deleteAllMissions(){
+    deleteAllMissions(scene){
         this.missionManager.deleteAllMissions();
+        scene.registry.set('missionList', []);
     }
     removeMissionFromId(scene,name){
         let missions = scene.registry.get('missionList');
@@ -40,9 +41,9 @@ export default class gameManager{
         scene.registry.set('missionList', missions);
     }
     // ASSETS - BUTTONS
-    spawnAssets(scene){
+    spawnAssets(scene,tutorial){
         this.mapImg = this.map.spawnMap(scene);
-        this.districtList = this.map.spawnDistricts(scene);
+        this.districtList = this.map.spawnDistricts(scene,tutorial);
         this.presidente = this.player.spawnPresident(scene);
     }
     spawnConfigurationButton(scene){

@@ -5,21 +5,13 @@ import footerUI from '../UI/footerUI.js';
 import batteryUI from '../UI/batteryUI.js';
 import endDayBtnUI from '../UI/endDayBtnUI.js';
 
-/**
- * Escena principal del juego. La escena se compone de una serie de plataformas 
- * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
- * El juego comienza generando aleatoriamente una base sobre la que generar una estrella. 
- * @abstract Cada vez que el jugador recoge la estrella, aparece una nueva en otra base.
- * El juego termina cuando el jugador ha recogido 10 estrellas.
- * @extends Phaser.Scene
- */
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'gameScene' });
     }
 
     init(data) {
-        this.fromScene = data && data.from ? data.from : null;
+        this.fromScene = data && data.from ? data.from : null;                  //SOBRA
         if (!this.registry.has('gameManager')) {
             const GM = new gameManager(this);
             this.registry.set('gameManager', GM)
@@ -31,6 +23,7 @@ export default class GameScene extends Phaser.Scene {
         if (!this.registry.has('flagShow')) this.registry.set('flagShow', true);
         if (!this.registry.has('missionList')) this.registry.set('missionList',[]);
         this.missionList = this.registry.get('missionList');
+        this.isTutorial = data.tutorial || false;
     }
 
     create() {
@@ -46,15 +39,10 @@ export default class GameScene extends Phaser.Scene {
         if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
         this.configButton = this.gameManager.spawnConfigurationButton(this);
 
-        this.topUI = new topUI(this, this.player);
-        this.batteryUI = new batteryUI(this, this.player);
-        this.endDayBtnUI = new endDayBtnUI(this, this.player);
-        this.footerUI = new footerUI(this, this.player);
-
-        this.topUI.create();
-        this.batteryUI.create();
-        this.endDayBtnUI.create();
-        this.footerUI.create();
+        this.topUI = new topUI(this);
+        this.batteryUI = new batteryUI(this);
+        this.endDayBtnUI = new endDayBtnUI(this);
+        this.footerUI = new footerUI(this);
 
         const { width, height } = this.sys.game.config;
         this.nightOverlay = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
@@ -170,7 +158,7 @@ export default class GameScene extends Phaser.Scene {
     //NO DEBE ESTAR AQUI
     finishDay() {
         console.log("DÍA TERMINADO");
-        this.gameManager.deleteAllMissions();
+        this.gameManager.deleteAllMissions(this);
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);

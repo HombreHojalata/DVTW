@@ -1,7 +1,8 @@
 export default class footerUI {
-    constructor(scene, player) {
+    constructor(scene) {
         this.scene = scene;
-        this.player = player;
+        this.player = this.scene.registry.get('gameManager').getPlayer();
+        this.create();
     }
 
     create() {
@@ -30,7 +31,6 @@ export default class footerUI {
             color: '#ffffff',
             fontStyle: 'bold'
         }).setOrigin(0.5).setDepth(11);
-
 
         this.blackMarketText = this.scene.add.text(
             footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2,

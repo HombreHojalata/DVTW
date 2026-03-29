@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 
 export default class batteryI {
-    constructor(scene, player) {
+    constructor(scene) {
         this.scene = scene;
-        this.player = player;
+        this.player = this.scene.registry.get('gameManager').getPlayer();
+        this.create();
     }
 
     create() {

@@ -8,10 +8,11 @@ export default class DistrictScene extends Phaser.Scene {
 
     init(data) {
         this.district = data.district;
+        this.tutorial = data.tutorial || false;
     }
        
     create() {
-        console.log("DISTRICT");
+        console.log("DISTRICT + " + this.district.getName());
         const baseWidth = this.scale.width;
         const baseHeight = this.scale.height;
         const newWidth = baseWidth * 0.9;
@@ -34,7 +35,152 @@ export default class DistrictScene extends Phaser.Scene {
         this.storePositionX = this.spawnBuiltList(newWidth,offsetX,newHeight);
         this.storeButton = this.spawnStoreButton(newHeight,this.storePositionX);
         this.spawnAllFooter(newWidth,offsetX,newHeight,offsetY);
+        //TUTORIAL
+        if(this.tutorial){
+            const { width, height } = this.sys.game.config;
+            this.blocker = this.add.zone(0, 0, width, height).setOrigin(0).setInteractive().setDepth(20);
+            this.explainTutorial();
+        }
     }
+    // TUTORIAL
+    explainTutorial() {
+        const container = this.add.container(340, 300).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
+        const text = this.add.text(150, 70, '¡Bienvenido al distrito de ' + this.district.getName() + '!\nAquí puedes gestionar las políticas del distrito y ver su información detallada.', {
+            fontSize: '16px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 280 },
+            lineSpacing: 10
+        }).setOrigin(0.5);
+        const continueBtn = this.add.text(150, 150, 'Continuar', { fontSize: '20px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        continueBtn.on('pointerup', () => {
+            continueBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.explainStoreButton();
+                }
+            });
+        });
+        container.add([bg, text, continueBtn]);
+    }
+    explainStoreButton() {              // CAPAZ HAY QUE MARCARLO
+        const container = this.add.container(340, 300).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
+        const text = this.add.text(150, 70, 'Haz click en el icono de la tienda para acceder al mercado de edificios del distrito.\nAquí podrás comprar nuevos edificios para tu distrito usando el dinero que has ganado.', {
+            fontSize: '16px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 280 },
+            lineSpacing: 10
+        }).setOrigin(0.5);
+        const goBackBtn = this.add.text(80, 170, 'Volver', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        goBackBtn.on('pointerup', () => {
+            goBackBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.explainTutorial();
+                }
+            });
+        });
+        const continueBtn = this.add.text(220, 170, 'Continuar', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        continueBtn.on('pointerup', () => {
+            continueBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.explainDistrictAtributes();
+                }
+            });
+        });
+        container.add([bg, text, goBackBtn, continueBtn]);
+    }
+    explainDistrictAtributes() {
+        const container = this.add.container(300, 450).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
+        const text = this.add.text(150, 70, 'En la parte inferior de la pantalla puedes ver los atributos del distrito y modificarlos usando los botones correspondientes.\nTen en cuenta que cada cambio tiene un costo, así que elige sabiamente.', {
+            fontSize: '16px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 280 },
+            lineSpacing: 10
+        }).setOrigin(0.5);
+        const goBackBtn = this.add.text(80, 170, 'Volver', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        goBackBtn.on('pointerup', () => {
+            goBackBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.explainStoreButton();
+                }
+            });
+        });
+        const prepareBtn = this.add.text(220, 170, 'Preparado', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        prepareBtn.on('pointerup', () => {
+            prepareBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.startGameText();
+                }
+            });
+        });
+        container.add([bg, text, goBackBtn, prepareBtn]);
+    }
+    startGameText() {
+        const { width, height } = this.sys.game.config;
+        const introContainer = this.add.container(0, 0).setDepth(21);
+        const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
+        const text = this.add.text(width / 2, height / 2 - 50, '¡Estás listo para gobernar!\nRecuerda que tus decisiones afectarán la vida de tus ciudadanos y el futuro de tu ciudad.\n¡Buena suerte!', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center'
+        }).setOrigin(0.5);
+        const continueBtn = this.add.text(width*2/3, height/2 + 150, 'START GAME', { fontSize: '24px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(21);
+        continueBtn.on('pointerup', () => {
+            continueBtn.setScale(1.1);
+            this.tweens.add({
+                targets: introContainer,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    introContainer.destroy();
+                    this.scene.stop();
+                    this.scene.stop('tutorialScene');
+                    this.scene.start('gameScene', { tutorial: true });
+                }
+            });
+        });
+        introContainer.add([bg, text, continueBtn]);
+    }
+    //
     spawnTemplate(newWidth,newHeight,offsetX,offsetY){return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);}
     spawnNameText(offsetX,offsetY){
         const leftCorner = offsetX*3 - 40;

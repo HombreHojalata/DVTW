@@ -1,13 +1,5 @@
 import Phaser from 'phaser';
 
-/**
- * Escena principal del juego. La escena se compone de una serie de plataformas 
- * sobre las que se sitúan las bases en las podrán aparecer las estrellas. 
- * El juego comienza generando aleatoriamente una base sobre la que generar una estrella. 
- * @abstract Cada vez que el jugador recoge la estrella, aparece una nueva en otra base.
- * El juego termina cuando el jugador ha recogido 10 estrellas.
- * @extends Phaser.Scene
- */
 export default class IntroScene extends Phaser.Scene {
     constructor() {
         super({ key: 'introScene' });

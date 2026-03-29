@@ -37,34 +37,32 @@ export default class District {
     // ASSETS
     spawnDistrict(scene){
         this.texture = this.is_special_built ? this.PNGwithSpecial : this.PNGwithOutSpecial;
-        const button = scene.add.image(this.posX, this.posY, this.texture)
-            .setOrigin(0)
-            .setScale(1)
+        const button = scene.add.image(this.posX, this.posY, this.texture).setOrigin(0).setScale(1)
             .setInteractive({
                 useHandCursor: true,
                 pixelPerfect: true
             });
-            const outline = scene.add.graphics();
-            outline.lineStyle(3, 0xcccccc, 1);
-            outline.setDepth(10);
-            outline.setPosition(-5, -10);
-            if(this.polygonPts && this.polygonPts.length > 0){
-                outline.beginPath();
-                outline.moveTo(this.polygonPts[0].x, this.polygonPts[0].y);
-                for(let i = 1; i < this.polygonPts.length; i++)
-                    outline.lineTo(this.polygonPts[i].x, this.polygonPts[i].y);
-                outline.closePath();
-                outline.strokePath();
-            }
-            outline.setVisible(false);
-            button.on('pointerover', () => {outline.setVisible(true);});
-            button.on('pointerout', () => {outline.setVisible(false);});
-            button.on('pointerup', () => {
-                scene.updateDistrictFooter(this);
-                scene.scene.pause('gameScene');
-                scene.scene.launch('districtScene', { district: this});
-            });
-            return button;
+        const outline = scene.add.graphics();
+        outline.lineStyle(3, 0xcccccc, 1);
+        outline.setDepth(10);
+        outline.setPosition(-5, -10);
+        if(this.polygonPts && this.polygonPts.length > 0){
+            outline.beginPath();
+            outline.moveTo(this.polygonPts[0].x, this.polygonPts[0].y);
+            for(let i = 1; i < this.polygonPts.length; i++)
+                outline.lineTo(this.polygonPts[i].x, this.polygonPts[i].y);
+            outline.closePath();
+            outline.strokePath();
+        }
+        outline.setVisible(false);
+        button.on('pointerover', () => {outline.setVisible(true);});
+        button.on('pointerout', () => {outline.setVisible(false);});
+        button.on('pointerup', () => {
+            scene.updateDistrictFooter(this);
+            scene.scene.pause('gameScene');
+            scene.scene.launch('districtScene', { district: this});
+        });
+        return button;
     }
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}

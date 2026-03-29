@@ -1,12 +1,12 @@
-import Phaser from 'phaser';
 import confirmationUI from './confirmationUI';
 
 export default class endDayBtnUI {
-    constructor(scene, player) {
+    constructor(scene) {
         this.scene = scene;
-        this.player = player;
+        this.player = this.scene.registry.get('gameManager').getPlayer();
         this.isOver = false;
         this.scaleValue = 0.8;
+        this.create();
     }
 
     create() {
@@ -18,6 +18,17 @@ export default class endDayBtnUI {
         const x = batteryX + (batteryWidth / 2);
         const y = batteryBottomY + 60;
 
+        if(this.tutorial) {
+            const size = 100;
+            this.blocker = this.scene.add.rectangle(x, y, size, size, 0x000000, 0).setOrigin(0.5).setInteractive().setDepth(13);
+            this.blockedContainer = this.scene.add.container(x, y - 70);
+            const bg = this.scene.add.rectangle(0, 0, 150, 50, 0xffff00).setOrigin(0.5);
+            const text = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontSize: '20px', color: '#000000', fontStyle: 'bold' }).setOrigin(0.5);
+            this.blockedContainer.add([bg, text]);
+            this.blockedContainer.setVisible(false).setDepth(14);
+            this.blocker.on('pointerover', () => { this.blockedContainer.setVisible(true); });
+            this.blocker.on('pointerout', () => { this.blockedContainer.setVisible(false); });
+        }
         this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(10).setScale(this.scaleValue);
 
         this.btn.on('pointerover', () => {

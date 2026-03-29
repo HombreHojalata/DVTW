@@ -76,7 +76,7 @@ export default class Map {
                 d.polygonPts = shape.polygon.map(pt => {
                     return {x: pt.x + shape.x, y: pt.y + shape.y};
                 });
-            d.spawnDistrict(scene, true);
+            d.spawnDistrict(scene);
         });
     }
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}

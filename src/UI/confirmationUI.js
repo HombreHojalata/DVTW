@@ -1,5 +1,3 @@
-import Phaser from 'phaser';
-
 export default class confirmationUI {
     constructor(scene, onConfirm) {
         this.scene = scene;
