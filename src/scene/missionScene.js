@@ -152,15 +152,11 @@ export default class MissionScene extends Phaser.Scene {
         bg.on('pointerdown', () => textObjects.forEach(t => t.setScale(1)));
         bg.on('pointerup', () =>{
             textObjects.forEach(t => t.setScale(1.1));
-            textObjects.forEach(t => t.setScale(1.1));
-            if(this.mission.isMinigame()){
-                this.scene.launch(minigameScene);
-                this.gameManager.removeMission(this.mission, option, this.district);
-            }
+            if(this.mission.isMinigame()) this.scene.launch(minigameScene);
             this.gameManager.removeMission(this.mission, option, this.district);
+            this.removeMissionFromId(this.mission.getName());
             this.scene.stop();
             this.scene.resume('gameScene');
-            
         });
         return { bg, texts: textObjects };
     }
@@ -188,5 +184,12 @@ export default class MissionScene extends Phaser.Scene {
         const x = 550;
         const y = 500;
         this.createOptionButton(x,y,optionList[0],null);
+    }
+
+    // REMOVE MISSION FROM LIST
+    removeMissionFromId(name){
+        let missions = this.registry.get('missionList');
+        missions = missions.filter(m => m.getName() !== name);
+        this.registry.set('missionList', missions);
     }
 }

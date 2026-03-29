@@ -28,9 +28,9 @@ export default class GameScene extends Phaser.Scene {
         this.player = this.gameManager.getPlayer();
         this.day = this.gameManager.getDay();
         this.map = this.gameManager.getMap();
-        if (!this.registry.has('flagShow')){
-            this.registry.set('flagShow', true);
-        }
+        if (!this.registry.has('flagShow')) this.registry.set('flagShow', true);
+        if (!this.registry.has('missionList')) this.registry.set('missionList',[]);
+        this.missionList = this.registry.get('missionList');
     }
 
     create() {
@@ -40,10 +40,11 @@ export default class GameScene extends Phaser.Scene {
         }
         console.log("GAME: " + "DAY " + this.day.getDayNumber());
         // SPAWN DAY VISUAL
-        if (this.registry.get('flagShow')) {
-            this.showDayIntro();
-        }
+        if (this.registry.get('flagShow')) this.showDayIntro();
+        // SPAWN MAP and MISSIONS
         this.gameManager.spawnAssets(this);
+        if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
+        this.configButton = this.gameManager.spawnConfigurationButton(this);
 
         this.topUI = new topUI(this, this.player);
         this.batteryUI = new batteryUI(this, this.player);
@@ -73,7 +74,7 @@ export default class GameScene extends Phaser.Scene {
         this.missionTimer = this.time.addEvent({
             delay: delay,
             callback: () => {
-                this.gameManager.getMission();
+                this.missionList.push(this.gameManager.getMission(this));
                 this.scheduleNextMission();
             }
         });

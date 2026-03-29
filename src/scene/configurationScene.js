@@ -6,7 +6,7 @@ export default class ConfigurationScene extends Phaser.Scene {
     }
 
     init(data) {
-        this.returnScene = (data && (data.from || data.fromScene || data.returnScene)) || null;
+        this.returnScene = data.scene;
     }
 
     create() {
@@ -129,21 +129,24 @@ export default class ConfigurationScene extends Phaser.Scene {
         );
 
         this.backButton.on('pointerup', () => {
-            if (this.returnScene) this.scene.start(this.returnScene);
-            else this.scene.start('introScene');
+            this.scene.stop();
+            if(this.returnScene === 'intro') this.scene.start('introScene');
+            else if(this.returnScene === 'game'){
+                this.registry.set('flagShow',false);
+                this.scene.start('gameScene');
+            }
         });
 
         this.saveButton.on('pointerup', () => {
-            if (this.audioManager?.setMusicVolume) {
-                this.audioManager.setMusicVolume(this.pendingMusicVolume);
-            }
+            if (this.audioManager?.setMusicVolume) this.audioManager.setMusicVolume(this.pendingMusicVolume);
+            if (this.audioManager?.setSfxVolume) this.audioManager.setSfxVolume(this.pendingSfxVolume);
 
-            if (this.audioManager?.setSfxVolume) {
-                this.audioManager.setSfxVolume(this.pendingSfxVolume);
+            this.scene.stop();
+            if(this.returnScene === 'intro') this.scene.start('introScene');
+            else if(this.returnScene === 'game'){
+                this.registry.set('flagShow',false);
+                this.scene.start('gameScene');
             }
-
-            if (this.returnScene) this.scene.start(this.returnScene);
-            else this.scene.start('introScene');
         });
 
         this.createLaunchButton();

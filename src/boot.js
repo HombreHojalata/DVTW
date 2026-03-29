@@ -55,7 +55,7 @@ import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.p
 import vendedor from '../assets/other/Vendedor.png' 
 import prensa_icon from '../assets/marketIcons/prensa.png'
 import hotel_icon from '../assets/marketIcons/hotel.png'
-// ICONS        NEED TO BE REPLACED
+// ICONS 
 import closeIcon from '../assets/icons/closeIcon.png'                 
 import configurationIcon from '../assets/icons/configurationIcon.png'
 import storeIcon from '../assets/icons/storeIcon.png'

@@ -11,7 +11,7 @@ export default class Mission{
         this.options=[];//Array de opciones, cada una con sus consecuencias.
         this.district = null;//String, se asigna a un distrito aleatorio.
         this.pos=[null,null];//Posición de la misión en el mapa, se asigna al distrito.
-        this.missionButton = null;//Botón que aparece en el mapa, se asigna al distrito.
+        //this.missionButton = null;//Botón que aparece en el mapa, se asigna al distrito.
     }
     
 
@@ -31,11 +31,16 @@ export default class Mission{
         this.options.push(option);
         this.numberOfOptions++;
     }
-    setMissionButton(button){
-        this.missionButton = button;
-    }
-    getMisionButton(){
-        return this.missionButton;
+    createMissionButton(scene){
+        this.icon = this.itIsCorrupt() ? 'missionCorruptIcon' : 'missionIcon';
+        this.missionButton = scene.add.image(this.getPos()[0],this.getPos()[1],this.icon).setOrigin(0).setInteractive({ useHandCursor: true }); 
+        this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
+        this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
+        this.missionButton.on('pointerup', () => {
+            scene.scene.pause('gameScene');
+            scene.scene.launch('missionScene', { mission: this});
+        });
+        //this.mB = this.missionButton;           //NO SE DEBERIA GUARDAR ALGO VISUAL
     }
 }
 
