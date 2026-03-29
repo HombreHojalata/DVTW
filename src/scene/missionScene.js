@@ -23,6 +23,9 @@ export default class MissionScene extends Phaser.Scene {
         this.gameManager = this.registry.get('gameManager');
         this.player = this.gameManager.getPlayer();
         this.map = this.gameManager.getMap();
+        //DISTRICT INFO
+        this.district = this.map.getDistrictByName(this.mission.getDistrict());
+        this.districtInfo = this.spawnDetailText(newWidth,newHeight,offsetX,offsetY);
         this.footerUI = new footerUI(this, this.player).create();
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
@@ -72,6 +75,21 @@ export default class MissionScene extends Phaser.Scene {
         }); 
         return descText;
     }  
+    spawnDetailText(newWidth,newHeight,offsetX,offsetY){
+        const populationInfo = this.add.text(newWidth / 2 + offsetX*4 - 20, newHeight - offsetY*10,'Poblacion - ' + this.district.getPopulation(),{
+            fontSize: '14px',
+            fontFamily: 'Arial Black',
+            fontStyle: 'italic',
+            color: '#000000',
+        }).setDepth(1000);
+        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6, newHeight - offsetY*10, 'Satisfaccion - ' + this.district.getSatisfaction(),{
+            fontSize: '14px',
+            fontFamily: 'Arial Black',
+            fontStyle: 'italic',
+            color: '#000000',
+        }).setDepth(1000);
+        return {populationInfo,satisfactionInfo};
+    }
     spawnScene(newWidth,newHeight,offsetX,offsetY){
         //could take it from a list in the district of the mission
         //this.district = this.mission.getDistrict(); and this.scene = this.district.getSceneFromMission();
@@ -136,7 +154,6 @@ export default class MissionScene extends Phaser.Scene {
         const hitArea = new Phaser.Geom.Rectangle(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight);
         bg.setInteractive(hitArea, Phaser.Geom.Rectangle.Contains, { useHandCursor: true }).setDepth(0);
         textObjects.forEach(t => t.setDepth(1));
-        this.district = this.map.getDistrictByName(this.mission.getDistrict());
         bg.on('pointerover', () => {
             bg.clear();
             bg.fillStyle(0x0056b3, 1);
@@ -153,8 +170,7 @@ export default class MissionScene extends Phaser.Scene {
         bg.on('pointerup', () =>{
             textObjects.forEach(t => t.setScale(1.1));
             if(this.mission.isMinigame()) this.scene.launch(minigameScene);
-            this.gameManager.removeMission(this.mission, option, this.district);
-            this.removeMissionFromId(this.mission.getName());
+            this.gameManager.removeMission(this, this.mission, option, this.district);
             this.scene.stop();
             this.scene.resume('gameScene');
         });
@@ -184,12 +200,5 @@ export default class MissionScene extends Phaser.Scene {
         const x = 550;
         const y = 500;
         this.createOptionButton(x,y,optionList[0],null);
-    }
-
-    // REMOVE MISSION FROM LIST
-    removeMissionFromId(name){
-        let missions = this.registry.get('missionList');
-        missions = missions.filter(m => m.getName() !== name);
-        this.registry.set('missionList', missions);
     }
 }

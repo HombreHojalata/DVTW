@@ -11,7 +11,6 @@ export default class Mission{
         this.options=[];//Array de opciones, cada una con sus consecuencias.
         this.district = null;//String, se asigna a un distrito aleatorio.
         this.pos=[null,null];//Posición de la misión en el mapa, se asigna al distrito.
-        //this.missionButton = null;//Botón que aparece en el mapa, se asigna al distrito.
     }
     
 
@@ -40,7 +39,6 @@ export default class Mission{
             scene.scene.pause('gameScene');
             scene.scene.launch('missionScene', { mission: this});
         });
-        //this.mB = this.missionButton;           //NO SE DEBERIA GUARDAR ALGO VISUAL
     }
 }
 

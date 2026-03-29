@@ -21,19 +21,23 @@ export default class gameManager{
         if(this.missionL.getDistrict() != "NULL") this.missionL.createMissionButton(scene);
         return this.missionL;
     }
-    removeMission(mission, option, district){
-            district.increasePopulation(option.popularity);
-            this.player.updateEnergy(option.energy);
-            this.player.updateCorruption(option.corruption);
-            this.player.updateMoney(-option.money);
-            let MissionButton = mission.getMisionButton();
-            MissionButton.destroy();
-            this.day.addDecision(mission.getName() + ": " + option.description);
-            this.day.updateResources(-option.money, option.energy, option.corruption, option.popularity);
-            this.missionManager.rmMission(mission);
+    removeMission(scene,mission, option, district){
+        district.increasePopulation(option.popularity);
+        this.player.updateEnergy(option.energy);
+        this.player.updateCorruption(option.corruption);
+        this.player.updateMoney(-option.money);
+        this.removeMissionFromId(scene,mission.getName());
+        this.day.addDecision(mission.getName() + ": " + option.description);
+        this.day.updateResources(-option.money, option.energy, option.corruption, option.popularity);
+        this.missionManager.rmMission(mission);
     }
     deleteAllMissions(){
         this.missionManager.deleteAllMissions();
+    }
+    removeMissionFromId(scene,name){
+        let missions = scene.registry.get('missionList');
+        missions = missions.filter(m => m.getName() !== name);
+        scene.registry.set('missionList', missions);
     }
     // ASSETS - BUTTONS
     spawnAssets(scene){

@@ -65,7 +65,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.startEnergyDrain();
         //MISSION TEST
-        this.scheduleNextMission();
+        //this.scheduleNextMission();
+        this.missionList.push(this.gameManager.getMission(this));
 
     }
 

@@ -38,7 +38,8 @@ export default class Map {
             'districtNuevaPradera', 'districtNuevaPraderaSpecial', -17, -19
         )
         const SAHAR = new DistrictSahar(
-            "SAHAR", "En el extrarradio de la ciudad se extiende el distrito de Sahar, una larga explanada bajo el sol. Los reptiles y animales deserticos de esta zona viven en condiciones humildes, pero un presidente no se debe preocupar por problemas tan insignificantes como ese. Es mucho mas interesante todo el terreno de construcion.",600, 20, 15,
+            "SAHAR", "En el extrarradio de la ciudad se extiende el distrito de Sahar, una larga explanada bajo el sol. Los reptiles y animales deserticos de esta zona viven en condiciones humildes, pero un presidente no se debe preocupar por problemas tan insignificantes como ese. Es mucho mas interesante todo el terreno de construcion.",
+            600, 20, 15,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 2,
             false, "RESTAURANT", 10,
             'districtSahar', 'districtSaharSpecial', -10, -17

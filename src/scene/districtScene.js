@@ -28,6 +28,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.districtNameText = this.spawnNameText(offsetX,offsetY);
         this.districtDescriptionText = this.spawnDescText(newWidth,offsetX,offsetY);
         this.districtScene = this.spawnScene(newWidth,newHeight,offsetX,offsetY);
+        this.districtDetail = this.spawnDetailText(newWidth,newHeight,offsetX,offsetY);
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth,offsetX,offsetY);
         this.storePositionX = this.spawnBuiltList(newWidth,offsetX,newHeight);
@@ -64,6 +65,15 @@ export default class DistrictScene extends Phaser.Scene {
         const randomIndex = Math.floor(Math.random() * list.length);
         this.districtScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]);
         return this.districtScene;
+    }
+    spawnDetailText(newWidth,newHeight,offsetX,offsetY){
+        const detailText = this.add.text(newWidth/10 + offsetX, newHeight - newHeight/3 + offsetY*5, 'Poblacion - ' + this.district.getPopulation(), {
+            fontSize: '20px',
+            fontFamily: 'Impact',
+            fontStyle: 'italic',
+            color: '#000000'
+        }).setDepth(1000);  
+        return detailText;
     }
     // SPAWN BUILTS IMAGE
     spawnBuiltList(newWidth, offsetX, newHeight) {

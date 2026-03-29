@@ -37,23 +37,6 @@ export default class District {
     // ASSETS
     spawnDistrict(scene){
         this.texture = this.is_special_built ? this.PNGwithSpecial : this.PNGwithOutSpecial;
-        /*const button = scene.add.image(this.posX, this.posY, this.texture)
-            .setOrigin(0)
-            .setScale(1)
-            .setInteractive({
-                useHandCursor: true,
-                pixelPerfect: true
-            });
-            /*button.on('pointerover', () => {button.setScale(1.01);});
-            button.on('pointerout', () => {button.setScale(1);});
-            button.on('pointerover', () => {button.setTint(0xcccccc);});
-            button.on('pointerout', () => {button.clearTint();});
-            button.on('pointerup', () => {
-                scene.updateDistrictFooter(this);
-                scene.scene.pause('gameScene');
-                scene.scene.launch('districtScene', { district: this});
-            });
-            return button;*/
         const button = scene.add.image(this.posX, this.posY, this.texture)
             .setOrigin(0)
             .setScale(1)
