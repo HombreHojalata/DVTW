@@ -3,7 +3,9 @@ import Phaser from 'phaser'
 import introScene from '../assets/scenes/introScene.png'  
 import loadScene from '../assets/scenes/loadScene.png'          //NEED TO BE REPLACE
 import configScene from '../assets/scenes/configScene.png'
-
+// TUTORIAL ASSETS
+import tutorialAnimals from '../assets/other/tutorialAnimals.png'
+import textCloud from '../assets/other/textCloud.png'
 // MAP ASSETS
 import map from '../assets/map/mapTemplate.png'
 // UI ASSETS
@@ -66,13 +68,11 @@ import decreaseSelectIcon from '../assets/icons/decreaseSelectIcon.png'
 import missionIcon from '../assets/icons/missionIcon.png'
 import missionCorruptIcon from '../assets/icons/missionCorruptIcon.png'
 
-
 //PROTOTYPE ASSETS, TO BE REPLACED
 import presidente from '../assets/other/presidente.png'                         //NEED TO BE REPLACE
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
 import missionCorruptTemplate from '../assets/mission/missionCorruptTemplate.png'
-
 // MISSION DISTRICT BORRASCAL SCENE ASSETS
 import regularSceneBorrascal from '../assets/mission/scenes/districtBorrascal/regularScene.png'
 import upMoneySceneBorrascal from '../assets/mission/scenes/districtBorrascal/upMoneyScene.png'
@@ -126,7 +126,7 @@ import downMoneyMission from '../assets/jsons/downMoney.json';
 import minigameMission from '../assets/jsons/minigame.json';
 import mapCutout from '../assets/jsons/map.json';
 
-//audio
+// AUDIO
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/il porco rosso.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
@@ -156,11 +156,13 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
     this.cache.json.add('mapCutout', mapCutout);
-
+    // PRINCIPAL SCENE ASSETS
     this.load.image('loadScene', loadScene);
     this.load.image('introScene', introScene);
     this.load.image('configScene', configScene);
-
+    // TUTORIAL ASSETS
+    this.load.image('tutorialAnimals', tutorialAnimals);
+    this.load.image('textCloud', textCloud);
     // MAP ASSETS
     this.load.image('map', map);
     // UI ASSETS

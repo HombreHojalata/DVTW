@@ -38,23 +38,28 @@ export default class TutorialScene extends Phaser.Scene {
     explainTutorial() {
         const { width, height } = this.sys.game.config;
         const introContainer = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
-        const introText1 = this.add.text(width / 2, height / 2 - 100, 'Bienvenido a Quackington DC', {
+        //const bg = this.add.image(width / 2, height / 2 - 100, 'textCloud').setOrigin(0);
+        const bg = this.add.rectangle(width/4 - 120, height/3 - 140, width/2, height/2, 0xffffff).setOrigin(0);
+        const img = this.add.image(width/2 - 150,30, 'tutorialAnimals').setOrigin(0).setScale(1).setDepth(20);
+        const introText1 = this.add.text(width / 2 - 120, height / 2 - 200, 'Bienvenido a Quackington DC', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
-            color: '#ffffff',
+            color: '#000000',
             fontStyle: 'bold',
             align: 'center'
         }).setOrigin(0.5);
-        const introText2 = this.add.text(width / 2, height / 2 + 50, 'Tú eres Donald, el alcalde de esta ciudad.\nTu objetivo es mantener el poder mediante decisiones\npolíticas, económicas y a veces controvertidas.\n\nGestiona recursos, responde a eventos y toma elecciones\nque afectan tu popularidad, dinero y corrupción.\n\n¡Buena suerte!',
-            {
-                fontSize: '24px',
-                fontFamily: 'Times New Roman',
-                color: '#ffffff',
-                align: 'center'
-            }).setOrigin(0.5);
-
-        const continueBtn = this.add.text(width*2/3 + 100, height/2 + 250, 'Continuar ->', { fontSize: '24px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(21);
+        const introText2 = this.add.text(width / 2-120, height / 2 - 50, 'Tú eres Donald, el alcalde de esta ciudad.\nTu objetivo es mantener el poder mediante decisiones\npolíticas, económicas y a veces controvertidas.\n\nGestiona recursos, responde a eventos y toma elecciones\nque afectan tu popularidad, dinero y corrupción.\n\n¡Buena suerte!',
+        {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5);
+        const continueBtn = this.add.text(width*2/3 - 60, height/2 + 100, 'Continuar ->', { 
+            fontSize: '24px', 
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(21);
         continueBtn.on('pointerup', () => {
             continueBtn.setScale(1.1);
             this.tweens.add({
@@ -68,7 +73,7 @@ export default class TutorialScene extends Phaser.Scene {
                 }
             });
         });
-        introContainer.add([bg, introText1, introText2, continueBtn]);
+        introContainer.add([bg, img, introText1, introText2, continueBtn]);
     }  
     explainEnergy() {
         const container = this.add.container(900, 300).setDepth(21);
