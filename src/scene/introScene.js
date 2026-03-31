@@ -67,7 +67,10 @@ export default class IntroScene extends Phaser.Scene {
         });
 
         createMenuButton(1120, 560, 'Opciones', () => {
-            this.scene.start('configurationScene', { scene: 'intro'});
+            this.scene.start('configurationScene', {
+                returnScene: 'introScene',
+                openedFromPause: false
+            });
         });
     }
 }

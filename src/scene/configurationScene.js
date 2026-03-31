@@ -6,12 +6,19 @@ export default class ConfigurationScene extends Phaser.Scene {
     }
 
     init(data) {
-        this.returnScene = data.scene;
+        this.returnScene = data?.returnScene || 'gameScene';
+        this.openedFromPause = data?.openedFromPause || false;
     }
 
     create() {
+
         const width = this.scale.width;
         const height = this.scale.height;
+
+        console.log('configurationScene opened', this.returnScene, this.openedFromPause);
+
+        this.scene.bringToTop('configurationScene');
+    
 
         this.audioManager = this.registry.get('audioManager');
 
@@ -24,6 +31,8 @@ export default class ConfigurationScene extends Phaser.Scene {
         this.pendingSfxVolume = this.initialSfxVolume;
 
         // Background fitted to screen while keeping whole image visible
+        this.add.rectangle(0, 0, width, height, 0x111111, 0.96).setOrigin(0);
+
         const bg = this.add.image(width / 2, height / 2, 'configScene');
         const scale = Math.min(width / bg.width, height / bg.height);
         bg.setScale(scale);
@@ -130,22 +139,40 @@ export default class ConfigurationScene extends Phaser.Scene {
 
         this.backButton.on('pointerup', () => {
             this.scene.stop();
-            if(this.returnScene === 'intro') this.scene.start('introScene');
-            else if(this.returnScene === 'game'){
-                this.registry.set('flagShow',false);
-                this.scene.start('gameScene');
+
+            if (this.openedFromPause) {
+                this.scene.start('PauseScene', { returnScene: this.returnScene });
+                return;
+            }
+
+            if (this.returnScene === 'introScene') {
+                this.scene.start('introScene');
+            } else if (this.returnScene === 'gameScene') {
+                this.registry.set('flagShow', false);
+                this.scene.resume('gameScene');
             }
         });
 
         this.saveButton.on('pointerup', () => {
-            if (this.audioManager?.setMusicVolume) this.audioManager.setMusicVolume(this.pendingMusicVolume);
-            if (this.audioManager?.setSfxVolume) this.audioManager.setSfxVolume(this.pendingSfxVolume);
+            if (this.audioManager?.setMusicVolume) {
+                this.audioManager.setMusicVolume(this.pendingMusicVolume);
+            }
+            if (this.audioManager?.setSfxVolume) {
+                this.audioManager.setSfxVolume(this.pendingSfxVolume);
+            }
 
             this.scene.stop();
-            if(this.returnScene === 'intro') this.scene.start('introScene');
-            else if(this.returnScene === 'game'){
-                this.registry.set('flagShow',false);
-                this.scene.start('gameScene');
+
+            if (this.openedFromPause) {
+                this.scene.start('PauseScene', { returnScene: this.returnScene });
+                return;
+            }
+
+            if (this.returnScene === 'introScene') {
+                this.scene.start('introScene');
+            } else if (this.returnScene === 'gameScene') {
+                this.registry.set('flagShow', false);
+                this.scene.resume('gameScene');
             }
         });
 

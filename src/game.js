@@ -11,6 +11,7 @@ import MissionScene from './scene/missionScene.js';
 import BlackMarketScene from './scene/blackMarketScene.js';
 import FinishScene from './scene/finishScene.js';
 import WordleMiniGame from './minigames/scene/wordleScene.js';
+import PauseScene from './scene/pauseMenuScene.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -29,7 +30,8 @@ let config = {
     dom: {
         createContainer: true
     },
-    scene: [Boot, IntroScene, ConfigurationScene, TutorialScene, GameScene, DistrictScene, DistrictStoreScene, MissionScene, BlackMarketScene, FinishScene, WordleMiniGame],
+    scene: [Boot, IntroScene, ConfigurationScene, TutorialScene, GameScene, DistrictScene, DistrictStoreScene, 
+        MissionScene, BlackMarketScene, FinishScene, WordleMiniGame, PauseScene],
     physics: {
         default: 'arcade',
         arcade: {

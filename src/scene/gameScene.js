@@ -5,6 +5,7 @@ import footerUI from '../UI/footerUI.js';
 import batteryUI from '../UI/batteryUI.js';
 import endDayBtnUI from '../UI/endDayBtnUI.js';
 
+
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'gameScene' });
@@ -34,10 +35,19 @@ export default class GameScene extends Phaser.Scene {
             console.log("GAME: " + "DAY " + this.day.getDayNumber());
             // SPAWN DAY VISUAL
             if (this.registry.get('flagShow')) this.showDayIntro();
+
             // SPAWN MAP and MISSIONS
             this.gameManager.spawnAssets(this);
             if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
             this.configButton = this.gameManager.spawnConfigurationButton(this);
+
+
+            this.input.keyboard.on('keydown-ESC', () => {
+                if (!this.scene.isActive('PauseScene') && !this.scene.isActive('configurationScene')) {
+                    this.scene.launch('PauseScene', { returnScene: this.scene.key });
+                    this.scene.pause();
+                }
+            });
 
             this.topUI = new topUI(this);
             this.batteryUI = new batteryUI(this);
