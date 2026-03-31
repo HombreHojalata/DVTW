@@ -61,6 +61,7 @@ export default class footerUI {
         this.blackMarketText.on('pointerover', () => {this.blackMarketText.setStyle({ backgroundColor: '#e99b15' });});
         this.blackMarketText.on('pointerout', () => {this.blackMarketText.setStyle({ backgroundColor: '#cc7a00' });});
         this.blackMarketText.on('pointerup', () => {
+            if (this.tutorial && this.scene.destroyBlackMarketContainer) this.scene.destroyBlackMarketContainer();
             this.scene.scene.pause();
             this.scene.scene.launch('blackMarketScene', { page: 0, tutorial: this.tutorial});
         });

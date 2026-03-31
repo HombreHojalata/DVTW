@@ -42,7 +42,7 @@ export default class TutorialScene extends Phaser.Scene {
         this.topUI = new topUI(this);
         this.batteryUI = new batteryUI(this);
         this.endDayBtnUI = new endDayBtnUI(this);
-        this.footerUI = new footerUI(this);
+        this.footerUI = new footerUI(this, true);
         // TUTORIAL ORDER
         if(this.sceneOrder === 1) this.explainTutorial();
         else if(this.sceneOrder === 2) this.startGameText();
@@ -295,7 +295,7 @@ export default class TutorialScene extends Phaser.Scene {
     // ORDER 3
     explainBlackMarket(){
         this.footerBlocker.destroy();
-        const container = this.add.container(0, 0).setDepth(21);
+        this.blackMarketContainer = this.add.container(0, 0).setDepth(21);
         //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
         const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
         const img = this.add.image(this.width - 500, 30, 'vendedor').setOrigin(0).setScale(1).setDepth(20);
@@ -312,6 +312,12 @@ export default class TutorialScene extends Phaser.Scene {
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-        container.add([bg, img, blackMarketText1, blackMarketText2]);
+        this.blackMarketContainer.add([bg, img, blackMarketText1, blackMarketText2]);
+    }
+    destroyBlackMarketContainer() {
+        if (this.blackMarketContainer) {
+            this.blackMarketContainer.destroy();
+            this.blackMarketContainer = null;
+        }
     }
 }
