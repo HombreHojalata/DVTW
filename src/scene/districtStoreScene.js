@@ -72,7 +72,7 @@ export default class DistrictScene extends Phaser.Scene {
                     this.scene.stop();
                     this.scene.stop('districtScene');
                     this.scene.stop('tutorialScene');
-                    this.scene.launch('tutorialScene', { order: 2 });
+                    this.scene.launch('tutorialScene', { order: 3 });
                 }
             }); 
         });
@@ -115,7 +115,8 @@ export default class DistrictScene extends Phaser.Scene {
             img.on('pointerup', () => {
                 if(this.tutorial && building.getName() === "CINEMA"){
                     this.containerStore.destroy();
-                    this.passToTutorialScene();
+                    this.scene.stop();
+                    this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: 2 });
                 }
                 if(this.district.canBuildMore()){
                     if(this.player.getMoney() >= building.getBuildingCost()){

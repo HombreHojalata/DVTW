@@ -45,15 +45,16 @@ export default class TutorialScene extends Phaser.Scene {
         this.footerUI = new footerUI(this, true);
         // TUTORIAL ORDER
         if(this.sceneOrder === 1) this.explainTutorial();
-        else if(this.sceneOrder === 2) this.startGameText();
-        else if(this.sceneOrder === 3) this.explainBlackMarket();
+        else if(this.sceneOrder === 2) this.explainDistricts();
+        else if(this.sceneOrder === 3) this.startGameText();
+        else if(this.sceneOrder === 4) this.explainBlackMarket();
     }
-    // ORDEN 1
+    // ORDER 1
     explainTutorial() {
         const introContainer = this.add.container(0, 0).setDepth(21);
-        //const bg = this.add.image(width / 2, height / 2 - 100, 'textCloud').setOrigin(0);
+        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
         const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
-        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals').setOrigin(0).setScale(1).setDepth(20);
+        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
         const introText1 = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Bienvenido a Quackington DC!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
@@ -89,11 +90,13 @@ export default class TutorialScene extends Phaser.Scene {
         introContainer.add([bg, img, introText1, introText2, continueBtn]);
     }  
     explainEnergyAndEndDayButton() {
+        let canContinue = false;
+        this.time.delayedCall(10000, () => { canContinue = true; });
         const container = this.add.container(0, 0).setDepth(21);
         //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
         const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
-        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals').setOrigin(0).setScale(1).setDepth(20);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'La barra que hay a la derecha es la barra de energía.\n Esta indicará el tiempo restante que tienes para realizar acciones cada día y se recargará tras el inicio del día siguiente.\n El botón de terminar día te permite finalizar el día actual y avanzar al siguiente, este se ubica justo debajo de la barra de energía.', {
+        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
+        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'La barra que hay a la derecha es la barra de energía.\n Esta indicará el tiempo restante que tienes para realizar acciones cada día y se recargará tras el inicio del día siguiente.\n\n El botón de terminar día te permite finalizar el día actual y avanzar al siguiente, este se ubica justo debajo de la barra de energía.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
@@ -170,18 +173,21 @@ export default class TutorialScene extends Phaser.Scene {
         container.add([bg, img, blackMarketText, goBackBtn, continueBtn]);
     }
     explainMissions(){
-        const container = this.add.container(650, 350).setDepth(21);
-        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 80, 'Las misiones son objetivos que puedes completar para ganar recompensas y avanzar en el juego.\nPuedes acceder a ellas haciendo click en el botón correspondiente que saldra en el mapa.\nLos rojos son las misiones corruptas y los amarillos son las misiones legítimas.', {
-            fontSize: '16px',
+        const container = this.add.container(0, 0).setDepth(21);
+        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
+        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals2').setOrigin(0).setScale(1).setDepth(20);
+        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Las misiones son objetivos que puedes completar para ganar recompensas y avanzar en el juego.\nPuedes acceder a ellas haciendo click en el botón correspondiente que saldra en el mapa.\nLos rojos son las misiones corruptas y los amarillos son las misiones legítimas.', {
+            fontSize: '24px',
             fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 }
-        }).setOrigin(0.5);
-        const missionIcon = this.add.image(150, -120, 'missionIcon').setDepth(22);
-        const missionCorruptIcon = this.add.image(300, 300, 'missionCorruptIcon').setDepth(22);
-        const goBackBtn = this.add.text(80, 170, 'Volver', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+        const goBackBtn = this.add.text(this.width/4-40, this.height/2 + 100, 'Volver', { 
+            fontSize: '16px', 
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
         goBackBtn.on('pointerup', () => {
             goBackBtn.setScale(1.1);
             this.tweens.add({
@@ -195,34 +201,57 @@ export default class TutorialScene extends Phaser.Scene {
                 }
             });
         });
-        const continueBtn = this.add.text(220, 170, 'Continuar', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', {
+            fontSize: '20px',
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
         continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainDistricts();
-                }
+            if(this.canContinue){
+                continueBtn.setScale(1.1);
+                this.tweens.add({
+                    targets: container,
+                    alpha: 0,
+                    duration: 1000,
+                    ease: 'Power2',
+                    onComplete: () => {
+                        container.destroy();
+                        this.explainDistricts();
+                    }
+                });
+            }
+        });
+        container.add([bg, img, text, goBackBtn, continueBtn]);
+        this.time.delayedCall(7000, () => {
+            container.setAlpha(0.3);
+            const missionIcon = this.add.image(800, 420, 'missionIcon').setDepth(22);
+            const missionCorruptIcon = this.add.image(400, 600, 'missionCorruptIcon').setDepth(22);
+            this.time.delayedCall(3000, () => {
+                container.setAlpha(1);
+                this.canContinue = true;
+                missionIcon.destroy();
+                missionCorruptIcon.destroy();
             });
         });
-        container.add([bg, text, missionIcon, missionCorruptIcon, goBackBtn, continueBtn]);
     }
+    // ORDER 2
     explainDistricts() {
-        const container = this.add.container(650, 350).setDepth(21);
-        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 70, 'La ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuedes hacer click en ellos para obtener información detallada y tomar decisiones informadas.', {
-            fontSize: '16px',
+        const container = this.add.container(0, 0).setDepth(21);
+        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
+        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals3').setOrigin(0).setScale(1).setDepth(20);
+        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'La ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuedes hacer click en ellos para obtener información detallada y tomar decisiones informadas.', {
+            fontSize: '24px',
             fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 }
-        }).setOrigin(0.5);
-        
-        const goBackBtn = this.add.text(80, 170, 'Volver', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+
+        const goBackBtn = this.add.text(this.width/4-40, this.height/2 + 100, 'Volver', { 
+            fontSize: '16px', 
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
         goBackBtn.on('pointerup', () => {
             goBackBtn.setScale(1.1);
             this.tweens.add({
@@ -236,7 +265,11 @@ export default class TutorialScene extends Phaser.Scene {
                 }
             });
         });
-        const continueBtn = this.add.text(220, 170, 'Continuar', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
+        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', { 
+            fontSize: '16px', 
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
         continueBtn.on('pointerup', () => {
             continueBtn.setScale(1.1);
             this.tweens.add({
@@ -246,18 +279,24 @@ export default class TutorialScene extends Phaser.Scene {
                 ease: 'Power2',
                 onComplete: () => {
                     container.destroy();
-                    this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true});
+                    this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true, order: 1 });
                 }
             });
         });
-        container.add([bg, text, goBackBtn, continueBtn]);
+        container.add([bg, img, text, goBackBtn, continueBtn]);
+        this.time.delayedCall(7000, () => {
+            container.setAlpha(0.3);
+            this.time.delayedCall(3000, () => {
+                container.setAlpha(1);
+            });
+        });
     }
-    // ORDER 2
+    // ORDER 3
     startGameText() {
         const introContainer = this.add.container(0, 0).setDepth(21);
         //const bg = this.add.image(width / 2, height / 2 - 100, 'textCloud').setOrigin(0);
         const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
-        const img = this.add.image(this.width/2 - 150,30, 'tutorialAnimals').setOrigin(0).setScale(1).setDepth(20);
+        const img = this.add.image(this.width/2 - 150,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
         const introText1 = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Felicidades has completado el tutorial!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
@@ -292,32 +331,63 @@ export default class TutorialScene extends Phaser.Scene {
         });
         introContainer.add([bg, img, introText1, introText2, prepareBtn]);      
     }
-    // ORDER 3
+    // ORDER 4
     explainBlackMarket(){
         this.footerBlocker.destroy();
         this.blackMarketContainer = this.add.container(0, 0).setDepth(21);
         //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
         const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
         const img = this.add.image(this.width - 500, 30, 'vendedor').setOrigin(0).setScale(1).setDepth(20);
-        const blackMarketText1 = this.add.text(this.width / 2 - 120, this.height / 2 - 200,'¡Bienvenido al Mercado Negro!',{
-            fontSize: '40px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            fontStyle: 'bold',
-            align: 'center'
-        }).setOrigin(0.5);
-        const blackMarketText2 = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Cuanto tiempo sin verte señor presidente. Mi nombre es Robinson Piqui y soy el jefe del mercado negro. En el mercado negro puedes comprar muchas cosas que fuera no existen que te ayudarán en tu gestión de tu ciudad.\n\nPuedes acceder a él haciendo click en el botón correspondiente en la parte inferior de la pantalla.', {
+        const blackMarketText = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Cuanto tiempo sin verte señor presidente. Mi nombre es Robinson Piqui y soy el jefe del mercado negro. En el mercado negro puedes comprar muchas cosas que fuera no existen que te ayudarán en tu gestión de tu ciudad.\n\nPuedes acceder a él haciendo click en el botón correspondiente en la parte inferior de la pantalla, pero solo puedes acceder cuando tu barra de energía esté por debajo de la mitad.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-        this.blackMarketContainer.add([bg, img, blackMarketText1, blackMarketText2]);
+        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', {
+            fontSize: '20px',
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
+        continueBtn.on('pointerup', () => {
+            continueBtn.setScale(1.1);
+            this.tweens.add({
+                targets: this.blackMarketContainer,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    this.blackMarketContainer.destroy();
+                    this.explainBlackMarket2();
+                }
+            });
+        });
+        this.blackMarketContainer.add([bg, img, blackMarketText,continueBtn]);
     }
-    destroyBlackMarketContainer() {
-        if (this.blackMarketContainer) {
-            this.blackMarketContainer.destroy();
-            this.blackMarketContainer = null;
-        }
+    explainBlackMarket2(){
+        const container = this.add.container(0, 0).setDepth(21);
+        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
+        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const img = this.add.image(this.width - 500, 30, 'vendedor').setOrigin(0).setScale(1).setDepth(20);
+        const blackMarketText = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Como ya sabes aquí solo vendemos productos de alta calidad, pero la calidad se paga caro.\n Ten cuidado que un gran poder conlleva grandes responsabilidades, yo no me hago cargo de las consecuencias.\n Bueno tengo cosas que hacer vuelve más tarde que todavia no esta abierto.',
+        {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+        this.time.delayedCall(8000, () => {
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                }
+            }); 
+        });
+
+        introContainer.add([bg, img, blackMarketText]);
     }
 }

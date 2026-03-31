@@ -1,20 +1,21 @@
 import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
 import introScene from '../assets/scenes/introScene.png'  
-import loadScene from '../assets/scenes/loadScene.png'          //NEED TO BE REPLACE
+import loadScene from '../assets/scenes/loadScene.png'                                                        //NEED TO BE REPLACE
 import configScene from '../assets/scenes/configScene.png'
+
 // TUTORIAL ASSETS
-import tutorialAnimals from '../assets/other/tutorialAnimals.png'
+import tutorialAnimals1 from '../assets/other/tutorialAnimals1.png'
+import tutorialAnimals2 from '../assets/other/tutorialAnimals2.png'
+import tutorialAnimals3 from '../assets/other/tutorialAnimals3.png'
 import textCloud from '../assets/other/textCloud.png'
-// MAP ASSETS
+
+// PROTOTYPE ASSETS, TO BE REPLACED
+import presidente from '../assets/other/presidente.png'                                                       //NEED TO BE REPLACE
+
+// MAP ASSET
 import map from '../assets/map/mapTemplate.png'
-// UI ASSETS
-import battery from '../assets/UIs/battery.png'
-import endDayNormal from '../assets/UIs/endDayNormal.png'
-import endDayBright from '../assets/UIs/endDayBright.png'
-import endDayPressed from '../assets/UIs/endDayPressed.png'
-import confirmationUI from '../assets/UIs/confirmationUI.png'
-import lowBarUI from '../assets/UIs/lowBarUI.png'
+
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/map/districtScenes/districtTemplate.png'
 import districtStoreTemplate from '../assets/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
@@ -26,25 +27,25 @@ import districtSaharScene1 from '../assets/map/districtScenes/districtSaharScene
 import districtSomosaguaScene1 from '../assets/map/districtScenes/districtSomosaguaScene1.png'                //NEED TO BE REPLACE
 // DISTRICT
 import districtBorrascal from '../assets/map/district/districtBorrascal.png'
-import districtBorrascalSpecial from '../assets/map/district/districtBorrascalSpecial.png'                    //NEED TO BE REPLACE
+import districtBorrascalSpecial from '../assets/map/district/districtBorrascalSpecial.png'
 import districtElNido from '../assets/map/district/districtElNido.png'
-import districtElNidoSpecial from '../assets/map/district/districtElNidoSpecial.png'                          //NEED TO BE REPLACE
+import districtElNidoSpecial from '../assets/map/district/districtElNidoSpecial.png'
 import districtGuinea from '../assets/map/district/districtGuinea.png'
 import districtGuineaSpecial from '../assets/map/district/districtGuineaSpecial.png' 
 import districtNuevaPradera from '../assets/map/district/districtNuevaPradera.png'
 import districtNuevaPraderaSpecial from '../assets/map/district/districtNuevaPraderaSpecial.png'  
 import districtSahar from '../assets/map/district/districtSahar.png'
-import districtSaharSpecial from '../assets/map/district/districtSaharSpecial.png'                            //NEED TO BE REPLACE
+import districtSaharSpecial from '../assets/map/district/districtSaharSpecial.png'
 import districtSomosagua from '../assets/map/district/districtSomosagua.png'
-import districtSomosaguaSpecial from '../assets/map/district/districtSomosaguaSpecial.png'                    //NEED TO BE REPLACE
+import districtSomosaguaSpecial from '../assets/map/district/districtSomosaguaSpecial.png'
 // BUILDING ASSETS
-import buildingCinema from '../assets/map/buildings/buildingCinema.png'                                       //NEED TO BE REPLACE
-import buildingComercialCenter from '../assets/map/buildings/buildingComercialCenter.png'                     //NEED TO BE REPLACE
-import buildingFactory from '../assets/map/buildings/buildingFactory.png'                                     //NEED TO BE REPLACE
-import buildingHospital from '../assets/map/buildings/buildingHospital.png'                                   //NEED TO BE REPLACE
-import buildingHotel from '../assets/map/buildings/buildingHotel.png'                                         //NEED TO BE REPLACE
-import buildingHouse from '../assets/map/buildings/buildingHouse.png'                                         //NEED TO BE REPLACE
-import buildingPark from '../assets/map/buildings/buildingPark.png'                                           //NEED TO BE REPLACE
+import buildingCinema from '../assets/map/buildings/buildingCinema.png'
+import buildingComercialCenter from '../assets/map/buildings/buildingComercialCenter.png'
+import buildingFactory from '../assets/map/buildings/buildingFactory.png' 
+import buildingHospital from '../assets/map/buildings/buildingHospital.png'
+import buildingHotel from '../assets/map/buildings/buildingHotel.png' 
+import buildingHouse from '../assets/map/buildings/buildingHouse.png'     
+import buildingPark from '../assets/map/buildings/buildingPark.png'                                    
 import specialBuildingBorrascal from '../assets/map/buildings/specialBuildingBorrascal.png'                   //NEED TO BE REPLACE
 import specialBuildingElNido from '../assets/map/buildings/specialBuildingElNido.png'                         //NEED TO BE REPLACE
 import specialBuildingGuinea from '../assets/map/buildings/specialBuildingGuinea.png'                         //NEED TO BE REPLACE
@@ -53,24 +54,6 @@ import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.p
 import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'                   //NEED TO BE REPLACE
 import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'                           //NEED TO BE REPLACE
 
-// BLACK MARKET ASSETS
-import vendedor from '../assets/other/Vendedor.png' 
-import vendedorSilueta from '../assets/other/VendedorSilueta.png' 
-import prensa_icon from '../assets/marketIcons/prensa.png'
-import hotel_icon from '../assets/marketIcons/hotel.png'
-// ICONS 
-import closeIcon from '../assets/icons/closeIcon.png'                 
-import configurationIcon from '../assets/icons/configurationIcon.png'
-import storeIcon from '../assets/icons/storeIcon.png'
-import increaseIcon from '../assets/icons/increaseIcon.png'
-import increaseSelectIcon from '../assets/icons/increaseSelectIcon.png'
-import decreaseIcon from '../assets/icons/decreaseIcon.png'
-import decreaseSelectIcon from '../assets/icons/decreaseSelectIcon.png'
-import missionIcon from '../assets/icons/missionIcon.png'
-import missionCorruptIcon from '../assets/icons/missionCorruptIcon.png'
-
-//PROTOTYPE ASSETS, TO BE REPLACED
-import presidente from '../assets/other/presidente.png'                         //NEED TO BE REPLACE
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
 import missionCorruptTemplate from '../assets/mission/missionCorruptTemplate.png'
@@ -117,6 +100,32 @@ import upPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosag
 import downPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosagua/downPopularityScene.png'
 import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomosagua/downCorruptionScene.png'
 
+// BLACK MARKET ASSETS
+import vendedor from '../assets/other/Vendedor.png' 
+import vendedorSilueta from '../assets/other/VendedorSilueta.png' 
+import prensa_icon from '../assets/marketIcons/prensa.png'
+import hotel_icon from '../assets/marketIcons/hotel.png'
+
+// ICONS 
+import closeIcon from '../assets/icons/closeIcon.png'                 
+import configurationIcon from '../assets/icons/configurationIcon.png'
+import storeIcon from '../assets/icons/storeIcon.png'
+import increaseIcon from '../assets/icons/increaseIcon.png'
+import increaseSelectIcon from '../assets/icons/increaseSelectIcon.png'
+import decreaseIcon from '../assets/icons/decreaseIcon.png'
+import decreaseSelectIcon from '../assets/icons/decreaseSelectIcon.png'
+import missionIcon from '../assets/icons/missionIcon.png'
+import missionCorruptIcon from '../assets/icons/missionCorruptIcon.png'
+import blackMarketIcon from '../assets/icons/blackMarketIcon.png'
+
+// UI ASSETS
+import battery from '../assets/UIs/battery.png'
+import endDayNormal from '../assets/UIs/endDayNormal.png'
+import endDayBright from '../assets/UIs/endDayBright.png'
+import endDayPressed from '../assets/UIs/endDayPressed.png'
+import confirmationUI from '../assets/UIs/confirmationUI.png'
+import lowBarUI from '../assets/UIs/lowBarUI.png'
+
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
 import UpMoneyMission from '../assets/jsons/upMoney.json';
@@ -148,31 +157,19 @@ export default class Boot extends Phaser.Scene {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
 
-    //LOAD de JSONS para las misiones
-    this.cache.json.add('regularMissions', RegularMission);
-    this.cache.json.add('upMoney', UpMoneyMission);
-    this.cache.json.add('upPopularity', UpPopularityMission);
-    this.cache.json.add('downCorruption', downCorruptionMission);
-    this.cache.json.add('downPopularity', downPopularityMission);
-    this.cache.json.add('downMoney', downMoneyMission);
-    this.cache.json.add('minigameMoney', minigameMission);
-    this.cache.json.add('mapCutout', mapCutout);
     // PRINCIPAL SCENE ASSETS
     this.load.image('loadScene', loadScene);
     this.load.image('introScene', introScene);
     this.load.image('configScene', configScene);
     // TUTORIAL ASSETS
-    this.load.image('tutorialAnimals', tutorialAnimals);
+    this.load.image('tutorialAnimals1', tutorialAnimals1);
+    this.load.image('tutorialAnimals2', tutorialAnimals2);
+    this.load.image('tutorialAnimals3', tutorialAnimals3);
     this.load.image('textCloud', textCloud);
+    // PRESIDENT ASSET
+    this.load.image('presidente', presidente);
     // MAP ASSETS
     this.load.image('map', map);
-    // UI ASSETS
-    this.load.image('battery', battery);
-    this.load.image('endDayNormal', endDayNormal);
-    this.load.image('endDayBright', endDayBright);
-    this.load.image('endDayPressed', endDayPressed);
-    this.load.image('confirmationUI', confirmationUI);
-    this.load.image('lowBarUI', lowBarUI);
     // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
@@ -212,22 +209,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image('specialBuildingSahar', specialBuildingSahar);
     this.load.image('specialBuildingSomosagua', specialBuildingSomosagua);
     this.load.image('specialBuildingMafia', specialBuildingMafia);
-    // ICONS ASSETS
-    this.load.image('configurationIcon', configurationIcon);
-    this.load.image('closeIcon', closeIcon);
-    this.load.image('storeIcon', storeIcon);
-    this.load.image('increaseIcon', increaseIcon);
-    this.load.image('increaseSelectIcon', increaseSelectIcon);
-    this.load.image('decreaseIcon', decreaseIcon);
-    this.load.image('decreaseSelectIcon', decreaseSelectIcon);
-    this.load.image('missionIcon', missionIcon);
-    this.load.image('missionCorruptIcon', missionCorruptIcon);
-    // PRESIDENTE ASSET
-    this.load.image('presidente', presidente);
+
     // MISSION ASSETS
     this.load.image('missionTemplate',missionTemplate);
     this.load.image('missionCorruptTemplate',missionCorruptTemplate);
-    
     // MISSION DISTRICT BORRASCAL SCENE ASSETS
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
     this.load.image('upMoneySceneBorrascal', upMoneySceneBorrascal);
@@ -270,14 +255,44 @@ export default class Boot extends Phaser.Scene {
     this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);  
-    //PROTOTYPE ASSETS, TO BE REPLACED
+
+    // BLACK MARKET ASSETS
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
     this.load.image('pensa_icon', prensa_icon);
     this.load.image('hotel_icon', hotel_icon);
 
+    // ICONS ASSETS
+    this.load.image('configurationIcon', configurationIcon);
+    this.load.image('closeIcon', closeIcon);
+    this.load.image('storeIcon', storeIcon);
+    this.load.image('increaseIcon', increaseIcon);
+    this.load.image('increaseSelectIcon', increaseSelectIcon);
+    this.load.image('decreaseIcon', decreaseIcon);
+    this.load.image('decreaseSelectIcon', decreaseSelectIcon);
+    this.load.image('missionIcon', missionIcon);
+    this.load.image('missionCorruptIcon', missionCorruptIcon);
+    this.load.image('blackMarketIcon', blackMarketIcon);
 
-    //audio?
+    // UI ASSETS
+    this.load.image('battery', battery);
+    this.load.image('endDayNormal', endDayNormal);
+    this.load.image('endDayBright', endDayBright);
+    this.load.image('endDayPressed', endDayPressed);
+    this.load.image('confirmationUI', confirmationUI);
+    this.load.image('lowBarUI', lowBarUI);
+
+    // JSONS
+    this.cache.json.add('regularMissions', RegularMission);
+    this.cache.json.add('upMoney', UpMoneyMission);
+    this.cache.json.add('upPopularity', UpPopularityMission);
+    this.cache.json.add('downCorruption', downCorruptionMission);
+    this.cache.json.add('downPopularity', downPopularityMission);
+    this.cache.json.add('downMoney', downMoneyMission);
+    this.cache.json.add('minigameMoney', minigameMission);
+    this.cache.json.add('mapCutout', mapCutout);
+
+    // AUDIO
     this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
 

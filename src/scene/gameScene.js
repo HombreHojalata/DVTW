@@ -27,6 +27,8 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
         if(this.day.getDayNumber() === 6){                                      // GAME END                       
             this.scene.stop();
             this.scene.start('finishScene');
@@ -34,6 +36,14 @@ export default class GameScene extends Phaser.Scene {
             console.log("GAME: " + "DAY " + this.day.getDayNumber());
             // SPAWN DAY VISUAL
             if (this.registry.get('flagShow')) this.showDayIntro();
+            //FOOTER BLOCKER
+            if(this.day.getDayNumber() === 1){
+                const footerHeight = 81;
+                const footerWidth = 1500;
+                const footerX = (this.width - footerWidth) / 2;
+                const footerY = this.height - footerHeight;
+                this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(100);
+            }
             // SPAWN MAP and MISSIONS
             this.gameManager.spawnAssets(this);
             if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
@@ -44,8 +54,7 @@ export default class GameScene extends Phaser.Scene {
             this.endDayBtnUI = new endDayBtnUI(this);
             this.footerUI = new footerUI(this);
 
-            const { width, height } = this.sys.game.config;
-            this.nightOverlay = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
+            this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
 
             this.events.on('resume', () => {
                 this.refreshHUD();
@@ -155,7 +164,7 @@ export default class GameScene extends Phaser.Scene {
                     introContainer.destroy()
                     if(currentDay === 2 && this.isTutorial){               // TUTORIAL BLACK MARKET
                         this.scene.stop();
-                        this.scene.start('tutorialScene', { order: 3 });
+                        this.scene.start('tutorialScene', { order: 4 });
                     }
                 } 
             });

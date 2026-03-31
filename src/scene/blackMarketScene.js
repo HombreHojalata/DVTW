@@ -9,7 +9,6 @@ export default class BlackMarketScene extends Phaser.Scene {
     init(data) {
         this.currentPage = data.page || 0;
         this.itemsPerPage = 3;
-        this.tutorial = data.tutorial || false;
     }
 
     create() {
@@ -60,8 +59,6 @@ export default class BlackMarketScene extends Phaser.Scene {
             this.scene.stop();
             this.scene.resume('gameScene');
         });
-        //TUTORIAL
-        if(this.tutorial) this.explainTutorial();
     }
 
     renderProducts() {
@@ -238,8 +235,5 @@ export default class BlackMarketScene extends Phaser.Scene {
         g.strokeRoundedRect(x, y, width, height, radius);
 
         return g;
-    }
-    //TUTORIAL
-    explainTutorial(){
     }
 }
