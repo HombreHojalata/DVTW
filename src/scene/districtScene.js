@@ -9,6 +9,7 @@ export default class DistrictScene extends Phaser.Scene {
     init(data) {
         this.district = data.district;
         this.tutorial = data.tutorial || false;
+        this.order = data.order || 1;
     }
        
     create() {
@@ -42,10 +43,12 @@ export default class DistrictScene extends Phaser.Scene {
             this.blockerPercentage = this.add.zone(580, 480, width/2, height/5).setOrigin(0).setInteractive().setDepth(20);
             this.blockerFooter = this.add.zone(0, height - 100, width, 100).setOrigin(0).setInteractive().setDepth(20);
             this.containerStore = null;
-            this.explainTutorial(width,height);
+            if(this.order === 1) this.explainTutorial(width,height);
+            else if(this.order === 2)this.finishTutorial(width,height);
         }
     }
     // TUTORIAL
+    // ORDER 1
     explainTutorial(width, height) {
         const container = this.add.container(340, 300).setDepth(21);   
         const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
@@ -143,6 +146,34 @@ export default class DistrictScene extends Phaser.Scene {
         });
         //FALTA UNA MARCA
         this.containerStore.add([bg, text, goBackBtn]);
+    }
+    // ORDER 2
+    finishTutorial() {
+        this.containerText = this.add.container(340, 300).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
+        const text = this.add.text(150, 70, '¡Bien hecho!\nHas aprendido a comprar edificios, que no sabes para qué sirven? Cada edificio tiene una función específica en tu distrito cuando pongas el cursor por encima de él te dira sus propiedades.\n', {
+            fontSize: '16px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 280 },
+            lineSpacing: 10
+        }).setOrigin(0.5);
+            //}).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+        this.time.delayedCall(5000, () => {
+            this.tweens.add({
+                targets: this.containerText,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    this.containerText.destroy();
+                    this.scene.stop();
+                    this.scene.stop('tutorialScene');
+                    this.scene.launch('tutorialScene', { order: 3 });
+                }
+            }); 
+        });
     }
     //
     spawnTemplate(newWidth,newHeight,offsetX,offsetY){return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);}
