@@ -52,7 +52,7 @@ export default class gameManager{
         this.configButton.on('pointerout', () => {this.configButton.setScale(1);});
         this.configButton.on('pointerup', () => {
             scene.scene.stop();
-            scene.scene.start('configurationScene', { scene: 'game'});
+            scene.scene.start('configurationScene', { returnScene: 'gameScene'});
         });
         return this.configButton;
     }

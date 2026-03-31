@@ -6,7 +6,7 @@ export default class ConfigurationScene extends Phaser.Scene {
     }
 
     init(data) {
-        this.returnScene = data?.returnScene || 'gameScene';
+        this.returnScene = data.returnScene || 'gameScene';
         this.openedFromPause = data?.openedFromPause || false;
     }
 
@@ -18,7 +18,6 @@ export default class ConfigurationScene extends Phaser.Scene {
         console.log('configurationScene opened', this.returnScene, this.openedFromPause);
 
         this.scene.bringToTop('configurationScene');
-    
 
         this.audioManager = this.registry.get('audioManager');
 
@@ -149,7 +148,7 @@ export default class ConfigurationScene extends Phaser.Scene {
                 this.scene.start('introScene');
             } else if (this.returnScene === 'gameScene') {
                 this.registry.set('flagShow', false);
-                this.scene.resume('gameScene');
+                this.scene.get('gameScene').scene.restart();
             }
         });
 
@@ -172,10 +171,9 @@ export default class ConfigurationScene extends Phaser.Scene {
                 this.scene.start('introScene');
             } else if (this.returnScene === 'gameScene') {
                 this.registry.set('flagShow', false);
-                this.scene.resume('gameScene');
+                this.scene.get('gameScene').scene.restart();
             }
         });
-
         this.createLaunchButton();
     }
 
