@@ -27,35 +27,35 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        if(this.day.getDayNumber() === 6){
+        if(this.day.getDayNumber() === 6){                                      // GAME END                       
             this.scene.stop();
             this.scene.start('finishScene');
+        }else{                                                                  // GAME START/CONTINUE   
+            console.log("GAME: " + "DAY " + this.day.getDayNumber());
+            // SPAWN DAY VISUAL
+            if (this.registry.get('flagShow')) this.showDayIntro();
+            // SPAWN MAP and MISSIONS
+            this.gameManager.spawnAssets(this);
+            if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
+            this.configButton = this.gameManager.spawnConfigurationButton(this);
+
+            this.topUI = new topUI(this);
+            this.batteryUI = new batteryUI(this);
+            this.endDayBtnUI = new endDayBtnUI(this);
+            this.footerUI = new footerUI(this);
+
+            const { width, height } = this.sys.game.config;
+            this.nightOverlay = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
+
+            this.events.on('resume', () => {
+                this.refreshHUD();
+            });
+
+            this.startEnergyDrain();
+            //MISSION TEST
+            //this.scheduleNextMission();
+            this.missionList.push(this.gameManager.getMission(this));
         }
-        console.log("GAME: " + "DAY " + this.day.getDayNumber());
-        // SPAWN DAY VISUAL
-        if (this.registry.get('flagShow')) this.showDayIntro();
-        // SPAWN MAP and MISSIONS
-        this.gameManager.spawnAssets(this);
-        if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
-        this.configButton = this.gameManager.spawnConfigurationButton(this);
-
-        this.topUI = new topUI(this);
-        this.batteryUI = new batteryUI(this);
-        this.endDayBtnUI = new endDayBtnUI(this);
-        this.footerUI = new footerUI(this);
-
-        const { width, height } = this.sys.game.config;
-        this.nightOverlay = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
-
-        this.events.on('resume', () => {
-            this.refreshHUD();
-        });
-
-        this.startEnergyDrain();
-        //MISSION TEST
-        //this.scheduleNextMission();
-        this.missionList.push(this.gameManager.getMission(this));
-
     }
 
     scheduleNextMission() {
@@ -151,7 +151,13 @@ export default class GameScene extends Phaser.Scene {
                 alpha: 0,
                 duration: 1000,
                 ease: 'Power2',
-                onComplete: () => introContainer.destroy()
+                onComplete: () =>{
+                    introContainer.destroy()
+                    if(currentDay === 2 && this.isTutorial){               // TUTORIAL BLACK MARKET
+                        this.scene.stop();
+                        this.scene.start('tutorialScene', { order: 3 });
+                    }
+                } 
             });
         });
     }

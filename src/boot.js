@@ -55,6 +55,7 @@ import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.p
 
 // BLACK MARKET ASSETS
 import vendedor from '../assets/other/Vendedor.png' 
+import vendedorSilueta from '../assets/other/VendedorSilueta.png' 
 import prensa_icon from '../assets/marketIcons/prensa.png'
 import hotel_icon from '../assets/marketIcons/hotel.png'
 // ICONS 
@@ -271,6 +272,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);  
     //PROTOTYPE ASSETS, TO BE REPLACED
     this.load.image('vendedor', vendedor);
+    this.load.image('vendedorSilueta', vendedorSilueta);
     this.load.image('pensa_icon', prensa_icon);
     this.load.image('hotel_icon', hotel_icon);
 

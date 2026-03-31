@@ -9,6 +9,7 @@ export default class BlackMarketScene extends Phaser.Scene {
     init(data) {
         this.currentPage = data.page || 0;
         this.itemsPerPage = 3;
+        this.tutorial = data.tutorial || false;
     }
 
     create() {
@@ -45,9 +46,7 @@ export default class BlackMarketScene extends Phaser.Scene {
         this.renderProducts();
         this.createTabsButtons(gameWidth, gameHeight);
 
-        this.vendedor = this.add.image(gameWidth - 250, gameHeight / 2, 'vendedor');
-        this.vendedor.setOrigin(0.5).setScale(0.8);
-        this.vendedor.setDepth(0);
+        this.vendedor = this.add.image(gameWidth - 250, gameHeight / 2, 'vendedor').setOrigin(0).setScale(1).setDepth(10);
 
         const backButton = this.add.text(gameWidth - 180, gameHeight - 50, 'VOLVER AL MAPA', {
             fontFamily: 'Courier New',

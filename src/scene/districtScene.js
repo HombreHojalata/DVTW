@@ -213,7 +213,7 @@ export default class DistrictScene extends Phaser.Scene {
         return newWidth - offsetX * (9 - this.builtList.length - 1);
     }
     // BUTTON
-    spawnStoreButton(newHeight,positionX,tutorial){
+    spawnStoreButton(newHeight,positionX){
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '14px',
             backgroundColor: '#000',
@@ -233,10 +233,10 @@ export default class DistrictScene extends Phaser.Scene {
             this.storeButton.setScale(1);
         });
         this.storeButton.on('pointerup', () => {
-            if(tutorial) this.containerStore.destroy();
+            if(this.tutorial) this.containerStore.destroy();
             tooltip.setVisible(false);
             this.scene.pause('districtScene');
-            this.scene.launch('districtStoreScene', { district: this.district, tutorial: true });
+            this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial });
         });
         return this.storeButton;
     }

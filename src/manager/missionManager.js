@@ -106,11 +106,10 @@ export default class missionManager{
     }
 
     finishDay(){
-        dayFisished = this.day;
+        dayFinished = this.day;
         this.day = new day(this.day);
-        return dayFisished.getDaySummary();    
+        return dayFinished.getDaySummary();    
     }
-
 
     async loadMissions(){
 

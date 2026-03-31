@@ -28,8 +28,7 @@ export default class DistrictScene extends Phaser.Scene {
         //TUTORIAL
         if(this.tutorial){
             const { width, height } = this.sys.game.config;
-            this.blockerBuildingBuy = this.add.zone(newWidth/3, 500, width/2-50, height/6).setOrigin(0).setInteractive(true).setDepth(20);
-            this.add.rectangle(newWidth/3 , 500, width/2-50, height/6, 0xff0000, 0.3).setOrigin(0).setDepth(20); // red
+            this.blockerBuildingBuy = this.add.zone(newWidth/3, 500, width/2-50, height/6).setOrigin(0).setInteractive().setDepth(20);
             this.containerStore = null;
             this.explainTutorial();
         }
@@ -37,7 +36,6 @@ export default class DistrictScene extends Phaser.Scene {
     // TUTORIAL
     explainTutorial() {
         this.containerStore = this.add.container(340, 300).setDepth(21);   
-        this.blockerBuildingBuy.destroy();
         const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
         const text = this.add.text(150, 70, '¡Bienvenido al mercado de edificios del distrito!\nAquí podrás comprar nuevos edificios para tu distrito usando el dinero que has ganado.\nCompra el edificio "CINEMA"', {
             fontSize: '16px',
@@ -47,29 +45,14 @@ export default class DistrictScene extends Phaser.Scene {
             wordWrap: { width: 280 },
             lineSpacing: 10
         }).setOrigin(0.5);
-        const continueBtn = this.add.text(150, 150, 'Continuar', { fontSize: '20px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: this.containerStore,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    this.containerStore.destroy();
-                    this.startGameText();
-                }
-            });
-        });
         //FALTA UNA MARCA
-        this.containerStore.add([bg, text, continueBtn]);
+        this.containerStore.add([bg, text]);
     }
-
-    startGameText() {
-        const container = this.add.container(340, 300).setDepth(21);   
+    passToTutorialScene() {
+        this.containerText = this.add.container(340, 300).setDepth(21);   
         this.blockerBuildingBuy.destroy();
         const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 70, '¡Bien hecho!\nHas comprado el edificio "CINEMA".\nAhora estás listo para empezar a jugar, dale al botón cuando estes preparado.', {
+        const text = this.add.text(150, 70, '¡Bien hecho!\nHas aprendido a comprar edificios, que no sabes para qué sirven? Cada edificio tiene una función específica en tu distrito cuando pongas el cursor por encima de él te dira sus propiedades.\n', {
             fontSize: '16px',
             fontFamily: 'Times New Roman',
             color: '#ffffff',
@@ -77,25 +60,23 @@ export default class DistrictScene extends Phaser.Scene {
             wordWrap: { width: 280 },
             lineSpacing: 10
         }).setOrigin(0.5);
-        const prepareBtn = this.add.text(150, 150, 'Preparado', { fontSize: '20px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
-        prepareBtn.on('pointerup', () => {
-            prepareBtn.setScale(1.1);
+            //}).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+        this.time.delayedCall(5000, () => {
             this.tweens.add({
-                targets: container,
+                targets: this.containerText,
                 alpha: 0,
                 duration: 1000,
                 ease: 'Power2',
                 onComplete: () => {
-                    container.destroy();
-                    this.startGameText();
+                    this.containerText.destroy();
                     this.scene.stop();
                     this.scene.stop('districtScene');
                     this.scene.stop('tutorialScene');
-                    this.scene.start('gameScene', { tutorial: true });
+                    this.scene.launch('tutorialScene', { order: 2 });
                 }
-            });
+            }); 
         });
-        container.add([bg, text, prepareBtn]);
+        this.containerText.add([bg, text]); 
     }
 
     // BUILDING LIST
@@ -134,7 +115,7 @@ export default class DistrictScene extends Phaser.Scene {
             img.on('pointerup', () => {
                 if(this.tutorial && building.getName() === "CINEMA"){
                     this.containerStore.destroy();
-                    this.startGameText();
+                    this.passToTutorialScene();
                 }
                 if(this.district.canBuildMore()){
                     if(this.player.getMoney() >= building.getBuildingCost()){
