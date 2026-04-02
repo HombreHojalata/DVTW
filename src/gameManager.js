@@ -7,10 +7,11 @@ import Map from './map/map.js'
 export default class gameManager{
     constructor(scene){
         this.scene = scene;
-        this.player = new Player(700000, 100, 100, 20, 80 , 'presidente' , 'presidente');
+        this.player = new Player(700000, 100, 100, 0, 0 , 'presidente' , 'presidente');
         this.day=new Day(0);
         this.missionManager = new MissionManager(scene,this.player);
         this.map = new Map('map',null,null);
+        this.player.updatePopularity(this.map.getPopularity());
     }
     // GETTERS
     getPlayer(){return this.player};
