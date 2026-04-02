@@ -92,4 +92,14 @@ export default class Map {
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
     // UPDATE DATA
     updateDistricts() {this.districtList.forEach(d => d.updateDistrict());}
+    getPopularity(){
+        let totalPopularity = 0;
+        totalPopularity +=this.getDistrictByName("BORRASCAL").getSatisfaction();
+        totalPopularity +=this.getDistrictByName("EL_NIDO").getSatisfaction();
+        totalPopularity +=this.getDistrictByName("GUINEA").getSatisfaction();
+        totalPopularity +=this.getDistrictByName("NUEVA_PRADERA").getSatisfaction();
+        totalPopularity +=this.getDistrictByName("SAHAR").getSatisfaction();
+        totalPopularity +=this.getDistrictByName("SOMOSAGUA").getSatisfaction();
+        return totalPopularity;
+    }
 }

@@ -315,7 +315,7 @@ export default class missionManager{
         this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }
     deleteAllMissions(){
-        for(mission of this.activeMissions){
+        for(let mission of this.activeMissions){
             mission.deleteMissionButton();
         }
         this.activeMissions = [];

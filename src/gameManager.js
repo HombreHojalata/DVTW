@@ -6,7 +6,7 @@ import Map from './map/map.js'
 
 export default class gameManager{
     constructor(scene){
-        //this.player = new Player(1000000, 100, 100, 20, 80 , 'presidente' , 'presidente');
+        this.scene = scene;
         this.player = new Player(700000, 100, 100, 20, 80 , 'presidente' , 'presidente');
         this.day=new Day(0);
         this.missionManager = new MissionManager(scene,this.player);
@@ -23,14 +23,21 @@ export default class gameManager{
         return this.missionL;
     }
     removeMission(scene,mission, option, district){
-        district.updatePopulation(option.popularity);
+        district.updateSatisfaction(option.popularity);
         this.player.updateEnergy(option.energy);
         this.player.updateCorruption(option.corruption);
         this.player.updateMoney(-option.money);
         this.removeMissionFromId(scene,mission.getName());
         this.day.addDecision(mission.getName() + ": " + option.description);
-        this.day.updateResources(-option.money, option.energy, option.corruption, option.popularity);
+        this.day.updateResources(-option.money, option.energy, option.corruption, 0);
         this.missionManager.rmMission(mission);
+        // UPDATE POPULARITY
+        let newPopularity = this.map.getPopularity();
+        let oldPopularity = this.player.getPopularity();
+        this.player.updatePopularity(newPopularity - oldPopularity);
+        this.day.updateResources(0, 0, 0, newPopularity - oldPopularity);
+        //Refresh UI
+        this.scene.refreshHUD();
     }
     deleteAllMissions(scene){
         this.missionManager.deleteAllMissions();

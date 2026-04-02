@@ -76,13 +76,13 @@ export default class MissionScene extends Phaser.Scene {
         return descText;
     }  
     spawnDetailText(newWidth,newHeight,offsetX,offsetY){
-        const populationInfo = this.add.text(newWidth / 2 + offsetX*4 - 20, newHeight - offsetY*10,'Poblacion - ' + this.district.getPopulation(),{
+        const populationInfo = this.add.text(newWidth / 2 + offsetX*4 - 20, newHeight - offsetY*10,'Poblacion: ' + this.district.getPopulation(),{
             fontSize: '14px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
             color: '#000000',
         }).setDepth(1000);
-        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6, newHeight - offsetY*10, 'Satisfaccion - ' + this.district.getSatisfaction(),{
+        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6, newHeight - offsetY*10, 'Satisfaccion: ' + this.district.getSatisfaction(),{
             fontSize: '14px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
@@ -128,13 +128,18 @@ export default class MissionScene extends Phaser.Scene {
         const lineSpacing = 6;
         const getColor = (value) => value >= 0 ? '#00ff00' : '#ff0000';
         const lines = [
-            { text: option.description, color: '#ffffff', size: '18px', style: 'bold'},
-            { text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) },
-            { text: `Energía: ${option.energy}`, color: getColor(option.energy) },
-            { text: `Coste: ${option.money}`, color: getColor(-option.money) },                         //JUSTO LA INVERSA SI DA DINERO VERDE, SI CUESTA ROJO
-            { text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) },
-            { text: `Población: ${option.popularity}`, color: getColor(option.popularity) }
+            { text: option.description, color: '#ffffff', size: '18px', style: 'bold'},            
+            { text: `Energía: ${option.energy}`, color: getColor(option.energy) }//JUSTO LA INVERSA SI DA DINERO VERDE, SI CUESTA ROJO      
         ];
+        if(option.probability <100)
+            lines.push({ text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) });
+        if(option.money != 0)
+            lines.push({ text: `Coste: ${option.money}`, color: getColor(-option.money) });
+        if(option.corruption != 0)
+            lines.push({ text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) });
+        if(option.popularity != 0)
+            lines.push({ text: `Satisfacción: ${option.popularity}`, color: getColor(option.popularity) });
+        
         const bg = this.add.graphics();
         bg.fillStyle(0x007BFF, 1);
         bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
