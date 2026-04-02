@@ -135,6 +135,10 @@ import endDayBright from '../assets/UIs/endDayBright.png'
 import endDayPressed from '../assets/UIs/endDayPressed.png'
 import confirmationUI from '../assets/UIs/confirmationUI.png'
 import lowBarUI from '../assets/UIs/lowBarUI.png'
+import marketBtnNormal from '../assets/UIs/marketBtnNormal.png'
+import marketBtnBright from '../assets/UIs/marketBtnBright.png'
+import marketBtnPressed from '../assets/UIs/marketBtnPressed.png'
+import marketBtnBlocked from '../assets/UIs/marketBtnBlocked.png'
 
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
@@ -304,6 +308,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image('endDayPressed', endDayPressed);
     this.load.image('confirmationUI', confirmationUI);
     this.load.image('lowBarUI', lowBarUI);
+    this.load.image('marketBtnNormal', marketBtnNormal);
+    this.load.image('marketBtnBright', marketBtnBright);
+    this.load.image('marketBtnPressed', marketBtnPressed);
+    this.load.image('marketBtnBlocked', marketBtnBlocked);
 
     // JSONS
     this.cache.json.add('regularMissions', RegularMission);

@@ -44,51 +44,64 @@ export default class footerUI {
         return this.districtTitleText;
     }
     updateDistrictFooter(district) {if(this.districtTitleText) {this.districtTitleText.setText(district.getName());}}
-    // BLACK MARKET needed changes
-    createBlackMarketButton(sectionMoney, sectionDistrict, sectionBlackMarket, footerX, footerY, footerHeight) {
 
-        const tooltip = this.scene.add.text(0, 0, '', {
-            fontSize: '14px',
+    createBlackMarketButton(sectionMoney, sectionDistrict, sectionBlackMarket, footerX, footerY, footerHeight) {
+        const x = footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2 + 15;
+        const y = footerY + footerHeight / 2 - 2;
+
+        const currentDay = this.scene.registry.get('gameManager').getDay();
+        const isDayOne = currentDay.dayNumber === 1;
+
+        const tooltip = this.scene.add.text(x - 150, y - 70, '', {
+            fontSize: '16px',
+            fontFamily: 'Georgia',
             backgroundColor: '#ffffff',
             color: '#000000',
             padding: { x: 5, y: 5 },
             align: 'center'
         }).setVisible(false);
-        // AQUI DEBERIA IR blackMarketIcon
-        this.blackMarketText = this.scene.add.text(
-            footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2,
-            footerY + footerHeight / 2,
-            'BLACK MARKET',
-            {
-                fontSize: '18px',
-                backgroundColor: '#e03b1e',
-                padding: { x: 8, y: 4 },
-                color: '#fff'
-            }
-        ).setOrigin(0.5).setInteractive({ useHandCursor: true }).setDepth(12);
 
-        this.blackMarketText.on('pointerover', (pointer) => {
-            this.blackMarketText.setStyle({ backgroundColor: '#e99b15' });
-            tooltip.setText('Dale click para accerder al mercado negro');
-            tooltip.setPosition(footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2 - 180, footerY - 20);
+        const initialTexture = isDayOne ? 'marketBtnBlocked' : 'marketBtnNormal';
+        this.blackMarketBtn = this.scene.add.image(x, y, initialTexture).setInteractive({ useHandCursor: true }).setDepth(15);
+        if (!isDayOne) this.blackMarketBtn.setTexture('marketBtnNormal');
+
+        this.blackMarketBtn.on('pointerover', (pointer) => {
+            this.blackMarketBtn.setTexture('marketBtnBright');
+
+            if (this.player.getEnergy() > this.player.getMaxEnergy() / 2) {
+                tooltip.setText('Aún es muy pronto, vuelve luego.');
+            } else {
+                tooltip.setText('Dale click para accerder al mercado negro');
+            }
             tooltip.setVisible(true);
-            tooltip.setDepth(100);
         });
-        this.blackMarketText.on('pointerout', () => {
-            this.blackMarketText.setStyle({ backgroundColor: '#cc7a00' });
+
+        this.blackMarketBtn.on('pointerout', (pointer) => {
+            this.blackMarketBtn.setTexture('marketBtnNormal');
             tooltip.setVisible(false);
         });
-        this.blackMarketText.on('pointerup', (pointer)=> {
-            if (this.player.getEnergy() < this.player.getMaxEnergy() / 2) {
-                this.scene.scene.pause();
-                this.scene.scene.launch('blackMarketScene', { page: 0});
-            }else{
-                tooltip.setText('Todavia es muy temprano para poder acceder\nal mercado negro');
-                tooltip.setPosition(footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2 - 180, footerY - 20);
-                tooltip.setVisible(true);
-                tooltip.setDepth(100);
+
+        this.blackMarketBtn.on('pointerdown', () => {
+            this.blackMarketBtn.setTexture('marketBtnPressed');
+            this.pressed = true;
+        });
+
+        this.blackMarketBtn.on('pointerup', () => {
+            this.blackMarketBtn.setTexture('marketBtnBright');
+
+            if (this.pressed) {
+                this.pressed = false;
+                if (this.player.getEnergy() <= this.player.getMaxEnergy() / 2) {
+                    this.scene.scene.pause();
+                    this.scene.scene.launch('blackMarketScene', { page: 0 });
+                } else {
+                    this.scene.cameras.main.shake(100, 0.005);
+                    tooltip.setText('¡Es muy pronto para el mercado negro!');
+                    tooltip.setVisible(true);
+                }
             }
         });
-        return this.blackMarketText;
+
+        return this.blackMarketBtn;
     }
 }
