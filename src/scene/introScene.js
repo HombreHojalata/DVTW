@@ -6,12 +6,65 @@ export default class IntroScene extends Phaser.Scene {
     }
 
     create() {
-        console.log("INTRO");
-        this.add.image(0, 0, 'introScene').setOrigin(0);
 
+        //crear animacion
+        this.anims.create({
+            key: 'openAgenda',
+            frames: this.anims.generateFrameNumbers('animatedAgenda', { start: 0, end: 3 }),
+            frameRate: 2,
+            repeat: 0 //no se repite
+        });
+
+        //sprite incial
+        this.sfondo = this.add.sprite(0, 0, 'animatedAgenda', 0).setOrigin(0);
+
+        //esperamos el click del usuario
+        this.sfondo.setInteractive({ useHandCursor: true });
+
+        //texto para el usuario
+        this.clickText = this.add.text(750, 425, 'Haz clic para empezar', {
+            fontSize: '36px',
+            fontStyle: 'bold',
+            color: '#ffffff',
+            fontFamily: 'Georgia',
+            stroke: '#000000',
+            strokeThickness: 5
+        }).setOrigin(0.5);
+
+        this.pulseTween = this.tweens.add({
+            targets: this.clickText,
+            alpha: { from: 0.1, to: 0.6 },
+            duration: 1200,
+            ease: 'Linear',
+            yoyo: true,
+            repeat: -1
+        });
+
+        //esperamos a que el usuario haga clic en cualquier parte de la escena
+        this.sfondo.setInteractive({ useHandCursor: true });
+
+        this.sfondo.on('pointerdown', () => {
+            this.pulseTween.stop();
+            this.clickText.destroy();
+
+            //iniciamos la animacion
+            this.sfondo.play('openAgenda');
+            this.sfondo.disableInteractive();
+        });
+
+
+        //botones
+        this.sfondo.on('animationcomplete', (animation) => {
+            if (animation.key === 'openAgenda') {
+                this.mostraMenu();
+            }
+        });
+    }
+
+    mostraMenu() {
         const createMenuButton = (x, y, text, callback) => {
-            const width = 300;
-            const height = 62;
+            const width = 220;
+            const height = 48;
 
             const shadow = this.add.rectangle(x + 4, y + 5, width, height, 0x000000, 0.18).setOrigin(0.5);
             const bg = this.add.rectangle(x, y, width, height, 0xf7f2ea, 0.82)
@@ -20,7 +73,7 @@ export default class IntroScene extends Phaser.Scene {
                 .setInteractive({ useHandCursor: true });
 
             const label = this.add.text(x, y, text, {
-                fontSize: '28px',
+                fontSize: '24px',
                 fontStyle: 'bold',
                 color: '#26304a',
                 fontFamily: 'Georgia'
@@ -58,15 +111,16 @@ export default class IntroScene extends Phaser.Scene {
             return { shadow, bg, label };
         };
 
-        createMenuButton(1120, 380, 'Tutorial', () => {
+        //colocacion de botones en la agenda abierta
+        createMenuButton(580, 520, 'Tutorial', () => {
             this.scene.start('tutorialScene');
         });
-        
-        createMenuButton(1120, 470, 'Nueva Partida', () => {
+
+        createMenuButton(560, 620, 'Nueva Partida', () => {
             this.scene.start('gameScene');
         });
 
-        createMenuButton(1120, 560, 'Opciones', () => {
+        createMenuButton(540, 720, 'Opciones', () => {
             this.scene.start('configurationScene', {
                 returnScene: 'introScene',
                 openedFromPause: false

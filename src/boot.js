@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
-import introScene from '../assets/scenes/introScene.png'  
+import agendaSheet from '../assets/scenes/agendaSpritesheet.png'
 import loadScene from '../assets/scenes/loadScene.png'                                                        //NEED TO BE REPLACE
 import configScene from '../assets/scenes/configScene.png'
 
@@ -159,7 +159,10 @@ export default class Boot extends Phaser.Scene {
 
     // PRINCIPAL SCENE ASSETS
     this.load.image('loadScene', loadScene);
-    this.load.image('introScene', introScene);
+    this.load.spritesheet('animatedAgenda', agendaSheet, { 
+      frameWidth: 1536, 
+      frameHeight: 922 
+    });
     this.load.image('configScene', configScene);
     // TUTORIAL ASSETS
     this.load.image('tutorialAnimals1', tutorialAnimals1);
