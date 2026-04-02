@@ -384,10 +384,12 @@ export default class TutorialScene extends Phaser.Scene {
                 ease: 'Power2',
                 onComplete: () => {
                     container.destroy();
+                    this.registry.set('flagShow', false);
+                    this.scene.start('gameScene', { tutorial: true});
                 }
             }); 
         });
 
-        introContainer.add([bg, img, blackMarketText]);
+        container.add([bg, img, blackMarketText]);
     }
 }
