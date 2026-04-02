@@ -208,13 +208,35 @@ export default class DistrictScene extends Phaser.Scene {
         return this.districtScene;
     }
     spawnDetailText(newWidth,newHeight,offsetX,offsetY){
-        const detailText = this.add.text(newWidth/10 + offsetX, newHeight - newHeight/3 + offsetY*5, 'Poblacion - ' + this.district.getPopulation(), {
+        //POBLACION TOTAL
+        const populationText = this.add.text(newWidth/10, newHeight - newHeight/3 + offsetY*5, 'Poblacion: ' + this.district.getPopulation(), {
             fontSize: '20px',
             fontFamily: 'Impact',
             fontStyle: 'italic',
             color: '#000000'
         }).setDepth(1000);  
-        return detailText;
+        // DINERO QUE SE GANA POR CICLO
+        const moneyText = this.add.text(newWidth/10, newHeight - newHeight/3 + offsetY*7, 'Dinero: ' + this.district.getMoneyGenerated(), {
+            fontSize: '20px',
+            fontFamily: 'Impact',
+            fontStyle: 'italic',
+            color: '#000000'
+        }).setDepth(1000);  
+        // HABITANTES A FAVOR
+        const inFavorText = this.add.text(newWidth/10 + offsetX*3, newHeight - newHeight/3 + offsetY*5, 'A favor: ' + this.district.getPopulation() * this.district.getSatisfaction() / 100, {
+            fontSize: '20px',
+            fontFamily: 'Impact',
+            fontStyle: 'italic',
+            color: '#000000'
+        }).setDepth(1000);  
+        // HABITANTES EN CONTRA/NEUTROS
+        const noFavorText = this.add.text(newWidth/10 + offsetX*3, newHeight - newHeight/3 + offsetY*7, 'En contra/Neutros: ' + this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
+            fontSize: '20px',
+            fontFamily: 'Impact',
+            fontStyle: 'italic',
+            color: '#000000'
+        }).setDepth(1000);  
+        return { populationText, moneyText, inFavorText, noFavorText };
     }
     // SPAWN BUILTS IMAGE
     spawnBuiltList(newWidth, offsetX, newHeight) {

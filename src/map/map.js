@@ -13,41 +13,51 @@ export default class Map {
         this.districtList = this.createList();
     }
     createList(){
+        //(name, desc, 
+        //population,populationIncrease, satisfaction, moneyGenerated,
+        //district_building ,buildings, space_building, 
+        //is_special_built, special_building, 
+        //PNGwithOutSpecial, PNGwithSpecial, posX, posY)
         const BORRASCAL = new DistrictBorrascal(
-            "BORRASCAL", "Any", 1000, 10, 100,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOTEL"], 4,
-            false, "CENTER_INVESTI", 10,
+            "BORRASCAL", "", 
+            7000, 1000, 34, 5000,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOTEL"], 5,
+            false, "CENTER_INVESTI",
             'districtBorrascal', 'districtBorrascalSpecial', -15, -13
         );
         const EL_NIDO = new DistrictElNido(
-            "EL_NIDO", "Any", 500, 8, 40,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOSPITAL"], 4,
-            false, "COPITOLIO",10,
+            "EL_NIDO", "Any", 
+            10000, 2000, 55, 10000,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOSPITAL"], 3,
+            false, "COPITOLIO",
             'districtElNido', 'districtElNidoSpecial', -17, -18
         );
         const GUINEA = new DistrictGuinea(
-            "GUINEA", "Any", 700, 14, 30,
+            "GUINEA", "Any", 
+            6500, 1500, 30, 7000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["COMERCIAL"], 4,
-            false, "TEATRE", 10,
+            false, "TEATRE", 
             'districtGuinea', 'districtGuineaSpecial', -10, -15
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
-            "NUEVA_PRADERA", "Any", 1400, 18, 5,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["CINEMA"], 4,
-            false, "ENPAWIRE", 10, 
+            "NUEVA_PRADERA", "Any", 
+            14000, 3000, 14, 5000,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["CINEMA"], 5,
+            false, "ENPAWIRE",
             'districtNuevaPradera', 'districtNuevaPraderaSpecial', -17, -19
         )
         const SAHAR = new DistrictSahar(
             "SAHAR", "En el extrarradio de la ciudad se extiende el distrito de Sahar, una larga explanada bajo el sol. Los reptiles y animales deserticos de esta zona viven en condiciones humildes, pero un presidente no se debe preocupar por problemas tan insignificantes como ese. Es mucho mas interesante todo el terreno de construcion.",
-            600, 20, 15,
-            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 2,
-            false, "RESTAURANT", 10,
+            2000, 500, 5, 1000,
+            ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 6,
+            false, "RESTAURANT", 
             'districtSahar', 'districtSaharSpecial', -10, -17
         );
         const SOMOSAGUA = new DistrictSomosagua(
-            "SOMOSAGUA", "Any", 800, 12, 10,
+            "SOMOSAGUA", "Any", 
+            4000, 1000, 45, 10000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["FACTORY"], 4,
-            false, "INDUSTRY", 10,
+            false, "INDUSTRY",
             'districtSomosagua', 'districtSomosaguaSpecial', -17, -17
         );
         const districtArray = [
@@ -80,10 +90,6 @@ export default class Map {
         });
     }
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
-
-    /*generateDistrictsMoney() {
-        let money = 0;
-        this.districtList.forEach(d => money += d.generateMoneyFromBuildings());
-        return money;
-    }*/
+    // UPDATE DATA
+    updateDistricts() {this.districtList.forEach(d => d.updateDistrict());}
 }

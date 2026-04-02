@@ -12,6 +12,6 @@ export default class DistrictSomosagua extends District {
         list.push('districtSomosaguaScene1');
         return list;
     }
-    // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingSomosagua',this.special_building,50000,40000,0,100);}
+    // VALUES NEED TO CHANGEPNGBuilding,name,cost,income,satisfaction,population
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingSomosagua',this.special_building,420000,280000,-20,-1000);}
 };

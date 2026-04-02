@@ -121,6 +121,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.canBuildMore()){
                     if(this.player.getMoney() >= building.getBuildingCost()){
                         this.district.addBuilding(building);
+                        this.district.updateSatisfaction(building.getSatisfaction());
+                        this.district.updatePopulationIncrease(building.getPopulationIncrease());
                         this.player.updateMoney(-building.getBuildingCost());
                         this.footerUI.refreshMoney();
                     } 

@@ -12,6 +12,6 @@ export default class DistrictGuinea extends District {
         list.push('districtGuineaScene1');
         return list;
     }
-    // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingGuinea',this.special_building,50000,40000,0,100);}
+    // VALUES NEED TO CHANGEPNGBuilding,name,cost,income,satisfaction,population
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingGuinea',this.special_building,300000,180000,25,1500);}
 };

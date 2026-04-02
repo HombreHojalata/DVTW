@@ -188,7 +188,9 @@ export default class GameScene extends Phaser.Scene {
         if (this.missionTimer) this.missionTimer.remove(false);
 
         this.cameras.main.fadeOut(1000, 0, 0, 0);
-
+        // UPDATE DATA
+        //this.moneyGenerated = this.map.updateDistricts();
+        //this.player.updateMoney(this.moneyGenerated);
         this.cameras.main.once('camerafadeoutcomplete', () => {
             this.gameManager.nextDay();
             this.scene.restart();

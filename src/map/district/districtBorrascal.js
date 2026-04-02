@@ -12,6 +12,6 @@ export default class DistrictBorrascal extends District{
         list.push('districtBorrascalScene1');
         return list;
     }
-    // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingBorrascal',this.special_building,50000,40000,0,100);}
+    // VALUES NEED TO CHANGEPNGBuilding,name,cost,income,satisfaction,population
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingBorrascal',this.special_building,240000,120000,10,1000);}
 };
