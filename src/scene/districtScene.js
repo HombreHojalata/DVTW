@@ -239,10 +239,10 @@ export default class DistrictScene extends Phaser.Scene {
         return { population: populationText, money: moneyText, inFavor: inFavorText, noFavor: noFavorText };
     }
     refreshDetailsText(){
-        this.districtDetail.population.setText('Poblacion: ' + this.district.getPopulation());
-        this.districtDetail.inFavor.setText('A favor: ' + this.district.getPopulation() * this.district.getSatisfaction() / 100);
-        this.districtDetail.money.setText('Dinero: ' + this.district.getMoneyGenerated());
-        this.districtDetail.noFavor.setText('En contra/Neutros: ' + this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100);
+        this.districtDetail.population.setText(this.district.getPopulation());
+        this.districtDetail.inFavor.setText(this.district.getPopulation() * this.district.getSatisfaction() / 100);
+        this.districtDetail.money.setText(this.district.getMoneyGenerated());
+        this.districtDetail.noFavor.setText(this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100);
     }
     // SPAWN BUILTS IMAGE
     spawnBuiltList(newWidth, offsetX, newHeight) {

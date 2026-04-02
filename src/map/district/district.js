@@ -90,9 +90,9 @@ export default class District {
     getPopulationIncrease() {return this.populationIncrease;}
 
     // MODIFYING DISTRICT MONEY AND SATISFACTION BY FOOTER ATTRIBUTES, 50 IS THE BASE
-    updateAfterModifyPercentage(){                      //FALTA REVISARLO MEJOR
-        this.modifyDistrictMoneyGenerated();            //MAL
-        this.modifyDistrictSatisfaction();              //PUEDE QUE ESTE BIEN
+    updateAfterModifyPercentage(){  
+        this.modifyDistrictMoneyGenerated(); 
+        this.modifyDistrictSatisfaction();  
     }
     //SATISFACTION
     getSatisfaction() {return this.satisfaction;}
@@ -120,9 +120,8 @@ export default class District {
     }
     //MONEY GENERATED AFFECTED BY DISTRICT PERCENTAGE 
     getMoneyGenerated() {
-        let money = 0;
-        for(let i = 0 ; i < this.moneyGeneratedByBuildings.length; i++) money += this.moneyGeneratedByBuildings[i];
-        return this.moneyGenerated + money;
+        const buildingsIncome = this.moneyGeneratedByBuildings.reduce((sum, income) => sum + income, 0);
+        return this.moneyGenerated + buildingsIncome;
     }
     modifyDistrictMoneyGenerated(){
         // IF TAXES INCREASE, MONEY INCREASE. IF TAXES DECREASE, MONEY DECREASE
@@ -130,17 +129,22 @@ export default class District {
         // IF WORK SCHEDULE INCREASE, BUILDING MONEY INCREASE. IF WORK SCHEDULE DECREASE, BUILDING MONEY DECREASE
         // IF CLEANING INCREASE, MONEY DECREASE. IF CLEANING DECREASE, MONEY INCREASE
         this.moneyGenerated = this.baseMoneyGenerated;
-        this.moneyGeneratedByBuildings = this.baseMoneyGeneratedByBuildings;
+        // clonar array para no mutar el original base directamente
+        this.moneyGeneratedByBuildings = [...this.baseMoneyGeneratedByBuildings];
+
         if(this.taxes > 50) this.moneyGenerated += (this.taxes - 50) * 1000;
         else if(this.taxes < 50) this.moneyGenerated -= (50 - this.taxes) * 1000;
         if(this.security > 50) this.moneyGenerated -= (this.security - 50) * 1000;
         else if(this.security < 50) this.moneyGenerated += (50 - this.security) * 1000;
-        if(this.workSchedule > 50){
-            for(let i = 0 ; i < this.moneyGeneratedByBuildings.length; i++) this.moneyGeneratedByBuildings[i] += (this.workSchedule - 50)/100 * this.moneyGeneratedByBuildings[i] ;
-        } 
-        else if(this.workSchedule < 50){
-            for(let i = 0 ; i < this.moneyGeneratedByBuildings.length; i++) this.moneyGeneratedByBuildings[i] -= (50 - this.workSchedule)/100 * this.moneyGeneratedByBuildings[i] ;
-        }
+
+        this.moneyGeneratedByBuildings.forEach((income, idx) => {
+            if(this.workSchedule > 50) {
+                this.moneyGeneratedByBuildings[idx] = income + ((this.workSchedule - 50) / 100) * income;
+            } else if(this.workSchedule < 50) {
+                this.moneyGeneratedByBuildings[idx] = income - ((50 - this.workSchedule) / 100) * income;
+            }
+        });
+
         if(this.cleaning > 50) this.moneyGenerated -= (this.cleaning - 50) * 1000;
         else if(this.cleaning < 50) this.moneyGenerated += (50 - this.cleaning) * 1000;
     }
@@ -176,7 +180,9 @@ export default class District {
         }
         if(built) {
             for(let i = 0; i < buildingList.length; i++){
-                this.moneyGeneratedByBuildings += buildingList[i].getBuildingIncome();
+                const income = buildingList[i].getBuildingIncome();
+                this.moneyGeneratedByBuildings.push(income);
+                this.baseMoneyGeneratedByBuildings.push(income);
                 this.updatePopulationIncrease(buildingList[i].getBuildingPopulationIncrease());
                 this.updateSatisfaction(buildingList[i].getBuildingSatisfaction());
             }
