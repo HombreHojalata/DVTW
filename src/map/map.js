@@ -19,42 +19,42 @@ export default class Map {
         //is_special_built, special_building, 
         //PNGwithOutSpecial, PNGwithSpecial, posX, posY)
         const BORRASCAL = new DistrictBorrascal(
-            "BORRASCAL", "", 
+            "BORRASCAL", "Aquí es donde los presupuestos públicos se congelan. Sin embargo, a pesar de ello el distrito de Borrascal es famoso por sus laboratorios e investigaciones. Una pena que sean demasiado caras.", 
             7000, 1000, 34, 5000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOTEL"], 5,
             false, "CENTER_INVESTI",
             'districtBorrascal', 'districtBorrascalSpecial', -15, -13
         );
         const EL_NIDO = new DistrictElNido(
-            "EL_NIDO", "Any", 
+            "EL_NIDO", "Donde el aire es puro y los impuestos son bajos. El Nido es el lujoso hogar de la aristocracia emplumada, y están muy acostumbrados a gastar su dinero en comercios de alto standing.", 
             10000, 2000, 55, 10000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOSPITAL"], 3,
             false, "COPITOLIO",
             'districtElNido', 'districtElNidoSpecial', -17, -18
         );
         const GUINEA = new DistrictGuinea(
-            "GUINEA", "Any", 
+            "GUINEA", "Un paraíso artificial constuido para que turítas de todo el mundo vengan a finjir amor por la naturaleza. Los festivales de Guinea son conocidos por su importancia cultural, y su gran beneficio.", 
             6500, 1500, 30, 7000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["COMERCIAL"], 4,
             false, "TEATRE", 
             'districtGuinea', 'districtGuineaSpecial', -10, -15
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
-            "NUEVA_PRADERA", "Any", 
+            "NUEVA_PRADERA", "El hogar ideal para la clase media, llena de vallas blancas y gente obediente de las normal. Nueva Pradera es un distrito fácil de ignorar, pero hay que tener cuidado con decepcionar a sus muchos vecinos.", 
             14000, 3000, 14, 5000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["CINEMA"], 5,
             false, "ENPAWIRE",
             'districtNuevaPradera', 'districtNuevaPraderaSpecial', -17, -19
         )
         const SAHAR = new DistrictSahar(
-            "SAHAR", "En el extrarradio de la ciudad se extiende el distrito de Sahar, una larga explanada bajo el sol. Los reptiles y animales deserticos de esta zona viven en condiciones humildes, pero un presidente no se debe preocupar por problemas tan insignificantes como ese. Es mucho mas interesante todo el terreno de construcion.",
+            "SAHAR", "Una explanada bajo el sol olvidada por la clase alta, pero no por el recaudador de impuestos. Sahar el sitio ideal para contruir para las grandes empresas, es lo bueno de los barrios porbes: no hay nadie importante que pueda quejarse.",
             2000, 500, 5, 1000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], [], 6,
             false, "RESTAURANT", 
             'districtSahar', 'districtSaharSpecial', -10, -17
         );
         const SOMOSAGUA = new DistrictSomosagua(
-            "SOMOSAGUA", "Any", 
+            "SOMOSAGUA", "La zona industrial de la ciudad: si el agua huele a azufre, es que el progreso va bien. Los vecinos de Somosagua están acostumbrados a la contaminación, por lo que no se quejarán mucho si ampliamos el número de fábricas.", 
             4000, 1000, 45, 10000,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["FACTORY"], 4,
             false, "INDUSTRY",
