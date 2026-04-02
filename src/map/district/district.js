@@ -86,7 +86,7 @@ export default class District {
     //POPULATION
     getPopulation() {return this.population;}
     updatePopulation(value) {this.population = Math.max(0, this.population + value);}
-    updatePopulationIncrease(value){this.populationIncrease = Math.max(0, Math.min(100, this.populationIncrease + value));}
+    updatePopulationIncrease(value){this.populationIncrease = Math.max(0, this.populationIncrease + value);}
     getPopulationIncrease() {return this.populationIncrease;}
 
     // MODIFYING DISTRICT MONEY AND SATISFACTION BY FOOTER ATTRIBUTES, 50 IS THE BASE
