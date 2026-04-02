@@ -72,13 +72,13 @@ export default class GameScene extends Phaser.Scene {
 
             this.startEnergyDrain();
             //MISSION TEST
-            //this.scheduleNextMission();
-            this.missionList.push(this.gameManager.getMission(this));
+            this.scheduleNextMission();
+            //this.missionList.push(this.gameManager.getMission(this));
         }
     }
 
     scheduleNextMission() {
-        const delay = Math.floor(Math.random() * (12000 - 3000 + 1)) + 3000;
+        const delay = Math.floor(Math.random() * (12000 - 3000 + 1));
         this.missionTimer = this.time.addEvent({
             delay: delay,
             callback: () => {

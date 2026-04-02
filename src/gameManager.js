@@ -23,7 +23,7 @@ export default class gameManager{
         return this.missionL;
     }
     removeMission(scene,mission, option, district){
-        district.increasePopulation(option.popularity);
+        district.updatePopulation(option.popularity);
         this.player.updateEnergy(option.energy);
         this.player.updateCorruption(option.corruption);
         this.player.updateMoney(-option.money);

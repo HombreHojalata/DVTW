@@ -311,9 +311,13 @@ export default class missionManager{
         if(mission.isMinigame()){
             this.minigameMissions = this.minigameMissions.filter(m => m !== mission);
         }
+        mission.deleteMissionButton();
         this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }
     deleteAllMissions(){
+        for(mission of this.activeMissions){
+            mission.deleteMissionButton();
+        }
         this.activeMissions = [];
         this.districtsWithMissions=[false,false,false,false,false,false];
     }
