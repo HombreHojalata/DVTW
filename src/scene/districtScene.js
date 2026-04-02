@@ -201,40 +201,40 @@ export default class DistrictScene extends Phaser.Scene {
         }); 
         return descText;
     }  
-    spawnScene(newWidth,newHeight,offsetX,offsetY){
+    spawnScene(newWidth,newHeight,offsetX,offsetY) {
         const list = this.district.getSceneList();
         const randomIndex = Math.floor(Math.random() * list.length);
         this.districtScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,list[randomIndex]);
         return this.districtScene;
     }
-    spawnDetailText(newWidth,newHeight,offsetX,offsetY){
+    spawnDetailText(newWidth,newHeight,offsetX,offsetY) {
         //POBLACION TOTAL
-        const populationText = this.add.text(newWidth/10, newHeight - newHeight/3 + offsetY*5, 'Poblacion: ' + this.district.getPopulation(), {
-            fontSize: '20px',
-            fontFamily: 'Impact',
-            fontStyle: 'italic',
-            color: '#000000'
+        const populationText = this.add.text(newWidth/10 + 80, newHeight - newHeight/3 + offsetY*5 + 5, this.district.getPopulation(), {
+            fontSize: '29px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#30718c'
         }).setDepth(1000);  
         // DINERO QUE SE GANA POR CICLO
-        const moneyText = this.add.text(newWidth/10, newHeight - newHeight/3 + offsetY*7, 'Dinero: ' + this.district.getMoneyGenerated(), {
-            fontSize: '20px',
-            fontFamily: 'Impact',
-            fontStyle: 'italic',
-            color: '#000000'
+        const moneyText = this.add.text(newWidth/10 + 80, newHeight - newHeight/3 + offsetY*9 + 5, this.district.getMoneyGenerated(), {
+            fontSize: '29px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#ba9900'
         }).setDepth(1000);  
         // HABITANTES A FAVOR
-        const inFavorText = this.add.text(newWidth/10 + offsetX*3, newHeight - newHeight/3 + offsetY*5, 'A favor: ' + this.district.getPopulation() * this.district.getSatisfaction() / 100, {
-            fontSize: '20px',
-            fontFamily: 'Impact',
-            fontStyle: 'italic',
-            color: '#000000'
+        const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 70, newHeight - newHeight/3 + offsetY*5 + 5, this.district.getPopulation() * this.district.getSatisfaction() / 100, {
+            fontSize: '29px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#46c83d'
         }).setDepth(1000);  
         // HABITANTES EN CONTRA/NEUTROS
-        const noFavorText = this.add.text(newWidth/10 + offsetX*3, newHeight - newHeight/3 + offsetY*7, 'En contra/Neutros: ' + this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
-            fontSize: '20px',
-            fontFamily: 'Impact',
-            fontStyle: 'italic',
-            color: '#000000'
+        const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 70, newHeight - newHeight/3 + offsetY*9 + 5, this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
+            fontSize: '29px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#e62d2a'
         }).setDepth(1000);  
         return { populationText, moneyText, inFavorText, noFavorText };
     }
