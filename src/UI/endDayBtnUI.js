@@ -90,6 +90,19 @@ export default class endDayBtnUI {
         this.confirmationUI.show();
     }
 
+    setDepth(depth) {
+        if (this.btn) {
+            this.btn.setDepth(depth);
+        }
+        if (this.blockedContainer) {
+            this.blockedContainer.setDepth(depth + 1);
+        }
+        if (this.blocker) {
+            this.blocker.setDepth(depth);
+        }
+        return this;
+    }
+
     finishDay() { 
         this.scene.finishDay();
     }

@@ -61,6 +61,7 @@ export default class GameScene extends Phaser.Scene {
             this.topUI = new topUI(this);
             this.batteryUI = new batteryUI(this);
             this.endDayBtnUI = new endDayBtnUI(this);
+            this.endDayBtnUI.btn.setDepth(22);
             this.footerUI = new footerUI(this);
 
             this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
@@ -111,6 +112,7 @@ export default class GameScene extends Phaser.Scene {
                 if (this.player.getEnergy() <= 0) {
                     this.energyTimerEvent.remove(false);
                     console.log('ENERGÍA AGOTADA');
+                    this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(20);
                     this.tweens.add({
                         targets: this.nightOverlay,
                         alpha: 0.35,
