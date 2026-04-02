@@ -100,6 +100,16 @@ import upPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosag
 import downPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosagua/downPopularityScene.png'
 import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomosagua/downCorruptionScene.png'
 
+//Memory minigame assets
+import memoryImage1 from '../assets/minigames/memory/memoryImage1.png'
+import memoryImage2 from '../assets/minigames/memory/memoryImage2.png'
+import memoryImage3 from '../assets/minigames/memory/memoryImage3.png'
+import memoryImage4 from '../assets/minigames/memory/memoryImage4.png'
+import memoryImage5 from '../assets/minigames/memory/memoryImage5.png'
+import memoryImage6 from '../assets/minigames/memory/memoryImage6.png'
+import memoryImage7 from '../assets/minigames/memory/memoryImage7.png'
+import memoryImage8 from '../assets/minigames/memory/memoryImage8.png'
+
 // BLACK MARKET ASSETS
 import vendedor from '../assets/other/Vendedor.png' 
 import vendedorSilueta from '../assets/other/VendedorSilueta.png' 
@@ -258,6 +268,16 @@ export default class Boot extends Phaser.Scene {
     this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);  
+
+    //Memory minigame assets
+    this.load.image('memoryImage1', memoryImage1);
+    this.load.image('memoryImage2', memoryImage2);
+    this.load.image('memoryImage3', memoryImage3);
+    this.load.image('memoryImage4', memoryImage4);
+    this.load.image('memoryImage5', memoryImage5);
+    this.load.image('memoryImage6', memoryImage6);
+    this.load.image('memoryImage7', memoryImage7);
+    this.load.image('memoryImage8', memoryImage8);
 
     // BLACK MARKET ASSETS
     this.load.image('vendedor', vendedor);

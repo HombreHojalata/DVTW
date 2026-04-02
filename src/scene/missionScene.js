@@ -179,6 +179,7 @@ export default class MissionScene extends Phaser.Scene {
     spawnButtons(){
         if(this.mission.isMinigame()){
             if(this.mission.getName() == "Cuackdle") this.createOptionButton(550,500,this.mission.getOptions()[0],'wordleMiniGame');
+            else if(this.mission.getName() == "Memory") this.createOptionButton(550,500,this.mission.getOptions()[0],'memoryMiniGame');
         }
         else{
             this.numberOfOptions = this.mission.getNumOptions();
