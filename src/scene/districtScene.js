@@ -236,7 +236,13 @@ export default class DistrictScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#e62d2a'
         }).setDepth(1000);  
-        return { populationText, moneyText, inFavorText, noFavorText };
+        return { population: populationText, money: moneyText, inFavor: inFavorText, noFavor: noFavorText };
+    }
+    refreshDetailsText(){
+        this.districtDetail.population.setText('Poblacion: ' + this.district.getPopulation());
+        this.districtDetail.inFavor.setText('A favor: ' + this.district.getPopulation() * this.district.getSatisfaction() / 100);
+        this.districtDetail.money.setText('Dinero: ' + this.district.getMoneyGenerated());
+        this.districtDetail.noFavor.setText('En contra/Neutros: ' + this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100);
     }
     // SPAWN BUILTS IMAGE
     spawnBuiltList(newWidth, offsetX, newHeight) {
@@ -287,9 +293,16 @@ export default class DistrictScene extends Phaser.Scene {
         });
         this.storeButton.on('pointerup', () => {
             if(this.tutorial) this.containerStore.destroy();
-            tooltip.setVisible(false);
-            this.scene.pause('districtScene');
-            this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial });
+            if(this.district.getSpaceBuildingBuilt() === this.district.getSpaceBuilding()) {
+                tooltip.setText('No puedes comprar mas EDIFICIOS, el distrito ya esta lleno');
+                tooltip.setPosition(pointer.x + 15, pointer.y + 35);
+                tooltip.setVisible(true);
+                tooltip.setDepth(100);
+            }else{
+                tooltip.setVisible(false);
+                this.scene.pause('districtScene');
+                this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial });
+            }
         });
         return this.storeButton;
     }
@@ -329,23 +342,12 @@ export default class DistrictScene extends Phaser.Scene {
     }
     createButton(x, y, image, swapImage,callback) {
         const button = this.add.image(x, y, image).setScale(1);
-        const tooltip = this.add.text(0, 0, '', {
-            fontSize: '14px',
-            backgroundColor: '#000',
-            color: '#fff',
-            padding: { x: 5, y: 5 }
-        }).setVisible(false);
         button.setInteractive({ useHandCursor: true });
-        button.on('pointerover', (pointer) => {
-            tooltip.setText('Darle al boton cuesta 5000$');
-            tooltip.setPosition(pointer.x + 15, pointer.y + 35);
-            tooltip.setVisible(true);
-            tooltip.setDepth(100);
+        button.on('pointerover', () => {
             button.setScale(1.1);
             button.setTexture(swapImage);
         });
         button.on('pointerout', () => {
-            tooltip.setVisible(false);
             button.setScale(1); 
             button.setTexture(image);
         });
@@ -367,8 +369,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getTaxesPercentage() < 100){
                     this.district.addTaxesPercentage(5);
                     this.taxesText.setText(this.district.getTaxesPercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -381,8 +383,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getTaxesPercentage() > 0){
                     this.district.addTaxesPercentage(-5);
                     this.taxesText.setText(this.district.getTaxesPercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();  
+                    this.refreshDetailsText();                  
                 }
             }
         );
@@ -397,8 +399,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getSecurityPercentage() < 100){
                     this.district.addSecurityPercentage(5);
                     this.securityText.setText(this.district.getSecurityPercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -411,8 +413,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getSecurityPercentage() > 0){
                     this.district.addSecurityPercentage(-5);
                     this.securityText.setText(this.district.getSecurityPercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -427,8 +429,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getWorkSchedulePercentage() < 100){
                     this.district.addWorkSchedulePercentage(5);
                     this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();             
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -441,8 +443,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getWorkSchedulePercentage() > 0){
                     this.district.addWorkSchedulePercentage(-5);
                     this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -457,8 +459,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getWorkSchedulePercentage() < 100){
                     this.district.addCleaningPercentage(5);
                     this.cleaningText.setText(this.district.getCleaningPercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -471,8 +473,8 @@ export default class DistrictScene extends Phaser.Scene {
                 if(this.district.getCleaningPercentage() > 0){
                     this.district.addCleaningPercentage(-5);
                     this.cleaningText.setText(this.district.getCleaningPercentage());
-                    this.player.updateMoney(-5000);
-                    this.footerUI.refreshMoney();
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
