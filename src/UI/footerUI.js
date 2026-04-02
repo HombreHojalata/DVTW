@@ -62,10 +62,11 @@ export default class footerUI {
         }).setVisible(false);
 
         const initialTexture = isDayOne ? 'marketBtnBlocked' : 'marketBtnNormal';
-        this.blackMarketBtn = this.scene.add.image(x, y, initialTexture).setInteractive({ useHandCursor: true }).setDepth(15);
+        this.blackMarketBtn = this.scene.add.image(x, y, initialTexture).setInteractive({ useHandCursor: !isDayOne }).setDepth(15);
         if (!isDayOne) this.blackMarketBtn.setTexture('marketBtnNormal');
 
         this.blackMarketBtn.on('pointerover', (pointer) => {
+            if (isDayOne) return;
             this.blackMarketBtn.setTexture('marketBtnBright');
 
             if (this.player.getEnergy() > this.player.getMaxEnergy() / 2) {
@@ -77,16 +78,19 @@ export default class footerUI {
         });
 
         this.blackMarketBtn.on('pointerout', (pointer) => {
+            if (isDayOne) return;
             this.blackMarketBtn.setTexture('marketBtnNormal');
             tooltip.setVisible(false);
         });
 
         this.blackMarketBtn.on('pointerdown', () => {
+            if (isDayOne) return;
             this.blackMarketBtn.setTexture('marketBtnPressed');
             this.pressed = true;
         });
 
         this.blackMarketBtn.on('pointerup', () => {
+            if (isDayOne) return;
             this.blackMarketBtn.setTexture('marketBtnBright');
 
             if (this.pressed) {
