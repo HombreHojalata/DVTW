@@ -342,7 +342,7 @@ export default class DistrictScene extends Phaser.Scene {
             fontStyle: 'bold'
         });
         this.spawnSecurityButton(newWidth,offsetX,newHeight,offsetY);
-        this.workScheduleText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*7 + 50, this.district.getWorkSchedulePercentage(), {
+        this.workScheduleText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*7 + 50, this.district.getWorkSchedule(), {
             fontSize: '30px',
             color: '#333333',
             fontStyle: 'bold'
@@ -412,7 +412,7 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseSelectIcon',
             () => {
                 if(this.district.getSecurityPercentage() < 100){
-                    this.district.addSecurityPercentage(5);
+                    this.district.addSecurityPercentage(1);
                     this.securityText.setText(this.district.getSecurityPercentage());
                     this.district.updateAfterModifyPercentage();
                     this.refreshDetailsText();
@@ -426,7 +426,7 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseSelectIcon',
             () =>  {
                 if(this.district.getSecurityPercentage() > 0){
-                    this.district.addSecurityPercentage(-5);
+                    this.district.addSecurityPercentage(-1);
                     this.securityText.setText(this.district.getSecurityPercentage());
                     this.district.updateAfterModifyPercentage();
                     this.refreshDetailsText();
@@ -441,9 +441,9 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getWorkSchedulePercentage() < 100){
-                    this.district.addWorkSchedulePercentage(5);
-                    this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
+                if(this.district.getWorkSchedule() < 24){
+                    this.district.addWorkSchedule(1);
+                    this.workScheduleText.setText(this.district.getWorkSchedule());
                     this.district.updateAfterModifyPercentage();
                     this.refreshDetailsText();
                 }
@@ -455,9 +455,9 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                if(this.district.getWorkSchedulePercentage() > 0){
-                    this.district.addWorkSchedulePercentage(-5);
-                    this.workScheduleText.setText(this.district.getWorkSchedulePercentage());
+                if(this.district.getWorkSchedule() > 0){
+                    this.district.addWorkSchedule(-1);
+                    this.workScheduleText.setText(this.district.getWorkSchedule());
                     this.district.updateAfterModifyPercentage();
                     this.refreshDetailsText();
                 }
@@ -471,8 +471,8 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getWorkSchedulePercentage() < 100){
-                    this.district.addCleaningPercentage(5);
+                if(this.district.getCleaningPercentage() < 100){
+                    this.district.addCleaningPercentage(1);
                     this.cleaningText.setText(this.district.getCleaningPercentage());
                     this.district.updateAfterModifyPercentage();
                     this.refreshDetailsText();
@@ -486,7 +486,7 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseSelectIcon',
             () =>  {
                 if(this.district.getCleaningPercentage() > 0){
-                    this.district.addCleaningPercentage(-5);
+                    this.district.addCleaningPercentage(-1);
                     this.cleaningText.setText(this.district.getCleaningPercentage());
                     this.district.updateAfterModifyPercentage();
                     this.refreshDetailsText();
