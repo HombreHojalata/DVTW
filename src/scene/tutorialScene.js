@@ -118,51 +118,31 @@ export default class TutorialScene extends Phaser.Scene {
         container.add([bg, img, introText1, introText2]);
 
         this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
-            this.fadeOutContainer(container, () => this.explainEnergyAndEndDayButton());
-        });
-    }  
-    explainEnergyAndEndDayButton() {
-        let canContinue = false;
-        this.time.delayedCall(10000, () => { canContinue = true; });
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'La barra que hay a la derecha es la barra de energía.\n Esta indicará el tiempo restante que tienes para realizar acciones cada día y se recargará tras el inicio del día siguiente.\n\n El botón de terminar día te permite finalizar el día actual y avanzar al siguiente, este se ubica justo debajo de la barra de energía.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center'
-        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-
-        container.add([bg, img, text]);
-
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
             this.fadeOutContainer(container, () => this.explainMissions());
-        });
-        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
-            this.fadeOutContainer(container, () => this.explainTutorial());
         });
     }
     explainMissions(){
         const container = this.add.container(0, 0).setDepth(21);
         const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals2').setOrigin(0).setScale(1).setDepth(20);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Nuestros mejores ingenieron han sido sacados de proyectos púlicos para desarrollar para usted una herramienta que le ayude a recibir notificaciones directas de los ciudadanos. Aparecerán por el mapa, y podrás completarlas para ganar recompensas y popularidad.\nTen cuidado, ya que después de un rato, desaparecerán.\nCada misión es distinta, algunas incluso tienen posibilidades de no funcionar, pero así funciona el mundo.', {
+        const icon = this.add.image(this.width / 2 - 120, this.height / 2 - 225, 'missionIcon').setOrigin(0.5, 0.5).setDepth(22).setScale(1.5);
+        const img = this.add.image(this.width/2 - 200, 30, 'tutorialAnimals2').setOrigin(0).setScale(1).setDepth(20);
+        const text = this.add.text(this.width / 2 - 120, this.height / 2 - 70, 'He cancelado un puente público para que nuestros mejores ingenieros se centren en diseñar este mapa interactivo. Ahora, los ciudadanos podrán mandarle notificaciones directamente a usted.\n\nEstos iconos aparecerán por toda la ciudad. Si hace click y los completa le recompensarán con recursos y popularidad.\n\nTenga cuidado; si las ignora, desaparecerán.\nY ojo, que cada misión es distinta.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
         
-        container.add([bg, img, text]);
+        container.add([bg, icon, img, text]);
 
         this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
-            this.fadeOutContainer(container, () => this.explainDistricts());
-        });
-        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
             this.fadeOutContainer(container, () => this.explainEnergyAndEndDayButton());
         });
+        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+            this.fadeOutContainer(container, () => this.explainTutorial());
+        });
         
+        /* ME PARECE QUE ESTO ES DEMASIADO CONFUSO, LA VERDAD
         this.time.delayedCall(700, () => {
             container.setAlpha(0.3);
             const missionIcon = this.add.image(800, 420, 'missionIcon').setDepth(22);
@@ -174,14 +154,36 @@ export default class TutorialScene extends Phaser.Scene {
                 missionCorruptIcon.destroy();
             });
         });
+        */
+    }
+    explainEnergyAndEndDayButton() {
+        let canContinue = false;
+        this.time.delayedCall(10000, () => { canContinue = true; });
+        const container = this.add.container(0, 0).setDepth(21);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
+        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
+        const text = this.add.text(this.width / 2-120, this.height / 2 - 90, 'A su derecha está su energía: el tiempo que le queda para realizar las misiones del populacho. Se reduce con el paso de las horas, y se recarga al comienzo de un nuevo día. Cada misión requerirá un gasto de energía.\n\nJusto debajo, está el botón de \'Terminar Día\'. Evitemos las horas extra, ya que eso requeriría compromiso real. Cuando su energía llegue a cero, podrá pulsarlo y finalizar el día.\n\nPuede irse antes si quiere, pero un pato dormido no es un pato productivo. Usted verá si prefiere dormir o dirigir.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+
+        container.add([bg, img, text]);
+
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+            this.fadeOutContainer(container, () => this.explainDistricts());
+        });
+        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+            this.fadeOutContainer(container, () => this.explainMissions());
+        });
     }
     // ORDER 2
     explainDistricts() {
         const container = this.add.container(0, 0).setDepth(21);
-        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
-        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
-        const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals3').setOrigin(0).setScale(1).setDepth(20);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'La ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuedes hacer click en ellos para obtener información detallada y tomar decisiones informadas.', {
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
+        const img = this.add.image(this.width/2 - 200, 30, 'tutorialAnimals3').setOrigin(0).setScale(1).setDepth(20);
+        const text = this.add.text(this.width / 2 - 120, this.height / 2 - 90, 'Como sabrá, nuestra ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuede hacer click en ellos para obtener información detallada y tomar decisiones informadas.\n\nEntremos en uno ahora para que pueda explicarle el funcionamiento interno de estos.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
@@ -206,31 +208,18 @@ export default class TutorialScene extends Phaser.Scene {
                 }
             });
         });
-        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', { 
-            fontSize: '16px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true, order: 1 });
-                }
+        
+        container.add([bg, img, text]);
+
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+            this.fadeOutContainer(container, () => {
+                this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true, order: 1 });
             });
         });
-        container.add([bg, img, text, goBackBtn, continueBtn]);
-        this.time.delayedCall(7000, () => {
-            container.setAlpha(0.3);
-            this.time.delayedCall(3000, () => {
-                container.setAlpha(1);
-            });
+        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+            this.fadeOutContainer(container, () => this.explainEnergyAndEndDayButton());
         });
+
     }
     // ORDER 3
     startGameText() {
