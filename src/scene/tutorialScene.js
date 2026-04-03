@@ -147,7 +147,7 @@ export default class TutorialScene extends Phaser.Scene {
         const container = this.add.container(0, 0).setDepth(21);
         const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
         const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals2').setOrigin(0).setScale(1).setDepth(20);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Las misiones son objetivos que puedes completar para ganar recompensas y avanzar en el juego.\nPuedes acceder a ellas haciendo click en el botón correspondiente que saldra en el mapa.\nLos rojos son las misiones corruptas y los amarillos son las misiones legítimas.', {
+        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Nuestros mejores ingenieron han sido sacados de proyectos púlicos para desarrollar para usted una herramienta que le ayude a recibir notificaciones directas de los ciudadanos. Aparecerán por el mapa, y podrás completarlas para ganar recompensas y popularidad.\nTen cuidado, ya que después de un rato, desaparecerán.\nCada misión es distinta, algunas incluso tienen posibilidades de no funcionar, pero así funciona el mundo.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
