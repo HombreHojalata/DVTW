@@ -42,9 +42,17 @@ export default class GameScene extends Phaser.Scene {
         // SI VOTOS POR ENCIMA DEL 50 GANAS
         // SI VOTOS POR DEBAJO DEL 50 PIERDES
         // SI TE QUEDAS EN BANCARROTA AL COMENZAR EL DIA PIERES(COMIENZO PORQUE RECIBES INGRESOS)
-        if(this.day.getDayNumber() === 6){                                      // GAME END                       
+        if(this.day.getDayNumber() === 6){                                      // GAME END          
+            this.population = this.map.getTotalPopulation();
+            this.popularity = this.map.getPopularity();
+            this.win = null;
+            if(this.popularity >= this.population/2){
+                if(this.player.getMoney() < 0) this.win = false;             
+                else this.win = true;
+            } 
+            else this.win = false;
             this.scene.stop();
-            this.scene.start('finishScene');
+            this.scene.launch('finishScene', { win: this.win });
         }else{                                                                  // GAME START/CONTINUE   
             console.log("GAME: " + "DAY " + this.day.getDayNumber());
             // SPAWN DAY VISUAL
@@ -177,19 +185,39 @@ export default class GameScene extends Phaser.Scene {
     }
     //NO DEBE ESTAR AQUI
     finishDay() {
-        console.log("DÍA TERMINADO");
+        console.log("GAME: " + "DAY " + this.day.getDayNumber() + " FINISH");
+
         this.gameManager.deleteAllMissions(this);
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
+        // SINO CREAR UNA ESCENA Y YA
+        // crear container full negro, por ejemplo depth 10 
+        // todos los textos en blacno, por ejemplo depth 11 
+        // RESUMEN DEL DIA
 
-        this.cameras.main.fadeOut(1000, 0, 0, 0);
-        // UPDATE DATA
-        //this.moneyGenerated = this.map.updateDistricts();
-        //this.player.updateMoney(this.moneyGenerated);
-        this.cameras.main.once('camerafadeoutcomplete', () => {
-            this.gameManager.nextDay();
-            this.scene.restart();
-        });
+        this.summary = this.day.getDaySummary();
+        this.dayNumber = this.summary.dayNumber,
+        this.decisionsTaken = this.summary.decisionstaken,
+        this.resourcesGained = this.summary.resourcesGained
+        this.add.text(400,350,this.dayNumber,{
+            fontSize: '16px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 280 },
+            lineSpacing: 10
+        }).setOrigin(0.5);
+
+        this.add.text(400,400,this.decisionsTaken);
+        this.add.text(400,450,this.resourcesGained);
+
+        //this.time.delayedCall(8000, () => {
+            this.cameras.main.fadeOut(1000, 0, 0, 0);
+            this.cameras.main.once('camerafadeoutcomplete', () => {
+                this.gameManager.nextDay();
+                this.scene.restart();
+            });
+        //});
     }
 }
