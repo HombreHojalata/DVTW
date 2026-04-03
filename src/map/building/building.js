@@ -8,7 +8,7 @@ export default class Building {
         this.populationIncrease = populationIncrease;
     }
     getName(){return this.name;}
-    getBuildingInfo(){return `Este edificio "${this.name}" genera:\nBeneficio - ${this.income}, Satisfaccion - ${this.satisfaction}, Aumento de Poblacion - ${this.populationIncrease} `;}
+    getBuildingInfo(){return `"${this.name}" cuesta ${this.cost} y genera:\nBeneficio: ${this.income}, Satisfaccion: ${this.satisfaction}`;}//, Aumento de Poblacion - ${this.populationIncrease} `;}
     getBuildingCost(){return this.cost};
     getBuildingIncome(){return this.income;}
     getBuildingSatisfaction(){return this.satisfaction;}

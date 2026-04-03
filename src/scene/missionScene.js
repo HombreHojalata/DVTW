@@ -176,6 +176,7 @@ export default class MissionScene extends Phaser.Scene {
             textObjects.forEach(t => t.setScale(1.1));
             if(this.mission.isMinigame()) {
                 this.scene.launch(minigameScene);
+                this.scene.stop();
             }
             this.gameManager.removeMission(this, this.mission, option, this.district);
             this.scene.stop();

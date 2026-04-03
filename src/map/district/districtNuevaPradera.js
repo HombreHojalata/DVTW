@@ -13,5 +13,5 @@ export default class DistrictNuevaPradera extends District {
         return list;
     }
     // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingNuevaPradera',this.special_building,330000,150000,22,3000);}
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingNuevaPradera',this.special_building,330000,3,17,0);}
 };

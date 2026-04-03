@@ -103,7 +103,7 @@ export default class DistrictScene extends Phaser.Scene {
             const img = this.add.image(x, y, building.getBuildingPNG()).setOrigin(0).setInteractive({ useHandCursor: true }).setDepth(19); 
             img.on('pointerover', (pointer) => {
                 if(this.district.canBuildMore()){
-                    if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. Dinero - ${this.player.getMoney()}$ `);
+                    if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. \nTienes: ${this.player.getMoney()}$ \t El edificio cuesta: ${building.getBuildingCost()}$`);
                     else tooltip.setText(building.getBuildingInfo());
                 }else tooltip.setText('No tienes suficiente espacio para construir');
                 tooltip.setPosition(pointer.x + 10, pointer.y + 10);
@@ -138,7 +138,7 @@ export default class DistrictScene extends Phaser.Scene {
             if(this.district.isSpecialBuildingBuilt()) tooltip.setText('Edificio especial ya construido!!!');
             else{
                 if(this.district.canBuildMore()){
-                    if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. Dinero - ${this.player.getMoney()}$ `);
+                    if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. \nTienes: ${this.player.getMoney()}$ \t El edificio cuesta: ${building.getBuildingCost()}$`);
                     else tooltip.setText('-----EDIFICIO SPECIAL-----\n' + building.getBuildingInfo());
                 }else tooltip.setText('No tienes suficiente espacio para construir');
             }

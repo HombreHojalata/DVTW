@@ -13,5 +13,5 @@ export default class DistrictSahar extends District {
         return list;
     }
     // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingSahar',this.special_building,180000,90000,17,500);}
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingSahar',this.special_building,180000,3,11,0);}
 };
