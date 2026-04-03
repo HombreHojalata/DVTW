@@ -182,7 +182,7 @@ export default class DistrictScene extends Phaser.Scene {
     }
     //
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
-        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtBase').setDisplaySize(newWidth, newHeight);
+        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);
     }
     spawnNameText(offsetX, offsetY) {
         const leftCorner = offsetX*3 - 40;
@@ -271,13 +271,12 @@ export default class DistrictScene extends Phaser.Scene {
             const y = newHeight - newHeight / 2;
             const img = this.add.image(x, y + 35, building.getBuildingPNG()).setOrigin(0.5, 0.5).setScale(1.4).setInteractive();
 
-            img.on('pointerover', (pointer) => {
+            img.on('pointerover', () => {
                 tooltip.setText(building.getBuildingInfo());
-                tooltip.setPosition(pointer.x + 10, pointer.y + 10);
+                tooltip.setPosition(720, newHeight - newHeight/2 - 55);
                 tooltip.setVisible(true);
                 tooltip.setDepth(100);
             });
-            img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
             img.on('pointerout', () => {tooltip.setVisible(false);});
         }
 
@@ -286,15 +285,15 @@ export default class DistrictScene extends Phaser.Scene {
     // BUTTONS
     spawnStoreButton(newHeight, positionX) {
         const tooltip = this.add.text(0, 0, '', {
-            fontSize: '14px',
+            fontSize: '16px',
             backgroundColor: '#000',
             color: '#fff',
             padding: { x: 5, y: 5 }
         }).setVisible(false);
         this.storeButton = this.add.image(positionX, newHeight - newHeight/2 + 35,'storeIcon').setScale(1.3).setOrigin(0.5,0.5).setInteractive({ useHandCursor: true }); 
-        this.storeButton.on('pointerover', (pointer) => {
-            tooltip.setText('Dale al boton si quieres ir al mercado de EDIFICIOS');
-            tooltip.setPosition(pointer.x + 15, pointer.y + 35);
+        this.storeButton.on('pointerover', () => {
+            tooltip.setText(`Dale al boton si quieres ir al mercado de EDIFICIOS(${this.district.getSpaceBuildingBuilt()}/${this.district.getSpaceBuilding()})`);
+            tooltip.setPosition(740, newHeight - newHeight/2 - 45);
             tooltip.setVisible(true);
             tooltip.setDepth(50);
             this.storeButton.setScale(1.5);
@@ -306,8 +305,8 @@ export default class DistrictScene extends Phaser.Scene {
         this.storeButton.on('pointerup', () => {
             if(this.tutorial) this.containerStore.destroy();
             if(this.district.getSpaceBuildingBuilt() === this.district.getSpaceBuilding()) {
-                tooltip.setText('No puedes comprar mas EDIFICIOS, el distrito ya esta lleno');
-                tooltip.setPosition(pointer.x + 15, pointer.y + 35);
+                tooltip.setText(`Distrito lleno(${this.district.getSpaceBuildingBuilt()}/${this.district.getSpaceBuilding()})`);
+                tooltip.setPosition(740, newHeight - newHeight/2 - 45);
                 tooltip.setVisible(true);
                 tooltip.setDepth(100);
             }else{
@@ -358,23 +357,12 @@ export default class DistrictScene extends Phaser.Scene {
     }
     createButton(x, y, image, swapImage,callback) {
         const button = this.add.image(x, y, image).setScale(1);
-        const tooltip = this.add.text(0, 0, '', {
-            fontSize: '14px',
-            backgroundColor: '#000',
-            color: '#fff',
-            padding: { x: 5, y: 5 }
-        }).setVisible(false);
         button.setInteractive({ useHandCursor: true });
-        button.on('pointerover', (pointer) => {
-            tooltip.setText('Precio al pulsar: $ 5000');
-            tooltip.setPosition(pointer.x + 15, pointer.y + 35);
-            tooltip.setVisible(true);
-            tooltip.setDepth(100);
+        button.on('pointerover', () => {
             button.setScale(1.1);
             button.setTexture(swapImage);
         });
         button.on('pointerout', () => {
-            tooltip.setVisible(false);
             button.setScale(1); 
             button.setTexture(image);
         });
@@ -386,7 +374,6 @@ export default class DistrictScene extends Phaser.Scene {
         });
         return button;
     }
-
     spawnTaxesButton(newWidth, offsetX, newHeight, offsetY){
         this.botonAumentar = this.createButton(
             newWidth - offsetX*7 + 10, 
