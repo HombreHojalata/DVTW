@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
 import agendaSheet from '../assets/scenes/agendaSpritesheet.png'
+import urnaSheet from '../assets/scenes/urnaSpritesheet.png'
 import loadScene from '../assets/scenes/loadScene.png'                                                        //NEED TO BE REPLACE
 import configScene from '../assets/scenes/configScene.png'
 
@@ -32,9 +33,9 @@ import districtBorrascalSpecial from '../assets/map/district/districtBorrascalSp
 import districtElNido from '../assets/map/district/districtElNido.png'
 import districtElNidoSpecial from '../assets/map/district/districtElNidoSpecial.png'
 import districtGuinea from '../assets/map/district/districtGuinea.png'
-import districtGuineaSpecial from '../assets/map/district/districtGuineaSpecial.png' 
+import districtGuineaSpecial from '../assets/map/district/districtGuineaSpecial.png'
 import districtNuevaPradera from '../assets/map/district/districtNuevaPradera.png'
-import districtNuevaPraderaSpecial from '../assets/map/district/districtNuevaPraderaSpecial.png'  
+import districtNuevaPraderaSpecial from '../assets/map/district/districtNuevaPraderaSpecial.png'
 import districtSahar from '../assets/map/district/districtSahar.png'
 import districtSaharSpecial from '../assets/map/district/districtSaharSpecial.png'
 import districtSomosagua from '../assets/map/district/districtSomosagua.png'
@@ -42,11 +43,11 @@ import districtSomosaguaSpecial from '../assets/map/district/districtSomosaguaSp
 // BUILDING ASSETS
 import buildingCinema from '../assets/map/buildings/buildingCinema.png'
 import buildingComercialCenter from '../assets/map/buildings/buildingComercialCenter.png'
-import buildingFactory from '../assets/map/buildings/buildingFactory.png' 
+import buildingFactory from '../assets/map/buildings/buildingFactory.png'
 import buildingHospital from '../assets/map/buildings/buildingHospital.png'
-import buildingHotel from '../assets/map/buildings/buildingHotel.png' 
-import buildingHouse from '../assets/map/buildings/buildingHouse.png'     
-import buildingPark from '../assets/map/buildings/buildingPark.png'                                    
+import buildingHotel from '../assets/map/buildings/buildingHotel.png'
+import buildingHouse from '../assets/map/buildings/buildingHouse.png'
+import buildingPark from '../assets/map/buildings/buildingPark.png'
 import specialBuildingBorrascal from '../assets/map/buildings/specialBuildingBorrascal.png'                   //NEED TO BE REPLACE
 import specialBuildingElNido from '../assets/map/buildings/specialBuildingElNido.png'                         //NEED TO BE REPLACE
 import specialBuildingGuinea from '../assets/map/buildings/specialBuildingGuinea.png'                         //NEED TO BE REPLACE
@@ -112,13 +113,13 @@ import memoryImage7 from '../assets/minigames/memory/memoryImage7.png'
 import memoryImage8 from '../assets/minigames/memory/memoryImage8.png'
 
 // BLACK MARKET ASSETS
-import vendedor from '../assets/other/Vendedor.png' 
-import vendedorSilueta from '../assets/other/VendedorSilueta.png' 
+import vendedor from '../assets/other/Vendedor.png'
+import vendedorSilueta from '../assets/other/VendedorSilueta.png'
 import prensa_icon from '../assets/marketIcons/prensa.png'
 import hotel_icon from '../assets/marketIcons/hotel.png'
 
 // ICONS 
-import closeIcon from '../assets/icons/closeIcon.png'                 
+import closeIcon from '../assets/icons/closeIcon.png'
 import configurationIcon from '../assets/icons/configurationIcon.png'
 import storeIcon from '../assets/icons/storeIcon.png'
 import increaseIcon from '../assets/icons/increaseIcon.png'
@@ -172,11 +173,17 @@ export default class Boot extends Phaser.Scene {
     // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
     //this.load.setPath('assets/sprites/');
 
+    //LOADING SCENE ASSETS
+    this.load.spritesheet('urnaCarga', urnaSheet, {
+      frameWidth: 1536,
+      frameHeight: 922
+    });
+
     // PRINCIPAL SCENE ASSETS
     this.load.image('loadScene', loadScene);
-    this.load.spritesheet('animatedAgenda', agendaSheet, { 
-      frameWidth: 1536, 
-      frameHeight: 922 
+    this.load.spritesheet('animatedAgenda', agendaSheet, {
+      frameWidth: 1536,
+      frameHeight: 922
     });
     this.load.image('configScene', configScene);
     // TUTORIAL ASSETS
@@ -230,8 +237,8 @@ export default class Boot extends Phaser.Scene {
     this.load.image('specialBuildingMafia', specialBuildingMafia);
 
     // MISSION ASSETS
-    this.load.image('missionTemplate',missionTemplate);
-    this.load.image('missionCorruptTemplate',missionCorruptTemplate);
+    this.load.image('missionTemplate', missionTemplate);
+    this.load.image('missionCorruptTemplate', missionCorruptTemplate);
     // MISSION DISTRICT BORRASCAL SCENE ASSETS
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
     this.load.image('upMoneySceneBorrascal', upMoneySceneBorrascal);
@@ -273,7 +280,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('downMoneySceneSomosagua', downMoneySceneSomosagua);
     this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
-    this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);  
+    this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);
 
     //Memory minigame assets
     this.load.image('memoryImage1', memoryImage1);
@@ -329,43 +336,87 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
 
+    //ara saber cuando termina la carga real
+    this.cargasCompletadas = false;
+    this.load.on('complete', () => {
+      this.cargasCompletadas = true;
+    });
   }
 
   create() {
-    this.add.image(750, 375, 'loadScene');  
-    
+    this.add.image(750, 375, 'loadScene');
+
     //WE CAN ADD MUSIC AND LOADING BAR HERE
     this.audioManager = new AudioManager(this);
     this.registry.set('audioManager', this.audioManager)
     this.audioManager.playMusic('bgMusic');
-    // Crear la barra de carga
+
+    //animacion de la urna
+    this.anims.create({
+      key: 'animUrna',
+      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
+      frameRate: 2,
+      repeat: -1
+    });
+
+    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
+    urna.setDisplaySize(1500, 850);
+    urna.play('animUrna');
+
+    //BARRA DE CARGA
     const barWidth = 600;
-    const barHeight = 30;
+    const barHeight = 22;
     const barX = this.cameras.main.centerX - barWidth / 2;
-    const barY = this.cameras.main.centerY + 300;
+    const barY = 780;
 
-    // Fondo de la barra
+    //estilo
     const barBg = this.add.graphics();
-    barBg.fillStyle(0x000000, 0.5);
-    barBg.fillRect(barX, barY, barWidth, barHeight);
-
-    // Barra de progreso
+    barBg.lineStyle(3, 0x1b263b, 1);
+    barBg.fillStyle(0x0d1117, 0.8);
+    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
+    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
     const progressBar = this.add.graphics();
-    progressBar.fillStyle(0xffff00, 1);
+    const barGlow = this.add.graphics();
 
     this.tweens.add({
       targets: { width: 0 },
       width: barWidth,
-      duration: 1500, //1.5 SECONDS
-      ease: 'Linear',
+      duration: 4500,
+      ease: 'Cubic.easeOut', //mas lento al final
       onUpdate: (tween) => {
+        const currentWidth = tween.getValue();
+
         progressBar.clear();
-        progressBar.fillStyle(0xffff00, 1);
-        progressBar.fillRect(barX, barY, tween.getValue(), barHeight);
-      },
-      onComplete: () => {
-        this.scene.start('introScene');
+        barGlow.clear();
+
+        if (currentWidth > 0) {
+
+            progressBar.fillStyle(0x3e5c9a, 1); 
+            progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
+
+            progressBar.fillStyle(0x5c7cba, 1);
+            progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
+
+            barGlow.fillStyle(0xffffff, 0.15);
+            barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
+        }
       }
     });
+
+    this.tiempoMinimoPasado = false;
+
+    this.time.delayedCall(4500, () => {
+      this.tiempoMinimoPasado = true;
+      this.intentarPasarAIntro();
+    });
+  }
+
+  intentarPasarAIntro() {
+    if (this.cargasCompletadas && this.tiempoMinimoPasado) {
+      this.scene.start('introScene');
+    } else {
+      // Se i file non sono pronti, ricontrolla tra 100ms
+      this.time.delayedCall(100, () => this.intentarPasarAIntro());
+    }
   }
 }
