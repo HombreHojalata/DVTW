@@ -133,7 +133,7 @@ export default class District {
         // clonar array para no mutar el original base directamente
         this.moneyGeneratedByBuildings = [...this.baseMoneyGeneratedByBuildings];
 
-        this.moneyGenerated = this.moneyGenerated * this.population * (this.taxes/ 100);
+        this.moneyGenerated = this.moneyGenerated * this.population * (this.taxes/ 100) * this.workSchedule / 8;
         
         this.moneyGenerated -= this.security * 500;
         
