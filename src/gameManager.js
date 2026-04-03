@@ -35,7 +35,7 @@ export default class gameManager{
         // UPDATE POPULARITY
         let newPopularity = this.map.getPopularity();
         let oldPopularity = this.player.getPopularity();
-        this.player.updatePopularity(newPopularity - oldPopularity);
+        this.player.updatePopularity(newPopularity);
         this.day.updateResources(0, 0, 0, newPopularity - oldPopularity);
         //Refresh UI
         this.scene.refreshHUD();
@@ -75,5 +75,6 @@ export default class gameManager{
     nextDay() {
         this.day = new Day(this.day);
         this.player.setEnergy(this.player.getMaxEnergy());
+        this.player.updateMoney(this.map.getMoneyGenerated());
     }
 }

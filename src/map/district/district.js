@@ -37,9 +37,9 @@ export default class District {
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
     }
-    // UPDATE DATA
+    // UPDATE DATA, DIRECTAMENTE SE LLAMA A GETMONEYGENERATED DESDE GM
     updateDistrict() {
-        this.updatePopulation(this.populationIncrease);
+        //this.updatePopulation(this.populationIncrease);
         return this.getMoneyGenerated();
     }
     // ASSETS
@@ -66,7 +66,6 @@ export default class District {
         button.on('pointerover', () => {outline.setVisible(true);});
         button.on('pointerout', () => {outline.setVisible(false);});
         button.on('pointerup', () => {
-            scene.updateDistrictFooter(this);
             scene.scene.pause('gameScene');
             scene.scene.launch('districtScene', { district: this});
         });
@@ -86,6 +85,7 @@ export default class District {
     //POPULATION
     getPopulation() {return this.population;}
     updatePopulation(value) {this.population = Math.max(0, this.population + value);}
+    // PARA DESPUES DEL HITO
     updatePopulationIncrease(value){this.populationIncrease = Math.max(0, this.populationIncrease + value);}
     getPopulationIncrease() {return this.populationIncrease;}
 

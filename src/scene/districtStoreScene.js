@@ -23,6 +23,7 @@ export default class DistrictScene extends Phaser.Scene {
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
         this.footerUI = new footerUI(this, this.player).create();
+        this.footerUI.updateDistrictFooter(this.district);
         //BUTTONS
         this.iconList = this.spawnIconList(newWidth,offsetX,newHeight);
         //TUTORIAL
@@ -126,6 +127,7 @@ export default class DistrictScene extends Phaser.Scene {
                     } 
                 }
                 tooltip.setVisible(false);
+                this.scene.stop();
                 this.scene.get('districtScene').scene.restart();
             });
         }
@@ -158,6 +160,7 @@ export default class DistrictScene extends Phaser.Scene {
                 } 
             }
             tooltip.setVisible(false);
+            this.scene.stop();
             this.scene.get('districtScene').scene.restart();
         });
         //CLOSE STORE BUTTON

@@ -11,10 +11,7 @@ export default class Player {
 
     spawnPresident(scene) {return scene.add.image(120, 150, this.PNGpresident).setDisplaySize(200, 350).setDepth(5);}
     getMoney(){ return this.money; }
-    updateMoney(amount){ 
-        if(this.money + amount < 0) this.money = 0;
-        else this.money += amount;
-    }
+    updateMoney(amount){this.money += amount;}
     getMaxEnergy() { return this.maxEnergy; }
     updateMaxEnergy(amount) { this.maxEnergy += amount; }
     getEnergy(){ return this.energy; }
@@ -23,5 +20,5 @@ export default class Player {
     getCorruption(){ return this.corruption; }
     updateCorruption(amount){ this.corruption += amount; }
     getPopularity(){ return this.popularity; }
-    updatePopularity(amount){ this.popularity += amount; }
+    updatePopularity(amount){ this.popularity = amount; }
 }

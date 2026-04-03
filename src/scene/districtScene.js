@@ -29,6 +29,8 @@ export default class DistrictScene extends Phaser.Scene {
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
         this.footerUI = new footerUI(this, this.player).create();
+        this.footerUI.updateDistrictFooter(this.district);
+
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth, newHeight, offsetX, offsetY);
         //DISTRICT INFO
@@ -53,6 +55,7 @@ export default class DistrictScene extends Phaser.Scene {
         }
     }
     // TUTORIAL
+    // FALTARIA EXPLICAR QUE EL BENEFICIO DE UN EDIFICIO ES SU VALOR N X HORAS LABORALES X NUM POBLACION
     // ORDER 1
     explainTutorial(width, height) {
         const container = this.add.container(340, 300).setDepth(21);   

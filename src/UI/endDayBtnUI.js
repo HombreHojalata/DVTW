@@ -8,7 +8,7 @@ export default class endDayBtnUI {
         this.scaleValue = 0.8;
         this.create();
     }
-
+    //COULD BE POSSIBLE IF POPULARITY LESS THAN 20% = LOSE GAME
     create() {
         const batteryWidth = 222;
         const batteryHeight = 466;
