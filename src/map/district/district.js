@@ -66,7 +66,6 @@ export default class District {
         button.on('pointerover', () => {outline.setVisible(true);});
         button.on('pointerout', () => {outline.setVisible(false);});
         button.on('pointerup', () => {
-            scene.updateDistrictFooter(this);
             scene.scene.pause('gameScene');
             scene.scene.launch('districtScene', { district: this});
         });

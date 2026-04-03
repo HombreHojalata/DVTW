@@ -29,6 +29,8 @@ export default class DistrictScene extends Phaser.Scene {
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
         this.footerUI = new footerUI(this, this.player).create();
+        this.footerUI.updateDistrictFooter(this.district);
+
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth, newHeight, offsetX, offsetY);
         //DISTRICT INFO

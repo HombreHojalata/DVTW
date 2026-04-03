@@ -92,14 +92,24 @@ export default class Map {
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
     // UPDATE DATA
     updateDistricts() {this.districtList.forEach(d => d.updateDistrict());}
+    getTotalPopulation(){
+        let totalPopulation = 0;
+        totalPopulation += this.getDistrictByName("BORRASCAL").getPopulation();
+        totalPopulation += this.getDistrictByName("EL_NIDO").getPopulation();
+        totalPopulation += this.getDistrictByName("GUINEA").getPopulation();
+        totalPopulation += this.getDistrictByName("NUEVA_PRADERA").getPopulation();
+        totalPopulation += this.getDistrictByName("SAHAR").getPopulation();
+        totalPopulation += this.getDistrictByName("SOMOSAGUA").getPopulation();
+        return totalPopulation;
+    }
     getPopularity(){
         let totalPopularity = 0;
-        totalPopularity +=this.getDistrictByName("BORRASCAL").getSatisfaction();
-        totalPopularity +=this.getDistrictByName("EL_NIDO").getSatisfaction();
-        totalPopularity +=this.getDistrictByName("GUINEA").getSatisfaction();
-        totalPopularity +=this.getDistrictByName("NUEVA_PRADERA").getSatisfaction();
-        totalPopularity +=this.getDistrictByName("SAHAR").getSatisfaction();
-        totalPopularity +=this.getDistrictByName("SOMOSAGUA").getSatisfaction();
+        totalPopularity += this.getDistrictByName("BORRASCAL").getPopulation() * this.getDistrictByName("BORRASCAL").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("EL_NIDO").getPopulation() * this.getDistrictByName("EL_NIDO").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("GUINEA").getPopulation() * this.getDistrictByName("GUINEA").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("NUEVA_PRADERA").getPopulation() * this.getDistrictByName("NUEVA_PRADERA").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("SAHAR").getPopulation() * this.getDistrictByName("SAHAR").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("SOMOSAGUA").getPopulation() * this.getDistrictByName("SOMOSAGUA").getSatisfaction() / 100;
         return totalPopularity;
     }
 }

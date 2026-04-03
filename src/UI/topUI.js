@@ -3,115 +3,81 @@ import Phaser from 'phaser';
 export default class topUI {
     constructor(scene) {
         this.scene = scene;
-        this.player = this.scene.registry.get('gameManager').getPlayer();
+        this.gameManager = this.scene.registry.get("gameManager");
+        this.player = this.gameManager.getPlayer();
+        this.map = this.gameManager.getMap();
         this.create();
     }
 
     create() {
-        const panelX = 500;
-        const panelY = 12;
-        const panelWidth = 620;
-        const panelHeight = 84;
+        this.populationTotal = this.map.getTotalPopulation();
+        this.popularity = this.map.getPopularity();
+        this.neutralOppositors = this.populationTotal - this.popularity;
 
-        this.panelX = panelX;
-        this.panelY = panelY;
-        this.panelWidth = panelWidth;
-        this.panelHeight = panelHeight;
-
-        this.topStatsBg = this.scene.add.rectangle(panelX, panelY, panelWidth, panelHeight, 0x2b2b2f, 0.96).setOrigin(0);
-        this.topStatsBorder = this.scene.add.rectangle(panelX, panelY, panelWidth, panelHeight).setOrigin(0).setStrokeStyle(3, 0xd2a94e);
-
-        this.topStatsTitle = this.scene.add.text(panelX + 22, panelY + 8, 'PRESIDENTIAL STATUS', {
-            fontSize: '17px',
-            color: '#f3e6c4',
+        // Texto
+        this.scene.add.text(500, 30,`TOTAL "${this.populationTotal}", AFAVOR "${this.popularity}", NEUTRAL-CONTRA "${this.neutralOppositors}"`,{
+            fontSize: '20px',
+            fontFamily: 'Courier New',
             fontStyle: 'bold',
-            fontFamily: 'Georgia'
+            color: '#000000'
         });
 
-        const barX = panelX + 175;
-        const barY = panelY + 34;
-        const barWidth = 390;
-        const barHeight = 14;
+        // Calcular porcentajes
+        this.popularityPercent = (this.popularity / this.populationTotal) * 100;
+        this.neutralPercent = (this.neutralOppositors / this.populationTotal) * 100;
 
-        this.barX = barX;
-        this.barY = barY;
-        this.barWidth = barWidth;
-        this.barHeight = barHeight;
+        // Configuración de barra
+        const barWidth = 400;
+        const barHeight = 30;
+        const x = 500;
+        const y = 80;
 
-        const popularity = Phaser.Math.Clamp(this.player.getPopularity(), 0, 100);
-        const oppositors = Math.min(15, Math.floor(this.player.getCorruption() * 0.4));
-        const neutrals = Math.max(0, 100 - popularity - oppositors);
+        this.graphics = this.scene.add.graphics();
 
-        const alliesWidth = barWidth * (popularity / 100);
-        const neutralWidth = barWidth * (neutrals / 100);
-        const oppositorsWidth = barWidth * (oppositors / 100);
+        // Fondo (gris)
+        this.graphics.fillStyle(0xcccccc, 1);
+        this.graphics.fillRect(x, y, barWidth, barHeight);
 
-        this.popularityLabel = this.scene.add.text(panelX + 22, barY - 1, 'PUBLIC OPINION', {
-            fontSize: '14px',
-            color: '#f5f1e7',
-            fontStyle: 'bold',
-            fontFamily: 'Georgia'
-        });
+        // Parte popularidad (verde)
+        this.graphics.fillStyle(0x00ff00, 1);
+        this.graphics.fillRect(
+            x,
+            y,
+            barWidth * (this.popularityPercent / 100),
+            barHeight
+        );
 
-        this.opinionBarBg = this.scene.add.rectangle(barX, barY, barWidth, barHeight, 0x202020).setOrigin(0);
+        // Parte neutral/opositores (rojo)
+        this.graphics.fillStyle(0xff0000, 1);
+        this.graphics.fillRect(
+            x + barWidth * (this.popularityPercent / 100),
+            y,
+            barWidth * (this.neutralPercent / 100),
+            barHeight
+        );
 
-        this.opinionAllies = this.scene.add.rectangle(barX, barY, alliesWidth, barHeight, 0x57c26d).setOrigin(0);
-        this.opinionNeutral = this.scene.add.rectangle(barX + alliesWidth, barY, neutralWidth, barHeight, 0x5f5f5f).setOrigin(0);
-        this.opinionOppositors = this.scene.add.rectangle(barX + alliesWidth + neutralWidth, barY, oppositorsWidth, barHeight, 0xa63a3a).setOrigin(0);
-
-        this.opinionFrame = this.scene.add.rectangle(barX, barY, barWidth, barHeight).setOrigin(0).setStrokeStyle(2, 0xf0dfb6);
-
-        this.opinionPercentText = this.scene.add.text(barX + barWidth / 2, barY + barHeight / 2, Math.floor(popularity) + '%', {
-            fontSize: '12px',
-            color: '#f6f2e8',
-            fontStyle: 'bold',
-            fontFamily: 'Georgia'
-        }).setOrigin(0.5);
-
-        this.opinionLegend = this.scene.add.text(barX, barY + 22, 'Allies', {
-            fontSize: '11px',
-            color: '#57c26d',
-            fontStyle: 'bold',
-            fontFamily: 'Georgia'
-        });
-
-        this.neutralLegend = this.scene.add.text(barX + 62, barY + 22, 'Neutral', {
-            fontSize: '11px',
-            color: '#d1d1d1',
-            fontStyle: 'bold',
-            fontFamily: 'Georgia'
-        });
-
-        this.oppositorLegend = this.scene.add.text(barX + 132, barY + 22, 'Oppositors', {
-            fontSize: '11px',
-            color: '#d85a5a',
-            fontStyle: 'bold',
-            fontFamily: 'Georgia'
-        });
+        // Texto de porcentaje
+        this.scene.add.text(x, y + 40,
+            `A favor: ${this.popularityPercent.toFixed(2)}% | Neutral/Contra: ${this.neutralPercent.toFixed(2)}%`,
+            { fontSize: '16px', color: '#000' }
+        );
     }
 
     refresh() {
         const opinionBarWidth = this.barWidth;
 
         const popularity = Phaser.Math.Clamp(this.player.getPopularity(), 0, 100);
-        const oppositors = Math.min(15, Math.floor(this.player.getCorruption() * 0.4));
-        const neutrals = Math.max(0, 100 - popularity - oppositors);
+        const oppositors = Phaser.Math.Clamp(this.map.getTotalPopulation()-this.map.getPopularity(), 0, 100);
 
         const alliesWidth = opinionBarWidth * (popularity / 100);
-        const neutralWidth = opinionBarWidth * (neutrals / 100);
         const oppositorsWidth = opinionBarWidth * (oppositors / 100);
 
         if (this.opinionAllies) {
             this.opinionAllies.width = alliesWidth;
         }
 
-        if (this.opinionNeutral) {
-            this.opinionNeutral.x = this.barX + alliesWidth;
-            this.opinionNeutral.width = neutralWidth;
-        }
-
         if (this.opinionOppositors) {
-            this.opinionOppositors.x = this.barX + alliesWidth + neutralWidth;
+            this.opinionOppositors.x = this.barX + alliesWidth;
             this.opinionOppositors.width = oppositorsWidth;
         }
 

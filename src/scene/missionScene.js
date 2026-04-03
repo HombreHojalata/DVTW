@@ -82,7 +82,7 @@ export default class MissionScene extends Phaser.Scene {
             fontStyle: 'italic',
             color: '#000000',
         }).setDepth(1000);
-        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6, newHeight - offsetY*10, 'Satisfaccion: ' + this.district.getSatisfaction(),{
+        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6, newHeight - offsetY*10, 'Satisfaccion: ' + this.district.getSatisfaction() + '%',{
             fontSize: '14px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
@@ -138,7 +138,7 @@ export default class MissionScene extends Phaser.Scene {
         if(option.corruption != 0)
             lines.push({ text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) });
         if(option.popularity != 0)
-            lines.push({ text: `Satisfacción: ${option.popularity}`, color: getColor(option.popularity) });
+            lines.push({ text: `Satisfacción: ${option.popularity}%`, color: getColor(option.popularity) });
         
         const bg = this.add.graphics();
         bg.fillStyle(0x007BFF, 1);

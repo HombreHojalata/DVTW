@@ -17,13 +17,21 @@ export default class GameScene extends Phaser.Scene {
             const GM = new gameManager(this);
             this.registry.set('gameManager', GM)
         }
+        // GAMEMANAGER
         this.gameManager = this.registry.get('gameManager');
-        this.player = this.gameManager.getPlayer();
-        this.day = this.gameManager.getDay();
+        // MAP
         this.map = this.gameManager.getMap();
+        // PLAYER
+        this.player = this.gameManager.getPlayer();
+        this.player.updatePopularity(this.map.getPopularity());
+        // DAY
+        this.day = this.gameManager.getDay();
+        // FLAG SHOW DAY INTRO
         if (!this.registry.has('flagShow')) this.registry.set('flagShow', true);
+        // MISSION
         if (!this.registry.has('missionList')) this.registry.set('missionList',[]);
         this.missionList = this.registry.get('missionList');
+        // TUTORIAL
         this.isTutorial = data.tutorial || false;
     }
 
@@ -73,7 +81,6 @@ export default class GameScene extends Phaser.Scene {
             this.startEnergyDrain();
             //MISSION TEST
             this.scheduleNextMission();
-            //this.missionList.push(this.gameManager.getMission(this));
         }
     }
 
@@ -125,29 +132,11 @@ export default class GameScene extends Phaser.Scene {
     }
 
     refreshHUD() {
-        if (this.topUI) {
-            this.topUI.refresh();
-        }
-
-        if (this.batteryUI) {
-            this.batteryUI.refresh();
-        }
-
-        if (this.endDayBtnUI) {
-            this.endDayBtnUI.refresh();
-        }
-
-        if (this.footerUI) {
-            this.footerUI.refreshMoney();
-        }
+        //this.topUI.refresh();
+        this.batteryUI.refresh();
+        this.endDayBtnUI.refresh();
+        this.footerUI.refreshMoney();
     }
-
-    updateDistrictFooter(district) {
-        if (this.footerUI) {
-            this.footerUI.updateDistrictFooter(district);
-        }
-    }
-
     showDayIntro() {
         const { width, height } = this.sys.game.config;
         const currentDay = this.day.getDayNumber();

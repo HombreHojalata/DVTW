@@ -23,5 +23,5 @@ export default class Player {
     getCorruption(){ return this.corruption; }
     updateCorruption(amount){ this.corruption += amount; }
     getPopularity(){ return this.popularity; }
-    updatePopularity(amount){ this.popularity += amount; }
+    updatePopularity(amount){ this.popularity = amount; }
 }
