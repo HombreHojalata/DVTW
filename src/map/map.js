@@ -20,28 +20,28 @@ export default class Map {
         //PNGwithOutSpecial, PNGwithSpecial, posX, posY)
         const BORRASCAL = new DistrictBorrascal(
             "BORRASCAL", "Aquí es donde los presupuestos públicos se congelan. Sin embargo, a pesar de ello el distrito de Borrascal es famoso por sus laboratorios e investigaciones. Una pena que sean demasiado caras.", 
-            7000, 1000, 34, 1,
+            7000, 1000, 20, 1,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOTEL"], 5,
             false, "CENTER_INVESTI",
             'districtBorrascal', 'districtBorrascalSpecial', -15, -13
         );
         const EL_NIDO = new DistrictElNido(
             "EL_NIDO", "Donde el aire es puro y los impuestos son bajos. El Nido es el lujoso hogar de la aristocracia emplumada, y están muy acostumbrados a gastar su dinero en comercios de alto standing.", 
-            10000, 2000, 55, 2,
+            10000, 2000, 31, 2,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["HOSPITAL"], 3,
             false, "COPITOLIO",
             'districtElNido', 'districtElNidoSpecial', -17, -18
         );
         const GUINEA = new DistrictGuinea(
             "GUINEA", "Un paraíso artificial constuido para que turítas de todo el mundo vengan a finjir amor por la naturaleza. Los festivales de Guinea son conocidos por su importancia cultural, y su gran beneficio.", 
-            6500, 1500, 30, 1.5,
+            6500, 1500, 17, 1.5,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["COMERCIAL"], 4,
             false, "TEATRE", 
             'districtGuinea', 'districtGuineaSpecial', -10, -15
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
             "NUEVA_PRADERA", "El hogar ideal para la clase media, llena de vallas blancas y gente obediente de las normal. Nueva Pradera es un distrito fácil de ignorar, pero hay que tener cuidado con decepcionar a sus muchos vecinos.", 
-            14000, 3000, 14, 1,
+            14000, 3000, 8, 1,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["CINEMA"], 5,
             false, "ENPAWIRE",
             'districtNuevaPradera', 'districtNuevaPraderaSpecial', -17, -19
@@ -55,7 +55,7 @@ export default class Map {
         );
         const SOMOSAGUA = new DistrictSomosagua(
             "SOMOSAGUA", "La zona industrial de la ciudad: si el agua huele a azufre, es que el progreso va bien. Los vecinos de Somosagua están acostumbrados a la contaminación, por lo que no se quejarán mucho si ampliamos el número de fábricas.", 
-            4000, 1000, 45, 2,
+            4000, 1000, 24, 2,
             ["CINEMA","COMERCIAL","FACTORY","HOSPITAL","HOTEL","HOUSE","PARK"], ["FACTORY"], 4,
             false, "INDUSTRY",
             'districtSomosagua', 'districtSomosaguaSpecial', -17, -17
@@ -111,5 +111,15 @@ export default class Map {
         totalPopularity += this.getDistrictByName("SAHAR").getPopulation() * this.getDistrictByName("SAHAR").getSatisfaction() / 100;
         totalPopularity += this.getDistrictByName("SOMOSAGUA").getPopulation() * this.getDistrictByName("SOMOSAGUA").getSatisfaction() / 100;
         return totalPopularity;
+    }
+    getMoneyGenerated(){
+        let totalMoneyGenerated = 0;
+        totalMoneyGenerated += this.getDistrictByName("BORRASCAL").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("EL_NIDO").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("GUINEA").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("NUEVA_PRADERA").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("SAHAR").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("SOMOSAGUA").getMoneyGenerated();
+        return totalMoneyGenerated;
     }
 }

@@ -38,6 +38,10 @@ export default class GameScene extends Phaser.Scene {
     create() {
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
+        //FINAL DE JUEGO :
+        // SI VOTOS POR ENCIMA DEL 50 GANAS
+        // SI VOTOS POR DEBAJO DEL 50 PIERDES
+        // SI TE QUEDAS EN BANCARROTA AL COMENZAR EL DIA PIERES(COMIENZO PORQUE RECIBES INGRESOS)
         if(this.day.getDayNumber() === 6){                                      // GAME END                       
             this.scene.stop();
             this.scene.start('finishScene');

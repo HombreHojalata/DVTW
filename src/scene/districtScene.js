@@ -55,6 +55,7 @@ export default class DistrictScene extends Phaser.Scene {
         }
     }
     // TUTORIAL
+    // FALTARIA EXPLICAR QUE EL BENEFICIO DE UN EDIFICIO ES SU VALOR N X HORAS LABORALES X NUM POBLACION
     // ORDER 1
     explainTutorial(width, height) {
         const container = this.add.container(340, 300).setDepth(21);   
