@@ -6,6 +6,8 @@ export default class IntroScene extends Phaser.Scene {
     }
 
     create() {
+        //comprobar si la agenda ya estaba abierta
+        const agendaAbierta = this.registry.get('agendaAbierta') || false;
 
         //crear animacion
         this.anims.create({
@@ -15,43 +17,56 @@ export default class IntroScene extends Phaser.Scene {
             repeat: 0 //no se repite
         });
 
-        //sprite incial
-        this.sfondo = this.add.sprite(0, 0, 'animatedAgenda', 0).setOrigin(0);
+        if (agendaAbierta) {
+            //mostrar agenda abierta directamente si ya se pulso antes
+            this.sfondo = this.add.sprite(0, 0, 'animatedAgenda', 3).setOrigin(0);
+            this.mostraMenu();
+        } else {
+            //sprite incial
+            this.sfondo = this.add.sprite(0, 0, 'animatedAgenda', 0).setOrigin(0);
 
-        //esperamos el click del usuario
-        this.sfondo.setInteractive({ useHandCursor: true });
+            //esperamos il click del usuario
+            this.sfondo.setInteractive({ useHandCursor: true });
 
-        //texto para el usuario
-        this.clickText = this.add.text(750, 425, 'Haz clic para empezar', {
-            fontSize: '36px',
-            fontStyle: 'bold',
-            color: '#ffffff',
-            fontFamily: 'Georgia',
-            stroke: '#000000',
-            strokeThickness: 5
-        }).setOrigin(0.5);
+            //texto para el usuario
+            this.clickText = this.add.text(750, 425, 'Haz clic para empezar', {
+                fontSize: '36px',
+                fontStyle: 'bold',
+                color: '#ffffff',
+                fontFamily: 'Georgia',
+                stroke: '#000000',
+                strokeThickness: 5
+            }).setOrigin(0.5);
 
-        this.pulseTween = this.tweens.add({
-            targets: this.clickText,
-            alpha: { from: 0.1, to: 0.6 },
-            duration: 1200,
-            ease: 'Linear',
-            yoyo: true,
-            repeat: -1
-        });
+            this.pulseTween = this.tweens.add({
+                targets: this.clickText,
+                alpha: { from: 0.1, to: 0.6 },
+                duration: 1200,
+                ease: 'Linear',
+                yoyo: true,
+                repeat: -1
+            });
 
-        //esperamos a que el usuario haga clic en cualquier parte de la escena
-        this.sfondo.setInteractive({ useHandCursor: true });
+            //esperamos a que el usuario haga clic en cualquier parte de la escena
+            this.sfondo.setInteractive({ useHandCursor: true });
 
-        this.sfondo.on('pointerdown', () => {
-            this.pulseTween.stop();
-            this.clickText.destroy();
+            this.sfondo.on('pointerdown', () => {
+                //activar audio si el navegador lo bloquea
+                if (this.sound.context.state === 'suspended') {
+                    this.sound.context.resume();
+                }
+                
+                //guardar estado de la agenda
+                this.registry.set('agendaAbierta', true);
 
-            //iniciamos la animacion
-            this.sfondo.play('openAgenda');
-            this.sfondo.disableInteractive();
-        });
+                this.pulseTween.stop();
+                this.clickText.destroy();
 
+                //iniciamos la animacion
+                this.sfondo.play('openAgenda');
+                this.sfondo.disableInteractive();
+            });
+        }
 
         //botones
         this.sfondo.on('animationcomplete', (animation) => {
