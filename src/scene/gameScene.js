@@ -79,6 +79,7 @@ export default class GameScene extends Phaser.Scene {
             this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
 
             this.events.on('resume', () => {
+                // NO DEBERIA HACER FALTA
                 this.refreshHUD();
             });
 
