@@ -8,6 +8,7 @@ import configScene from '../assets/scenes/configScene.png'
 import tutorialAnimals1 from '../assets/other/tutorialAnimals1.png'
 import tutorialAnimals2 from '../assets/other/tutorialAnimals2.png'
 import tutorialAnimals3 from '../assets/other/tutorialAnimals3.png'
+import tutorialInfo from '../assets/other/tutorialInfo.png'
 import textCloud from '../assets/other/textCloud.png'
 
 // PROTOTYPE ASSETS, TO BE REPLACED
@@ -182,6 +183,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('tutorialAnimals1', tutorialAnimals1);
     this.load.image('tutorialAnimals2', tutorialAnimals2);
     this.load.image('tutorialAnimals3', tutorialAnimals3);
+    this.load.image('tutorialInfo', tutorialInfo);
     this.load.image('textCloud', textCloud);
     // PRESIDENT ASSET
     this.load.image('presidente', presidente);

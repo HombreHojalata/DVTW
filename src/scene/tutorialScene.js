@@ -49,12 +49,57 @@ export default class TutorialScene extends Phaser.Scene {
         else if(this.sceneOrder === 3) this.startGameText();
         else if(this.sceneOrder === 4) this.explainBlackMarket();
     }
+
+    createTutorialButton(container, x, y, text, callback) {
+        const width = 240;
+        const height = 50;
+
+        const shadow = this.add.rectangle(x + 4, y + 5, width, height, 0x000000, 0.18).setOrigin(0.5);
+        const bg = this.add.rectangle(x, y, width, height, 0xf7f2ea, 0.9).setOrigin(0.5).setStrokeStyle(3, 0x263b63).setInteractive({ useHandCursor: true });
+        const label = this.add.text(x, y, text, {
+            fontSize: '22px',
+            fontFamily: 'Georgia',
+            color: '#26304a',
+            fontStyle: 'bold'
+        }).setOrigin(0.5);
+
+        bg.on('pointerover', () => {
+            bg.setFillStyle(0xfff7df, 1);
+            bg.setStrokeStyle(3, 0xb68a2f);
+            label.setColor('#1b2340');
+            bg.setScale(1.05);
+            label.setScale(1.05);
+            shadow.setAlpha(0.28);
+        });
+
+        bg.on('pointerout', () => {
+            bg.setFillStyle(0xf7f2ea, 0.9);
+            bg.setStrokeStyle(3, 0x263b63);
+            label.setColor('#26304a');
+            bg.setScale(1);
+            label.setScale(1);
+            shadow.setAlpha(0.18);
+        });
+
+        bg.on('pointerdown', () => {
+            bg.setScale(0.95);
+            label.setScale(0.95);
+        });
+
+        bg.on('pointerup', () => {
+            bg.setScale(1.05);
+            label.setScale(1.05);
+            callback();
+        });
+
+        container.add([shadow, bg, label]);
+    }
     // ORDER 1
     explainTutorial() {
-        const introContainer = this.add.container(0, 0).setDepth(21);
-        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
-        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const container = this.add.container(0, 0).setDepth(21);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
         const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
+
         const introText1 = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Bienvenido a Quackington DC!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
@@ -62,39 +107,25 @@ export default class TutorialScene extends Phaser.Scene {
             fontStyle: 'bold',
             align: 'center'
         }).setOrigin(0.5);
-        const introText2 = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Tú eres Donald, el alcalde de esta ciudad.\nTu objetivo es mantener el poder durante los próximos 5 días mediante decisiones políticas, económicas y a veces controvertidas.\n\nGestiona recursos, responde a eventos y toma elecciones\nque afectan tu popularidad, dinero y corrupción.\n\n¡Buena suerte!',
+        const introText2 = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Buenos días, señor presidente.\nSoy su secretaria, la que se únca que trabaja de verdad por aquí.\n\nSeré clara: su mandato es un chiste y las elecciones son solo en 5 días.\nSi no consigue suficiente apoyo político, su próxima oficina será una celda con vistas al estanque.\n\nComo veo que lo necesita ayuda, le explicaré como llevar la ciudad.',
         {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar ->', { 
-            fontSize: '24px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(21);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: introContainer,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    introContainer.destroy();
-                    this.explainEnergyAndEndDayButton();
-                }
-            });
+
+        container.add([bg, img, introText1, introText2]);
+
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+            this.fadeOutContainer(container, () => this.explainEnergyAndEndDayButton());
         });
-        introContainer.add([bg, img, introText1, introText2, continueBtn]);
     }  
     explainEnergyAndEndDayButton() {
         let canContinue = false;
         this.time.delayedCall(10000, () => { canContinue = true; });
         const container = this.add.container(0, 0).setDepth(21);
-        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
-        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
         const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals1').setOrigin(0).setScale(1).setDepth(20);
         const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'La barra que hay a la derecha es la barra de energía.\n Esta indicará el tiempo restante que tienes para realizar acciones cada día y se recargará tras el inicio del día siguiente.\n\n El botón de terminar día te permite finalizar el día actual y avanzar al siguiente, este se ubica justo debajo de la barra de energía.', {
             fontSize: '24px',
@@ -102,80 +133,19 @@ export default class TutorialScene extends Phaser.Scene {
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', {
-            fontSize: '20px',
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainIntroBlackMarket();
-                }
-            });
-        });
-        container.add([bg, img, text, continueBtn]);
-    }
-    explainIntroBlackMarket(){
-        const container = this.add.container(0, 0).setDepth(21);
-        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
-        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
-        const img = this.add.image(this.width - 500, 30, 'vendedorSilueta').setOrigin(0).setScale(1).setDepth(20);
-        const blackMarketText = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Un placer hablar con usted señor presidente. Soy Xxxxxxxx Xxxxx, ya me conocerás cuando pases a visitarme al mercado negro.\n\n Que no sabes como ir? Abajo a la derecha tienes un boton para acceder a ella, cuando pases por ahi ya te explicaré como funciona mi mercado.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center'
-        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
 
-        const goBackBtn = this.add.text(this.width/4-40, this.height/2 + 100, 'Volver', { 
-            fontSize: '16px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        goBackBtn.on('pointerup', () => {
-            goBackBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainEndDayButton();
-                }
-            });
+        container.add([bg, img, text]);
+
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+            this.fadeOutContainer(container, () => this.explainMissions());
         });
-        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', { 
-            fontSize: '16px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainMissions();
-                }
-            });
+        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+            this.fadeOutContainer(container, () => this.explainTutorial());
         });
-        container.add([bg, img, blackMarketText, goBackBtn, continueBtn]);
     }
     explainMissions(){
         const container = this.add.container(0, 0).setDepth(21);
-        //const bg = this.add.image(this.width / 2, this.height / 2 - 100, 'textCloud').setOrigin(0);
-        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
         const img = this.add.image(this.width/2 - 200,30, 'tutorialAnimals2').setOrigin(0).setScale(1).setDepth(20);
         const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Las misiones son objetivos que puedes completar para ganar recompensas y avanzar en el juego.\nPuedes acceder a ellas haciendo click en el botón correspondiente que saldra en el mapa.\nLos rojos son las misiones corruptas y los amarillos son las misiones legítimas.', {
             fontSize: '24px',
@@ -183,46 +153,17 @@ export default class TutorialScene extends Phaser.Scene {
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-        const goBackBtn = this.add.text(this.width/4-40, this.height/2 + 100, 'Volver', { 
-            fontSize: '16px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        goBackBtn.on('pointerup', () => {
-            goBackBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainIntroBlackMarket();
-                }
-            });
+        
+        container.add([bg, img, text]);
+
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+            this.fadeOutContainer(container, () => this.explainDistricts());
         });
-        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', {
-            fontSize: '20px',
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            if(this.canContinue){
-                continueBtn.setScale(1.1);
-                this.tweens.add({
-                    targets: container,
-                    alpha: 0,
-                    duration: 1000,
-                    ease: 'Power2',
-                    onComplete: () => {
-                        container.destroy();
-                        this.explainDistricts();
-                    }
-                });
-            }
+        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+            this.fadeOutContainer(container, () => this.explainEnergyAndEndDayButton());
         });
-        container.add([bg, img, text, goBackBtn, continueBtn]);
-        this.time.delayedCall(7000, () => {
+        
+        this.time.delayedCall(700, () => {
             container.setAlpha(0.3);
             const missionIcon = this.add.image(800, 420, 'missionIcon').setDepth(22);
             const missionCorruptIcon = this.add.image(400, 600, 'missionCorruptIcon').setDepth(22);
@@ -332,6 +273,56 @@ export default class TutorialScene extends Phaser.Scene {
         introContainer.add([bg, img, introText1, introText2, prepareBtn]);      
     }
     // ORDER 4
+    explainIntroBlackMarket(){
+        const container = this.add.container(0, 0).setDepth(21);
+        
+        const bg = this.add.rectangle(this.width/4 - 120, this.height/3 - 140, this.width/2, this.height/2, 0xffffff).setOrigin(0);
+        const img = this.add.image(this.width - 500, 30, 'vendedorSilueta').setOrigin(0).setScale(1).setDepth(20);
+        const blackMarketText = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Un placer hablar con usted señor presidente. Soy Xxxxxxxx Xxxxx, ya me conocerás cuando pases a visitarme al mercado negro.\n\n Que no sabes como ir? Abajo a la derecha tienes un boton para acceder a ella, cuando pases por ahi ya te explicaré como funciona mi mercado.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
+
+        const goBackBtn = this.add.text(this.width/4-40, this.height/2 + 100, 'Volver', { 
+            fontSize: '16px', 
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
+        goBackBtn.on('pointerup', () => {
+            goBackBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.explainEndDayButton();
+                }
+            });
+        });
+        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', { 
+            fontSize: '16px', 
+            fontFamily: 'Times New Roman', 
+            color: '#000000' 
+        }).setOrigin(0.5).setInteractive().setDepth(22);
+        continueBtn.on('pointerup', () => {
+            continueBtn.setScale(1.1);
+            this.tweens.add({
+                targets: container,
+                alpha: 0,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: () => {
+                    container.destroy();
+                    this.explainMissions();
+                }
+            });
+        });
+        container.add([bg, img, blackMarketText, goBackBtn, continueBtn]);
+    }
     explainBlackMarket(){
         this.footerBlocker.destroy();
         this.blackMarketContainer = this.add.container(0, 0).setDepth(21);
@@ -391,5 +382,18 @@ export default class TutorialScene extends Phaser.Scene {
         });
 
         container.add([bg, img, blackMarketText]);
+    }
+
+    fadeOutContainer(container, callback) {
+        this.tweens.add({
+            targets: container,
+            alpha: 0,
+            duration: 1000,
+            ease: 'Power2',
+            onComplete: () => {
+                container.destroy();
+                callback();
+            }
+        });
     }
 }
