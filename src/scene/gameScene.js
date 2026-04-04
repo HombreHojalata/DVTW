@@ -158,14 +158,23 @@ export default class GameScene extends Phaser.Scene {
         const introContainer = this.add.container(0, 0).setDepth(100);
         const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
         this.text = (currentDay === 5) ? `DÍA ${currentDay} ` + 'ÚLTIMO DÍA' : `DÍA ${currentDay}`;
-        const dayText = this.add.text(width / 2, height / 2, this.text, {
+        const dayText = this.add.text(width / 2, height / 2 - 100, this.text, {
             fontSize: '80px',
+            fontFamily: 'Times New Roman',
+            fontWeight: 'bold',
+            color: '#ffffff'
+        }).setOrigin(0.5);
+        this.text2 = null;
+        if(currentDay != 1){
+           this.text2 = "DINERO INGRESADO : " +  this.map.getMoneyGenerated();
+        }
+        const moneyText = this.add.text(width/2, height/2 + 100, this.text2, {
+            fontSize: '50px',
             fontFamily: 'Times New Roman',
             fontWeight: 'bolf',
             color: '#ffffff'
         }).setOrigin(0.5);
-
-        introContainer.add([blocker, bg, dayText]);
+        introContainer.add([blocker, bg, dayText, moneyText]);
 
         this.time.delayedCall(1500, () => {
             this.tweens.add({
