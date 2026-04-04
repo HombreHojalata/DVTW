@@ -73,8 +73,8 @@ export default class GameScene extends Phaser.Scene {
 
             this.input.keyboard.on('keydown-ESC', () => {
                 if (!this.scene.isActive('pauseScene') && !this.scene.isActive('configurationScene')) {
-                    this.scene.launch('pauseScene', { returnScene: this.scene.key });
                     this.scene.pause();
+                    this.scene.launch('pauseScene', { returnScene: this.scene.key });
                 }
             });
 
@@ -87,10 +87,8 @@ export default class GameScene extends Phaser.Scene {
             this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
 
             this.events.on('resume', () => {
-                // NO DEBERIA HACER FALTA
                 this.refreshHUD();
             });
-
             this.startEnergyDrain();
             //MISSION TEST
             this.scheduleNextMission();
@@ -115,7 +113,7 @@ export default class GameScene extends Phaser.Scene {
     startEnergyDrain() {
         //this.totalDayDurationMs = 0.5 * 60 * 1000;
         //this.energyTickMs = 250;
-        this.totalDayDurationMs = 0.5 * 60 * 10000;
+        this.totalDayDurationMs = 0.5 * 60 * 8000;
         this.energyTickMs = 1000;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);

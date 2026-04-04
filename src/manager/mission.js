@@ -38,8 +38,8 @@ export default class Mission{
         this.missionButton.on('pointerover', () => {this.missionButton.setScale(1.1);});
         this.missionButton.on('pointerout', () => {this.missionButton.setScale(1);});
         this.missionButton.on('pointerup', () => {
-            scene.scene.pause('gameScene');
             scene.scene.launch('missionScene', { mission: this});
+            scene.scene.pause("gameScene");
         });
     }
     deleteMissionButton() {
