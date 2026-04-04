@@ -156,6 +156,7 @@ import mapCutout from '../assets/jsons/map.json';
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/il porco rosso.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
+import blackMarketAudio from '../assets/audio/black market.mp3';
 /**
  * 
  * Escena para la precarga de los assets que se usarán en el juego.
@@ -335,6 +336,7 @@ export default class Boot extends Phaser.Scene {
     // AUDIO
     this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
+    this.load.audio('blackMarketAudio', blackMarketAudio);
 
     //ara saber cuando termina la carga real
     this.cargasCompletadas = false;
@@ -344,70 +346,52 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(750, 375, 'loadScene');
-
-    //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.add.image(750, 375, 'loadScene');  
+    
     this.audioManager = new AudioManager(this);
-    this.registry.set('audioManager', this.audioManager)
-    this.audioManager.playMusic('bgMusic');
+    this.registry.set('audioManager', this.audioManager);
 
-    //animacion de la urna
-    this.anims.create({
-      key: 'animUrna',
-      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
-      frameRate: 2,
-      repeat: -1
+    this.audioManager.registerMusic('bgMusic', {
+        loop: true,
+        volumeMultiplier: 1
     });
 
-    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
-    urna.setDisplaySize(1500, 850);
-    urna.play('animUrna');
+    this.audioManager.registerMusic('blackMarketAudio', {
+        loop: true,
+        volumeMultiplier: 0.9
+    });
 
-    //BARRA DE CARGA
+    this.audioManager.registerSfx('quack', {
+        volumeMultiplier: 1
+    });
+
+    this.audioManager.playMusic('bgMusic');
+
     const barWidth = 600;
-    const barHeight = 22;
+    const barHeight = 30;
     const barX = this.cameras.main.centerX - barWidth / 2;
-    const barY = 780;
+    const barY = this.cameras.main.centerY + 300;
 
-    //estilo
     const barBg = this.add.graphics();
-    barBg.lineStyle(3, 0x1b263b, 1);
-    barBg.fillStyle(0x0d1117, 0.8);
-    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
-    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
+    barBg.fillStyle(0x000000, 0.5);
+    barBg.fillRect(barX, barY, barWidth, barHeight);
+
     const progressBar = this.add.graphics();
-    const barGlow = this.add.graphics();
+    progressBar.fillStyle(0xffff00, 1);
 
     this.tweens.add({
       targets: { width: 0 },
       width: barWidth,
-      duration: 4500,
-      ease: 'Cubic.easeOut', //mas lento al final
+      duration: 1500,
+      ease: 'Linear',
       onUpdate: (tween) => {
-        const currentWidth = tween.getValue();
-
         progressBar.clear();
-        barGlow.clear();
-
-        if (currentWidth > 0) {
-
-            progressBar.fillStyle(0x3e5c9a, 1); 
-            progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
-
-            progressBar.fillStyle(0x5c7cba, 1);
-            progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
-
-            barGlow.fillStyle(0xffffff, 0.15);
-            barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
-        }
+        progressBar.fillStyle(0xffff00, 1);
+        progressBar.fillRect(barX, barY, tween.getValue(), barHeight);
+      },
+      onComplete: () => {
+        this.scene.start('introScene');
       }
-    });
-
-    this.tiempoMinimoPasado = false;
-
-    this.time.delayedCall(4500, () => {
-      this.tiempoMinimoPasado = true;
-      this.intentarPasarAIntro();
     });
   }
 

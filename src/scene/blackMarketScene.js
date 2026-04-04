@@ -12,6 +12,13 @@ export default class BlackMarketScene extends Phaser.Scene {
     }
 
     create() {
+
+        this.audioManager = this.registry.get('audioManager');
+
+        if (this.audioManager) {
+            this.audioManager.switchMusic('blackMarketAudio');
+        }
+
         const gameWidth = this.sys.game.config.width;
         const gameHeight = this.sys.game.config.height;
 
@@ -58,6 +65,7 @@ export default class BlackMarketScene extends Phaser.Scene {
         backButton.on('pointerup', () => {
             this.scene.stop();
             this.scene.resume('gameScene');
+            this.audioManager.switchMusic('bgMusic');
         });
     }
 

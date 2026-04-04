@@ -345,7 +345,7 @@ export default class ConfigurationScene extends Phaser.Scene {
 
         hotspot.on('pointerdown', () => {
             if (this.audioManager?.play) {
-                this.audioManager.play('quack');
+                this.audioManager.playSfx('quack');
             }
 
             this.launchPressOverlay.setAlpha(0.22);
