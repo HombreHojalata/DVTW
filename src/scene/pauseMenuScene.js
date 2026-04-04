@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export default class PauseMenuScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'PauseScene' });
+        super({ key: 'pauseScene' });
     }
 
     init(data) {

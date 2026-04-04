@@ -10,20 +10,19 @@ export default class topUI {
     }
 
     create() {
+        // ATRIBUTES
         this.populationTotal = this.map.getTotalPopulation();
         this.popularity = this.map.getPopularity();
         this.neutralOppositors = this.populationTotal - this.popularity;
-
-        // Calcular porcentajes
+        // PERCENTAGES
         this.popularityPercent = (this.popularity / this.populationTotal) * 100;
         this.neutralPercent = (this.neutralOppositors / this.populationTotal) * 100;
-
-        // Configuración de barra
-        const barWidth = 400;
-        const barHeight = 30;
-        const x = 500;
-        const y = 80;
-
+        // BAR DATA
+        const barWidth = 600;
+        const barHeight = 100;
+        const x = 450;
+        const y = 30;
+        this.blocker = this.scene.add.zone(x,y,barWidth,barHeight).setOrigin(0).setInteractive();
         this.graphics = this.scene.add.graphics();
         this.graphics.fillStyle(0xcccccc, 1);
         this.graphics.fillRect(x, y, barWidth, barHeight);

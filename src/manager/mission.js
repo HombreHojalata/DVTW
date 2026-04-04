@@ -41,7 +41,6 @@ export default class Mission{
             scene.scene.pause('gameScene');
             scene.scene.launch('missionScene', { mission: this});
         });
-        
     }
     deleteMissionButton() {
         if (this.missionButton) {

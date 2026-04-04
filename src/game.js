@@ -9,6 +9,7 @@ import DistrictScene from './scene/districtScene.js';
 import DistrictStoreScene from './scene/districtStoreScene.js';
 import MissionScene from './scene/missionScene.js';
 import BlackMarketScene from './scene/blackMarketScene.js';
+import SummaryDayScene from './scene/summaryDayScene.js';
 import FinishScene from './scene/finishScene.js';
 import WordleMiniGame from './minigames/scene/wordleScene.js';
 import MemoryMiniGame from './minigames/scene/memoryScene.js';
@@ -32,7 +33,7 @@ let config = {
         createContainer: true
     },
     scene: [Boot, IntroScene, ConfigurationScene, TutorialScene, GameScene, DistrictScene, DistrictStoreScene, 
-        MissionScene, BlackMarketScene, FinishScene, PauseScene, WordleMiniGame, MemoryMiniGame],
+        MissionScene, BlackMarketScene, SummaryDayScene, FinishScene, PauseScene, WordleMiniGame, MemoryMiniGame],
     physics: {
         default: 'arcade',
         arcade: {

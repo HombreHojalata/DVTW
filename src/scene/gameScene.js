@@ -72,8 +72,8 @@ export default class GameScene extends Phaser.Scene {
 
 
             this.input.keyboard.on('keydown-ESC', () => {
-                if (!this.scene.isActive('PauseScene') && !this.scene.isActive('configurationScene')) {
-                    this.scene.launch('PauseScene', { returnScene: this.scene.key });
+                if (!this.scene.isActive('pauseScene') && !this.scene.isActive('configurationScene')) {
+                    this.scene.launch('pauseScene', { returnScene: this.scene.key });
                     this.scene.pause();
                 }
             });
@@ -113,8 +113,10 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 0.5 * 60 * 1000;
-        this.energyTickMs = 250;
+        //this.totalDayDurationMs = 0.5 * 60 * 1000;
+        //this.energyTickMs = 250;
+        this.totalDayDurationMs = 0.5 * 60 * 10000;
+        this.energyTickMs = 1000;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
 
@@ -191,33 +193,11 @@ export default class GameScene extends Phaser.Scene {
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
-        // SINO CREAR UNA ESCENA Y YA
-        // crear container full negro, por ejemplo depth 10 
-        // todos los textos en blacno, por ejemplo depth 11 
-        // RESUMEN DEL DIA
-
-        this.summary = this.day.getDaySummary();
-        this.dayNumber = this.summary.dayNumber,
-        this.decisionsTaken = this.summary.decisionstaken,
-        this.resourcesGained = this.summary.resourcesGained
-        this.add.text(400,350,this.dayNumber,{
-            fontSize: '16px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 },
-            lineSpacing: 10
-        }).setOrigin(0.5);
-
-        this.add.text(400,400,this.decisionsTaken);
-        this.add.text(400,450,this.resourcesGained);
-
-        //this.time.delayedCall(8000, () => {
-            this.cameras.main.fadeOut(1000, 0, 0, 0);
-            this.cameras.main.once('camerafadeoutcomplete', () => {
-                this.gameManager.nextDay();
-                this.scene.restart();
-            });
-        //});
+ 
+        this.cameras.main.fadeOut(1000, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+            this.scene.stop();
+            this.scene.launch('summaryDayScene', { summary: this.day.getDaySummary() });
+        });
     }
 }
