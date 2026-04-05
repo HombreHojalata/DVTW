@@ -54,136 +54,6 @@ export default class DistrictScene extends Phaser.Scene {
             else if(this.order === 2)this.finishTutorial(width,height);
         }
     }
-    // TUTORIAL
-    // FALTARIA EXPLICAR QUE EL BENEFICIO DE UN EDIFICIO ES SU VALOR N X HORAS LABORALES X NUM POBLACION
-    // ORDER 1
-    explainTutorial(width, height) {
-        const container = this.add.container(340, 300).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 70, '¡Bienvenido al distrito de ' + this.district.getName() + '!\nAquí puedes gestionar las políticas del distrito y ver su información detallada.', {
-            fontSize: '16px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 },
-            lineSpacing: 10
-        }).setOrigin(0.5);
-        const continueBtn = this.add.text(150, 150, 'Continuar', { fontSize: '20px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainDistrictAtributes(width, height);
-                }
-            });
-        });
-        container.add([bg, text, continueBtn]);
-    }
-    explainDistrictAtributes(width, height) {
-        const container = this.add.container(300, 450).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 70, 'En la parte inferior de la pantalla puedes ver los atributos del distrito y modificarlos usando los botones correspondientes.\nTen en cuenta que cada cambio tiene un costo, así que elige sabiamente.', {
-            fontSize: '16px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 },
-            lineSpacing: 10
-        }).setOrigin(0.5);
-        const goBackBtn = this.add.text(80, 170, 'Volver', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
-        goBackBtn.on('pointerup', () => {
-            goBackBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainTutorial(width, height);
-                }
-            });
-        });
-        const prepareBtn = this.add.text(220, 170, 'Continuar', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
-        prepareBtn.on('pointerup', () => {
-            prepareBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainStoreButton(width, height);
-                }
-            });
-        });
-        container.add([bg, text, goBackBtn, prepareBtn]);
-    }
-    explainStoreButton(width, height) {              // CAPAZ HAY QUE MARCARLO
-        this.containerStore = this.add.container(340, 300).setDepth(21);   
-        this.blockerBuilding.destroy();
-        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 70, 'Haz click en el icono de la tienda para acceder al mercado de edificios del distrito.\nAquí podrás comprar nuevos edificios para tu distrito usando el dinero que has ganado.', {
-            fontSize: '16px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 },
-            lineSpacing: 10
-        }).setOrigin(0.5);
-        const goBackBtn = this.add.text(150,150, 'Volver', { fontSize: '16px', fontFamily: 'Times New Roman', color: '#ffffff' }).setOrigin(0.5).setInteractive().setDepth(22);
-        goBackBtn.on('pointerup', () => {
-            goBackBtn.setScale(1.1);
-            this.tweens.add({
-                targets: this.containerStore,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    this.containerStore.destroy();
-                    this.blockerBuilding = this.add.zone(580, 320, width/2, height/6).setOrigin(0).setInteractive().setDepth(20);
-                    this.explainDistrictAtributes(width, height);
-                }
-            });
-        });
-        //FALTA UNA MARCA
-        this.containerStore.add([bg, text, goBackBtn]);
-    }
-    // ORDER 2
-    finishTutorial() {
-        this.containerText = this.add.container(340, 300).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.8).setOrigin(0);
-        const text = this.add.text(150, 70, '¡Bien hecho!\nHas aprendido a comprar edificios, que no sabes para qué sirven? Cada edificio tiene una función específica en tu distrito cuando pongas el cursor por encima de él te dira sus propiedades.\n', {
-            fontSize: '16px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 280 },
-            lineSpacing: 10
-        }).setOrigin(0.5);
-            //}).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
-        this.time.delayedCall(5000, () => {
-            this.tweens.add({
-                targets: this.containerText,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    this.containerText.destroy();
-                    this.scene.stop();
-                    this.scene.stop('tutorialScene');
-                    this.scene.launch('tutorialScene', { order: 3 });
-                }
-            }); 
-        });
-    }
-    //
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
         return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);
     }
@@ -224,28 +94,28 @@ export default class DistrictScene extends Phaser.Scene {
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#30718c'
-        }).setDepth(1000);  
+        }).setDepth(15);  
         // DINERO QUE SE GANA POR CICLO
         const moneyText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*9 + 60, this.district.getMoneyGenerated(), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#ba9900'
-        }).setDepth(1000);  
+        }).setDepth(15);  
         // HABITANTES A FAVOR
         const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 60, newHeight - newHeight/3 + offsetY*5 + 50, this.district.getPopulation() * this.district.getSatisfaction() / 100, {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#46c83d'
-        }).setDepth(1000);  
+        }).setDepth(15);  
         // HABITANTES EN CONTRA/NEUTROS
         const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 60, newHeight - newHeight/3 + offsetY*9 + 60, this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#e62d2a'
-        }).setDepth(1000);  
+        }).setDepth(15);  
         return { population: populationText, money: moneyText, inFavor: inFavorText, noFavor: noFavorText };
     }
     refreshDetailsText(){
@@ -299,14 +169,22 @@ export default class DistrictScene extends Phaser.Scene {
             tooltip.setPosition(740, newHeight - newHeight/2 - 45);
             tooltip.setVisible(true);
             tooltip.setDepth(50);
-            this.storeButton.setScale(1.5);
+            this.tweens.add({
+                targets: this.storeButton,
+                scale: 1.5,
+                duration: 80
+            });
         });
         this.storeButton.on('pointerout', () => {
             tooltip.setVisible(false);
-            this.storeButton.setScale(1.3);
+            this.tweens.add({
+                targets: this.storeButton,
+                scale: 1.3,
+                duration: 50
+            });
         });
         this.storeButton.on('pointerup', () => {
-            if(this.tutorial) this.containerStore.destroy();
+            //if(this.tutorial) this.containerStore.destroy();
             if(this.district.getSpaceBuildingBuilt() === this.district.getSpaceBuilding()) {
                 tooltip.setText(`Distrito lleno(${this.district.getSpaceBuildingBuilt()}/${this.district.getSpaceBuilding()})`);
                 tooltip.setPosition(740, newHeight - newHeight/2 - 45);
@@ -322,8 +200,20 @@ export default class DistrictScene extends Phaser.Scene {
     }
     spawnCloseButton(newWidth, offsetX, offsetY) {
         this.closeButton = this.add.image(offsetX + newWidth - 60, offsetY + 110, 'closeIcon').setOrigin(0.5, 0.5).setInteractive({ useHandCursor: true }); 
-        this.closeButton.on('pointerover', () => {this.closeButton.setScale(1.1);});
-        this.closeButton.on('pointerout', () => {this.closeButton.setScale(1);});
+        this.closeButton.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.closeButton,
+                scale: 1.1,
+                duration: 80
+            });
+        });
+        this.closeButton.on('pointerout', () => {
+            this.tweens.add({
+                targets: this.closeButton,
+                scale: 1,
+                duration: 80
+            });
+        });
         this.closeButton.on('pointerup', () => {
             this.scene.stop();
             this.registry.set('flagShow',false);
@@ -458,7 +348,7 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                if(this.district.getWorkSchedule() > 0){
+                if(this.district.getWorkSchedule() > 0) {
                     this.district.addWorkSchedule(-1);
                     this.workScheduleText.setText(this.district.getWorkSchedule());
                     this.district.updateAfterModifyPercentage();
@@ -467,14 +357,14 @@ export default class DistrictScene extends Phaser.Scene {
             }
         );
     }
-    spawnCleaningButton(newWidth,offsetX,newHeight,offsetY){
+    spawnCleaningButton(newWidth,offsetX,newHeight,offsetY) { 
         this.botonAumentar = this.createButton(
             newWidth-offsetX*2, 
             newHeight - offsetY*8 + 40, 
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getCleaningPercentage() < 100){
+                if(this.district.getCleaningPercentage() < 100) {
                     this.district.addCleaningPercentage(1);
                     this.cleaningText.setText(this.district.getCleaningPercentage());
                     this.district.updateAfterModifyPercentage();
@@ -488,7 +378,7 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                if(this.district.getCleaningPercentage() > 0){
+                if(this.district.getCleaningPercentage() > 0) {
                     this.district.addCleaningPercentage(-1);
                     this.cleaningText.setText(this.district.getCleaningPercentage());
                     this.district.updateAfterModifyPercentage();
@@ -496,5 +386,151 @@ export default class DistrictScene extends Phaser.Scene {
                 }
             }
         );
+    }
+    // TUTORIAL
+    // FALTARIA EXPLICAR QUE EL BENEFICIO DE UN EDIFICIO ES SU VALOR N X HORAS LABORALES X NUM POBLACION
+    createTutorialButton(container, x, y, text, callback) {
+        const width = 220;
+        const height = 48;
+
+        const shadow = this.add.rectangle(x + 4, y + 5, width, height, 0x000000, 0.18).setOrigin(0.5);
+        const bg = this.add.rectangle(x, y, width, height, 0xf7f2ea, 0.95)
+            .setOrigin(0.5)
+            .setStrokeStyle(3, 0x263b63)
+            .setInteractive({ useHandCursor: true });
+
+        const label = this.add.text(x, y, text, {
+            fontSize: '22px',
+            fontStyle: 'bold',
+            color: '#26304a',
+            fontFamily: 'Georgia'
+        }).setOrigin(0.5);
+
+        bg.on('pointerover', () => {
+            bg.setFillStyle(0xfff7df, 1);
+            bg.setStrokeStyle(3, 0xb68a2f);
+            label.setScale(1.05);
+            bg.setScale(1.05);
+        });
+
+        bg.on('pointerout', () => {
+            bg.setFillStyle(0xf7f2ea, 0.95);
+            bg.setStrokeStyle(3, 0x263b63);
+            label.setScale(1);
+            bg.setScale(1);
+        });
+
+        bg.on('pointerdown', () => { bg.setScale(0.98); label.setScale(0.98); });
+
+        bg.on('pointerup', () => {
+            bg.setScale(1.05);
+            label.setScale(1.05);
+            callback();
+        });
+
+        container.add([shadow, bg, label]);
+    }
+    // ORDER 1
+    explainTutorial(width, height) {
+        const container = this.add.container(width / 2, height / 2).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 425, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, '¡Bienvenido a El Nido!\n\nAquí podrá gestionar la política interna de cada distrito. Recuerde que cada zona de Quackington DC es distinta, le recomiendo leer la descripción de cada una.\n\nEstamos trabajando en mejoras a futuro en este panel, pero por el momento dejeme explicar cómo funciona todo.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 0, 120, 'Continuar', () => {
+            container.destroy();
+            this.explainDistrictAttributes(width, height);
+        });
+    }
+    explainDistrictAttributes(width, height) {
+        const container = this.add.container(width / 4 - 30, height * 0.4 + 30).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -50, 'Esos cuatro números debajo de la foto del distrito son: el número total de habitantes del lugar, el dinero que cobra o gasta cada ciclo este distrito, y los vecinos del distrito a favor y en contra.\n\nEl objetivo es ampliar el porcentaje de satisfacción de los distritos para aumentar los vecinos a favor. Esto influye directamente en la opinión pública global.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 600 }
+        }).setOrigin(0.5);
+
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 180, 120, 'Continuar', () => {
+            container.destroy();
+            this.explainStoreButton(width, height);
+        });
+        this.createTutorialButton(container, -180, 120, 'Volver', () => {
+            container.destroy();
+            this.explainTutorial(width, height);
+        });
+    }
+    explainStoreButton(width, height) {
+        const container = this.add.container(width * 0.7, height * 0.6).setDepth(21);   
+        this.blockerBuilding.destroy();
+        const bg = this.add.rectangle(0, 0, 700, 250, 0x000000, 0.85).setOrigin(0.5, 0);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, 100, 'Si de verdad quiere controlar la ciudad, la mejor forma de hacerlo es contruyendo edificios.\nPulse el icono de la bolsa de dinero para gastar esos fondos públicos en constuctoras privadas.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 650 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, -180, 200, 'Volver', () => {
+            container.destroy();
+            if (this.pulseTween) this.pulseTween.stop();
+            this.storeButton.setScale(1.3);
+            this.explainDistrictAttributes(width, height);
+        });
+
+        this.pulseTween = this.tweens.add({
+            targets: this.storeButton,
+            scale: 1.6,
+            duration: 600,
+            ease: 'Sine.easeInOut',
+            yoyo: true,
+            loop: -1
+        });
+        this.storeButton.once('pointerdown', () => {
+            if (this.pulseTween) this.pulseTween.stop();
+            this.storeButton.setScale(1.3);
+            container.destroy();
+            this.scene.launch('districtStoreScene', { district: this.district, tutorial: true });
+        })
+    
+    }
+    // ORDER 2
+    finishTutorial() {
+        const container = this.add.container(750, 500).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 300, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, '¡Buen trabajo, señor!\nSi se cansa de algún edificio que ha contruido anteriormente, siempre puede demolerlo haciendo clicl sobre este.\n\nVeo que ya se ha familiarizado bien con el control de los distritos, estoy segura que le pillará el tranquillo en seguida.\n', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 0, 100, 'Continuar', () => {
+            container.destroy();
+            this.scene.stop();
+            this.scene.stop('tutorialScene');
+            this.scene.launch('tutorialScene', { order: 2 });
+        });
     }
 }

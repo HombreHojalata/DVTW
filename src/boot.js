@@ -11,6 +11,7 @@ import tutorialAnimals2 from '../assets/other/tutorialAnimals2.png'
 import tutorialAnimals3 from '../assets/other/tutorialAnimals3.png'
 import tutorialInfo from '../assets/other/tutorialInfo.png'
 import textCloud from '../assets/other/textCloud.png'
+import flamingo from '../assets/other/flamingo.png'
 
 // PROTOTYPE ASSETS, TO BE REPLACED
 import presidente from '../assets/other/presidente.png'                                                       //NEED TO BE REPLACE
@@ -55,6 +56,7 @@ import specialBuildingNuevaPradera from '../assets/map/buildings/specialBuilding
 import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.png'                           //NEED TO BE REPLACE
 import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'                   //NEED TO BE REPLACE
 import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'                           //NEED TO BE REPLACE
+import districtStoreBg from '../assets/map/buildings/districtStoreBg.png'                                      
 
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
@@ -192,6 +194,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('tutorialAnimals2', tutorialAnimals2);
     this.load.image('tutorialAnimals3', tutorialAnimals3);
     this.load.image('tutorialInfo', tutorialInfo);
+    this.load.image('flamingo', flamingo);
     this.load.image('textCloud', textCloud);
     // PRESIDENT ASSET
     this.load.image('presidente', presidente);
@@ -236,6 +239,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('specialBuildingSahar', specialBuildingSahar);
     this.load.image('specialBuildingSomosagua', specialBuildingSomosagua);
     this.load.image('specialBuildingMafia', specialBuildingMafia);
+    this.load.image('districtStoreBg', districtStoreBg);
 
     // MISSION ASSETS
     this.load.image('missionTemplate', missionTemplate);
