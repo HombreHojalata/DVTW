@@ -166,7 +166,7 @@ export default class GameScene extends Phaser.Scene {
         }).setOrigin(0.5);
         this.text2 = null;
         if(currentDay != 1){
-           this.text2 = "DINERO INGRESADO : " +  this.map.getMoneyGenerated();
+            this.text2 = "DINERO INGRESADO : " +  this.map.getMoneyGenerated();
         }
         const moneyText = this.add.text(width/2, height/2 + 100, this.text2, {
             fontSize: '50px',
@@ -184,11 +184,14 @@ export default class GameScene extends Phaser.Scene {
                 ease: 'Power2',
                 onComplete: () =>{
                     introContainer.destroy()
-                    if(currentDay === 2 && this.isTutorial){               // TUTORIAL BLACK MARKET
+                    if (currentDay === 2 && this.isTutorial) {               // TUTORIAL BLACK MARKET
+                        this.scene.stop();
+                        this.scene.start('tutorialScene', { order: 3 });
+                    } else if (currentDay === 3 && this.isTutorial) {        // TUTORIAL BLACK MARKET 2
                         this.scene.stop();
                         this.scene.start('tutorialScene', { order: 4 });
                     }
-                } 
+                }
             });
         });
     }
