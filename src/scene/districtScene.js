@@ -84,33 +84,33 @@ export default class DistrictScene extends Phaser.Scene {
     spawnScene(newWidth,newHeight,offsetX,offsetY) {
         const list = this.district.getSceneList();
         const randomIndex = Math.floor(Math.random() * list.length);
-        this.districtScene = this.add.image(offsetX + newWidth * 0.025, offsetY + newHeight * 0.15, list[randomIndex]).setScale(1.3).setOrigin(0);
+        this.districtScene = this.add.image(offsetX + newWidth * 0.048, offsetY + newHeight * 0.2, list[randomIndex]).setOrigin(0);
         return this.districtScene;
     }
     spawnDetailText(newWidth,newHeight,offsetX,offsetY) {
         //POBLACION TOTAL
-        const populationText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*5 + 50, this.district.getPopulation(), {
+        const populationText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*2 + 45, this.district.getPopulation(), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#30718c'
         }).setDepth(15);  
         // DINERO QUE SE GANA POR CICLO
-        const moneyText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*9 + 60, this.district.getMoneyGenerated(), {
+        const moneyText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*7 + 50, this.district.getMoneyGenerated(), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#ba9900'
         }).setDepth(15);  
         // HABITANTES A FAVOR
-        const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 60, newHeight - newHeight/3 + offsetY*5 + 50, this.district.getPopulation() * this.district.getSatisfaction() / 100, {
+        const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*2 + 45, this.district.getPopulation() * this.district.getSatisfaction() / 100, {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#46c83d'
         }).setDepth(15);  
         // HABITANTES EN CONTRA/NEUTROS
-        const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 60, newHeight - newHeight/3 + offsetY*9 + 60, this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
+        const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*7 + 50, this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
@@ -359,7 +359,7 @@ export default class DistrictScene extends Phaser.Scene {
     }
     spawnCleaningButton(newWidth,offsetX,newHeight,offsetY) { 
         this.botonAumentar = this.createButton(
-            newWidth-offsetX*2, 
+            newWidth-offsetX*2 + 10, 
             newHeight - offsetY*8 + 40, 
             'increaseIcon',
             'increaseSelectIcon',
@@ -451,7 +451,7 @@ export default class DistrictScene extends Phaser.Scene {
         });
     }
     explainDistrictAttributes(width, height) {
-        const container = this.add.container(width / 4 - 30, height * 0.4 + 30).setDepth(21);   
+        const container = this.add.container(width / 4 - 30, height * 0.35 + 30).setDepth(21);   
         const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
         bg.setStrokeStyle(2, 0xffffff, 0.5);
         const text = this.add.text(0, -50, 'Esos cuatro números debajo de la foto del distrito son: el número total de habitantes del lugar, el dinero que cobra o gasta cada ciclo este distrito, y los vecinos del distrito a favor y en contra.\n\nEl objetivo es ampliar el porcentaje de satisfacción de los distritos para aumentar los vecinos a favor. Esto influye directamente en la opinión pública global.', {
