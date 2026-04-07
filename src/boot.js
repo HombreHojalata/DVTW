@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 // PRINCIPAL SCENE ASSETS
 import agendaSheet from '../assets/scenes/agendaSpritesheet.png'
 import urnaSheet from '../assets/scenes/urnaSpritesheet.png'
-import loadScene from '../assets/scenes/loadScene.png'                                                        //NEED TO BE REPLACE
+import loadScene from '../assets/scenes/loadScene.png'
 import configScene from '../assets/scenes/configScene.png'
 
 // TUTORIAL ASSETS
@@ -11,24 +11,23 @@ import tutorialAnimals2 from '../assets/other/tutorialAnimals2.png'
 import tutorialAnimals3 from '../assets/other/tutorialAnimals3.png'
 import tutorialInfo from '../assets/other/tutorialInfo.png'
 import textCloud from '../assets/other/textCloud.png'
-import flamingo from '../assets/other/flamingo.png'
-import blackMarketMessage from '../assets/other/blackMarketMessage.png'
 
-// PROTOTYPE ASSETS, TO BE REPLACED
-import presidente from '../assets/other/presidente.png'                                                       //NEED TO BE REPLACE
+// PROTOTYPE ASSETS
+import presidente from '../assets/other/presidente.png'
 
 // MAP ASSET
 import map from '../assets/map/mapTemplate.png'
 
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/map/districtScenes/districtTemplate.png'
-import districtStoreTemplate from '../assets/map/districtScenes/districtStoreTemplate.png'                    //NEED TO BE REPLACE
-import districtBorrascalScene1 from '../assets/map/districtScenes/districtBorrascalScene1.png'                //NEED TO BE REPLACE
-import districtElNidoScene1 from '../assets/map/districtScenes/districtElNidoScene1.png'                      //NEED TO BE REPLACE
-import districtGuineaScene1 from '../assets/map/districtScenes/districtGuineaScene1.png'                      //NEED TO BE REPLACE
-import districtNuevaPraderaScene1 from '../assets/map/districtScenes/districtNuevaPraderaScene1.png'          //NEED TO BE REPLACE
-import districtSaharScene1 from '../assets/map/districtScenes/districtSaharScene1.png'                        //NEED TO BE REPLACE
-import districtSomosaguaScene1 from '../assets/map/districtScenes/districtSomosaguaScene1.png'                //NEED TO BE REPLACE
+import districtStoreTemplate from '../assets/map/districtScenes/districtStoreTemplate.png'
+import districtBorrascalScene1 from '../assets/map/districtScenes/districtBorrascalScene1.png'
+import districtElNidoScene1 from '../assets/map/districtScenes/districtElNidoScene1.png'
+import districtGuineaScene1 from '../assets/map/districtScenes/districtGuineaScene1.png'
+import districtNuevaPraderaScene1 from '../assets/map/districtScenes/districtNuevaPraderaScene1.png'
+import districtSaharScene1 from '../assets/map/districtScenes/districtSaharScene1.png'
+import districtSomosaguaScene1 from '../assets/map/districtScenes/districtSomosaguaScene1.png'
+
 // DISTRICT
 import districtBorrascal from '../assets/map/district/districtBorrascal.png'
 import districtBorrascalSpecial from '../assets/map/district/districtBorrascalSpecial.png'
@@ -42,6 +41,7 @@ import districtSahar from '../assets/map/district/districtSahar.png'
 import districtSaharSpecial from '../assets/map/district/districtSaharSpecial.png'
 import districtSomosagua from '../assets/map/district/districtSomosagua.png'
 import districtSomosaguaSpecial from '../assets/map/district/districtSomosaguaSpecial.png'
+
 // BUILDING ASSETS
 import buildingCinema from '../assets/map/buildings/buildingCinema.png'
 import buildingComercialCenter from '../assets/map/buildings/buildingComercialCenter.png'
@@ -50,54 +50,54 @@ import buildingHospital from '../assets/map/buildings/buildingHospital.png'
 import buildingHotel from '../assets/map/buildings/buildingHotel.png'
 import buildingHouse from '../assets/map/buildings/buildingHouse.png'
 import buildingPark from '../assets/map/buildings/buildingPark.png'
-import specialBuildingBorrascal from '../assets/map/buildings/specialBuildingBorrascal.png'                   //NEED TO BE REPLACE
-import specialBuildingElNido from '../assets/map/buildings/specialBuildingElNido.png'                         //NEED TO BE REPLACE
-import specialBuildingGuinea from '../assets/map/buildings/specialBuildingGuinea.png'                         //NEED TO BE REPLACE
-import specialBuildingNuevaPradera from '../assets/map/buildings/specialBuildingNuevaPradera.png'             //NEED TO BE REPLACE
-import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.png'                           //NEED TO BE REPLACE
-import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'                   //NEED TO BE REPLACE
-import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'                           //NEED TO BE REPLACE
-import districtStoreBg from '../assets/map/buildings/districtStoreBg.png'                                      
+import specialBuildingBorrascal from '../assets/map/buildings/specialBuildingBorrascal.png'
+import specialBuildingElNido from '../assets/map/buildings/specialBuildingElNido.png'
+import specialBuildingGuinea from '../assets/map/buildings/specialBuildingGuinea.png'
+import specialBuildingNuevaPradera from '../assets/map/buildings/specialBuildingNuevaPradera.png'
+import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.png'
+import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'
+import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'
 
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
 import missionCorruptTemplate from '../assets/mission/missionCorruptTemplate.png'
-// MISSION DISTRICT BORRASCAL SCENE ASSETS
+
+// MISSION DISTRICT SCENES (CONTINUAZIONE...)
 import regularSceneBorrascal from '../assets/mission/scenes/districtBorrascal/regularScene.png'
 import upMoneySceneBorrascal from '../assets/mission/scenes/districtBorrascal/upMoneyScene.png'
 import downMoneySceneBorrascal from '../assets/mission/scenes/districtBorrascal/downMoneyScene.png'
 import upPopularitySceneBorrascal from '../assets/mission/scenes/districtBorrascal/upPopularityScene.png'
 import downPopularitySceneBorrascal from '../assets/mission/scenes/districtBorrascal/downPopularityScene.png'
 import downCorruptionSceneBorrascal from '../assets/mission/scenes/districtBorrascal/downCorruptionScene.png'
-// MISSION DISTRICT EL NIDO SCENE ASSETS
+
 import regularSceneElNido from '../assets/mission/scenes/districtElNido/regularScene.png'
 import upMoneySceneElNido from '../assets/mission/scenes/districtElNido/upMoneyScene.png'
 import downMoneySceneElNido from '../assets/mission/scenes/districtElNido/downMoneyScene.png'
 import upPopularitySceneElNido from '../assets/mission/scenes/districtElNido/upPopularityScene.png'
 import downPopularitySceneElNido from '../assets/mission/scenes/districtElNido/downPopularityScene.png'
 import downCorruptionSceneElNido from '../assets/mission/scenes/districtElNido/downCorruptionScene.png'
-// MISSION DISTRICT GUINEA SCENE ASSETS
+
 import regularSceneGuinea from '../assets/mission/scenes/districtGuinea/regularScene.png'
 import upMoneySceneGuinea from '../assets/mission/scenes/districtGuinea/upMoneyScene.png'
 import downMoneySceneGuinea from '../assets/mission/scenes/districtGuinea/downMoneyScene.png'
 import upPopularitySceneGuinea from '../assets/mission/scenes/districtGuinea/upPopularityScene.png'
 import downPopularitySceneGuinea from '../assets/mission/scenes/districtGuinea/downPopularityScene.png'
 import downCorruptionSceneGuinea from '../assets/mission/scenes/districtGuinea/downCorruptionScene.png'
-// MISSION DISTRICT NUEVA PRADERA SCENE ASSETS
+
 import regularSceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/regularScene.png'
 import upMoneySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/upMoneyScene.png'
 import downMoneySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/downMoneyScene.png'
 import upPopularitySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/upPopularityScene.png'
 import downPopularitySceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/downPopularityScene.png'
 import downCorruptionSceneNuevaPradera from '../assets/mission/scenes/districtNuevaPradera/downCorruptionScene.png'
-// MISSION DISTRICT SAHAR SCENE ASSETS
+
 import regularSceneSahar from '../assets/mission/scenes/districtSahar/regularScene.png'
 import upMoneySceneSahar from '../assets/mission/scenes/districtSahar/upMoneyScene.png'
 import downMoneySceneSahar from '../assets/mission/scenes/districtSahar/downMoneyScene.png'
 import upPopularitySceneSahar from '../assets/mission/scenes/districtSahar/upPopularityScene.png'
 import downPopularitySceneSahar from '../assets/mission/scenes/districtSahar/downPopularityScene.png'
 import downCorruptionSceneSahar from '../assets/mission/scenes/districtSahar/downCorruptionScene.png'
-// MISSION DISTRICT SOMOSAGUA SCENE ASSETS
+
 import regularSceneSomosagua from '../assets/mission/scenes/districtSomosagua/regularScene.png'
 import upMoneySceneSomosagua from '../assets/mission/scenes/districtSomosagua/upMoneyScene.png'
 import downMoneySceneSomosagua from '../assets/mission/scenes/districtSomosagua/downMoneyScene.png'
@@ -105,7 +105,7 @@ import upPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosag
 import downPopularitySceneSomosagua from '../assets/mission/scenes/districtSomosagua/downPopularityScene.png'
 import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomosagua/downCorruptionScene.png'
 
-//Memory minigame assets
+// MINIGAME & MARKET
 import memoryImage1 from '../assets/minigames/memory/memoryImage1.png'
 import memoryImage2 from '../assets/minigames/memory/memoryImage2.png'
 import memoryImage3 from '../assets/minigames/memory/memoryImage3.png'
@@ -114,14 +114,12 @@ import memoryImage5 from '../assets/minigames/memory/memoryImage5.png'
 import memoryImage6 from '../assets/minigames/memory/memoryImage6.png'
 import memoryImage7 from '../assets/minigames/memory/memoryImage7.png'
 import memoryImage8 from '../assets/minigames/memory/memoryImage8.png'
-
-// BLACK MARKET ASSETS
 import vendedor from '../assets/other/Vendedor.png'
 import vendedorSilueta from '../assets/other/VendedorSilueta.png'
 import prensa_icon from '../assets/marketIcons/prensa.png'
 import hotel_icon from '../assets/marketIcons/hotel.png'
 
-// ICONS 
+// ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
 import configurationIcon from '../assets/icons/configurationIcon.png'
 import storeIcon from '../assets/icons/storeIcon.png'
@@ -133,7 +131,7 @@ import missionIcon from '../assets/icons/missionIcon.png'
 import missionCorruptIcon from '../assets/icons/missionCorruptIcon.png'
 import blackMarketIcon from '../assets/icons/blackMarketIcon.png'
 
-// UI ASSETS
+// UI
 import battery from '../assets/UIs/battery.png'
 import endDayNormal from '../assets/UIs/endDayNormal.png'
 import endDayBright from '../assets/UIs/endDayBright.png'
@@ -144,13 +142,8 @@ import marketBtnNormal from '../assets/UIs/marketBtnNormal.png'
 import marketBtnBright from '../assets/UIs/marketBtnBright.png'
 import marketBtnPressed from '../assets/UIs/marketBtnPressed.png'
 import marketBtnBlocked from '../assets/UIs/marketBtnBlocked.png'
-import popularityBar from '../assets/UIs/popularityBar.png'
-import mapBtnNormal from '../assets/UIs/mapBtnNormal.png'
-import mapBtnBright from '../assets/UIs/mapBtnBright.png'
-import mapBtnPressed from '../assets/UIs/mapBtnPressed.png'
-import lowBarMarketUI from '../assets/UIs/lowBarMarketUI.png'
 
-// JSON misiones
+// JSON
 import RegularMission from '../assets/jsons/regularMissions.json';
 import UpMoneyMission from '../assets/jsons/upMoney.json';
 import UpPopularityMission from '../assets/jsons/upPopularity.json';
@@ -164,24 +157,13 @@ import mapCutout from '../assets/jsons/map.json';
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/il porco rosso.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
-import blackMarketAudio from '../assets/audio/black market.mp3';
-/**
- * 
- * Escena para la precarga de los assets que se usarán en el juego.
- * Esta escena se puede mejorar añadiendo una imagen del juego y una 
- * barra de progreso de carga de los assets
- * @see {@link https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/} como ejemplo
- * sobre cómo hacer una barra de progreso.
- */
+
 export default class Boot extends Phaser.Scene {
   constructor() {
     super({ key: 'boot' });
   }
 
   preload() {
-    // Con setPath podemos establecer el prefijo que se añadirá a todos los load que aparecen a continuación
-    //this.load.setPath('assets/sprites/');
-
     //LOADING SCENE ASSETS
     this.load.spritesheet('urnaCarga', urnaSheet, {
       frameWidth: 1536,
@@ -195,19 +177,17 @@ export default class Boot extends Phaser.Scene {
       frameHeight: 922
     });
     this.load.image('configScene', configScene);
+
     // TUTORIAL ASSETS
     this.load.image('tutorialAnimals1', tutorialAnimals1);
     this.load.image('tutorialAnimals2', tutorialAnimals2);
     this.load.image('tutorialAnimals3', tutorialAnimals3);
     this.load.image('tutorialInfo', tutorialInfo);
-    this.load.image('flamingo', flamingo);
     this.load.image('textCloud', textCloud);
-    this.load.image('blackMarketMessage', blackMarketMessage);
-    // PRESIDENT ASSET
+
+    // RESTO DEI LOAD... (tutti i tuoi file audio, immagini e json)
     this.load.image('presidente', presidente);
-    // MAP ASSETS
     this.load.image('map', map);
-    // DISTRICT SCENES ASSETS
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
     this.load.image('districtBorrascalScene1', districtBorrascalScene1);
@@ -216,21 +196,18 @@ export default class Boot extends Phaser.Scene {
     this.load.image('districtNuevaPraderaScene1', districtNuevaPraderaScene1);
     this.load.image('districtSaharScene1', districtSaharScene1);
     this.load.image('districtSomosaguaScene1', districtSomosaguaScene1);
-    // DISTRICT ASSETS
     this.load.image('districtBorrascal', districtBorrascal);
     this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);
     this.load.image('districtNuevaPradera', districtNuevaPradera);
     this.load.image('districtSahar', districtSahar);
     this.load.image('districtSomosagua', districtSomosagua);
-    // SPECIAL DISTRICT ASSETS
     this.load.image('districtBorrascalSpecial', districtBorrascalSpecial);
     this.load.image('districtElNidoSpecial', districtElNidoSpecial);
     this.load.image('districtGuineaSpecial', districtGuineaSpecial);
     this.load.image('districtNuevaPraderaSpecial', districtNuevaPraderaSpecial);
     this.load.image('districtSaharSpecial', districtSaharSpecial);
     this.load.image('districtSomosaguaSpecial', districtSomosaguaSpecial);
-    // NORMAL BUILDING ASSETS
     this.load.image('buildingCinema', buildingCinema);
     this.load.image('buildingComercialCenter', buildingComercialCenter);
     this.load.image('buildingFactory', buildingFactory);
@@ -238,7 +215,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('buildingHotel', buildingHotel);
     this.load.image('buildingHouse', buildingHouse);
     this.load.image('buildingPark', buildingPark);
-    // SPECIAL BUILDING ASSETS
     this.load.image('specialBuildingBorrascal', specialBuildingBorrascal);
     this.load.image('specialBuildingElNido', specialBuildingElNido);
     this.load.image('specialBuildingGuinea', specialBuildingGuinea);
@@ -246,55 +222,44 @@ export default class Boot extends Phaser.Scene {
     this.load.image('specialBuildingSahar', specialBuildingSahar);
     this.load.image('specialBuildingSomosagua', specialBuildingSomosagua);
     this.load.image('specialBuildingMafia', specialBuildingMafia);
-    this.load.image('districtStoreBg', districtStoreBg);
-
-    // MISSION ASSETS
     this.load.image('missionTemplate', missionTemplate);
     this.load.image('missionCorruptTemplate', missionCorruptTemplate);
-    // MISSION DISTRICT BORRASCAL SCENE ASSETS
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
     this.load.image('upMoneySceneBorrascal', upMoneySceneBorrascal);
     this.load.image('downMoneySceneBorrascal', downMoneySceneBorrascal);
     this.load.image('upPopularitySceneBorrascal', upPopularitySceneBorrascal);
     this.load.image('downPopularitySceneBorrascal', downPopularitySceneBorrascal);
     this.load.image('downCorruptionSceneBorrascal', downCorruptionSceneBorrascal);
-    // MISSION DISTRICT EL NIDO SCENE ASSETS
     this.load.image('regularSceneElNido', regularSceneElNido);
     this.load.image('upMoneySceneElNido', upMoneySceneElNido);
     this.load.image('downMoneySceneElNido', downMoneySceneElNido);
     this.load.image('upPopularitySceneElNido', upPopularitySceneElNido);
     this.load.image('downPopularitySceneElNido', downPopularitySceneElNido);
     this.load.image('downCorruptionSceneElNido', downCorruptionSceneElNido);
-    // MISSION DISTRICT GUINEA SCENE ASSETS
     this.load.image('regularSceneGuinea', regularSceneGuinea);
     this.load.image('upMoneySceneGuinea', upMoneySceneGuinea);
     this.load.image('downMoneySceneGuinea', downMoneySceneGuinea);
     this.load.image('upPopularitySceneGuinea', upPopularitySceneGuinea);
     this.load.image('downPopularitySceneGuinea', downPopularitySceneGuinea);
     this.load.image('downCorruptionSceneGuinea', downCorruptionSceneGuinea);
-    // MISSION DISTRICT NUEVA PRADERA SCENE ASSETS
     this.load.image('regularSceneNuevaPradera', regularSceneNuevaPradera);
     this.load.image('upMoneySceneNuevaPradera', upMoneySceneNuevaPradera);
     this.load.image('downMoneySceneNuevaPradera', downMoneySceneNuevaPradera);
     this.load.image('upPopularitySceneNuevaPradera', upPopularitySceneNuevaPradera);
     this.load.image('downPopularitySceneNuevaPradera', downPopularitySceneNuevaPradera);
     this.load.image('downCorruptionSceneNuevaPradera', downCorruptionSceneNuevaPradera);
-    // MISSION DISTRICT SAHAR SCENE ASSETS
     this.load.image('regularSceneSahar', regularSceneSahar);
     this.load.image('upMoneySceneSahar', upMoneySceneSahar);
     this.load.image('downMoneySceneSahar', downMoneySceneSahar);
     this.load.image('upPopularitySceneSahar', upPopularitySceneSahar);
     this.load.image('downPopularitySceneSahar', downPopularitySceneSahar);
     this.load.image('downCorruptionSceneSahar', downCorruptionSceneSahar);
-    // MISSION DISTRICT SOMOSAGUA SCENE ASSETS
     this.load.image('regularSceneSomosagua', regularSceneSomosagua);
     this.load.image('upMoneySceneSomosagua', upMoneySceneSomosagua);
     this.load.image('downMoneySceneSomosagua', downMoneySceneSomosagua);
     this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);
-
-    //Memory minigame assets
     this.load.image('memoryImage1', memoryImage1);
     this.load.image('memoryImage2', memoryImage2);
     this.load.image('memoryImage3', memoryImage3);
@@ -303,14 +268,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage6', memoryImage6);
     this.load.image('memoryImage7', memoryImage7);
     this.load.image('memoryImage8', memoryImage8);
-
-    // BLACK MARKET ASSETS
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
     this.load.image('pensa_icon', prensa_icon);
     this.load.image('hotel_icon', hotel_icon);
-
-    // ICONS ASSETS
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
@@ -321,8 +282,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('missionIcon', missionIcon);
     this.load.image('missionCorruptIcon', missionCorruptIcon);
     this.load.image('blackMarketIcon', blackMarketIcon);
-
-    // UI ASSETS
     this.load.image('battery', battery);
     this.load.image('endDayNormal', endDayNormal);
     this.load.image('endDayBright', endDayBright);
@@ -333,13 +292,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('marketBtnBright', marketBtnBright);
     this.load.image('marketBtnPressed', marketBtnPressed);
     this.load.image('marketBtnBlocked', marketBtnBlocked);
-    this.load.image('popularityBar', popularityBar);
-    this.load.image('mapBtnNormal', mapBtnNormal);
-    this.load.image('mapBtnBright', mapBtnBright);
-    this.load.image('mapBtnPressed', mapBtnPressed);
-    this.load.image('lowBarMarketUI', lowBarMarketUI);
-
-    // JSONS
     this.cache.json.add('regularMissions', RegularMission);
     this.cache.json.add('upMoney', UpMoneyMission);
     this.cache.json.add('upPopularity', UpPopularityMission);
@@ -348,13 +300,9 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
     this.cache.json.add('mapCutout', mapCutout);
-
-    // AUDIO
     this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
-    this.load.audio('blackMarketAudio', blackMarketAudio);
 
-    //ara saber cuando termina la carga real
     this.cargasCompletadas = false;
     this.load.on('complete', () => {
       this.cargasCompletadas = true;
@@ -362,61 +310,69 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(750, 375, 'loadScene');  
-    
+
+    this.add.image(750, 375, 'loadScene');
+
+    //WE CAN ADD MUSIC AND LOADING BAR HERE
     this.audioManager = new AudioManager(this);
-    this.registry.set('audioManager', this.audioManager);
-
-    this.audioManager.registerMusic('bgMusic', {
-        loop: true,
-        volumeMultiplier: 1
-    });
-
-    this.audioManager.registerMusic('blackMarketAudio', {
-        loop: true,
-        volumeMultiplier: 0.9
-    });
-
-    this.audioManager.registerSfx('quack', {
-        volumeMultiplier: 1
-    });
-
+    this.registry.set('audioManager', this.audioManager)
     this.audioManager.playMusic('bgMusic');
 
+    //animacion de la urna
+    this.anims.create({
+      key: 'animUrna',
+      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
+      frameRate: 1,
+      repeat: -1
+    });
+
+    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
+    urna.setDisplaySize(1536, 922);
+    urna.play('animUrna');
+
+    //BARRA DE CARGA
     const barWidth = 600;
-    const barHeight = 30;
+    const barHeight = 22;
     const barX = this.cameras.main.centerX - barWidth / 2;
-    const barY = this.cameras.main.centerY + 300;
+    const barY = 780;
 
+    //estilo
     const barBg = this.add.graphics();
-    barBg.fillStyle(0x000000, 0.5);
-    barBg.fillRect(barX, barY, barWidth, barHeight);
-
+    barBg.lineStyle(3, 0x1b263b, 1);
+    barBg.fillStyle(0x0d1117, 0.8);
+    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
+    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
     const progressBar = this.add.graphics();
-    progressBar.fillStyle(0xffff00, 1);
+    const barGlow = this.add.graphics();
 
     this.tweens.add({
       targets: { width: 0 },
       width: barWidth,
-      duration: 1500,
-      ease: 'Linear',
+      duration: 7000,
+      ease: 'Cubic.easeOut', //mas lento al final
       onUpdate: (tween) => {
+        const currentWidth = tween.getValue();
         progressBar.clear();
-        progressBar.fillStyle(0xffff00, 1);
-        progressBar.fillRect(barX, barY, tween.getValue(), barHeight);
-      },
-      onComplete: () => {
+        barGlow.clear();
+
+        if (currentWidth > 0) {
+          progressBar.fillStyle(0x3e5c9a, 1);
+          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
+
+          progressBar.fillStyle(0x5c7cba, 1);
+          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
+
+          barGlow.fillStyle(0xffffff, 0.15);
+          barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
+        }
+      }
+    });
+
+    urna.on('animationrepeat', () => {
+      if (this.cargasCompletadas) {
+        urna.stop();
         this.scene.start('introScene');
       }
     });
-  }
-
-  intentarPasarAIntro() {
-    if (this.cargasCompletadas && this.tiempoMinimoPasado) {
-      this.scene.start('introScene');
-    } else {
-      // Se i file non sono pronti, ricontrolla tra 100ms
-      this.time.delayedCall(100, () => this.intentarPasarAIntro());
-    }
   }
 }
