@@ -157,6 +157,7 @@ import mapCutout from '../assets/jsons/map.json';
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/il porco rosso.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
+import blackMarketAudio from '../assets/audio/black market.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -300,8 +301,11 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
     this.cache.json.add('mapCutout', mapCutout);
+
+    //AUDIO PART
     this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
+    this.load.audio('blackMarketAudio', blackMarketAudio);
 
     this.cargasCompletadas = false;
     this.load.on('complete', () => {
