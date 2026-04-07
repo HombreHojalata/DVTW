@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { PRODUCTS } from '../market/products.js';
+import marketFooterUI from '../UI/marketFooterUI.js';
 
 export default class BlackMarketScene extends Phaser.Scene {
     constructor() {
@@ -14,7 +15,6 @@ export default class BlackMarketScene extends Phaser.Scene {
     create() {
 
         this.audioManager = this.registry.get('audioManager');
-
         if (this.audioManager) {
             this.audioManager.switchMusic('blackMarketAudio');
         }
@@ -38,35 +38,13 @@ export default class BlackMarketScene extends Phaser.Scene {
             color: '#ffcc00'
         }).setOrigin(0.5);
 
-        this.drawRoundBox(50, 30, 300, 50, 0x8fd886, 0x0e6e1e).setDepth(1);
+        this.footer = new marketFooterUI(this);
 
-        this.moneyText = this.add.text(200, 55, `DINERO: ${this.player.getMoney()} $`, {
-            fontFamily: 'Courier New',
-            fontSize: '22px',
-            color: '#0e6e1e'
-        }).setOrigin(0.5).setDepth(2);
-
-        this.moneyText.setStroke('#0e6e1e', 3);
-
-        this.updateCorruptionBar(gameWidth, gameHeight);
+        this.updateCorruptionBar(gameHeight);
         this.renderProducts();
         this.createTabsButtons(gameWidth, gameHeight);
 
         this.vendedor = this.add.image(gameWidth - 250, gameHeight / 2, 'vendedor').setOrigin(0.5).setScale(1).setDepth(10);
-
-        const backButton = this.add.text(gameWidth - 180, gameHeight - 50, 'VOLVER AL MAPA', {
-            fontFamily: 'Courier New',
-            fontSize: '30px',
-            fontWeight: 'bold',
-            backgroundColor: '#000',
-            padding: 10
-        }).setOrigin(0.5).setInteractive({ useHandCursor: true }).setDepth(10);
-
-        backButton.on('pointerup', () => {
-            this.scene.stop();
-            this.scene.resume('gameScene');
-            this.audioManager.switchMusic('bgMusic');
-        });
     }
 
     renderProducts() {
@@ -200,48 +178,20 @@ export default class BlackMarketScene extends Phaser.Scene {
         }).setOrigin(0.5);
     }
 
-    updateCorruptionBar(w, h) {
-        const x = 50;
-        const y = h - 90;
-        const width = 550;
-        const height = 70;
+    updateCorruptionBar(h) {
+        const barStartX = 536;
+        const barEndX = 1136;
+        const barWidth = barEndX - barStartX;
+        const barHeight = 81;
+        const barY = h - barHeight + 11;
 
-        this.drawRoundBox(x, y, width, height, 0xffffff, 0x000000);
+        if (this.corruptionBar) this.corruptionBar.destroy();
+        this.corruptionBar = this.add.rectangle(barStartX, barY, barWidth, barHeight, 0x000000).setOrigin(0).setDepth(9);
 
-        this.add.text(x + 25, y + 25, 'CORRUPCIÓN:', {
-            fontFamily: 'Courier New',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            color: '#000000'
-        }).setStroke('#000', 2);
+        const corruption = Phaser.Math.Clamp(this.player.getCorruption(), 0, 100);
+        const fillWidth = barWidth * (corruption / 100);
 
-        const barX = x + 170;
-        const barY = y + 20;
-        const barWidth = 330;
-        const barHeight = 30;
-
-        this.add.rectangle(barX, barY, barWidth, barHeight, 0x333333).setOrigin(0);
-
-        const fillPercent = Phaser.Math.Clamp(this.player.getCorruption(), 0, 100) / 100;
-        this.add.rectangle(barX, barY, barWidth * fillPercent, barHeight, 0xff0000).setOrigin(0);
-
-        this.add.text(barX + barWidth + 20, barY + barHeight / 2, `${Math.floor(this.player.getCorruption())}%`, {
-            fontFamily: 'Courier New',
-            fontSize: '18px',
-            color: '#000000',
-            fontStyle: 'bold'
-        }).setOrigin(0, 0.5);
-    }
-
-    drawRoundBox(x, y, width, height, color, strokeColor) {
-        const g = this.add.graphics();
-        const radius = 15;
-
-        g.fillStyle(color, 1);
-        g.fillRoundedRect(x, y, width, height, radius);
-        g.lineStyle(4, strokeColor, 1);
-        g.strokeRoundedRect(x, y, width, height, radius);
-
-        return g;
+        if (this.corruptionFill) this.corruptionFill.destroy();
+        this.corruptionFill = this.add.rectangle(barStartX, barY, fillWidth, barHeight, 0xff3131).setOrigin(0).setDepth(10);
     }
 }

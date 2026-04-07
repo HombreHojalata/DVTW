@@ -145,6 +145,10 @@ import marketBtnBright from '../assets/UIs/marketBtnBright.png'
 import marketBtnPressed from '../assets/UIs/marketBtnPressed.png'
 import marketBtnBlocked from '../assets/UIs/marketBtnBlocked.png'
 import popularityBar from '../assets/UIs/popularityBar.png'
+import mapBtnNormal from '../assets/UIs/mapBtnNormal.png'
+import mapBtnBright from '../assets/UIs/mapBtnBright.png'
+import mapBtnPressed from '../assets/UIs/mapBtnPressed.png'
+import lowBarMarketUI from '../assets/UIs/lowBarMarketUI.png'
 
 // JSON misiones
 import RegularMission from '../assets/jsons/regularMissions.json';
@@ -330,6 +334,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image('marketBtnPressed', marketBtnPressed);
     this.load.image('marketBtnBlocked', marketBtnBlocked);
     this.load.image('popularityBar', popularityBar);
+    this.load.image('mapBtnNormal', mapBtnNormal);
+    this.load.image('mapBtnBright', mapBtnBright);
+    this.load.image('mapBtnPressed', mapBtnPressed);
+    this.load.image('lowBarMarketUI', lowBarMarketUI);
 
     // JSONS
     this.cache.json.add('regularMissions', RegularMission);
