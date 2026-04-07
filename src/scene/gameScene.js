@@ -42,18 +42,18 @@ export default class GameScene extends Phaser.Scene {
         // SI VOTOS POR ENCIMA DEL 50 GANAS
         // SI VOTOS POR DEBAJO DEL 50 PIERDES
         // SI TE QUEDAS EN BANCARROTA AL COMENZAR EL DIA PIERES(COMIENZO PORQUE RECIBES INGRESOS)
-        if(this.day.getDayNumber() === 6){                                      // GAME END          
+        if (this.day.getDayNumber() === 6){                                      // GAME END          
             this.population = this.map.getTotalPopulation();
             this.popularity = this.map.getPopularity();
             this.win = null;
-            if(this.popularity >= this.population/2){
+            if (this.popularity >= this.population/2){
                 if(this.player.getMoney() < 0) this.win = false;             
                 else this.win = true;
             } 
             else this.win = false;
             this.scene.stop();
             this.scene.launch('finishScene', { win: this.win });
-        }else{                                                                  // GAME START/CONTINUE   
+        } else {                                                                  // GAME START/CONTINUE   
             console.log("GAME: " + "DAY " + this.day.getDayNumber());
             // SPAWN DAY VISUAL
             if (this.registry.get('flagShow')) this.showDayIntro();
@@ -84,6 +84,8 @@ export default class GameScene extends Phaser.Scene {
             this.endDayBtnUI.btn.setDepth(22);
             this.footerUI = new footerUI(this);
 
+            this.middayOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x00c3ff).setOrigin(0).setAlpha(0).setDepth(1);
+            this.afternoonOverlay = this.add.rectangle(0, 0, this.width, this.height, 0xff9500).setOrigin(0).setAlpha(0).setDepth(1);
             this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
 
             this.events.on('resume', () => {
@@ -93,6 +95,10 @@ export default class GameScene extends Phaser.Scene {
             //MISSION TEST
             this.scheduleNextMission();
         }
+
+        this.events.on('resume', () => {
+                this.footerUI = new footerUI(this);
+        });
     }
 
     scheduleNextMission() {
@@ -114,7 +120,7 @@ export default class GameScene extends Phaser.Scene {
         //this.totalDayDurationMs = 0.5 * 60 * 1000;
         //this.energyTickMs = 250;
         this.totalDayDurationMs = (0.5 * 60 * 8000) / 20; // TODO: Cambiar tras testeo
-        this.energyTickMs = 1000;
+        this.energyTickMs = 1000 / 100;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
 
@@ -129,7 +135,38 @@ export default class GameScene extends Phaser.Scene {
                 this.player.updateEnergy(-this.energyDrainPerTick);
                 this.refreshHUD();
 
+                if (this.player.getEnergy() <= 50 && !this.midday) {
+                    this.midday = true;
+                    console.log('MITAD DEL DÍA -> ABRE EL MERCADO');
+                    this.tweens.add({
+                        targets: this.middayOverlay,
+                        alpha: 0.10,
+                        duration: 3000,
+                        ease: 'Power2'
+                    });
+                    if (this.day != 1) this.footerUI.openMarket();
+                }
+
+                if (this.player.getEnergy() <= 25 && !this.afternoon) {
+                    this.afternoon = true;
+                    console.log('ATARDECE');
+                    this.tweens.add({
+                        targets: this.afternoonOverlay,
+                        alpha: 0.15,
+                        duration: 3000,
+                        ease: 'Power2'
+                    });
+                    this.tweens.add({
+                        targets: this.middayOverlay,
+                        alpha: 0,
+                        duration: 2000,
+                        ease: 'Power2'
+                    });
+                }
+
                 if (this.player.getEnergy() <= 0) {
+                    this.midday = false;
+                    this.afternoon = false;
                     this.energyTimerEvent.remove(false);
                     console.log('ENERGÍA AGOTADA');
                     this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(20);
@@ -137,6 +174,12 @@ export default class GameScene extends Phaser.Scene {
                         targets: this.nightOverlay,
                         alpha: 0.35,
                         duration: 2000,
+                        ease: 'Power2'
+                    });
+                    this.tweens.add({
+                        targets: this.afternoonOverlay,
+                        alpha: 0,
+                        duration: 1500,
                         ease: 'Power2'
                     });
                 }

@@ -33,7 +33,7 @@ export default class footerUI {
             color: '#2e6417'
         }).setOrigin(1, 0.5).setDepth(11);
     }
-    refreshMoney() {if(this.moneyText) {this.moneyText.setText(this.player.getMoney());}}
+    refreshMoney() { if (this.moneyText) { this.moneyText.setText(this.player.getMoney());} }
     // DISTRICT
     createDistrictText(sectionMoney, sectionDistrict, footerX, footerY, footerHeight) {
         this.districtTitleText = this.scene.add.text(footerX + sectionMoney + sectionDistrict / 2, footerY + footerHeight / 2, 'QUACKINGTON DC', {
@@ -43,7 +43,7 @@ export default class footerUI {
         }).setOrigin(0.5).setDepth(11);
         return this.districtTitleText;
     }
-    updateDistrictFooter(district) {if(this.districtTitleText) {this.districtTitleText.setText(district.getName());}}
+    updateDistrictFooter(district) { if(this.districtTitleText) {this.districtTitleText.setText(district.getName()); }}
 
     createBlackMarketButton(sectionMoney, sectionDistrict, sectionBlackMarket, footerX, footerY, footerHeight) {
         const x = footerX + sectionMoney + sectionDistrict + sectionBlackMarket / 2 + 15;
@@ -107,5 +107,16 @@ export default class footerUI {
         });
 
         return this.blackMarketBtn;
+    }
+
+    openMarket() {
+        this.scene.tweens.add({
+            targets: this.blackMarketButton,
+            scale: 1.05,
+            duration: 200,
+            yoyo: true,
+            ease: 'Sine.easeInOut',
+            loop: 1
+        });
     }
 }

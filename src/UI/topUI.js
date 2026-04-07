@@ -21,11 +21,8 @@ export default class topUI {
         const x = 300;
         const y = 20;
 
-        const barWidth = 878;
-        const barHeight = 80;   
-
-        const barX = x + 100;
-        const barY = y + 50;
+        const barWidth = 880;
+        const barHeight = 75;
 
         this.graphics = this.scene.add.graphics().setDepth(21);
         this.graphics.fillRect(x, y, barWidth, barHeight);
@@ -44,7 +41,7 @@ export default class topUI {
             barWidth * (this.neutralPercent / 100),
             barHeight
         );
-        this.frame = this.scene.add.image(x - 10, y, 'popularityBar').setOrigin(0).setDepth(22);
+        this.frame = this.scene.add.image(x - 10, y - 5, 'popularityBar').setOrigin(0).setDepth(22);
 
         const textStyle = {
             fontSize: '35px',
@@ -55,8 +52,8 @@ export default class topUI {
             strokeThickness: 4
         };
 
-        this.greenText = this.scene.add.text(x + 20, y + 18, `${Math.round(this.popularityPercent)}%`, textStyle).setDepth(23);
-        this.redText = this.scene.add.text(x + barWidth - 70, y + 18, `${Math.round(this.neutralPercent)}%`, textStyle).setStyle({ align: 'right' }).setDepth(23);
+        this.greenText = this.scene.add.text(x + 20, y + 13, `${Math.round(this.popularityPercent)}%`, textStyle).setDepth(23);
+        this.redText = this.scene.add.text(x + barWidth - 70, y + 13, `${Math.round(this.neutralPercent)}%`, textStyle).setStyle({ align: 'right' }).setDepth(23);
 
         this.blocker = this.scene.add.zone(x - 10, y, barWidth + 20, barHeight).setOrigin(0).setInteractive();
     }
