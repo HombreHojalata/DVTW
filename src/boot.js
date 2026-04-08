@@ -182,13 +182,80 @@ export default class Boot extends Phaser.Scene {
 
     // PRINCIPAL SCENE ASSETS
     this.load.image('loadScene', loadScene);
+
+    //AUDIO PART
+    this.load.audio('bgMusic', gameAudio);
+  }
+
+  create() {
+    this.add.image(750, 375, 'loadScene');
+
+    //WE CAN ADD MUSIC AND LOADING BAR HERE
+    this.audioManager = new AudioManager(this);
+    this.registry.set('audioManager', this.audioManager)
+    this.audioManager.playMusic('bgMusic');
+
+    //animacion de la urna
+    this.anims.create({
+      key: 'animUrna',
+      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
+      frameRate: 1,
+      repeat: -1
+    });
+
+    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
+    urna.setDisplaySize(1536, 922);
+    urna.play('animUrna');
+
+    //BARRA DE CARGA
+    const barWidth = 600;
+    const barHeight = 22;
+    const barX = this.cameras.main.centerX - barWidth / 2;
+    const barY = 780;
+
+    //estilo
+    const barBg = this.add.graphics();
+    barBg.lineStyle(3, 0x1b263b, 1);
+    barBg.fillStyle(0x0d1117, 0.8);
+    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
+    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
+    const progressBar = this.add.graphics();
+    const barGlow = this.add.graphics();
+
+    this.tweens.add({
+      targets: { width: 0 },
+      width: barWidth,
+      duration: 7000,
+      ease: 'Cubic.easeOut', //mas lento al final
+      onUpdate: (tween) => {
+        const currentWidth = tween.getValue();
+        progressBar.clear();
+        barGlow.clear();
+
+        if (currentWidth > 0) {
+          progressBar.fillStyle(0x3e5c9a, 1);
+          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
+
+          progressBar.fillStyle(0x5c7cba, 1);
+          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
+
+          barGlow.fillStyle(0xffffff, 0.15);
+          barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
+        }
+      }
+    });
+
+    this.cargasCompletadas = false;
+    this.load.on('complete', () => {
+      this.cargasCompletadas = true;
+    });
+
+    // START LOADING REMAINING ASSETS
     this.load.spritesheet('animatedAgenda', agendaSheet, {
       frameWidth: 1536,
       frameHeight: 922
     });
     this.load.image('configScene', configScene);
-
-    // TUTORIAL ASSETS
     this.load.image('tutorialAnimals1', tutorialAnimals1);
     this.load.image('tutorialAnimals2', tutorialAnimals2);
     this.load.image('tutorialAnimals3', tutorialAnimals3);
@@ -196,8 +263,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('textCloud', textCloud);
     this.load.image('flamingo', flamingo);
     this.load.image('blackMarketMessage', blackMarketMessage);
-
-    // RESTO DEI LOAD... (tutti i tuoi file audio, immagini e json)
     this.load.image('presidente', presidente);
     this.load.image('map', map);
     this.load.image('districtTemplate', districtTemplate);
@@ -319,76 +384,10 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
     this.cache.json.add('mapCutout', mapCutout);
-
-    //AUDIO PART
-    this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
 
-    this.cargasCompletadas = false;
-    this.load.on('complete', () => {
-      this.cargasCompletadas = true;
-    });
-  }
-
-  create() {
-
-    this.add.image(750, 375, 'loadScene');
-
-    //WE CAN ADD MUSIC AND LOADING BAR HERE
-    this.audioManager = new AudioManager(this);
-    this.registry.set('audioManager', this.audioManager)
-    this.audioManager.playMusic('bgMusic');
-
-    //animacion de la urna
-    this.anims.create({
-      key: 'animUrna',
-      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
-      frameRate: 1,
-      repeat: -1
-    });
-
-    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
-    urna.setDisplaySize(1536, 922);
-    urna.play('animUrna');
-
-    //BARRA DE CARGA
-    const barWidth = 600;
-    const barHeight = 22;
-    const barX = this.cameras.main.centerX - barWidth / 2;
-    const barY = 780;
-
-    //estilo
-    const barBg = this.add.graphics();
-    barBg.lineStyle(3, 0x1b263b, 1);
-    barBg.fillStyle(0x0d1117, 0.8);
-    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
-    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
-    const progressBar = this.add.graphics();
-    const barGlow = this.add.graphics();
-
-    this.tweens.add({
-      targets: { width: 0 },
-      width: barWidth,
-      duration: 7000,
-      ease: 'Cubic.easeOut', //mas lento al final
-      onUpdate: (tween) => {
-        const currentWidth = tween.getValue();
-        progressBar.clear();
-        barGlow.clear();
-
-        if (currentWidth > 0) {
-          progressBar.fillStyle(0x3e5c9a, 1);
-          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
-
-          progressBar.fillStyle(0x5c7cba, 1);
-          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
-
-          barGlow.fillStyle(0xffffff, 0.15);
-          barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
-        }
-      }
-    });
+    this.load.start();
 
     urna.on('animationrepeat', () => {
       if (this.cargasCompletadas) {
