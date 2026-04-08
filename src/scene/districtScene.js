@@ -10,6 +10,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.district = data.district;
         this.tutorial = data.tutorial || false;
         this.order = data.order || 1;
+        this.day = data.day || 1;
     }
        
     create() {
@@ -30,7 +31,6 @@ export default class DistrictScene extends Phaser.Scene {
         this.player = this.registry.get('gameManager').getPlayer();
         this.footerUI = new footerUI(this, this.player).create();
         this.footerUI.updateDistrictFooter(this.district);
-
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth, newHeight, offsetX, offsetY);
         //DISTRICT INFO
@@ -43,6 +43,11 @@ export default class DistrictScene extends Phaser.Scene {
         this.storePositionX = this.spawnBuiltList(newWidth, offsetX, newHeight);
         this.storeButton = this.spawnStoreButton(newHeight, this.storePositionX, this.tutorial).setDepth(19);
         this.spawnAllFooter(newWidth, offsetX, newHeight, offsetY);
+
+        //BLOCKER
+        this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
+        if (this.day > 2) this.blocker.destroy();
+
         //TUTORIAL
         if(this.tutorial){
             const { width, height } = this.sys.game.config;

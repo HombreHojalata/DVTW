@@ -60,6 +60,7 @@ import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.p
 import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'
 import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'
 import districtStoreBg from '../assets/map/buildings/districtStoreBg.png'
+import blockerDistrict from '../assets/map/districtScenes/blockerDistrict.png'
 
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
@@ -234,6 +235,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('specialBuildingSomosagua', specialBuildingSomosagua);
     this.load.image('specialBuildingMafia', specialBuildingMafia);
     this.load.image('districtStoreBg', districtStoreBg);
+    this.load.image('blockerDistrict', blockerDistrict);
     this.load.image('missionTemplate', missionTemplate);
     this.load.image('missionCorruptTemplate', missionCorruptTemplate);
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
