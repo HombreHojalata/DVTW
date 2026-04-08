@@ -7,7 +7,7 @@
 
 ---
 
-# 1. Visión general
+# 1. Visión generalo
 ## 1.1. Descripción
 **Lame Duck** es un juego de gestión de recursos y estrategía, en el que controlas al pato presidente de la ciudad de Quackington DC durante los últimos días de su mandato intentando contentar lo máximo posible a los ciudadanos para conseguir su apoyo en las elecciones venideras y ser reelegidos.
 
