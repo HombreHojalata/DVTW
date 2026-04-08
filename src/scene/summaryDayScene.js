@@ -10,69 +10,57 @@ export default class SummaryDayScene extends Phaser.Scene {
         this.summary = data.summary;
     }
     create() {
-        // ATRIBUTES
         const { width, height } = this.sys.game.config;
-        this.dayNumber = this.summary.dayNumber,
-        this.decisionsTaken = this.summary.decisionsTaken,
-        this.resourcesGained = this.summary.resourcesGained
-        const {money, corruption, energy, popularity} = this.resourcesGained;
 
-        // VISUAL
-        const blocker = this.add.zone(0, 0, width, height).setOrigin(0).setInteractive();
-        const summaryContainer = this.add.container(0, 0).setDepth(100);
-        const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
-        const summaryText = this.add.text(width / 2, height / 4 - 50, `RESUMEN DÍA ${this.dayNumber}`, {
+        let currentY = 100; // posición inicial
+
+        const summaryContainer = this.add.container(width / 2, height).setDepth(100);
+
+        const addLine = (text, style, spacing = 50) => {
+            const line = this.add.text(0, currentY, text, style).setOrigin(0.5);
+            summaryContainer.add(line);
+            currentY += spacing;
+        };
+
+        // TITTLE
+        const titleStyle = {
             fontSize: '80px',
             fontFamily: 'Times New Roman',
-            fontWeight: 'bold',
+            fontStyle: 'bold',
             color: '#ffffff',
             align: 'center'
-        }).setOrigin(0.5);
-        const decisionsFormatted = this.decisionsTaken.map((d, i) => `${i + 1}. ${d}`).join('\n');
-
-        const decisionText = this.add.text(width/2, height/4 + 100, decisionsFormatted, {
+        };
+        addLine(`RESUMEN DÍA ${this.summary.dayNumber}`, titleStyle, 120);
+        // DECISIONS TAKEN
+        const textStyle = {
             fontSize: '34px',
             fontFamily: 'Times New Roman',
-            fontWeight: 'bold',
             color: '#ffffff',
             align: 'center'
-        }).setOrigin(0.5);
-        const resourcesText1 = this.add.text(width/2, height/4 + 400,  `DINERO: ${money}`, {
+        };
+        this.summary.decisionsTaken.forEach((d, i) => {addLine(`${i + 1}. ${d}`, textStyle, 60);});
+        // RESOURCES GAINED
+        const smallStyle = {
             fontSize: '28px',
             fontFamily: 'Times New Roman',
-            fontWeight: 'bold',
             color: '#ffffff',
             align: 'center'
-        }).setOrigin(0.5);
-        const resourcesText2 = this.add.text(width/2, height/4 + 450,  `CORRUPCION: ${corruption}`, {
-            fontSize: '28px',
-            fontFamily: 'Times New Roman',
-            fontWeight: 'bold',
-            color: '#ffffff',
-            align: 'center'
-        }).setOrigin(0.5);
-        const resourcesText3 = this.add.text(width/2, height/4 + 500, `PORCENTAGE DE VOTOS:  + ${popularity}`, {
-            fontSize: '28px',
-            fontFamily: 'Times New Roman',
-            fontWeight: 'bold',
-            color: '#ffffff',
-            align: 'center'
-        }).setOrigin(0.5);
-        summaryContainer.add([blocker, bg, summaryText, decisionText, resourcesText1, resourcesText2, resourcesText3]);
+        };
+        const { money, corruption, popularity } = this.summary.resourcesGained;
+        addLine(`DINERO GANADO: ${money}`, smallStyle);
+        addLine(`CORRUPCIÓN GANADO: ${corruption}`, smallStyle);
+        addLine(`VOTOS GANADOS: +${popularity}`, smallStyle);
 
-        this.time.delayedCall(4000, () => {
-            this.tweens.add({
-                targets: summaryContainer,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () =>{
-                    summaryContainer.destroy()
-                    this.registry.get("gameManager").nextDay();
-                    this.scene.stop();
-                    this.scene.start('gameScene');
-                } 
-            });
+        this.tweens.add({
+            targets: summaryContainer,
+            y: -currentY, 
+            duration: 7000, 
+            ease: 'Linear',
+            onComplete: () => {
+                summaryContainer.destroy();
+                this.registry.get("gameManager").nextDay();
+                this.scene.start('gameScene');
+            }
         });
     }
 }
