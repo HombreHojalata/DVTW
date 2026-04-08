@@ -108,12 +108,12 @@ export default class District {
         this.satisfaction = this.baseSatisfaction;
         if(this.taxes > 50) this.satisfaction -= (this.taxes - 50) * 0.5;
         else if(this.taxes < 50) this.satisfaction += (50 - this.taxes) * 0.5;
-        if(this.security > 50) this.satisfaction += (this.security - 50) * 0.5;
-        else if(this.security < 50) this.satisfaction -= (50 - this.security) * 0.5;
-        if(this.workSchedule > 50) this.satisfaction -= (this.workSchedule - 50) * 0.5;
-        else if(this.workSchedule < 50) this.satisfaction += (50 - this.workSchedule) * 0.5;
-        if(this.cleaning > 50) this.satisfaction += (this.cleaning - 50) * 0.5;
-        else if(this.cleaning < 50) this.satisfaction -= (50 - this.cleaning) * 0.5;
+        if(this.security > 10) this.satisfaction += (this.security - 10) * 0.5;
+        else if(this.security < 10) this.satisfaction -= (10 - this.security) * 0.5;
+        if(this.workSchedule > 8) this.satisfaction -= (this.workSchedule - 8) * 1.5;
+        else if(this.workSchedule < 8) this.satisfaction += (8 - this.workSchedule) * 1.5;
+        if(this.cleaning > 10) this.satisfaction += (this.cleaning - 10) * 0.5;
+        else if(this.cleaning < 10) this.satisfaction -= (10 - this.cleaning) * 0.5;
 
         this.satisfaction = Math.max(0, Math.min(100, this.satisfaction));
 
