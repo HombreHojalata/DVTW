@@ -9,7 +9,7 @@ export default class DistrictNuevaPradera extends District {
     }
     createSceneList(){
         const list = [];
-        list.push('districtNuevaPraderaScene1');
+        list.push('districtNuevaPraderaScene1', 'districtNuevaPraderaScene2');
         return list;
     }
     // VALUES NEED TO CHANGE

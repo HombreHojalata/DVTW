@@ -9,7 +9,7 @@ export default class DistrictElNido extends District {
     }
     createSceneList(){
         const list = [];
-        list.push('districtElNidoScene1');
+        list.push('districtElNidoScene1', 'districtElNidoScene2');
         return list;
     }
     // VALUES NEED TO CHANGE PNGBuilding,name,cost,income,satisfaction,population

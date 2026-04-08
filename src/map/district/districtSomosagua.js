@@ -9,7 +9,7 @@ export default class DistrictSomosagua extends District {
     }
     createSceneList(){
         const list = [];
-        list.push('districtSomosaguaScene1');
+        list.push('districtSomosaguaScene1', 'districtSomosaguaScene2');
         return list;
     }
     // VALUES NEED TO CHANGEPNGBuilding,name,cost,income,satisfaction,population
