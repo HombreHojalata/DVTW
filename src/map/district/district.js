@@ -67,7 +67,7 @@ export default class District {
         button.on('pointerout', () => {outline.setVisible(false);});
         button.on('pointerup', () => {
             scene.scene.pause('gameScene');
-            scene.scene.launch('districtScene', { district: this, day: scene.day.getDayNumber() });
+            scene.scene.launch('districtScene', { district: this, dayo: scene.day.getDayNumber() });
         });
         return button;
     }

@@ -45,8 +45,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.spawnAllFooter(newWidth, offsetX, newHeight, offsetY);
 
         //BLOCKER
-        this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
-        if (this.day > 2) this.blocker.destroy();
+        if (this.day < 2) this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
 
         //TUTORIAL
         if(this.tutorial){
@@ -55,8 +54,9 @@ export default class DistrictScene extends Phaser.Scene {
             this.blockerPercentage = this.add.zone(580, 480, width/2, height/5).setOrigin(0).setInteractive().setDepth(20);
             this.blockerFooter = this.add.zone(0, height - 100, width, 100).setOrigin(0).setInteractive().setDepth(20);
             this.containerStore = null;
-            if(this.order === 1) this.explainTutorial(width,height);
-            else if(this.order === 2)this.finishTutorial(width,height);
+            if (this.order === 1) this.explainTutorial(width, height);
+            else if (this.order === 2) this.finishTutorial(width, height);
+            else if (this.order === 3) this.explaintParameters(width, height);
         }
     }
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
@@ -536,6 +536,49 @@ export default class DistrictScene extends Phaser.Scene {
             this.scene.stop();
             this.scene.stop('tutorialScene');
             this.scene.launch('tutorialScene', { order: 2 });
+        });
+    }
+    // ORDER 3
+    explaintParameters(width, height) {
+        const container = this.add.container(width / 2, height / 2).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 300, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, 'Estamos nuevamente en El Nido, el lugar ideal para mostrarle sus nuevo Parámetros de Distritos: Impuestos, Horario Laboral, Seguridad, y Limpieza de las calles.\n\nCada parámetro es un delicado equilibrio. Al ajustarlo, la satisfacción de los vecinos y el dinero del distrito irán variando.\nDebe encontrar el balance que más le convenga, señor.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 0, 100, 'Continuar', () => {
+            container.destroy();
+            this.epxlainTestParameter(width, height);
+        });
+    }
+    epxlainTestParameter(width, height) {
+        const container = this.add.container(width / 4 - 30, height * 0.35 + 30).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -50, 'Vamos a porbar a ampliar la limpieza del dis', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 600 }
+        }).setOrigin(0.5);
+
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 180, 120, 'Continuar', () => {
+            container.destroy();
+            this.explainStoreButton(width, height);
+        });
+        this.createTutorialButton(container, -180, 120, 'Volver', () => {
+            container.destroy();
+            this.explainTutorial(width, height);
         });
     }
 }

@@ -1,7 +1,7 @@
 export default class day{
 
     constructor(previousDay){
-        this.dayNumber = previousDay ? previousDay.dayNumber  + 1 : 1;
+        this.dayNumber = previousDay ? previousDay + 1 : 1;
         this.decisionstaken=[];
         this.resourcesGained={
             money: 0,
