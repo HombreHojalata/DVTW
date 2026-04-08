@@ -1,7 +1,7 @@
 [
   {
-    "name": "Reforma urgente del ayuntamiento",
-    "description": "El edificio del ayuntamiento necesita reformas... justo antes de las elecciones.",
+    "name": "Reforma urgente del sistema de alcantarillado",
+    "description": "El sistema de alcantarillado necesita reformas... justo antes de las elecciones.",
     "event": false,
     "corrupt": false,
     "minigame": false,
@@ -10,17 +10,17 @@
         "probability": 100,
         "description": "Reformarlo todo para que luzca moderno",
         "energy": -6,
-        "money": -180,
+        "money": -180000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 7
       },
       {
         "probability": 100,
         "description": "Reformar solo la fachada visible",
         "energy": -4,
-        "money": -120,
-        "corruption": 1,
-        "popularity": 1
+        "money": -120000,
+        "corruption": 4,
+        "popularity": 7
       }
     ]
   },
@@ -34,18 +34,18 @@
       {
         "probability": 100,
         "description": "Construir una rotonda enorme",
-        "energy": -5,
-        "money": -150,
+        "energy": -15,
+        "money": -150000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 15
       },
       {
         "probability": 100,
         "description": "Hacer una rotonda pequeña pero simbólica",
-        "energy": -3,
-        "money": -90,
+        "energy": -10,
+        "money": -90000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 10
       }
     ]
   },
@@ -60,17 +60,17 @@
         "probability": 100,
         "description": "Contratar una banda famosa",
         "energy": -6,
-        "money": -200,
+        "money": -200000,
         "corruption": 0,
-        "popularity": 4
+        "popularity": 15
       },
       {
         "probability": 100,
         "description": "Traer artistas locales",
         "energy": -4,
-        "money": -120,
+        "money": -100000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 7
       }
     ]
   },
@@ -85,17 +85,17 @@
         "probability": 100,
         "description": "Financiar el proyecto completo",
         "energy": -4,
-        "money": -140,
+        "money": -140000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 9
       },
       {
         "probability": 100,
         "description": "Dar solo una subvención parcial",
         "energy": -2,
-        "money": -80,
+        "money": -80000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 6
       }
     ]
   },
@@ -110,17 +110,17 @@
         "probability": 100,
         "description": "Encargar una estatua monumental",
         "energy": -3,
-        "money": -170,
+        "money": -170000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 8
       },
       {
         "probability": 100,
         "description": "Encargar una versión más modesta",
         "energy": -2,
-        "money": -90,
+        "money": -90000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 4
       }
     ]
   },
@@ -135,17 +135,17 @@
         "probability": 100,
         "description": "Organizar un gran festival",
         "energy": -5,
-        "money": -160,
+        "money": -160000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 10
       },
       {
         "probability": 100,
         "description": "Organizar un evento más pequeño",
         "energy": -3,
-        "money": -100,
+        "money": -100000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 6
       }
     ]
   },
@@ -160,17 +160,17 @@
         "probability": 100,
         "description": "Repararlo completamente",
         "energy": -6,
-        "money": -180,
+        "money": -180000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 7
       },
       {
         "probability": 100,
         "description": "Hacer reparaciones mínimas",
         "energy": -3,
-        "money": -100,
+        "money": -100000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 3
       }
     ]
   },
@@ -185,17 +185,17 @@
         "probability": 100,
         "description": "Comprar cientos de bicicletas",
         "energy": -5,
-        "money": -150,
+        "money": -150000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 9
       },
       {
         "probability": 100,
         "description": "Comprar un lote más pequeño",
         "energy": -3,
-        "money": -90,
+        "money": -90000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 6
       }
     ]
   },
@@ -210,17 +210,17 @@
         "probability": 100,
         "description": "Reformarlo completamente",
         "energy": -5,
-        "money": -170,
+        "money": -170000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 8
       },
       {
         "probability": 100,
         "description": "Cambiar solo bancos y farolas",
         "energy": -3,
-        "money": -90,
+        "money": -90000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 4
       }
     ]
   },
@@ -235,17 +235,17 @@
         "probability": 100,
         "description": "Lanzar una campaña enorme",
         "energy": -4,
-        "money": -150,
+        "money": -150000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 15
       },
       {
         "probability": 100,
         "description": "Hacer una campaña modesta",
         "energy": -2,
-        "money": -80,
+        "money": -80000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 8
       }
     ]
   },
@@ -260,17 +260,17 @@
         "probability": 100,
         "description": "Construir un centro completo",
         "energy": -6,
-        "money": -190,
+        "money": -190000,
         "corruption": 0,
-        "popularity": 4
+        "popularity": 10
       },
       {
         "probability": 100,
         "description": "Adaptar un edificio existente",
         "energy": -4,
-        "money": -120,
+        "money": -120000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 8
       }
     ]
   },
@@ -285,17 +285,17 @@
         "probability": 100,
         "description": "Financiar muchas becas",
         "energy": -3,
-        "money": -140,
+        "money": -140000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 10
       },
       {
         "probability": 100,
         "description": "Financiar pocas becas",
         "energy": -2,
-        "money": -80,
+        "money": -80000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 7
       }
     ]
   },
@@ -310,17 +310,17 @@
         "probability": 100,
         "description": "Instalar iluminación gigante",
         "energy": -3,
-        "money": -160,
+        "money": -160000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 12
       },
       {
         "probability": 100,
         "description": "Instalar luces normales",
         "energy": -2,
-        "money": -90,
+        "money": -90000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 6
       }
     ]
   },
@@ -335,17 +335,17 @@
         "probability": 100,
         "description": "Reformarla completamente",
         "energy": -4,
-        "money": -150,
+        "money": -150000,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 8
       },
       {
         "probability": 100,
         "description": "Comprar nuevo mobiliario",
         "energy": -2,
-        "money": -80,
+        "money": -80000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 5
       }
     ]
   },
@@ -360,17 +360,17 @@
         "probability": 100,
         "description": "Comprar equipos de última generación",
         "energy": -6,
-        "money": -200,
+        "money": -200000,
         "corruption": 0,
-        "popularity": 4
+        "popularity": 14
       },
       {
         "probability": 100,
         "description": "Comprar equipos básicos",
         "energy": -4,
-        "money": -120,
+        "money": -120000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 8
       }
     ]
   }
