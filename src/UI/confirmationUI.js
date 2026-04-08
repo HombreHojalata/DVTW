@@ -28,7 +28,7 @@ export default class confirmationUI {
             fontWight: 'bold'
         };
         this.btnNo = this.scene.add.text(0, 80, "[ SEGUIR TRABAJANDO ]", btnStyle).setOrigin(0.5).setAngle(-3).setInteractive({ useHandCursor: true }).on('pointerdown', () => this.cancel());
-        this.btnYes = this.scene.add.text(0, 160, "[ SÍ, SUFICIENTE POR HOY ]", btnStyle).setOrigin(0.5).setAngle(-3).setInteractive({ useHandCursor: true }).on('pointerdown', () => this.confirm());
+        this.btnYes = this.scene.add.text(0, 160, "[ SUFICIENTE POR HOY ]", btnStyle).setOrigin(0.5).setAngle(-3).setInteractive({ useHandCursor: true }).on('pointerdown', () => this.confirm());
         this.hoverEffect(this.btnNo);
         this.hoverEffect(this.btnYes);
 
