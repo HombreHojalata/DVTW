@@ -148,5 +148,11 @@ export default class IntroScene extends Phaser.Scene {
                 openedFromPause: false
             });
         });
+
+        /*
+        createMenuButton(580, 320, 'ENDING', () => { // PARA DEPURAR
+            this.scene.start('finishScene', { win: true });
+        });
+        */
     }
 }

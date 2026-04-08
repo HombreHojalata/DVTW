@@ -539,7 +539,7 @@ export default class DistrictScene extends Phaser.Scene {
             if (this.pulseTween) this.pulseTween.stop();
             this.storeButton.setScale(1.3);
             container.destroy();
-            this.scene.launch('districtStoreScene', { district: this.district, tutorial: true });
+            this.scene.launch('districtStoreScene', { district: this.district, tutorial: true});
         })
     
     }
@@ -589,7 +589,7 @@ export default class DistrictScene extends Phaser.Scene {
         const container = this.add.container(width / 4 - 30, height * 0.35 + 30).setDepth(21);   
         const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
         bg.setStrokeStyle(2, 0xffffff, 0.5);
-        const text = this.add.text(0, -50, 'Vamos a porbar a ampliar la limpieza del dis', {
+        const text = this.add.text(0, -50, 'Vamos a porbar a ampliar la limpieza del distrito. Las avez locales aprecian mucho mantener sus calles limpias.\n\nPulsa el botón de + más subir el nivel de limpieza.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#ffffff',
@@ -599,13 +599,6 @@ export default class DistrictScene extends Phaser.Scene {
 
         container.add([bg, text]);
 
-        this.createTutorialButton(container, 180, 120, 'Continuar', () => {
-            container.destroy();
-            this.explainStoreButton(width, height);
-        });
-        this.createTutorialButton(container, -180, 120, 'Volver', () => {
-            container.destroy();
-            this.explainTutorial(width, height);
-        });
+        
     }
 }

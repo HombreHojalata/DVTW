@@ -16,6 +16,8 @@ import blackMarketMessage from '../assets/other/blackMarketMessage.png'
 
 // PROTOTYPE ASSETS
 import presidente from '../assets/other/presidente.png'
+import goodEnding from '../assets/other/goodEnding.png'
+import badEnding from '../assets/other/badEnding.png'
 
 // MAP ASSET
 import map from '../assets/map/mapTemplate.png'
@@ -274,6 +276,8 @@ export default class Boot extends Phaser.Scene {
     this.load.image('flamingo', flamingo);
     this.load.image('blackMarketMessage', blackMarketMessage);
     this.load.image('presidente', presidente);
+    this.load.image('goodEnding', goodEnding);
+    this.load.image('badEnding', badEnding);
     this.load.image('map', map);
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
