@@ -73,7 +73,7 @@ export default class gameManager{
     }
     // UPDATES 
     nextDay() {
-        this.day = new Day(this.day);
+        this.day = new Day(this.day.dayNumber);
         this.player.setEnergy(this.player.getMaxEnergy());
         this.player.updateMoney(this.map.getMoneyGenerated());
     }
