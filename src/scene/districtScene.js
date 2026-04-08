@@ -16,16 +16,16 @@ export default class DistrictScene extends Phaser.Scene {
     create() {
         console.log("DISTRICT + " + this.district.getName());
 
-        const baseWidth = this.scale.width;
-        const baseHeight = this.scale.height;
+        this.baseWidth = this.scale.width;
+        this.baseHeight = this.scale.height;
 
-        const newWidth = baseWidth * 0.9;
-        const newHeight = baseHeight * 0.85;
+        const newWidth = this.baseWidth * 0.9;
+        const newHeight = this.baseHeight * 0.85;
 
-        const offsetX = (baseWidth - newWidth) / 2;
-        const offsetY = (baseHeight - newHeight) / 2 - 50;
+        const offsetX = (this.baseWidth - newWidth) / 2;
+        const offsetY = (this.baseHeight - newHeight) / 2 - 50;
 
-        this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
+        this.add.rectangle(0, 0, this.baseWidth, this.baseHeight, 0x000000, 0.5).setOrigin(0);
 
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
@@ -96,28 +96,28 @@ export default class DistrictScene extends Phaser.Scene {
     }
     spawnDetailText(newWidth,newHeight,offsetX,offsetY) {
         //POBLACION TOTAL
-        const populationText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*2 + 45, this.district.getPopulation(), {
+        const populationText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*2 + 45, Math.trunc(this.district.getPopulation()), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#30718c'
         }).setDepth(15);  
         // DINERO QUE SE GANA POR CICLO
-        const moneyText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*7 + 50, this.district.getMoneyGenerated(), {
+        const moneyText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*7 + 50, Math.trunc(this.district.getMoneyGenerated()), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#ba9900'
         }).setDepth(15);  
         // HABITANTES A FAVOR
-        const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*2 + 45, this.district.getPopulation() * this.district.getSatisfaction() / 100, {
+        const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*2 + 45, Math.trunc(this.district.getPopulation() * this.district.getSatisfaction() / 100), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#46c83d'
         }).setDepth(15);  
         // HABITANTES EN CONTRA/NEUTROS
-        const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*7 + 50, this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100, {
+        const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*7 + 50, Math.trunc(this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
@@ -152,12 +152,37 @@ export default class DistrictScene extends Phaser.Scene {
             const img = this.add.image(x, y + 35, building.getBuildingPNG()).setOrigin(0.5, 0.5).setScale(1.4).setInteractive();
 
             img.on('pointerover', () => {
-                tooltip.setText(building.getBuildingInfo());
+                tooltip.setText(building.getBuildingInfo() + '\nSi quieres vender el edificio pulsalo');
                 tooltip.setPosition(720, newHeight - newHeight/2 - 55);
                 tooltip.setVisible(true);
                 tooltip.setDepth(100);
             });
             img.on('pointerout', () => {tooltip.setVisible(false);});
+            img.on('pointerup', () => {
+                const container = this.add.container(this.baseWidth/2, this.baseHeight/2).setDepth(21);   
+                const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
+                bg.setStrokeStyle(2, 0xffffff, 0.5);
+                const text = this.add.text(0, -50, 'Para demoler este edificio tienes que pagar a los trabajores 10000$', {
+                    fontSize: '24px',
+                    fontFamily: 'Times New Roman',
+                    color: '#ffffff',
+                    align: 'center',
+                    wordWrap: { width: 600 }
+                }).setOrigin(0.5);
+
+                container.add([bg, text]);
+
+                this.createTutorialButton(container, -180, 120, 'Rechazar', () => {
+                    container.destroy();
+                });
+                this.createTutorialButton(container, 180, 120, 'Aceptar', () => {
+                    container.destroy();
+                    this.player.updateMoney(-10000);
+                    this.district.removeBuilding(building);
+                    this.scene.restart();
+                });
+
+            });
         }
 
         return newWidth * 0.5 + (offsetX + 25) * this.builtList.length;
