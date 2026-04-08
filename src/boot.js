@@ -11,6 +11,8 @@ import tutorialAnimals2 from '../assets/other/tutorialAnimals2.png'
 import tutorialAnimals3 from '../assets/other/tutorialAnimals3.png'
 import tutorialInfo from '../assets/other/tutorialInfo.png'
 import textCloud from '../assets/other/textCloud.png'
+import flamingo from '../assets/other/flamingo.png'
+import blackMarketMessage from '../assets/other/blackMarketMessage.png'
 
 // PROTOTYPE ASSETS
 import presidente from '../assets/other/presidente.png'
@@ -57,6 +59,7 @@ import specialBuildingNuevaPradera from '../assets/map/buildings/specialBuilding
 import specialBuildingSahar from '../assets/map/buildings/specialBuildingSahar.png'
 import specialBuildingSomosagua from '../assets/map/buildings/specialBuildingSomosagua.png'
 import specialBuildingMafia from '../assets/map/buildings/specialBuildingMafia.png'
+import districtStoreBg from '../assets/map/buildings/districtStoreBg.png'
 
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
@@ -142,6 +145,11 @@ import marketBtnNormal from '../assets/UIs/marketBtnNormal.png'
 import marketBtnBright from '../assets/UIs/marketBtnBright.png'
 import marketBtnPressed from '../assets/UIs/marketBtnPressed.png'
 import marketBtnBlocked from '../assets/UIs/marketBtnBlocked.png'
+import popularityBar from '../assets/UIs/popularityBar.png'
+import mapBtnNormal from '../assets/UIs/mapBtnNormal.png'
+import mapBtnBright from '../assets/UIs/mapBtnBright.png'
+import mapBtnPressed from '../assets/UIs/mapBtnPressed.png'
+import lowBarMarketUI from '../assets/UIs/lowBarMarketUI.png'
 
 // JSON
 import RegularMission from '../assets/jsons/regularMissions.json';
@@ -185,6 +193,8 @@ export default class Boot extends Phaser.Scene {
     this.load.image('tutorialAnimals3', tutorialAnimals3);
     this.load.image('tutorialInfo', tutorialInfo);
     this.load.image('textCloud', textCloud);
+    this.load.image('flamingo', flamingo);
+    this.load.image('blackMarketMessage', blackMarketMessage);
 
     // RESTO DEI LOAD... (tutti i tuoi file audio, immagini e json)
     this.load.image('presidente', presidente);
@@ -223,6 +233,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('specialBuildingSahar', specialBuildingSahar);
     this.load.image('specialBuildingSomosagua', specialBuildingSomosagua);
     this.load.image('specialBuildingMafia', specialBuildingMafia);
+    this.load.image('districtStoreBg', districtStoreBg);
     this.load.image('missionTemplate', missionTemplate);
     this.load.image('missionCorruptTemplate', missionCorruptTemplate);
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
@@ -293,6 +304,11 @@ export default class Boot extends Phaser.Scene {
     this.load.image('marketBtnBright', marketBtnBright);
     this.load.image('marketBtnPressed', marketBtnPressed);
     this.load.image('marketBtnBlocked', marketBtnBlocked);
+    this.load.image('popularityBar', popularityBar);
+    this.load.image('mapBtnNormal', mapBtnNormal);
+    this.load.image('mapBtnBright', mapBtnBright);
+    this.load.image('mapBtnPressed', mapBtnPressed);
+    this.load.image('lowBarMarketUI', lowBarMarketUI);
     this.cache.json.add('regularMissions', RegularMission);
     this.cache.json.add('upMoney', UpMoneyMission);
     this.cache.json.add('upPopularity', UpPopularityMission);
