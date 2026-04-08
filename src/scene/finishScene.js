@@ -37,6 +37,8 @@ export default class FinishScene extends Phaser.Scene {
         strokeThickness: 5
     }).setOrigin(0.5).setInteractive({ useHandCursor: true });
     this.clickText.on('pointerup', () => {
+      this.registry.reset();
+      this.registry.set('agendaAbierta',true); 
       this.scene.stop();
       this.scene.start('introScene');
     });

@@ -12,6 +12,5 @@ export default class DistrictNuevaPradera extends District {
         list.push('districtNuevaPraderaScene1', 'districtNuevaPraderaScene2');
         return list;
     }
-    // VALUES NEED TO CHANGE
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingNuevaPradera',this.special_building,330000,3,17,0);}
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingNuevaPradera',"ENPAWIRE",330000,3,17,0);}
 };

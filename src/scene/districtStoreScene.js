@@ -117,16 +117,16 @@ export default class DistrictScene extends Phaser.Scene {
     }
 
     configureNormalEvents(img, building, tooltip) {
-        img.on('pointerover', (pointer) => {
+        img.on('pointerover', () => {
             if(this.district.canBuildMore()){
                 if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. \nTienes: ${this.player.getMoney()}$ \t El edificio cuesta: ${building.getBuildingCost()}$`);
                 else tooltip.setText(building.getBuildingInfo());
             }else tooltip.setText('No tienes suficiente espacio para construir');
-            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
+            tooltip.setPosition(600, 625);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
-        img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
+        img.on('pointermove', () => {tooltip.setPosition(600, 625);});
         img.on('pointerout', () => {tooltip.setVisible(false);});
         img.on('pointerup', () => {
             if(this.tutorial) {
@@ -154,19 +154,19 @@ export default class DistrictScene extends Phaser.Scene {
         });
     }
     configureSpecialEvents(img, building, tooltip) {
-        img.on('pointerover', (pointer) => {
+        img.on('pointerover', () => {
             if(this.district.isSpecialBuildingBuilt()) tooltip.setText('Edificio especial ya construido!!!');
             else{
                 if(this.district.canBuildMore()){
                     if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. \nTienes: ${this.player.getMoney()}$ \t El edificio cuesta: ${building.getBuildingCost()}$`);
-                    else tooltip.setText('-----EDIFICIO ESPECIAL-----\n' + building.getBuildingInfo());
+                    else tooltip.setText('--------EDIFICIO ESPECIAL--------\n' + building.getBuildingInfo());
                 }else tooltip.setText('No tienes suficiente espacio para construir');
             }
-            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
+            tooltip.setPosition(600,625);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
-        img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
+        img.on('pointermove', () => {tooltip.setPosition(600,625);});
         img.on('pointerout', () => {tooltip.setVisible(false);});
         img.on('pointerup', () => {
             tooltip.setVisible(false);
