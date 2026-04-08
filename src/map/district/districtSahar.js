@@ -9,7 +9,7 @@ export default class DistrictSahar extends District {
     }
     createSceneList(){
         const list = [];
-        list.push('districtSaharScene1');
+        list.push('districtSaharScene1', 'districtSaharScene2');
         return list;
     }
     // VALUES NEED TO CHANGE

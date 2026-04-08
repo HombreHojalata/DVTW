@@ -29,6 +29,12 @@ import districtGuineaScene1 from '../assets/map/districtScenes/districtGuineaSce
 import districtNuevaPraderaScene1 from '../assets/map/districtScenes/districtNuevaPraderaScene1.png'
 import districtSaharScene1 from '../assets/map/districtScenes/districtSaharScene1.png'
 import districtSomosaguaScene1 from '../assets/map/districtScenes/districtSomosaguaScene1.png'
+import districtBorrascalScene2 from '../assets/map/districtScenes/districtBorrascalScene2.png'
+import districtElNidoScene2 from '../assets/map/districtScenes/districtElNidoScene2.png'
+import districtGuineaScene2 from '../assets/map/districtScenes/districtGuineaScene2.png'
+import districtNuevaPraderaScene2 from '../assets/map/districtScenes/districtNuevaPraderaScene2.png'
+import districtSaharScene2 from '../assets/map/districtScenes/districtSaharScene2.png'
+import districtSomosaguaScene2 from '../assets/map/districtScenes/districtSomosaguaScene2.png'
 
 // DISTRICT
 import districtBorrascal from '../assets/map/district/districtBorrascal.png'
@@ -273,6 +279,12 @@ export default class Boot extends Phaser.Scene {
     this.load.image('districtNuevaPraderaScene1', districtNuevaPraderaScene1);
     this.load.image('districtSaharScene1', districtSaharScene1);
     this.load.image('districtSomosaguaScene1', districtSomosaguaScene1);
+    this.load.image('districtBorrascalScene2', districtBorrascalScene2);
+    this.load.image('districtElNidoScene2', districtElNidoScene2);
+    this.load.image('districtGuineaScene2', districtGuineaScene2);
+    this.load.image('districtNuevaPraderaScene2', districtNuevaPraderaScene2);
+    this.load.image('districtSaharScene2', districtSaharScene2);
+    this.load.image('districtSomosaguaScene2', districtSomosaguaScene2);
     this.load.image('districtBorrascal', districtBorrascal);
     this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);

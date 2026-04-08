@@ -9,7 +9,7 @@ export default class DistrictGuinea extends District {
     }
     createSceneList(){
         const list = [];
-        list.push('districtGuineaScene1');
+        list.push('districtGuineaScene1', 'districtGuineaScene2');
         return list;
     }
     // VALUES NEED TO CHANGEPNGBuilding,name,cost,income,satisfaction,population

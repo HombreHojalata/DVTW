@@ -88,8 +88,10 @@ export default class DistrictScene extends Phaser.Scene {
     }  
     spawnScene(newWidth,newHeight,offsetX,offsetY) {
         const list = this.district.getSceneList();
-        const randomIndex = Math.floor(Math.random() * list.length);
-        this.districtScene = this.add.image(offsetX + newWidth * 0.048, offsetY + newHeight * 0.2, list[randomIndex]).setOrigin(0);
+        let i = 0;
+        if(this.district.isSpecialBuildingBuilt())
+            i = 1;
+        this.districtScene = this.add.image(offsetX + newWidth * 0.048, offsetY + newHeight * 0.2, list[i]).setOrigin(0);
         return this.districtScene;
     }
     spawnDetailText(newWidth,newHeight,offsetX,offsetY) {
