@@ -164,9 +164,10 @@ import mapCutout from '../assets/jsons/map.json';
 
 // AUDIO
 import AudioManager from '../src/manager/audioManager.js'
-import gameAudio from '../assets/audio/il porco rosso.mp3';
+import gameAudio from '../assets/audio/rimworld.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
 import blackMarketAudio from '../assets/audio/black market.mp3';
+import introSceneAudio from '../assets/audio/il porco rosso.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -185,15 +186,18 @@ export default class Boot extends Phaser.Scene {
 
     //AUDIO PART
     this.load.audio('bgMusic', gameAudio);
+    this.load.audio('introSceneAudio', introSceneAudio);
   }
 
   create() {
     this.add.image(750, 375, 'loadScene');
 
     //WE CAN ADD MUSIC AND LOADING BAR HERE
+
+
     this.audioManager = new AudioManager(this);
     this.registry.set('audioManager', this.audioManager)
-    this.audioManager.playMusic('bgMusic');
+    this.audioManager.playMusic('introSceneAudio');
 
     //animacion de la urna
     this.anims.create({
@@ -386,6 +390,8 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('mapCutout', mapCutout);
     this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
+    this.load.audio('introSceneAudio', introSceneAudio);
+    this.load.audio('bgMusic', gameAudio);
 
     this.load.start();
 

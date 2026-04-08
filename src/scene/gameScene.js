@@ -36,6 +36,12 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+
+        this.audioManager = this.registry.get('audioManager');
+        if (this.audioManager) {
+            this.audioManager.switchMusic('bgMusic');
+        }
+
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
         //FINAL DE JUEGO :
