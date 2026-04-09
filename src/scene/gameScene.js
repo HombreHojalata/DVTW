@@ -198,6 +198,7 @@ export default class GameScene extends Phaser.Scene {
         this.batteryUI.refresh();
         this.endDayBtnUI.refresh();
         this.footerUI.refreshMoney();
+        this.topUI.refresh();
     }
     showDayIntro() {
         const { width, height } = this.sys.game.config;

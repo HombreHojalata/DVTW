@@ -36,4 +36,33 @@ export const PRODUCTS = [
         priceStep: '+250',
         effect: (player) => { console.log("-> Los Hoteles ahora son más baratos!! :D"); } // Bueno, esto de momento valdrá...
     },
+    {
+        id: 'votos',
+        name: 'PUCHERAZO',
+        desc: 'Manipulación a gran escala. +5% de satisfacción en TODOS los distritos. (+30 de Corrupción).',
+        image: 'hotel_icon',
+        price: 66000,
+        limit: 1,
+        priceStep: '+0',
+        effect: (player, gameManager) => {
+            const map = gameManager.getMap();
+            map.districtList.forEach(district => {
+                district.updateSatisfaction(5);
+            })
+            player.updateCorruption(30);
+        }
+    },
+    {
+        id: 'obra_fantasma',
+        name: 'OBRA PÚBLICA FANTASMA',
+        desc: 'Adjudica un presupuesto para un puente que nunca se construirá. Ganar 40.000$ inmediatmanete pero te lloverán las críticas. (+25 Corrupción)',
+        image: 'hotel_icon',
+        price: 0,
+        limit: 2,
+        priceStep: '+0',
+        effect: (player) => {
+            player.updateMoney(40000);
+            player.updateCorruption(25);
+        }
+    },
 ];
