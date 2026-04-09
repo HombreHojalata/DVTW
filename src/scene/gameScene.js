@@ -100,6 +100,8 @@ export default class GameScene extends Phaser.Scene {
             this.startEnergyDrain();
             //MISSION TEST
             this.scheduleNextMission();
+
+            this.startPresidentBlink();
         }
 
         this.events.on('resume', () => {
@@ -141,6 +143,30 @@ export default class GameScene extends Phaser.Scene {
                 this.player.updateEnergy(-this.energyDrainPerTick);
                 this.refreshHUD();
 
+                if (this.player.getEnergy() > 50) {
+                    this.midday = false;
+                    this.afternoon = false;
+
+                    this.tweens.add({
+                        targets: this.middayOverlay,
+                        alpha: 0,
+                        duration: 1000,
+                        ease: 'Power2'
+                    });
+                    this.tweens.add({
+                        targets: this.afternoonOverlay,
+                        alpha: 0,
+                        duration: 1000,
+                        ease: 'Power2'
+                    });
+                    this.tweens.add({
+                        targets: this.nightOverlay,
+                        alpha: 0,
+                        duration: 1000,
+                        ease: 'Power2'
+                    });
+                }
+
                 if (this.player.getEnergy() <= 50 && !this.midday) {
                     this.midday = true;
                     console.log('MITAD DEL DÍA -> ABRE EL MERCADO');
@@ -174,6 +200,10 @@ export default class GameScene extends Phaser.Scene {
                     this.midday = false;
                     this.afternoon = false;
                     this.energyTimerEvent.remove(false);
+
+                    if (this.blinkEvent) this.blinkEvent.remove();
+                    if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
+
                     console.log('ENERGÍA AGOTADA');
                     this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(20);
                     this.tweens.add({
@@ -258,6 +288,22 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.stop();
             this.scene.launch('summaryDayScene', { summary: this.day.getDaySummary() });
+        });
+    }
+
+    startPresidentBlink() {
+        this.blinkEvent = this.time.addEvent({
+            delay: Phaser.Math.Between(2000, 6000),
+            callback: () => {
+                if (this.player.getEnergy() > 0 && this.gameManager.presidente) {
+                    this.gameManager.presidente.setTexture('photoBlink');
+                    this.time.delayedCall(150, () => {
+                        if (this.player.getEnergy() > 0)
+                            this.gameManager.presidente.setTexture('photoNormal');
+                    });
+                }
+            },
+            loop: true
         });
     }
 }
