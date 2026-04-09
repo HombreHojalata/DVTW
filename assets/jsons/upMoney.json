@@ -10,15 +10,15 @@
         "probability": 100,
         "description": "Dar el contrato a una empresa amiga",
         "energy": -3,
-        "money": 120,
+        "money": 120000,
         "corruption": 3,
-        "popularity": -2
+        "popularity": -5
       },
       {
         "probability": 100,
         "description": "Organizar una licitación pública rápida",
         "energy": -6,
-        "money": 60,
+        "money": 60000,
         "corruption": 0,
         "popularity": 2
       }
@@ -33,17 +33,17 @@
     "options": [
       {
         "probability": 100,
-        "description": "Aprobarlo sin revisar demasiado",
+        "description": "Aceptar un soborno para aprobarlo sin revisar demasiado",
         "energy": -2,
-        "money": 150,
-        "corruption": 4,
+        "money": 150000,
+        "corruption": 6,
         "popularity": -3
       },
       {
         "probability": 100,
         "description": "Revisar el proyecto y cobrar tasas legales",
         "energy": -6,
-        "money": 70,
+        "money": 70000,
         "corruption": 0,
         "popularity": 1
       }
@@ -60,17 +60,17 @@
         "probability": 100,
         "description": "Firmar concesión muy favorable a la empresa",
         "energy": -3,
-        "money": 140,
+        "money": 140000,
         "corruption": 3,
-        "popularity": -2
+        "popularity": -6
       },
       {
         "probability": 100,
         "description": "Negociar condiciones más equilibradas",
         "energy": -7,
-        "money": 80,
+        "money": 80000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 4
       }
     ]
   },
@@ -85,17 +85,17 @@
         "probability": 100,
         "description": "Aceptar patrocinio con publicidad enorme",
         "energy": -3,
-        "money": 110,
+        "money": 110000,
         "corruption": 0,
-        "popularity": -1
+        "popularity": -4
       },
       {
         "probability": 100,
         "description": "Reducir publicidad pero aceptar el dinero",
         "energy": -5,
-        "money": 70,
+        "money": 70000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": -2
       }
     ]
   },
@@ -108,9 +108,9 @@
     "options": [
       {
         "probability": 100,
-        "description": "Venderlo barato a un comprador conocido",
+        "description": "Venderlo barato a un amigo de un familiar",
         "energy": -2,
-        "money": 160,
+        "money": 160000,
         "corruption": 4,
         "popularity": -3
       },
@@ -118,9 +118,9 @@
         "probability": 100,
         "description": "Subastarlo públicamente",
         "energy": -6,
-        "money": 100,
+        "money": 100000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 6
       }
     ]
   },
@@ -135,17 +135,17 @@
         "probability": 100,
         "description": "Imponer la tasa inmediatamente",
         "energy": -4,
-        "money": 120,
+        "money": 120000,
         "corruption": 0,
-        "popularity": -2
+        "popularity": -7
       },
       {
         "probability": 100,
         "description": "Aplicarla de forma progresiva",
         "energy": -6,
-        "money": 70,
+        "money": 70000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 2
       }
     ]
   },
@@ -160,15 +160,15 @@
         "probability": 100,
         "description": "Firmar un contrato largo con comisión incluida",
         "energy": -3,
-        "money": 150,
+        "money": 150000,
         "corruption": 4,
-        "popularity": -3
+        "popularity": -6
       },
       {
         "probability": 100,
         "description": "Negociar mejores condiciones públicas",
         "energy": -7,
-        "money": 90,
+        "money": 90000,
         "corruption": 0,
         "popularity": 2
       }
@@ -185,17 +185,17 @@
         "probability": 100,
         "description": "Autorizar todas las vallas posibles",
         "energy": -2,
-        "money": 120,
+        "money": 120000,
         "corruption": 0,
-        "popularity": -2
+        "popularity": -8
       },
       {
         "probability": 100,
         "description": "Limitar el número de vallas",
         "energy": -4,
-        "money": 70,
+        "money": 70000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": -2
       }
     ]
   },
@@ -210,17 +210,17 @@
         "probability": 100,
         "description": "Cobrar tasas altas por el uso del estadio",
         "energy": -3,
-        "money": 110,
+        "money": 80000,
         "corruption": 0,
-        "popularity": -1
+        "popularity": -3
       },
       {
         "probability": 100,
         "description": "Cobrar menos para atraer público",
         "energy": -5,
-        "money": 70,
+        "money": 60000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 5
       }
     ]
   },
@@ -233,19 +233,19 @@
     "options": [
       {
         "probability": 100,
-        "description": "Aprobarlo discretamente",
+        "description": "Aprobarlo discretamente a cambio de una comisión",
         "energy": -2,
-        "money": 170,
+        "money": 170000,
         "corruption": 4,
         "popularity": -3
       },
       {
         "probability": 100,
-        "description": "Exigir impuestos más altos",
+        "description": "Subir impuestos a casas de apuestas",
         "energy": -5,
-        "money": 100,
+        "money": 100000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 4
       }
     ]
   },
@@ -260,17 +260,17 @@
         "probability": 100,
         "description": "Subir el precio de los puestos",
         "energy": -3,
-        "money": 100,
+        "money": 100000,
         "corruption": 0,
-        "popularity": -1
+        "popularity": -5
       },
       {
         "probability": 100,
         "description": "Mantener precios pero cobrar servicios extra",
         "energy": -4,
-        "money": 80,
+        "money": 80000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": -2
       }
     ]
   },
@@ -285,17 +285,17 @@
         "probability": 100,
         "description": "Cobrar una tasa alta por ocupación",
         "energy": -3,
-        "money": 110,
+        "money": 110000,
         "corruption": 0,
-        "popularity": -1
+        "popularity": -4
       },
       {
         "probability": 100,
         "description": "Cobrar menos para agradar a los hosteleros",
         "energy": -4,
-        "money": 70,
+        "money": 20000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 6
       }
     ]
   },
@@ -310,15 +310,15 @@
         "probability": 100,
         "description": "Aprobarla a cambio de favores",
         "energy": -2,
-        "money": 130,
+        "money": 130000,
         "corruption": 3,
-        "popularity": -2
+        "popularity": -3
       },
       {
         "probability": 100,
         "description": "Reducir la subvención y supervisarla",
         "energy": -6,
-        "money": 70,
+        "money": 50000,
         "corruption": 0,
         "popularity": 1
       }
@@ -335,7 +335,7 @@
         "probability": 100,
         "description": "Cobrar tarifas altas por permisos",
         "energy": -3,
-        "money": 120,
+        "money": 120000,
         "corruption": 0,
         "popularity": 0
       },
@@ -343,9 +343,9 @@
         "probability": 100,
         "description": "Cobrar menos para atraer rodajes futuros",
         "energy": -4,
-        "money": 80,
+        "money": 80000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 6
       }
     ]
   },
@@ -360,17 +360,17 @@
         "probability": 100,
         "description": "Crear una tasa temporal para todos",
         "energy": -3,
-        "money": 140,
+        "money": 140000,
         "corruption": 0,
-        "popularity": -3
+        "popularity": -10
       },
       {
         "probability": 100,
         "description": "Aplicarla solo a grandes empresas",
         "energy": -6,
-        "money": 90,
+        "money": 90000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 3
       }
     ]
   }
