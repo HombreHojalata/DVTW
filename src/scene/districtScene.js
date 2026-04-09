@@ -45,7 +45,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.spawnAllFooter(newWidth, offsetX, newHeight, offsetY);
 
         //BLOCKER
-        if (this.day < 2) this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
+        if (this.day < 3) this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
 
         //TUTORIAL
         if(this.tutorial){
