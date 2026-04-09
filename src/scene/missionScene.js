@@ -96,7 +96,8 @@ export default class MissionScene extends Phaser.Scene {
         //better getScene from mission
 
         //this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,this.mission.getScene());
-        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2,'districtBorrascalScene1');
+        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2,this.mission.getScene());
+        console.log(this.mission.getScene());
         return this.districtScene;
     }
     spawnCloseButton(newWidth,offsetX,offsetY){

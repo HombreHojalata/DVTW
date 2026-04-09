@@ -19,7 +19,7 @@ export default class gameManager{
     getDay(){return this.day};
     // MISSIONS
     getMission(scene){
-        this.missionL = this.missionManager.getMission();
+        this.missionL = this.missionManager.getMission(this.map);
         if(this.missionL.getDistrict() != "NULL") this.missionL.createMissionButton(scene);
         return this.missionL;
     }

@@ -29,78 +29,97 @@ export default class missionManager{
     
 
 
-    getMission(){
-        const playerMoney = this.player.getMoney();
-        const playerPopularity = this.player.getPopularity();
-        const playerCorruption = this.player.getCorruption();
-
-        const moneyDiff = Math.abs(playerMoney - this.espectedResources.money)/15;
-        const popularityDiff = Math.abs(playerPopularity - this.espectedResources.popularity)/7;
-        const corruptionDiff = playerCorruption - this.espectedResources.corruption;
-        let missionSelected = null;
-        if(this.minigameMissions.length > 0 ){
-            missionSelected = this.minigameMissions[Math.floor(Math.random() * this.minigameMissions.length)];
-            this.minigameMissions = this.minigameMissions.filter(m => m !== missionSelected);
-        }
-        else if(moneyDiff > popularityDiff && moneyDiff > corruptionDiff && this.espectedResources.money/moneyDiff > 2){
-            if(playerMoney > this.espectedResources.money){
-                missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
-            }else{
-                missionSelected = this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
-            }
-        }else if(popularityDiff > corruptionDiff && this.espectedResources.popularity/popularityDiff > 2){
-            if(playerPopularity > this.espectedResources.popularity){
-                missionSelected = this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
-            }else{
-                missionSelected = this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
-            }
-        }else if(playerCorruption > this.espectedResources.corruption && this.espectedResources.corruption/corruptionDiff > 2){
-            missionSelected = this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
-        }
-        else{
-            missionSelected = this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
-        }
+    getMission(map){
+        //Primero de todo vamos a ver en que distrito sería la mision para elegir la misión en función de eso.
         let districtIndex = Math.floor(Math.random() * 6);
         if(this.districtsWithMissions[districtIndex]){
             if(!this.districtsWithMissions[0] || !this.districtsWithMissions[1] || !this.districtsWithMissions[2] || !this.districtsWithMissions[3] || !this.districtsWithMissions[4] || !this.districtsWithMissions[5]){
                 while(this.districtsWithMissions[districtIndex]){
                     districtIndex = Math.floor(Math.random() * 6);
                 }
-                
             }
             else {
+                //No se debería llegar aquí meter limitaciones para evitarlo.
                 districtIndex=-1;
             }
         }
-        this.districtsWithMissions[districtIndex] = true;
-        if(districtIndex == -1){
-            missionSelected.setDistrict("NULL");
-            missionSelected.setPos(0, 0);
+        if(districtIndex==-1){
+            let nullMission = new Mission("NULL","NULL",false,false,false);
+            nullMission.setDistrict("NULL");
+            return nullMission;
         }
-        else if(districtIndex == 0){
-            missionSelected.setDistrict("BORRASCAL");
-            missionSelected.setPos(1160, 150);
+        this.districtsWithMissions[districtIndex] = true;
+        let districtName;
+        let districtPosition;
+        if(districtIndex == 0){
+            districtName = "BORRASCAL";
+            districtPosition = [1160, 150];
         }
         else if(districtIndex == 1){
-            missionSelected.setDistrict("EL_NIDO");
-            missionSelected.setPos(680, 390);
+            districtName = "EL_NIDO";
+            districtPosition = [680, 390];
         }
         else if(districtIndex == 2){
-            missionSelected.setDistrict("GUINEA");
-            missionSelected.setPos(250, 200);
+            districtName = "GUINEA";
+            districtPosition = [250, 200];
         }
         else if(districtIndex == 3){
-            missionSelected.setDistrict("NUEVA_PRADERA");
-            missionSelected.setPos(1020, 540);
+            districtName = "NUEVA_PRADERA";
+            districtPosition = [1020, 540];
         }
         else if(districtIndex == 4){
-            missionSelected.setDistrict("SAHAR");
-            missionSelected.setPos(350, 450);
+            districtName = "SAHAR";
+            districtPosition = [350, 450];
         }
         else{//districtIndex == 5
-            missionSelected.setDistrict("SOMOSAGUA");
-            missionSelected.setPos(800, 160);
+            districtName = "SOMOSAGUA";
+            districtPosition = [800, 160];
         }
+        //Atributos a tener en cuenta para elegir la misión:
+        let districtSatisfaction = map.getDistrictByName(districtName).getSatisfaction();
+        let money = this.player.getMoney();
+        let corruption = this.player.getCorruption();
+        let energy = this.player.getEnergy();
+        //Limites de recursos para elegir misión:
+        let minMoney = 300000;
+        let maxMoney = 500000;
+        let maxCorruption = 40;
+        let maxSatisfaction = 55;
+        let minSatisfaction = 30;
+        //Logica para elegir mision:
+        let missionType;
+        let missionSelected;
+        if(districtSatisfaction < minSatisfaction){
+            missionType = "upPopularity";
+            missionSelected = this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
+        }
+        else if(districtSatisfaction > maxSatisfaction){
+            missionType = "downPopularity";
+            missionSelected = this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
+        }
+        else{
+            if(corruption > maxCorruption){
+                missionType = "downCorruption";
+                missionSelected = this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
+            }
+            else{
+                if(money < minMoney){
+                    missionType = "upMoney";
+                    missionSelected = this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
+                }
+                else if(money > maxMoney){
+                    missionType = "downMoney";
+                    missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
+                }
+                else{
+                    missionType = "regular";
+                    missionSelected = this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
+                }
+            }
+        }
+        missionSelected.setDistrict(districtName);
+        missionSelected.setPos(districtPosition[0],districtPosition[1]);
+        missionSelected.setSceneImage(this.chooseImage(missionType, districtName));
         this.activeMissions.push(missionSelected);
         return missionSelected;
     }
@@ -320,5 +339,63 @@ export default class missionManager{
         }
         this.activeMissions = [];
         this.districtsWithMissions=[false,false,false,false,false,false];
+    }
+    chooseImage(missionType, districtName){
+        let imageKey = '';
+        if(missionType == "upPopularity"){
+            if(districtName == "BORRASCAL"){imageKey = 'upPopularitySceneBorrascal';}
+            else if(districtName == "EL_NIDO"){imageKey = 'upPopularitySceneElNido';}
+            else if(districtName == "GUINEA"){imageKey = 'upPopularitySceneGuinea';}
+            else if(districtName == "NUEVA_PRADERA"){imageKey = 'upPopularitySceneNuevaPradera';}
+            else if(districtName == "SAHAR"){imageKey = 'upPopularitySceneSahar';}
+            else{//districtName == "SOMOSAGUA"
+                imageKey = 'upPopularitySceneSomosagua';}
+        }
+        else if(missionType == "downPopularity"){
+            if(districtName == "BORRASCAL"){imageKey = 'downPopularitySceneBorrascal';}
+            else if(districtName == "EL_NIDO"){imageKey = 'downPopularitySceneElNido';}
+            else if(districtName == "GUINEA"){imageKey = 'downPopularitySceneGuinea';}
+            else if(districtName == "NUEVA_PRADERA"){imageKey = 'downPopularitySceneNuevaPradera';}
+            else if(districtName == "SAHAR"){imageKey = 'downPopularitySceneSahar';}
+            else{//districtName == "SOMOSAGUA"
+                imageKey = 'downPopularitySceneSomosagua'; }
+        }
+        else if(missionType == "upMoney"){
+            if(districtName == "BORRASCAL"){imageKey = 'upMoneySceneBorrascal';}
+            else if(districtName == "EL_NIDO"){imageKey = 'upMoneySceneElNido';}
+            else if(districtName == "GUINEA"){imageKey = 'upMoneySceneGuinea';}
+            else if(districtName == "NUEVA_PRADERA"){imageKey = 'upMoneySceneNuevaPradera';}
+            else if(districtName == "SAHAR"){imageKey = 'upMoneySceneSahar';}
+            else{//districtName == "SOMOSAGUA"
+                imageKey = 'upMoneySceneSomosagua';}
+        }
+        else if(missionType == "downMoney"){
+            if(districtName == "BORRASCAL"){imageKey = 'downMoneySceneBorrascal';}
+            else if(districtName == "EL_NIDO"){imageKey = 'downMoneySceneElNido';}
+            else if(districtName == "GUINEA"){imageKey = 'downMoneySceneGuinea';}
+            else if(districtName == "NUEVA_PRADERA"){imageKey = 'downMoneySceneNuevaPradera';}
+            else if(districtName == "SAHAR"){imageKey = 'downMoneySceneSahar';}
+            else{//districtName == "SOMOSAGUA"
+            imageKey = 'downMoneySceneSomosagua';}
+        }
+        else if(missionType == "downCorruption"){
+            if(districtName == "BORRASCAL"){imageKey = 'downCorruptionSceneBorrascal';}
+            else if(districtName == "EL_NIDO"){imageKey = 'downCorruptionSceneElNido';}
+            else if(districtName == "GUINEA"){imageKey = 'downCorruptionSceneGuinea';}
+            else if(districtName == "NUEVA_PRADERA"){imageKey = 'downCorruptionSceneNuevaPradera';}
+            else if(districtName == "SAHAR"){imageKey = 'downCorruptionSceneSahar';}
+            else{//districtName == "SOMOSAGUA"
+                imageKey = 'downCorruptionSceneSomosagua';}
+        }
+        else if(missionType == "regular"){
+            if(districtName == "BORRASCAL"){imageKey = 'regularSceneBorrascal';}
+            else if(districtName == "EL_NIDO"){imageKey = 'regularSceneElNido';}
+            else if(districtName == "GUINEA"){imageKey = 'regularSceneGuinea';}
+            else if(districtName == "NUEVA_PRADERA"){imageKey = 'regularSceneNuevaPradera';}
+            else if(districtName == "SAHAR"){imageKey = 'regularSceneSahar';}
+            else{//districtName == "SOMOSAGUA"
+                imageKey = 'regularSceneSomosagua';}
+        }
+        return imageKey;
     }
 }
