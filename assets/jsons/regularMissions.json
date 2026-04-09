@@ -12,7 +12,7 @@
         "energy": -5,
         "money": 0,
         "corruption": 0,
-        "popularity": 3
+        "popularity": 4
       },
       {
         "probability": 100,
@@ -20,7 +20,7 @@
         "energy": -10,
         "money": 20,
         "corruption": 0,
-        "popularity": 5
+        "popularity": 7
       }
     ]
   },
@@ -35,7 +35,7 @@
         "probability": 100,
         "description": "Taparlo con asfalto exprés (equipo municipal)",
         "energy": -6,
-        "money": -10,
+        "money": -10000,
         "corruption": 0,
         "popularity": 2
       },
@@ -60,7 +60,7 @@
         "probability": 100,
         "description": "Ofrecer subvenciones pequeñas y foto de grupo",
         "energy": -4,
-        "money": -30,
+        "money": -30000,
         "corruption": 0,
         "popularity": 4
       },
@@ -70,7 +70,7 @@
         "energy": 0,
         "money": 0,
         "corruption": 0,
-        "popularity": -1
+        "popularity": -3
       }
     ]
   },
@@ -85,9 +85,9 @@
         "probability": 100,
         "description": "Poner jardineras compradas localmente",
         "energy": -3,
-        "money": -20,
+        "money": -20000,
         "corruption": 0,
-        "popularity": 2
+        "popularity": 3
       },
       {
         "probability": 100,
@@ -95,7 +95,7 @@
         "energy": -5,
         "money": 0,
         "corruption": 0,
-        "popularity": 1
+        "popularity": -1
       }
     ]
   },
@@ -111,8 +111,8 @@
         "description": "Aplazar su publicación con excusas administrativas",
         "energy": -2,
         "money": 0,
-        "corruption": 1,
-        "popularity": -1
+        "corruption": 4,
+        "popularity": -2
       },
       {
         "probability": 100,
@@ -120,7 +120,7 @@
         "energy": -6,
         "money": 0,
         "corruption": 0,
-        "popularity": -3
+        "popularity": -6
       }
     ]
   },
@@ -135,7 +135,7 @@
         "probability": 100,
         "description": "Encargarla a un proveedor caro pero rápido",
         "energy": -2,
-        "money": -60,
+        "money": -30000,
         "corruption": 0,
         "popularity": 4
       },
@@ -143,7 +143,7 @@
         "probability": 100,
         "description": "Hacer la placa con material económico",
         "energy": -1,
-        "money": -15,
+        "money": -10000,
         "corruption": 0,
         "popularity": 1
       }
@@ -160,7 +160,7 @@
         "probability": 100,
         "description": "Contratar microencuestas y publicar resultados favorables",
         "energy": -3,
-        "money": -25,
+        "money": -25000,
         "corruption": 0,
         "popularity": 3
       },
@@ -185,7 +185,7 @@
         "probability": 100,
         "description": "Llevar obsequios simbólicos",
         "energy": -4,
-        "money": -10,
+        "money": -10000,
         "corruption": 0,
         "popularity": 2
       },
@@ -210,7 +210,7 @@
         "probability": 100,
         "description": "Adjuntar cláusulas favorables y repartir comisiones",
         "energy": -2,
-        "money": -40,
+        "money": -40000,
         "corruption": 2,
         "popularity": 1
       },
@@ -218,7 +218,7 @@
         "probability": 100,
         "description": "Elegir la oferta más barata públicamente",
         "energy": -3,
-        "money": -40,
+        "money": -40000,
         "corruption": 0,
         "popularity": -1
       }
@@ -235,13 +235,13 @@
         "probability": 100,
         "description": "Pagar restauración profesional",
         "energy": -3,
-        "money": -50,
+        "money": -50000,
         "corruption": 0,
         "popularity": 3
       },
       {
         "probability": 100,
-        "description": "Dejarla tal cual y tomar la foto en sombra",
+        "description": "Dejarla tal cual y prometer arreglarla pronto",
         "energy": 0,
         "money": 0,
         "corruption": 0,
@@ -260,7 +260,7 @@
         "probability": 100,
         "description": "Plantar unos pocos árboles con voluntarios",
         "energy": -6,
-        "money": -5,
+        "money": -5000,
         "corruption": 0,
         "popularity": 2
       },
@@ -268,7 +268,7 @@
         "probability": 100,
         "description": "Contratar empresa para plantar rápido",
         "energy": -3,
-        "money": -40,
+        "money": -40000,
         "corruption": 0,
         "popularity": 4
       }
@@ -285,7 +285,7 @@
         "probability": 100,
         "description": "Aplicar la bonificación y admitir menor recaudación",
         "energy": -2,
-        "money": -30,
+        "money": -30000,
         "corruption": 0,
         "popularity": 3
       },
@@ -295,7 +295,7 @@
         "energy": -1,
         "money": 0,
         "corruption": 0,
-        "popularity": -1
+        "popularity": -6
       }
     ]
   },
@@ -335,7 +335,7 @@
         "probability": 100,
         "description": "Comprarlo con fondos municipales y aparecer en la foto",
         "energy": -3,
-        "money": -35,
+        "money": -35000,
         "corruption": 0,
         "popularity": 3
       },
@@ -344,7 +344,7 @@
         "description": "Aceptar donación privada (complicado de justificar)",
         "energy": -1,
         "money": 0,
-        "corruption": 1,
+        "corruption": 2,
         "popularity": 1
       }
     ]
@@ -360,9 +360,9 @@
         "probability": 100,
         "description": "Cerrar y limpiar con brigada municipal",
         "energy": -4,
-        "money": -10,
+        "money": -10000,
         "corruption": 0,
-        "popularity": 1
+        "popularity": 6
       },
       {
         "probability": 100,
@@ -370,7 +370,7 @@
         "energy": -7,
         "money": 0,
         "corruption": 0,
-        "popularity": 0
+        "popularity": 2
       }
     ]
   },
