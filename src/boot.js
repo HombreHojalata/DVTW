@@ -128,8 +128,12 @@ import memoryImage7 from '../assets/minigames/memory/memoryImage7.png'
 import memoryImage8 from '../assets/minigames/memory/memoryImage8.png'
 import vendedor from '../assets/other/Vendedor.png'
 import vendedorSilueta from '../assets/other/VendedorSilueta.png'
-import prensa_icon from '../assets/marketIcons/prensa.png'
-import hotel_icon from '../assets/marketIcons/hotel.png'
+import news_icon from '../assets/marketIcons/news_icon.png'
+import hotel_icon from '../assets/marketIcons/hotel_icon.png'
+import votes_icon from '../assets/marketIcons/votes_icon.png'
+import bridge_icon from '../assets/marketIcons/bridge_icon.png'
+import coffee_icon from '../assets/marketIcons/coffee_icon.png'
+import evil_icon from '../assets/marketIcons/evil_icon.png'
 
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
@@ -369,8 +373,12 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage8', memoryImage8);
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
-    this.load.image('pensa_icon', prensa_icon);
+    this.load.image('news_icon', news_icon);
     this.load.image('hotel_icon', hotel_icon);
+    this.load.image('votes_icon', votes_icon);
+    this.load.image('bridge_icon', bridge_icon);
+    this.load.image('coffee_icon', coffee_icon);
+    this.load.image('evil_icon', evil_icon);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
