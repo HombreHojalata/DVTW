@@ -55,7 +55,7 @@ export default class DistrictScene extends Phaser.Scene {
             const img = this.add.image(x, y, building.getBuildingPNG()).setOrigin(0).setDepth(19); 
 
             if (this.tutorial) {
-                if (building.getName() === "CINEMA") {
+                if (building.getName() === "CINE") {
                     img.setOrigin(0.5);
                     img.x += 32;
                     img.y += 32;
@@ -117,20 +117,20 @@ export default class DistrictScene extends Phaser.Scene {
     }
 
     configureNormalEvents(img, building, tooltip) {
-        img.on('pointerover', (pointer) => {
+        img.on('pointerover', () => {
             if(this.district.canBuildMore()){
                 if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. \nTienes: ${this.player.getMoney()}$ \t El edificio cuesta: ${building.getBuildingCost()}$`);
                 else tooltip.setText(building.getBuildingInfo());
             }else tooltip.setText('No tienes suficiente espacio para construir');
-            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
+            tooltip.setPosition(600, 625);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
-        img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
+        img.on('pointermove', () => {tooltip.setPosition(600, 625);});
         img.on('pointerout', () => {tooltip.setVisible(false);});
         img.on('pointerup', () => {
             if(this.tutorial) {
-                if (building.getName() === "CINEMA") {
+                if (building.getName() === "CINE") {
                     if (this.pulseTween) this.pulseTween.stop();
                     img.setScale(1);
                     this.district.addBuilding(building);
@@ -154,19 +154,19 @@ export default class DistrictScene extends Phaser.Scene {
         });
     }
     configureSpecialEvents(img, building, tooltip) {
-        img.on('pointerover', (pointer) => {
+        img.on('pointerover', () => {
             if(this.district.isSpecialBuildingBuilt()) tooltip.setText('Edificio especial ya construido!!!');
             else{
                 if(this.district.canBuildMore()){
                     if(this.player.getMoney() < building.getBuildingCost()) tooltip.setText(`No tienes suficiente dinero para comprar este edificio. \nTienes: ${this.player.getMoney()}$ \t El edificio cuesta: ${building.getBuildingCost()}$`);
-                    else tooltip.setText('-----EDIFICIO ESPECIAL-----\n' + building.getBuildingInfo());
+                    else tooltip.setText('--------EDIFICIO ESPECIAL--------\n' + building.getBuildingInfo());
                 }else tooltip.setText('No tienes suficiente espacio para construir');
             }
-            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
+            tooltip.setPosition(600,625);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
-        img.on('pointermove', (pointer) => {tooltip.setPosition(pointer.x + 15, pointer.y + 35);});
+        img.on('pointermove', () => {tooltip.setPosition(600,625);});
         img.on('pointerout', () => {tooltip.setVisible(false);});
         img.on('pointerup', () => {
             tooltip.setVisible(false);
@@ -228,7 +228,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.containerStore = this.add.container(300, 140).setDepth(21);   
         const bg = this.add.rectangle(0, 0, 450, 300, 0x000000, 0.85).setOrigin(0.5, 0);
         bg.setStrokeStyle(2, 0xffffff, 0.5);
-        const text = this.add.text(0, 140, '¡Aquí tiene el catálogo de obras públicas!\nAquí podrá comprar nuevos edificios para los distritos.\n\nCada edificio tiene una función distinta.\n Intente comprar el edificio "CINEMA" para probar.', {
+        const text = this.add.text(0, 140, '¡Aquí tiene el catálogo de obras públicas!\nAquí podrá comprar nuevos edificios para los distritos.\n\nCada edificio tiene una función distinta.\n Intente comprar el edificio "CINE" para probar.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#ffffff',

@@ -375,8 +375,7 @@ export default class TutorialScene extends Phaser.Scene {
         container.add([bg, img, introText, text]);
 
         this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
-            //this.fadeOutContainer(container, () => this.explainMissions());
-            container.destroy();
+            this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true, order: 3, day: 3 });
         });
     }
 

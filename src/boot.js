@@ -16,6 +16,8 @@ import blackMarketMessage from '../assets/other/blackMarketMessage.png'
 
 // PROTOTYPE ASSETS
 import presidente from '../assets/other/presidente.png'
+import goodEnding from '../assets/other/goodEnding.png'
+import badEnding from '../assets/other/badEnding.png'
 
 // MAP ASSET
 import map from '../assets/map/mapTemplate.png'
@@ -29,6 +31,12 @@ import districtGuineaScene1 from '../assets/map/districtScenes/districtGuineaSce
 import districtNuevaPraderaScene1 from '../assets/map/districtScenes/districtNuevaPraderaScene1.png'
 import districtSaharScene1 from '../assets/map/districtScenes/districtSaharScene1.png'
 import districtSomosaguaScene1 from '../assets/map/districtScenes/districtSomosaguaScene1.png'
+import districtBorrascalScene2 from '../assets/map/districtScenes/districtBorrascalScene2.png'
+import districtElNidoScene2 from '../assets/map/districtScenes/districtElNidoScene2.png'
+import districtGuineaScene2 from '../assets/map/districtScenes/districtGuineaScene2.png'
+import districtNuevaPraderaScene2 from '../assets/map/districtScenes/districtNuevaPraderaScene2.png'
+import districtSaharScene2 from '../assets/map/districtScenes/districtSaharScene2.png'
+import districtSomosaguaScene2 from '../assets/map/districtScenes/districtSomosaguaScene2.png'
 
 // DISTRICT
 import districtBorrascal from '../assets/map/district/districtBorrascal.png'
@@ -164,9 +172,10 @@ import mapCutout from '../assets/jsons/map.json';
 
 // AUDIO
 import AudioManager from '../src/manager/audioManager.js'
-import gameAudio from '../assets/audio/il porco rosso.mp3';
+import gameAudio from '../assets/audio/rimworld.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
 import blackMarketAudio from '../assets/audio/black market.mp3';
+import introSceneAudio from '../assets/audio/il porco rosso.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -182,13 +191,83 @@ export default class Boot extends Phaser.Scene {
 
     // PRINCIPAL SCENE ASSETS
     this.load.image('loadScene', loadScene);
+
+    //AUDIO PART
+    this.load.audio('bgMusic', gameAudio);
+    this.load.audio('introSceneAudio', introSceneAudio);
+  }
+
+  create() {
+    this.add.image(750, 375, 'loadScene');
+
+    //WE CAN ADD MUSIC AND LOADING BAR HERE
+
+
+    this.audioManager = new AudioManager(this);
+    this.registry.set('audioManager', this.audioManager)
+    this.audioManager.playMusic('introSceneAudio');
+
+    //animacion de la urna
+    this.anims.create({
+      key: 'animUrna',
+      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
+      frameRate: 1,
+      repeat: -1
+    });
+
+    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
+    urna.setDisplaySize(1536, 922);
+    urna.play('animUrna');
+
+    //BARRA DE CARGA
+    const barWidth = 600;
+    const barHeight = 22;
+    const barX = this.cameras.main.centerX - barWidth / 2;
+    const barY = 780;
+
+    //estilo
+    const barBg = this.add.graphics();
+    barBg.lineStyle(3, 0x1b263b, 1);
+    barBg.fillStyle(0x0d1117, 0.8);
+    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
+    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
+    const progressBar = this.add.graphics();
+    const barGlow = this.add.graphics();
+
+    this.tweens.add({
+      targets: { width: 0 },
+      width: barWidth,
+      duration: 7000,
+      ease: 'Cubic.easeOut', //mas lento al final
+      onUpdate: (tween) => {
+        const currentWidth = tween.getValue();
+        progressBar.clear();
+        barGlow.clear();
+
+        if (currentWidth > 0) {
+          progressBar.fillStyle(0x3e5c9a, 1);
+          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
+
+          progressBar.fillStyle(0x5c7cba, 1);
+          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
+
+          barGlow.fillStyle(0xffffff, 0.15);
+          barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
+        }
+      }
+    });
+
+    this.cargasCompletadas = false;
+    this.load.on('complete', () => {
+      this.cargasCompletadas = true;
+    });
+
+    // START LOADING REMAINING ASSETS
     this.load.spritesheet('animatedAgenda', agendaSheet, {
       frameWidth: 1536,
       frameHeight: 922
     });
     this.load.image('configScene', configScene);
-
-    // TUTORIAL ASSETS
     this.load.image('tutorialAnimals1', tutorialAnimals1);
     this.load.image('tutorialAnimals2', tutorialAnimals2);
     this.load.image('tutorialAnimals3', tutorialAnimals3);
@@ -196,9 +275,9 @@ export default class Boot extends Phaser.Scene {
     this.load.image('textCloud', textCloud);
     this.load.image('flamingo', flamingo);
     this.load.image('blackMarketMessage', blackMarketMessage);
-
-    // RESTO DEI LOAD... (tutti i tuoi file audio, immagini e json)
     this.load.image('presidente', presidente);
+    this.load.image('goodEnding', goodEnding);
+    this.load.image('badEnding', badEnding);
     this.load.image('map', map);
     this.load.image('districtTemplate', districtTemplate);
     this.load.image('districtStoreTemplate', districtStoreTemplate);
@@ -208,6 +287,12 @@ export default class Boot extends Phaser.Scene {
     this.load.image('districtNuevaPraderaScene1', districtNuevaPraderaScene1);
     this.load.image('districtSaharScene1', districtSaharScene1);
     this.load.image('districtSomosaguaScene1', districtSomosaguaScene1);
+    this.load.image('districtBorrascalScene2', districtBorrascalScene2);
+    this.load.image('districtElNidoScene2', districtElNidoScene2);
+    this.load.image('districtGuineaScene2', districtGuineaScene2);
+    this.load.image('districtNuevaPraderaScene2', districtNuevaPraderaScene2);
+    this.load.image('districtSaharScene2', districtSaharScene2);
+    this.load.image('districtSomosaguaScene2', districtSomosaguaScene2);
     this.load.image('districtBorrascal', districtBorrascal);
     this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);
@@ -319,76 +404,12 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
     this.cache.json.add('mapCutout', mapCutout);
-
-    //AUDIO PART
-    this.load.audio('bgMusic', gameAudio);
     this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
+    this.load.audio('introSceneAudio', introSceneAudio);
+    this.load.audio('bgMusic', gameAudio);
 
-    this.cargasCompletadas = false;
-    this.load.on('complete', () => {
-      this.cargasCompletadas = true;
-    });
-  }
-
-  create() {
-
-    this.add.image(750, 375, 'loadScene');
-
-    //WE CAN ADD MUSIC AND LOADING BAR HERE
-    this.audioManager = new AudioManager(this);
-    this.registry.set('audioManager', this.audioManager)
-    this.audioManager.playMusic('bgMusic');
-
-    //animacion de la urna
-    this.anims.create({
-      key: 'animUrna',
-      frames: this.anims.generateFrameNumbers('urnaCarga', { start: 0, end: 6 }),
-      frameRate: 1,
-      repeat: -1
-    });
-
-    const urna = this.add.sprite(0, 0, 'urnaCarga').setOrigin(0);
-    urna.setDisplaySize(1536, 922);
-    urna.play('animUrna');
-
-    //BARRA DE CARGA
-    const barWidth = 600;
-    const barHeight = 22;
-    const barX = this.cameras.main.centerX - barWidth / 2;
-    const barY = 780;
-
-    //estilo
-    const barBg = this.add.graphics();
-    barBg.lineStyle(3, 0x1b263b, 1);
-    barBg.fillStyle(0x0d1117, 0.8);
-    barBg.strokeRoundedRect(barX, barY, barWidth, barHeight, 5);
-    barBg.fillRoundedRect(barX, barY, barWidth, barHeight, 5);
-    const progressBar = this.add.graphics();
-    const barGlow = this.add.graphics();
-
-    this.tweens.add({
-      targets: { width: 0 },
-      width: barWidth,
-      duration: 7000,
-      ease: 'Cubic.easeOut', //mas lento al final
-      onUpdate: (tween) => {
-        const currentWidth = tween.getValue();
-        progressBar.clear();
-        barGlow.clear();
-
-        if (currentWidth > 0) {
-          progressBar.fillStyle(0x3e5c9a, 1);
-          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, barHeight - 6, 4);
-
-          progressBar.fillStyle(0x5c7cba, 1);
-          progressBar.fillRoundedRect(barX + 3, barY + 3, currentWidth - 6, (barHeight - 6) / 2, 4);
-
-          barGlow.fillStyle(0xffffff, 0.15);
-          barGlow.fillRoundedRect(barX + 5, barY + 5, currentWidth - 10, 6, 3);
-        }
-      }
-    });
+    this.load.start();
 
     urna.on('animationrepeat', () => {
       if (this.cargasCompletadas) {

@@ -8,7 +8,7 @@ export default class gameManager{
     constructor(scene){
         this.scene = scene;
         this.player = new Player(700000, 100, 100, 0, 0 , 'presidente' , 'presidente');
-        this.day=new Day(0);
+        this.day = new Day(0);
         this.missionManager = new MissionManager(scene,this.player);
         this.map = new Map('map',null,null);
         this.player.updatePopularity(this.map.getPopularity());
@@ -73,7 +73,7 @@ export default class gameManager{
     }
     // UPDATES 
     nextDay() {
-        this.day = new Day(this.day);
+        this.day = new Day(this.day.dayNumber);
         this.player.setEnergy(this.player.getMaxEnergy());
         this.player.updateMoney(this.map.getMoneyGenerated());
     }

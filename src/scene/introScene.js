@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import AudioManager from '../manager/audioManager';
 
 export default class IntroScene extends Phaser.Scene {
     constructor() {
@@ -8,6 +9,12 @@ export default class IntroScene extends Phaser.Scene {
     create() {
         //comprobar si la agenda ya estaba abierta
         const agendaAbierta = this.registry.get('agendaAbierta') || false;
+
+
+        this.audioManager = this.registry.get('audioManager');
+        if (this.audioManager) {
+            this.audioManager.switchMusic('introSceneAudio');
+        }
 
         //crear animacion
         this.anims.create({
@@ -141,5 +148,11 @@ export default class IntroScene extends Phaser.Scene {
                 openedFromPause: false
             });
         });
+
+        /*
+        createMenuButton(580, 320, 'ENDING', () => { // PARA DEPURAR
+            this.scene.start('finishScene', { win: true });
+        });
+        */
     }
 }

@@ -1,4 +1,4 @@
-import District from './district';
+    import District from './district';
 import SpecialBuilding from '../building/specialBuildingBorrascal.js';
 
 export default class DistrictBorrascal extends District{
@@ -9,9 +9,8 @@ export default class DistrictBorrascal extends District{
     }
     createSceneList(){
         const list = [];
-        list.push('districtBorrascalScene1');
+        list.push('districtBorrascalScene1', 'districtBorrascalScene2');
         return list;
     }
-    // VALUES NEED TO CHANGEPNGBuilding,name,cost,income,satisfaction,population
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingBorrascal',this.special_building,240000,4,10,0);}
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingBorrascal',"CENTRO DE INVESTIGACIÓN",240000,4,10,0);}
 };

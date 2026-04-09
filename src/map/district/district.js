@@ -67,7 +67,7 @@ export default class District {
         button.on('pointerout', () => {outline.setVisible(false);});
         button.on('pointerup', () => {
             scene.scene.pause('gameScene');
-            scene.scene.launch('districtScene', { district: this, day: scene.day.getDayNumber() });
+            scene.scene.launch('districtScene', { district: this, dayo: scene.day.getDayNumber() });
         });
         return button;
     }
@@ -161,13 +161,13 @@ export default class District {
         const buildingList = [];
         for(let i = 0 ; i < buildings.length; i++){
             //PNGBuilding,name,cost,income,satisfaction,populationIncrease
-            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINEMA",10000,1,5,0));
-            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"COMERCIAL",30000,2,5,0));
-            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FACTORY",50000,3,-5,-0));
+            if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINE",10000,1,5,0));
+            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"CENTRO COMERCIAL",30000,2,5,0));
+            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FÁBRICA",50000,3,-5,-0));
             else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,-2,15,0));
             else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,1,5,0));
-            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOUSE",5000,0,10,0));
-            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARK",10000,-1,10,0));
+            else if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOGAR",5000,0,10,0));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARQUE",10000,-1,10,0));
         }
         if(built) {
             for(let i = 0; i < buildingList.length; i++){
@@ -218,4 +218,10 @@ export default class District {
             throw new Error("This building can't be built in this district.");
         }
     }
+    removeBuilding(building){
+        if(building.getName() === this.special_building) this.is_special_built = false;
+        const index = this.building_list.indexOf(building);
+        if (index !== -1) this.building_list.splice(index, 1);
+    }
+    
 }
