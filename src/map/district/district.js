@@ -66,6 +66,8 @@ export default class District {
         button.on('pointerover', () => {outline.setVisible(true);});
         button.on('pointerout', () => {outline.setVisible(false);});
         button.on('pointerup', () => {
+            const audioManager = scene.registry.get('audioManager');
+            if (audioManager) audioManager.play('openDistrict');
             scene.scene.pause('gameScene');
             scene.scene.launch('districtScene', { district: this, day: scene.day.getDayNumber() });
         });

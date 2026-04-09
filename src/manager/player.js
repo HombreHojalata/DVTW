@@ -9,7 +9,7 @@ export default class Player {
         this.PNGpresident = PNGpresident;
     }
 
-    spawnPresident(scene) {return scene.add.image(120, 150, this.PNGpresident).setDisplaySize(200, 350).setDepth(5);}
+    spawnPresident(scene) {return scene.add.image(15, 15, this.PNGpresident).setDisplaySize(224, 287).setOrigin(0).setDepth(19);}
     getMoney(){ return this.money; }
     updateMoney(amount){this.money += amount;}
     getMaxEnergy() { return this.maxEnergy; }

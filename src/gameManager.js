@@ -7,7 +7,7 @@ import Map from './map/map.js'
 export default class gameManager{
     constructor(scene){
         this.scene = scene;
-        this.player = new Player(700000, 100, 100, 0, 0 , 'presidente' , 'presidente');
+        this.player = new Player(700000, 100, 100, 0, 0, 'photoNormal');
         this.day = new Day(0);
         this.missionManager = new MissionManager(scene,this.player);
         this.map = new Map('map',null,null);
@@ -50,7 +50,7 @@ export default class gameManager{
         scene.registry.set('missionList', missions);
     }
     // ASSETS - BUTTONS
-    spawnAssets(scene,tutorial){
+    spawnAssets(scene,tutorial){ 
         this.mapImg = this.map.spawnMap(scene);
         this.districtList = this.map.spawnDistricts(scene,tutorial);
         this.presidente = this.player.spawnPresident(scene);
