@@ -12,7 +12,7 @@
         "energy": -5,
         "money": 0,
         "corruption": 0,
-        "popularity": 6
+        "popularity": 8
       },
       {
         "probability": 100,
@@ -20,7 +20,7 @@
         "energy": -3,
         "money": 0,
         "corruption": 0,
-        "popularity": 4
+        "popularity": 6
       }
     ]
   },
@@ -45,7 +45,7 @@
         "energy": -2,
         "money": -80,
         "corruption": 0,
-        "popularity": 6
+        "popularity": 8
       }
     ]
   },
@@ -68,7 +68,7 @@
         "probability": 100,
         "description": "Comprar productos para la foto",
         "energy": -2,
-        "money": -60,
+        "money": -6000,
         "corruption": 0,
         "popularity": 6
       }
@@ -85,17 +85,17 @@
         "probability": 100,
         "description": "Participar en el evento deportivo",
         "energy": -6,
-        "money": -40,
+        "money": -40000,
         "corruption": 0,
-        "popularity": 7
+        "popularity": 8
       },
       {
         "probability": 100,
         "description": "Entregar premios y saludar",
         "energy": -3,
-        "money": -20,
+        "money": -20000,
         "corruption": 0,
-        "popularity": 5
+        "popularity": 6
       }
     ]
   },
@@ -110,17 +110,17 @@
         "probability": 100,
         "description": "Hacer una gran inauguración",
         "energy": -4,
-        "money": -120,
+        "money": -120000,
         "corruption": 0,
-        "popularity": 7
+        "popularity": 10
       },
       {
         "probability": 100,
         "description": "Abrirlo discretamente",
         "energy": -2,
-        "money": -60,
+        "money": -60000,
         "corruption": 0,
-        "popularity": 4
+        "popularity": 6
       }
     ]
   },
@@ -135,17 +135,17 @@
         "probability": 100,
         "description": "Ayudar personalmente en la limpieza",
         "energy": -7,
-        "money": -30,
+        "money": -30000,
         "corruption": 0,
-        "popularity": 8
+        "popularity": 12
       },
       {
         "probability": 100,
         "description": "Enviar brigadas municipales",
         "energy": -3,
-        "money": -80,
+        "money": -80000,
         "corruption": 0,
-        "popularity": 5
+        "popularity": 6
       }
     ]
   },
@@ -170,7 +170,7 @@
         "energy": -3,
         "money": 0,
         "corruption": 0,
-        "popularity": 4
+        "popularity": 5
       }
     ]
   },
@@ -193,9 +193,9 @@
         "probability": 100,
         "description": "Donar equipos médicos",
         "energy": -2,
-        "money": -120,
+        "money": -120000,
         "corruption": 0,
-        "popularity": 7
+        "popularity": 8
       }
     ]
   },
@@ -210,7 +210,7 @@
         "probability": 100,
         "description": "Participar con voluntarios",
         "energy": -6,
-        "money": -20,
+        "money": -20000,
         "corruption": 0,
         "popularity": 7
       },
@@ -218,7 +218,7 @@
         "probability": 100,
         "description": "Financiar el evento",
         "energy": -2,
-        "money": -100,
+        "money": -100000,
         "corruption": 0,
         "popularity": 6
       }
@@ -243,9 +243,9 @@
         "probability": 100,
         "description": "Donar nuevo equipamiento",
         "energy": -3,
-        "money": -110,
+        "money": -110000,
         "corruption": 0,
-        "popularity": 6
+        "popularity": 8
       }
     ]
   },
@@ -260,7 +260,7 @@
         "probability": 100,
         "description": "Aparecer disfrazado en el escenario",
         "energy": -5,
-        "money": -30,
+        "money": -30000,
         "corruption": 0,
         "popularity": 8
       },
@@ -268,9 +268,9 @@
         "probability": 100,
         "description": "Entregar regalos a los niños",
         "energy": -3,
-        "money": -90,
+        "money": -90000,
         "corruption": 0,
-        "popularity": 7
+        "popularity": 10
       }
     ]
   },
@@ -285,7 +285,7 @@
         "probability": 100,
         "description": "Autorizar actuaciones y apoyarles",
         "energy": -2,
-        "money": -20,
+        "money": -20000,
         "corruption": 0,
         "popularity": 5
       },
@@ -293,7 +293,7 @@
         "probability": 100,
         "description": "Financiar un pequeño festival",
         "energy": -4,
-        "money": -110,
+        "money": -110000,
         "corruption": 0,
         "popularity": 7
       }
@@ -312,7 +312,7 @@
         "energy": -6,
         "money": 0,
         "corruption": 0,
-        "popularity": 7
+        "popularity": 10
       },
       {
         "probability": 100,
@@ -320,7 +320,7 @@
         "energy": -3,
         "money": 0,
         "corruption": 0,
-        "popularity": 5
+        "popularity": 8
       }
     ]
   },
@@ -343,9 +343,9 @@
         "probability": 100,
         "description": "Llevarla a un refugio municipal",
         "energy": -2,
-        "money": -40,
+        "money": -40000,
         "corruption": 0,
-        "popularity": 5
+        "popularity": 7
       }
     ]
   },
@@ -360,17 +360,17 @@
         "probability": 100,
         "description": "Publicar datos del ayuntamiento",
         "energy": -4,
-        "money": -30,
+        "money": -30000,
         "corruption": -2,
-        "popularity": 7
+        "popularity": 9
       },
       {
         "probability": 100,
         "description": "Anunciar una auditoría pública",
         "energy": -6,
-        "money": -70,
+        "money": -70000,
         "corruption": -3,
-        "popularity": 8
+        "popularity": 12
       }
     ]
   }
