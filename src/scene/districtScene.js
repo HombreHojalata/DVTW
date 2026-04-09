@@ -247,6 +247,8 @@ export default class DistrictScene extends Phaser.Scene {
             });
         });
         this.closeButton.on('pointerup', () => {
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('closeDistrict');
             this.scene.stop();
             this.registry.set('flagShow',false);
             this.scene.get('gameScene').scene.restart();
@@ -293,6 +295,8 @@ export default class DistrictScene extends Phaser.Scene {
         });
         button.on('pointerdown', () => {button.setScale(1); button.setTexture(image);});
         button.on('pointerup', () => {
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('key');
             button.setScale(1);
             button.setTexture(swapImage);
             if (callback) callback();

@@ -131,7 +131,8 @@ export default class BlackMarketScene extends Phaser.Scene {
                 if (this.player.getMoney() >= price) {
                     this.player.updateMoney(-price);
                     product.effect(this.player, this.gameManager);
-
+                    const audioManager = this.registry.get('audioManager');
+                    if (audioManager) audioManager.play('money');
                     this.registry.set(`buy_count_${product.id}`, amountBought + 1);
                     this.buyFlash = true;
                     this.scene.restart({ page: this.currentPage });

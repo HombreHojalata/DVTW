@@ -183,6 +183,10 @@ import gameAudio from '../assets/audio/rimworld.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
 import blackMarketAudio from '../assets/audio/black market.mp3';
 import introSceneAudio from '../assets/audio/il porco rosso.mp3';
+import openDistrict from '../assets/audio/openDistrict.mp3';
+import closeDistrict from '../assets/audio/closeDistrict.mp3';
+import key from '../assets/audio/key.mp3';
+import money from '../assets/audio/money.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -422,6 +426,10 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('blackMarketAudio', blackMarketAudio);
     this.load.audio('introSceneAudio', introSceneAudio);
     this.load.audio('bgMusic', gameAudio);
+    this.load.audio('openDistrict', openDistrict);
+    this.load.audio('closeDistrict', closeDistrict);
+    this.load.audio('key', key);
+    this.load.audio('money', money);
 
     this.load.start();
 

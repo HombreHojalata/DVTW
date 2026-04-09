@@ -53,6 +53,8 @@ export default class endDayBtnUI {
         });
 
         this.btn.on('pointerup', () => {
+            const audioManager = this.scene.registry.get('audioManager');
+            if (audioManager) audioManager.play('key');
             if (this.isOver) {
                 this.btn.setTexture('endDayBright');
                 this.scene.registry.set('flagShow',true);
