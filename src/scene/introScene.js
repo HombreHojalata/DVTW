@@ -158,6 +158,8 @@ export default class IntroScene extends Phaser.Scene {
             this.scene.start('finishScene', { win: false });
         });
         
-        
+        createMenuButton(120, 150, 'PLINKO', () => { // PARA DEPURAR
+            this.scene.start('plinkoMiniGame');
+        });
     }
 }

@@ -13,6 +13,7 @@ import SummaryDayScene from './scene/summaryDayScene.js';
 import FinishScene from './scene/finishScene.js';
 import WordleMiniGame from './minigames/scene/wordleScene.js';
 import MemoryMiniGame from './minigames/scene/memoryScene.js';
+import PlinkoMiniGame from './minigames/scene/plinkoScene.js';
 import PauseScene from './scene/pauseMenuScene.js';
 
 /**
@@ -33,7 +34,7 @@ let config = {
         createContainer: true
     },
     scene: [Boot, IntroScene, ConfigurationScene, TutorialScene, GameScene, DistrictScene, DistrictStoreScene, 
-        MissionScene, BlackMarketScene, SummaryDayScene, FinishScene, PauseScene, WordleMiniGame, MemoryMiniGame],
+        MissionScene, BlackMarketScene, SummaryDayScene, FinishScene, PauseScene, WordleMiniGame, MemoryMiniGame, PlinkoMiniGame],
     physics: {
         default: 'arcade',
         arcade: {
