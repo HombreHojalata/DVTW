@@ -136,7 +136,7 @@ export default class MissionScene extends Phaser.Scene {
         if(option.probability <100)
             lines.push({ text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) });
         if(option.money != 0)
-            lines.push({ text: `Coste: ${option.money}`, color: getColor(-option.money) });
+            lines.push({ text: `Beneficio: ${option.money}`, color: getColor(option.money) });
         if(option.corruption != 0)
             lines.push({ text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) });
         if(option.popularity != 0)
