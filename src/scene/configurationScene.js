@@ -140,7 +140,7 @@ export default class ConfigurationScene extends Phaser.Scene {
             this.scene.stop();
 
             if (this.openedFromPause) {
-                this.scene.start('PauseScene', { returnScene: this.returnScene });
+                this.scene.start('pauseScene', { returnScene: this.returnScene });
                 return;
             }
 
@@ -163,7 +163,7 @@ export default class ConfigurationScene extends Phaser.Scene {
             this.scene.stop();
 
             if (this.openedFromPause) {
-                this.scene.start('PauseScene', { returnScene: this.returnScene });
+                this.scene.start('pauseScene', { returnScene: this.returnScene });
                 return;
             }
 

@@ -13,6 +13,7 @@ export default class Mission{
         this.pos=[null,null];//Posición de la misión en el mapa, se asigna al distrito.
         this.missionButton = null;//Botón que se muestra en el mapa, se asigna al distrito.
         this.icon = null;//Icono del botón, se asigna al distrito.
+        this.sceneImage = null;//Imagen que se muestra en la escena de la misión, se asigna dependiendo del distrito y el tipo de misión.
     }
     
 
@@ -25,6 +26,8 @@ export default class Mission{
     getNumOptions() {return this.numberOfOptions;}
     setDistrict(district) {this.district = district;}
     setPos(x,y) {this.pos=[x,y];}
+    setSceneImage(image) {this.sceneImage = image;}
+    getScene() {return this.sceneImage;}
     getDistrict() {return this.district;}
     getPos() {return this.pos;}
     addOption(Pr, De, En, Mo, Cor, Po){

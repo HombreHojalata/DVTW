@@ -45,7 +45,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.spawnAllFooter(newWidth, offsetX, newHeight, offsetY);
 
         //BLOCKER
-        if (this.day < 2) this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
+        if (this.day < 3) this.blocker = this.add.image(598, 500, 'blockerDistrict').setOrigin(0).setInteractive({ useHandCursor: false }).setScale(0.955);
 
         //TUTORIAL
         if(this.tutorial){
@@ -56,7 +56,7 @@ export default class DistrictScene extends Phaser.Scene {
             this.containerStore = null;
             if (this.order === 1) this.explainTutorial(width, height);
             else if (this.order === 2) this.finishTutorial(width, height);
-            else if (this.order === 3) this.explaintParameters(width, height);
+            else if (this.order === 3) this.explainParameters(width, height);
         }
     }
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
@@ -247,6 +247,8 @@ export default class DistrictScene extends Phaser.Scene {
             });
         });
         this.closeButton.on('pointerup', () => {
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('closeDistrict');
             this.scene.stop();
             this.registry.set('flagShow',false);
             this.scene.get('gameScene').scene.restart();
@@ -293,6 +295,8 @@ export default class DistrictScene extends Phaser.Scene {
         });
         button.on('pointerdown', () => {button.setScale(1); button.setTexture(image);});
         button.on('pointerup', () => {
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('key');
             button.setScale(1);
             button.setTexture(swapImage);
             if (callback) callback();
@@ -520,13 +524,6 @@ export default class DistrictScene extends Phaser.Scene {
         
         container.add([bg, text]);
 
-        this.createTutorialButton(container, -180, 200, 'Volver', () => {
-            container.destroy();
-            if (this.pulseTween) this.pulseTween.stop();
-            this.storeButton.setScale(1.3);
-            this.explainDistrictAttributes(width, height);
-        });
-
         this.pulseTween = this.tweens.add({
             targets: this.storeButton,
             scale: 1.6,
@@ -542,6 +539,12 @@ export default class DistrictScene extends Phaser.Scene {
             this.scene.launch('districtStoreScene', { district: this.district, tutorial: true});
         })
     
+        this.createTutorialButton(container, -180, 200, 'Volver', () => {
+            if (this.pulseTween) this.pulseTween.stop();
+            this.storeButton.setScale(1.3);
+            container.destroy();
+            this.explainDistrictAttributes(width, height);
+        });
     }
     // ORDER 2
     finishTutorial() {
@@ -566,9 +569,9 @@ export default class DistrictScene extends Phaser.Scene {
         });
     }
     // ORDER 3
-    explaintParameters(width, height) {
+    explainParameters(width, height) {
         const container = this.add.container(width / 2, height / 2).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 750, 300, 0x000000, 0.85).setOrigin(0.5);
+        const bg = this.add.rectangle(0, 0, 750, 350, 0x000000, 0.85).setOrigin(0.5);
         bg.setStrokeStyle(2, 0xffffff, 0.5);
         const text = this.add.text(0, -40, 'Estamos nuevamente en El Nido, el lugar ideal para mostrarle sus nuevo Parámetros de Distritos: Impuestos, Horario Laboral, Seguridad, y Limpieza de las calles.\n\nCada parámetro es un delicado equilibrio. Al ajustarlo, la satisfacción de los vecinos y el dinero del distrito irán variando.\nDebe encontrar el balance que más le convenga, señor.', {
             fontSize: '24px',
@@ -580,16 +583,16 @@ export default class DistrictScene extends Phaser.Scene {
         
         container.add([bg, text]);
 
-        this.createTutorialButton(container, 0, 100, 'Continuar', () => {
+        this.createTutorialButton(container, 0, 120, 'Continuar', () => {
             container.destroy();
             this.epxlainTestParameter(width, height);
         });
     }
     epxlainTestParameter(width, height) {
         const container = this.add.container(width / 4 - 30, height * 0.35 + 30).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
+        const bg = this.add.rectangle(0, 0, 650, 300, 0x000000, 0.85).setOrigin(0.5);
         bg.setStrokeStyle(2, 0xffffff, 0.5);
-        const text = this.add.text(0, -50, 'Vamos a porbar a ampliar la limpieza del distrito. Las avez locales aprecian mucho mantener sus calles limpias.\n\nPulsa el botón de + más subir el nivel de limpieza.', {
+        const text = this.add.text(0, -50, 'Vamos a porbar a ampliar la limpieza del distrito. Las avez locales aprecian mucho mantener sus calles limpias.\n\nPulsa el botón de + para subir el nivel de limpieza.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#ffffff',
@@ -599,6 +602,102 @@ export default class DistrictScene extends Phaser.Scene {
 
         container.add([bg, text]);
 
+        this.pulseTween = this.tweens.add({
+            targets: this.botonAumentar,
+            scale: 1.4,
+            duration: 300,
+            ease: 'Sine.easeInOut',
+            yoyo: true,
+            loop: -1
+        });
+        this.botonAumentar.once('pointerup', () => {
+            if (this.pulseTween) this.pulseTween.stop();
+            this.storeButton.setScale(1.3);
+            container.destroy();
+            this.explainParameters2(width, height);
+        })
+
+        this.createTutorialButton(container, -180, 90, 'Volver', () => {
+            if (this.pulseTween) this.pulseTween.stop();
+            this.botonAumentar.setScale(1);
+            container.destroy();
+            this.explainParameters(width, height);
+        });
+    }
+    explainParameters2(width, height) {
+        const container = this.add.container(width / 2, height / 2).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 350, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, '¡Bien hecho, señor presidente!\nAhora las calles están mucho más a la alutra del distrito.\n\nSin embargo, no somos una ONG, y nuestro dinero está mejor invertido en otras cosas.\nVamos a probar a revertir los cambios que hemos hecho.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
         
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 0, 120, 'Continuar', () => {
+            container.destroy();
+            this.epxlainTestParameter2(width, height);
+        });
+    }
+    epxlainTestParameter2(width, height) {
+        const container = this.add.container(width / 4 - 30, height * 0.35 + 30).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 650, 300, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -50, 'Intente lo contrario: disminuya la limpieza del lugar.\nNo sé preocue, si luego lo prefiere, puede volver a dejarla como estaba.\n\nPulsa el botón de - para diminuir el nivel de seguridad.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 600 }
+        }).setOrigin(0.5);
+
+        container.add([bg, text]);
+
+        this.pulseTween = this.tweens.add({
+            targets: this.botonReducir,
+            scale: 1.4,
+            duration: 300,
+            ease: 'Sine.easeInOut',
+            yoyo: true,
+            loop: -1
+        });
+        this.botonReducir.once('pointerup', () => {
+            if (this.pulseTween) this.pulseTween.stop();
+            this.storeButton.setScale(1.3);
+            container.destroy();
+            this.explainParametersFinish(width, height);
+        })
+
+        this.createTutorialButton(container, -180, 90, 'Volver', () => {
+            if (this.pulseTween) this.pulseTween.stop();
+            this.botonReducir.setScale(1);
+            container.destroy();
+            this.explainParametersFinish(width, height);
+        });
+    }
+    explainParametersFinish(width, height) {
+        const container = this.add.container(width / 2, height / 2).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 350, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, 'Usted ha nacido para esto, señor presidente.\nRecuerde que cada distrito es distito, por lo que preferiran un equilibrio diferente de los parámetros.\n\nEsta herramienta le será muy útil para conseguir llegar popularidad en aquellos distritos que más se le compliquen.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 0, 120, 'Continuar', () => {
+            container.destroy();
+            this.scene.stop();
+            this.scene.stop('tutorialScene');
+            this.scene.launch('tutorialScene', { order: 5 });
+        });
     }
 }

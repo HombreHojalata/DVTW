@@ -48,6 +48,7 @@ export default class TutorialScene extends Phaser.Scene {
         else if(this.sceneOrder === 2) this.explainCorrupt();
         else if(this.sceneOrder === 3) this.explainBlackMarket();
         else if(this.sceneOrder === 4) this.explainDistrictParameters();
+        else if(this.sceneOrder === 5) this.finishTutorial();
     }
 
     createTutorialButton(container, x, y, text, callback) {
@@ -145,24 +146,8 @@ export default class TutorialScene extends Phaser.Scene {
             container.destroy();
             this.explainTutorial();
         });
-        
-        /* ME PARECE QUE ESTO ES DEMASIADO CONFUSO, LA VERDAD
-        this.time.delayedCall(700, () => {
-            container.setAlpha(0.3);
-            const missionIcon = this.add.image(800, 420, 'missionIcon').setDepth(22);
-            const missionCorruptIcon = this.add.image(400, 600, 'missionCorruptIcon').setDepth(22);
-            this.time.delayedCall(3000, () => {
-                container.setAlpha(1);
-                this.canContinue = true;
-                missionIcon.destroy();
-                missionCorruptIcon.destroy();
-            });
-        });
-        */
     }
     explainEnergyAndEndDayButton() {
-        let canContinue = false; // DE MOMENTO ESTO NO SIRVE, PERO LO PUEDO AÑADIR LUEGO
-        this.time.delayedCall(1000, () => { canContinue = true; });
         const container = this.add.container(0, 0).setDepth(21);
         const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
         const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
@@ -255,56 +240,6 @@ export default class TutorialScene extends Phaser.Scene {
         });  
     }
     // ORDER 3
-    // ESTA JUSTO NO SALE NUNCA...
-    explainIntroBlackMarket() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width - 500, 30, 'vendedorSilueta').setOrigin(0).setScale(1).setDepth(25);
-        const blackMarketText = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Un placer hablar con usted señor presidente. Soy Xxxxxxxx Xxxxx, ya me conocerás cuando pases a visitarme al mercado negro.\n\n Que no sabes como ir? Abajo a la derecha tienes un boton para acceder a ella, cuando pases por ahi ya te explicaré como funciona mi mercado.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center'
-        }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40).angle(-2);
-
-        const goBackBtn = this.add.text(this.width/4-40, this.height/2 + 100, 'Volver', { 
-            fontSize: '16px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        goBackBtn.on('pointerup', () => {
-            goBackBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainEndDayButton();
-                }
-            });
-        });
-        const continueBtn = this.add.text(this.width*2/3 - 60, this.height/2 + 100, 'Continuar', { 
-            fontSize: '16px', 
-            fontFamily: 'Times New Roman', 
-            color: '#000000' 
-        }).setOrigin(0.5).setInteractive().setDepth(22);
-        continueBtn.on('pointerup', () => {
-            continueBtn.setScale(1.1);
-            this.tweens.add({
-                targets: container,
-                alpha: 0,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    container.destroy();
-                    this.explainMissions();
-                }
-            });
-        });
-        container.add([bg, img, blackMarketText, goBackBtn, continueBtn]);
-    }
     explainBlackMarket() {
         const container = this.add.container(0, 0).setDepth(21);
         const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(20);
@@ -390,5 +325,31 @@ export default class TutorialScene extends Phaser.Scene {
                 callback();
             }
         });
+    }
+    //ORDER 5
+    finishTutorial() {
+        const container = this.add.container(0, 0).setDepth(21);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
+        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
+        const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Eso es todo!', {
+            fontSize: '40px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center',
+            fontStyle: 'bold',
+        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
+        const text = this.add.text(this.width / 2- 120, this.height / 2 - 70, 'Bien, le dejo para que pruebe su nuevo jugetito.\nYa quedan pocos días para las elecciones, así que propcure conseguir el mayor apoyo posible.\n\nMucho animo, señor presidente.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
+
+        container.add([bg, img, introText, text]);    
+
+        this.createTutorialButton(container, this.width * 0.44, this.height * 0.6, '¡Entendido!', () => {
+            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: true }); });
+            this.sceneOrder = 1;
+        }); 
     }
 }

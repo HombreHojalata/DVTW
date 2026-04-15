@@ -96,6 +96,8 @@ export default class footerUI {
             if (this.pressed) {
                 this.pressed = false;
                 if (this.player.getEnergy() <= this.player.getMaxEnergy() / 2) {
+                    const audioManager = this.scene.registry.get('audioManager');
+                    if (audioManager) audioManager.play('key');
                     this.scene.scene.pause();
                     this.scene.scene.launch('blackMarketScene', { page: 0 });
                 } else {

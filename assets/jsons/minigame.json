@@ -9,7 +9,7 @@
         {
           "probability": 100,
           "description": "Juega a Wordle",
-          "energy": -2,
+          "energy": -20,
           "money": 0,
           "corruption": 0,
           "popularity": 45
@@ -26,10 +26,27 @@
         {
           "probability": 100,
           "description": "Juega a Memory",
-          "energy": -4,
+          "energy": -0,
           "money": 0,
           "corruption": 0,
           "popularity": 55
+        }
+      ]
+    },
+    {
+      "name": "Plinko",
+      "description": "El presidente se siente afortunado y quiere hacer unas apuestas.",
+      "event": true,
+      "corrupt": false,
+      "minigame": true,
+      "options": [
+        {
+          "probability": 100,
+          "description": "Apuesta en Plinko",
+          "energy": -20,
+          "money": 200000,
+          "corruption": 0,
+          "popularity": 0
         }
       ]
     }

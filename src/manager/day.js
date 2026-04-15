@@ -9,8 +9,41 @@ export default class day{
             corruption: 0,
             popularity: 0
         }
+        this.Orquilladerecursos=[{
+            minMoney: 200000,
+            maxMoney: 550000,
+            maxCorruption: 60,
+            maxSatisfaction: 35,
+            minSatisfaction: 28
+        },{
+            minMoney: 180000,
+            maxMoney: 400000,
+            maxCorruption: 50,
+            maxSatisfaction: 37,
+            minSatisfaction: 30
+        },{
+            minMoney: 100000,
+            maxMoney: 300000,
+            maxCorruption: 40,
+            maxSatisfaction: 35,
+            minSatisfaction: 30
+        },{
+            minMoney: 100000,
+            maxMoney: 250000,
+            maxCorruption: 40,
+            maxSatisfaction: 45,
+            minSatisfaction: 40
+        },{
+            minMoney: 0,
+            maxMoney: 120000,
+            maxCorruption: 40,
+            maxSatisfaction: 55,
+            minSatisfaction: 44
+        }]
     }
-
+    getOrquilladeRecursos(daynumber){
+        return this.Orquilladerecursos[daynumber - 1];
+    }
     updateResources(money, energy, corruption, popularity) {
         this.resourcesGained.money += Number(money);
         this.resourcesGained.energy += Number(energy);

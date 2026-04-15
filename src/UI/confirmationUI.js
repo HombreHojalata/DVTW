@@ -76,6 +76,8 @@ export default class confirmationUI {
     }
 
     hide() {
+        const audioManager = this.scene.registry.get('audioManager');
+        if (audioManager) audioManager.play('closeDistrict');
         this.scene.tweens.add({
             targets: this.container,
             scale: 0,

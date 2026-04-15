@@ -16,6 +16,9 @@ import blackMarketMessage from '../assets/other/blackMarketMessage.png'
 
 // PROTOTYPE ASSETS
 import presidente from '../assets/other/presidente.png'
+import photoNormal from '../assets/other/photoNormal.png'
+import photoBlink from '../assets/other/photoBlink.png'
+import photoSleep from '../assets/other/photoSleep.png'
 import goodEnding from '../assets/other/goodEnding.png'
 import badEnding from '../assets/other/badEnding.png'
 
@@ -128,8 +131,12 @@ import memoryImage7 from '../assets/minigames/memory/memoryImage7.png'
 import memoryImage8 from '../assets/minigames/memory/memoryImage8.png'
 import vendedor from '../assets/other/Vendedor.png'
 import vendedorSilueta from '../assets/other/VendedorSilueta.png'
-import prensa_icon from '../assets/marketIcons/prensa.png'
-import hotel_icon from '../assets/marketIcons/hotel.png'
+import news_icon from '../assets/marketIcons/news_icon.png'
+import hotel_icon from '../assets/marketIcons/hotel_icon.png'
+import votes_icon from '../assets/marketIcons/votes_icon.png'
+import bridge_icon from '../assets/marketIcons/bridge_icon.png'
+import coffee_icon from '../assets/marketIcons/coffee_icon.png'
+import evil_icon from '../assets/marketIcons/evil_icon.png'
 
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
@@ -176,6 +183,10 @@ import gameAudio from '../assets/audio/rimworld.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
 import blackMarketAudio from '../assets/audio/black market.mp3';
 import introSceneAudio from '../assets/audio/il porco rosso.mp3';
+import openDistrict from '../assets/audio/openDistrict.mp3';
+import closeDistrict from '../assets/audio/closeDistrict.mp3';
+import key from '../assets/audio/key.mp3';
+import money from '../assets/audio/money.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -276,6 +287,9 @@ export default class Boot extends Phaser.Scene {
     this.load.image('flamingo', flamingo);
     this.load.image('blackMarketMessage', blackMarketMessage);
     this.load.image('presidente', presidente);
+    this.load.image('photoNormal', photoNormal);
+    this.load.image('photoBlink', photoBlink);
+    this.load.image('photoSleep', photoSleep);
     this.load.image('goodEnding', goodEnding);
     this.load.image('badEnding', badEnding);
     this.load.image('map', map);
@@ -369,8 +383,12 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage8', memoryImage8);
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
-    this.load.image('pensa_icon', prensa_icon);
+    this.load.image('news_icon', news_icon);
     this.load.image('hotel_icon', hotel_icon);
+    this.load.image('votes_icon', votes_icon);
+    this.load.image('bridge_icon', bridge_icon);
+    this.load.image('coffee_icon', coffee_icon);
+    this.load.image('evil_icon', evil_icon);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
@@ -408,6 +426,10 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('blackMarketAudio', blackMarketAudio);
     this.load.audio('introSceneAudio', introSceneAudio);
     this.load.audio('bgMusic', gameAudio);
+    this.load.audio('openDistrict', openDistrict);
+    this.load.audio('closeDistrict', closeDistrict);
+    this.load.audio('key', key);
+    this.load.audio('money', money);
 
     this.load.start();
 

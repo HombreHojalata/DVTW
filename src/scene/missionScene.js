@@ -96,10 +96,12 @@ export default class MissionScene extends Phaser.Scene {
         //better getScene from mission
 
         //this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,this.mission.getScene());
-        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2,'districtBorrascalScene1');
+        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2,this.mission.getScene());
+        console.log(this.mission.getScene());
         return this.districtScene;
     }
     spawnCloseButton(newWidth,offsetX,offsetY){
+        if(this.mission.itIsEvent()) return null;
         this.closeButton = this.add.image(newWidth - offsetX ,offsetY + 60,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
         this.closeButton.on('pointerover', () => {
             this.tweens.add({
@@ -134,7 +136,7 @@ export default class MissionScene extends Phaser.Scene {
         if(option.probability <100)
             lines.push({ text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) });
         if(option.money != 0)
-            lines.push({ text: `Coste: ${option.money}`, color: getColor(-option.money) });
+            lines.push({ text: `Beneficio: ${option.money}`, color: getColor(option.money) });
         if(option.corruption != 0)
             lines.push({ text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) });
         if(option.popularity != 0)
@@ -188,6 +190,7 @@ export default class MissionScene extends Phaser.Scene {
         if(this.mission.isMinigame()){
             if(this.mission.getName() == "Cuackdle") this.createOptionButton(550,500,this.mission.getOptions()[0],'wordleMiniGame');
             else if(this.mission.getName() == "Memory") this.createOptionButton(550,500,this.mission.getOptions()[0],'memoryMiniGame');
+            else if(this.mission.getName() == "Plinko") this.createOptionButton(550,500,this.mission.getOptions()[0],'plinkoMiniGame');
         }
         else{
             this.numberOfOptions = this.mission.getNumOptions();

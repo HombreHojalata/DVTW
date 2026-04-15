@@ -55,6 +55,7 @@ export default class marketFooterUI {
                 this.scene.scene.stop();
                 this.scene.scene.resume('gameScene');
                 const audioManager = this.scene.registry.get('audioManager');
+                if (audioManager) audioManager.play('key');
                 if (audioManager) audioManager.switchMusic('bgMusic');
             }
         });
