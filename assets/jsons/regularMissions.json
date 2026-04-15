@@ -18,7 +18,7 @@
         "probability": 100,
         "description": "Alargar el evento para salir en más fotos",
         "energy": -15,
-        "money": 20,
+        "money": 2000,
         "corruption": 0,
         "popularity": 7
       }
