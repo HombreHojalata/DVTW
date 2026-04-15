@@ -19,7 +19,7 @@ export default class gameManager{
     getDay(){return this.day};
     // MISSIONS
     getMission(scene){
-        this.missionL = this.missionManager.getMission(this.map);
+        this.missionL = this.missionManager.getMission(this.map, this.day);
         if(this.missionL.getDistrict() != "NULL") this.missionL.createMissionButton(scene);
         return this.missionL;
     }
@@ -27,7 +27,7 @@ export default class gameManager{
         district.updateSatisfaction(option.popularity);
         this.player.updateEnergy(option.energy);
         this.player.updateCorruption(option.corruption);
-        this.player.updateMoney(-option.money);
+        this.player.updateMoney(option.money);
         this.removeMissionFromId(scene,mission.getName());
         this.day.addDecision(mission.getName() + ": " + option.description);
         this.day.updateResources(-option.money, option.energy, option.corruption, 0);

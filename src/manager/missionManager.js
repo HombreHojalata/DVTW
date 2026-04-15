@@ -29,7 +29,7 @@ export default class missionManager{
     
 
 
-    getMission(map){
+    getMission(map, day){
         //Primero de todo vamos a ver en que distrito sería la mision para elegir la misión en función de eso.
         let districtIndex = Math.floor(Math.random() * 6);
         if(this.districtsWithMissions[districtIndex]){
@@ -80,12 +80,13 @@ export default class missionManager{
         let money = this.player.getMoney();
         let corruption = this.player.getCorruption();
         let energy = this.player.getEnergy();
-        //Limites de recursos para elegir misión:
-        let minMoney = 300000;
-        let maxMoney = 500000;
-        let maxCorruption = 40;
-        let maxSatisfaction = 55;
-        let minSatisfaction = 30;
+        //Limites de recursos para elegir misión, dependiendo del dia:
+        let orquilladeRecursos = day.getOrquilladeRecursos(day.getDayNumber());
+        let minMoney = orquilladeRecursos.minMoney;
+        let maxMoney = orquilladeRecursos.maxMoney;
+        let maxCorruption = orquilladeRecursos.maxCorruption;
+        let maxSatisfaction = orquilladeRecursos.maxSatisfaction;
+        let minSatisfaction = orquilladeRecursos.minSatisfaction;
         //Logica para elegir mision:
         let missionType;
         let missionSelected;
