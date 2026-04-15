@@ -305,7 +305,9 @@ export default class missionManager{
 
         this.minigameMissions.push(mission);
     });
-        
+        this.upMoneyMissions.push(this.minigameMissions[2]);
+        this.upPopularityMissions.push(this.minigameMissions[0]);
+        this.upPopularityMissions.push(this.minigameMissions[1]);
     }
     rmMission(mission){
         const districtName = mission.getDistrict(); 
