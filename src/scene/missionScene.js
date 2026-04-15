@@ -47,10 +47,10 @@ export default class MissionScene extends Phaser.Scene {
         const text = '¡' + this.mission.getName() + '!';
         const spacing = 10;
         let x = 0;
-        const container = this.add.container(0, offsetY + 80);
+        const container = this.add.container(0, offsetY + 70);
 
         for (let char of text) {
-            const letter = this.add.text(x, 0, char, {
+            const letter = this.add.text(x - 100, 0, char, {
                 fontSize: '65px',
                 fontFamily: 'Impact',
                 fontStyle: 'bold',
@@ -60,7 +60,7 @@ export default class MissionScene extends Phaser.Scene {
             x += letter.width + spacing;
         }
         // centrar
-        container.x = offsetX*4;
+        container.x = offsetX * 4;
         container.setAngle(-2.8);
         return container;
     }
@@ -102,7 +102,7 @@ export default class MissionScene extends Phaser.Scene {
     }
     spawnCloseButton(newWidth,offsetX,offsetY){
         if(this.mission.itIsEvent()) return null;
-        this.closeButton = this.add.image(newWidth - offsetX ,offsetY + 60,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
+        this.closeButton = this.add.image(newWidth - offsetX, offsetY + 60,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
         this.closeButton.on('pointerover', () => {
             this.tweens.add({
                 targets: this.closeButton,
