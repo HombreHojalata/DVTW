@@ -2,14 +2,14 @@
   {
     "name": "Corte de cinta exprés",
     "description": "Una inauguración relámpago para la foto: luces, aplausos y un poco de improvisación.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Dar un discurso breve y sonreír",
-        "energy": -5,
+        "energy": -8,
         "money": 0,
         "corruption": 0,
         "popularity": 4
@@ -17,7 +17,7 @@
       {
         "probability": 100,
         "description": "Alargar el evento para salir en más fotos",
-        "energy": -10,
+        "energy": -15,
         "money": 20,
         "corruption": 0,
         "popularity": 7
@@ -27,14 +27,14 @@
   {
     "name": "Reparación milagrosa",
     "description": "Un bache que apareció justo antes de que paseara la prensa.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Taparlo con asfalto exprés (equipo municipal)",
-        "energy": -6,
+        "energy": -12,
         "money": -10000,
         "corruption": 0,
         "popularity": 2
@@ -59,7 +59,7 @@
       {
         "probability": 100,
         "description": "Ofrecer subvenciones pequeñas y foto de grupo",
-        "energy": -4,
+        "energy": -10,
         "money": -30000,
         "corruption": 0,
         "popularity": 4
@@ -84,7 +84,7 @@
       {
         "probability": 100,
         "description": "Poner jardineras compradas localmente",
-        "energy": -3,
+        "energy": -8,
         "money": -20000,
         "corruption": 0,
         "popularity": 3
@@ -92,7 +92,7 @@
       {
         "probability": 100,
         "description": "Pedir a voluntarios que limpien gratis",
-        "energy": -5,
+        "energy": -12,
         "money": 0,
         "corruption": 0,
         "popularity": -1
@@ -102,14 +102,14 @@
   {
     "name": "El informe 'perdido'",
     "description": "Un informe incómodo que nadie encuentra en delegación.",
-    "event": false,
+    "event": true,
     "corrupt": true,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Aplazar su publicación con excusas administrativas",
-        "energy": -2,
+        "energy": -6,
         "money": 0,
         "corruption": 4,
         "popularity": -2
@@ -117,7 +117,7 @@
       {
         "probability": 100,
         "description": "Publicarlo y afrontar las consecuencias",
-        "energy": -6,
+        "energy": -14,
         "money": 0,
         "corruption": 0,
         "popularity": -6
@@ -134,7 +134,7 @@
       {
         "probability": 100,
         "description": "Encargarla a un proveedor caro pero rápido",
-        "energy": -2,
+        "energy": -6,
         "money": -30000,
         "corruption": 0,
         "popularity": 4
@@ -142,7 +142,7 @@
       {
         "probability": 100,
         "description": "Hacer la placa con material económico",
-        "energy": -1,
+        "energy": -4,
         "money": -10000,
         "corruption": 0,
         "popularity": 1
@@ -159,7 +159,7 @@
       {
         "probability": 100,
         "description": "Contratar microencuestas y publicar resultados favorables",
-        "energy": -3,
+        "energy": -8,
         "money": -25000,
         "corruption": 0,
         "popularity": 3
@@ -167,7 +167,7 @@
       {
         "probability": 100,
         "description": "No publicar nada y atender quejas personalmente",
-        "energy": -8,
+        "energy": -16,
         "money": 0,
         "corruption": 0,
         "popularity": 0
@@ -177,14 +177,14 @@
   {
     "name": "Visita al asilo",
     "description": "Visitar un centro de mayores para fotos y discursos sensibles.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Llevar obsequios simbólicos",
-        "energy": -4,
+        "energy": -10,
         "money": -10000,
         "corruption": 0,
         "popularity": 2
@@ -202,14 +202,14 @@
   {
     "name": "Contrato amistoso",
     "description": "Un pequeño contrato con una empresa local para arreglos menores.",
-    "event": false,
+    "event": true,
     "corrupt": true,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Adjuntar cláusulas favorables y repartir comisiones",
-        "energy": -2,
+        "energy": -6,
         "money": -40000,
         "corruption": 2,
         "popularity": 1
@@ -217,7 +217,7 @@
       {
         "probability": 100,
         "description": "Elegir la oferta más barata públicamente",
-        "energy": -3,
+        "energy": -8,
         "money": -40000,
         "corruption": 0,
         "popularity": -1
@@ -227,14 +227,14 @@
   {
     "name": "La farola restaurada",
     "description": "Restaurar una farola histórica que se ve en el plano centro.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Pagar restauración profesional",
-        "energy": -3,
+        "energy": -8,
         "money": -50000,
         "corruption": 0,
         "popularity": 3
@@ -252,14 +252,14 @@
   {
     "name": "Campaña 'verde'",
     "description": "Plantación simbólica de árboles para la campaña final.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Plantar unos pocos árboles con voluntarios",
-        "energy": -6,
+        "energy": -14,
         "money": -5000,
         "corruption": 0,
         "popularity": 2
@@ -267,7 +267,7 @@
       {
         "probability": 100,
         "description": "Contratar empresa para plantar rápido",
-        "energy": -3,
+        "energy": -8,
         "money": -40000,
         "corruption": 0,
         "popularity": 4
@@ -277,14 +277,14 @@
   {
     "name": "Recorte de impuestos local",
     "description": "Prometer una bonificación fiscal pequeña para un barrio clave.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Aplicar la bonificación y admitir menor recaudación",
-        "energy": -2,
+        "energy": -6,
         "money": -30000,
         "corruption": 0,
         "popularity": 3
@@ -292,7 +292,7 @@
       {
         "probability": 100,
         "description": "Postergar la medida por trámites",
-        "energy": -1,
+        "energy": -4,
         "money": 0,
         "corruption": 0,
         "popularity": -6
@@ -302,14 +302,14 @@
   {
     "name": "Entrevista en la tele local",
     "description": "Un presentador incisivo y un público deseoso de titulares.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Responder con anécdotas y evitar promesas concretas",
-        "energy": -5,
+        "energy": -12,
         "money": 0,
         "corruption": 0,
         "popularity": 2
@@ -317,7 +317,7 @@
       {
         "probability": 100,
         "description": "Prometer medidas ambiciosas que no están listas",
-        "energy": -8,
+        "energy": -16,
         "money": 0,
         "corruption": 0,
         "popularity": 4
@@ -327,14 +327,14 @@
   {
     "name": "Regalo institucional",
     "description": "Donar un lote de material escolar en temporada de fotos.",
-    "event": false,
+    "event": true,
     "corrupt": true,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Comprarlo con fondos municipales y aparecer en la foto",
-        "energy": -3,
+        "energy": -8,
         "money": -35000,
         "corruption": 0,
         "popularity": 3
@@ -342,7 +342,7 @@
       {
         "probability": 100,
         "description": "Aceptar donación privada (complicado de justificar)",
-        "energy": -1,
+        "energy": -4,
         "money": 0,
         "corruption": 2,
         "popularity": 1
@@ -352,14 +352,14 @@
   {
     "name": "Cierre temporal de la plaza",
     "description": "Cerrar la plaza por un día para limpieza ‘profunda’ antes de la visita.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Cerrar y limpiar con brigada municipal",
-        "energy": -4,
+        "energy": -10,
         "money": -10000,
         "corruption": 0,
         "popularity": 6
@@ -367,7 +367,7 @@
       {
         "probability": 100,
         "description": "Dejarla abierta y organizar voluntariado",
-        "energy": -7,
+        "energy": -15,
         "money": 0,
         "corruption": 0,
         "popularity": 2
@@ -377,14 +377,14 @@
   {
     "name": "Foto con mascota",
     "description": "Una mascota local se acerca y la prensa lo amplifica todo.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Hacer la foto y publicar en redes",
-        "energy": -2,
+        "energy": -6,
         "money": 0,
         "corruption": 0,
         "popularity": 2

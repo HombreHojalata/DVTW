@@ -2,14 +2,14 @@
   {
     "name": "Selfie con vecinos",
     "description": "Un paseo improvisado por el barrio termina rodeado de vecinos con móviles.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Hacerse selfies con todo el mundo",
-        "energy": -5,
+        "energy": -12,
         "money": 0,
         "corruption": 0,
         "popularity": 8
@@ -17,7 +17,7 @@
       {
         "probability": 100,
         "description": "Dar un pequeño discurso y algunas fotos",
-        "energy": -3,
+        "energy": -8,
         "money": 0,
         "corruption": 0,
         "popularity": 6
@@ -27,14 +27,14 @@
   {
     "name": "Visita a la escuela",
     "description": "Un colegio local invita al alcalde a hablar con los estudiantes.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Dar una charla motivacional",
-        "energy": -4,
+        "energy": -10,
         "money": 0,
         "corruption": 0,
         "popularity": 5
@@ -42,7 +42,7 @@
       {
         "probability": 100,
         "description": "Donar material escolar",
-        "energy": -2,
+        "energy": -6,
         "money": -80,
         "corruption": 0,
         "popularity": 8
@@ -52,14 +52,14 @@
   {
     "name": "Paseo por el mercado",
     "description": "Un paseo por el mercado local con cámaras de televisión.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Hablar con comerciantes y clientes",
-        "energy": -4,
+        "energy": -10,
         "money": 0,
         "corruption": 0,
         "popularity": 5
@@ -67,7 +67,7 @@
       {
         "probability": 100,
         "description": "Comprar productos para la foto",
-        "energy": -2,
+        "energy": -6,
         "money": -6000,
         "corruption": 0,
         "popularity": 6
@@ -77,14 +77,14 @@
   {
     "name": "Día del deporte",
     "description": "Organizar una actividad deportiva abierta para la ciudad.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Participar en el evento deportivo",
-        "energy": -6,
+        "energy": -14,
         "money": -40000,
         "corruption": 0,
         "popularity": 8
@@ -92,7 +92,7 @@
       {
         "probability": 100,
         "description": "Entregar premios y saludar",
-        "energy": -3,
+        "energy": -8,
         "money": -20000,
         "corruption": 0,
         "popularity": 6
@@ -102,14 +102,14 @@
   {
     "name": "Abrir un parque nuevo",
     "description": "El parque del barrio por fin está listo para inaugurarse.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Hacer una gran inauguración",
-        "energy": -4,
+        "energy": -10,
         "money": -120000,
         "corruption": 0,
         "popularity": 10
@@ -117,7 +117,7 @@
       {
         "probability": 100,
         "description": "Abrirlo discretamente",
-        "energy": -2,
+        "energy": -6,
         "money": -60000,
         "corruption": 0,
         "popularity": 6
@@ -127,14 +127,14 @@
   {
     "name": "Ayuda tras tormenta",
     "description": "Una tormenta ha causado pequeños daños en algunos barrios.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Ayudar personalmente en la limpieza",
-        "energy": -7,
+        "energy": -16,
         "money": -30000,
         "corruption": 0,
         "popularity": 12
@@ -142,7 +142,7 @@
       {
         "probability": 100,
         "description": "Enviar brigadas municipales",
-        "energy": -3,
+        "energy": -8,
         "money": -80000,
         "corruption": 0,
         "popularity": 6
@@ -152,14 +152,14 @@
   {
     "name": "Encuentro vecinal",
     "description": "Un grupo de vecinos quiere hablar directamente con el alcalde.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Escuchar todas las quejas",
-        "energy": -6,
+        "energy": -12,
         "money": 0,
         "corruption": 0,
         "popularity": 6
@@ -167,7 +167,7 @@
       {
         "probability": 100,
         "description": "Prometer mejoras futuras",
-        "energy": -3,
+        "energy": -6,
         "money": 0,
         "corruption": 0,
         "popularity": 5
@@ -177,14 +177,14 @@
   {
     "name": "Visita al hospital",
     "description": "Una visita al hospital municipal para agradecer al personal.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Agradecer al personal públicamente",
-        "energy": -3,
+        "energy": -7,
         "money": 0,
         "corruption": 0,
         "popularity": 5
@@ -192,7 +192,7 @@
       {
         "probability": 100,
         "description": "Donar equipos médicos",
-        "energy": -2,
+        "energy": -10,
         "money": -120000,
         "corruption": 0,
         "popularity": 8
@@ -202,14 +202,14 @@
   {
     "name": "Campaña de limpieza",
     "description": "Organizar un día de limpieza ciudadana.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Participar con voluntarios",
-        "energy": -6,
+        "energy": -14,
         "money": -20000,
         "corruption": 0,
         "popularity": 7
@@ -217,7 +217,7 @@
       {
         "probability": 100,
         "description": "Financiar el evento",
-        "energy": -2,
+        "energy": -6,
         "money": -100000,
         "corruption": 0,
         "popularity": 6
@@ -227,14 +227,14 @@
   {
     "name": "Foto con bomberos",
     "description": "Los bomberos locales invitan al alcalde a visitar la estación.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Entrenar un rato con ellos",
-        "energy": -7,
+        "energy": -16,
         "money": 0,
         "corruption": 0,
         "popularity": 7
@@ -242,7 +242,7 @@
       {
         "probability": 100,
         "description": "Donar nuevo equipamiento",
-        "energy": -3,
+        "energy": -8,
         "money": -110000,
         "corruption": 0,
         "popularity": 8
@@ -252,14 +252,14 @@
   {
     "name": "Festival infantil",
     "description": "Un festival para niños en la plaza central.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Aparecer disfrazado en el escenario",
-        "energy": -5,
+        "energy": -12,
         "money": -30000,
         "corruption": 0,
         "popularity": 8
@@ -267,7 +267,7 @@
       {
         "probability": 100,
         "description": "Entregar regalos a los niños",
-        "energy": -3,
+        "energy": -8,
         "money": -90000,
         "corruption": 0,
         "popularity": 10
@@ -277,14 +277,14 @@
   {
     "name": "Apoyo a artistas callejeros",
     "description": "Los artistas callejeros piden permiso para actuar.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Autorizar actuaciones y apoyarles",
-        "energy": -2,
+        "energy": -5,
         "money": -20000,
         "corruption": 0,
         "popularity": 5
@@ -292,7 +292,7 @@
       {
         "probability": 100,
         "description": "Financiar un pequeño festival",
-        "energy": -4,
+        "energy": -10,
         "money": -110000,
         "corruption": 0,
         "popularity": 7
@@ -302,14 +302,14 @@
   {
     "name": "Viaje en transporte público",
     "description": "Tomar el autobús para demostrar cercanía con la gente.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Viajar en hora punta",
-        "energy": -6,
+        "energy": -16,
         "money": 0,
         "corruption": 0,
         "popularity": 10
@@ -317,7 +317,7 @@
       {
         "probability": 100,
         "description": "Viajar con periodistas",
-        "energy": -3,
+        "energy": -8,
         "money": 0,
         "corruption": 0,
         "popularity": 8
@@ -327,14 +327,14 @@
   {
     "name": "Rescate de mascota",
     "description": "Una mascota perdida aparece en redes sociales.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Ayudar a encontrar al dueño",
-        "energy": -3,
+        "energy": -6,
         "money": 0,
         "corruption": 0,
         "popularity": 6
@@ -342,7 +342,7 @@
       {
         "probability": 100,
         "description": "Llevarla a un refugio municipal",
-        "energy": -2,
+        "energy": -6,
         "money": -40000,
         "corruption": 0,
         "popularity": 7
@@ -352,14 +352,14 @@
   {
     "name": "Promesa de transparencia",
     "description": "Los ciudadanos piden más transparencia en el gobierno local.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Publicar datos del ayuntamiento",
-        "energy": -4,
+        "energy": -12,
         "money": -30000,
         "corruption": -2,
         "popularity": 9
@@ -367,7 +367,7 @@
       {
         "probability": 100,
         "description": "Anunciar una auditoría pública",
-        "energy": -6,
+        "energy": -16,
         "money": -70000,
         "corruption": -3,
         "popularity": 12

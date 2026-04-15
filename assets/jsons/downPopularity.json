@@ -2,14 +2,14 @@
   {
     "name": "Subida de impuestos",
     "description": "El presupuesto municipal está ajustado y se plantea subir impuestos.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Subir impuestos a todos",
-        "energy": -3,
+        "energy": -10,
         "money": 180000,
         "corruption": 0,
         "popularity": -15
@@ -17,7 +17,7 @@
       {
         "probability": 100,
         "description": "Subir impuestos solo a algunos sectores",
-        "energy": -2,
+        "energy": -8,
         "money": 120000,
         "corruption": 0,
         "popularity": -10
@@ -27,14 +27,14 @@
   {
     "name": "Cerrar el parque",
     "description": "El ayuntamiento decide cerrar el parque por mantenimiento indefinido.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Cerrarlo completamente",
-        "energy": -2,
+        "energy": -12,
         "money": 40000,
         "corruption": 0,
         "popularity": -12
@@ -42,7 +42,7 @@
       {
         "probability": 100,
         "description": "Cerrar solo una parte",
-        "energy": -1,
+        "energy": -8,
         "money": 20000,
         "corruption": 0,
         "popularity": -8
@@ -52,14 +52,14 @@
   {
     "name": "Entrevista polémica",
     "description": "Una entrevista en televisión termina con declaraciones desafortunadas.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Defender lo dicho",
-        "energy": -3,
+        "energy": -15,
         "money": 0,
         "corruption": 0,
         "popularity": -14
@@ -67,7 +67,7 @@
       {
         "probability": 100,
         "description": "Ignorar la polémica",
-        "energy": -1,
+        "energy": -10,
         "money": 0,
         "corruption": 0,
         "popularity": -8
@@ -84,7 +84,7 @@
       {
         "probability": 100,
         "description": "Eliminar varias ayudas",
-        "energy": -2,
+        "energy": -15,
         "money": 150000,
         "corruption": 0,
         "popularity": -15
@@ -92,7 +92,7 @@
       {
         "probability": 100,
         "description": "Reducir discretamente las ayudas",
-        "energy": -2,
+        "energy": -10,
         "money": 90000,
         "corruption": 0,
         "popularity": -10
@@ -102,14 +102,14 @@
   {
     "name": "Multas de tráfico",
     "description": "Se instala un sistema agresivo de multas automáticas.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Instalar cámaras por toda la ciudad",
-        "energy": -2,
+        "energy": -20,
         "money": 160000,
         "corruption": 0,
         "popularity": -14
@@ -117,7 +117,7 @@
       {
         "probability": 100,
         "description": "Instalar algunas cámaras",
-        "energy": -1,
+        "energy": -14,
         "money": 90000,
         "corruption": 0,
         "popularity": -8
@@ -127,14 +127,14 @@
   {
     "name": "Recorte cultural",
     "description": "El presupuesto cultural se reduce drásticamente.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Cancelar eventos culturales",
-        "energy": -2,
+        "energy": -15,
         "money": 120000,
         "corruption": 0,
         "popularity": -12
@@ -142,7 +142,7 @@
       {
         "probability": 100,
         "description": "Reducir el número de eventos",
-        "energy": -1,
+        "energy": -10,
         "money": 70000,
         "corruption": 0,
         "popularity": -8
@@ -152,14 +152,14 @@
   {
     "name": "Obras eternas",
     "description": "Unas obras en el centro paralizan el tráfico durante meses.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Seguir con las obras sin cambios",
-        "energy": -2,
+        "energy": -10,
         "money": 60000,
         "corruption": 0,
         "popularity": -12
@@ -167,7 +167,7 @@
       {
         "probability": 100,
         "description": "Aplazar algunas mejoras",
-        "energy": -1,
+        "energy": -8,
         "money": 30000,
         "corruption": 0,
         "popularity": -5
@@ -177,14 +177,14 @@
   {
     "name": "Privatización de servicios",
     "description": "El ayuntamiento privatiza algunos servicios públicos.",
-    "event": false,
+    "event": true,
     "corrupt": true,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Privatizar varios servicios",
-        "energy": -3,
+        "energy": -15,
         "money": 200000,
         "corruption": 3,
         "popularity": -15
@@ -192,7 +192,7 @@
       {
         "probability": 100,
         "description": "Privatizar uno solo",
-        "energy": -2,
+        "energy": -5,
         "money": 120000,
         "corruption": 2,
         "popularity": -10
@@ -202,14 +202,14 @@
   {
     "name": "Recorte en transporte",
     "description": "Se reducen líneas de transporte público.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Eliminar varias líneas",
-        "energy": -2,
+        "energy": -15,
         "money": 150000,
         "corruption": 0,
         "popularity": -12
@@ -217,7 +217,7 @@
       {
         "probability": 100,
         "description": "Reducir frecuencias",
-        "energy": -1,
+        "energy": -10,
         "money": 80000,
         "corruption": 0,
         "popularity": -8
@@ -227,14 +227,14 @@
   {
     "name": "Subida del transporte",
     "description": "El precio del transporte público aumenta.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Subir mucho el precio",
-        "energy": -2,
+        "energy": -10,
         "money": 140000,
         "corruption": 0,
         "popularity": -12
@@ -242,7 +242,7 @@
       {
         "probability": 100,
         "description": "Subirlo un poco",
-        "energy": -1,
+        "energy": -6,
         "money": 70000,
         "corruption": 0,
         "popularity": -7
@@ -252,14 +252,14 @@
   {
     "name": "Prohibición del evento local",
     "description": "Un evento popular es cancelado por motivos administrativos.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Cancelar el evento",
-        "energy": -2,
+        "energy": -8,
         "money": 30000,
         "corruption": 0,
         "popularity": -8
@@ -267,7 +267,7 @@
       {
         "probability": 100,
         "description": "Posponerlo indefinidamente",
-        "energy": -1,
+        "energy": -6,
         "money": 20000,
         "corruption": 0,
         "popularity": -5
@@ -277,14 +277,14 @@
   {
     "name": "Errores en redes sociales",
     "description": "Un mensaje del ayuntamiento en redes sociales causa polémica.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Responder agresivamente",
-        "energy": -2,
+        "energy": -10,
         "money": 0,
         "corruption": 0,
         "popularity": -8
@@ -292,7 +292,7 @@
       {
         "probability": 100,
         "description": "Borrar el mensaje",
-        "energy": -1,
+        "energy": -7,
         "money": 0,
         "corruption": 0,
         "popularity": -5
@@ -302,14 +302,14 @@
   {
     "name": "Recorte en educación",
     "description": "El presupuesto educativo se reduce.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Cerrar programas educativos",
-        "energy": -2,
+        "energy": -16,
         "money": 150000,
         "corruption": 0,
         "popularity": -12
@@ -317,7 +317,7 @@
       {
         "probability": 100,
         "description": "Reducir financiación",
-        "energy": -1,
+        "energy": -12,
         "money": 80000,
         "corruption": 0,
         "popularity": -8
@@ -327,14 +327,14 @@
   {
     "name": "Demolición polémica",
     "description": "Hay que demoler un edificio histórico para un proyecto urbanístico. La decisión es controvertida.",
-    "event": false,
+    "event": true,
     "corrupt": true,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Demolerlo de noche sin avisar",
-        "energy": -2,
+        "energy": -20,
         "money": 120000,
         "corruption": 6,
         "popularity": -8
@@ -342,7 +342,7 @@
       {
         "probability": 100,
         "description": "Hacer como que eschuchamos a los ciudadanos, pero seguir adelante",
-        "energy": -1,
+        "energy": -14,
         "money": 150000,
         "corruption": 2,
         "popularity": -6
@@ -352,14 +352,14 @@
   {
     "name": "Ignorar protesta",
     "description": "Un grupo de ciudadanos protesta frente al ayuntamiento.",
-    "event": false,
+    "event": true,
     "corrupt": false,
     "minigame": false,
     "options": [
       {
         "probability": 100,
         "description": "Ignorar completamente la protesta",
-        "energy": -1,
+        "energy": -14,
         "money": 0,
         "corruption": 0,
         "popularity": -15
@@ -367,7 +367,7 @@
       {
         "probability": 100,
         "description": "Enviar seguridad para dispersarlos",
-        "energy": -2,
+        "energy": -10,
         "money": -8000,
         "corruption": 0,
         "popularity": -12

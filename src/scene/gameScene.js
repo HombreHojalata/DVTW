@@ -110,12 +110,15 @@ export default class GameScene extends Phaser.Scene {
     }
 
     scheduleNextMission() {
-        const delay = Math.floor(Math.random() * (12000 - 3000 + 1));
+        const delay = Math.floor(Math.random() * (9000 + 1))+6000; // Entre 6 y 15 segundos
+        if(this.player.getEnergy() <= 0) return;
         this.missionTimer = this.time.addEvent({
             delay: delay,
             callback: () => {
-                this.missionList.push(this.gameManager.getMission(this));
-                this.scheduleNextMission();
+                 if(this.player.getEnergy() > 0){
+                    this.missionList.push(this.gameManager.getMission(this));
+                    this.scheduleNextMission();
+                }
             }
         });
     }
@@ -127,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
     startEnergyDrain() {
         //this.totalDayDurationMs = 0.5 * 60 * 1000;
         //this.energyTickMs = 250;
-        this.totalDayDurationMs = (0.5 * 60 * 8000) / 10; // TODO: Cambiar tras testeo
+        this.totalDayDurationMs = (0.5 * 60 * 8000); // TODO: Cambiar tras testeo
         this.energyTickMs = 1000 / 100;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
@@ -200,7 +203,7 @@ export default class GameScene extends Phaser.Scene {
                     this.midday = false;
                     this.afternoon = false;
                     this.energyTimerEvent.remove(false);
-
+                    this.gameManager.deleteAllMissions(this);//Pa que va a haber missiones sin energia.
                     if (this.blinkEvent) this.blinkEvent.remove();
                     if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
 
