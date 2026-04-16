@@ -106,6 +106,8 @@ export default class endDayBtnUI {
     }
 
     finishDay() { 
+        const audioManager = this.scene.registry.get('audioManager');
+        if (audioManager) audioManager.play('trumpet');
         this.scene.finishDay();
     }
 }

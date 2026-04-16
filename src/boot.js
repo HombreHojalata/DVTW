@@ -196,6 +196,8 @@ import corruptMission from '../assets/audio/corruptMission.mp3';
 import exitMission from '../assets/audio/exitMission.mp3';
 import alarm from '../assets/audio/alarm.mp3';
 import closeBriefcase from '../assets/audio/closeBriefcase.mp3';
+import trumpet from '../assets/audio/trumpet.mp3';
+import nightAmbience from '../assets/audio/nightAmbience.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -448,6 +450,8 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('exitMission', exitMission);
     this.load.audio('alarm', alarm);
     this.load.audio('closeBriefcase', closeBriefcase);
+    this.load.audio('trumpet', trumpet);
+    this.load.audio('nightAmbience', nightAmbience);
 
     this.load.start();
 

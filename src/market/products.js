@@ -75,7 +75,7 @@ export const PRODUCTS = [
         price: 0,
         limit: Infinity,
         priceStep: '+0',
-        effect: (player) => {
+        effect: (player, gameManager) => {
             const districts = gameManager.getMap().districtList;
             const source = Phaser.Utils.Array.GetRandom(districts);
             const target = Phaser.Utils.Array.GetRandom(districts.filter(d => d !== source));

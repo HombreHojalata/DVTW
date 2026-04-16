@@ -21,7 +21,10 @@ export default class Player {
     updateMaxEnergy(amount) { this.maxEnergy += amount; }
     getEnergy(){ return this.energy; }
     setEnergy(amount) { this.energy = amount };
-    updateEnergy(amount){ this.energy += amount;}
+    updateEnergy(amount){ 
+        this.energy += amount;
+        if (this.energy < 0) this.setEnergy(0);
+    }
     getCorruption(){ return this.corruption; }
     updateCorruption(amount){ this.corruption += amount; }
     getPopularity(){ return this.popularity; }

@@ -206,6 +206,7 @@ export default class GameScene extends Phaser.Scene {
                     this.gameManager.deleteAllMissions(this);//Pa que va a haber missiones sin energia.
                     if (this.blinkEvent) this.blinkEvent.remove();
                     if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
+                    //if (this.audioManager) this.audioManager.play('nightAmbience');
 
                     console.log('ENERGÍA AGOTADA');
                     this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(20);
