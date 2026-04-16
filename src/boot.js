@@ -137,6 +137,7 @@ import votes_icon from '../assets/marketIcons/votes_icon.png'
 import bridge_icon from '../assets/marketIcons/bridge_icon.png'
 import coffee_icon from '../assets/marketIcons/coffee_icon.png'
 import evil_icon from '../assets/marketIcons/evil_icon.png'
+import planet_icon from '../assets/marketIcons/planet_icon.png';
 
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
@@ -397,6 +398,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('bridge_icon', bridge_icon);
     this.load.image('coffee_icon', coffee_icon);
     this.load.image('evil_icon', evil_icon);
+    this.load.image('planet_icon', planet_icon);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
