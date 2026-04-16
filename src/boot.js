@@ -187,6 +187,9 @@ import openDistrict from '../assets/audio/openDistrict.mp3';
 import closeDistrict from '../assets/audio/closeDistrict.mp3';
 import key from '../assets/audio/key.mp3';
 import money from '../assets/audio/money.mp3';
+import ball1 from '../assets/audio/ball1.mp3';
+import ball2 from '../assets/audio/ball2.mp3';
+import ball3 from '../assets/audio/ball3.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -430,6 +433,9 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('closeDistrict', closeDistrict);
     this.load.audio('key', key);
     this.load.audio('money', money);
+    this.load.audio('ball1', ball1);
+    this.load.audio('ball2', ball2);
+    this.load.audio('ball3', ball3);
 
     this.load.start();
 
