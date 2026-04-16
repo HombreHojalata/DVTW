@@ -190,6 +190,11 @@ import money from '../assets/audio/money.mp3';
 import ball1 from '../assets/audio/ball1.mp3';
 import ball2 from '../assets/audio/ball2.mp3';
 import ball3 from '../assets/audio/ball3.mp3';
+import mission from '../assets/audio/mission.mp3';
+import corruptMission from '../assets/audio/corruptMission.mp3';
+import exitMission from '../assets/audio/exitMission.mp3';
+import alarm from '../assets/audio/alarm.mp3';
+import closeBriefcase from '../assets/audio/closeBriefcase.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -436,6 +441,11 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('ball1', ball1);
     this.load.audio('ball2', ball2);
     this.load.audio('ball3', ball3);
+    this.load.audio('mission', mission);
+    this.load.audio('corruptMission', corruptMission);
+    this.load.audio('exitMission', exitMission);
+    this.load.audio('alarm', alarm);
+    this.load.audio('closeBriefcase', closeBriefcase);
 
     this.load.start();
 

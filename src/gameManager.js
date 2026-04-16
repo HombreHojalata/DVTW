@@ -38,7 +38,7 @@ export default class gameManager{
         this.player.updatePopularity(newPopularity);
         this.day.updateResources(0, 0, 0, newPopularity - oldPopularity);
         //Refresh UI
-        this.scene.refreshHUD();
+        //this.scene.refreshHUD();
     }
     deleteAllMissions(scene){
         this.missionManager.deleteAllMissions();
@@ -56,9 +56,23 @@ export default class gameManager{
         this.presidente = this.player.spawnPresident(scene);
     }
     spawnConfigurationButton(scene){
-        this.configButton = scene.add.image(1450,20,'configurationIcon').setOrigin(1, 0).setInteractive({ useHandCursor: true }); 
-        this.configButton.on('pointerover', () => {this.configButton.setScale(1.2);});
-        this.configButton.on('pointerout', () => {this.configButton.setScale(1);});
+        this.configButton = scene.add.image(1410, 60,'configurationIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }).setScale(1.2).setDepth(20); 
+        this.configButton.on('pointerover', () => {
+            scene.tweens.add({
+                targets: this.configButton,
+                scale: 1.5,
+                duration: 80,
+                ease: 'Power2'
+            });
+        });
+        this.configButton.on('pointerout', () => {
+            scene.tweens.add({
+                targets: this.configButton,
+                scale: 1.2,
+                duration: 80,
+                ease: 'Power2'
+            });
+        });
         this.configButton.on('pointerup', () => {
             scene.scene.stop();
             scene.scene.start('configurationScene', { returnScene: 'gameScene'});
