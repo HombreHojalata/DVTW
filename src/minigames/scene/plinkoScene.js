@@ -7,7 +7,8 @@ export default class plinkoScene extends Phaser.Scene {
 
     init(data) {
         this.pointsGoal = data.goal || 500000;
-        this.ballsLeft = data.balls || 5;
+        this.maxBalls = data.balls || 10;
+        this.ballsUsed = 0;
         this.currentPoints = 10;
         this.isGameOver = false;
     }
@@ -34,13 +35,19 @@ export default class plinkoScene extends Phaser.Scene {
         this.pointsText = this.add.text(50, 100, `OBJETIVO: ${this.currentPoints} / ${this.pointsGoal}`, {
             fontSize: '24px',
             fontFamily: 'Courier New',
-            color: '#ffffff'
+            fontStyle: 'bold',
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 2
         });
 
-        this.ballsText = this.add.text(50, 140, `BOLAS: ${this.ballsLeft}`, {
+        this.ballsText = this.add.text(50, 140, `BOLAS: ${this.ballsUsed}`, {
             fontSize: '24px',
             fontFamily: 'Courier New',
-            color: '#ffffff'
+            fontStyle: 'bold',
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 2
         });
 
         this.boardWidth = 800;
@@ -50,29 +57,26 @@ export default class plinkoScene extends Phaser.Scene {
         this.pegs = this.physics.add.staticGroup();
         this.buckets = this.physics.add.staticGroup();
         this.walls = this.physics.add.staticGroup();
+        this.ballsGroup = this.physics.add.group();
 
         this.createBoard(width, height);
 
         this.input.on('pointerdown', (pointer) => {
-            if (pointer.x > this.boardStartX && pointer.x < this.boardEndX) {
-                if (this.ballsLeft > 0 && !this.isGameOver) {
-                    this.dropBall(pointer.x);
-                }
-            } else if (!this.isGameOver) {
-                this.cameras.main.shake(100, 0.002);
+            if (this.ballsUsed < this.maxBalls && !this.isGameOver) {
+                this.dropBall();
             }
+            if (!this.isGameOver) this.checkGameStatus();
         });
     }
 
     createBoard(width, height) {
-        const rows = 9;
-        const spacingX = 80;
+        const rows = 10;
+        const spacingX = 75;
         const spacingY = 60;
-        const startY = 200;
+        const startY = 180;
 
         for (let r = 0; r < rows; r++) {
-            const isEven = r % 2 === 0;
-            const cols = isEven ? 9 : 10;
+            const cols = r + 2;
             const rowWidth = (cols - 1) * spacingX;
             const startX = (width - rowWidth) / 2;
 
@@ -116,24 +120,42 @@ export default class plinkoScene extends Phaser.Scene {
         });
     }
 
-    dropBall(x) {
-        this.ballsLeft--;
-        this.ballsText.setText(`BOLAS: ${this.ballsLeft}`);
+    dropBall() {
+        this.ballsUsed++;
+        this.ballsText.setText(`BOLAS: ${this.ballsUsed}`);
+
+        const spawnX = this.scale.width / 2;
+        const spawnY = 80;
         
-        const ball = this.add.circle(x, 60, 12, this.colors.ball);
+        const ball = this.add.circle(spawnX, spawnY, 12, this.colors.ball);
         this.physics.add.existing(ball);
+        this.ballsGroup.add(ball);
         
         ball.body.setCircle(12);
-        ball.body.setBounce(0.5, 0.5);
+        ball.body.setBounce(0.7, 0.7);
         ball.body.setCollideWorldBounds(true);
         ball.setDepth(5);
 
-        ball.body.setVelocityX(Phaser.Math.Between(-15, 15));
+        ball.body.setVelocityX(Phaser.Math.Between(-30, 30));
 
-        this.physics.add.collider(ball, this.pegs, () => {
+        this.physics.add.collider(ball, this.pegs, (ballHit, pegHit) => {
             const audioManager = this.registry.get('audioManager');
-            if (audioManager) audioManager.play('key');
-            ball.body.setAngularVelocity(Phaser.Math.Between(-300, 300));
+            const hitSounds = ['ball1', 'ball2', 'ball3'];
+            
+            const currentTime = this.time.now;
+            if (!ballHit.lastSoundTime || currentTime - ballHit.lastSoundTime > 100) {
+                const randomSound = Phaser.Utils.Array.GetRandom(hitSounds);
+                audioManager.play(randomSound);
+                ballHit.lastSoundTime = currentTime;
+            }
+
+            if (Math.abs(ballHit.body.velocity.x) < 20) {
+                const diffX = ballHit.x - pegHit.x; 
+                const push = diffX > 0 ? 60 : -60; 
+                ballHit.body.setVelocityX(push);
+            }
+
+            ballHit.body.setAngularVelocity(Phaser.Math.Between(-400, 400));
         });
 
         this.physics.add.collider(ball, this.walls);
@@ -151,7 +173,7 @@ export default class plinkoScene extends Phaser.Scene {
     checkGameStatus() {
         if (this.currentPoints >= this.pointsGoal) {
             this.winGame();
-        } else if (this.ballsLeft < 0 /*&& this.physics.world.activeBodies.length === 0*/) {
+        } else if (this.ballsUsed >= this.maxBalls && this.ballsGroup.countActive() === 0) {
             this.loseGame();
         }
     }
@@ -162,7 +184,7 @@ export default class plinkoScene extends Phaser.Scene {
             fontSize: '40px',
             color: '#46c83d',
             backgroundColor: '#000'
-        }).setOrigin(0.5);
+        }).setOrigin(0.5).setDepth(10);
         
         this.time.delayedCall(2000, () => this.exitScene(true));
     }
@@ -173,7 +195,7 @@ export default class plinkoScene extends Phaser.Scene {
             fontSize: '40px',
             color: '#b04848',
             backgroundColor: '#000'
-        }).setOrigin(0.5);
+        }).setOrigin(0.5).setDepth(10);
 
         this.time.delayedCall(2000, () => this.exitScene(false));
     }

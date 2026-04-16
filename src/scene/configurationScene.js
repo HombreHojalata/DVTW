@@ -20,6 +20,7 @@ export default class ConfigurationScene extends Phaser.Scene {
         this.scene.bringToTop('configurationScene');
 
         this.audioManager = this.registry.get('audioManager');
+        if (this.audioManager) this.audioManager.play('alarm');
 
         // Saved values currently in the real audio manager
         this.initialMusicVolume = this.audioManager?.musicVolume ?? 0.5;
@@ -138,6 +139,7 @@ export default class ConfigurationScene extends Phaser.Scene {
 
         this.backButton.on('pointerup', () => {
             this.scene.stop();
+            if (this.audioManager) this.audioManager.play('closeBriefcase');
 
             if (this.openedFromPause) {
                 this.scene.start('pauseScene', { returnScene: this.returnScene });
@@ -161,6 +163,7 @@ export default class ConfigurationScene extends Phaser.Scene {
             }
 
             this.scene.stop();
+            if (this.audioManager) this.audioManager.play('closeBriefcase');
 
             if (this.openedFromPause) {
                 this.scene.start('pauseScene', { returnScene: this.returnScene });

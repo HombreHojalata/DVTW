@@ -138,6 +138,8 @@ import votes_icon from '../assets/marketIcons/votes_icon.png'
 import bridge_icon from '../assets/marketIcons/bridge_icon.png'
 import coffee_icon from '../assets/marketIcons/coffee_icon.png'
 import evil_icon from '../assets/marketIcons/evil_icon.png'
+import planet_icon from '../assets/marketIcons/planet_icon.png';
+
 import whacFrameInicio from '../assets/minigames/whacAMole/whacFrameInicio.png'
 import whacFrame2 from '../assets/minigames/whacAMole/whacFrame2.png'
 import whacFrame3 from '../assets/minigames/whacAMole/whacFrame3.png'
@@ -219,6 +221,16 @@ import openDistrict from '../assets/audio/openDistrict.mp3';
 import closeDistrict from '../assets/audio/closeDistrict.mp3';
 import key from '../assets/audio/key.mp3';
 import money from '../assets/audio/money.mp3';
+import ball1 from '../assets/audio/ball1.mp3';
+import ball2 from '../assets/audio/ball2.mp3';
+import ball3 from '../assets/audio/ball3.mp3';
+import mission from '../assets/audio/mission.mp3';
+import corruptMission from '../assets/audio/corruptMission.mp3';
+import exitMission from '../assets/audio/exitMission.mp3';
+import alarm from '../assets/audio/alarm.mp3';
+import closeBriefcase from '../assets/audio/closeBriefcase.mp3';
+import trumpet from '../assets/audio/trumpet.mp3';
+import nightAmbience from '../assets/audio/nightAmbience.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -421,6 +433,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('bridge_icon', bridge_icon);
     this.load.image('coffee_icon', coffee_icon);
     this.load.image('evil_icon', evil_icon);
+    this.load.image('planet_icon', planet_icon);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
@@ -492,6 +505,16 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('key', key);
     this.load.audio('money', money);
 
+     this.load.audio('ball1', ball1);
+    this.load.audio('ball2', ball2);
+    this.load.audio('ball3', ball3);
+    this.load.audio('mission', mission);
+    this.load.audio('corruptMission', corruptMission);
+    this.load.audio('exitMission', exitMission);
+    this.load.audio('alarm', alarm);
+    this.load.audio('closeBriefcase', closeBriefcase);
+    this.load.audio('trumpet', trumpet);
+    this.load.audio('nightAmbience', nightAmbience);
 
     this.load.start();
 

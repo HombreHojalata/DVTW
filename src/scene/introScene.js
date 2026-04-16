@@ -149,7 +149,7 @@ export default class IntroScene extends Phaser.Scene {
             });
         });
 
-        
+        /*
         createMenuButton(120, 30, 'GOOD ENDING', () => { // PARA DEPURAR
             this.scene.start('finishScene', { win: true });
         });
@@ -161,5 +161,6 @@ export default class IntroScene extends Phaser.Scene {
         createMenuButton(120, 150, 'PLINKO', () => { // PARA DEPURAR
             this.scene.start('plinkoMiniGame');
         });
+        */
     }
 }
