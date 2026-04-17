@@ -122,6 +122,13 @@ import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomos
 
 // MINIGAME & MARKET
 import fondoMemory from '../assets/minigames/memory/fondoMemory.png';
+import memoryRetro1 from '../assets/minigames/memory/retro1.png';
+import memoryRetro2 from '../assets/minigames/memory/retro2.png';
+import memoryRetro3 from '../assets/minigames/memory/retro3.png';
+import memoryRetro4 from '../assets/minigames/memory/retro4.png';
+import memoryRetro5 from '../assets/minigames/memory/retro5.png';
+import memoryRetro6 from '../assets/minigames/memory/retro6.png';
+import memoryRetro7 from '../assets/minigames/memory/retro7.png';
 import memoryImage1 from '../assets/minigames/memory/memoryImage1.png'
 import memoryImage2 from '../assets/minigames/memory/memoryImage2.png'
 import memoryImage3 from '../assets/minigames/memory/memoryImage3.png'
@@ -419,6 +426,13 @@ export default class Boot extends Phaser.Scene {
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);
     this.load.image('fondoMemory', fondoMemory);
+    this.load.image('retro1', memoryRetro1);
+    this.load.image('retro2', memoryRetro2);
+    this.load.image('retro3', memoryRetro3);
+    this.load.image('retro4', memoryRetro4);
+    this.load.image('retro5', memoryRetro5);
+    this.load.image('retro6', memoryRetro6);
+    this.load.image('retro7', memoryRetro7);
     this.load.image('memoryImage1', memoryImage1);
     this.load.image('memoryImage2', memoryImage2);
     this.load.image('memoryImage3', memoryImage3);
