@@ -121,6 +121,7 @@ import downPopularitySceneSomosagua from '../assets/mission/scenes/districtSomos
 import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomosagua/downCorruptionScene.png'
 
 // MINIGAME & MARKET
+import fondoMemory from '../assets/minigames/memory/fondoMemory.png';
 import memoryImage1 from '../assets/minigames/memory/memoryImage1.png'
 import memoryImage2 from '../assets/minigames/memory/memoryImage2.png'
 import memoryImage3 from '../assets/minigames/memory/memoryImage3.png'
@@ -417,6 +418,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);
+    this.load.image('fondoMemory', fondoMemory);
     this.load.image('memoryImage1', memoryImage1);
     this.load.image('memoryImage2', memoryImage2);
     this.load.image('memoryImage3', memoryImage3);

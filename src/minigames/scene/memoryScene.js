@@ -32,7 +32,7 @@ export default class memoryScene extends Phaser.Scene {
             textDark: '#121213'
         };
 
-        this.add.rectangle(width / 2, height / 2, width, height, this.colors.bg);
+        this.add.image(width / 2, height / 2, 'fondoMemory');
 
         this.add.text(width / 2, 50, 'MEMORY', {
             fontSize: '40px',
