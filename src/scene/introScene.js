@@ -133,26 +133,8 @@ export default class IntroScene extends Phaser.Scene {
             return { shadow, bg, label };
         };
 
-        /*createMenuButton(120, 150, 'DEBUG PLINKO', () => {
+        /*createMenuButton(120, 150, 'PLINKO', () => {
             this.scene.start('plinkoMiniGame', { 
-                isTest: true, 
-                puntos: 0,
-                difficulty: 1
-            });
-        });*/
-
-
-        /*createMenuButton(120, 150, 'DEBUG WORLDE', () => {
-            this.scene.start('wordleMiniGame', { 
-                isTest: true, 
-                puntos: 0,
-                difficulty: 1
-            });
-        });*/
-
-
-        /*createMenuButton(120, 150, 'DEBUG MEMORY', () => {
-            this.scene.start('memoryMiniGame', { 
                 isTest: true, 
                 puntos: 0,
                 difficulty: 1

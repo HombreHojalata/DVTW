@@ -164,6 +164,7 @@ import whacFrame13 from '../assets/minigames/whacAMole/whacFrame13.png'
 import whacFrame14 from '../assets/minigames/whacAMole/whacFrame14.png'
 import whacFrame15 from '../assets/minigames/whacAMole/whacFrame15.png'
 
+import fondoWordle from '../assets/minigames/wordle/fondoWordle.png';
 
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
@@ -490,6 +491,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('whacFrame13', whacFrame13);
     this.load.image('whacFrame14', whacFrame14);
     this.load.image('whacFrame15', whacFrame15);
+    this.load.image('fondoWordle', fondoWordle);
     this.cache.json.add('regularMissions', RegularMission);
     this.cache.json.add('upMoney', UpMoneyMission);
     this.cache.json.add('upPopularity', UpPopularityMission);

@@ -8,6 +8,7 @@ export default class wordleScene extends Phaser.Scene {
     }
 
     create() {
+        //configuracion inicial de dimensiones y variables de juego
         const width = this.scale.width;
         const height = this.scale.height;
 
@@ -20,49 +21,50 @@ export default class wordleScene extends Phaser.Scene {
         this.finished = false;
         this.currentGuess = new Array(this.cols).fill('');
 
-
+        //seleccion de palabra secreta aleatoria
         this.secretWord = Phaser.Utils.Array.GetRandom(WORDLE_WORDS).toUpperCase();
 
 
         this.colors = {
-            bg: 0x121213,
-            panel: 0x1a1a1b,
-            emptyTile: 0x121213,
-            tileBorder: 0x3a3a3c,
-            text: '#ffffff',
+            emptyTile: 0x1a1a1b, 
+            tileBorder: 0x33ff33,
+            text: '#33ff33', 
             green: 0x538d4e,
             yellow: 0xb59f3b,
-            gray: 0x3a3a3c,
-            keyUnused: 0x818384,
+            gray: 0x757575,
+            keyUnused: 0x444444, 
             keyText: '#ffffff'
         };
 
 
-        this.keyStates = {}; // A: 'gray' | 'yellow' | 'green'
+        this.keyStates = {}; 
 
+        //creacion de fondo y textos de interfaz
+        this.add.image(width / 2, height / 2, 'fondoWordle').setDisplaySize(width, height);
 
-        this.add.rectangle(width / 2, height / 2, width, height, this.colors.bg);
+        const UI_X = width * 0.65;
 
-
-        this.add.text(width / 2, 55, 'LAME DUCK WORDLE', {
-            fontSize: '38px',
+        this.add.text(UI_X, 250, 'LAME DUCK\nWORDLE', {
+            fontSize: '36px',
             fontStyle: 'bold',
-            color: this.colors.text,
-            fontFamily: 'Arial'
+            color: '#33ff33', 
+            fontFamily: 'Courier New',
+            align: 'center'
         }).setOrigin(0.5);
 
 
-        this.add.text(width / 2, 95, 'Guess the 5-letter word', {
+        this.add.text(UI_X, 360, 'Guess the\n5-letter word', {
             fontSize: '20px',
-            color: '#d7dadc',
-            fontFamily: 'Arial'
+            color: '#33ff33',
+            fontFamily: 'Courier New',
+            align: 'center'
         }).setOrigin(0.5);
 
 
-        this.statusText = this.add.text(width / 2, height - 40, 'Type letters, ENTER to submit, BACKSPACE to delete', {
-            fontSize: '18px',
-            color: '#d7dadc',
-            fontFamily: 'Arial',
+        this.statusText = this.add.text(UI_X, height - 300, 'Type letters,\nENTER to submit', {
+            fontSize: '19px',
+            color: '#33ff33',
+            fontFamily: 'Courier New',
             align: 'center'
         }).setOrigin(0.5);
 
@@ -70,44 +72,39 @@ export default class wordleScene extends Phaser.Scene {
         this.createGrid(width, height);
         this.createKeyboard(width, height);
 
-
+        //entrada del teclado
         this.input.keyboard.on('keydown', this.handleKey, this);
-
-
         console.log('Secret word:', this.secretWord);
     }
 
 
     createGrid(width, height) {
+        //generacion de la cuadricula de los intentos del a palabra
         this.grid = [];
-
-
-        const boxSize = 62;
-        const gap = 10;
+        const boxSize = 46; 
+        const gap = 8;
         const totalWidth = this.cols * boxSize + (this.cols - 1) * gap;
-        const startX = (width - totalWidth) / 2;
-        const startY = 130;
-
+        
+        const centerX = width * 0.41; 
+        const startX = centerX - (totalWidth / 2);
+        const startY = 170;
 
         for (let r = 0; r < this.rows; r++) {
             this.grid[r] = [];
-
 
             for (let c = 0; c < this.cols; c++) {
                 const x = startX + c * (boxSize + gap);
                 const y = startY + r * (boxSize + gap);
 
-
-                const rect = this.add.rectangle(x, y, boxSize, boxSize, this.colors.emptyTile)
-                    .setStrokeStyle(3, this.colors.tileBorder)
+                const rect = this.add.rectangle(x, y, boxSize, boxSize, this.colors.emptyTile, 0.6)
+                    .setStrokeStyle(2, 0x33ff33)
                     .setOrigin(0);
 
-
                 const text = this.add.text(x + boxSize / 2, y + boxSize / 2, '', {
-                    fontSize: '30px',
+                    fontSize: '26px',
                     fontStyle: 'bold',
-                    color: this.colors.text,
-                    fontFamily: 'Arial'
+                    color: '#33ff33',
+                    fontFamily: 'Courier New'
                 }).setOrigin(0.5);
 
 
@@ -120,7 +117,7 @@ export default class wordleScene extends Phaser.Scene {
     createKeyboard(width, height) {
         this.keyboardButtons = {};
 
-
+        ////generacion del teclado
         const rows = [
             ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
             ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
@@ -128,48 +125,46 @@ export default class wordleScene extends Phaser.Scene {
         ];
 
 
-        const keyWidth = 42;
-        const keyHeight = 52;
-        const gap = 6;
-        const startY = 575;
-
+        const keyWidth = 34;
+        const keyHeight = 46;
+        const gap = 5;
+        const startY = height - 330; 
+        const centerX = width * 0.41;
 
         rows.forEach((row, rowIndex) => {
             let rowWidth = 0;
 
 
             row.forEach((key) => {
-                rowWidth += (key === 'ENTER' || key === '⌫') ? 70 : keyWidth;
+                rowWidth += (key === 'ENTER' || key === '⌫') ? 60 : keyWidth;
             });
             rowWidth += (row.length - 1) * gap;
 
-
-            let currentX = (width - rowWidth) / 2;
+            let currentX = centerX - (rowWidth / 2);
 
 
             row.forEach((key) => {
-                const w = (key === 'ENTER' || key === '⌫') ? 70 : keyWidth;
+                const w = (key === 'ENTER' || key === '⌫') ? 60 : keyWidth;
                 const x = currentX;
                 const y = startY + rowIndex * (keyHeight + gap);
 
-
-                const rect = this.add.rectangle(x, y, w, keyHeight, this.colors.keyUnused)
+                const rect = this.add.rectangle(x, y, w, keyHeight, this.colors.keyUnused, 0.8)
                     .setOrigin(0)
                     .setStrokeStyle(1, 0x000000)
                     .setInteractive({ useHandCursor: true });
 
 
                 const label = this.add.text(x + w / 2, y + keyHeight / 2, key, {
-                    fontSize: key === 'ENTER' ? '16px' : '20px',
+                    fontSize: key === 'ENTER' ? '10px' : '14px',
                     fontStyle: 'bold',
                     color: this.colors.keyText,
                     fontFamily: 'Arial'
                 }).setOrigin(0.5);
 
 
+                //gestion de clicks
                 rect.on('pointerup', () => {
                     if (this.finished) return;
-
 
                     if (key === 'ENTER') {
                         this.submitGuess();
@@ -184,8 +179,6 @@ export default class wordleScene extends Phaser.Scene {
                 if (key.length === 1) {
                     this.keyboardButtons[key] = { rect, label };
                 }
-
-
                 currentX += w + gap;
             });
         });
@@ -193,8 +186,8 @@ export default class wordleScene extends Phaser.Scene {
 
 
     handleKey(event) {
+        //procesamiento de las keys presionadas
         if (this.finished) return;
-
 
         const key = event.key.toUpperCase();
 
@@ -238,11 +231,12 @@ export default class wordleScene extends Phaser.Scene {
 
 
     submitGuess() {
+        //verificacion del intento al pulsar enter
         if (this.finished) return;
 
 
         if (this.currentCol < this.cols) {
-            this.statusText.setText('The word must have 5 letters');
+            this.statusText.setText('Word too short');
             return;
         }
 
@@ -258,6 +252,7 @@ export default class wordleScene extends Phaser.Scene {
             const tile = this.grid[this.currentRow][i];
             tile.rect.setFillStyle(evaluations[i].color);
             tile.rect.setStrokeStyle(3, evaluations[i].color);
+            tile.text.setColor('#ffffff'); 
         }
 
 
@@ -266,7 +261,7 @@ export default class wordleScene extends Phaser.Scene {
 
         if (guess === secret) {
             this.finished = true;
-            this.statusText.setText('Correct! Crisis contained.');
+            this.statusText.setText('Correct!\nAccess Granted');
 
 
             this.time.delayedCall(3000, () => {
@@ -285,7 +280,7 @@ export default class wordleScene extends Phaser.Scene {
 
         if (this.currentRow >= this.rows) {
             this.finished = true;
-            this.statusText.setText(`You lost. The word was ${secret}`);
+            this.statusText.setText(`Access Denied\nWord: ${secret}`);
 
 
             this.time.delayedCall(3000, () => {
@@ -294,18 +289,19 @@ export default class wordleScene extends Phaser.Scene {
                 this.scene.get('gameScene').scene.restart();
             });
         } else {
-            this.statusText.setText(`Attempt ${this.currentRow + 1} of ${this.rows}`);
+            this.statusText.setText(`Attempt\n${this.currentRow} of ${this.rows}`);
         }
     }
 
 
     evaluateGuess(guess, secret) {
+        //comparacion de letras para asignar colores
         const result = new Array(this.cols).fill(null);
         const secretChars = secret.split('');
         const guessChars = guess.split('');
 
 
-        // 1. Verdes
+        //verdes
         for (let i = 0; i < this.cols; i++) {
             if (guessChars[i] === secretChars[i]) {
                 result[i] = {
@@ -319,7 +315,7 @@ export default class wordleScene extends Phaser.Scene {
         }
 
 
-        // 2. Amarillos / grises
+        //amarillos / grises
         for (let i = 0; i < this.cols; i++) {
             if (result[i] !== null) continue;
 
