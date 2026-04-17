@@ -617,12 +617,12 @@ export default class DistrictScene extends Phaser.Scene {
             this.explainParameters2(width, height);
         })
 
-        this.createTutorialButton(container, -180, 90, 'Volver', () => {
+        /*this.createTutorialButton(container, -180, 90, 'Volver', () => {
             if (this.pulseTween) this.pulseTween.stop();
             this.botonAumentar.setScale(1);
             container.destroy();
             this.explainParameters(width, height);
-        });
+        });*/
     }
     explainParameters2(width, height) {
         const container = this.add.container(width / 2, height / 2).setDepth(21);   
@@ -672,12 +672,12 @@ export default class DistrictScene extends Phaser.Scene {
             this.explainParametersFinish(width, height);
         })
 
-        this.createTutorialButton(container, -180, 90, 'Volver', () => {
+        /*this.createTutorialButton(container, -180, 90, 'Volver', () => {
             if (this.pulseTween) this.pulseTween.stop();
             this.botonReducir.setScale(1);
             container.destroy();
             this.explainParametersFinish(width, height);
-        });
+        });*/
     }
     explainParametersFinish(width, height) {
         const container = this.add.container(width / 2, height / 2).setDepth(21);   
