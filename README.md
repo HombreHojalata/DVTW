@@ -7,7 +7,7 @@
 
 ---
 
-# 1. Visión generalo
+# 1. Visión general
 ## 1.1. Descripción
 **Lame Duck** es un juego de gestión de recursos y estrategía, en el que controlas al pato presidente de la ciudad de Quackington DC durante los últimos días de su mandato intentando contentar lo máximo posible a los ciudadanos para conseguir su apoyo en las elecciones venideras y ser reelegidos.
 
@@ -93,16 +93,13 @@ Existen varios tipos distintos de misiones:
 ### 3.3.1. Misiones básicas
 Las misiones básicas son una transacción sencilla: te proporcionan una recompensa a cambio de un gasto.
 **Ejemplo:** *”Los castores de la presa hidráulica exigen un aumento de sueldo” Esta misión proporciona satisfacción de los vecinos a cambio de dinero.*
-### 3.3.2. Misiones de probabilidad
-Las misiones de probabilidad tienen un porcentaje de acierto que se muestra antes de aceptarla. Esto significa que puede ser que se pague lo exigido por la misión pero que no se consiga recompensa, e incluso que cause algún suceso negativo.
-**Ejemplo:** *”Los detectives siguen el rastro de la mafia de las ratas hasta un viejo restaurante. ¿Enviar a los policías?” En caso de aceptarla, hay posibilidades de que arresten a los criminales consiguiendo satisfacción, pero también que sea una falsa alarma.*
-### 3.3.3. Misiones de minijuegos
+### 3.3.2. Misiones de minijuegos
 Las misiones de minijuegos presentan una pequeña tarea o desafío que debe superar el jugador para completar la misión. En caso de fallarlo, esta no dará recompensa. Suelen estar reservadas para misiones importantes de narrativas, pero también hay algunas genéricas.
 **Ejemplo:** *”¡Controla la protesta frente al ayuntamiento!” Muestra un minijuego estilo matatopos.*
-### 3.3.4. Misiones de elección
+### 3.3.3. Misiones de elección
 Las misiones de elección proporcionan más de una opción de resolverlas. Pueden contener elementos de otros tipos de misiones.
 **Ejemplo:** *”Los reptiles te piden construir nuevas casas en Sahar.” Esta misión te da la opción de contratar a una empresa que desconoces que tal lo hará (probabilidad), o ir tú mismo a construirlas (minijuego).*
-### 3.3.5. Misiones corruptas
+### 3.3.4. Misiones corruptas
 Las misiones corruptas son menos comunes que el resto. Estas pueden ser de cualquier tipo, y prometen una recompensa mucho mayor a las misiones corrientes. A cambio, estas suelen venir con alguna penalización, normalmente en forma de bajar la satisfacción en algún distrito. Además, aceptar una misión corrupta subirá el nivel de *corrupción* general.
 
 ## 3.4. Eventos
@@ -176,13 +173,9 @@ Tras un par de días, se desbloquea la opción de manejar los parámetros de cad
 	 - **Pros:** Aumenta la satisfacción constante.
 	 - **Contras:** Aumenta el coste de dinero.
 
-4. **Jornada Laboral (Productividad):**
+4. **Horario Laboral / Jornada Laboral (Productividad):**
 	 - **Pros:** Aumenta la efectividad de los edificios que generan dinero.
 	 - **Contras:** Reduce la satisfacción y puede generar opositores.
-
-5. **Propaganda (Comunicación):**
-	 - **Pros:** Aumenta la satisfacción y disminuye mínimamente los opositores.
-	 - **Contras:** Aumenta mucho el coste de dinero y sube mucho la corrupción.
 
 
 # 4. Interfaz
@@ -249,6 +242,30 @@ Muestra una lista ordenada de nombres de mejoras o productos junto a una pequeñ
 </p>
 
 
+### 4.2.5. HUD de pantalla de opciones
+
+La pantalla de opciones permite al jugador configurar aspectos básicos del juego, principalmente relacionados con el audio y la navegación entre escenas.
+
+En esta interfaz se incluyen:
+- **Control de volumen de música:** mediante un deslizador que ajusta el nivel de la música de fondo.
+- **Control de efectos de sonido (SFX):** permite regular el volumen de los sonidos asociados a acciones y eventos del juego.
+- **Botón de retorno:** permite volver a la escena anterior desde la que se accedió al menú de opciones.
+
+La pantalla está diseñada como un panel superpuesto o escena independiente, manteniendo coherencia visual con el resto de la interfaz del juego. Su función principal es ofrecer al jugador una forma rápida y accesible de ajustar la experiencia audiovisual sin interrumpir significativamente el flujo de la partida.
+
+
+
+## 4.3. Audio
+
+El proyecto cuenta con un sistema de audio centralizado mediante un **AudioManager**, encargado de gestionar música y efectos de sonido.
+
+Entre sus funciones se incluyen:
+- reproducción de música por escena,
+- control de volumen de música y efectos,
+- cambio dinámico de pista,
+- reutilización de configuraciones de audio.
+
+
 # 5. Mundo del juego
 ## 5.1. Personajes
 ### 5.1.1. Presidente
@@ -279,13 +296,19 @@ Cada distrito cuenta con un número de habitantes independiente, además de otra
 - **Guinea:** Es una zona tropical famosa por sus festivales y fiestas. El turismo es la principal fuente de ingresos del lugar, y se nota, pues hay muchos colores llamativos para atraer a viajeros. Los principales vecinos son animales de jungla y pantanos (monos, cocodrilos, loros, etc).
 
 ## 6. Estética y contenido
-*POR DISCUTIR*
-La estética que vamos a implementar va a ser mixta:
-- **Arte animado:** Para los personajes/NPC del juego, historietas/cutscenes, mercado negro, mapa del juego.
-- **PixelArt: ** Para los iconos de los edificios construibles en cada distrito.
+La estética de **Lame Duck** combina un estilo caricaturesco y satírico con una presentación visual clara y diferenciada por escenas.
+
+El proyecto utiliza:
+- **arte ilustrado y animado** para personajes, fondos, escenas y presentación general,
+- **iconografía visual específica** para botones, misiones, edificios y elementos interactivos,
+- una línea visual exagerada y expresiva, coherente con el tono político-humorístico del juego.
+
+La dirección artística busca reforzar tanto la legibilidad de la interfaz como la identidad cómica del mundo.
 
 ## 7. Experiencia de juego
-*POR DISCUTIR*
+La experiencia de juego en Lame Duck está diseñada para transmitir al jugador una sensación constante de presión, improvisación y cálculo político. A lo largo de cada jornada, el jugador debe reaccionar rápidamente a las misiones que aparecen en el mapa, decidir en qué distritos intervenir y gestionar con cuidado recursos limitados como el dinero, la energía y la corrupción. 
+
+Esta dinámica busca generar una mezcla de estrategia y urgencia, en la que cada decisión puede aportar beneficios inmediatos, pero también consecuencias negativas a medio plazo. Al mismo tiempo, el tono satírico y exagerado del juego convierte esa presión en una experiencia más ligera y humorística, haciendo que el jugador se sienta dentro de una campaña política caótica, absurda y oportunista, donde lo importante no es gobernar bien, sino mantener una buena imagen ante la ciudad.
 
 ## 8. Producción
 ### 8.1 Planificación
