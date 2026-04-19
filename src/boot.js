@@ -121,6 +121,14 @@ import downPopularitySceneSomosagua from '../assets/mission/scenes/districtSomos
 import downCorruptionSceneSomosagua from '../assets/mission/scenes/districtSomosagua/downCorruptionScene.png'
 
 // MINIGAME & MARKET
+import fondoMemory from '../assets/minigames/memory/fondoMemory.png';
+import memoryRetro1 from '../assets/minigames/memory/retro1.png';
+import memoryRetro2 from '../assets/minigames/memory/retro2.png';
+import memoryRetro3 from '../assets/minigames/memory/retro3.png';
+import memoryRetro4 from '../assets/minigames/memory/retro4.png';
+import memoryRetro5 from '../assets/minigames/memory/retro5.png';
+import memoryRetro6 from '../assets/minigames/memory/retro6.png';
+import memoryRetro7 from '../assets/minigames/memory/retro7.png';
 import memoryImage1 from '../assets/minigames/memory/memoryImage1.png'
 import memoryImage2 from '../assets/minigames/memory/memoryImage2.png'
 import memoryImage3 from '../assets/minigames/memory/memoryImage3.png'
@@ -129,6 +137,7 @@ import memoryImage5 from '../assets/minigames/memory/memoryImage5.png'
 import memoryImage6 from '../assets/minigames/memory/memoryImage6.png'
 import memoryImage7 from '../assets/minigames/memory/memoryImage7.png'
 import memoryImage8 from '../assets/minigames/memory/memoryImage8.png'
+
 import vendedor from '../assets/other/Vendedor.png'
 import vendedorSilueta from '../assets/other/VendedorSilueta.png'
 import news_icon from '../assets/marketIcons/news_icon.png'
@@ -137,6 +146,29 @@ import votes_icon from '../assets/marketIcons/votes_icon.png'
 import bridge_icon from '../assets/marketIcons/bridge_icon.png'
 import coffee_icon from '../assets/marketIcons/coffee_icon.png'
 import evil_icon from '../assets/marketIcons/evil_icon.png'
+import planet_icon from '../assets/marketIcons/planet_icon.png';
+
+import whacFrameInicio from '../assets/minigames/whacAMole/whacFrameInicio.png'
+import whacFrame2 from '../assets/minigames/whacAMole/whacFrame2.png'
+import whacFrame3 from '../assets/minigames/whacAMole/whacFrame3.png'
+import whacFrame4 from '../assets/minigames/whacAMole/whacFrame4.png'
+import whacFrame5 from '../assets/minigames/whacAMole/whacFrame5.png'
+import whacFrame6 from '../assets/minigames/whacAMole/whacFrame6.png'
+import whacFrame7 from '../assets/minigames/whacAMole/whacFrame7.png'
+import whacFrame8 from '../assets/minigames/whacAMole/whacFrame8.png'
+import whacFrame9 from '../assets/minigames/whacAMole/whacFrame9.png'
+import whacFrame10 from '../assets/minigames/whacAMole/whacFrame10.png'
+import whacFrame11 from '../assets/minigames/whacAMole/whacFrame11.png'
+import whacFrame12 from '../assets/minigames/whacAMole/whacFrame12.png'
+import whacFrame13 from '../assets/minigames/whacAMole/whacFrame13.png'
+import whacFrame14 from '../assets/minigames/whacAMole/whacFrame14.png'
+import whacFrame15 from '../assets/minigames/whacAMole/whacFrame15.png'
+
+import fondoWordle from '../assets/minigames/wordle/fondoWordle.png';
+
+import fondoPlinko from '../assets/minigames/plinko/fondoPlinko.png';
+import coinPlinko from '../assets/minigames/plinko/coinPlinko.png';
+import bagPlinko from '../assets/minigames/plinko/bagPlinko.png';
 
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
@@ -176,6 +208,21 @@ import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
 import minigameMission from '../assets/jsons/minigame.json';
 import mapCutout from '../assets/jsons/map.json';
+// WHAC-A-MOLE JSONS
+import whacJSON2 from '../assets/jsons/whacAMole/whacFrame2.json';
+import whacJSON3 from '../assets/jsons/whacAMole/whacFrame3.json';
+import whacJSON4 from '../assets/jsons/whacAMole/whacFrame4.json';
+import whacJSON5 from '../assets/jsons/whacAMole/whacFrame5.json';
+import whacJSON6 from '../assets/jsons/whacAMole/whacFrame6.json';
+import whacJSON7 from '../assets/jsons/whacAMole/whacFrame7.json';
+import whacJSON8 from '../assets/jsons/whacAMole/whacFrame8.json';
+import whacJSON9 from '../assets/jsons/whacAMole/whacFrame9.json';
+import whacJSON10 from '../assets/jsons/whacAMole/whacFrame10.json';
+import whacJSON11 from '../assets/jsons/whacAMole/whacFrame11.json';
+import whacJSON12 from '../assets/jsons/whacAMole/whacFrame12.json';
+import whacJSON13 from '../assets/jsons/whacAMole/whacFrame13.json';
+import whacJSON14 from '../assets/jsons/whacAMole/whacFrame14.json';
+import whacJSON15 from '../assets/jsons/whacAMole/whacFrame15.json';
 
 // AUDIO
 import AudioManager from '../src/manager/audioManager.js'
@@ -187,6 +234,16 @@ import openDistrict from '../assets/audio/openDistrict.mp3';
 import closeDistrict from '../assets/audio/closeDistrict.mp3';
 import key from '../assets/audio/key.mp3';
 import money from '../assets/audio/money.mp3';
+import ball1 from '../assets/audio/ball1.mp3';
+import ball2 from '../assets/audio/ball2.mp3';
+import ball3 from '../assets/audio/ball3.mp3';
+import mission from '../assets/audio/mission.mp3';
+import corruptMission from '../assets/audio/corruptMission.mp3';
+import exitMission from '../assets/audio/exitMission.mp3';
+import alarm from '../assets/audio/alarm.mp3';
+import closeBriefcase from '../assets/audio/closeBriefcase.mp3';
+import trumpet from '../assets/audio/trumpet.mp3';
+import nightAmbience from '../assets/audio/nightAmbience.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -373,6 +430,14 @@ export default class Boot extends Phaser.Scene {
     this.load.image('upPopularitySceneSomosagua', upPopularitySceneSomosagua);
     this.load.image('downPopularitySceneSomosagua', downPopularitySceneSomosagua);
     this.load.image('downCorruptionSceneSomosagua', downCorruptionSceneSomosagua);
+    this.load.image('fondoMemory', fondoMemory);
+    this.load.image('retro1', memoryRetro1);
+    this.load.image('retro2', memoryRetro2);
+    this.load.image('retro3', memoryRetro3);
+    this.load.image('retro4', memoryRetro4);
+    this.load.image('retro5', memoryRetro5);
+    this.load.image('retro6', memoryRetro6);
+    this.load.image('retro7', memoryRetro7);
     this.load.image('memoryImage1', memoryImage1);
     this.load.image('memoryImage2', memoryImage2);
     this.load.image('memoryImage3', memoryImage3);
@@ -381,6 +446,25 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage6', memoryImage6);
     this.load.image('memoryImage7', memoryImage7);
     this.load.image('memoryImage8', memoryImage8);
+    this.load.image('whacFrameInicio', whacFrameInicio);
+    this.load.image('whacFrame2', whacFrame2);
+    this.load.image('whacFrame3', whacFrame3);
+    this.load.image('whacFrame4', whacFrame4);
+    this.load.image('whacFrame5', whacFrame5);
+    this.load.image('whacFrame6', whacFrame6);
+    this.load.image('whacFrame7', whacFrame7);
+    this.load.image('whacFrame8', whacFrame8);
+    this.load.image('whacFrame9', whacFrame9);
+    this.load.image('whacFrame10', whacFrame10);
+    this.load.image('whacFrame11', whacFrame11);
+    this.load.image('whacFrame12', whacFrame12);
+    this.load.image('whacFrame13', whacFrame13);
+    this.load.image('whacFrame14', whacFrame14);
+    this.load.image('whacFrame15', whacFrame15);
+    this.load.image('fondoWordle', fondoWordle);
+    this.load.image('fondoPlinko', fondoPlinko);
+    this.load.image('coinPlinko', coinPlinko);
+    this.load.image('bagPlinko', bagPlinko);
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
     this.load.image('news_icon', news_icon);
@@ -389,6 +473,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('bridge_icon', bridge_icon);
     this.load.image('coffee_icon', coffee_icon);
     this.load.image('evil_icon', evil_icon);
+    this.load.image('planet_icon', planet_icon);
     this.load.image('configurationIcon', configurationIcon);
     this.load.image('closeIcon', closeIcon);
     this.load.image('storeIcon', storeIcon);
@@ -422,6 +507,20 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('downMoney', downMoneyMission);
     this.cache.json.add('minigameMoney', minigameMission);
     this.cache.json.add('mapCutout', mapCutout);
+    this.cache.json.add('whacJSON2', whacJSON2);
+    this.cache.json.add('whacJSON3', whacJSON3);
+    this.cache.json.add('whacJSON4', whacJSON4);
+    this.cache.json.add('whacJSON5', whacJSON5);
+    this.cache.json.add('whacJSON6', whacJSON6);
+    this.cache.json.add('whacJSON7', whacJSON7);
+    this.cache.json.add('whacJSON8', whacJSON8);
+    this.cache.json.add('whacJSON9', whacJSON9);
+    this.cache.json.add('whacJSON10', whacJSON10);
+    this.cache.json.add('whacJSON11', whacJSON11);
+    this.cache.json.add('whacJSON12', whacJSON12);
+    this.cache.json.add('whacJSON13', whacJSON13);
+    this.cache.json.add('whacJSON14', whacJSON14);
+    this.cache.json.add('whacJSON15', whacJSON15);
     this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
     this.load.audio('introSceneAudio', introSceneAudio);
@@ -430,6 +529,17 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('closeDistrict', closeDistrict);
     this.load.audio('key', key);
     this.load.audio('money', money);
+
+     this.load.audio('ball1', ball1);
+    this.load.audio('ball2', ball2);
+    this.load.audio('ball3', ball3);
+    this.load.audio('mission', mission);
+    this.load.audio('corruptMission', corruptMission);
+    this.load.audio('exitMission', exitMission);
+    this.load.audio('alarm', alarm);
+    this.load.audio('closeBriefcase', closeBriefcase);
+    this.load.audio('trumpet', trumpet);
+    this.load.audio('nightAmbience', nightAmbience);
 
     this.load.start();
 

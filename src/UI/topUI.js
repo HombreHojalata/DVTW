@@ -29,7 +29,7 @@ export default class topUI {
         };
 
         this.greenText = this.scene.add.text(this.x + 20, this.y + 13, '', textStyle).setDepth(23);
-        this.redText = this.scene.add.text(this.x + this.barWidth - 70, this.y + 13, '', textStyle).setStyle({ align: 'right' }).setDepth(23);
+        this.redText = this.scene.add.text(this.x + this.barWidth - 80, this.y + 13, '', textStyle).setStyle({ align: 'right' }).setDepth(23);
 
         this.blocker = this.scene.add.zone(this.x - 10, this.y, this.barWidth + 20, this.barHeight).setOrigin(0).setInteractive();
 

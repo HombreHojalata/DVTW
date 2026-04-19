@@ -130,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
     startEnergyDrain() {
         //this.totalDayDurationMs = 0.5 * 60 * 1000;
         //this.energyTickMs = 250;
-        this.totalDayDurationMs = (0.5 * 60 * 5000); // TODO: Cambiar tras testeo
+        this.totalDayDurationMs = (0.5 * 60 * 5000) / 2; // TODO: Cambiar tras testeo
         this.energyTickMs = 1000 / 100;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
@@ -206,6 +206,7 @@ export default class GameScene extends Phaser.Scene {
                     this.gameManager.deleteAllMissions(this);//Pa que va a haber missiones sin energia.
                     if (this.blinkEvent) this.blinkEvent.remove();
                     if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
+                    //if (this.audioManager) this.audioManager.play('nightAmbience');
 
                     console.log('ENERGÍA AGOTADA');
                     this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(20);

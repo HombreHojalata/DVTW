@@ -348,8 +348,7 @@ export default class TutorialScene extends Phaser.Scene {
         container.add([bg, img, introText, text]);    
 
         this.createTutorialButton(container, this.width * 0.44, this.height * 0.6, '¡Entendido!', () => {
-            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: true }); });
-            this.sceneOrder = 1;
+            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: false }); });
         }); 
     }
 }

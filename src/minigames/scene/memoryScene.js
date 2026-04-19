@@ -6,6 +6,7 @@ export default class memoryScene extends Phaser.Scene {
     }
 
     create() {
+        //obtener dimensiones de la pantalla
         const width = this.scale.width;
         const height = this.scale.height;
 
@@ -15,49 +16,52 @@ export default class memoryScene extends Phaser.Scene {
         this.cols = 4;
         this.totalCards = this.rows * this.cols;
 
-        this.firstCard = null;
-        this.secondCard = null;
-        this.lockBoard = false;
-        this.matchedPairs = 0;
-        this.moves = 0;
+        //variables de el estado del juego
+        this.firstCard = null; //primera carta seleccionada
+        this.secondCard = null; //segunda
+        this.lockBoard = false; //para bloquear cuando estamos eligiendo la segunda carta
+        this.matchedPairs = 0; //contador de parejas
+        this.moves = 0; //contador de movimientos
         this.finished = false;
 
         this.colors = {
-            bg: 0x121213,
-            panel: 0x1a1a1b,
-            cardBack: 0x3a3a3c,
-            cardFront: 0xf5f5f5,
-            matched: 0x538d4e,
             text: '#ffffff',
             textDark: '#121213'
         };
 
-        this.add.rectangle(width / 2, height / 2, width, height, this.colors.bg);
+        //imagen de fondo
+        this.add.image(width / 2, height / 2, 'fondoMemory');
 
-        this.add.text(width / 2, 50, 'MEMORY', {
-            fontSize: '40px',
+        const UI_X = width * 0.8;
+
+        //textos
+        this.add.text(UI_X, 150, 'MEMORY', {
+            fontSize: '50px',
             fontStyle: 'bold',
             color: this.colors.text,
             fontFamily: 'Arial'
         }).setOrigin(0.5);
 
-        this.add.text(width / 2, 90, 'Find all the matching pairs', {
+        this.add.text(UI_X, 210, 'Find all the matching pairs', {
+            fontSize: '22px',
+            color: '#d7dadc',
+            fontFamily: 'Arial',
+            align: 'center',
+            wordWrap: { width: 250 }
+        }).setOrigin(0.5);
+
+        this.movesText = this.add.text(UI_X, 350, 'Moves: 0', {
+            fontSize: '32px',
+            fontStyle: 'bold',
+            color: '#ffffff',
+            fontFamily: 'Arial'
+        }).setOrigin(0.5);
+
+        this.statusText = this.add.text(UI_X, height - 100, 'Click two cards', {
             fontSize: '20px',
             color: '#d7dadc',
             fontFamily: 'Arial'
         }).setOrigin(0.5);
-
-        this.statusText = this.add.text(width / 2, height - 35, 'Click two cards', {
-            fontSize: '18px',
-            color: '#d7dadc',
-            fontFamily: 'Arial'
-        }).setOrigin(0.5);
-
-        this.movesText = this.add.text(20, 20, 'Moves: 0', {
-            fontSize: '20px',
-            color: '#d7dadc',
-            fontFamily: 'Arial'
-        });
 
         this.createBoard(width, height);
     }
@@ -65,20 +69,23 @@ export default class memoryScene extends Phaser.Scene {
     createBoard(width, height) {
         this.cards = [];
 
-        const cardW = 90;
-        const cardH = 110;
-        const gapX = 14;
-        const gapY = 14;
+        //tamano de los papeles
+        const cardW = 155; 
+        const cardH = 185; 
+        const gapX = 50;
+        const gapY = 10;
 
+        //dimension ocupada por la cuadricula
         const totalWidth = this.cols * cardW + (this.cols - 1) * gapX;
         const totalHeight = this.rows * cardH + (this.rows - 1) * gapY;
 
-        const startX = (width - totalWidth) / 2 +30;
-        const startY = 180;
+        const startX = (width * 0.05) + (cardW / 2);
+        const startY = (height - totalHeight) / 2 + (cardH / 2);
 
         const values = this.generatePairs();
         this.cardData = values;
 
+        //crear las cartas
         for (let r = 0; r < this.rows; r++) {
             this.cards[r] = [];
 
@@ -91,18 +98,27 @@ export default class memoryScene extends Phaser.Scene {
 
                 const container = this.add.container(x, y);
 
-                const back = this.add.rectangle(0, 0, cardW, cardH, this.colors.cardBack)
-                    .setStrokeStyle(3, 0x000000);
+                //elegir un diseño de papel aleatorio
+                const randomRetroKey = `retro${Phaser.Math.Between(1, 7)}`;
+                
+                const back = this.add.image(0, 0, randomRetroKey);
+                back.setDisplaySize(cardW, cardH);
 
-                const front = this.add.rectangle(0, 0, cardW, cardH, this.colors.cardFront)
-                    .setStrokeStyle(3, 0x000000);
+                //el front usa la misma imagen que el back (es el mismo papel)
+                const front = this.add.image(0, 0, randomRetroKey); 
+                front.setDisplaySize(cardW, cardH);
                 front.setVisible(false);
 
+                //r otacion aleatoria
+                container.setAngle(Phaser.Math.Between(-5, 5));
+
+                //icono del back
                 const image = this.add.image(0, 0, value).setVisible(false);
-                image.setDisplaySize(cardW, cardH);
+                image.setDisplaySize(cardW * 0.7, cardH * 0.7);
 
                 container.add([back, front, image]);
                 container.setSize(cardW, cardH);
+                
                 back.setInteractive({ useHandCursor: true });
                 back.on('pointerup', () => {
                     this.handleCardClick(r, c);
@@ -161,9 +177,6 @@ export default class memoryScene extends Phaser.Scene {
             this.time.delayedCall(350, () => {
                 this.firstCard.matched = true;
                 this.secondCard.matched = true;
-
-                this.firstCard.front.setFillStyle(this.colors.matched);
-                this.secondCard.front.setFillStyle(this.colors.matched);
 
                 this.matchedPairs++;
 

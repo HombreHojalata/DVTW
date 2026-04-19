@@ -12,6 +12,11 @@ export default class MissionScene extends Phaser.Scene {
        
     create() {
         console.log("MISSION");
+        
+        const sound = this.mission.itIsCorrupt() ? 'corruptMission' : 'mission';
+        const audioManager = this.registry.get('audioManager');
+        if (audioManager) audioManager.play(sound);
+        
         const baseWidth = this.scale.width;
         const baseHeight = this.scale.height;
         const newWidth = baseWidth * 0.9;
@@ -44,14 +49,14 @@ export default class MissionScene extends Phaser.Scene {
         return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, this.template).setDisplaySize(newWidth, newHeight);
     }
     spawnNameText(offsetX,offsetY){                         //NEED TO CHANGE
-        const text = this.mission.getName() + '!';
+        const text = '¡' + this.mission.getName() + '!';
         const spacing = 10;
         let x = 0;
-        const container = this.add.container(0, offsetY + 80);
+        const container = this.add.container(0, offsetY + 70);
 
         for (let char of text) {
-            const letter = this.add.text(x, 0, char, {
-                fontSize: '60px',
+            const letter = this.add.text(x - 100, 0, char, {
+                fontSize: '65px',
                 fontFamily: 'Impact',
                 fontStyle: 'bold',
                 color: '#ffffff'
@@ -60,8 +65,8 @@ export default class MissionScene extends Phaser.Scene {
             x += letter.width + spacing;
         }
         // centrar
-        container.x = offsetX*4;
-        container.setAngle(-3);
+        container.x = offsetX * 4;
+        container.setAngle(-2.8);
         return container;
     }
     spawnDescText(newWidth,newHeight,offsetX,offsetY){
@@ -98,11 +103,11 @@ export default class MissionScene extends Phaser.Scene {
         //this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,this.mission.getScene());
         this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2,this.mission.getScene());
         console.log(this.mission.getScene());
-        return this.districtScene;
+        return this.missionScene;
     }
     spawnCloseButton(newWidth,offsetX,offsetY){
         if(this.mission.itIsEvent()) return null;
-        this.closeButton = this.add.image(newWidth - offsetX ,offsetY + 60,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
+        this.closeButton = this.add.image(newWidth - offsetX, offsetY + 60,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
         this.closeButton.on('pointerover', () => {
             this.tweens.add({
                 targets: this.closeButton,
@@ -119,6 +124,8 @@ export default class MissionScene extends Phaser.Scene {
         });
         this.closeButton.on('pointerup', () => {
             this.scene.stop();
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('exitMission');
             this.scene.resume('gameScene');
         });
         return this.closeButton;
@@ -178,6 +185,8 @@ export default class MissionScene extends Phaser.Scene {
             textObjects.forEach(t => t.setScale(1.1));
             this.gameManager.removeMission(this, this.mission, option, this.district);
             this.scene.stop();
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('exitMission');
             if(this.mission.isMinigame()) {
                 this.scene.start(minigameScene);
             }else{
