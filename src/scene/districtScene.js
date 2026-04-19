@@ -38,6 +38,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.districtDescriptionText = this.spawnDescText(newWidth, offsetX, offsetY);
         this.districtScene = this.spawnScene(newWidth, newHeight, offsetX, offsetY);
         this.districtDetail = this.spawnDetailText(newWidth, newHeight, offsetX, offsetY);
+        this.refreshDetailsText();
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth, offsetX, offsetY);
         this.storePositionX = this.spawnBuiltList(newWidth, offsetX, newHeight);
@@ -95,52 +96,106 @@ export default class DistrictScene extends Phaser.Scene {
         return this.districtScene;
     }
     spawnDetailText(newWidth,newHeight,offsetX,offsetY) {
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Margarine',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
         //POBLACION TOTAL
         const populationText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*2 + 45, Math.trunc(this.district.getPopulation()), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#30718c'
-        }).setDepth(15);  
+        }).setDepth(15).setInteractive();
+        populationText.on('pointerover', () => {
+            tooltip.setText('Población total del distrito');
+            tooltip.setPosition(0, 0);
+            tooltip.setVisible(true);
+            tooltip.setDepth(100);
+        });
+        populationText.on('pointerout', () => { tooltip.setVisible(false); });
         // DINERO QUE SE GANA POR CICLO
         const moneyText = this.add.text(newWidth/10 + 70, newHeight - newHeight/3 + offsetY*7 + 50, Math.trunc(this.district.getMoneyGenerated()), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#ba9900'
-        }).setDepth(15);  
+        }).setDepth(15).setInteractive();
+        moneyText.on('pointerover', () => {
+            tooltip.setText('Dinero generado por ciclo');
+            tooltip.setPosition(0, 0);
+            tooltip.setVisible(true);
+            tooltip.setDepth(100);
+        });
+        moneyText.on('pointerout', () => { tooltip.setVisible(false); });
         // HABITANTES A FAVOR
         const inFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*2 + 45, Math.trunc(this.district.getPopulation() * this.district.getSatisfaction() / 100), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#46c83d'
-        }).setDepth(15);  
+        }).setDepth(15).setInteractive();
+        inFavorText.on('pointerover', () => {
+            tooltip.setText('Habitantes a favor');
+            tooltip.setPosition(0, 0);
+            tooltip.setVisible(true);
+            tooltip.setDepth(100);
+        });
+        inFavorText.on('pointerout', () => { tooltip.setVisible(false); });
         // HABITANTES EN CONTRA/NEUTROS
         const noFavorText = this.add.text(newWidth/10 + offsetX*3 + 65, newHeight - newHeight/3 + offsetY*7 + 50, Math.trunc(this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100), {
             fontSize: '34px',
             fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#e62d2a'
-        }).setDepth(15);  
+        }).setDepth(15).setInteractive();
+        noFavorText.on('pointerover', () => {
+            tooltip.setText('Habitantes en contra o neutros');
+            tooltip.setPosition(0, 0);
+            tooltip.setVisible(true);
+            tooltip.setDepth(100);
+        });
+        noFavorText.on('pointerout', () => { tooltip.setVisible(false); });
         return { population: populationText, money: moneyText, inFavor: inFavorText, noFavor: noFavorText };
     }
-    refreshDetailsText(){
+    refreshDetailsText(callback = null){
         this.districtDetail.population.setText(this.district.getPopulation());
         this.districtDetail.inFavor.setText(this.district.getPopulation() * this.district.getSatisfaction() / 100);
         this.districtDetail.money.setText(this.district.getMoneyGenerated());
         this.districtDetail.noFavor.setText(this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100);
+        const texts = [this.districtDetail.population, this.districtDetail.money, this.districtDetail.inFavor, this.districtDetail.noFavor];
+        let completedTweens = 0;
+        texts.forEach(text => {
+            this.tweens.add({
+                targets: text,
+                scaleX: 1.2,
+                scaleY: 1.2,
+                duration: 300,
+                yoyo: true,
+                ease: 'Power2',
+                onComplete: () => {
+                    completedTweens++;
+                    if (completedTweens === texts.length && callback) {
+                        callback();
+                    }
+                }
+            });
+        });
     }
     // SPAWN BUILTS IMAGE
     spawnBuiltList(newWidth, offsetX, newHeight) {
         this.builtList = this.district.getBuildingsBuilt();
 
         const tooltip = this.add.text(0, 0, '', {
-            fontSize: '16px',
+            fontSize: '30px',
+            fontFamily: 'Margarine',
             backgroundColor: '#000',
             color: '#fff',
             padding: { x: 5, y: 5 }
-        }).setVisible(false);
+        }).setVisible(false).setPosition(0,0).setDepth(100);
 
         const startX = newWidth * 0.5;
         const spacing = 100;
@@ -153,18 +208,16 @@ export default class DistrictScene extends Phaser.Scene {
 
             img.on('pointerover', () => {
                 tooltip.setText(building.getBuildingInfo() + '\nSi quieres vender el edificio pulsalo');
-                tooltip.setPosition(720, newHeight - newHeight/2 - 55);
                 tooltip.setVisible(true);
-                tooltip.setDepth(100);
             });
             img.on('pointerout', () => {tooltip.setVisible(false);});
             img.on('pointerup', () => {
                 const container = this.add.container(this.baseWidth/2, this.baseHeight/2).setDepth(21);   
                 const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
                 bg.setStrokeStyle(2, 0xffffff, 0.5);
-                const text = this.add.text(0, -50, 'Para demoler este edificio tienes que pagar a los trabajores 10000$', {
-                    fontSize: '24px',
-                    fontFamily: 'Times New Roman',
+                const text = this.add.text(0, 0, 'Para demoler este edificio tienes que pagar a los trabajores 10000$', {
+                    fontSize: '30px',
+                    fontFamily: 'Margarine',
                     color: '#ffffff',
                     align: 'center',
                     wordWrap: { width: 600 }
@@ -179,7 +232,9 @@ export default class DistrictScene extends Phaser.Scene {
                     container.destroy();
                     this.player.updateMoney(-10000);
                     this.district.removeBuilding(building);
-                    this.scene.restart();
+                    this.refreshDetailsText(() => {
+                        this.scene.restart();
+                    });
                 });
 
             });
@@ -190,17 +245,16 @@ export default class DistrictScene extends Phaser.Scene {
     // BUTTONS
     spawnStoreButton(newHeight, positionX) {
         const tooltip = this.add.text(0, 0, '', {
-            fontSize: '16px',
+            fontSize: '30px',
+            fontFamily: 'Margarine',
             backgroundColor: '#000',
             color: '#fff',
             padding: { x: 5, y: 5 }
-        }).setVisible(false);
+        }).setVisible(false).setPosition(0,0).setDepth(100);
         this.storeButton = this.add.image(positionX, newHeight - newHeight/2 + 35,'storeIcon').setScale(1.3).setOrigin(0.5,0.5).setInteractive({ useHandCursor: true }); 
         this.storeButton.on('pointerover', () => {
             tooltip.setText(`Dale al boton si quieres ir al mercado de EDIFICIOS(${this.district.getSpaceBuildingBuilt()}/${this.district.getSpaceBuilding()})`);
-            tooltip.setPosition(740, newHeight - newHeight/2 - 45);
             tooltip.setVisible(true);
-            tooltip.setDepth(50);
             this.tweens.add({
                 targets: this.storeButton,
                 scale: 1.5,
@@ -219,9 +273,7 @@ export default class DistrictScene extends Phaser.Scene {
             //if(this.tutorial) this.containerStore.destroy();
             if(this.district.getSpaceBuildingBuilt() === this.district.getSpaceBuilding()) {
                 tooltip.setText(`Distrito lleno(${this.district.getSpaceBuildingBuilt()}/${this.district.getSpaceBuilding()})`);
-                tooltip.setPosition(740, newHeight - newHeight/2 - 45);
                 tooltip.setVisible(true);
-                tooltip.setDepth(100);
             }else{
                 tooltip.setVisible(false);
                 this.scene.pause('districtScene');

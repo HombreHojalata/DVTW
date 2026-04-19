@@ -4,6 +4,7 @@ import topUI from '../UI/topUI.js';
 import footerUI from '../UI/footerUI.js';
 import batteryUI from '../UI/batteryUI.js';
 import endDayBtnUI from '../UI/endDayBtnUI.js';
+import dayUI from '../UI/dayUI.js';
 
 
 export default class GameScene extends Phaser.Scene {
@@ -47,7 +48,6 @@ export default class GameScene extends Phaser.Scene {
         //FINAL DE JUEGO :
         // SI VOTOS POR ENCIMA DEL 50 GANAS
         // SI VOTOS POR DEBAJO DEL 50 PIERDES
-        // SI TE QUEDAS EN BANCARROTA AL COMENZAR EL DIA PIERES(COMIENZO PORQUE RECIBES INGRESOS)
         if (this.day.getDayNumber() === 6){                                      // GAME END          
             this.population = this.map.getTotalPopulation();
             this.popularity = this.map.getPopularity();
@@ -73,9 +73,9 @@ export default class GameScene extends Phaser.Scene {
             }
             // SPAWN MAP and MISSIONS
             this.gameManager.spawnAssets(this);
+            this.presidenteBlocker = this.add.zone(15, 15, 224, 287).setOrigin(0).setInteractive().setDepth(20);
             if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
             this.configButton = this.gameManager.spawnConfigurationButton(this);
-
 
             this.input.keyboard.on('keydown-ESC', () => {
                 if (!this.scene.isActive('pauseScene') && !this.scene.isActive('configurationScene')) {
@@ -86,10 +86,11 @@ export default class GameScene extends Phaser.Scene {
 
             this.topUI = new topUI(this);
             this.batteryUI = new batteryUI(this);
+            this.batteryUIBlocker = this.add.zone(this.batteryUI.innerX, this.batteryUI.innerY, this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
             this.endDayBtnUI = new endDayBtnUI(this);
             this.endDayBtnUI.btn.setDepth(22);
             this.footerUI = new footerUI(this);
-
+            this.dayUI = new dayUI(this);
             this.middayOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x00c3ff).setOrigin(0).setAlpha(0).setDepth(1);
             this.afternoonOverlay = this.add.rectangle(0, 0, this.width, this.height, 0xff9500).setOrigin(0).setAlpha(0).setDepth(1);
             this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);

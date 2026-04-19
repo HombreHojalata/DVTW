@@ -27,7 +27,6 @@ import map from '../assets/map/mapTemplate.png'
 
 // DISTRICT SCENE ASSETS
 import districtTemplate from '../assets/map/districtScenes/districtTemplate.png'
-import districtStoreTemplate from '../assets/map/districtScenes/districtStoreTemplate.png'
 import districtBorrascalScene1 from '../assets/map/districtScenes/districtBorrascalScene1.png'
 import districtElNidoScene1 from '../assets/map/districtScenes/districtElNidoScene1.png'
 import districtGuineaScene1 from '../assets/map/districtScenes/districtGuineaScene1.png'
@@ -351,7 +350,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('badEnding', badEnding);
     this.load.image('map', map);
     this.load.image('districtTemplate', districtTemplate);
-    this.load.image('districtStoreTemplate', districtStoreTemplate);
     this.load.image('districtBorrascalScene1', districtBorrascalScene1);
     this.load.image('districtElNidoScene1', districtElNidoScene1);
     this.load.image('districtGuineaScene1', districtGuineaScene1);

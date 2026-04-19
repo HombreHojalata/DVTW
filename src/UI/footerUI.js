@@ -33,7 +33,11 @@ export default class footerUI {
             color: '#2e6417'
         }).setOrigin(1, 0.5).setDepth(11);
     }
-    refreshMoney() { if (this.moneyText) { this.moneyText.setText(this.player.getMoney());} }
+    refreshMoney() {
+        if (this.moneyText) {
+            this.moneyText.setText(this.player.getMoney());
+        } 
+    }
     // DISTRICT
     createDistrictText(sectionMoney, sectionDistrict, footerX, footerY, footerHeight) {
         this.districtTitleText = this.scene.add.text(footerX + sectionMoney + sectionDistrict / 2, footerY + footerHeight / 2, 'QUACKINGTON DC', {

@@ -47,9 +47,13 @@ export default class SummaryDayScene extends Phaser.Scene {
             align: 'center'
         };
         const { money, corruption, popularity } = this.summary.resourcesGained;
-        addLine(`DINERO GANADO: ${money}`, smallStyle);
+        if(money >= 0) addLine(`DINERO GANADO: ${money}`, smallStyle);
+        else addLine(`DINERO PERDIDO: ${money}`, smallStyle);
+        if(corruption >= 0) addLine(`CORRUPCIÓN GANADO: ${corruption}`, smallStyle);
+        else addLine(`CORRUPCIÓN PERDIDO: ${corruption}`, smallStyle);
         addLine(`CORRUPCIÓN GANADO: ${corruption}`, smallStyle);
-        addLine(`VOTOS GANADOS: +${popularity}`, smallStyle);
+        if(popularity >= 0) addLine(`VOTOS GANADOS: ${popularity}`, smallStyle);
+        else addLine(`VOTOS PERDIDOS: ${popularity}`, smallStyle);
 
         this.tweens.add({
             targets: summaryContainer,
