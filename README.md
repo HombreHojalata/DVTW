@@ -35,12 +35,12 @@ Cada día se divide, más o menos, en el siguiente ciclo de juego:
 2. Surgen misiones y eventos que recompensan al jugador con satisfacción a cambio de recursos.
 3. Si el evento, o la misión, ha causado alguna consecuencia, el jugador puede responder ajustando las variables construyendo edificios o modificando parámetros de distritos.
 4. En caso de conseguir suficientes recursos, el jugador puede comprar mejoras.
-5. Cuando la energía se reduce demasiado, se termina el día.
+5. Cuando la energía se reduce hasta 0, o hasta que el jugador decida antes de ello, se termina el día.
 
 ## 2.2. Desarrollo de la historia
 La historia toma lugar a lo largo de los últimos días de mandato del presidente.
 
-El **primer día** se usa como tutorial para enseñar al jugador los controles básicos de acceso a distritos y misiones, así como las misiones corruptas *(más información sobre las mecánicas en el apartado 3)*. El **segundo día** es donde se deja más libertad al jugador de probar los distintos sistemas; se introduce también la construcción de edificios y el Mercado Negro. Durante el **tercer día** se introduce al jugador a la gestión de parámetros de distritos y la mafia.
+El **primer día** se usa como tutorial para enseñar al jugador los controles básicos de acceso a distritos y misiones. El **segundo día** es donde se deja más libertad al jugador de probar los distintos sistemas; se introduce también la construcción de edificios y el Mercado Negro. Durante el **tercer día** se introduce al jugador a la gestión de parámetros de distritos y la mafia.
 
 Este mismo día, también se seleccionará la *narrativa* que seguirá el jugador durante el resto de la partida, y mostrará las primeras pistas y misiones de esta a lo largo del día, desarrollándose más y más durante los siguientes días, hasta el **día final**, donde surgirá una *catástrofe* como desenlace de la narrativa llevada hasta el momento.
 
@@ -52,9 +52,11 @@ $$\dots$$
 
 En caso de que el jugador se quede sin recursos, o se vea envuelto en una situación inescapable de la narrativa, la partida terminará antes de que transcurran todos los días. En caso de conseguir superar todos los días, el jugador será victorioso si ha conseguido reunir un *80%* de los votos.
 
+Pendiente de más investigación.
+
 # 3. Mecánicas
 ## 3.1. Mapa de la ciudad
-Durante el juego se observa al mapa de Quackington DC desde arriba. La ciudad está dividida en 6 distritos: El Nido, Nueva Pradera, Somosagua, Borrascal, Sahar y Guinea. Seleccionar un distrito muestra su nombre al jugador, y si este además selecciona la opción de “Información”, despliega una pantalla con los datos del distrito: una imagen de la zona, una descripción escrita, el nivel de satisfacción, el número de vecinos en el distrito, los parámetros manejables y los edificios (las últimas dos secciones empiezan bloqueadas y se van desbloqueando con el transcurso de los días).
+Durante el juego se observa al mapa de Quackington DC desde arriba. La ciudad está dividida en 6 distritos: El Nido, Nueva Pradera, Somosagua, Borrascal, Sahar y Guinea. Seleccionar un distrito muestra su nombre al jugador, y si este además selecciona la opción de “Información”, despliega una pantalla con los datos del distrito: una imagen de la zona, una descripción escrita, el nivel de satisfacción, el número de ciudadanos en el distrito, los parámetros manejables y los edificios (las últimas dos secciones empiezan bloqueadas y se van desbloqueando con el transcurso de los días).
 
 ## 3.2 Recursos y variables
 ### 3.2.1 Recursos del jugador
@@ -70,14 +72,13 @@ Durante el juego se observa al mapa de Quackington DC desde arriba. La ciudad es
 ### 3.2.2. Variables de gestión
 **Opinión Pública:** La marca métrica global que determina la puntuación del jugador, y se muestra en todo momento en una barra en la parte superior de la pantalla. Representa la población total del Quackington DC dividida en tres segmentos:
 - ***Afines:*** Ciudadanos que han decidido apoyar al jugador. El objetivo del juego es conseguir cierta cantidad de ciudadanos afines.
-- ***Neutrales:*** Ciudadanos que aún no están politizados. El principal objetivo de las misiones es convertirlos.
 - ***Opositores:*** Ciudadanos activamente en contra del jugador. Estos requieren medidas específicas para ser convencidos, y reducen la satisfacción obtenida en distritos donde se aglomeran.
 
 **Satisfacción:** Cada distrito tiene un nivel de satisfacción independiente (del -100% al 100%). Este aumenta con al completar ciertas misiones de la zona o construir edificios de bienestar, y disminuye como resultado de acciones negativas contra el distrito. La satisfacción se puede ver en la pestaña de información de cada distrito.
 - ***Conversión de votos:*** El porcentaje de satisfacción se traduce directamente en el porcentaje de vecinos del distrito *afines* al jugador (cada distrito tiene un número de población distinto).
 - ***Umbral negativo:*** Si la satisfacción cae por debajo de 0, el distrito comienza a generar *opositores* de forma proporcional. Estos tienen un efecto pasivo en que reducen la obtención de satisfacción positiva porcentualmente según su cantidad (por ejemplo, si un distrito cuenta con un 20% de opositores en él, una misión que normalmente proporciona +10 de satisfacción, tan solo generará +8 de satisfacción). El jugador deberá hacer misiones específicas o subir por encima del 100% la satisfacción para convertir de vuelta a los *opositores*.
 
-**Corrupción:** Es una variable que representa el grado de corrupción del jugador. Esta no se muestra de forma directa al jugador, pero si con pistas visuales (noticias, mensajes de la secretaria, eventos, etc). Esta valor aumenta cada vez que se lleva a cabo una *acción corrupta*.
+**Corrupción:** Es una variable que representa el grado de corrupción del jugador. Esta se muestra de forma directa al jugador, en la pestaña del Mercado Negro. Esta valor aumenta cada vez que se lleva a cabo una *acción corrupta*, sea comprar mejoras en el Mercado Negro por ejemplo.
 - ***Aumento de corrupción:*** Cada vez que se aumente el valor de la corrupción, se comprobará si el presidente es “pillado”, subiendo la posibilidad cuanto más corrupción tenga. Si esto ocurre, repercutirá en una bajada generalizada de satisfacción en todos los distritos, además de otros posibles efectos dependiendo del nivel de corrupción al ser pillado.
 - ***Blanqueo:*** Para reducir el nivel de corrupción se pueden hacer ciertas misiones, aunque la forma más efectiva es pagar a la prensa en el mercado negro para conseguirlo. El precio de esta compra irá en aumento exponencial para obligar al jugador a poder siempre librarse de las consecuencias de las elecciones corruptas.
 
@@ -119,10 +120,10 @@ A partir del tercer día, se selecciona la narrativa que el jugador irá viviend
 
 Todas la narrativas añaden una **catástrofe** al día final: un evento con causas negativas para poner a prueba la capacidad de adaptarse del jugador. Además, mientras dure la catástrofe, las misiones se reemplazarán por únicamente las de la narrativa. Durante este tiempo, el día no se puede saltar.
 
-Cuando termine este evento, el jugador tendrá la posibilidad de hacer control de daños los últimos momentos del día final.
+Cuando termine este evento, el jugador tendrá la posibilidad de hacer control de daños los últimos momentos del día final. Aún pendiente por implementar. 
 
 ## 3.7. Final del día
-Debajo de la barra de energía se muestra el botón de “Terminar el Día”. Este puede ser pulsado por el jugador en cualquier momento (si no está en medio de una catástrofe) para finalizar el día si así quiere. Si aún le queda energía restante, se muestra un mensaje preguntando si de verdad quiere finalizar el día antes de tiempo.
+Debajo de la barra de energía se muestra el botón de “Terminar el Día”. Este puede ser pulsado por el jugador en cualquier momento (si no está en medio de una catástrofe) para finalizar el día si así quiere. Si aún le queda energía restante, se muestra un mensaje preguntando si de verdad quiere finalizar el día antes de tiempo, para así decidir si acabar el día o no.
 
 Una vez se termina una jornada, se presenta un resumen de lo hecho durante el día como si fuera un reportaje sobre el presidente. También aparecen noticias relacionadas con la narrativa o acciones tomadas.
 
@@ -143,24 +144,23 @@ Cada distrito debe controlar su número de vecinos, así como su satisfacción, 
 Cada distrito tiene una cantidad específica de edificios que construir. Las opciones generales son las siguientes:
 | Edificio | Coste de Construcción | Efecto | Impacto Social |
 | :--- | :--- | :--- | :--- |
-| **Gran Centro Comercial** | Muy Alto | Genera **Dinero** cada ciclo | Aumenta la **Satisfacción** |
+| **Centro Comercial** | Muy Alto | Genera **Dinero** cada ciclo | Aumenta la **Satisfacción** |
 | **Hotel de Lujo** | Alto | Genera **Dinero** cada ciclo | *Ninguno* |
 | **Mega-Fábrica** | Alto | Genera mucho **Dinero** cada ciclo.  | Disminuye la **Satisfacción**, y puede provocar *Opositores* |
 | **Hospital** | Alto | Aumenta un poco la **Satisfacción** | Reduce la pérdida de **Satisfacción** ante un crisis |
-| **Colegio Público** | Medio | Aumenta la **Satisfacción** | *Ninguno* |
-| **Comisaría** | Medio | Disminuye en número de *Opositores* | Aumenta la *Corrupción* |
+| **Cine** | Medio | Aumenta la **Satisfacción** | *Ninguno* |
 |**Bloque de Viviendas**| Medio | Aumenta la población del distrito | Sube un poco la **Satisfacción** |
 | **Parque Municipal** | Bajo | Aumenta un poco la **Satisfacción** | *Ninguno* | ---
 
 Además, existen edificios específicos de cada distrito que se consiguen al aumentar la satisfacción de estos a cierto nivel:
-| Distrito | Edificio | Coste de Construcción | Efecto |
-| :--- | :--- | :--- | :--- |
-| *El Nido* | **Club Nocturno VIP** | Alto | Duplica el efecto de los Hoteles y Centros Comerciales en el distrito |
-| *Nueva Pradera* | **EnPAWire State** | Alto | Aumenta la efectividad de todos los edificios del distrito |
-| *Somosagua* | **Petrolera Nemo** | Medio | Reduce mucho la **Satisfacción** del distrito, pero aumenta la efectividad de todas las Fábricas de la ciudad |
-| *Borrascal* | **Instituto de Investigación Polar** | Alto | Reduce el coste de las mejoras del Mercado Negro |
-| *Sahar* | **Casino “Cuerno Dorado”** | Medio | En cada ciclo tiene la posibilidad de aumentar un poco la **Satisfacción** de todos los distritos, y una pequeña posibilidad de bajarla en el distrito |
-| *Guinea* | **Teatro Janeiro** | Alto | Reduce un poco la **Corrupción** en cada ciclo. Pan y circo. | ---
+| Distrito | Edificio |
+| :--- | :--- | 
+| *El Nido* | **Copitolio** | 
+| *Nueva Pradera* | **EnPAWire State** | 
+| *Somosagua* | **Fábrica Mundo Jupi** |
+| *Borrascal* | **Centro de Investigación**|
+| *Sahar* | **Restaurante Bambi** |
+| *Guinea* | **Teatro Magno** | 
 
 ### 3.8.2. Parámetros
 Tras un par de días, se desbloquea la opción de manejar los parámetros de cada distrito, manejando una serie de barras, presentando un coste por modificarlas:
@@ -184,12 +184,10 @@ Tras un par de días, se desbloquea la opción de manejar los parámetros de cad
 	 - **Pros:** Aumenta la satisfacción y disminuye mínimamente los opositores.
 	 - **Contras:** Aumenta mucho el coste de dinero y sube mucho la corrupción.
 
-### 3.9. Mafia
-A lo largo de la partida un distrito elegido sin que el jugador lo sepa albergará a la mafia. Esta se dedicará a reducir la efectividad de la zona, pero puede aliarse con el presidente si el jugador la trata bien a costa de aumentar la corrupción. Algunas misiones o eventos especiales influenciarán a la actitud de la mafia con el jugador, pudiendo ayudarle o ir en su contra dependiendo del caso.
 
 # 4. Interfaz
 ## 4.1. Controles y plataformas
-El juego está pensado para jugarse con teclado y ratón. Las mayoría de interacciones se realizan haciendo click con el ratón o moviendo el cursor por la pantalla, con muy pocas ocasiones en las que únicamente se pueda usar el teclado (siendo en algunos minijuegos o al escribir cosas). También cuenta con atajos de teclado para abrir pestañas como el Mercado Negro o el menú de ajustes.
+El juego está pensado para jugarse con teclado y ratón. Las mayoría de interacciones se realizan haciendo click con el ratón o moviendo el cursor por la pantalla, con muy pocas ocasiones en las que únicamente se pueda usar el teclado (siendo en algunos minijuegos o al escribir cosas). También cuenta con atajos de teclado para abrir pestañas como el menú de ajustes (ESC)
 
 Debido a sus controles simples, existe la posibilidad de ser jugables tanto en dispositivos táctiles como con mandos, pero actualmente no son una prioridad.
 
@@ -260,7 +258,7 @@ El protagonista del juego: Donald J. Duck, el presidente pato. Es un pato blanco
 <br clear="left"/>
 
 ### 5.1.2. Líder de la mafia
-La mafia de ratas está liderada por don Bigotes Corleonne, un pequeño ratón que viste un traje morado. Este puede ser amistoso u hostil hacia el jugador dependiendo de sus acciones.
+La mafia de ratas está liderada por don Bigotes Corleonne, un pequeño ratón que viste un traje morado. Este puede ser amistoso u hostil hacia el jugador dependiendo de sus acciones. Pendiente a futuras implementaciones. 
 
 <img width="100" alt="RataMafiosa" src="https://github.com/user-attachments/assets/8915b6c9-d3d3-4256-8461-b52ce916115c" />
 <br clear="left"/>
