@@ -133,15 +133,6 @@ export default class IntroScene extends Phaser.Scene {
             return { shadow, bg, label };
         };
 
-        /*createMenuButton(120, 150, 'PLINKO', () => {
-            this.scene.start('plinkoMiniGame', { 
-                isTest: true, 
-                puntos: 0,
-                difficulty: 1
-            });
-        });*/
-
-
         //colocacion de botones en la agenda abierta
         createMenuButton(580, 520, 'Tutorial', () => {
             this.scene.start('tutorialScene');

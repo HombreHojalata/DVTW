@@ -166,6 +166,10 @@ import whacFrame15 from '../assets/minigames/whacAMole/whacFrame15.png'
 
 import fondoWordle from '../assets/minigames/wordle/fondoWordle.png';
 
+import fondoPlinko from '../assets/minigames/plinko/fondoPlinko.png';
+import coinPlinko from '../assets/minigames/plinko/coinPlinko.png';
+import bagPlinko from '../assets/minigames/plinko/bagPlinko.png';
+
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
 import configurationIcon from '../assets/icons/configurationIcon.png'
@@ -442,6 +446,25 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage6', memoryImage6);
     this.load.image('memoryImage7', memoryImage7);
     this.load.image('memoryImage8', memoryImage8);
+    this.load.image('whacFrameInicio', whacFrameInicio);
+    this.load.image('whacFrame2', whacFrame2);
+    this.load.image('whacFrame3', whacFrame3);
+    this.load.image('whacFrame4', whacFrame4);
+    this.load.image('whacFrame5', whacFrame5);
+    this.load.image('whacFrame6', whacFrame6);
+    this.load.image('whacFrame7', whacFrame7);
+    this.load.image('whacFrame8', whacFrame8);
+    this.load.image('whacFrame9', whacFrame9);
+    this.load.image('whacFrame10', whacFrame10);
+    this.load.image('whacFrame11', whacFrame11);
+    this.load.image('whacFrame12', whacFrame12);
+    this.load.image('whacFrame13', whacFrame13);
+    this.load.image('whacFrame14', whacFrame14);
+    this.load.image('whacFrame15', whacFrame15);
+    this.load.image('fondoWordle', fondoWordle);
+    this.load.image('fondoPlinko', fondoPlinko);
+    this.load.image('coinPlinko', coinPlinko);
+    this.load.image('bagPlinko', bagPlinko);
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
     this.load.image('news_icon', news_icon);
@@ -476,22 +499,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image('mapBtnBright', mapBtnBright);
     this.load.image('mapBtnPressed', mapBtnPressed);
     this.load.image('lowBarMarketUI', lowBarMarketUI);
-    this.load.image('whacFrameInicio', whacFrameInicio);
-    this.load.image('whacFrame2', whacFrame2);
-    this.load.image('whacFrame3', whacFrame3);
-    this.load.image('whacFrame4', whacFrame4);
-    this.load.image('whacFrame5', whacFrame5);
-    this.load.image('whacFrame6', whacFrame6);
-    this.load.image('whacFrame7', whacFrame7);
-    this.load.image('whacFrame8', whacFrame8);
-    this.load.image('whacFrame9', whacFrame9);
-    this.load.image('whacFrame10', whacFrame10);
-    this.load.image('whacFrame11', whacFrame11);
-    this.load.image('whacFrame12', whacFrame12);
-    this.load.image('whacFrame13', whacFrame13);
-    this.load.image('whacFrame14', whacFrame14);
-    this.load.image('whacFrame15', whacFrame15);
-    this.load.image('fondoWordle', fondoWordle);
     this.cache.json.add('regularMissions', RegularMission);
     this.cache.json.add('upMoney', UpMoneyMission);
     this.cache.json.add('upPopularity', UpPopularityMission);
