@@ -63,8 +63,6 @@ export default class memoryScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.createBoard(width, height);
-
-        this.finishGame();
     }
 
     createBoard(width, height) {

@@ -35,7 +35,16 @@ export default class footerUI {
     }
     refreshMoney() {
         if (this.moneyText) {
+            console.log('Dinero en refreshMoney:', this.player.getMoney());
             this.moneyText.setText(this.player.getMoney());
+
+            this.scene.tweens.add({
+                targets: this.moneyText,
+                scale: 1.2, // un poco más grande, 1.6 sería demasiado agresivo para UI
+                duration: 200,
+                yoyo: true,
+                ease: 'Power2'
+            });
         } 
     }
     // DISTRICT

@@ -106,7 +106,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         this.events.on('resume', () => {
-                this.footerUI = new footerUI(this);
+                this.footerUI.refreshMoney();
         });
     }
 
@@ -140,14 +140,32 @@ export default class GameScene extends Phaser.Scene {
             this.energyTimerEvent.remove(false);
         }
 
+        //this.triggeredThresholds = new Set();
         this.energyTimerEvent = this.time.addEvent({
             delay: this.energyTickMs,
             loop: true,
             callback: () => {
                 this.player.updateEnergy(-this.energyDrainPerTick);
                 this.refreshHUD();
+                // LOGICA DE CICLO DE ENERGIA
+                /* TODAVIA NO FUNCIONA BIEN
+                const thresholds = [
+                    maxEnergy * 0.75,
+                    maxEnergy * 0.5,
+                    maxEnergy * 0.25
+                ];
 
+                thresholds.forEach(threshold => {
+                    if (this.player.getEnergy() <= threshold &&!this.triggeredThresholds.has(threshold)) {
+                        this.triggeredThresholds.add(threshold);
+                        console.log('ALCANZADO ' + this.player.getEnergy() + '-> RECIBIENDO DINERO: ' + this.map.getMoneyGenerated());
+                        this.player.updateMoney(this.map.getMoneyGenerated());
+                        this.footerUI.refreshMoney();
+                    }
+                });*/
+                // LOGICA DE CICLO DE DIA
                 if (this.player.getEnergy() > 50) {
+
                     this.midday = false;
                     this.afternoon = false;
 
@@ -235,6 +253,7 @@ export default class GameScene extends Phaser.Scene {
         this.footerUI.refreshMoney();
         this.topUI.refresh();
     }
+
     showDayIntro() {
         const { width, height } = this.sys.game.config;
         const currentDay = this.day.getDayNumber();
@@ -280,7 +299,6 @@ export default class GameScene extends Phaser.Scene {
             });
         });
     }
-    //NO DEBE ESTAR AQUI
     finishDay() {
         console.log("GAME: " + "DAY " + this.day.getDayNumber() + " FINISH");
 
