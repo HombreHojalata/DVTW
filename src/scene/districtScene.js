@@ -11,6 +11,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.tutorial = data.tutorial || false;
         this.order = data.order || 1;
         this.day = data.day || 1;
+        this.boughtBuilding = data.boughtBuilding || false;
     }
        
     create() {
@@ -211,8 +212,15 @@ export default class DistrictScene extends Phaser.Scene {
             const building = this.builtList[i];
             const x = startX + i * spacing;
             const y = newHeight - newHeight / 2;
-            const img = this.add.image(x, y + 35, building.getBuildingPNG()).setOrigin(0.5, 0.5).setScale(1.4).setInteractive();
 
+            const img = this.add.image(x, y + 35, building.getBuildingPNG()).setOrigin(0.5, 0.5).setScale(1.4).setInteractive();
+            if(this.boughtBuilding && i === this.builtList.length - 1) this.tweens.add({
+                targets: img,
+                scale: 1.6,
+                duration: 300,
+                yoyo: true,
+                ease: 'Power2'
+            });
             img.on('pointerover', () => {
                 tooltip.setText(building.getBuildingInfo());
                 tooltip2.setText("Si quieres vender el edificio pulsalo");
@@ -296,7 +304,7 @@ export default class DistrictScene extends Phaser.Scene {
             }else{
                 tooltip.setVisible(false);
                 this.scene.pause('districtScene');
-                this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial });
+                this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial, order: this.order});
             }
         });
         return this.storeButton;

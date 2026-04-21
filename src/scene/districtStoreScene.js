@@ -9,6 +9,7 @@ export default class DistrictScene extends Phaser.Scene {
     init(data) {
         this.district = data.district;
         this.tutorial = data.tutorial || false;
+        this.order = data.order || 1;
     }
        
     create() {
@@ -151,7 +152,7 @@ export default class DistrictScene extends Phaser.Scene {
                     this.footerUI.refreshMoney();
                     tooltip.setVisible(false);
                     this.scene.stop();
-                    this.scene.get('districtScene').scene.restart();
+                    this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
                 } 
             }
         }); 
@@ -186,7 +187,7 @@ export default class DistrictScene extends Phaser.Scene {
                     this.footerUI.refreshMoney();
                     tooltip.setVisible(false);
                     this.scene.stop();
-                    this.scene.get('districtScene').scene.restart();
+                    this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
                 } 
             }
         });
