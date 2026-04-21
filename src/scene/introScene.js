@@ -158,7 +158,6 @@ export default class IntroScene extends Phaser.Scene {
             this.scene.start('finishScene', { win: false });
         });
          */
-        /*
         createMenuButton(120, 30, 'MEMORY', () => { // PARA DEPURAR
             this.scene.start('memoryMiniGame');
         });
@@ -171,6 +170,5 @@ export default class IntroScene extends Phaser.Scene {
         createMenuButton(120, 210, 'WORDLE', () => { // PARA DEPURAR
             this.scene.start('wordleMiniGame');
         });   
-        */
     }
 }

@@ -32,38 +32,39 @@ export default class memoryScene extends Phaser.Scene {
         //imagen de fondo
         this.add.image(width / 2, height / 2, 'fondoMemory');
 
-        const UI_X = width * 0.8;
+        this.UI_X = width * 0.8;
 
         //textos
-        this.add.text(UI_X, 150, 'MEMORY', {
-            fontSize: '50px',
+        this.add.text(this.UI_X, 150, 'MEMORY', {
+            fontSize: '60px',
             fontStyle: 'bold',
             color: this.colors.text,
             fontFamily: 'Arial'
         }).setOrigin(0.5);
 
-        this.add.text(UI_X, 210, 'Find all the matching pairs', {
+        this.add.text(this.UI_X, 230, 'Encuentra todas las parejas', {
             fontSize: '22px',
             color: '#d7dadc',
             fontFamily: 'Arial',
             align: 'center',
-            wordWrap: { width: 250 }
         }).setOrigin(0.5);
 
-        this.movesText = this.add.text(UI_X, 350, 'Moves: 0', {
+        this.movesText = this.add.text(this.UI_X, 350, 'Movimientos: 0', {
             fontSize: '32px',
             fontStyle: 'bold',
             color: '#ffffff',
             fontFamily: 'Arial'
         }).setOrigin(0.5);
 
-        this.statusText = this.add.text(UI_X, height - 100, 'Click two cards', {
+        this.statusText = this.add.text(this.UI_X, height - 100, 'Selecciona dos cartas', {
             fontSize: '20px',
             color: '#d7dadc',
             fontFamily: 'Arial'
         }).setOrigin(0.5);
 
         this.createBoard(width, height);
+
+        this.finishGame();
     }
 
     createBoard(width, height) {
@@ -171,7 +172,7 @@ export default class memoryScene extends Phaser.Scene {
         this.secondCard = card;
         this.lockBoard = true;
         this.moves++;
-        this.movesText.setText(`Moves: ${this.moves}`);
+        this.movesText.setText(`Movimientos: ${this.moves}`);
 
         if (this.firstCard.value === this.secondCard.value) {
             this.time.delayedCall(350, () => {
@@ -183,7 +184,7 @@ export default class memoryScene extends Phaser.Scene {
                 this.resetTurn();
 
                 if (this.matchedPairs === this.totalCards / 2) {
-                    this.winGame();
+                    this.finishGame();
                 }
             });
         } else {
@@ -223,14 +224,55 @@ export default class memoryScene extends Phaser.Scene {
         this.lockBoard = false;
     }
 
-    winGame() {
+  finishGame() {
+        //TODO: mejorar esta parte, que se vea mas bonita y que de feedback segun el rendimiento del jugador y que se implemente la logica para dar dinero segun el rendimiento
         this.finished = true;
-        this.statusText.setText('You win! All pairs found.');
 
-        this.time.delayedCall(2500, () => {
+        this.statusText.setText('¡Buen trabajo! Todas las parejas encontradas.');
+        this.finishText1 = this.add.text(this.UI_X, 500,'', {
+            fontSize: '30px',
+            color: '#d7dadc',
+            fontFamily: 'Arial',
+            fontStyle: 'bold',
+            align: 'center',
+            wordWrap: { width: 500 },
+        }).setOrigin(0.5);
+        this.finishText2 = this.add.text(this.UI_X, 580, '', {
+            fontSize: '27px',
+            color: '#d7dadc',
+            fontFamily: 'Arial',
+            fontStyle: 'bold',
+            align: 'center',
+            wordWrap: { width: 500 }
+        }).setOrigin(0.5);
+       
+        // TOTAL MIN 8 MOVES
+        if (this.moves <= 12) {
+            this.finishText1.setText('¡Excelente memoria! Has encontrado todas las parejas en un tiempo récord.').setColor('#5378af');
+            this.finishText2.setText('¡Has ganado X dinero!').setColor('#53af53');  //100%
+        }
+        else if (this.moves <= 16) {
+            this.finishText1.setText('¡Muy bien! Has encontrado todas las parejas en un tiempo aceptable.').setColor('#5378af');
+            this.finishText2.setText('¡Has ganado X dinero!').setColor('#53af53');  //75%
+        }
+        else if (this.moves <= 20) {
+            this.finishText1.setText('¡Buen trabajo! Has encontrado todas las parejas, pero podrías mejorar tu memoria.').setColor('#5378af');
+            this.finishText2.setText('¡Has ganado X dinero!').setColor('#53af53');  //50%
+        }
+        else if (this.moves <= 24) {
+            this.finishText1.setText('Has encontrado todas las parejas, pero tu memoria necesita trabajo.').setColor('#5378af');
+            this.finishText2.setText('¡Has ganado X dinero!').setColor('#53af53');  //25%
+        }
+        else {
+            this.finishText1.setText('Has encontrado todas las parejas, pero este no es tu juego.').setColor('#5378af');
+            this.finishText2.setText('¡No has ganado nada!').setColor('#af5b53');  //0%
+        }
+
+        this.time.delayedCall(10000, () => {
             this.scene.stop();
             this.registry.set('flagShow', false);
             this.scene.get('gameScene').scene.restart();
         });
+
     }
 }
