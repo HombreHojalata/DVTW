@@ -125,7 +125,7 @@ export default class DistrictScene extends Phaser.Scene {
             color: '#ba9900'
         }).setDepth(15).setInteractive();
         moneyText.on('pointerover', () => {
-            tooltip.setText('Dato: Dinero que genera el distrito por ciclo laboral');
+            tooltip.setText('Dato: Dinero que genera el distrito por ciclo de energía');
             tooltip.setPosition(0, 0);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
@@ -196,6 +196,13 @@ export default class DistrictScene extends Phaser.Scene {
             color: '#fff',
             padding: { x: 5, y: 5 }
         }).setVisible(false).setPosition(0,0).setDepth(100);
+        const tooltip2 = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Margarine',
+            backgroundColor: '#000',
+            color: '#ffe600',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false).setPosition(0,165).setDepth(100);
 
         const startX = newWidth * 0.5;
         const spacing = 100;
@@ -207,11 +214,14 @@ export default class DistrictScene extends Phaser.Scene {
             const img = this.add.image(x, y + 35, building.getBuildingPNG()).setOrigin(0.5, 0.5).setScale(1.4).setInteractive();
 
             img.on('pointerover', () => {
-                tooltip.setText(building.getBuildingInfo() + '\nSi quieres vender el edificio pulsalo');
+                tooltip.setText(building.getBuildingInfo());
+                tooltip2.setText("Si quieres vender el edificio pulsalo");
                 tooltip.setVisible(true);
+                tooltip2.setVisible(true);
             });
-            img.on('pointerout', () => {tooltip.setVisible(false);});
+            img.on('pointerout', () => {tooltip.setVisible(false); tooltip2.setVisible(false);});
             img.on('pointerup', () => {
+                tooltip2.setVisible(false);
                 const container = this.add.container(this.baseWidth/2, this.baseHeight/2).setDepth(21);   
                 const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
                 bg.setStrokeStyle(2, 0xffffff, 0.5);
@@ -239,7 +249,16 @@ export default class DistrictScene extends Phaser.Scene {
 
             });
         }
-
+        //ANIMATION FOR TOOLTIP2
+        this.tweens.add({
+            targets: tooltip2,
+            scaleX: 1.05,
+            scaleY: 1.05,
+            duration: 800,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+        });
         return newWidth * 0.5 + (offsetX + 25) * this.builtList.length;
     }
     // BUTTONS

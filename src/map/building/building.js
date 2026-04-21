@@ -7,7 +7,7 @@ export default class Building {
         this.satisfaction = satisfaction;
     }
     getName(){return this.name;}
-    getBuildingInfo(){return `"${this.name}" cuesta ${this.cost} y genera:\nBeneficio: ${this.income}, Satisfaccion: ${this.satisfaction}`;}
+    getBuildingInfo(){return `Este edificio cuesta ${this.cost} y genera:\nBeneficio: ${this.income}, Satisfaccion: ${this.satisfaction}\nEl beneficio es lo que genera de dinero por cada ciclo de energia\nLa satisfaccion es lo cuan feliz hace a los habitantes`;}
     getBuildingCost(){return this.cost};
     getBuildingIncome(){return this.income;}
     getBuildingSatisfaction(){return this.satisfaction;}
