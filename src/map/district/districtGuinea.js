@@ -2,9 +2,9 @@ import District from './district';
 import SpecialBuilding from '../building/specialBuildingGuinea.js';
 
 export default class DistrictGuinea extends District {
-    constructor(name, desc, population, populationIncrease, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
+    constructor(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
          opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
-        super(name, desc, population, populationIncrease, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
+        super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
     createSceneList(){
@@ -12,5 +12,5 @@ export default class DistrictGuinea extends District {
         list.push('districtGuineaScene1', 'districtGuineaScene2');
         return list;
     }
-    getSpecialBuilding() {return new SpecialBuilding('specialBuildingGuinea',"TEATRO MAGNO",300000,4,20,0);}
+    getSpecialBuilding() {return new SpecialBuilding('specialBuildingGuinea',"TEATRO MAGNO",300000,4,20);}
 };

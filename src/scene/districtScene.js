@@ -14,7 +14,7 @@ export default class DistrictScene extends Phaser.Scene {
     }
        
     create() {
-        console.log("DISTRICT + " + this.district.getName());
+        console.log("DISTRICT: " + this.district.getName());
 
         this.baseWidth = this.scale.width;
         this.baseHeight = this.scale.height;
@@ -111,7 +111,7 @@ export default class DistrictScene extends Phaser.Scene {
             color: '#30718c'
         }).setDepth(15).setInteractive();
         populationText.on('pointerover', () => {
-            tooltip.setText('Población total del distrito');
+            tooltip.setText('Dato: Población total del distrito');
             tooltip.setPosition(0, 0);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
@@ -125,7 +125,7 @@ export default class DistrictScene extends Phaser.Scene {
             color: '#ba9900'
         }).setDepth(15).setInteractive();
         moneyText.on('pointerover', () => {
-            tooltip.setText('Dinero generado por ciclo');
+            tooltip.setText('Dato: Dinero que genera el distrito por ciclo laboral');
             tooltip.setPosition(0, 0);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
@@ -139,7 +139,7 @@ export default class DistrictScene extends Phaser.Scene {
             color: '#46c83d'
         }).setDepth(15).setInteractive();
         inFavorText.on('pointerover', () => {
-            tooltip.setText('Habitantes a favor');
+            tooltip.setText('Dato: Habitantes satisfechos del distrito');
             tooltip.setPosition(0, 0);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
@@ -153,7 +153,7 @@ export default class DistrictScene extends Phaser.Scene {
             color: '#e62d2a'
         }).setDepth(15).setInteractive();
         noFavorText.on('pointerover', () => {
-            tooltip.setText('Habitantes en contra o neutros');
+            tooltip.setText('Dato: Habitantes insatisfechos del distrito');
             tooltip.setPosition(0, 0);
             tooltip.setVisible(true);
             tooltip.setDepth(100);

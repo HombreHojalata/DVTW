@@ -7,7 +7,7 @@ import BuildingHouse from "../building/buildingHouse.js";
 import BuildingPark from "../building/buildingPark.js";
 
 export default class District {
-    constructor(name, desc, population,populationIncrease, satisfaction, moneyGenerated,
+    constructor(name, desc, population, satisfaction, moneyGenerated,
         district_building ,buildings, space_building, 
         is_special_built, special_building, 
         PNGwithOutSpecial, PNGwithSpecial, posX, posY) {
@@ -15,7 +15,6 @@ export default class District {
         this.name = name;                                                                                       // Name of the district
         this.desc = desc;                                                                                       // Description of the district                              
         this.population = population;                                                                           // Population of the district    
-        this.populationIncrease = populationIncrease;                                                           // Population increase of the district
         this.satisfaction = satisfaction;                                                                       // Satisfaction of the population in the district
         this.baseSatisfaction = satisfaction;  
         this.taxes = 50;                                                                                        // Percentage 0-100
@@ -87,9 +86,6 @@ export default class District {
     //POPULATION
     getPopulation() {return this.population;}
     updatePopulation(value) {this.population = Math.max(0, this.population + value);}
-    // PARA DESPUES DEL HITO
-    updatePopulationIncrease(value){this.populationIncrease = Math.max(0, this.populationIncrease + value);}
-    getPopulationIncrease() {return this.populationIncrease;}
 
     // MODIFYING DISTRICT MONEY AND SATISFACTION BY FOOTER ATTRIBUTES, 50 IS THE BASE
     updateAfterModifyPercentage(){  
@@ -162,21 +158,20 @@ export default class District {
     createBuildings(built,buildings){
         const buildingList = [];
         for(let i = 0 ; i < buildings.length; i++){
-            //PNGBuilding,name,cost,income,satisfaction,populationIncrease 
-            if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOGAR",5000,0,10,0));
-            else if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINE",10000,1,5,0));
-            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARQUE",10000,-1,10,0));
-            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,1,5,0));
-            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"CENTRO COMERCIAL",30000,2,5,0));
-            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FÁBRICA",50000,3,-5,-0));
-            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,-2,15,0));
+            //PNGBuilding,name,cost,income,satisfaction
+            if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOGAR",5000,0,10));
+            else if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINE",10000,1,5));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARQUE",10000,-1,10));
+            else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,1,5));
+            else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"CENTRO COMERCIAL",30000,2,5));
+            else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FÁBRICA",50000,3,-5));
+            else if(buildings[i] === "HOSPITAL") buildingList.push(new BuildingHospital('buildingHospital',"HOSPITAL",60000,-2,15));
         }
         if(built) {
             for(let i = 0; i < buildingList.length; i++){
                 const income = buildingList[i].getBuildingIncome();
                 this.moneyGeneratedByBuildings.push(income);
                 this.baseMoneyGeneratedByBuildings.push(income);
-                this.updatePopulationIncrease(buildingList[i].getBuildingPopulationIncrease());
                 this.updateSatisfaction(buildingList[i].getBuildingSatisfaction());
             }
         }
@@ -188,7 +183,6 @@ export default class District {
                 this.building_list.push(building);
                 this.moneyGeneratedByBuildings.push(building.getBuildingIncome());
                 this.baseMoneyGeneratedByBuildings.push(building.getBuildingIncome());
-                this.updatePopulationIncrease(building.getBuildingPopulationIncrease());
                 this.updateSatisfaction(building.getBuildingSatisfaction());
             }
             else{
@@ -207,7 +201,6 @@ export default class District {
                 this.is_special_built = true;
                 this.moneyGeneratedByBuildings.push(building.getBuildingIncome());
                 this.baseMoneyGeneratedByBuildings.push(building.getBuildingIncome());
-                this.updatePopulationIncrease(building.getBuildingPopulationIncrease());
                 this.updateSatisfaction(building.getBuildingSatisfaction());
             }
             else{
@@ -226,7 +219,6 @@ export default class District {
         if (index !== -1){
             this.moneyGeneratedByBuildings.splice(index, 1);
             this.baseMoneyGeneratedByBuildings.splice(index, 1);
-            this.updatePopulationIncrease(-building.getBuildingPopulationIncrease());
             this.updateSatisfaction(-building.getBuildingSatisfaction());
             this.building_list.splice(index, 1);
         }

@@ -12,7 +12,7 @@ export default class DistrictScene extends Phaser.Scene {
     }
        
     create() {
-        console.log("DISTRICT STORE");
+        console.log("DISTRICT STORE: " + this.district.getName());
         const baseWidth = this.scale.width;
         const baseHeight = this.scale.height;
         const newWidth = baseWidth * 0.9;
@@ -154,7 +154,7 @@ export default class DistrictScene extends Phaser.Scene {
                     this.scene.get('districtScene').scene.restart();
                 } 
             }
-        });
+        }); 
     }
     configureSpecialEvents(img, building, tooltip) {
         img.on('pointerover', () => {

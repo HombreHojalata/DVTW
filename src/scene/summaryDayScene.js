@@ -51,7 +51,6 @@ export default class SummaryDayScene extends Phaser.Scene {
         else addLine(`DINERO PERDIDO: ${money}`, smallStyle);
         if(corruption >= 0) addLine(`CORRUPCIÓN GANADO: ${corruption}`, smallStyle);
         else addLine(`CORRUPCIÓN PERDIDO: ${corruption}`, smallStyle);
-        addLine(`CORRUPCIÓN GANADO: ${corruption}`, smallStyle);
         if(popularity >= 0) addLine(`VOTOS GANADOS: ${popularity}`, smallStyle);
         else addLine(`VOTOS PERDIDOS: ${popularity}`, smallStyle);
 
