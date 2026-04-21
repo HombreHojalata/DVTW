@@ -53,7 +53,7 @@ export default class wordleScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
 
-        this.add.text(UI_X, 360, 'Guess the\n5-letter word', {
+        this.add.text(UI_X, 360, 'Adivina la palabra\nde 5 letras', {
             fontSize: '20px',
             color: '#33ff33',
             fontFamily: 'Courier New',
@@ -61,7 +61,7 @@ export default class wordleScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
 
-        this.statusText = this.add.text(UI_X, height - 300, 'Type letters,\nENTER to submit', {
+        this.statusText = this.add.text(UI_X, height - 300, 'Escribe las letras,\n presiona ENTER para confirmar', {
             fontSize: '19px',
             color: '#33ff33',
             fontFamily: 'Courier New',
@@ -255,16 +255,25 @@ export default class wordleScene extends Phaser.Scene {
             tile.text.setColor('#ffffff'); 
         }
 
-
         this.updateKeyboardColors(evaluations);
 
+        const width = this.scale.width;
+        const height = this.scale.height;
 
         if (guess === secret) {
             this.finished = true;
-            this.statusText.setText('Correct!\nAccess Granted');
+            
+            this.statusText.setText('Correcto!\n Acceso Concedido');
 
+            this.add.text(width / 2, height / 2.5, '¡CONTRASEÑA CORRECTA!', {
+                fontSize: '64px',
+                fontFamily: 'Climate Crisis',
+                color: '#46c83d',
+                stroke: '#000000',
+                strokeThickness: 6
+            }).setOrigin(0.5).setDepth(10);
 
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(5000, () => {
                 this.scene.stop();
                 this.registry.set('flagShow',false);
                 this.scene.get('gameScene').scene.restart();
@@ -280,10 +289,18 @@ export default class wordleScene extends Phaser.Scene {
 
         if (this.currentRow >= this.rows) {
             this.finished = true;
-            this.statusText.setText(`Access Denied\nWord: ${secret}`);
 
+            this.statusText.setText(`Acceso Denegado\nPalabra: ${secret}`);
 
-            this.time.delayedCall(3000, () => {
+            this.add.text(width / 2, height / 2.5, '¡CONTRASEÑA INCORRECTA!', {
+                fontSize: '64px',
+                fontFamily: 'Climate Crisis',
+                color: '#c83d3d',
+                stroke: '#000000',
+                strokeThickness: 6
+            }).setOrigin(0.5).setDepth(10);
+
+            this.time.delayedCall(5000, () => {
                 this.scene.stop();
                 this.registry.set('flagShow',false);
                 this.scene.get('gameScene').scene.restart();

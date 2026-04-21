@@ -170,6 +170,7 @@ export default class plinkoScene extends Phaser.Scene {
     }
 
     checkGameStatus() {
+        //TODO: que se implemente la logica para dar dinero segun el rendimiento + mensaje de lo que gana/pierde el jugador segun su rendimiento
         if (this.currentPoints >= this.pointsGoal) this.winGame();
         else if (this.ballsUsed >= this.maxBalls && this.ballsGroup.countActive() === 0) this.loseGame();
     }
@@ -189,7 +190,7 @@ export default class plinkoScene extends Phaser.Scene {
             strokeThickness: 6
         }).setOrigin(0.5).setDepth(10);
 
-        this.time.delayedCall(2000, () => this.exitScene(true));
+        this.time.delayedCall(5000, () => this.exitScene(true));
     }
 
     loseGame() {
@@ -207,7 +208,7 @@ export default class plinkoScene extends Phaser.Scene {
             strokeThickness: 6
         }).setOrigin(0.5).setDepth(10);
         
-        this.time.delayedCall(2000, () => this.exitScene(false));
+        this.time.delayedCall(5000, () => this.exitScene(false));
     }
 
 

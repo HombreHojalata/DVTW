@@ -220,7 +220,7 @@ export default class WhacAMoleMiniGame extends Phaser.Scene {
 
         const resultText = hasWon ? '¡HAS GANADO!' : 'HAS PERDIDO';
         const resultColor = hasWon ? '#00ff00' : '#ff0000';
-
+        // TODO: que se implemente la logica para dar dinero segun el rendimiento + mensaje de lo que gana/pierde el jugador segun su rendimiento
         this.add.text(750, 380, resultText, {
             fontFamily: 'Arial Black',
             fontSize: '80px',
@@ -235,6 +235,12 @@ export default class WhacAMoleMiniGame extends Phaser.Scene {
             fontSize: '40px',
             fill: '#ffffff'
         }).setOrigin(0.5).setDepth(200);
+
+        this.time.delayedCall(5000, () => {
+            this.scene.stop();
+            this.registry.set('flagShow', false);
+            this.scene.get('gameScene').scene.restart();
+        });
 
         //log para debug de puntos
         console.log(`puntos: ${this.score}, maximo: ${maxPossibleScore}, necesario: ${victoryThreshold}`);

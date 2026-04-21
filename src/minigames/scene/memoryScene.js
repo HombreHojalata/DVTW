@@ -225,25 +225,28 @@ export default class memoryScene extends Phaser.Scene {
     }
 
   finishGame() {
-        //TODO: mejorar esta parte, que se vea mas bonita y que de feedback segun el rendimiento del jugador y que se implemente la logica para dar dinero segun el rendimiento
+        //TODO: que se implemente la logica para dar dinero segun el rendimiento 
+        const width = this.scale.width;
+        const height = this.scale.height;
         this.finished = true;
 
         this.statusText.setText('¡Buen trabajo! Todas las parejas encontradas.');
-        this.finishText1 = this.add.text(this.UI_X, 500,'', {
-            fontSize: '30px',
-            color: '#d7dadc',
-            fontFamily: 'Arial',
-            fontStyle: 'bold',
+
+        this.finishText1 = this.add.text(width / 2, height / 2.5,'', {
+            fontSize: '64px',
+            fontFamily: 'Climate Crisis',
+            stroke: '#000000',
+            strokeThickness: 6,
             align: 'center',
-            wordWrap: { width: 500 },
+            wordWrap: { width: width * 0.7 }
         }).setOrigin(0.5);
-        this.finishText2 = this.add.text(this.UI_X, 580, '', {
-            fontSize: '27px',
-            color: '#d7dadc',
-            fontFamily: 'Arial',
-            fontStyle: 'bold',
+        this.finishText2 = this.add.text(width / 2, height / 2.5 + 200, '', {
+            fontSize: '64px',
+            fontFamily: 'Climate Crisis',
+            stroke: '#000000',
+            strokeThickness: 6,
             align: 'center',
-            wordWrap: { width: 500 }
+            wordWrap: { width: width * 0.7 }
         }).setOrigin(0.5);
        
         // TOTAL MIN 8 MOVES
@@ -268,7 +271,7 @@ export default class memoryScene extends Phaser.Scene {
             this.finishText2.setText('¡No has ganado nada!').setColor('#af5b53');  //0%
         }
 
-        this.time.delayedCall(10000, () => {
+        this.time.delayedCall(5000, () => {
             this.scene.stop();
             this.registry.set('flagShow', false);
             this.scene.get('gameScene').scene.restart();
