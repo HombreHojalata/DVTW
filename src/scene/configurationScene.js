@@ -154,6 +154,23 @@ export default class ConfigurationScene extends Phaser.Scene {
             }
         });
 
+        this.input.keyboard.on('keydown-ESC', () => {
+            this.scene.stop();
+            if (this.audioManager) this.audioManager.play('closeBriefcase');
+
+            if (this.openedFromPause) {
+                this.scene.start('pauseScene', { returnScene: this.returnScene });
+                return;
+            }
+
+            if (this.returnScene === 'introScene') {
+                this.scene.start('introScene');
+            } else if (this.returnScene === 'gameScene') {
+                this.registry.set('flagShow', false);
+                this.scene.get('gameScene').scene.restart();
+            }
+        });
+
         this.saveButton.on('pointerup', () => {
             if (this.audioManager?.setMusicVolume) {
                 this.audioManager.setMusicVolume(this.pendingMusicVolume);
