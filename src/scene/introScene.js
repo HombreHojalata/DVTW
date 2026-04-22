@@ -169,6 +169,9 @@ export default class IntroScene extends Phaser.Scene {
         });
         createMenuButton(120, 210, 'WORDLE', () => { // PARA DEPURAR
             this.scene.start('wordleMiniGame');
-        });   
-    }
+        });
+        createMenuButton(120, 270, 'MONKEYTYPE',() => {
+            this.scene.start('monkeyTypeGame');
+        });
+    }   
 }

@@ -15,10 +15,7 @@ export default class MGManager {
 
     applyResult(result) {
         if (!result) return;
-
-
         const player = this.gameManager.getPlayer();
-
 
         if (result.money && player.addMoney) player.addMoney(result.money);
         if (result.popularity && player.addPopularity) player.addPopularity(result.popularity);

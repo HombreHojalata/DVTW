@@ -219,6 +219,9 @@ export default class GameScene extends Phaser.Scene {
                 }
 
                 if (this.player.getEnergy() <= 0) {
+                    if (this.audioManager)
+                        this.audioManager.switchMusic('nightAmbience');
+
                     this.midday = false;
                     this.afternoon = false;
                     this.energyTimerEvent.remove(false);
