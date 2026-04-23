@@ -17,6 +17,7 @@ import PlinkoMiniGame from './minigames/scene/plinkoScene.js';
 import WhacAMoleMiniGame from './minigames/scene/whacAMoleScene.js';
 import PauseScene from './scene/pauseMenuScene.js';
 import MonkeyTypeScene from './minigames/scene/monkeyTypeScene.js';
+import WordSearchMiniGame from './minigames/scene/wordSearchScene.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -37,7 +38,7 @@ let config = {
     },
     scene: [Boot, IntroScene, ConfigurationScene, TutorialScene, GameScene, DistrictScene, DistrictStoreScene, 
         MissionScene, BlackMarketScene, SummaryDayScene, FinishScene, PauseScene,
-         WordleMiniGame, MemoryMiniGame, PlinkoMiniGame, WhacAMoleMiniGame, MonkeyTypeScene],
+         WordleMiniGame, MemoryMiniGame, PlinkoMiniGame, WhacAMoleMiniGame, MonkeyTypeScene, WordSearchMiniGame],
     physics: {
         default: 'arcade',
         arcade: {
