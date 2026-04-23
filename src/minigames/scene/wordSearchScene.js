@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { WORD_SEARCH_WORDS } from '../data/mgConfig';
 
 export default class wordSearchScene extends Phaser.Scene{
     constructor(){
@@ -13,33 +14,21 @@ export default class wordSearchScene extends Phaser.Scene{
 
         this.rows = 10;
         this.cols = 10;
-        this.finished = false;
 
+        this.finished = false;
         this.isDragging = false;
         this.selectedTiles = [];
+        this.wordsFoundList = [];
         this.wordsFound = 0;
 
-        //CHANGE WORDS != THAN WORDLE 
-        this.wordsToFind = [
-            'DUCKS',
-            'VOTES',
-            'MAYOR',
-            'MEDIA',
-            'MONEY',
-            'POWER',
-            'TRIAL',
-            'CROOK',
-            'CHAOS',
-            'LAUGH',
-            'QUACK',
-            'PRESS'
-        ];
+
+        this.wordsToFind = Phaser.Utils.Array.GetRandom(WORD_SEARCH_WORDS);
 
         this.colors = {
             emptyTile: 0x1a1a1b,
             text: '#ffffff',
-            highlight: 0x538d4e,
-            found: 0xb59f3b
+            highlight: 0xb59f3b,
+            found: 0x538d4e
         }
 
         //BACKGROUND
@@ -58,8 +47,24 @@ export default class wordSearchScene extends Phaser.Scene{
             fontSize: '20px',
             color: '#d7dadc',
             fontFamily: 'Arial',
-            align: 'center'
+            align: 'center',
+            wordWrap: {width: 250}
         }).setOrigin(0.5);
+
+        this.wordListTexts = {};
+        let listStartY = 330;
+
+        this.wordsToFind.forEach((word, index) => {
+            let textObj = this.add.text(UI_X, listStartY + (index * 35), word, {
+                fontSize: '24px',
+                fontStyle: 'bold',
+                color: '#ffffff',
+                fontFamily: 'Courier New',
+                align: 'center'
+            }).setOrigin(0.5);
+
+            this.wordListTexts[word] = textObj;
+        })
 
         this.createGrid(width, height);
 
@@ -78,6 +83,61 @@ export default class wordSearchScene extends Phaser.Scene{
 
         const alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+        let invisibleGrid = [];
+        for(let r = 0; r < this.rows; r++)
+            invisibleGrid[r] = new Array(this.cols).fill('');
+
+        const directions = [
+            [1, 0],
+            [0, 1],
+            [1, 1],
+            [-1, 1]
+        ];
+
+        this.wordsToFind.forEach(word => {
+            let done = false;
+            let attempts = 0;
+
+            while(!done && attempts < 10000){
+                const dir = directions[Math.floor(Math.random() * directions.length)];
+                const startRow = Math.floor(Math.random() * this.rows);
+                const startCol = Math.floor(Math.random() * this.cols);
+
+                let avail = true;
+
+                for(let i = 0; i < word.length; i++){
+                    const r = startRow + (i * dir[0]);
+                    const c = startCol + (i * dir[1]);
+
+                    if(r < 0 || r >= this.rows || c < 0 || c >= this.cols){
+                        avail = false;
+                        break;
+                    }
+
+                    if(invisibleGrid[r][c] !== '' && invisibleGrid[r][c] !== word[i]){
+                        avail = false;
+                        break;
+                    }
+                }
+
+                if(avail){
+                    for(let i = 0; i < word.length; i++){
+                        const r = startRow + (i * dir[0]);
+                        const c = startCol + (i * dir[1]);
+
+                        invisibleGrid[r][c] = word[i];
+                    }
+
+                    done = true;
+                }
+
+                attempts++;
+            }
+
+            if(!done) //CHECK
+                console.warn(`WORD NOT PLACED (${word})`);
+        });
+
         for(let r = 0; r < this.rows; r++){
             this.grid[r] = [];
 
@@ -86,22 +146,23 @@ export default class wordSearchScene extends Phaser.Scene{
                 const y = startY + (r * (boxSize + gap));
 
                 //ACTUAL WORDS
-
-                const randChar = alph[Math.floor(Math.random() * alph.length)];
+                let charVal = invisibleGrid[r][c];
+                if(charVal === '')
+                    charVal = alph[Math.floor(Math.random() * alph.length)];
 
                 const rect = this.add.rectangle(x, y, boxSize, boxSize, this.colors.emptyTile, 0.8)
-                    .setStrokeStyle(1, 0xffffff)
+                    .setStrokeStyle(2, 0xffffff)
                     .setOrigin(0)
                     .setInteractive({useHandCursor: true});
 
-                const text = this.add.text(x + (boxSize / 2), y + (boxSize / 2), randChar, {
+                const text = this.add.text(x + (boxSize / 2), y + (boxSize / 2), charVal, {
                     fontSize: '24px',
                     fontStyle: 'bold',
                     color: this.colors.text,
                     fontFamily: 'Courier New'
                 }).setOrigin(0.5);
 
-                const tile = {rect, text, r, c, letter: randChar, matched: false};
+                const tile = {rect, text, r, c, letter: charVal, matched: false};
                 this.grid[r][c] = tile;
 
                 rect.on('pointerdown', () => this.startDrag(tile));
@@ -138,9 +199,18 @@ export default class wordSearchScene extends Phaser.Scene{
         const selectedWord = this.selectedTiles.map(t => t.letter).join('');
         const reverseWord = selectedWord.split('').reverse().join('');
 
-        if(this.wordsToFind.includes(selectedWord) || this.wordsToFind.includes(reverseWord)){
+        const match = [selectedWord, reverseWord].find(w => this.wordsToFind.includes(w));
+
+        if(match && !this.wordsFoundList.includes(match)){
             this.wordsFound++;
-            this.statusText.setText(`Encontraste la palabra {${selectedWord}}`);
+            this.wordsFoundList.push(match);
+            //this.statusText.setText(`Encontraste la palabra {${selectedWord}}`);
+
+            if(this.wordListTexts[match]){
+                const foundWord = this.wordListTexts[match];
+                foundWord.setColor('#888888');
+                this.add.rectangle(foundWord.x, foundWord.y, foundWord.width + 10, 3, 0x888888);
+            }
 
             this.selectedTiles.forEach(t => {
                 t.matched = true;
