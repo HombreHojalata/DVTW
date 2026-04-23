@@ -49,5 +49,56 @@
           "popularity": 0
         }
       ]
-    }
+    },
+    {
+      "name": "Sopa de letras",
+      "description": "Que fortuna le aguardará al presidente, se enfrenta a una sopa de letras, ¿Ganará un premio?.",
+      "event": true,
+      "corrupt": false,
+      "minigame": true,
+      "options": [
+        {
+          "probability": 100,
+          "description": "Encuantra todas las palabras",
+          "energy": -20,
+          "money": 200000,
+          "corruption": 0,
+          "popularity": 0
+        }
+      ]
+    },
+    {
+      "name": "MonkeyType",
+      "description": "¡Rápido! Se van a publicar unos documentos incriminantes, date prisa para censurarlos.",
+      "event": true,
+      "corrupt": false,
+      "minigame": true,
+      "options": [
+        {
+          "probability": 100,
+          "description": "Censura documentos con MonkeyType",
+          "energy": -20,
+          "money": 200000,
+          "corruption": 0,
+          "popularity": 0
+        }
+      ]
+    },
+    {
+    "name": "whacAMole",
+    "description": "Tienes una rueda de prensa, los periodistas te hacen preguntas sobre corrupción, ¡Cuidado con las camaras!",
+    "event": true,
+    "corrupt": false,
+    "minigame": true,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Responde a los micrifonos",
+        "energy": -10,
+        "money": -300000,
+        "corruption": 0,
+        "popularity": 0
+      }
+    ]
+  }
 ]

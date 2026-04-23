@@ -99,8 +99,7 @@ export default class missionManager{
             missionSelected = this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
         }
         else{
-            if(corruption > maxCorruption){
-                missionType = "downCorruption";
+            if(corruption > maxCorruption){//Cambiar a que vaya por probalilidad que asciende con la corrupcion, no que sea un limite fijo.
                 missionSelected = this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
             }
             else{
@@ -306,6 +305,9 @@ export default class missionManager{
 
         this.minigameMissions.push(mission);
     });
+        this.downCorruptionMissions.push(this.minigameMissions[2]);
+        this.upMoneyMissions.push(this.minigameMissions[4]);
+        this.upMoneyMissions.push(this.minigameMissions[3]);
         this.upMoneyMissions.push(this.minigameMissions[2]);
         this.upPopularityMissions.push(this.minigameMissions[0]);
         this.upPopularityMissions.push(this.minigameMissions[1]);
