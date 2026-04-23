@@ -243,6 +243,20 @@ import alarm from '../assets/audio/alarm.mp3';
 import closeBriefcase from '../assets/audio/closeBriefcase.mp3';
 import trumpet from '../assets/audio/trumpet.mp3';
 import nightAmbience from '../assets/audio/nightAmbience.mp3';
+import coin1 from '../assets/audio/coin/coin1.mp3';
+import coin2 from '../assets/audio/coin/coin2.mp3';
+import coin3 from '../assets/audio/coin/coin3.mp3';
+import coin4 from '../assets/audio/coin/coin4.mp3';
+import coin5 from '../assets/audio/coin/coin5.mp3';
+import coin6 from '../assets/audio/coin/coin6.mp3';
+import coin7 from '../assets/audio/coin/coin7.mp3';
+import coin8 from '../assets/audio/coin/coin8.mp3';
+import coin9 from '../assets/audio/coin/coin9.mp3';
+import coin10 from '../assets/audio/coin/coin10.mp3';
+import coin11 from '../assets/audio/coin/coin11.mp3';
+import coin12 from '../assets/audio/coin/coin12.mp3';
+import coin13 from '../assets/audio/coin/coin13.mp3';
+import moneyBag from '../assets/audio/moneyBag.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -539,6 +553,20 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('closeBriefcase', closeBriefcase);
     this.load.audio('trumpet', trumpet);
     this.load.audio('nightAmbience', nightAmbience);
+    this.load.audio('coin1', coin1);
+    this.load.audio('coin2', coin2);
+    this.load.audio('coin3', coin3);
+    this.load.audio('coin4', coin4);
+    this.load.audio('coin5', coin5);
+    this.load.audio('coin6', coin6);
+    this.load.audio('coin7', coin7);
+    this.load.audio('coin8', coin8);
+    this.load.audio('coin9', coin9);
+    this.load.audio('coin10', coin10);
+    this.load.audio('coin11', coin11);
+    this.load.audio('coin12', coin12);
+    this.load.audio('coin13', coin13);
+    this.load.audio('moneyBag', moneyBag);
 
     this.load.start();
 
