@@ -77,6 +77,9 @@ export default class plinkoScene extends Phaser.Scene {
         const spacingY = 45;
         const startY = 110; 
 
+        let leftEdgePoints = [];
+        let rightEdgePoints = [];
+
         //genera la estructura piramida l 
         for (let r = 0; r < rows; r++) {
             const cols = r + 2;
@@ -86,6 +89,7 @@ export default class plinkoScene extends Phaser.Scene {
             for (let c = 0; c < cols; c++) {
                 const x = startX + c * spacingX;
                 const y = startY + r * spacingY;
+
                 const peg = this.pegs.create(x, y, null).setVisible(false); 
                 peg.body.setCircle(5);
                 peg.body.updateFromGameObject();
@@ -94,23 +98,37 @@ export default class plinkoScene extends Phaser.Scene {
                 graphics.fillStyle(this.colors.peg, 1);
                 graphics.fillCircle(x, y, 5);
                 graphics.setDepth(1);
-                peg.setData('graphics', graphics); 
+                peg.setData('graphics', graphics);
+
+                if (c === 0) leftEdgePoints.push({ x, y });
+                if (c === cols - 1) rightEdgePoints.push({ x, y });
             }
         }
+
+        const wallGraphic = this.add.graphics();
+        wallGraphic.lineStyle(6, 0x000000, 1);
+        wallGraphic.setDepth(1);
+
+        this.createDiagonalWall(leftEdgePoints, -spacingX / 2, wallGraphic);
+        this.createDiagonalWall(rightEdgePoints, spacingX / 2, wallGraphic);
 
         //anade paredes invisibles laterales para que la bola no salga
         const leftWall = this.add.rectangle(this.boardStartX - 10, height / 2, 20, height, 0xffffff, 0); 
         const rightWall = this.add.rectangle(this.boardEndX + 10, height / 2, 20, height, 0xffffff, 0); 
         this.walls.add(leftWall);
         this.walls.add(rightWall);
+        this.spawnArea = this.boardStartX + (this.boardWidth / 2);
+        const topLeftopWall = this.add.rectangle(this.spawnArea - 30, 60, 8, 100, 0xff0000, 0); 
+        const topRightWall = this.add.rectangle(this.spawnArea + 30, 60, 8, 100, 0xff0000, 0); 
+        this.walls.add(topLeftopWall);
+        this.walls.add(topRightWall);
 
         const bucketValues = [100, 50, 10, 5, 1, 5, 10, 50, 100];
         const bucketWidth = this.boardWidth / bucketValues.length;
         bucketValues.forEach((val, i) => {
             const x = this.boardStartX + i * bucketWidth + bucketWidth / 2;
             const y = startY + (rows * spacingY) + 40; 
-            const b = this.buckets.create(x, y, 'bagPlinko').setScale(0.9).setData('value', val).setDepth(2);
-            
+            this.buckets.create(x, y, 'bagPlinko').setScale(0.9).setData('value', val).setDepth(2);
             const label = this.add.text(x, y + 30, `x${val}`, {
                 fontSize: '16px',
                 fontFamily: 'Arial',
@@ -119,6 +137,34 @@ export default class plinkoScene extends Phaser.Scene {
             }).setOrigin(0.5).setDepth(4);
             this.bucketLabels.push(label);
         });
+    }
+
+    createDiagonalWall(points, offset, graphics) {
+        const wallColor = 0x000000;
+        graphics.lineStyle(8, wallColor, 0);
+        graphics.beginPath();
+
+        points.forEach((p, i) => {
+            const wallX = p.x + offset;
+            const wallY = p.y;
+            if (i === 0) graphics.moveTo(wallX, wallY - 100);
+            graphics.lineTo(wallX, wallY);
+        });
+        graphics.strokePath();
+
+        for (let i = 0; i < points.length - 1; i++) {
+            const p1 = points[i];
+            const p2 = points[i+1];
+            
+            for (let j = 0; j <= 10; j++) {
+                const t = j / 10;
+                const x = Phaser.Math.Linear(p1.x + offset, p2.x + offset, t);
+                const y = Phaser.Math.Linear(p1.y, p2.y, t);
+                const block = this.walls.create(x, y, null).setOrigin(0.5).setVisible(false);
+                block.body.setSize(10, 10); 
+                block.body.updateFromGameObject();
+            }
+        }
     }
 
     clearScene() {
@@ -139,7 +185,7 @@ export default class plinkoScene extends Phaser.Scene {
         this.ballsUsed++;
         this.ballsText.setText(`BOLAS: ${this.ballsUsed}`);
         const spawnX = this.boardStartX + (this.boardWidth / 2); 
-        const ball = this.add.image(spawnX, 40, 'coinPlinko').setScale(0.36);
+        const ball = this.add.image(spawnX, 50, 'coinPlinko').setScale(0.4);
         this.physics.add.existing(ball);
         this.ballsGroup.add(ball);
         ball.body.setCircle((ball.width * ball.scaleX) / 2).setBounce(0.7).setCollideWorldBounds(true);
@@ -150,7 +196,7 @@ export default class plinkoScene extends Phaser.Scene {
             const audioManager = this.registry.get('audioManager');
             const currentTime = this.time.now;
             if (!ballHit.lastSoundTime || currentTime - ballHit.lastSoundTime > 100) {
-                audioManager.play(Phaser.Utils.Array.GetRandom(['ball1', 'ball2', 'ball3']));
+                audioManager.play(Phaser.Utils.Array.GetRandom(['coin1', 'coin2', 'coin3', 'coin4', 'coin5', 'coin6', 'coin7', 'coin8', 'coin9', 'coin10', 'coin11', 'coin12', 'coin13']));
                 ballHit.lastSoundTime = currentTime;
             }
             if (Math.abs(ballHit.body.velocity.x) < 20) {
