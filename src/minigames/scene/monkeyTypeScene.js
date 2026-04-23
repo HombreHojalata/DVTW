@@ -7,19 +7,18 @@ export default class MonkeyTypeScene extends Phaser.Scene {
     }
 
     init(data) {
-        this.returnScene = 'gameScene';
+        this.returnScene = data?.returnScene || 'gameScene';
         this.gameManager = data?.gameManager || null;
         this.duration = TYPING_CONFIG?.DURATION || 30;
+
         this.wordPool = TYPING_CONFIG?.WORDS || [
-            'duck', 'vote', 'power', 'city', 'energy', 'money', 'market',
-            'speech', 'press', 'public', 'policy', 'mayor', 'district',
-            'debate', 'media', 'scandal', 'campaign', 'office', 'budget'
+            'pato', 'votos', 'poder', 'ciudad', 'energía', 'dinero', 'mercado',
+            'expresión', 'prensa', 'público', 'política', 'alcalde', 'distrito',
+            'debate', 'media', 'escándalo', 'campaña', 'oficina', 'presupuesto'
         ];
     }
 
     create() {
-
-
         this.input.keyboard.addCapture([
             'SPACE',
             'UP',
@@ -27,7 +26,8 @@ export default class MonkeyTypeScene extends Phaser.Scene {
             'LEFT',
             'RIGHT',
             'BACKSPACE',
-            'ESC'
+            'ESC',
+            'ENTER'
         ]);
 
         const { width, height } = this.scale;
@@ -36,10 +36,17 @@ export default class MonkeyTypeScene extends Phaser.Scene {
         this.gameEnded = false;
         this.timeLeft = this.duration;
         this.typedChars = [];
-        this.totalWords = 80;
+        this.totalWords = 50;
         this.testString = this.generateTestString(this.totalWords);
 
-        this.add.rectangle(0, 0, width, height, 0x111111, 0.96).setOrigin(0);
+        this.baseX = 100;
+        this.baseY = 250;
+        this.wrapWidth = width - 200;
+
+        this.charObjects = [];
+        this.charPositions = [];
+
+        this.add.rectangle(0, 0, width, height, 0x111111, 0.97).setOrigin(0);
 
         this.titleText = this.add.text(width / 2, 55, 'MONKEYTYPE MODE', {
             fontFamily: 'Arial',
@@ -61,34 +68,11 @@ export default class MonkeyTypeScene extends Phaser.Scene {
             color: '#e6e6e6'
         }).setOrigin(1, 0.5);
 
-        this.instructionText = this.add.text(width / 2, 170, 'Start typing to begin the 30-second test', {
+        this.instructionText = this.add.text(width / 2, 170, 'Start typing to begin the test', {
             fontFamily: 'Arial',
             fontSize: '20px',
             color: '#8f8f8f'
         }).setOrigin(0.5);
-
-        this.textStyle = {
-            fontFamily: 'Courier New, monospace',
-            fontSize: '30px',
-            wordWrap: { width: width - 200, useAdvancedWrap: true },
-            lineSpacing: 10
-        };
-
-        this.futureText = this.add.text(100, 250, this.testString, {
-            ...this.textStyle,
-            color: '#666666'
-        }).setOrigin(0, 0);
-
-        this.typedText = this.add.text(100, 250, '', {
-            ...this.textStyle,
-            color: '#f5f5f5'
-        }).setOrigin(0, 0);
-
-        this.caretText = this.add.text(100, 250, '', {
-            ...this.textStyle,
-            color: '#ffd166',
-            backgroundColor: '#2a2a2a'
-        }).setOrigin(0, 0);
 
         this.bottomHint = this.add.text(width / 2, height - 50, 'ESC to exit · Backspace enabled', {
             fontFamily: 'Arial',
@@ -96,11 +80,36 @@ export default class MonkeyTypeScene extends Phaser.Scene {
             color: '#777777'
         }).setOrigin(0.5);
 
+        this.charStyle = {
+            fontFamily: 'monospace',
+            fontSize: '26px',
+            color: '#666666'
+        };
+
+        this.measureText = this.add.text(-9999, -9999, 'M', this.charStyle);
+        this.charWidth = this.measureText.width;
+        this.lineHeight = this.measureText.height + 10;
+        this.measureText.destroy();
+
+        this.buildCharLayout();
+
+        this.caret = this.add.rectangle(this.baseX, this.baseY, 3, this.lineHeight - 6, 0xffd166)
+            .setOrigin(0, 0);
+
+        this.caretTween = this.tweens.add({
+            targets: this.caret,
+            alpha: 0.15,
+            duration: 500,
+            yoyo: true,
+            repeat: -1
+        });
+
         this.input.keyboard.on('keydown', this.handleKeyDown, this);
+
         this.renderText();
     }
 
-    generateTestString(wordCount = 60) {
+    generateTestString(wordCount = 50) {
         const words = [];
         for (let i = 0; i < wordCount; i++) {
             words.push(Phaser.Utils.Array.GetRandom(this.wordPool));
@@ -108,9 +117,47 @@ export default class MonkeyTypeScene extends Phaser.Scene {
         return words.join(' ');
     }
 
+    buildCharLayout() {
+        const maxCols = Math.max(1, Math.floor(this.wrapWidth / this.charWidth));
+
+        let col = 0;
+        let row = 0;
+
+        for (let i = 0; i < this.testString.length; i++) {
+            const ch = this.testString[i];
+
+            if (ch === '\n') {
+                col = 0;
+                row++;
+                continue;
+            }
+
+            const x = this.baseX + col * this.charWidth;
+            const y = this.baseY + row * this.lineHeight;
+
+            const textObj = this.add.text(x, y, ch, this.charStyle).setOrigin(0, 0);
+
+            this.charObjects.push(textObj);
+            this.charPositions.push({ x, y });
+
+            col++;
+
+            if (col >= maxCols || ch === ' ') {
+                if (col >= maxCols) {
+                    col = 0;
+                    row++;
+                }
+            }
+        }
+    }
+
     handleKeyDown(event) {
+        if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Backspace') {
+            event.preventDefault();
+        }
+
         if (this.gameEnded) {
-            if (event.key === 'Escape') {
+            if (event.key === 'Escape' || event.key === 'Enter') {
                 this.finishAndReturn();
             }
             return;
@@ -140,6 +187,10 @@ export default class MonkeyTypeScene extends Phaser.Scene {
 
         this.typedChars.push(event.key);
         this.renderText();
+
+        if (this.typedChars.length >= this.testString.length) {
+            this.endGame();
+        }
     }
 
     isAcceptedInput(event) {
@@ -205,33 +256,45 @@ export default class MonkeyTypeScene extends Phaser.Scene {
     }
 
     renderText() {
-        const typedString = this.typedChars.join('');
         const currentIndex = this.typedChars.length;
-        const currentChar = this.testString[currentIndex] || '';
 
-        this.typedText.setText(typedString);
-        this.caretText.setText(currentChar);
+        for (let i = 0; i < this.charObjects.length; i++) {
+            const obj = this.charObjects[i];
+            const expected = this.testString[i];
+            const typed = this.typedChars[i];
 
-        const baseX = 100;
-        const baseY = 250;
+            if (i < currentIndex) {
+                if (typed === expected) {
+                    obj.setColor('#f5f5f5');
+                    obj.setBackgroundColor(null);
+                    obj.setAlpha(1);
+                } else {
+                    obj.setColor('#ff6b6b');
+                    obj.setBackgroundColor('#3a1f1f');
+                    obj.setAlpha(1);
+                }
+            } else if (i === currentIndex) {
+                obj.setColor('#ffd166');
+                obj.setBackgroundColor('#2a2a2a');
+                obj.setAlpha(1);
+            } else {
+                obj.setColor('#666666');
+                obj.setBackgroundColor(null);
+                obj.setAlpha(1);
+            }
+        }
 
-        const typedWidth = this.typedText.width || 0;
-        const lines = this.typedText.getWrappedText(typedString);
-
-        if (!lines || lines.length <= 1) {
-            this.caretText.setPosition(baseX + typedWidth, baseY);
+        if (currentIndex < this.charPositions.length) {
+            const pos = this.charPositions[currentIndex];
+            this.caret.setPosition(pos.x - 2, pos.y + 2);
+            this.caret.setVisible(true);
+        } else if (this.charPositions.length > 0) {
+            const lastIndex = this.charPositions.length - 1;
+            const lastPos = this.charPositions[lastIndex];
+            this.caret.setPosition(lastPos.x + this.charWidth, lastPos.y + 2);
+            this.caret.setVisible(true);
         } else {
-            const lastLine = lines[lines.length - 1] || '';
-            const lineHeight = this.typedText.height / lines.length;
-
-            const measure = this.add.text(-9999, -9999, lastLine, this.textStyle);
-            const lastLineWidth = measure.width;
-            measure.destroy();
-
-            this.caretText.setPosition(
-                baseX + lastLineWidth,
-                baseY + lineHeight * (lines.length - 1)
-            );
+            this.caret.setVisible(false);
         }
 
         this.updateLiveStats();
@@ -244,6 +307,10 @@ export default class MonkeyTypeScene extends Phaser.Scene {
 
         if (this.timeEvent) {
             this.timeEvent.remove(false);
+        }
+
+        if (this.caretTween) {
+            this.caretTween.stop();
         }
 
         this.input.keyboard.off('keydown', this.handleKeyDown, this);
@@ -277,48 +344,52 @@ export default class MonkeyTypeScene extends Phaser.Scene {
     }
 
     showResults(stats, result) {
-        const { width, height } = this.scale;
+    const { width, height } = this.scale;
 
-        this.resultPayload = result;
+    this.resultPayload = result;
 
-        this.resultBg = this.add.rectangle(width / 2, height / 2, 520, 320, 0x000000, 0.88)
-            .setStrokeStyle(2, 0xf0f0f0);
+    const panelWidth = 560;
+    const panelHeight = 380;
+    const panelX = width / 2;
+    const panelY = height / 2;
 
-        this.resultTitle = this.add.text(width / 2, height / 2 - 110, 'RESULTS', {
-            fontFamily: 'Arial',
-            fontSize: '34px',
-            color: '#ffffff',
-            fontStyle: 'bold'
-        }).setOrigin(0.5);
+    this.resultBg = this.add.rectangle(panelX, panelY, panelWidth, panelHeight, 0x000000, 0.92)
+        .setStrokeStyle(2, 0xf0f0f0);
 
-        this.resultText = this.add.text(
-            width / 2,
-            height / 2 - 10,
-            [
-                `WPM: ${stats.wpm}`,
-                `Accuracy: ${stats.accuracy}%`,
-                `Correct chars: ${stats.correctChars}`,
-                `Mistakes: ${stats.incorrectChars}`,
-                `Words completed: ${stats.completedWords}`,
-                `Reward: +${result.money} money`
-            ],
-            {
-                fontFamily: 'Arial',
-                fontSize: '24px',
-                color: '#f2f2f2',
-                align: 'center',
-                lineSpacing: 10
-            }
-        ).setOrigin(0.5);
+    const topY = panelY - panelHeight / 2 + 35;
 
-        this.resultHint = this.add.text(width / 2, height / 2 + 120, 'Press ENTER or ESC to return', {
-            fontFamily: 'Arial',
-            fontSize: '20px',
-            color: '#ffd166'
-        }).setOrigin(0.5);
+    this.resultTitle = this.add.text(panelX, topY, 'RESULTS', {
+        fontFamily: 'Arial',
+        fontSize: '32px',
+        color: '#ffffff',
+        fontStyle: 'bold'
+    }).setOrigin(0.5, 0);
 
-        this.input.keyboard.on('keydown', this.handleResultKeyDown, this);
-    }
+    const resultLines = [
+        `WPM: ${stats.wpm}`,
+        `Accuracy: ${stats.accuracy}%`,
+        `Correct chars: ${stats.correctChars}`,
+        `Mistakes: ${stats.incorrectChars}`,
+        `Words completed: ${stats.completedWords}`,
+        `Reward: +${result.money} money`
+    ];
+
+    this.resultText = this.add.text(panelX, topY + 70, resultLines.join('\n'), {
+        fontFamily: 'Arial',
+        fontSize: '22px',
+        color: '#f2f2f2',
+        align: 'center',
+        lineSpacing: 12
+    }).setOrigin(0.5, 0);
+
+    this.resultHint = this.add.text(panelX, panelY + panelHeight / 2 - 55, 'Press ENTER or ESC to return', {
+        fontFamily: 'Arial',
+        fontSize: '20px',
+        color: '#ffd166'
+    }).setOrigin(0.5, 0.5);
+
+    this.input.keyboard.on('keydown', this.handleResultKeyDown, this);
+}
 
     handleResultKeyDown(event) {
         if (event.key === 'Enter' || event.key === 'Escape') {

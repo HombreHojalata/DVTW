@@ -4,18 +4,21 @@ export const MINI_GAMES = {
 
 
 export const WORDLE_WORDS = [
-    'DUCKS',
-    'VOTES',
-    'MAYOR',
-    'MEDIA',
-    'MONEY',
-    'POWER',
-    'TRIAL',
-    'CROOK',
-    'CHAOS',
-    'LAUGH',
-    'QUACK',
-    'PRESS'
+    'VOTOS',
+    'PODER',
+    'LEYES',
+    'CARGO',
+    'FALSO',
+    'PACTO',
+    'GENTE',
+    'TRATO',
+    'DEUDA',
+    'CRISIS',
+    'RUMOR',
+    'ORDEN',
+    'BOTOX',
+    'MOTOS',
+    'DROGA'
 ];
 
 export const WORD_SEARCH_WORDS = [
@@ -29,11 +32,11 @@ export const TYPING_CONFIG = {
     TOTAL_WORDS: 80,     // cuántas palabras generar en pantalla
 
     WORDS: [
-        'duck', 'vote', 'power', 'city', 'energy', 'money', 'market',
-        'speech', 'press', 'public', 'policy', 'mayor', 'district',
-        'debate', 'media', 'scandal', 'campaign', 'office', 'budget',
-        'leader', 'crowd', 'promise', 'tax', 'speech', 'control',
-        'agenda', 'minister', 'nation', 'crisis', 'reform'
+        'pato', 'voto', 'poder', 'ciudad', 'energia', 'dinero', 'mercado',
+        'discurso', 'prensa', 'publico', 'politica', 'alcalde', 'distrito',
+        'debate', 'medios', 'escandalo', 'campaña', 'oficina', 'presupuesto',
+        'lider', 'multitud', 'promesa', 'impuesto', 'control',
+        'agenda', 'ministro', 'nacion', 'crisis', 'reforma'
     ],
 
     REWARDS: {
