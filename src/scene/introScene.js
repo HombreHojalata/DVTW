@@ -173,5 +173,8 @@ export default class IntroScene extends Phaser.Scene {
         createMenuButton(120, 270, 'MONKEYTYPE',() => {
             this.scene.start('monkeyTypeGame');
         });
+        createMenuButton(120, 330, 'WORD SEARCH', () => {
+            this.scene.start('wordSearchMiniGame');
+        });
     }   
 }

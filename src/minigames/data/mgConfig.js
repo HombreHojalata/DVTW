@@ -21,6 +21,11 @@ export const WORDLE_WORDS = [
     'DROGA'
 ];
 
+export const WORD_SEARCH_WORDS = [
+    ['DUCKS', 'PRESS', 'VOTES', 'QUACK', 'MAYOR', 'LAUGH'],
+    ['MEDIA', 'CHAOS', 'MONEY', 'CROOK', 'POWER', 'TRIAL']
+];
+
 
 export const TYPING_CONFIG = {
     DURATION: 30,        // duración del test en segundos
