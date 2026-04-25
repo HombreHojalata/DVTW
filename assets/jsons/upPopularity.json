@@ -373,5 +373,505 @@
         "popularity": 12
       }
     ]
+  },
+  {
+    "name": "TikToker de Estado",
+    "description": "Tu equipo de comunicación dice que los jóvenes te ven como 'un señor que grita'. Sugieren que grabes un baile viral con el último éxito de reggaetón en el despacho presidencial. Es ridículo, pero los 'likes' mandan.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Hacer el baile con coreografía profesional y filtros de perrito.",
+        "energy": -14,
+        "money": -15000,
+        "corruption": 0,
+        "popularity": 18
+      },
+      {
+        "probability": 100,
+        "description": "Grabar un video 'reaccionando' a memes sobre ti.",
+        "energy": -8,
+        "money": -5000,
+        "corruption": 0,
+        "popularity": 8
+      }
+    ]
+  },
+  {
+    "name": "Día Nacional de la Siesta",
+    "description": "Para subir la moral (y que la gente deje de protestar un rato), propones declarar el viernes como festivo nacional dedicado al descanso. La patronal se tira de los pelos, pero el pueblo te adora.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Decretar el festivo con cierre total de oficinas.",
+        "energy": -10,
+        "money": -200000,
+        "corruption": 0,
+        "popularity": 25
+      },
+      {
+        "probability": 100,
+        "description": "Reducir la jornada laboral solo ese día por la tarde.",
+        "energy": -6,
+        "money": -80000,
+        "corruption": 0,
+        "popularity": 12
+      }
+    ]
+  },
+  {
+    "name": "Pelea con un 'Hater' Famoso",
+    "description": "Un actor de Hollywood ha criticado tu gestión en una entrevista. Tu asesor sugiere entrar al trapo en redes sociales para demostrar que eres un 'líder fuerte' que no se deja amedrentar por las élites.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Responder con un hilo de tweets incendiario y nacionalista.",
+        "energy": -12,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 15
+      },
+      {
+        "probability": 100,
+        "description": "Retarle a un debate público (que nunca ocurrirá).",
+        "energy": -8,
+        "money": -2000,
+        "corruption": 0,
+        "popularity": 7
+      }
+    ]
+  },
+  {
+    "name": "Bono-Consuelo para Gamers",
+    "description": "Se acerca el lanzamiento de un videojuego muy esperado y el servidor nacional de internet va fatal. Para evitar una revuelta juvenil, podrías regalar 'skins' exclusivas o meses de suscripción gratis.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Repartir códigos de descarga gratuitos financiados por el estado.",
+        "energy": -10,
+        "money": -120000,
+        "corruption": 0,
+        "popularity": 20
+      },
+      {
+        "probability": 100,
+        "description": "Inaugurar un torneo nacional con tu nombre en el trofeo.",
+        "energy": -15,
+        "money": -40000,
+        "corruption": 0,
+        "popularity": 10
+      }
+    ]
+  },
+  {
+    "name": "El 'Enemigo Exterior' Inventado",
+    "description": "La popularidad cae. Necesitas una distracción. ¿Qué tal si acusas a un país vecino de querer robarnos la receta del plato nacional? Un poco de patriotismo culinario siempre une a la gente.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Dar un discurso épico defendiendo 'nuestras tradiciones'.",
+        "energy": -16,
+        "money": -10000,
+        "corruption": 5,
+        "popularity": 22
+      },
+      {
+        "probability": 100,
+        "description": "Prohibir la importación de productos de ese país una semana.",
+        "energy": -12,
+        "money": -50000,
+        "corruption": 2,
+        "popularity": 14
+      }
+    ]
+  },
+  {
+    "name": "Aparición en un Reality Show",
+    "description": "Te han invitado a ser juez invitado en 'La Cocina de los Famosos'. Tienes que probar una tortilla quemada y decir que está deliciosa para ganarte el voto de las amas de casa y los fans del programa.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Participar, cocinar algo típico y mancharte la camisa a propósito.",
+        "energy": -18,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 17
+      },
+      {
+        "probability": 100,
+        "description": "Enviar un video grabado desde tu cocina 'real'.",
+        "energy": -6,
+        "money": -2000,
+        "corruption": 0,
+        "popularity": 6
+      }
+    ]
+  },
+  {
+    "name": "Cajitas de Comida con tu Cara",
+    "description": "El plan 'Hambre Cero' consiste en repartir cestas de alimentos básicos. El publicista insiste en que tu cara (con una sonrisa radiante) aparezca impresa en cada brick de leche y lata de atún.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Llenar los barrios pobres de cajas con tu logo.",
+        "energy": -12,
+        "money": -150000,
+        "corruption": 4,
+        "popularity": 25
+      },
+      {
+        "probability": 100,
+        "description": "Repartir vales de comida digitales (menos visuales).",
+        "energy": -8,
+        "money": -100000,
+        "corruption": 0,
+        "popularity": 10
+      }
+    ]
+  },
+  {
+    "name": "Mascota Presidencial Adorable",
+    "description": "Las encuestas dicen que te falta 'humanidad'. Adoptar un perrito de la protectora y subir fotos jugando con él en el jardín es el manual básico de política. Pero tiene que ser uno muy feo para dar más pena.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Adoptar al perro más viejo y hacerlo 'Ministro de Caricias'.",
+        "energy": -10,
+        "money": -5000,
+        "corruption": 0,
+        "popularity": 15
+      },
+      {
+        "probability": 100,
+        "description": "Hacer un reportaje fotográfico en un refugio sin adoptar nada.",
+        "energy": -12,
+        "money": -1000,
+        "corruption": 1,
+        "popularity": 7
+      }
+    ]
+  },
+  {
+    "name": "Inauguración de un Banco de Parque",
+    "description": "No hay presupuesto para el hospital, pero han sobrado 500€ para un banco de madera en el centro. Si cortas la cinta con 20 fotógrafos y una banda de música, parecerá que has reconstruido la ciudad entera.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Dar un discurso de 2 horas sobre 'la importancia del descanso'.",
+        "energy": -15,
+        "money": -3000,
+        "corruption": 0,
+        "popularity": 9
+      },
+      {
+        "probability": 100,
+        "description": "Sentarte a charlar con una anciana en el banco (previamente contratada).",
+        "energy": -10,
+        "money": -1000,
+        "corruption": 2,
+        "popularity": 12
+      }
+    ]
+  },
+  {
+    "name": "Bajar el precio de la Cerveza",
+    "description": "Hay una crisis económica galopante. ¿La solución? Un decreto que subvencione el precio de la caña en los bares. La gente olvidará la inflación mientras suene el 'chinchín'.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Subvencionar el barril a todos los hosteleros.",
+        "energy": -14,
+        "money": -250000,
+        "corruption": 0,
+        "popularity": 30
+      },
+      {
+        "probability": 100,
+        "description": "Crear el 'Carnet del Cervecero' con descuentos.",
+        "energy": -10,
+        "money": -90000,
+        "corruption": 0,
+        "popularity": 15
+      }
+    ]
+  },
+  {
+    "name": "Conspiración para Ganar",
+    "description": "Un grupo de teóricos de la conspiración cree que hay alienígenas en la sede del gobierno. Si les das la razón a medias y prometes 'desclasificar documentos', te ganarás a un sector muy ruidoso en internet.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Publicar 200 folios en blanco tachados con rotulador negro.",
+        "energy": -12,
+        "money": -5000,
+        "corruption": 4,
+        "popularity": 18
+      },
+      {
+        "probability": 100,
+        "description": "Hacer un guiño misterioso en una entrevista sobre el tema.",
+        "energy": -6,
+        "money": 0,
+        "corruption": 1,
+        "popularity": 7
+      }
+    ]
+  },
+  {
+    "name": "Fútbol Gratis para Todos",
+    "description": "El partido de la final de copa es de pago. Podrías usar fondos públicos para comprar los derechos y emitirlo en abierto. Es tirar el dinero, pero nadie se acordará de las listas de espera del hospital.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Pagar la millonada para que se vea en la TV pública.",
+        "energy": -8,
+        "money": -300000,
+        "corruption": 0,
+        "popularity": 35
+      },
+      {
+        "probability": 100,
+        "description": "Instalar pantallas gigantes en todas las plazas.",
+        "energy": -16,
+        "money": -110000,
+        "corruption": 0,
+        "popularity": 22
+      }
+    ]
+  },
+  {
+    "name": "El Retorno de los Exiliados",
+    "description": "Un científico famoso que se fue del país porque no había ayudas quiere volver. Si lo recibes en el aeropuerto con alfombra roja, quedarás como el salvador del talento nacional.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Darle las llaves de la ciudad y un laboratorio (vacío).",
+        "energy": -14,
+        "money": -80000,
+        "corruption": 0,
+        "popularity": 16
+      },
+      {
+        "probability": 100,
+        "description": "Hacerte un selfie con él y tuitear 'Talento de vuelta'.",
+        "energy": -6,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 9
+      }
+    ]
+  },
+  {
+    "name": "Milagro en la Carretera",
+    "description": "Se ha hecho viral un video tuyo ayudando a cambiar la rueda a un coche parado (obviamente era el coche de un escolta). La gente cree que eres un héroe humilde.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Pagar para promocionar el video en todas las redes.",
+        "energy": -8,
+        "money": -15000,
+        "corruption": 3,
+        "popularity": 20
+      },
+      {
+        "probability": 100,
+        "description": "Declarar que 'cualquier ciudadano haría lo mismo'.",
+        "energy": -6,
+        "money": 0,
+        "corruption": 1,
+        "popularity": 11
+      }
+    ]
+  },
+  {
+    "name": "Cambio de Nombre del Aeropuerto",
+    "description": "Propón cambiar el nombre del aeropuerto por el de un cantante pop recientemente fallecido. Los fans se volverán locos de alegría y te verán como un líder 'conectado' con la cultura.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Hacer una ceremonia con concierto tributo incluido.",
+        "energy": -18,
+        "money": -120000,
+        "corruption": 0,
+        "popularity": 19
+      },
+      {
+        "probability": 100,
+        "description": "Simplemente cambiar los carteles y la web.",
+        "energy": -8,
+        "money": -40000,
+        "corruption": 0,
+        "popularity": 10
+      }
+    ]
+  },
+  {
+    "name": "Lanzamiento de 'La Nueva Dieta Nacional'",
+    "description": "Dices que los ciudadanos están gordos. Propones una dieta basada en el producto que más exporta tu país. Quedas como alguien preocupado por la salud y de paso ayudas a los empresarios amigos.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Repartir folletos diciendo que el tocino es súper-alimento.",
+        "energy": -10,
+        "money": -30000,
+        "corruption": 5,
+        "popularity": 13
+      },
+      {
+        "probability": 100,
+        "description": "Sustituir el menú de los colegios por esta dieta.",
+        "energy": -14,
+        "money": -60000,
+        "corruption": 3,
+        "popularity": -5
+      }
+    ]
+  },
+  {
+    "name": "Guerra contra las Palomas",
+    "description": "La gente odia que las palomas ensucien sus coches. Si declaras 'la guerra total' a estas aves y contratas a halcones patrulleros, serás el salvador de la limpieza urbana.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Crear un 'Escuadrón de Halcones' con uniformes épicos.",
+        "energy": -15,
+        "money": -95000,
+        "corruption": 0,
+        "popularity": 17
+      },
+      {
+        "probability": 100,
+        "description": "Instalar pinchos láser (que no hacen nada) en las estatuas.",
+        "energy": -10,
+        "money": -35000,
+        "corruption": 0,
+        "popularity": 8
+      }
+    ]
+  },
+  {
+    "name": "El Discurso de Navidad más Largo",
+    "description": "Quieres batir el récord mundial de discurso presidencial. Si aguantas 7 horas hablando de esperanza y unidad, entrarás en el libro Guinness y la gente te respetará por tu aguante físico.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Hablar hasta desmayarte frente a las cámaras.",
+        "energy": -25,
+        "money": -2000,
+        "corruption": 0,
+        "popularity": 21
+      },
+      {
+        "probability": 100,
+        "description": "Usar un holograma mientras tú te vas a cenar.",
+        "energy": -6,
+        "money": -45000,
+        "corruption": 2,
+        "popularity": 10
+      }
+    ]
+  },
+  {
+    "name": "Perdonar Multas de Tráfico",
+    "description": "Se acerca tu cumpleaños. ¿Qué mejor regalo que una 'Amnistía de Multas por Exceso de Velocidad'? Los conductores te querrán llevar en hombros.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Borrar todas las multas menores del último año.",
+        "energy": -12,
+        "money": -400000,
+        "corruption": 6,
+        "popularity": 40
+      },
+      {
+        "probability": 100,
+        "description": "Hacer un sorteo para perdonar 100 multas al azar.",
+        "energy": -8,
+        "money": -10000,
+        "corruption": 1,
+        "popularity": 14
+      }
+    ]
+  },
+  {
+    "name": "Beso a un Bebé (Nivel Experto)",
+    "description": "El clásico. Vas a un barrio obrero a besar bebés. Pero para destacar, el bebé tiene que ser especialmente ruidoso y tú tienes que mantener la sonrisa mientras te vomita encima.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Abrazar a toda la familia y quedarte a comer su guiso.",
+        "energy": -20,
+        "money": -500,
+        "corruption": 0,
+        "popularity": 18
+      },
+      {
+        "probability": 100,
+        "description": "Repartir peluches con tu cara a todos los niños del barrio.",
+        "energy": -12,
+        "money": -25000,
+        "corruption": 0,
+        "popularity": 13
+      }
+    ]
   }
 ]
