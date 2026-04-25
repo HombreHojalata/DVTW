@@ -33,7 +33,12 @@ export default class GameScene extends Phaser.Scene {
         if (!this.registry.has('missionList')) this.registry.set('missionList',[]);
         this.missionList = this.registry.get('missionList');
         // TUTORIAL
-        this.isTutorial = data.tutorial || false;
+        if (!this.registry.has('isTutorial')) this.registry.set('isTutorial', data.tutorial || false);
+        this.isTutorial = this.registry.get('isTutorial');
+        // ENERGY CYCLE
+        if(!this.registry.has('triggeredThresholds')) this.registry.set('triggeredThresholds', new Set());
+        this.triggeredThresholds = this.registry.get('triggeredThresholds');
+
     }
 
     create() {
@@ -89,7 +94,7 @@ export default class GameScene extends Phaser.Scene {
             this.batteryUIBlocker = this.add.zone(this.batteryUI.innerX, this.batteryUI.innerY, this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
             this.endDayBtnUI = new endDayBtnUI(this);
             this.endDayBtnUI.btn.setDepth(22);
-            this.footerUI = new footerUI(this);
+            this.footerUI = new footerUI(this, this.isTutorial);
             this.dayUI = new dayUI(this);
             this.middayOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x00c3ff).setOrigin(0).setAlpha(0).setDepth(1);
             this.afternoonOverlay = this.add.rectangle(0, 0, this.width, this.height, 0xff9500).setOrigin(0).setAlpha(0).setDepth(1);
@@ -106,7 +111,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         this.events.on('resume', () => {
-                this.footerUI.refreshMoney();
+            this.footerUI.refreshMoney();
         });
     }
 
@@ -129,9 +134,9 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        //this.totalDayDurationMs = 0.5 * 60 * 1000;
+        this.totalDayDurationMs = 0.5 * 60 * 1000;
         //this.energyTickMs = 250;
-        this.totalDayDurationMs = (0.5 * 60 * 5000) / 2; // TODO: Cambiar tras testeo
+      //  this.totalDayDurationMs = (0.5 * 60 * 5000) / 2; // TODO: Cambiar tras testeo
         this.energyTickMs = 1000 / 100;
         const maxEnergy = this.player.getMaxEnergy() || 100;
         this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
@@ -140,29 +145,30 @@ export default class GameScene extends Phaser.Scene {
             this.energyTimerEvent.remove(false);
         }
 
-        //this.triggeredThresholds = new Set();
         this.energyTimerEvent = this.time.addEvent({
             delay: this.energyTickMs,
             loop: true,
             callback: () => {
                 this.player.updateEnergy(-this.energyDrainPerTick);
                 this.refreshHUD();
-                // LOGICA DE CICLO DE ENERGIA
-                /* TODAVIA NO FUNCIONA BIEN
+                // LOGICA DE CICLO DE ENERGIA - DINERO
                 const thresholds = [
                     maxEnergy * 0.75,
                     maxEnergy * 0.5,
                     maxEnergy * 0.25
                 ];
-
                 thresholds.forEach(threshold => {
                     if (this.player.getEnergy() <= threshold &&!this.triggeredThresholds.has(threshold)) {
                         this.triggeredThresholds.add(threshold);
-                        console.log('ALCANZADO ' + this.player.getEnergy() + '-> RECIBIENDO DINERO: ' + this.map.getMoneyGenerated());
+                        console.log(`Se ha llegado al ${threshold}% de energía.`);
+                        console.log('Dinero del Jugador:', this.player.getMoney());
+                        console.log('Dinero generado del Map:', this.map.getMoneyGenerated());
                         this.player.updateMoney(this.map.getMoneyGenerated());
                         this.footerUI.refreshMoney();
+                        this.time.delayedCall(400, () => {
+                        });
                     }
-                });*/
+                });
                 // LOGICA DE CICLO DE DIA
                 if (this.player.getEnergy() > 50) {
 
@@ -251,9 +257,9 @@ export default class GameScene extends Phaser.Scene {
 
     refreshHUD() {
         //this.topUI.refresh();
+        //this.footerUI.refreshMoney();
         this.batteryUI.refresh();
         this.endDayBtnUI.refresh();
-        this.footerUI.refreshMoney();
         this.topUI.refresh();
     }
 
@@ -309,6 +315,7 @@ export default class GameScene extends Phaser.Scene {
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
+        if (this.triggeredThresholds) this.triggeredThresholds.clear();
  
         this.cameras.main.fadeOut(1000, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {

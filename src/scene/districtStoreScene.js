@@ -23,7 +23,7 @@ export default class DistrictScene extends Phaser.Scene {
         const offsetY = (baseHeight - newHeight) / 2 - 50;
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
-        this.footerUI = new footerUI(this, this.player).create();
+        this.footerUI = new footerUI(this, this.tutorial);
         this.footerUI.updateDistrictFooter(this.district);
         //BUTTONS
         this.iconList = this.spawnIconList(newWidth,offsetX,newHeight);
@@ -47,8 +47,8 @@ export default class DistrictScene extends Phaser.Scene {
         this.newX = newWidth * 0.4 + 5;
         this.newY = newHeight * 0.67;
         const container = this.add.container(this.newX, this.newY); 
-        const background = this.add.image(0, 0, 'districtStoreBg').setOrigin(0);
-        container.add(background);
+        this.storeContainer = this.add.image(0, 0, 'districtStoreBg').setOrigin(0);
+        container.add(this.storeContainer);
         //NORMAL BUILDING
         for (let i = 0; i < this.builtList.length; i++) {
             const building = this.builtList[i];
@@ -140,8 +140,10 @@ export default class DistrictScene extends Phaser.Scene {
                     this.district.addBuilding(building);
                     this.player.updateMoney(-building.getBuildingCost());
                     this.footerUI.refreshMoney();
-                    this.containerStore.destroy();
-                    this.passToTutorialScene();
+                    this.time.delayedCall(400, () => {
+                        this.containerStore.destroy();
+                        this.passToTutorialScene();
+                    });
                 }
                 return
             }
@@ -150,10 +152,12 @@ export default class DistrictScene extends Phaser.Scene {
                     this.district.addBuilding(building);
                     this.player.updateMoney(-building.getBuildingCost());
                     this.footerUI.refreshMoney();
-                    tooltip.setVisible(false);
-                    this.scene.stop();
-                    this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
-                } 
+                    this.time.delayedCall(400, () => {
+                        tooltip.setVisible(false);
+                        this.scene.stop();
+                        this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
+                    });
+                } else this.cameras.main.shake(200, 0.005);
             }
         }); 
     }
@@ -180,16 +184,18 @@ export default class DistrictScene extends Phaser.Scene {
         img.on('pointermove', () => {});
         img.on('pointerout', () => {tooltip.setVisible(false);});
         img.on('pointerup', () => {
-            if(this.district.canBuildMore()){
+            if(this.district.canBuildMore() && !this.district.isSpecialBuildingBuilt()){
                 if(this.player.getMoney() >= building.getBuildingCost()){
                     this.district.addSpecialBuilding(building);
                     this.player.updateMoney(-building.getBuildingCost());
-                    this.footerUI.refreshMoney();
                     tooltip.setVisible(false);
-                    this.scene.stop();
-                    this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
+                    this.footerUI.refreshMoney();
+                    this.time.delayedCall(400, () => {
+                        this.scene.stop();
+                        this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
+                    });
                 } 
-            }
+            }else this.cameras.main.shake(200, 0.005);
         });
     }
     // TUTORIAL

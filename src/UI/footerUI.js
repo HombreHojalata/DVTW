@@ -32,18 +32,21 @@ export default class footerUI {
             fontStyle: 'bold',
             color: '#2e6417'
         }).setOrigin(1, 0.5).setDepth(11);
+        return this.moneyText;
     }
-    refreshMoney() {
+    refreshMoney(callback = null) {
         if (this.moneyText) {
-            console.log('Dinero en refreshMoney:', this.player.getMoney());
             this.moneyText.setText(this.player.getMoney());
-
             this.scene.tweens.add({
                 targets: this.moneyText,
-                scale: 1.2, // un poco más grande, 1.6 sería demasiado agresivo para UI
-                duration: 200,
+                scaleX: 1.2,
+                scaleY: 1.2,
+                duration: 300,
                 yoyo: true,
-                ease: 'Power2'
+                ease: 'Power2',
+                onComplete: () => {
+                   callback && callback();
+                }
             });
         } 
     }

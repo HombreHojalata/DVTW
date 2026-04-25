@@ -8,6 +8,7 @@ export default class MissionScene extends Phaser.Scene {
 
     init(data) {
         this.mission = data.mission;
+        this.tutorial = this.registry.get('isTutorial');
     }
        
     create() {
@@ -31,7 +32,7 @@ export default class MissionScene extends Phaser.Scene {
         //DISTRICT INFO
         this.district = this.map.getDistrictByName(this.mission.getDistrict());
         this.districtInfo = this.spawnDetailText(newWidth,newHeight,offsetX,offsetY);
-        this.footerUI = new footerUI(this, this.player).create();
+        this.footerUI = new footerUI(this, this.tutorial);
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
         //MISSION INFO

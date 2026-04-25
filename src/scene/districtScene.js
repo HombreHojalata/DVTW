@@ -30,7 +30,7 @@ export default class DistrictScene extends Phaser.Scene {
 
         //PLAYER INFO
         this.player = this.registry.get('gameManager').getPlayer();
-        this.footerUI = new footerUI(this, this.player).create();
+        this.footerUI = new footerUI(this, this.tutorial);
         this.footerUI.updateDistrictFooter(this.district);
         //TEMPLATE
         this.template = this.spawnTemplate(newWidth, newHeight, offsetX, offsetY);
@@ -39,7 +39,8 @@ export default class DistrictScene extends Phaser.Scene {
         this.districtDescriptionText = this.spawnDescText(newWidth, offsetX, offsetY);
         this.districtScene = this.spawnScene(newWidth, newHeight, offsetX, offsetY);
         this.districtDetail = this.spawnDetailText(newWidth, newHeight, offsetX, offsetY);
-        this.refreshDetailsText();
+        if(this.boughtBuilding)
+            this.refreshDetailsText();
         //BUTTONS
         this.closeButton = this.spawnCloseButton(newWidth, offsetX, offsetY);
         this.storePositionX = this.spawnBuiltList(newWidth, offsetX, newHeight);
@@ -60,6 +61,9 @@ export default class DistrictScene extends Phaser.Scene {
             else if (this.order === 2) this.finishTutorial(width, height);
             else if (this.order === 3) this.explainParameters(width, height);
         }
+
+        //this.event.on('resume', () => { ...
+
     }
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
         return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);
@@ -230,6 +234,7 @@ export default class DistrictScene extends Phaser.Scene {
             img.on('pointerout', () => {tooltip.setVisible(false); tooltip2.setVisible(false);});
             img.on('pointerup', () => {
                 tooltip2.setVisible(false);
+                this.blocker = this.add.zone(0, 0, this.baseWidth, this.baseHeight).setOrigin(0).setInteractive().setDepth(20);
                 const container = this.add.container(this.baseWidth/2, this.baseHeight/2).setDepth(21);   
                 const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
                 bg.setStrokeStyle(2, 0xffffff, 0.5);
@@ -245,9 +250,11 @@ export default class DistrictScene extends Phaser.Scene {
 
                 this.createTutorialButton(container, -180, 120, 'Rechazar', () => {
                     container.destroy();
+                    this.blocker.destroy();
                 });
                 this.createTutorialButton(container, 180, 120, 'Aceptar', () => {
                     container.destroy();
+                    this.blocker.destroy();
                     this.player.updateMoney(-10000);
                     this.district.removeBuilding(building);
                     this.refreshDetailsText(() => {
@@ -303,6 +310,7 @@ export default class DistrictScene extends Phaser.Scene {
                 tooltip.setVisible(true);
             }else{
                 tooltip.setVisible(false);
+                this.closeButton.setVisible(false);
                 this.scene.pause('districtScene');
                 this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial, order: this.order});
             }
