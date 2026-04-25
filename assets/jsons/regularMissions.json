@@ -398,5 +398,505 @@
         "popularity": -1
       }
     ]
+  },
+  {
+    "name": "Crisis de la Máquina de Café",
+    "description": "La máquina de café de la planta 3 se ha estropeado. Los funcionarios están al borde de una huelga de 'brazos caídos' y la tensión se palpa en el ambiente. Hay que decidir si arreglarla o sustituirla por una de cápsulas ecológicas carísimas.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Llamar al técnico de confianza y pagar el arreglo básico.",
+        "energy": -4,
+        "money": -500,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Poner máquinas de cápsulas con el logo del ayuntamiento.",
+        "energy": -6,
+        "money": -3000,
+        "corruption": 1,
+        "popularity": 3
+      }
+    ]
+  },
+  {
+    "name": "El Tweet de Buenos Días",
+    "description": "Tu Community Manager te pregunta qué tono quieres usar hoy en las redes sociales. Un mensaje institucional aburrido o algo más 'cercano' que incluya un chiste malo sobre el tráfico.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Publicar: 'Trabajando por y para usted'.",
+        "energy": -2,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Subir una foto desayunando un churro con un juego de palabras.",
+        "energy": -5,
+        "money": -100,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "Elegir la Tipografía del Informe",
+    "description": "El informe trimestral está listo, pero el departamento de diseño está dividido entre la seriedad de la 'Times New Roman' o la modernidad de una fuente sin remates que cuesta 500€ la licencia.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Usar la fuente gratuita de toda la vida.",
+        "energy": -3,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      },
+      {
+        "probability": 100,
+        "description": "Comprar la fuente moderna para parecer 'vanguardista'.",
+        "energy": -2,
+        "money": -500,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Discusión por un Seto Vecinal",
+    "description": "Dos vecinos ilustres llevan meses peleándose porque un seto municipal invade 5 centímetros de una propiedad privada. Quieren que tú, personalmente, vayas a medirlo con una regla.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Enviar a un técnico de parques y jardines a resolverlo.",
+        "energy": -4,
+        "money": -200,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Ir tú mismo para salir en la gaceta local como 'el mediador'.",
+        "energy": -10,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "Renovar las Sillas del Pleno",
+    "description": "Las sillas de la oposición chirrían mucho cuando se mueven y dicen que es una táctica de sabotaje acústico. Puedes ignorarlos o gastar un poco en aceite y tapicería.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Engrasar solo las sillas de tu partido.",
+        "energy": -5,
+        "money": -300,
+        "corruption": 1,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Cambiar todas las sillas por unas ergonómicas básicas.",
+        "energy": -4,
+        "money": -4000,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Inauguración de una Papelera",
+    "description": "Se ha instalado una papelera 'inteligente' (que básicamente tiene un pedal) en el parque. El concejal de medio ambiente quiere que cortes una cinta simbólica para Instagram.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Hacer la foto rápida y volver al despacho.",
+        "energy": -6,
+        "money": -100,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Ignorar la invitación y enviar un PDF de prensa.",
+        "energy": -2,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "El Color de las Bridas del Orgullo",
+    "description": "Se acerca la semana del Orgullo y hay que comprar bridas para colgar las banderas. Alguien sugiere que las bridas también sean de colores, aunque cuestan el triple que las negras.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Comprar bridas negras estándar (más baratas).",
+        "energy": -3,
+        "money": -50,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Comprar el pack multicolor por coherencia visual.",
+        "energy": -3,
+        "money": -150,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "La Alfombra del Despacho",
+    "description": "La alfombra actual tiene una mancha de café que parece el mapa de un país enemigo. Puedes mandarla a la tintorería o comprar una de 'piel sintética ecológica' que está de moda.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Limpiarla con un poco de agua y jabón.",
+        "energy": -5,
+        "money": -20,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Comprar una nueva de diseño escandinavo.",
+        "energy": -4,
+        "money": -1200,
+        "corruption": 1,
+        "popularity": 0
+      }
+    ]
+  },
+  {
+    "name": "Cena con el Gremio de Panaderos",
+    "description": "Es la cena anual y esperan que des un discurso sobre 'la importancia de la harina en la identidad nacional'. Es aburrido, pero el pan gratis durante un año es tentador.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Asistir y comer demasiado hojaldre.",
+        "energy": -12,
+        "money": -100,
+        "corruption": 0,
+        "popularity": 4
+      },
+      {
+        "probability": 100,
+        "description": "Enviar una carta de agradecimiento y quedarte en casa.",
+        "energy": -2,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Goteras en el Archivo",
+    "description": "Hay una pequeña gotera justo encima de los expedientes de multas de tráfico de hace 20 años. Si no haces nada, el papel se deshará y las multas 'desaparecerán' por arte de magia.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Poner un cubo y llamar al albañil.",
+        "energy": -5,
+        "money": -400,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Dejar que la naturaleza siga su curso (adiós multas).",
+        "energy": -2,
+        "money": -2000,
+        "corruption": 3,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "La Foto con el Árbol de Navidad",
+    "description": "Es hora de encender las luces. Puedes hacerlo con un botón gigante y fuegos artificiales, o simplemente darle al interruptor de la pared mientras nadie mira.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Montar un evento con coros infantiles y chocolate.",
+        "energy": -10,
+        "money": -2500,
+        "corruption": 0,
+        "popularity": 5
+      },
+      {
+        "probability": 100,
+        "description": "Encendido discreto sin prensa.",
+        "energy": -3,
+        "money": -200,
+        "corruption": 0,
+        "popularity": 0
+      }
+    ]
+  },
+  {
+    "name": "Cambiar el Fondo de Pantalla",
+    "description": "El informático te pregunta si quieres que todos los ordenadores públicos tengan de fondo una foto de la ciudad o una foto tuya con gesto inspirador.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Poner el escudo de la ciudad (clásico).",
+        "energy": -2,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Poner tu cara para que no te olviden.",
+        "energy": -2,
+        "money": -100,
+        "corruption": 1,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "El Aire Acondicionado en Verano",
+    "description": "En la oficina hace un calor insoportable. El protocolo de ahorro energético dice 27 grados, pero tus asesores están sudando sobre los documentos importantes.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cumplir la ley y comprar abanicos de cartón.",
+        "energy": -8,
+        "money": -200,
+        "corruption": 0,
+        "popularity": -1
+      },
+      {
+        "probability": 100,
+        "description": "Bajarlo a 21 grados y cerrar las cortinas.",
+        "energy": -3,
+        "money": -600,
+        "corruption": 1,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Una Paloma en el Despacho",
+    "description": "Ha entrado una paloma por la ventana y no sabe salir. Está tirando los bolígrafos y mirando con desconfianza el busto de mármol. Necesitas ayuda profesional o un escobazo con estilo.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Llamar a los servicios de protección animal.",
+        "energy": -4,
+        "money": -150,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Intentar sacarla tú mismo con una toalla.",
+        "energy": -12,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "Elegir la Corbata para la Gala",
+    "description": "Hoy es la entrega de premios de la asociación de vecinos. ¿Corbata roja de 'líder apasionado', azul de 'gestor fiable' o ir sin ella para parecer 'alguien del pueblo'?",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Ir elegante con corbata clásica.",
+        "energy": -4,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Ir sin corbata y con los puños remangados.",
+        "energy": -3,
+        "money": 0,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "El Cumpleaños del Conserje",
+    "description": "El conserje cumple 40 años de servicio. El protocolo sugiere regalarle una placa de metal, pero él prefiere una tarjeta regalo del supermercado para comprar gambas.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Darle la placa institucional (más barata).",
+        "energy": -4,
+        "money": -80,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Comprarle la tarjeta regalo con fondos de 'representación'.",
+        "energy": -2,
+        "money": -200,
+        "corruption": 2,
+        "popularity": 3
+      }
+    ]
+  },
+  {
+    "name": "La Suscripción al Periódico",
+    "description": "Hay que renovar la suscripción de prensa del despacho. El periódico local te critica siempre, pero el nacional no sabe ni que existes. ¿A cuál apoyamos con dinero público?",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Suscribirse al local para intentar que hablen mejor de ti.",
+        "energy": -3,
+        "money": -300,
+        "corruption": 1,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "No suscribirse a nada y leer las noticias en Twitter.",
+        "energy": -6,
+        "money": 0,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "El Bote de las Galletas",
+    "description": "Para las reuniones largas necesitas galletas. Hay un pack de marca blanca y un pack de 'pastas artesanales de la monjas' que valen el doble pero quedan mejor ante las visitas.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Comprar las galletas de marca blanca.",
+        "energy": -4,
+        "money": -15,
+        "corruption": 0,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Pagar por las pastas de las monjas.",
+        "energy": -2,
+        "money": -60,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "Renovar el Escudo de la Fachada",
+    "description": "El escudo de piedra de la entrada está lleno de musgo. Un restaurador pide 1.500€, pero un becario dice que con una manguera a presión y un poco de lejía lo deja niquelado.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Contratar al profesional (calidad asegurada).",
+        "energy": -4,
+        "money": -1500,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Dejar que el becario use la manguera (riesgo de rotura).",
+        "energy": -8,
+        "money": -50,
+        "corruption": 0,
+        "popularity": 0
+      }
+    ]
+  },
+  {
+    "name": "WiFi para Visitantes",
+    "description": "Los ciudadanos que vienen a esperar el autobús se quejan de que no hay internet. Puedes poner un WiFi abierto que vaya lentísimo o uno con registro que robe sus correos para spam.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Poner WiFi abierto y limitado a 10 minutos.",
+        "energy": -5,
+        "money": -200,
+        "corruption": 0,
+        "popularity": 1
+      },
+      {
+        "probability": 100,
+        "description": "Poner WiFi con registro obligatorio de datos personales.",
+        "energy": -4,
+        "money": 500,
+        "corruption": 2,
+        "popularity": -2
+      }
+    ]
   }
 ]
