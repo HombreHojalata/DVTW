@@ -1,18 +1,626 @@
 [
   {
-    "name": "whacAMole",
-    "description": "Tienes una rueda de prensa, los periodistas te hacen preguntas sobre corrupción, ¡Cuidado con las camaras!",
+    "name": "La Filtración del 'Primo' Enfadado",
+    "description": "El primo al que le diste la concesión de las autopistas se siente infravalorado y ha enviado fotos de vuestros chats de WhatsApp a la prensa. En los mensajes sales diciendo que el pueblo es 'un rebaño de ovejas pagadoras'.",
     "event": true,
-    "corrupt": false,
-    "minigame": true,
+    "corrupt": true,
+    "minigame": false,
     "options": [
       {
         "probability": 100,
-        "description": "Acceso completo a información",
+        "description": "Pagarle un 'plus de silencio' millonario de los fondos reservados.",
+        "energy": -15,
+        "money": -350000,
+        "corruption": 8,
+        "popularity": -5
+      },
+      {
+        "probability": 100,
+        "description": "Negarlo todo y decir que es un montaje de IA. Nadie te cree.",
         "energy": -10,
-        "money": -300000,
+        "money": -50000,
+        "corruption": 2,
+        "popularity": -35
+      }
+    ]
+  },
+  {
+    "name": "Operación 'Queso Suizo'",
+    "description": "Una filtración internacional de un banco en un paraíso fiscal ha revelado una cuenta a nombre de tu perro con 5 millones de euros. Los inspectores de hacienda están en tu puerta con muchas preguntas.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Donar la mitad de la cuenta a una ONG (de tu mujer) para 'limpiar' imagen.",
+        "energy": -20,
+        "money": -450000,
+        "corruption": 10,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Decir que es un error administrativo. La multa es histórica.",
+        "energy": -12,
+        "money": -600000,
         "corruption": 0,
+        "popularity": -40
+      }
+    ]
+  },
+  {
+    "name": "El 'Jacuzzi' Presidencial",
+    "description": "Un becario ha subido un TikTok por error mostrando el jacuzzi de oro que instalaste en el búnker de emergencia con dinero destinado a la educación infantil. El video tiene 20 millones de visitas.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Convertirlo en un 'centro de hidroterapia para ancianos' (solo para la foto).",
+        "energy": -18,
+        "money": -150000,
+        "corruption": 4,
+        "popularity": -10
+      },
+      {
+        "probability": 100,
+        "description": "Despedir al becario y cerrar el búnker. La indignación es total.",
+        "energy": -10,
+        "money": 0,
+        "corruption": 2,
+        "popularity": -45
+      }
+    ]
+  },
+  {
+    "name": "Chantaje del Ex-Tesorero",
+    "description": "Tu antiguo tesorero, que está en la cárcel por 'tus' errores, amenaza con publicar sus diarios donde detalla cada sobre con dinero que recibiste. Pide el indulto o un maletín.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Enviar el maletín mediante un intermediario de dudosa reputación.",
+        "energy": -15,
+        "money": -500000,
+        "corruption": 12,
         "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Indultarlo por 'motivos de salud'. La calle arde en protestas.",
+        "energy": -25,
+        "money": 0,
+        "corruption": 15,
+        "popularity": -50
+      }
+    ]
+  },
+  {
+    "name": "El Puente de Mantequilla",
+    "description": "El puente que construyó tu constructora favorita con materiales de baja calidad (para repartiros el ahorro) se ha agrietado a la semana de inaugurarlo. No pueden pasar ni las bicicletas.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Repararlo con urgencia con fondos de emergencia nacionales.",
+        "energy": -22,
+        "money": -400000,
+        "corruption": 5,
+        "popularity": -20
+      },
+      {
+        "probability": 100,
+        "description": "Culpar al cambio climático y dejarlo cerrado.",
+        "energy": -10,
+        "money": -50000,
+        "corruption": 2,
+        "popularity": -38
+      }
+    ]
+  },
+  {
+    "name": "Cena de Gala con el Narco",
+    "description": "Han salido a la luz fotos tuyas en un yate brindando con un conocido contrabandista. Tú dices que pensabas que era un empresario de la pesca, pero sale sujetando un fardo sospechoso.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Contratar a la mejor agencia de PR para 'limpiar' tu nombre.",
+        "energy": -18,
+        "money": -250000,
+        "corruption": 3,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Decir que estabas en una 'misión encubierta' secreta.",
+        "energy": -12,
+        "money": -20000,
+        "corruption": 6,
+        "popularity": -30
+      }
+    ]
+  },
+  {
+    "name": "El Disco Duro 'Martilleado'",
+    "description": "La policía judicial entra en la sede de tu partido. Tu secretaria, presa del pánico, ha intentado destruir los discos duros con un martillo de carpintero, pero han recuperado los datos.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Sobornar al perito informático para que los archivos no abran.",
+        "energy": -20,
+        "money": -300000,
+        "corruption": 15,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Culpar a la secretaria de actuar por su cuenta. Popularidad hundida.",
+        "energy": -15,
+        "money": -100000,
+        "corruption": 5,
+        "popularity": -45
+      }
+    ]
+  },
+  {
+    "name": "Regalo de Bodas Injustificable",
+    "description": "Se ha descubierto que el Rolex de diamantes que regalaste a tu hija por su boda fue pagado por una empresa eléctrica que al día siguiente subió la tarifa un 20%.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Devolver el reloj y pedir perdón llorando en TV.",
+        "energy": -25,
+        "money": -80000,
+        "corruption": 0,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Decir que era una 'donación desinteresada' por la amistad.",
+        "energy": -12,
+        "money": 0,
+        "corruption": 8,
+        "popularity": -40
+      }
+    ]
+  },
+  {
+    "name": "La Fundación 'Niños sin Wi-Fi'",
+    "description": "La auditoría revela que tu fundación benéfica solo ha gastado un 2% en tablets y un 98% en 'gastos de representación', que incluyen tus cenas en París.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Inyectar dinero propio para cuadrar las cuentas rápido.",
+        "energy": -10,
+        "money": -380000,
+        "corruption": 5,
+        "popularity": -5
+      },
+      {
+        "probability": 100,
+        "description": "Liquidar la fundación y huir de las preguntas.",
+        "energy": -15,
+        "money": -100000,
+        "corruption": 7,
+        "popularity": -35
+      }
+    ]
+  },
+  {
+    "name": "Espionaje a la Oposición con Fondos Públicos",
+    "description": "Te han pillado usando el servicio de inteligencia para saber con quién sale la líder de la oposición. El jefe de espías amenaza con contarlo todo si no le doblas el sueldo.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Aceptar el chantaje y subirle el sueldo (y el tuyo de paso).",
+        "energy": -14,
+        "money": -200000,
+        "corruption": 12,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Destituirlo. Él filtra las grabaciones a la prensa nacional.",
+        "energy": -18,
+        "money": 0,
+        "corruption": 5,
+        "popularity": -48
+      }
+    ]
+  },
+  {
+    "name": "El Master Comprado",
+    "description": "Un periodista de investigación ha descubierto que tu Master en 'Ética Política' se obtuvo sin ir a clase y con firmas falsificadas. La universidad está bajo sospecha.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Renunciar al título y decir que fuiste 'engañado'.",
+        "energy": -15,
+        "money": -50000,
+        "corruption": 2,
+        "popularity": -25
+      },
+      {
+        "probability": 100,
+        "description": "Presionar al rector para que mienta. Cuesta caro.",
+        "energy": -20,
+        "money": -220000,
+        "corruption": 10,
+        "popularity": -10
+      }
+    ]
+  },
+  {
+    "name": "La Mansión en la Costa Protegida",
+    "description": "Has construido una villa de lujo en una zona protegida donde no se puede poner ni una sombrilla. Un grupo de ecologistas ha encadenado el acceso y la prensa está volando drones sobre tu piscina.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Demolerla tú mismo para parecer 'ejemplar'.",
+        "energy": -25,
+        "money": -600000,
+        "corruption": 0,
+        "popularity": 15
+      },
+      {
+        "probability": 100,
+        "description": "Cambiar la ley de costas de urgencia. Escándalo nacional.",
+        "energy": -20,
+        "money": -150000,
+        "corruption": 18,
+        "popularity": -45
+      }
+    ]
+  },
+  {
+    "name": "Sobornos en las Olimpiadas Escolares",
+    "description": "Se ha descubierto que pagaste a los jueces para que tu hijo ganara la medalla de oro en los 100 metros lisos del colegio. El video del niño tropezando y los jueces ignorándolo es viral.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Hacer una donación masiva al deporte escolar como disculpa.",
+        "energy": -12,
+        "money": -180000,
+        "corruption": 2,
+        "popularity": -12
+      },
+      {
+        "probability": 100,
+        "description": "Decir que es una persecución política contra un menor.",
+        "energy": -10,
+        "money": 0,
+        "corruption": 5,
+        "popularity": -30
+      }
+    ]
+  },
+  {
+    "name": "El Software Espía en tu Propio Teléfono",
+    "description": "Has instalado un software para espiar a tus ministros, pero el hacker que contrataste ha decidido vender tus propios datos al mercado negro. Tus fotos en pijama son tendencia.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Comprar tus propios datos al hacker antes de que salgan.",
+        "energy": -15,
+        "money": -420000,
+        "corruption": 8,
+        "popularity": 0
+      },
+      {
+        "probability": 100,
+        "description": "Denunciar y dejar que salga todo. Vergüenza pública.",
+        "energy": -20,
+        "money": -50000,
+        "corruption": 2,
+        "popularity": -40
+      }
+    ]
+  },
+  {
+    "name": "Las Vacunas VIP",
+    "description": "Durante una crisis sanitaria, tú y toda tu familia os saltasteis la cola para vacunaros en el sótano del palacio con música de jazz y caviar. Un enfermero indignado lo ha contado.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Dimisión del Ministro de Sanidad (como cabeza de turco).",
+        "energy": -18,
+        "money": -120000,
+        "corruption": 6,
+        "popularity": -25
+      },
+      {
+        "probability": 100,
+        "description": "Decir que era un 'ensayo clínico' necesario para el Estado.",
+        "energy": -14,
+        "money": -50000,
+        "corruption": 4,
+        "popularity": -45
+      }
+    ]
+  },
+  {
+    "name": "Empresa Pantalla de Mascarillas",
+    "description": "Compraste mascarillas a una empresa que solo vendía churros y que pertenece a tu cuñado. El 40% del dinero 'desapareció' en comisiones. Ahora las mascarillas pican.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Devolver las comisiones discretamente al tesoro público.",
+        "energy": -15,
+        "money": -300000,
+        "corruption": 5,
+        "popularity": -10
+      },
+      {
+        "probability": 100,
+        "description": "Defender la calidad del producto. Indignación médica.",
+        "energy": -20,
+        "money": -50000,
+        "corruption": 8,
+        "popularity": -42
+      }
+    ]
+  },
+  {
+    "name": "Caza Mayor Ilegal",
+    "description": "Te han pillado cazando una especie protegida en un parque nacional mientras decías que estabas en una 'reunión de alto nivel'. Hay una foto tuya con un elefante (o un lince) muy triste.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Pagar una multa astronómica y financiar un santuario.",
+        "energy": -16,
+        "money": -280000,
+        "corruption": 1,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Decir que el animal te atacó primero (era un lince).",
+        "energy": -10,
+        "money": -10000,
+        "corruption": 4,
+        "popularity": -38
+      }
+    ]
+  },
+  {
+    "name": "El Avión Privado para Ir al Cine",
+    "description": "Usaste el Falcon oficial para ir a un estreno de cine en otra ciudad porque 'el tráfico era horrible'. El coste del combustible equivale al sueldo anual de 10 profesores.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Reembolsar el coste del vuelo de tu bolsillo.",
+        "energy": -8,
+        "money": -90000,
+        "corruption": 0,
+        "popularity": -10
+      },
+      {
+        "probability": 100,
+        "description": "Justificarlo como 'agenda cultural de seguridad nacional'.",
+        "energy": -14,
+        "money": 0,
+        "corruption": 5,
+        "popularity": -32
+      }
+    ]
+  },
+  {
+    "name": "Lavado de Dinero en la Tintorería",
+    "description": "Usabas una cadena de tintorerías para blanquear los sobornos de las constructoras. La policía ha encontrado billetes de 500€ dentro de los edredones de los clientes.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cerrar el negocio y quemar los libros contables.",
+        "energy": -22,
+        "money": -500000,
+        "corruption": 15,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Decir que era una 'promoción de fidelidad' del banco.",
+        "energy": -15,
+        "money": -100000,
+        "corruption": 10,
+        "popularity": -45
+      }
+    ]
+  },
+  {
+    "name": "Sobornos en el Examen de Conducir",
+    "description": "Se ha filtrado que tus tres hijos aprobaron el examen de conducir sin bajarse del coche. El examinador ahora vive en una casa que tú le regalaste.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Obligar a tus hijos a repetir el examen (y que suspendan).",
+        "energy": -15,
+        "money": -20000,
+        "corruption": 2,
+        "popularity": -10
+      },
+      {
+        "probability": 100,
+        "description": "Comprar el silencio de la autoescuela entera.",
+        "energy": -12,
+        "money": -150000,
+        "corruption": 12,
+        "popularity": -5
+      }
+    ]
+  },
+  {
+    "name": "El Disco de Oro del Ministro",
+    "description": "Has financiado con dinero público la carrera musical de tu sobrino, que no sabe cantar. El disco ha costado 1 millón de euros y ha vendido 4 copias (todas compradas por ti).",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Regalar el disco con el periódico oficial para agotar stock.",
+        "energy": -14,
+        "money": -250000,
+        "corruption": 9,
+        "popularity": -18
+      },
+      {
+        "probability": 100,
+        "description": "Retirar el disco y decir que era una 'obra experimental'.",
+        "energy": -10,
+        "money": -500000,
+        "corruption": 5,
+        "popularity": -30
+      }
+    ]
+  },
+  {
+    "name": "Papeles de un País Remoto",
+    "description": "Apareces en una lista de beneficiarios de una mina de diamantes en un país en conflicto. Dices que es un error de nombre, pero el DNI coincide hasta en la foto.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Donar los 'supuestos' diamantes al tesoro nacional.",
+        "energy": -20,
+        "money": -550000,
+        "corruption": 4,
+        "popularity": 10
+      },
+      {
+        "probability": 100,
+        "description": "Decir que es una conspiración de la inteligencia extranjera.",
+        "energy": -15,
+        "money": -40000,
+        "corruption": 12,
+        "popularity": -40
+      }
+    ]
+  },
+  {
+    "name": "El Helipuerto en el Tejado",
+    "description": "Instalaste un helipuerto ilegal en tu ático del centro para no aguantar los semáforos. El ruido despierta a todo el barrio cada mañana a las 7.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Desmantelarlo y pedir perdón a los vecinos.",
+        "energy": -20,
+        "money": -150000,
+        "corruption": 0,
+        "popularity": 20
+      },
+      {
+        "probability": 100,
+        "description": "Declarar el ático 'zona de interés aeronáutico estatal'.",
+        "energy": -14,
+        "money": -80000,
+        "corruption": 15,
+        "popularity": -45
+      }
+    ]
+  },
+  {
+    "name": "Cuentas del Partido en 'B'",
+    "description": "Un ex-empleado ha entregado una caja de zapatos llena de recibos escritos a mano con tus iniciales y cantidades enormes de dinero al lado de la palabra 'CONSEGUIDO'.",
+    "event": true,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Decir que esas no son tus iniciales, sino las de 'Benito'.",
+        "energy": -18,
+        "money": -100000,
+        "corruption": 7,
+        "popularity": -42
+      },
+      {
+        "probability": 100,
+        "description": "Pagar una fianza millonaria para evitar que el juez investigue.",
+        "energy": -25,
+        "money": -700000,
+        "corruption": 12,
+        "popularity": -10
+      }
+    ]
+  },
+  {
+    "name": "El Reloj de la Discordia",
+    "description": "Durante un mitin sobre la austeridad, se te ha caído el reloj de 150.000€ al suelo y un periodista lo ha recogido. El contraste entre tu discurso y tu muñeca es el meme del año.",
+    "event": true,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Subastarlo para caridad y comprar uno de plástico de 10€.",
+        "energy": -15,
+        "money": -150000,
+        "corruption": 0,
+        "popularity": 25
+      },
+      {
+        "probability": 100,
+        "description": "Decir que es una imitación china barata. Nadie te cree.",
+        "energy": -10,
+        "money": -20000,
+        "corruption": 3,
+        "popularity": -35
       }
     ]
   }
