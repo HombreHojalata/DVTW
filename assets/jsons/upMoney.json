@@ -373,5 +373,505 @@
         "popularity": 3
       }
     ]
+  },
+  {
+    "name": "Privatización del aire (bueno, del agua)",
+    "description": "Una multinacional llamada 'H2-Oro' sugiere que la gestión pública del agua es ineficiente. Proponen un contrato de gestión privada que 'optimizará' las tarifas para los ciudadanos mientras llenan las arcas municipales.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Vender el suministro por 25 años y aceptar un 'bonus de firma' bajo cuerda.",
+        "energy": -5,
+        "money": 250000,
+        "corruption": 8,
+        "popularity": -12
+      },
+      {
+        "probability": 100,
+        "description": "Externalizar solo el mantenimiento cobrando un canon elevado a la empresa.",
+        "energy": -10,
+        "money": 95000,
+        "corruption": 0,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Visas de Oro para 'Filántropos'",
+    "description": "Varios oligarcas extranjeros con fortunas de dudosa procedencia buscan la residencia permanente. Solo necesitan comprar un par de pisos de lujo y que tú mires hacia otro lado con sus antecedentes.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Agilizar los trámites VIP a cambio de 'donaciones' al partido.",
+        "energy": -4,
+        "money": 300000,
+        "corruption": 10,
+        "popularity": -5
+      },
+      {
+        "probability": 100,
+        "description": "Cobrar una tasa administrativa abusiva pero legal por inversor extranjero.",
+        "energy": -12,
+        "money": 120000,
+        "corruption": 0,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "La Crypto-Nación",
+    "description": "Unos 'criptobros' con camisas de lino te proponen lanzar la 'PatriaCoin'. Dicen que es el futuro de la economía, aunque parece un esquema piramidal de manual con la bandera del país.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Invertir fondos públicos en el lanzamiento y quedarse con un 'pre-minado' privado.",
+        "energy": -6,
+        "money": 200000,
+        "corruption": 7,
+        "popularity": -4
+      },
+      {
+        "probability": 100,
+        "description": "Limitarse a cobrar licencias de minería eléctrica a precio de oro.",
+        "energy": -10,
+        "money": 85000,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Nombres comerciales para el Metro",
+    "description": "Una cadena de hamburguesas quiere que la estación central pase a llamarse 'Estación Whopper'. Los puristas de la historia están furiosos, pero el departamento de tesorería está salivando.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Vender el nombre de todas las líneas al mejor postor corporativo.",
+        "energy": -4,
+        "money": 180000,
+        "corruption": 0,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Permitir solo publicidad discreta en los andenes a cambio de un canon anual.",
+        "energy": -8,
+        "money": 60000,
+        "corruption": 0,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Gentrificación Express",
+    "description": "Un fondo buitre quiere convertir un barrio obrero en un complejo de apartamentos turísticos 'chic'. Solo necesitan que el ayuntamiento declare la zona de 'interés turístico' para facilitar los desahucios.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Aprobar el plan urbanístico tras recibir un sobre en un restaurante caro.",
+        "energy": -5,
+        "money": 220000,
+        "corruption": 9,
+        "popularity": -20
+      },
+      {
+        "probability": 100,
+        "description": "Permitir la reforma pero imponiendo una tasa de 'compensación vecinal'.",
+        "energy": -14,
+        "money": 110000,
+        "corruption": 0,
+        "popularity": -5
+      }
+    ]
+  },
+  {
+    "name": "Venta de datos ciudadanos",
+    "description": "Una empresa de Big Data está interesada en los hábitos de consumo y movilidad de tus ciudadanos. Dicen que es para 'mejorar el tráfico', pero todos sabemos que es para venderles aspiradoras.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Vender la base de datos completa de forma anónima (o casi).",
+        "energy": -4,
+        "money": 190000,
+        "corruption": 6,
+        "popularity": -8
+      },
+      {
+        "probability": 100,
+        "description": "Vender solo estadísticas macroeconómicas generales de forma legal.",
+        "energy": -8,
+        "money": 50000,
+        "corruption": 0,
+        "popularity": 0
+      }
+    ]
+  },
+  {
+    "name": "Cementerio Nuclear 'Amigable'",
+    "description": "Un país vecino no sabe qué hacer con sus residuos radiactivos. Te ofrecen una cantidad indecente de dinero por guardarlos en una mina abandonada cerca de un pueblo del que nadie se acuerda.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Aceptar el cargamento y decir que son 'materiales de construcción'.",
+        "energy": -7,
+        "money": 400000,
+        "corruption": 10,
+        "popularity": -25
+      },
+      {
+        "probability": 100,
+        "description": "Cobrar por un estudio de viabilidad eterno que nunca concluye nada.",
+        "energy": -12,
+        "money": 150000,
+        "corruption": 2,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Impuesto a los 'Streamers'",
+    "description": "Esos jóvenes que juegan a videojuegos ganan demasiado dinero. Podrías crear una tasa especial por 'uso intensivo de la red pública' para que contribuyan al bienestar del país (y a tu bolsillo).",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Crujirlos a impuestos hasta que se muden a Andorra.",
+        "energy": -6,
+        "money": 130000,
+        "corruption": 0,
+        "popularity": -6
+      },
+      {
+        "probability": 100,
+        "description": "Crear un carnet de 'creador digital' obligatorio y de pago.",
+        "energy": -10,
+        "money": 70000,
+        "corruption": 0,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Multas por 'Fealdad Urbana'",
+    "description": "La ciudad necesita fondos. Tu asesor propone multar a cualquiera que tenga la fachada desconchada, la ropa tendida en el balcón o plantas 'estéticamente desagradables'.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Enviar a una patrulla de 'estilismo urbano' a multar sin piedad.",
+        "energy": -8,
+        "money": 110000,
+        "corruption": 0,
+        "popularity": -18
+      },
+      {
+        "probability": 100,
+        "description": "Hacer una campaña de pintura obligatoria comprando tú los materiales.",
+        "energy": -12,
+        "money": 50000,
+        "corruption": 2,
+        "popularity": -4
+      }
+    ]
+  },
+  {
+    "name": "Explotación del Parque Nacional",
+    "description": "Bajo las montañas del parque natural hay litio. El problema es que hay que talar medio bosque y desplazar a unas cabras en peligro de extinción. Las empresas tecnológicas pagan bien.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Dar la concesión minera y decir que es para la 'transición ecológica'.",
+        "energy": -6,
+        "money": 280000,
+        "corruption": 7,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Permitir solo 'eco-explotaciones' con un impuesto verde masivo.",
+        "energy": -15,
+        "money": 130000,
+        "corruption": 0,
+        "popularity": -3
+      }
+    ]
+  },
+  {
+    "name": "La Gran Lotería Nacional",
+    "description": "La gente está desesperada por dinero. Es el momento perfecto para lanzar una lotería semanal donde el premio mayor es 'no pagar impuestos un año'. La recaudación será histórica.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Inundar los quioscos con boletos y publicidad agresiva.",
+        "energy": -6,
+        "money": 160000,
+        "corruption": 0,
+        "popularity": -5
+      },
+      {
+        "probability": 100,
+        "description": "Hacer un sorteo benéfico donde te quedas el 40% para gestión.",
+        "energy": -10,
+        "money": 90000,
+        "corruption": 1,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "Venta de títulos nobiliarios",
+    "description": "Hay muchos nuevos ricos que quieren ser 'Duques' o 'Condes'. Como presidente, podrías restaurar una vieja ley que permite vender títulos vacantes a cambio de una aportación al tesoro.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Nombrar 'Marqués' a un constructor a cambio de una mansión.",
+        "energy": -4,
+        "money": 210000,
+        "corruption": 8,
+        "popularity": -10
+      },
+      {
+        "probability": 100,
+        "description": "Vender certificados de 'Ciudadano de Honor' con beneficios fiscales.",
+        "energy": -9,
+        "money": 110000,
+        "corruption": 0,
+        "popularity": -4
+      }
+    ]
+  },
+  {
+    "name": "Peajes en el centro",
+    "description": "Para 'reducir la contaminación', podrías poner cámaras y cobrar 10 euros a cada coche que entre en la ciudad. El aire estará más limpio y tu cuenta bancaria más llena.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Instalar peajes automáticos en todas las entradas mañana mismo.",
+        "energy": -7,
+        "money": 145000,
+        "corruption": 0,
+        "popularity": -22
+      },
+      {
+        "probability": 100,
+        "description": "Cobrar solo a vehículos antiguos y de lujo.",
+        "energy": -11,
+        "money": 75000,
+        "corruption": 0,
+        "popularity": -8
+      }
+    ]
+  },
+  {
+    "name": "Subasta de embajadas",
+    "description": "Tenemos edificios históricos en capitales europeas que no sirven para nada. Unos inversores quieren convertirlos en hoteles boutique. El prestigio diplomático está sobrevalorado.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Malvender los edificios a una inmobiliaria amiga del cuñado.",
+        "energy": -5,
+        "money": 320000,
+        "corruption": 9,
+        "popularity": -12
+      },
+      {
+        "probability": 100,
+        "description": "Alquilar los edificios a largo plazo con pagos por adelantado.",
+        "energy": -12,
+        "money": 140000,
+        "corruption": 0,
+        "popularity": -3
+      }
+    ]
+  },
+  {
+    "name": "Permisos para 'Fracking'",
+    "description": "Una empresa energética ha encontrado gas esquisto bajo el valle principal. Inyectar químicos al suelo suena peligroso, pero los royalties que ofrecen podrían pagar tu próxima campaña.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Firmar los permisos y culpar al gobierno anterior si el agua sale ardiendo.",
+        "energy": -6,
+        "money": 350000,
+        "corruption": 10,
+        "popularity": -30
+      },
+      {
+        "probability": 100,
+        "description": "Autorizar solo una planta experimental con impuestos triplicados.",
+        "energy": -14,
+        "money": 160000,
+        "corruption": 0,
+        "popularity": -10
+      }
+    ]
+  },
+  {
+    "name": "Tasas por Mascotas Exóticas",
+    "description": "Últimamente la gente tiene iguanas y cerdos vietnamitas. Es el momento de crear el 'Registro Nacional de Animales No Convencionales' con una cuota de inscripción obligatoria.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Multar a quien no tenga a su hámster debidamente registrado.",
+        "energy": -5,
+        "money": 65000,
+        "corruption": 0,
+        "popularity": -7
+      },
+      {
+        "probability": 100,
+        "description": "Cobrar un impuesto de lujo solo por animales peligrosos.",
+        "energy": -9,
+        "money": 40000,
+        "corruption": 0,
+        "popularity": -1
+      }
+    ]
+  },
+  {
+    "name": "Venta de armamento obsoleto",
+    "description": "Tenemos tanques de los años 70 cogiendo polvo. Un grupo de 'rebeldes' de un país lejano está interesado. El ministerio de defensa dice que es ilegal, pero tú eres el que manda.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Vender el arsenal mediante un intermediario opaco en las Caimán.",
+        "energy": -8,
+        "money": 290000,
+        "corruption": 11,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Desguazar y vender el metal a precio de mercado internacional.",
+        "energy": -13,
+        "money": 100000,
+        "corruption": 0,
+        "popularity": 1
+      }
+    ]
+  },
+  {
+    "name": "Patrocinio en los uniformes policiales",
+    "description": "Una marca de bebidas energéticas quiere poner su logo en los chalecos antibalas. Los agentes dicen que pierden autoridad, pero el contrato cubriría el déficit del trimestre.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Convertir a la policía en vallas publicitarias andantes.",
+        "energy": -4,
+        "money": 130000,
+        "corruption": 0,
+        "popularity": -20
+      },
+      {
+        "probability": 100,
+        "description": "Permitir solo un logo pequeño en los coches patrulla.",
+        "energy": -8,
+        "money": 55000,
+        "corruption": 0,
+        "popularity": -5
+      }
+    ]
+  },
+  {
+    "name": "Impuesto a la 'Comida Basura'",
+    "description": "Bajo la excusa de la salud pública, puedes poner un impuesto del 50% a todo lo que tenga azúcar o grasa. Los niños llorarán, pero el tesoro nacional reirá.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Subir el IVA de los dónuts al máximo legal.",
+        "energy": -6,
+        "money": 125000,
+        "corruption": 0,
+        "popularity": -14
+      },
+      {
+        "probability": 100,
+        "description": "Obligar a las empresas a pagar un canon por cada gramo de azúcar.",
+        "energy": -12,
+        "money": 90000,
+        "corruption": 1,
+        "popularity": -4
+      }
+    ]
+  },
+  {
+    "name": "Derechos de nombre de puentes",
+    "description": "El puente histórico de la ciudad podría llamarse 'Puente Cripto-Seguros'. Una empresa financiera está dispuesta a pagar una fortuna por el derecho a poner su cartel de neón sobre el río.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Aceptar el contrato y recibir una tarjeta Black como agradecimiento.",
+        "energy": -4,
+        "money": 175000,
+        "corruption": 7,
+        "popularity": -12
+      },
+      {
+        "probability": 100,
+        "description": "Cobrar solo por poner publicidad temporal en las barandillas.",
+        "energy": -10,
+        "money": 65000,
+        "corruption": 0,
+        "popularity": -3
+      }
+    ]
   }
 ]
