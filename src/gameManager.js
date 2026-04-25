@@ -9,7 +9,7 @@ export default class gameManager{
         this.scene = scene;
         this.player = new Player(700000, 100, 100, 0, 0, 'photoNormal');
         this.day = new Day(0);
-        this.missionManager = new MissionManager(scene,this.player);
+        this.missionManager = new MissionManager(this.scene,this.player);
         this.map = new Map('map',null,null);
         this.player.updatePopularity(this.map.getPopularity());
     }
@@ -50,15 +50,15 @@ export default class gameManager{
         scene.registry.set('missionList', missions);
     }
     // ASSETS - BUTTONS
-    spawnAssets(scene,tutorial){ 
-        this.mapImg = this.map.spawnMap(scene);
-        this.districtList = this.map.spawnDistricts(scene,tutorial);
-        this.presidente = this.player.spawnPresident(scene);
+    spawnAssets(tutorial){ 
+        this.mapImg = this.map.spawnMap(this.scene);
+        this.districtList = this.map.spawnDistricts(this.scene,tutorial);
+        this.presidente = this.player.spawnPresident(this.scene);
     }
-    spawnConfigurationButton(scene){
-        this.configButton = scene.add.image(1410, 60,'configurationIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }).setScale(1.2).setDepth(20); 
+    spawnConfigurationButton(){
+        this.configButton = this.scene.add.image(1410, 60,'configurationIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }).setScale(1.2).setDepth(20); 
         this.configButton.on('pointerover', () => {
-            scene.tweens.add({
+            this.scene.tweens.add({
                 targets: this.configButton,
                 scale: 1.5,
                 duration: 80,
@@ -66,7 +66,7 @@ export default class gameManager{
             });
         });
         this.configButton.on('pointerout', () => {
-            scene.tweens.add({
+            this.scene.tweens.add({
                 targets: this.configButton,
                 scale: 1.2,
                 duration: 80,
@@ -74,15 +74,15 @@ export default class gameManager{
             });
         });
         this.configButton.on('pointerup', () => {
-            scene.scene.stop();
-            scene.scene.start('configurationScene', { returnScene: 'gameScene'});
+            this.scene.scene.stop();
+            this.scene.scene.start('configurationScene', { returnScene: 'gameScene'});
         });
         return this.configButton;
     }
-    spawnMissionButton(scene){
-        if(scene.registry.has('missionList')){
-            let list = scene.registry.get('missionList');
-            list.forEach(mission => {mission.createMissionButton(scene)});
+    spawnMissionButton(){
+        if(this.scene.registry.has('missionList')){
+            let list = this.scene.registry.get('missionList');
+            list.forEach(mission => {mission.createMissionButton(this.scene)});
         }
     }
     // UPDATES 

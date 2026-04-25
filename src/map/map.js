@@ -91,7 +91,6 @@ export default class Map {
     }
     getDistrictByName(name) {return this.districtList.find(d => d.getName() === name) || null;}
     // UPDATE DATA
-    updateDistricts() {this.districtList.forEach(d => d.updateDistrict());}
     getTotalPopulation(){
         let totalPopulation = 0;
         totalPopulation += this.getDistrictByName("BORRASCAL").getPopulation();
