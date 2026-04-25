@@ -373,5 +373,505 @@
         "popularity": -12
       }
     ]
+  },
+  {
+    "name": "Privatización de Sombras en Verano",
+    "description": "Un lobby de sombrillas propone que los árboles de los parques sean sustituidos por postes de alquiler de sombra. 'El sol es gratis, pero el frescor es un servicio premium', dicen tus asesores.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Talar los árboles y poner postes de pago por minuto.",
+        "energy": -12,
+        "money": 180000,
+        "corruption": 6,
+        "popularity": -25
+      },
+      {
+        "probability": 100,
+        "description": "Poner un impuesto especial a las terrazas con árboles.",
+        "energy": -8,
+        "money": 75000,
+        "corruption": 2,
+        "popularity": -12
+      }
+    ]
+  },
+  {
+    "name": "Cierre de Urgencias los Fines de Semana",
+    "description": "Las estadísticas dicen que la gente enferma menos los sábados (o eso quieres creer). Cerrar las urgencias ahorrará una fortuna en luz y personal que podrías usar en algo más 'productivo'.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cerrar los centros y poner un cartel de 'Vuelva el lunes'.",
+        "energy": -15,
+        "money": 250000,
+        "corruption": 0,
+        "popularity": -35
+      },
+      {
+        "probability": 100,
+        "description": "Sustituir médicos por una App de autodiagnóstico.",
+        "energy": -10,
+        "money": 120000,
+        "corruption": 1,
+        "popularity": -20
+      }
+    ]
+  },
+  {
+    "name": "Impuesto al Paseo Matutino",
+    "description": "Hay demasiada gente caminando por las aceras, desgastando el pavimento. Propones un 'Pase de Movilidad Peatonal' obligatorio para cualquiera que salga de casa sin perro.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Instalar torniquetes de cobro en las calles principales.",
+        "energy": -14,
+        "money": 140000,
+        "corruption": 0,
+        "popularity": -18
+      },
+      {
+        "probability": 100,
+        "description": "Cobrar una tasa anual por 'uso intensivo de calzado'.",
+        "energy": -8,
+        "money": 60000,
+        "corruption": 0,
+        "popularity": -10
+      }
+    ]
+  },
+  {
+    "name": "Venta del Archivo Histórico a un Coleccionista",
+    "description": "Un jeque árabe quiere comprar los documentos fundacionales del país para su biblioteca privada. Son papeles viejos, y él ofrece oro de verdad.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Vender el lote completo y decir que se han digitalizado.",
+        "energy": -6,
+        "money": 300000,
+        "corruption": 8,
+        "popularity": -22
+      },
+      {
+        "probability": 100,
+        "description": "Subastar los mapas más antiguos individualmente.",
+        "energy": -10,
+        "money": 150000,
+        "corruption": 5,
+        "popularity": -14
+      }
+    ]
+  },
+  {
+    "name": "Prohibición de las Chirigotas y la Sátira",
+    "description": "Se han pasado de la raya con una broma sobre tu peinado (o tu barriga). Decides que 'la libertad de expresión termina donde empieza el respeto institucional'. O sea, tú.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Prohibir cualquier mención humorística al gobierno.",
+        "energy": -18,
+        "money": 0,
+        "corruption": 4,
+        "popularity": -30
+      },
+      {
+        "probability": 100,
+        "description": "Obligar a que los chistes pasen por censura previa.",
+        "energy": -12,
+        "money": -10000,
+        "corruption": 2,
+        "popularity": -15
+      }
+    ]
+  },
+  {
+    "name": "Conversión de Guarderías en Casinos",
+    "description": "Los niños no generan impuestos, pero el blackjack sí. Propones 'reubicar' las guarderías en el sótano y alquilar las plantas superiores a una empresa de apuestas.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Firmar la concesión exprés con la casa de apuestas.",
+        "energy": -10,
+        "money": 280000,
+        "corruption": 7,
+        "popularity": -40
+      },
+      {
+        "probability": 100,
+        "description": "Subir el alquiler a las guarderías hasta que se vayan.",
+        "energy": -14,
+        "money": 95000,
+        "corruption": 3,
+        "popularity": -25
+      }
+    ]
+  },
+  {
+    "name": "Eliminación de Bancos para 'Evitar Vagabundos'",
+    "description": "Bajo la excusa del diseño minimalista, quieres quitar todos los bancos de las plazas. 'El ciudadano de éxito siempre está en movimiento', reza tu nuevo eslogan.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Retirar todos los asientos públicos de la ciudad.",
+        "energy": -12,
+        "money": 45000,
+        "corruption": 0,
+        "popularity": -16
+      },
+      {
+        "probability": 100,
+        "description": "Sustituirlos por asientos inclinados donde no puedes sentarte.",
+        "energy": -15,
+        "money": 20000,
+        "corruption": 1,
+        "popularity": -12
+      }
+    ]
+  },
+  {
+    "name": "Impuesto a los Animales de Compañía",
+    "description": "Tener un perro es un lujo, y como tal, debe tributar. Propones una tasa por cada pata del animal (los ciempiés no cuentan, por ahora).",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cobrar 100€ anuales por mascota registrada.",
+        "energy": -10,
+        "money": 120000,
+        "corruption": 0,
+        "popularity": -28
+      },
+      {
+        "probability": 100,
+        "description": "Crear un cuerpo de inspectores de microchips.",
+        "energy": -14,
+        "money": 40000,
+        "corruption": 1,
+        "popularity": -15
+      }
+    ]
+  },
+  {
+    "name": "Corte de Wi-Fi Gratuito en Plazas",
+    "description": "Dices que es para que los jóvenes 'vuelvan a hablarse cara a cara', pero en realidad es para ahorrarte el mantenimiento de los servidores.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Desconectar todos los routers públicos mañana mismo.",
+        "energy": -5,
+        "money": 35000,
+        "corruption": 0,
+        "popularity": -14
+      },
+      {
+        "probability": 100,
+        "description": "Poner una pantalla de anuncios de 5 minutos antes de conectar.",
+        "energy": -8,
+        "money": 60000,
+        "corruption": 0,
+        "popularity": -10
+      }
+    ]
+  },
+  {
+    "name": "Sustitución de Bomberos por una App de 'Auto-extinción'",
+    "description": "El parque de bomberos gasta mucho en camiones. La nueva App permite que los vecinos se organicen por turnos para tirar cubos de agua si algo arde. ¡Economía colaborativa!",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Despedir a la mitad de la plantilla y lanzar la App.",
+        "energy": -16,
+        "money": 220000,
+        "corruption": 5,
+        "popularity": -45
+      },
+      {
+        "probability": 100,
+        "description": "Vender los camiones viejos y no comprar nuevos.",
+        "energy": -10,
+        "money": 110000,
+        "corruption": 3,
+        "popularity": -20
+      }
+    ]
+  },
+  {
+    "name": "Venta del Nombre de la Calle Mayor",
+    "description": "Un banco internacional ofrece una fortuna por llamar a la calle principal 'Avenida de los Intereses Bajos'. Los vecinos dicen que es su identidad, tú dices que es dinero.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cambiar el nombre y poner logos del banco en las placas.",
+        "energy": -8,
+        "money": 190000,
+        "corruption": 6,
+        "popularity": -24
+      },
+      {
+        "probability": 100,
+        "description": "Alquilar el nombre solo durante los fines de semana.",
+        "energy": -6,
+        "money": 70000,
+        "corruption": 2,
+        "popularity": -12
+      }
+    ]
+  },
+  {
+    "name": "Prohibición de Tender Ropa en los Balcones",
+    "description": "El estudio de turismo dice que los calzoncillos al sol 'afean la ciudad'. Quieres obligar a todos a comprar secadoras eléctricas, que casualmente venden tus amigos.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Multar severamente a quien cuelgue una sábana.",
+        "energy": -12,
+        "money": 55000,
+        "corruption": 4,
+        "popularity": -15
+      },
+      {
+        "probability": 100,
+        "description": "Crear un 'Impuesto al Paisaje' por cada balcón con ropa.",
+        "energy": -8,
+        "money": 30000,
+        "corruption": 2,
+        "popularity": -8
+      }
+    ]
+  },
+  {
+    "name": "Sustitución de Profesores por Pantallas con Anuncios",
+    "description": "La educación pública es cara. ¿Y si ponemos videos grabados de hace 10 años y metemos anuncios de cereales entre medias? Los niños ya están acostumbrados a YouTube.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Recortar el sueldo docente y digitalizar las aulas.",
+        "energy": -15,
+        "money": 175000,
+        "corruption": 0,
+        "popularity": -32
+      },
+      {
+        "probability": 100,
+        "description": "Aumentar el número de alumnos a 60 por clase.",
+        "energy": -10,
+        "money": 90000,
+        "corruption": 0,
+        "popularity": -20
+      }
+    ]
+  },
+  {
+    "name": "Peajes para Entrar al Centro",
+    "description": "Para 'reducir la contaminación', decides que cualquiera que no tenga un coche de lujo (híbrido de 80.000€) pague 10€ cada vez que cruce una calle céntrica.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Instalar cámaras de lectura de matrículas y peajes.",
+        "energy": -18,
+        "money": 130000,
+        "corruption": 0,
+        "popularity": -26
+      },
+      {
+        "probability": 100,
+        "description": "Prohibir el aparcamiento a residentes sin garaje.",
+        "energy": -12,
+        "money": 60000,
+        "corruption": 0,
+        "popularity": -18
+      }
+    ]
+  },
+  {
+    "name": "Cierre de la Piscina Municipal por 'Mantenimiento VIP'",
+    "description": "Es verano y la piscina está llena. Decides cerrarla al público general para alquilarla por las tardes a fiestas privadas de la élite empresarial. 'Mantenimiento preventivo', lo llamas.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cerrar al público y cobrar alquileres de lujo.",
+        "energy": -10,
+        "money": 85000,
+        "corruption": 5,
+        "popularity": -22
+      },
+      {
+        "probability": 100,
+        "description": "Subir la entrada de 2€ a 25€ para 'filtrar' gente.",
+        "energy": -6,
+        "money": 45000,
+        "corruption": 2,
+        "popularity": -18
+      }
+    ]
+  },
+  {
+    "name": "Conversión del Comedor Social en Restaurante con Estrella",
+    "description": "El local del comedor social tiene unas vistas increíbles. Sería un desperdicio no poner un restaurante de comida molecular que cobre 200€ por un aire de patata.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Desahuciar el comedor y dar la licencia al chef famoso.",
+        "energy": -14,
+        "money": 160000,
+        "corruption": 6,
+        "popularity": -29
+      },
+      {
+        "probability": 100,
+        "description": "Obligar a los pobres a servir las mesas para 'aprender'.",
+        "energy": -20,
+        "money": 50000,
+        "corruption": 8,
+        "popularity": -40
+      }
+    ]
+  },
+  {
+    "name": "Impuesto a la Tristeza Pública",
+    "description": "La gente deprimida consume menos y da mala imagen. Propones multar a quien sea pillado llorando o con cara de pocos amigos en parques públicos.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Instalar 'sensores de sonrisa' y multar al que no ría.",
+        "energy": -15,
+        "money": 80000,
+        "corruption": 2,
+        "popularity": -33
+      },
+      {
+        "probability": 100,
+        "description": "Hacer un curso de 'positivismo obligatorio' de pago.",
+        "energy": -10,
+        "money": 40000,
+        "corruption": 0,
+        "popularity": -15
+      }
+    ]
+  },
+  {
+    "name": "Venta de Monumentos Nacionales como Apartamentos",
+    "description": "La torre antigua de la ciudad tiene espacio para 4 lofts de lujo. ¿Quién necesita historia cuando puede tener inquilinos que paguen en dólares?",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Vender la torre y decir que estaba 'en ruinas'.",
+        "energy": -12,
+        "money": 350000,
+        "corruption": 9,
+        "popularity": -38
+      },
+      {
+        "probability": 100,
+        "description": "Alquilar el interior para una serie de Netflix.",
+        "energy": -10,
+        "money": 120000,
+        "corruption": 3,
+        "popularity": -10
+      }
+    ]
+  },
+  {
+    "name": "Corte de Luz en Barrios Periféricos",
+    "description": "Para cumplir con los objetivos de ahorro energético, decides apagar las farolas de los barrios pobres a partir de las 8 de la tarde. 'Fomenta el descanso temprano', aseguras.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Apagón total nocturno fuera del centro rico.",
+        "energy": -6,
+        "money": 95000,
+        "corruption": 0,
+        "popularity": -27
+      },
+      {
+        "probability": 100,
+        "description": "Quitar una de cada dos farolas permanentemente.",
+        "energy": -8,
+        "money": 40000,
+        "corruption": 0,
+        "popularity": -15
+      }
+    ]
+  },
+  {
+    "name": "Requisado de Bicicletas para el 'Esfuerzo Nacional'",
+    "description": "Necesitas metal para... bueno, para algo importante. Decides que todas las bicicletas aparcadas en la calle pasan a ser propiedad del estado para su fundición.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Confiscar todas las bicis sin dar explicaciones.",
+        "energy": -18,
+        "money": 70000,
+        "corruption": 4,
+        "popularity": -25
+      },
+      {
+        "probability": 100,
+        "description": "Obligar a pagar una 'tasa de recuperación' para devolverlas.",
+        "energy": -14,
+        "money": 110000,
+        "corruption": 6,
+        "popularity": -35
+      }
+    ]
   }
 ]
