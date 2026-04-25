@@ -38,7 +38,7 @@ export default class GameScene extends Phaser.Scene {
         // ENERGY CYCLE
         if(!this.registry.has('triggeredThresholds')) this.registry.set('triggeredThresholds', new Set());
         this.triggeredThresholds = this.registry.get('triggeredThresholds');
-
+        if(this.player.getEnergy() === 100) this.triggeredThresholds.clear();
     }
 
     create() {
@@ -233,6 +233,7 @@ export default class GameScene extends Phaser.Scene {
                     this.gameManager.deleteAllMissions(this);//Pa que va a haber missiones sin energia.
                     if (this.blinkEvent) this.blinkEvent.remove();
                     if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
+                    if (this.triggeredThresholds) this.triggeredThresholds.clear();
                     //if (this.audioManager) this.audioManager.play('nightAmbience');
 
                     console.log('ENERGÍA AGOTADA');
@@ -314,7 +315,6 @@ export default class GameScene extends Phaser.Scene {
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
-        if (this.triggeredThresholds) this.triggeredThresholds.clear();
  
         this.cameras.main.fadeOut(1000, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
