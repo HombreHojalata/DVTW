@@ -90,31 +90,51 @@ export default class missionManager{
         //Logica para elegir mision:
         let missionType;
         let missionSelected;
-        if(districtSatisfaction < minSatisfaction){
+
+        if((corruption > maxCorruption) && (Math.random() * (corruption - maxCorruption+40))>20){
+                missionSelected = this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
+            }
+
+        else if((districtSatisfaction < minSatisfaction) && (Math.random() *100)<80){
             missionType = "upPopularity";
             missionSelected = this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
         }
-        else if(districtSatisfaction > maxSatisfaction){
+        else if((districtSatisfaction > maxSatisfaction) && (Math.random() *100)<80){
             missionType = "downPopularity";
             missionSelected = this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
         }
-        else{
-            if(corruption > maxCorruption){//Cambiar a que vaya por probalilidad que asciende con la corrupcion, no que sea un limite fijo.
-                missionSelected = this.downCorruptionMissions[Math.floor(Math.random() * this.downCorruptionMissions.length)];
+        else if((districtSatisfaction < maxSatisfaction) && (districtSatisfaction > minSatisfaction) &&((Math.random() *100)<15)){
+            if((Math.random() *100)<=50){
+                missionType = "upPopularity";
+                missionSelected = this.upPopularityMissions[Math.floor(Math.random() * this.upPopularityMissions.length)];
             }
             else{
-                if(money < minMoney){
+                missionType = "downPopularity";
+                missionSelected = this.downPopularityMissions[Math.floor(Math.random() * this.downPopularityMissions.length)];
+            }
+        }
+        else{
+            if((money < minMoney) && (Math.random() *100)<80){
+                missionType = "upMoney";
+                missionSelected = this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
+            }
+            else if((money > maxMoney) && (Math.random() *100)<80){
+                missionType = "downMoney";
+                missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
+            }
+            else if((money < maxMoney) && (money > minMoney) && ((Math.random() *100)<15)){
+                if((Math.random() *100)<=50){
                     missionType = "upMoney";
                     missionSelected = this.upMoneyMissions[Math.floor(Math.random() * this.upMoneyMissions.length)];
                 }
-                else if(money > maxMoney){
+                else{
                     missionType = "downMoney";
                     missionSelected = this.downMoneyMissions[Math.floor(Math.random() * this.downMoneyMissions.length)];
                 }
-                else{
-                    missionType = "regular";
-                    missionSelected = this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
-                }
+            }
+            else{
+                missionType = "regular";
+                missionSelected = this.regularMissions[Math.floor(Math.random() * this.regularMissions.length)];
             }
         }
         missionSelected.setDistrict(districtName);
