@@ -111,7 +111,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.closeButton.on('pointerup', () => {
             tooltip.setVisible(false);
             this.scene.stop();
-            this.scene.resume('districtScene');
+            this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order });
         });
         return this.closeButton;
     }

@@ -38,7 +38,7 @@ export default class GameScene extends Phaser.Scene {
         // ENERGY CYCLE
         if(!this.registry.has('triggeredThresholds')) this.registry.set('triggeredThresholds', new Set());
         this.triggeredThresholds = this.registry.get('triggeredThresholds');
-
+        if(this.player.getEnergy() === 100) this.triggeredThresholds.clear();
     }
 
     create() {
@@ -77,10 +77,10 @@ export default class GameScene extends Phaser.Scene {
                 this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(100);
             }
             // SPAWN MAP and MISSIONS
-            this.gameManager.spawnAssets(this);
+            this.gameManager.spawnAssets();
             this.presidenteBlocker = this.add.zone(15, 15, 224, 287).setOrigin(0).setInteractive().setDepth(20);
-            if (this.registry.has('missionList')) this.gameManager.spawnMissionButton(this);
-            this.configButton = this.gameManager.spawnConfigurationButton(this);
+            if (this.registry.has('missionList')) this.gameManager.spawnMissionButton();
+            this.configButton = this.gameManager.spawnConfigurationButton();
 
             this.input.keyboard.on('keydown-ESC', () => {
                 if (!this.scene.isActive('pauseScene') && !this.scene.isActive('configurationScene')) {
@@ -93,7 +93,6 @@ export default class GameScene extends Phaser.Scene {
             this.batteryUI = new batteryUI(this);
             this.batteryUIBlocker = this.add.zone(this.batteryUI.innerX, this.batteryUI.innerY, this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
             this.endDayBtnUI = new endDayBtnUI(this);
-            this.endDayBtnUI.btn.setDepth(22);
             this.footerUI = new footerUI(this, this.isTutorial);
             this.dayUI = new dayUI(this);
             this.middayOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x00c3ff).setOrigin(0).setAlpha(0).setDepth(1);
@@ -234,6 +233,7 @@ export default class GameScene extends Phaser.Scene {
                     this.gameManager.deleteAllMissions(this);//Pa que va a haber missiones sin energia.
                     if (this.blinkEvent) this.blinkEvent.remove();
                     if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
+                    if (this.triggeredThresholds) this.triggeredThresholds.clear();
                     //if (this.audioManager) this.audioManager.play('nightAmbience');
 
                     console.log('ENERGÍA AGOTADA');
@@ -315,7 +315,6 @@ export default class GameScene extends Phaser.Scene {
         this.input.enabled = false;
         if (this.energyTimerEvent) this.energyTimerEvent.paused = true;
         if (this.missionTimer) this.missionTimer.remove(false);
-        if (this.triggeredThresholds) this.triggeredThresholds.clear();
  
         this.cameras.main.fadeOut(1000, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {

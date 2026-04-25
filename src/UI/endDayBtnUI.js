@@ -8,7 +8,6 @@ export default class endDayBtnUI {
         this.scaleValue = 0.8;
         this.create();
     }
-    //COULD BE POSSIBLE IF POPULARITY LESS THAN 20% = LOSE GAME
     create() {
         const batteryWidth = 222;
         const batteryHeight = 466;
@@ -17,10 +16,11 @@ export default class endDayBtnUI {
 
         const x = batteryX + (batteryWidth / 2);
         const y = batteryBottomY + 60;
+        const { width, height } = this.scene.sys.game.config;
 
         if(this.tutorial) {
             const size = 100;
-            this.blocker = this.scene.add.rectangle(x, y, size, size, 0x000000, 0).setOrigin(0.5).setInteractive().setDepth(13);
+            this.blocker = this.scene.add.rectangle(x, y, size, size, 0x000000, 0).setOrigin(0.5).setInteractive().setDepth(24);
             this.blockedContainer = this.scene.add.container(x, y - 70);
             const bg = this.scene.add.rectangle(0, 0, 150, 50, 0xffff00).setOrigin(0.5);
             const text = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontSize: '20px', color: '#000000', fontStyle: 'bold' }).setOrigin(0.5);
@@ -29,7 +29,7 @@ export default class endDayBtnUI {
             this.blocker.on('pointerover', () => { this.blockedContainer.setVisible(true); });
             this.blocker.on('pointerout', () => { this.blockedContainer.setVisible(false); });
         }
-        this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(10).setScale(this.scaleValue);
+        this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(22).setScale(this.scaleValue);
 
         this.btn.on('pointerover', () => {
             this.scene.tweens.add({
@@ -61,12 +61,12 @@ export default class endDayBtnUI {
                 this.finishDay();
             } else {
                 this.btn.setTexture('endDayNormal');
-                this.askConfirmation();
+                this.blocker =  this.scene.add.zone(x, y, width, height).setOrigin(0.5).setInteractive().setDepth(24);
+                this.confirmationUI = new confirmationUI(this.scene, () => this.finishDay()).show();
             }
         });
 
-        this.confirmationUI = new confirmationUI(this.scene, () => this.finishDay());
-        this.confirmationUI.create();
+        
     }
 
     refresh() {
@@ -86,10 +86,6 @@ export default class endDayBtnUI {
             this.isOver = false;
             this.btn.setTexture('endDayNormal');
         }
-    }
-
-    askConfirmation() {
-        this.confirmationUI.show();
     }
 
     setDepth(depth) {

@@ -36,11 +36,6 @@ export default class District {
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
     }
-    // UPDATE DATA, DIRECTAMENTE SE LLAMA A GETMONEYGENERATED DESDE GM
-    updateDistrict() {
-        //this.updatePopulation(this.populationIncrease);
-        return this.getMoneyGenerated();
-    }
     // ASSETS
     spawnDistrict(scene){
         this.texture = this.is_special_built ? this.PNGwithSpecial : this.PNGwithOutSpecial;
