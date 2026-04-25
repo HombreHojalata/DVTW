@@ -116,7 +116,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     scheduleNextMission() {
-        const delay = Math.floor(Math.random() * (9000 + 1))+3000; // Entre 6 y 15 segundos
+        const delay = Math.floor(Math.random() * (4000 + 1))+2000; // Entre 2 y 6 segundos
         if(this.player.getEnergy() <= 0) return;
         this.missionTimer = this.time.addEvent({
             delay: delay,

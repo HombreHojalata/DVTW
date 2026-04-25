@@ -20,7 +20,18 @@ export default class gameManager{
     // MISSIONS
     getMission(scene){
         this.missionL = this.missionManager.getMission(this.map, this.day);
-        if(this.missionL.getDistrict() != "NULL") this.missionL.createMissionButton(scene);
+        if(this.missionL.getDistrict() != "NULL") {
+            if(this.missionL.itIsEvent() && this.day.getNumberOfEvents() < 2) {
+                this.missionL.createMissionButton(scene);
+                this.day.incrementNumberOfEvents();
+            }
+            else if(!this.missionL.itIsEvent()) {
+                this.missionL.createMissionButton(scene);
+            }
+            else{
+                return this.getMission(scene);
+            }
+        }
         return this.missionL;
     }
     removeMission(scene,mission, option, district){
