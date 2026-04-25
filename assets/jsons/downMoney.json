@@ -373,5 +373,505 @@
         "popularity": 8
       }
     ]
+  },
+  {
+    "name": "Ministerio del Bienestar Emocional y el Yoga",
+    "description": "Tu asesor dice que la población está 'estresada' por los impuestos. Propone crear un ministerio para repartir esterillas de yoga con tu cara y contratar a 500 'coachs' motivacionales que casualmente son todos primos de tus diputados.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Fundar el ministerio con sede en un palacio alquilado.",
+        "energy": -18,
+        "money": -250000,
+        "corruption": 6,
+        "popularity": 12
+      },
+      {
+        "probability": 100,
+        "description": "Subvencionar solo 'retiros espirituales' para altos cargos.",
+        "energy": -10,
+        "money": -110000,
+        "corruption": 4,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "Aeropuerto 'Libre de Aviones'",
+    "description": "Has construido un aeropuerto impresionante en un pueblo de 50 habitantes. No tiene vuelos programados, pero las cafeterías son de lujo y el corte de cinta quedó espectacular en las noticias.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Mantener las pistas iluminadas 24/7 por si alguien se pierde.",
+        "energy": -15,
+        "money": -300000,
+        "corruption": 2,
+        "popularity": 8
+      },
+      {
+        "probability": 100,
+        "description": "Convertirlo en un 'Centro de Interpretación del Aire' vacío.",
+        "energy": -12,
+        "money": -150000,
+        "corruption": 0,
+        "popularity": 5
+      }
+    ]
+  },
+  {
+    "name": "Campaña 'Tu Presidente te Quiere'",
+    "description": "El departamento de marketing sugiere que la gente necesita sentir tu calor. Proponen empapelar el país con carteles gigantes donde sales abrazando a un perrito o a una anciana (o a ambos).",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Contratar vallas publicitarias hasta en el desierto.",
+        "energy": -14,
+        "money": -180000,
+        "corruption": 0,
+        "popularity": 15
+      },
+      {
+        "probability": 100,
+        "description": "Pagar anuncios en horario de máxima audiencia en la TV pública.",
+        "energy": -10,
+        "money": -95000,
+        "corruption": 0,
+        "popularity": 9
+      }
+    ]
+  },
+  {
+    "name": "El 'Silicon Valley' de las Patatas",
+    "description": "Quieres modernizar el sector agrícola. El plan es dar tablets de última generación a todos los pastores y poner Wi-Fi en los establos. Dicen que las ovejas darán leche 'inteligente'.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Sustituir todos los tractores por modelos eléctricos experimentales.",
+        "energy": -20,
+        "money": -280000,
+        "corruption": 0,
+        "popularity": 11
+      },
+      {
+        "probability": 100,
+        "description": "Crear una App para que las vacas hagan 'match' con toros.",
+        "energy": -12,
+        "money": -130000,
+        "corruption": 0,
+        "popularity": 7
+      }
+    ]
+  },
+  {
+    "name": "Estatua de Oro (para reflexionar)",
+    "description": "Un artista vanguardista propone una escultura de 20 metros de un político anónimo (que se parece mucho a ti) mirando al infinito. El material es bronce, pero el presupuesto dice que es platino.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Aprobar la obra y añadirle luces LED de colores.",
+        "energy": -15,
+        "money": -220000,
+        "corruption": 5,
+        "popularity": 6
+      },
+      {
+        "probability": 100,
+        "description": "Encargar un busto para cada ayuntamiento del país.",
+        "energy": -10,
+        "money": -140000,
+        "corruption": 3,
+        "popularity": 4
+      }
+    ]
+  },
+  {
+    "name": "El Metaverso Nacional",
+    "description": "Para no quedarnos atrás, propones que todos los trámites administrativos se hagan en un mundo virtual en 3D. Ahora, renovar el DNI requiere que tu avatar camine por una playa digital durante 2 horas.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Comprar servidores masivos y gafas VR para los funcionarios.",
+        "energy": -18,
+        "money": -350000,
+        "corruption": 0,
+        "popularity": 10
+      },
+      {
+        "probability": 100,
+        "description": "Hacer una web con avatares pixelados que no funciona.",
+        "energy": -12,
+        "money": -160000,
+        "corruption": 0,
+        "popularity": -5
+      }
+    ]
+  },
+  {
+    "name": "Cumbre Mundial de la Paz (y el Marisco)",
+    "description": "Vas a invitar a 40 líderes internacionales para hablar del cambio climático. El catering incluye langosta azul y el alojamiento es en suites presidenciales. Nadie llegará a ningún acuerdo, pero las fotos serán épicas.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Pagar el viaje en Business a todas las delegaciones.",
+        "energy": -16,
+        "money": -400000,
+        "corruption": 0,
+        "popularity": 18
+      },
+      {
+        "probability": 100,
+        "description": "Regalar a cada líder un reloj de oro con el escudo nacional.",
+        "energy": -12,
+        "money": -200000,
+        "corruption": 2,
+        "popularity": 12
+      }
+    ]
+  },
+  {
+    "name": "Rebranding de la Bandera",
+    "description": "Un estudio de diseño de Nueva York dice que los colores de tu bandera 'no transmiten resiliencia'. Sugieren cambiar el rojo por 'carmesí pasión' y cobrar 2 millones por el cambio de logo.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cambiar todas las banderas oficiales del país de golpe.",
+        "energy": -10,
+        "money": -190000,
+        "corruption": 4,
+        "popularity": -10
+      },
+      {
+        "probability": 100,
+        "description": "Pagar solo el manual de identidad visual (500 páginas vacías).",
+        "energy": -6,
+        "money": -110000,
+        "corruption": 3,
+        "popularity": -2
+      }
+    ]
+  },
+  {
+    "name": "Subvención a la 'Arqueología Futurista'",
+    "description": "Un grupo de científicos pide fondos para buscar restos de civilizaciones alienígenas en el desierto central. No han encontrado nada, pero dicen que el equipo de excavación debe ser chapado en titanio.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Financiar una expedición de 5 años con todo pagado.",
+        "energy": -14,
+        "money": -210000,
+        "corruption": 0,
+        "popularity": 4
+      },
+      {
+        "probability": 100,
+        "description": "Construir un museo para los 'posibles' hallazgos.",
+        "energy": -10,
+        "money": -130000,
+        "corruption": 1,
+        "popularity": 6
+      }
+    ]
+  },
+  {
+    "name": "Desfile de la Victoria Imaginaria",
+    "description": "Como no ha habido guerras (por suerte), decides celebrar el 'Aniversario de la No-Guerra'. Necesitamos tanques desfilando, aviones tirando humo de colores y muchos confetis biodegradables carísimos.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Organizar el desfile más grande de la historia del continente.",
+        "energy": -20,
+        "money": -320000,
+        "corruption": 0,
+        "popularity": 20
+      },
+      {
+        "probability": 100,
+        "description": "Pagar una cena de gala para 2.000 militares de alto rango.",
+        "energy": -15,
+        "money": -180000,
+        "corruption": 2,
+        "popularity": 10
+      }
+    ]
+  },
+  {
+    "name": "El Tren Bala de vía única",
+    "description": "Prometiste alta velocidad y la vas a dar. El problema es que solo hay presupuesto para una vía, así que los trenes tienen que turnarse para pasar. Es ineficiente, pero el tren es muy brillante.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Inaugurar el primer tramo de 5km con gran fanfarria.",
+        "energy": -22,
+        "money": -450000,
+        "corruption": 7,
+        "popularity": 14
+      },
+      {
+        "probability": 100,
+        "description": "Comprar los trenes antes de tener las vías puestas.",
+        "energy": -15,
+        "money": -250000,
+        "corruption": 5,
+        "popularity": 8
+      }
+    ]
+  },
+  {
+    "name": "Plan de 'Baños Públicos de Cristal'",
+    "description": "Una empresa de diseño sueca propone baños públicos transparentes que se opacan cuando entras. Dicen que es 'arquitectura democrática'. Cuestan diez veces más que un baño normal y se rompen con la mirada.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Instalarlos en todas las plazas principales.",
+        "energy": -12,
+        "money": -170000,
+        "corruption": 0,
+        "popularity": 9
+      },
+      {
+        "probability": 100,
+        "description": "Crear un cuerpo de limpieza VIP solo para estos baños.",
+        "energy": -10,
+        "money": -90000,
+        "corruption": 0,
+        "popularity": 5
+      }
+    ]
+  },
+  {
+    "name": "Observatorio de Nubes Nacional",
+    "description": "Para combatir el cambio climático, propones observar las nubes. Necesitas un edificio con forma de nube, telescopios que miren hacia abajo y una plantilla de 200 'nube-analistas'.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Construirlo en la cima de la montaña más cara de acceder.",
+        "energy": -18,
+        "money": -230000,
+        "corruption": 0,
+        "popularity": 6
+      },
+      {
+        "probability": 100,
+        "description": "Publicar un libro mensual con fotos de nubes para los colegios.",
+        "energy": -8,
+        "money": -70000,
+        "corruption": 0,
+        "popularity": 3
+      }
+    ]
+  },
+  {
+    "name": "Día Nacional del 'Selfie' con el Líder",
+    "description": "Un día festivo donde los ciudadanos pueden hacerse una foto contigo. Necesitamos seguridad, vallas, fotógrafos profesionales y un software de retoque para que todos salgan sonrientes por ley.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Montar 500 escenarios fotográficos por todo el país.",
+        "energy": -14,
+        "money": -150000,
+        "corruption": 0,
+        "popularity": 12
+      },
+      {
+        "probability": 100,
+        "description": "Repartir palos-selfie oficiales con el logo del partido.",
+        "energy": -8,
+        "money": -80000,
+        "corruption": 0,
+        "popularity": 7
+      }
+    ]
+  },
+  {
+    "name": "Rescatar a la Empresa de 'Casetes'",
+    "description": "La fábrica local de cintas de casete va a quebrar. El dueño es tu antiguo profesor de gimnasia. Dice que el casete va a volver como el vinilo y que solo necesita un empujón público.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Nacionalizar la empresa y comprar 1 millón de cintas.",
+        "energy": -15,
+        "money": -200000,
+        "corruption": 8,
+        "popularity": 5
+      },
+      {
+        "probability": 100,
+        "description": "Dar una subvención a fondo perdido para 'modernización'.",
+        "energy": -10,
+        "money": -120000,
+        "corruption": 5,
+        "popularity": 2
+      }
+    ]
+  },
+  {
+    "name": "La Gran Muralla (para que no se escapen los perros)",
+    "description": "Un lobby de constructores propone un muro perimetral en los parques para que los perros no se escapen a la carretera. El muro es de mármol de Carrara y tiene sensores de movimiento.",
+    "event": false,
+    "corrupt": true,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cerrar todos los parques con el muro de lujo.",
+        "energy": -18,
+        "money": -260000,
+        "corruption": 6,
+        "popularity": -5
+      },
+      {
+        "probability": 100,
+        "description": "Poner puertas automáticas bañadas en oro en los accesos.",
+        "energy": -12,
+        "money": -140000,
+        "corruption": 4,
+        "popularity": 3
+      }
+    ]
+  },
+  {
+    "name": "Festival de Cine de 'Autor Muy Desconocido'",
+    "description": "Quieres que el país sea un referente cultural. Vas a financiar un festival de cine donde solo se proyectan películas de 8 horas sobre el crecimiento de la hierba. El jurado cobra 10.000€ por día.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Alquilar todos los cines del centro para el festival.",
+        "energy": -14,
+        "money": -195000,
+        "corruption": 0,
+        "popularity": 4
+      },
+      {
+        "probability": 100,
+        "description": "Pagar el alojamiento de los directores en hoteles de 5 estrellas.",
+        "energy": -10,
+        "money": -115000,
+        "corruption": 2,
+        "popularity": 6
+      }
+    ]
+  },
+  {
+    "name": "Sustitución de Farolas por Antorchas 'Vintage'",
+    "description": "Para ahorrar electricidad (y porque queda bohemio), un asesor sugiere volver a las antorchas de aceite en el centro histórico. Requiere contratar a 300 'encendedores de farolas' con uniforme de época.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Cambiar toda la iluminación del centro por fuego real.",
+        "energy": -16,
+        "money": -210000,
+        "corruption": 0,
+        "popularity": 11
+      },
+      {
+        "probability": 100,
+        "description": "Comprar aceite de ballena sintético súper caro y ecológico.",
+        "energy": -12,
+        "money": -130000,
+        "corruption": 1,
+        "popularity": 5
+      }
+    ]
+  },
+  {
+    "name": "Cuerpo de 'Detectives de la Felicidad'",
+    "description": "Agentes de paisano que patrullan las calles preguntando a la gente si son felices. Si dicen que no, les dan un abrazo oficial y un folleto con tus logros políticos. Los uniformes son de seda.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Desplegar 1.000 agentes de la felicidad por el país.",
+        "energy": -15,
+        "money": -240000,
+        "corruption": 2,
+        "popularity": 13
+      },
+      {
+        "probability": 100,
+        "description": "Comprar coches patrulla con forma de emoticono sonriente.",
+        "energy": -10,
+        "money": -155000,
+        "corruption": 0,
+        "popularity": 9
+      }
+    ]
+  },
+  {
+    "name": "Misión Espacial 'Un Paso para el Político'",
+    "description": "Quieres enviar una cápsula a la Luna con un pendrive que contiene tus discursos grabados. Es un proyecto científico vital para que los extraterrestres sepan quién manda aquí.",
+    "event": false,
+    "corrupt": false,
+    "minigame": false,
+    "options": [
+      {
+        "probability": 100,
+        "description": "Crear la Agencia Espacial Nacional en un edificio carísimo.",
+        "energy": -25,
+        "money": -500000,
+        "corruption": 3,
+        "popularity": 15
+      },
+      {
+        "probability": 100,
+        "description": "Lanzar un cohete casero que probablemente explote al salir.",
+        "energy": -18,
+        "money": -200000,
+        "corruption": 0,
+        "popularity": -5
+      }
+    ]
   }
 ]
