@@ -22,8 +22,10 @@ export const WORDLE_WORDS = [
 ];
 
 export const WORD_SEARCH_WORDS = [
-    ['DUCKS', 'PRESS', 'VOTES', 'QUACK', 'MAYOR', 'LAUGH'],
-    ['MEDIA', 'CHAOS', 'MONEY', 'CROOK', 'POWER', 'TRIAL']
+    ['PATOS', 'PRENSA', 'VOTOS', 'QUACK', 'ALCALDE', 'RISA'],
+    ['MEDIA', 'CAOS', 'DINERO', 'LADRON', 'PODER', 'JUICIO'],
+    ['LEYES', 'CARGO', 'FALSO', 'PACTO', 'GENTE', 'TRATO'],
+    ['DEUDA', 'CRISIS', 'RUMORES', 'ORDEN', 'DROGA', 'MOTOS']
 ];
 
 

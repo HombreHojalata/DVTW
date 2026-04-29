@@ -51,8 +51,10 @@ export default class wordSearchScene extends Phaser.Scene {
             wordWrap: { width: 250 }
         }).setOrigin(0.5);
 
+        this.maxTimeLimit = 120;
         this.startTime = this.time.now;
-        this.timerText = this.add.text(UI_X, 290, 'Tiempo: 0s', {
+
+        this.timerText = this.add.text(UI_X, 290, `Tiempo: ${this.maxTimeLimit}s`, {
             fontSize: '24px',
             fontFamily: 'Courier New',
             color: '#ffffff',
@@ -82,7 +84,13 @@ export default class wordSearchScene extends Phaser.Scene {
     update(time) {
         if (!this.finished) {
             const sec = Math.floor((time - this.startTime) / 1000);
-            this.timerText.setText(`Tiempo: ${sec}s`);
+            const secLeft = this.maxTimeLimit - sec;
+            if (secLeft > 0)
+                this.timerText.setText(`Tiempo: ${secLeft}s`);
+            else {
+                this.timerText.setText(`Tiempo: 0s`);
+                this.timeUp();
+            }
         }
     }
 
@@ -256,6 +264,27 @@ export default class wordSearchScene extends Phaser.Scene {
             fontSize: '64px',
             fontFamily: 'Climate Crisis',
             color: '#46c83d',
+            stroke: '#000000',
+            strokeThickness: 6
+        }).setOrigin(0.5).setDepth(10);
+
+        this.time.delayedCall(4000, () => {
+            this.scene.stop();
+            this.registry.set('flagShow', false);
+            this.scene.get('gameScene').scene.restart();
+        });
+    }
+
+    timeUp() {
+        this.finished = true;
+
+        const width = this.scale.width;
+        const height = this.scale.height;
+
+        this.add.text(width / 2, height / 2.5, 'TEMPO AGOTADO', {
+            fontSize: '64px',
+            fontFamily: 'Climate Crisis',
+            color: '#ff3333',
             stroke: '#000000',
             strokeThickness: 6
         }).setOrigin(0.5).setDepth(10);
