@@ -21,7 +21,7 @@ export default class dayUI {
         const rectHeight = 40;
         const rectX = 130 - rectWidth / 2;
         const rectY = 292 - rectHeight / 2;
-        const radius = 12;
+        const radius = 8;
 
         this.graphics.fillStyle(0xffffff, 1);
         this.graphics.fillRoundedRect(rectX, rectY, rectWidth, rectHeight, radius);
