@@ -22,8 +22,18 @@ export default class gameManager{
         this.missionL = this.missionManager.getMission(this.map, this.day);
         if(this.missionL.getDistrict() != "NULL") {
             if(this.missionL.itIsEvent() && this.day.getNumberOfEvents() < 2) {
-                this.missionL.createMissionButton(scene);
-                this.day.incrementNumberOfEvents();
+                if(this.missionL.isMinigame() && this.day.getNumberOfMinigames() < 2){
+                    this.missionL.createMissionButton(scene);
+                    this.day.incrementNumberOfMinigames();
+                    this.missionL.createMissionButton(scene);
+                }
+                else if(this.missionL.isMinigame() && this.day.getNumberOfMinigames() >= 2){
+                    return this.getMission(scene);
+                }
+                else if(!this.missionL.isMinigame()){
+                    this.missionL.createMissionButton(scene);
+                    this.day.incrementNumberOfEvents();
+                }               
             }
             else if(!this.missionL.itIsEvent()) {
                 this.missionL.createMissionButton(scene);
