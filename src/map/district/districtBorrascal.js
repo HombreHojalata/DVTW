@@ -7,10 +7,7 @@ export default class DistrictBorrascal extends District{
         super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
-    createSceneList(){
-        const list = [];
-        list.push('districtBorrascalScene1', 'districtBorrascalScene2');
-        return list;
-    }
+    getSceneNormal() {return 'districtBorrascalSceneNormal';}
+    getSceneSpecial() {return 'districtBorrascalSceneSpecial';}
     getSpecialBuilding() {return new SpecialBuilding('specialBuildingBorrascal',"CENTRO DE INVESTIGACIÓN",240000,4,10);}
 };

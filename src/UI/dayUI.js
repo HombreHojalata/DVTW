@@ -27,12 +27,12 @@ export default class dayUI {
         this.graphics.fillRoundedRect(rectX, rectY, rectWidth, rectHeight, radius);
 
         this.dayText = this.scene.add.text(130, 292, 'DÍA ' + this.gameManager.getDay().getDayNumber(), {
-            fontSize: '22px',
-            fontFamily: 'Times New Romans',
+            fontSize: '34px',
+            fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#000000',
             stroke: '#ffffff',
-            strokeThickness: 3
+            strokeThickness: 5
         }).setOrigin(0.5).setDepth(23);
     }
 }

@@ -7,10 +7,7 @@ export default class DistrictElNido extends District {
         super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
-    createSceneList(){
-        const list = [];
-        list.push('districtElNidoScene1', 'districtElNidoScene2');
-        return list;
-    }
+    getSceneNormal() {return 'districtElNidoSceneNormal';}
+    getSceneSpecial() {return 'districtElNidoSceneSpecial';}
     getSpecialBuilding() {return new SpecialBuilding('specialBuildingElNido',"COPITOLIO",270000,4,15);}
 };

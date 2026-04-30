@@ -7,10 +7,7 @@ export default class DistrictSahar extends District {
         super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
-    createSceneList(){
-        const list = [];
-        list.push('districtSaharScene1', 'districtSaharScene2');
-        return list;
-    }
+    getSceneNormal() {return 'districtSaharSceneNormal';}
+    getSceneSpecial() {return 'districtSaharSceneSpecial';}
     getSpecialBuilding() {return new SpecialBuilding('specialBuildingSahar',"RESTAURANTE BAMBI",180000,3,11);}
 };

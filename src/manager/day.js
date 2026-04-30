@@ -10,6 +10,7 @@ export default class day{
             popularity: 0
         }
         this.numberOfEvents=0;
+        this.numberOfMinigames=0;
         this.Orquilladerecursos=[{
             minMoney: 200000,
             maxMoney: 550000,
@@ -44,6 +45,8 @@ export default class day{
     }
     getNumberOfEvents() { return this.numberOfEvents; }
     incrementNumberOfEvents() { this.numberOfEvents += 1; }
+    getNumberOfMinigames() { return this.numberOfMinigames; }
+    incrementNumberOfMinigames() { this.numberOfMinigames += 1; }
     getOrquilladeRecursos(daynumber){
         return this.Orquilladerecursos[daynumber - 1];
     }

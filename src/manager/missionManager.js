@@ -56,7 +56,7 @@ export default class missionManager{
             districtPosition = [1160, 150];
         }
         else if(districtIndex == 1){
-            districtName = "EL_NIDO";
+            districtName = "EL NIDO";
             districtPosition = [680, 390];
         }
         else if(districtIndex == 2){
@@ -64,7 +64,7 @@ export default class missionManager{
             districtPosition = [250, 200];
         }
         else if(districtIndex == 3){
-            districtName = "NUEVA_PRADERA";
+            districtName = "NUEVA PRADERA";
             districtPosition = [1020, 540];
         }
         else if(districtIndex == 4){
@@ -325,6 +325,8 @@ export default class missionManager{
 
         this.minigameMissions.push(mission);
     });
+    let numberOfMInigamesRepetitions = 16;
+    for(let i=0; i<numberOfMInigamesRepetitions; i++){
         this.downCorruptionMissions.push(this.minigameMissions[2]);
         this.upMoneyMissions.push(this.minigameMissions[4]);
         this.upMoneyMissions.push(this.minigameMissions[3]);
@@ -332,6 +334,7 @@ export default class missionManager{
         this.upPopularityMissions.push(this.minigameMissions[0]);
         this.upPopularityMissions.push(this.minigameMissions[1]);
     }
+}
     rmMission(mission){
         const districtName = mission.getDistrict(); 
         if(districtName == "BORRASCAL"){
@@ -352,9 +355,13 @@ export default class missionManager{
         else{//districtName == "SOMOSAGUA"
             this.districtsWithMissions[5] = false;
         }
-        if(mission.isMinigame()){
-            this.minigameMissions = this.minigameMissions.filter(m => m !== mission);
-        }
+        this.minigameMissions = this.minigameMissions.filter(m => m !== mission);
+        this.regularMissions = this.regularMissions.filter(m => m !== mission);
+        this.upMoneyMissions = this.upMoneyMissions.filter(m => m !== mission);
+        this.upPopularityMissions = this.upPopularityMissions.filter(m => m !== mission);
+        this.downMoneyMissions = this.downMoneyMissions.filter(m => m !== mission);
+        this.downPopularityMissions = this.downPopularityMissions.filter(m => m !== mission);
+        this.downCorruptionMissions = this.downCorruptionMissions.filter(m => m !== mission);
         mission.deleteMissionButton();
         this.activeMissions = this.activeMissions.filter(m => m !== mission);
     }
