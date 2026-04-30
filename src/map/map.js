@@ -82,9 +82,21 @@ export default class Map {
             "SOMOSAGUA": "somosaguaCutout"
         };
 
+        const specCutouts = {
+            "BORRASCAL": "borrascalSpecCutout",
+            "EL_NIDO": "nidoSpecCutout",
+            "GUINEA": "guineaSpecCutout",
+            "NUEVA_PRADERA": "praderaSpecCutout",
+            "SAHAR": "saharSpecCutout",
+            "SOMOSAGUA": "somosaguaSpecCutout"
+        };
+
         this.districtList.forEach(d => {
             const districtName = d.getName().toUpperCase();
-            const cutout = cutouts[districtName];
+
+            const spec = d.is_special_built;
+
+            const cutout = spec ? specCutouts[districtName] : cutouts[districtName];
             const districtCutout = scene.cache.json.get(cutout);
 
             let tiledObj = [];
