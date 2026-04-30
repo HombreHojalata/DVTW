@@ -32,7 +32,6 @@ export default class District {
         this.special_building = special_building;                                                               // Special building that can be built in the district
         this.PNGwithOutSpecial = PNGwithOutSpecial;                                                             // PNG of the district without the special building
         this.PNGwithSpecial = PNGwithSpecial;                                                                   // PNG of the district with the special building         
-        this.scene_list = this.createSceneList();                                                               // List of scenes for each districtScene
         this.posX = posX;                                                                                       // Position X of the district in the map
         this.posY = posY;                                                                                       // Position Y of the district in the map
     }
@@ -70,13 +69,11 @@ export default class District {
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}
     // SCENES
-    getSceneList() {return this.scene_list}
-    createSceneList(){throw new Error('createSceneList() debe implementarse en la subclase');}
+    getSceneNormal() {throw new Error('getSceneNormal() debe implementarse en la subclase');}
+    getSceneSpecial() {throw new Error('getSceneNormal() debe implementarse en la subclase');}
     
     getName() {return this.name;}
     getDescription() {return this.desc;}
-    //getPosX() {return this.posX;}
-    //getPosY() {return this.posY;}
 
     //POPULATION
     getPopulation() {return this.population;}
