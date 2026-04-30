@@ -158,16 +158,16 @@ export default class IntroScene extends Phaser.Scene {
             this.scene.start('finishScene', { win: false });
         });
          */
-        createMenuButton(120, 30, 'MEMORY', () => { // PARA DEPURAR
+        createMenuButton(120, 30, 'MEMORY', () => {
             this.scene.start('memoryMiniGame');
         });
-        createMenuButton(120, 90, 'PLINKO', () => { // PARA DEPURAR
+        createMenuButton(120, 90, 'PLINKO', () => {
             this.scene.start('plinkoMiniGame');
         });
-        createMenuButton(120, 150, 'WHACAMOLE', () => { // PARA DEPURAR
+        createMenuButton(120, 150, 'WHACAMOLE', () => {
             this.scene.start('whacAMole');
         });
-        createMenuButton(120, 210, 'WORDLE', () => { // PARA DEPURAR
+        createMenuButton(120, 210, 'WORDLE', () => {
             this.scene.start('wordleMiniGame');
         });
         createMenuButton(120, 270, 'MONKEYTYPE',() => {
