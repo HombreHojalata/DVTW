@@ -57,12 +57,15 @@ export default class footerUI {
     }
     // DISTRICT
     createDistrictText(sectionMoney, sectionDistrict, footerX, footerY, footerHeight) {
+        //TODO: spacing between letters 
         this.districtTitleText = this.scene.add.text(footerX + sectionMoney + sectionDistrict / 2, footerY + footerHeight / 2, 'QUACKINGTON DC', {
+            fontFamily: 'Handjet',
             fontSize: '38px',
             color: '#ffffff',
-            fontStyle: 'bold'
+            fontStyle: 'bold',
         }).setOrigin(0.5).setDepth(11);
         return this.districtTitleText;
+
     }
     updateDistrictFooter(district) { if(this.districtTitleText) {this.districtTitleText.setText(district.getName()); }}
 
@@ -86,7 +89,7 @@ export default class footerUI {
         this.blackMarketBtn = this.scene.add.image(x, y, initialTexture).setInteractive({ useHandCursor: !isDayOne }).setDepth(15);
         if (!isDayOne) this.blackMarketBtn.setTexture('marketBtnNormal');
 
-        this.blackMarketBtn.on('pointerover', (pointer) => {
+        this.blackMarketBtn.on('pointerover', () => {
             if (isDayOne) return;
             this.blackMarketBtn.setTexture('marketBtnBright');
 
@@ -98,7 +101,7 @@ export default class footerUI {
             tooltip.setVisible(true);
         });
 
-        this.blackMarketBtn.on('pointerout', (pointer) => {
+        this.blackMarketBtn.on('pointerout', () => {
             if (isDayOne) return;
             this.blackMarketBtn.setTexture('marketBtnNormal');
             tooltip.setVisible(false);

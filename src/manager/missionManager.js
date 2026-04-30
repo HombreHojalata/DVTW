@@ -56,7 +56,7 @@ export default class missionManager{
             districtPosition = [1160, 150];
         }
         else if(districtIndex == 1){
-            districtName = "EL_NIDO";
+            districtName = "EL NIDO";
             districtPosition = [680, 390];
         }
         else if(districtIndex == 2){
@@ -64,7 +64,7 @@ export default class missionManager{
             districtPosition = [250, 200];
         }
         else if(districtIndex == 3){
-            districtName = "NUEVA_PRADERA";
+            districtName = "NUEVA PRADERA";
             districtPosition = [1020, 540];
         }
         else if(districtIndex == 4){

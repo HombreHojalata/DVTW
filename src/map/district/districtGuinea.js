@@ -7,10 +7,7 @@ export default class DistrictGuinea extends District {
         super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
-    createSceneList(){
-        const list = [];
-        list.push('districtGuineaScene1', 'districtGuineaScene2');
-        return list;
-    }
+    getSceneNormal() {return 'districtGuineaSceneNormal';}
+    getSceneSpecial() {return 'districtGuineaSceneSpecial';}
     getSpecialBuilding() {return new SpecialBuilding('specialBuildingGuinea',"TEATRO MAGNO",300000,4,20);}
 };

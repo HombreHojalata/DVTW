@@ -61,9 +61,6 @@ export default class DistrictScene extends Phaser.Scene {
             else if (this.order === 2) this.finishTutorial(width, height);
             else if (this.order === 3) this.explainParameters(width, height);
         }
-
-        //this.event.on('resume', () => { ...
-
     }
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
         return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, 'districtTemplate').setDisplaySize(newWidth, newHeight);
@@ -72,8 +69,8 @@ export default class DistrictScene extends Phaser.Scene {
         const leftCorner = offsetX*3 - 40;
         const rightCorner = offsetX*6;
         const nameText = this.add.text(0, offsetY + 15, this.district.getName(), {
-            fontSize: '44px',
-            fontFamily: 'Courier New',
+            fontSize: '50px',
+            fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#000000'
         });
@@ -82,10 +79,10 @@ export default class DistrictScene extends Phaser.Scene {
         return nameText;
     }
     spawnDescText(newWidth, offsetX, offsetY) {
-        const descText = this.add.text(offsetX*8 + 7, offsetY + 165, this.district.getDescription(), {
-            fontSize: '20px',
-            fontFamily: 'Margarine',
-            fontStyle: 'italic',
+        const descText = this.add.text(offsetX*8 + 7, offsetY + 155, this.district.getDescription(), {
+            fontSize: '28px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
             color: '#000000',
             wordWrap: { width: newWidth * 0.55 + 10 },                                                 //LIMIT
             lineSpacing: 8                                                                             //SPACE BETWEEN LINES
@@ -93,17 +90,14 @@ export default class DistrictScene extends Phaser.Scene {
         return descText;
     }  
     spawnScene(newWidth,newHeight,offsetX,offsetY) {
-        const list = this.district.getSceneList();
-        let i = 0;
-        if(this.district.isSpecialBuildingBuilt())
-            i = 1;
-        this.districtScene = this.add.image(offsetX + newWidth * 0.048, offsetY + newHeight * 0.2, list[i]).setOrigin(0);
+        const sceneKey = this.district.isSpecialBuildingBuilt()? this.district.getSceneSpecial() : this.district.getSceneNormal();
+        this.districtScene = this.add.image(offsetX + newWidth * 0.048, offsetY + newHeight * 0.2, sceneKey).setOrigin(0);
         return this.districtScene;
     }
     spawnDetailText(newWidth,newHeight,offsetX,offsetY) {
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '30px',
-            fontFamily: 'Margarine',
+            fontFamily: 'Handjet',
             backgroundColor: '#000',
             color: '#fff',
             padding: { x: 5, y: 5 }
@@ -115,9 +109,9 @@ export default class DistrictScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#30718c'
         }).setDepth(15).setInteractive();
-        populationText.on('pointerover', () => {
+        populationText.on('pointerover', (pointer) => {
             tooltip.setText('Dato: Población total del distrito');
-            tooltip.setPosition(0, 0);
+            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
@@ -129,9 +123,9 @@ export default class DistrictScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#ba9900'
         }).setDepth(15).setInteractive();
-        moneyText.on('pointerover', () => {
+        moneyText.on('pointerover', (pointer) => {
             tooltip.setText('Dato: Dinero que genera el distrito por ciclo de energía');
-            tooltip.setPosition(0, 0);
+            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
@@ -143,9 +137,9 @@ export default class DistrictScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#46c83d'
         }).setDepth(15).setInteractive();
-        inFavorText.on('pointerover', () => {
+        inFavorText.on('pointerover', (pointer) => {
             tooltip.setText('Dato: Habitantes satisfechos del distrito');
-            tooltip.setPosition(0, 0);
+            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });
@@ -157,9 +151,9 @@ export default class DistrictScene extends Phaser.Scene {
             fontStyle: 'bold',
             color: '#e62d2a'
         }).setDepth(15).setInteractive();
-        noFavorText.on('pointerover', () => {
+        noFavorText.on('pointerover', (pointer) => {
             tooltip.setText('Dato: Habitantes insatisfechos del distrito');
-            tooltip.setPosition(0, 0);
+            tooltip.setPosition(pointer.x + 10, pointer.y + 10);
             tooltip.setVisible(true);
             tooltip.setDepth(100);
         });

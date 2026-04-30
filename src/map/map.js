@@ -26,7 +26,7 @@ export default class Map {
             'districtBorrascal', 'districtBorrascalSpecial', -15, -13
         );
         const EL_NIDO = new DistrictElNido(
-            "EL_NIDO", "Donde el aire es puro y los impuestos son bajos. El Nido es el lujoso hogar de la aristocracia emplumada, y están muy acostumbrados a gastar su dinero en comercios de alto standing.",
+            "EL NIDO", "Donde el aire es puro y los impuestos son bajos. El Nido es el lujoso hogar de la aristocracia emplumada, y están muy acostumbrados a gastar su dinero en comercios de alto standing.",
             10000, 31, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["HOSPITAL"], 3,
             false, "COPITOLIO",
@@ -40,7 +40,7 @@ export default class Map {
             'districtGuinea', 'districtGuineaSpecial', -10, -15
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
-            "NUEVA_PRADERA", "El hogar ideal para la clase media, llena de vallas blancas y gente obediente de las normal. Nueva Pradera es un distrito fácil de ignorar, pero hay que tener cuidado con decepcionar a sus muchos vecinos.",
+            "NUEVA PRADERA", "El hogar ideal para la clase media, llena de vallas blancas y gente obediente de las normal. Nueva Pradera es un distrito fácil de ignorar, pero hay que tener cuidado con decepcionar a sus muchos vecinos.",
             14000, 8, 1,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["CINEMA"], 5,
             false, "ENPAWIRE",
@@ -75,18 +75,18 @@ export default class Map {
     spawnDistricts(scene) {
         const cutouts = {
             "BORRASCAL": "borrascalCutout",
-            "EL_NIDO": "nidoCutout",
+            "EL NIDO": "nidoCutout",
             "GUINEA": "guineaCutout",
-            "NUEVA_PRADERA": "praderaCutout",
+            "NUEVA PRADERA": "praderaCutout",
             "SAHAR": "saharCutout",
             "SOMOSAGUA": "somosaguaCutout"
         };
 
         const specCutouts = {
             "BORRASCAL": "borrascalSpecCutout",
-            "EL_NIDO": "nidoSpecCutout",
+            "EL NIDO": "nidoSpecCutout",
             "GUINEA": "guineaSpecCutout",
-            "NUEVA_PRADERA": "praderaSpecCutout",
+            "NUEVA PRADERA": "praderaSpecCutout",
             "SAHAR": "saharSpecCutout",
             "SOMOSAGUA": "somosaguaSpecCutout"
         };
@@ -126,9 +126,9 @@ export default class Map {
     getTotalPopulation() {
         let totalPopulation = 0;
         totalPopulation += this.getDistrictByName("BORRASCAL").getPopulation();
-        totalPopulation += this.getDistrictByName("EL_NIDO").getPopulation();
+        totalPopulation += this.getDistrictByName("EL NIDO").getPopulation();
         totalPopulation += this.getDistrictByName("GUINEA").getPopulation();
-        totalPopulation += this.getDistrictByName("NUEVA_PRADERA").getPopulation();
+        totalPopulation += this.getDistrictByName("NUEVA PRADERA").getPopulation();
         totalPopulation += this.getDistrictByName("SAHAR").getPopulation();
         totalPopulation += this.getDistrictByName("SOMOSAGUA").getPopulation();
         return totalPopulation;
@@ -136,9 +136,9 @@ export default class Map {
     getPopularity() {
         let totalPopularity = 0;
         totalPopularity += this.getDistrictByName("BORRASCAL").getPopulation() * this.getDistrictByName("BORRASCAL").getSatisfaction() / 100;
-        totalPopularity += this.getDistrictByName("EL_NIDO").getPopulation() * this.getDistrictByName("EL_NIDO").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("EL NIDO").getPopulation() * this.getDistrictByName("EL NIDO").getSatisfaction() / 100;
         totalPopularity += this.getDistrictByName("GUINEA").getPopulation() * this.getDistrictByName("GUINEA").getSatisfaction() / 100;
-        totalPopularity += this.getDistrictByName("NUEVA_PRADERA").getPopulation() * this.getDistrictByName("NUEVA_PRADERA").getSatisfaction() / 100;
+        totalPopularity += this.getDistrictByName("NUEVA PRADERA").getPopulation() * this.getDistrictByName("NUEVA PRADERA").getSatisfaction() / 100;
         totalPopularity += this.getDistrictByName("SAHAR").getPopulation() * this.getDistrictByName("SAHAR").getSatisfaction() / 100;
         totalPopularity += this.getDistrictByName("SOMOSAGUA").getPopulation() * this.getDistrictByName("SOMOSAGUA").getSatisfaction() / 100;
         return totalPopularity;
@@ -146,9 +146,9 @@ export default class Map {
     getMoneyGenerated() {
         let totalMoneyGenerated = 0;
         totalMoneyGenerated += this.getDistrictByName("BORRASCAL").getMoneyGenerated();
-        totalMoneyGenerated += this.getDistrictByName("EL_NIDO").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("EL NIDO").getMoneyGenerated();
         totalMoneyGenerated += this.getDistrictByName("GUINEA").getMoneyGenerated();
-        totalMoneyGenerated += this.getDistrictByName("NUEVA_PRADERA").getMoneyGenerated();
+        totalMoneyGenerated += this.getDistrictByName("NUEVA PRADERA").getMoneyGenerated();
         totalMoneyGenerated += this.getDistrictByName("SAHAR").getMoneyGenerated();
         totalMoneyGenerated += this.getDistrictByName("SOMOSAGUA").getMoneyGenerated();
         return totalMoneyGenerated;

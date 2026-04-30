@@ -7,10 +7,7 @@ export default class DistrictNuevaPradera extends District {
         super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
     }
-    createSceneList(){
-        const list = [];
-        list.push('districtNuevaPraderaScene1', 'districtNuevaPraderaScene2');
-        return list;
-    }
+    getSceneNormal() {return 'districtNuevaPraderaSceneNormal';}
+    getSceneSpecial() {return 'districtNuevaPraderaSceneSpecial';}
     getSpecialBuilding() {return new SpecialBuilding('specialBuildingNuevaPradera',"ENPAWIRE",330000,3,17);}
 };
