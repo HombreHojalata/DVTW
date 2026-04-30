@@ -10,6 +10,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.district = data.district;
         this.tutorial = data.tutorial || false;
         this.order = data.order || 1;
+        this.day = data.day || 1;
     }
        
     create() {
@@ -111,7 +112,7 @@ export default class DistrictScene extends Phaser.Scene {
         this.closeButton.on('pointerup', () => {
             tooltip.setVisible(false);
             this.scene.stop();
-            this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order });
+            this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, day: this.day });
         });
         return this.closeButton;
     }
@@ -155,7 +156,7 @@ export default class DistrictScene extends Phaser.Scene {
                     this.time.delayedCall(400, () => {
                         tooltip.setVisible(false);
                         this.scene.stop();
-                        this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
+                        this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true, day: this.day });
                     });
                 } else this.cameras.main.shake(200, 0.005);
             }
@@ -192,7 +193,7 @@ export default class DistrictScene extends Phaser.Scene {
                     this.footerUI.refreshMoney();
                     this.time.delayedCall(400, () => {
                         this.scene.stop();
-                        this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true });
+                        this.scene.launch('districtScene', { district: this.district, tutorial: this.tutorial, order: this.order, boughtBuilding: true, day: this.day });
                     });
                 } 
             }else this.cameras.main.shake(200, 0.005);

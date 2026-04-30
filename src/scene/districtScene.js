@@ -312,7 +312,7 @@ export default class DistrictScene extends Phaser.Scene {
                 tooltip.setVisible(false);
                 this.closeButton.setVisible(false);
                 this.scene.pause('districtScene');
-                this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial, order: this.order});
+                this.scene.launch('districtStoreScene', { district: this.district, tutorial: this.tutorial, order: this.order, day: this.day });
             }
         });
         return this.storeButton;
@@ -338,7 +338,7 @@ export default class DistrictScene extends Phaser.Scene {
             if (audioManager) audioManager.play('closeDistrict');
             this.scene.stop();
             this.registry.set('flagShow',false);
-            this.scene.get('gameScene').scene.restart();
+            this.scene.resume('gameScene');
         });
         return this.closeButton;
     }

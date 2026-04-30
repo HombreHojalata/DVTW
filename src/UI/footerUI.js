@@ -41,11 +41,16 @@ export default class footerUI {
                 targets: this.moneyText,
                 scaleX: 1.2,
                 scaleY: 1.2,
-                duration: 300,
-                yoyo: true,
+                duration: 200,
                 ease: 'Power2',
                 onComplete: () => {
-                   callback && callback();
+                   this.scene.tweens.add({
+                    targets: this.moneyText,
+                    scaleX: 1,
+                    scaleY: 1,
+                    duration: 200,
+                    ease: 'Power2',
+                });
                 }
             });
         } 

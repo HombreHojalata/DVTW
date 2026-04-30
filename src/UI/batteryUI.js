@@ -14,7 +14,7 @@ export default class batteryI {
         const terminalHeight = 30;
         
         const batteryX = this.scene.sys.game.config.width - batteryWidth - 20;
-        const batteryY = 100;
+        const batteryY = 150;
         const innerPadding = 15;
 
         this.innerX = batteryX + innerPadding;
@@ -37,20 +37,20 @@ export default class batteryI {
         const textCenterX = this.innerX + this.innerWidth / 2;
 
         const labelStyle = {
-            fontSize: '14px',
-            color: '#ffffff',
-            fontStyle: 'bold',
-            fontFamily: 'Georgia'
-        };
-        const numberStyle = {
             fontSize: '26px',
             color: '#ffffff',
             fontStyle: 'bold',
-            fontFamily: 'Georgia'
+            fontFamily: 'Handjet'
+        };
+        const numberStyle = {
+            fontSize: '35px',
+            color: '#ffffff',
+            fontStyle: 'bold',
+            fontFamily: 'Handjet'
         };
 
-        this.energyLabelTitle = this.scene.add.text(textCenterX, bottomSectionY + 20, 'ENERGÍA:', labelStyle).setOrigin(0.5, 0).setDepth(13);
-        this.energyNumberText = this.scene.add.text(textCenterX, bottomSectionY + sectionHeight - 10, '', numberStyle).setOrigin(0.5, 1.5).setDepth(13);
+        this.energyLabelTitle = this.scene.add.text(textCenterX, bottomSectionY + 13, 'ENERGÍA:', labelStyle).setOrigin(0.5, 0).setDepth(13);
+        this.energyNumberText = this.scene.add.text(textCenterX, bottomSectionY + sectionHeight - 5, '', numberStyle).setOrigin(0.5, 1.5).setDepth(13);
 
         this.refresh();
     }
@@ -63,7 +63,7 @@ export default class batteryI {
 
         if (!maxEnergy || maxEnergy === 0) return;
 
-        this.energyNumberText.setText(Math.floor(`${currentEnergy}`) + '/' +  Math.floor(`${maxEnergy}`));
+        this.energyNumberText.setText(Math.floor(`${currentEnergy}`) + ' / ' +  Math.floor(`${maxEnergy}`));
 
         const energyPercent = Phaser.Math.Clamp(currentEnergy / maxEnergy, 0, 1);
 

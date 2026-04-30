@@ -133,12 +133,10 @@ export default class GameScene extends Phaser.Scene {
     */
 
     startEnergyDrain() {
-        this.totalDayDurationMs = 0.5 * 60 * 1000;
-        //this.energyTickMs = 250;
-      //  this.totalDayDurationMs = (0.5 * 60 * 5000) / 2; // TODO: Cambiar tras testeo
-        this.energyTickMs = 1000 / 100;
         const maxEnergy = this.player.getMaxEnergy() || 100;
-        this.energyDrainPerTick = maxEnergy / (this.totalDayDurationMs / this.energyTickMs);
+        this.totalDayDurationMs = 2 * 60 * 1000; // 2 min (120.000 ms)
+        this.energyTickMs = 1000 / 100;  // 10 ñms por tick   
+        this.energyDrainPerTick = 100 / (this.totalDayDurationMs / this.energyTickMs);
 
         if (this.energyTimerEvent) {
             this.energyTimerEvent.remove(false);
@@ -218,7 +216,7 @@ export default class GameScene extends Phaser.Scene {
                     this.tweens.add({
                         targets: this.middayOverlay,
                         alpha: 0,
-                        duration: 2000,
+                        duration: 1000,
                         ease: 'Power2'
                     });
                 }
@@ -247,7 +245,7 @@ export default class GameScene extends Phaser.Scene {
                     this.tweens.add({
                         targets: this.afternoonOverlay,
                         alpha: 0,
-                        duration: 1500,
+                        duration: 1000,
                         ease: 'Power2'
                     });
                 }

@@ -2,14 +2,15 @@ export default class confirmationUI {
     constructor(scene, onConfirm) {
         this.scene = scene;
         this.onConfirm = onConfirm;
+        this.isVisible = false;
         this.create();
     }
 
     create() {
         const { width, height } = this.scene.sys.game.config;
 
-        this.overlay = this.scene.add.rectangle(0, 0, width, height, 0x000000, 0.6).setOrigin(0).setInteractive().setVisible(false).setDepth(6);
-        this.container = this.scene.add.container(width * 0.40, height / 2).setVisible(false).setDepth(25);
+        this.overlay = this.scene.add.rectangle(0, 0, width, height, 0x000000, 0.6).setOrigin(0).setInteractive().setVisible(false).setDepth(25);
+        this.container = this.scene.add.container(width * 0.50, height / 2).setVisible(false).setDepth(25);
         this.postit = this.scene.add.image(0, 0, 'confirmationUI').setScale(0.8);
         
         const txtStyle = {
@@ -26,7 +27,7 @@ export default class confirmationUI {
             fontSize: '40px',
             color: '#8b0000',
             fontFamily: 'Georgia',
-            fontWight: 'bold'
+            fontWeight: 'bold'
         };
         this.btnNo = this.scene.add.text(0, 80, "[ SEGUIR TRABAJANDO ]", btnStyle).setOrigin(0.5).setAngle(-3).setInteractive({ useHandCursor: true }).on('pointerdown', () => this.cancel());
         this.btnYes = this.scene.add.text(0, 160, "[ SUFICIENTE POR HOY ]", btnStyle).setOrigin(0.5).setAngle(-3).setInteractive({ useHandCursor: true }).on('pointerdown', () => this.confirm());
@@ -43,7 +44,7 @@ export default class confirmationUI {
                 targets: button,
                 scale: 1.1,
                 duration: 100,
-                ease: 'Powe1'
+                ease: 'Power1'
             });
         });
 
@@ -91,7 +92,6 @@ export default class confirmationUI {
 
                 if (this.scene.energyTimerEvent)
                     this.scene.energyTimerEvent.paused = false;
-
             } 
         });
     }
@@ -103,7 +103,7 @@ export default class confirmationUI {
     confirm() {
         this.hide();
         if (this.onConfirm){
-            this.scene.registry.set('flagShow', true);             
+            this.scene.registry.set('flagShow', true);
             this.onConfirm();
         } 
     }

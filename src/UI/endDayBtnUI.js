@@ -12,7 +12,7 @@ export default class endDayBtnUI {
         const batteryWidth = 222;
         const batteryHeight = 466;
         const batteryX = this.scene.sys.game.config.width - batteryWidth - 20;
-        const batteryBottomY = 80 + batteryHeight;
+        const batteryBottomY = 130 + batteryHeight;
 
         const x = batteryX + (batteryWidth / 2);
         const y = batteryBottomY + 60;
@@ -61,7 +61,7 @@ export default class endDayBtnUI {
                 this.finishDay();
             } else {
                 this.btn.setTexture('endDayNormal');
-                this.blocker =  this.scene.add.zone(x, y, width, height).setOrigin(0.5).setInteractive().setDepth(24);
+                //this.blocker =  this.scene.add.zone(x, y, width, height).setOrigin(0.5).setInteractive().setDepth(24);
                 this.confirmationUI = new confirmationUI(this.scene, () => this.finishDay()).show();
             }
         });

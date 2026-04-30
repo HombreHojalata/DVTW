@@ -47,13 +47,13 @@ export default class MissionScene extends Phaser.Scene {
 
     spawnTemplate(newWidth,newHeight,offsetX,offsetY){
         this.template = this.mission.itIsCorrupt()? 'missionCorruptTemplate' : 'missionTemplate';
-        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY, this.template).setDisplaySize(newWidth, newHeight);
+        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY + 20, this.template).setDisplaySize(newWidth, newHeight);
     }
     spawnNameText(offsetX,offsetY){                         //NEED TO CHANGE
         const text = '¡' + this.mission.getName() + '!';
         const spacing = 10;
         let x = 0;
-        const container = this.add.container(0, offsetY + 70);
+        const container = this.add.container(0, offsetY + 90);
 
         for (let char of text) {
             const letter = this.add.text(x - 100, 0, char, {
@@ -71,7 +71,7 @@ export default class MissionScene extends Phaser.Scene {
         return container;
     }
     spawnDescText(newWidth,newHeight,offsetX,offsetY){
-        const descText = this.add.text(newWidth/4 - offsetX - 20 ,newHeight/4 + offsetY*2, this.mission.getDescription(), {
+        const descText = this.add.text(newWidth/4 - offsetX - 20 ,newHeight/4 + offsetY*2 + 20, this.mission.getDescription(), {
             fontSize: '18px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
@@ -82,13 +82,13 @@ export default class MissionScene extends Phaser.Scene {
         return descText;
     }  
     spawnDetailText(newWidth,newHeight,offsetX,offsetY){
-        const populationInfo = this.add.text(newWidth / 2 + offsetX*4 - 20, newHeight - offsetY*10,'Poblacion: ' + this.district.getPopulation(),{
+        const populationInfo = this.add.text(newWidth / 2 + offsetX*4, newHeight - offsetY*10,'Poblacion: ' + this.district.getPopulation(),{
             fontSize: '14px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
             color: '#000000',
         }).setDepth(1000);
-        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6, newHeight - offsetY*10, 'Satisfaccion: ' + this.district.getSatisfaction() + '%',{
+        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6 + 20, newHeight - offsetY*10, 'Satisfaccion: ' + this.district.getSatisfaction() + '%',{
             fontSize: '14px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
@@ -102,13 +102,13 @@ export default class MissionScene extends Phaser.Scene {
         //better getScene from mission
 
         //this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,this.mission.getScene());
-        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2,this.mission.getScene());
+        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2 + 20,this.mission.getScene());
         console.log(this.mission.getScene());
         return this.missionScene;
     }
-    spawnCloseButton(newWidth,offsetX,offsetY){
+    spawnCloseButton(newWidth, offsetX, offsetY){
         if(this.mission.itIsEvent()) return null;
-        this.closeButton = this.add.image(newWidth - offsetX, offsetY + 60,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
+        this.closeButton = this.add.image(newWidth - offsetX, offsetY + 80,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
         this.closeButton.on('pointerover', () => {
             this.tweens.add({
                 targets: this.closeButton,
@@ -144,7 +144,7 @@ export default class MissionScene extends Phaser.Scene {
         if(option.probability <100)
             lines.push({ text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) });
         if(option.money != 0)
-            lines.push({ text: `Beneficio: ${option.money}`, color: getColor(option.money) });
+            lines.push({ text: `Dinero: ${option.money}`, color: getColor(option.money) });
         if(option.corruption != 0)
             lines.push({ text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) });
         if(option.popularity != 0)

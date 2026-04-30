@@ -67,7 +67,7 @@ export default class gameManager{
         this.presidente = this.player.spawnPresident(this.scene);
     }
     spawnConfigurationButton(){
-        this.configButton = this.scene.add.image(1410, 60,'configurationIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }).setScale(1.2).setDepth(20); 
+        this.configButton = this.scene.add.image(1370, 60,'configurationIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }).setScale(1.3).setDepth(20); 
         this.configButton.on('pointerover', () => {
             this.scene.tweens.add({
                 targets: this.configButton,
@@ -79,7 +79,7 @@ export default class gameManager{
         this.configButton.on('pointerout', () => {
             this.scene.tweens.add({
                 targets: this.configButton,
-                scale: 1.2,
+                scale: 1.3,
                 duration: 80,
                 ease: 'Power2'
             });
