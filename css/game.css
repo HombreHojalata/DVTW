@@ -132,7 +132,7 @@ h1 {
 
 
 .mecanicas::before { /* Esta animación he buscado como se hacía */
-    content: "TOP SECRET • CLASIFICADO • CONFIDENCIAL • DUCK LEAKS • ";
+    content: "TOP SECRET - CLASIFICADO - CONFIDENCIAL - DUCK LEAKS - ";
     position: absolute;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;

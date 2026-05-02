@@ -14,134 +14,176 @@ export default class MissionScene extends Phaser.Scene {
     create() {
         console.log("MISSION");
         
-        const sound = this.mission.itIsCorrupt() ? 'corruptMission' : 'mission';
         const audioManager = this.registry.get('audioManager');
+        const sound = this.mission.itIsCorrupt() ? 'corruptMission' : 'mission';
         if (audioManager) audioManager.play(sound);
         
-        const baseWidth = this.scale.width;
-        const baseHeight = this.scale.height;
+        const { width: baseWidth, height: baseHeight } = this.scale;
         const newWidth = baseWidth * 0.9;
         const newHeight = baseHeight * 0.85;
         const offsetX = (baseWidth - newWidth) / 2; 
         const offsetY = (baseHeight - newHeight) / 2 - 50;
-        this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 0.5).setOrigin(0);
-        //PLAYER INFO
+
+        // BACKGROUND
+        this.bgOverlay = this.add.rectangle(0, 0, baseWidth, baseHeight, 0x000000, 1).setOrigin(0).setAlpha(0);
+        this.tweens.add({
+            targets: this.bgOverlay,
+            alpha: 0.6,
+            duration: 150
+        });
+
+        // MAIN CONTAINER
+        this.mainContainer = this.add.container(0, baseHeight);
+
+        // PLAYER AND MAP INFO
         this.gameManager = this.registry.get('gameManager');
         this.player = this.gameManager.getPlayer();
-        this.map = this.gameManager.getMap();
-        //DISTRICT INFO
-        this.district = this.map.getDistrictByName(this.mission.getDistrict());
-        this.districtInfo = this.spawnDetailText(newWidth,newHeight,offsetX,offsetY);
+        this.district = this.gameManager.getMap().getDistrictByName(this.mission.getDistrict());
+
+        // SPAWN ELEMENTS
+        const template = this.spawnTemplate(newWidth, newHeight, offsetX, offsetY);
+        const nameText = this.spawnNameText(offsetX, offsetY);
+        const descText = this.spawnDescText(newWidth, newHeight, offsetX, offsetY);
+        const sceneImg = this.spawnScene(newWidth, newHeight, offsetX, offsetY);
+        const detailTexts = this.spawnDetailText(newWidth, newHeight, offsetX, offsetY);
+        const closeBtn = this.spawnCloseButton(newWidth, offsetX, offsetY);
+
+        this.mainContainer.add([template, nameText, descText, sceneImg, detailTexts.populationInfo, detailTexts.satisfactionInfo]);
+        if (closeBtn) this.mainContainer.add(closeBtn);
+
+        this.spawnButtons();
+
+        // ANIMATION
+        this.tweens.add({
+            targets: this.mainContainer,
+            y: 0,
+            scaleY: { from: 0.2, to: 1 },
+            duration: 600,
+            ease: 'Back.easeOut'
+        });
+
         this.footerUI = new footerUI(this, this.tutorial);
-        //TEMPLATE
-        this.template = this.spawnTemplate(newWidth,newHeight,offsetX,offsetY);
-        //MISSION INFO
-        this.missionNameText = this.spawnNameText(offsetX,offsetY);
-        this.missionDescriptionText = this.spawnDescText(newWidth,newHeight,offsetX,offsetY);
-        this.missionScene = this.spawnScene(newWidth,newHeight,offsetX,offsetY);
-        //OPTIONS
-        this.options = this.spawnButtons();
-        //BUTTONS
-        this.closeButton = this.spawnCloseButton(newWidth,offsetX,offsetY);
     }
 
-    spawnTemplate(newWidth,newHeight,offsetX,offsetY){
-        this.template = this.mission.itIsCorrupt()? 'missionCorruptTemplate' : 'missionTemplate';
-        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY + 20, this.template).setDisplaySize(newWidth, newHeight);
+    spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
+        const key = this.mission.itIsCorrupt() ? 'missionCorruptTemplate' : 'missionTemplate';
+        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY + 20, key).setDisplaySize(newWidth, newHeight);
     }
-    spawnNameText(offsetX,offsetY){                         //NEED TO CHANGE
+
+    spawnNameText(offsetX, offsetY) {
         const text = '¡' + this.mission.getName() + '!';
-        const spacing = 10;
-        let x = 0;
-        const container = this.add.container(0, offsetY + 90);
+        const spacing = 8;
+        let xOffset = 0;
+        const nameContainer = this.add.container(offsetX * 4, offsetY + 90);
 
         for (let char of text) {
-            const letter = this.add.text(x - 100, 0, char, {
-                fontSize: '65px',
+            const letter = this.add.text(xOffset - 100, 0, char, {
+                fontSize: '60px',
                 fontFamily: 'Impact',
                 fontStyle: 'bold',
                 color: '#ffffff'
             });
-            container.add(letter);
-            x += letter.width + spacing;
+            nameContainer.add(letter);
+            xOffset += letter.width + spacing;
         }
-        // centrar
-        container.x = offsetX * 4;
-        container.setAngle(-2.8);
-        return container;
+        nameContainer.setAngle(-2.8);
+        return nameContainer;
     }
-    spawnDescText(newWidth,newHeight,offsetX,offsetY){
-        const descText = this.add.text(newWidth/4 - offsetX - 20 ,newHeight/4 + offsetY*2 + 20, this.mission.getDescription(), {
+
+    spawnDescText(newWidth, newHeight, offsetX, offsetY) {
+        return this.add.text(newWidth / 4 - offsetX - 20, newHeight / 4 + offsetY * 2 + 20, this.mission.getDescription(), {
             fontSize: '18px',
             fontFamily: 'Arial Black',
             fontStyle: 'italic',
             color: '#000000',
-            wordWrap: { width: newWidth - newWidth/2 },                                                 //LIMIT
+            wordWrap: {width: newWidth - newWidth / 2},                                                 //LIMIT
             lineSpacing: 10                                                                             //SPACE BETWEEN LINES
-        }); 
-        return descText;
-    }  
-    spawnDetailText(newWidth,newHeight,offsetX,offsetY){
-        const populationInfo = this.add.text(newWidth / 2 + offsetX*4, newHeight - offsetY*10,'Poblacion: ' + this.district.getPopulation(),{
-            fontSize: '14px',
-            fontFamily: 'Arial Black',
-            fontStyle: 'italic',
-            color: '#000000',
-        }).setDepth(1000);
-        const satisfactionInfo = this.add.text(newWidth / 2 + offsetX*6 + 20, newHeight - offsetY*10, 'Satisfaccion: ' + this.district.getSatisfaction() + '%',{
-            fontSize: '14px',
-            fontFamily: 'Arial Black',
-            fontStyle: 'italic',
-            color: '#000000',
-        }).setDepth(1000);
-        return {populationInfo,satisfactionInfo};
+        });
     }
-    spawnScene(newWidth,newHeight,offsetX,offsetY){
-        //could take it from a list in the district of the mission
-        //this.district = this.mission.getDistrict(); and this.scene = this.district.getSceneFromMission();
-        //better getScene from mission
 
-        //this.missionScene = this.add.image(newWidth-newWidth/2-offsetX*4-35,newHeight-newHeight/2-offsetY,this.mission.getScene());
-        this.missionScene = this.add.image(newWidth-offsetX*3,newHeight-newHeight/2 + 20,this.mission.getScene());
-        console.log(this.mission.getScene());
-        return this.missionScene;
+    spawnDetailText(newWidth, newHeight, offsetX, offsetY) {
+        const toTitleCase = (str) => {
+            return str.toLowerCase().split(' ').map(word => {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }).join(' ');
+        };
+
+        const formattedName = toTitleCase(this.district.getName());
+
+        const startX = newWidth - offsetX * 5 - 10;
+        const startY = newHeight - offsetY * 11;
+        const spacingY = 26;
+
+        const populationInfo = this.add.text(startX, startY, 'Distrito: ' + formattedName, {
+            fontSize: '24px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#000000',
+        });
+        const satisfactionInfo = this.add.text(startX, startY + spacingY, 'Satisfaccion: ' + this.district.getSatisfaction() + '%', {
+            fontSize: '24px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#000000',
+        });
+        return { populationInfo, satisfactionInfo };
     }
-    spawnCloseButton(newWidth, offsetX, offsetY){
-        if(this.mission.itIsEvent()) return null;
-        this.closeButton = this.add.image(newWidth - offsetX, offsetY + 80,'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true }); 
-        this.closeButton.on('pointerover', () => {
+
+    spawnScene(newWidth, newHeight, offsetX, offsetY) {
+        return this.add.image(newWidth - offsetX * 3, newHeight - newHeight / 2 + 20, this.mission.getScene()).setDisplaySize(350, 350);
+    }
+
+    spawnCloseButton(newWidth, offsetX, offsetY) {
+        if (this.mission.itIsEvent()) return null;
+        const btn = this.add.image(newWidth - offsetX + 25, offsetY + 77, 'closeIcon').setOrigin(0.5).setInteractive({ useHandCursor: true });
+        btn.on('pointerover', () => {
             this.tweens.add({
-                targets: this.closeButton,
+                targets: btn,
                 scale: 1.1,
                 duration: 80
             });
         });
-        this.closeButton.on('pointerout', () => {
+        btn.on('pointerout', () => {
             this.tweens.add({
-                targets: this.closeButton,
+                targets: btn,
                 scale: 1,
                 duration: 80
             });
         });
-        this.closeButton.on('pointerup', () => {
-            this.scene.stop();
+        btn.on('pointerup', () => {
             const audioManager = this.registry.get('audioManager');
             if (audioManager) audioManager.play('exitMission');
-            this.scene.resume('gameScene');
+            this.tweens.add({
+                targets: this.mainContainer,
+                y: this.scale.height,
+                scaleY: 0.5,
+                duration: 150,
+                onComplete: () => {
+                    this.scene.stop();
+                    this.scene.resume('gameScene');
+                }
+            });
         });
-        return this.closeButton;
+        return btn;
     }
+
     createOptionButton(x, y, option, minigameScene) {
-        const buttonWidth = 300;   // ancho fijo del botón
-        const buttonHeight = 180;  // alto fijo del botón
+        const buttonWidth = 300;
+        const buttonHeight = 180;
         const padding = 20;
-        const lineSpacing = 6;
+
         const getColor = (value) => value >= 0 ? '#00ff00' : '#ff0000';
+
+        const container = this.add.container(x, y);
+        const bg = this.add.graphics();
+        bg.fillStyle(0x007BFF, 1);
+        bg.fillRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, 20);
+
         const lines = [
-            { text: option.description, color: '#ffffff', size: '18px', style: 'bold'},            
-            { text: `Energía: ${option.energy}`, color: getColor(option.energy) }//JUSTO LA INVERSA SI DA DINERO VERDE, SI CUESTA ROJO      
+            { text: option.description, color: '#ffffff', size: '18px' },
+            { text: `Energía: ${option.energy}`, color: option.energy >= 0 ? '#00ff00' : '#ff0000' }
         ];
-        if(option.probability <100)
+        if(option.probability < 100)
             lines.push({ text: `Probabilidad: ${option.probability}`, color: getColor(option.probability) });
         if(option.money != 0)
             lines.push({ text: `Dinero: ${option.money}`, color: getColor(option.money) });
@@ -149,81 +191,62 @@ export default class MissionScene extends Phaser.Scene {
             lines.push({ text: `Corrupción: ${option.corruption}`, color: getColor(option.corruption) });
         if(option.popularity != 0)
             lines.push({ text: `Satisfacción: ${option.popularity}%`, color: getColor(option.popularity) });
-        
-        const bg = this.add.graphics();
-        bg.fillStyle(0x007BFF, 1);
-        bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
-        const startY = y - buttonHeight / 2 + padding;
-        let currentY = startY;
+
+        let currentY = -buttonHeight / 2 + padding;
         const textObjects = lines.map(line => {
-            const txt = this.add.text(x, currentY, line.text, {
-                fontSize: line.size || '15px',
-                color: line.color,
-                align: 'center',
+            const txt = this.add.text(0, currentY, line.text, {
+                fontSize: line.size || '15px', color: line.color, align: 'center',
                 wordWrap: { width: buttonWidth - padding * 2 }
             }).setOrigin(0.5, 0);
-
-            currentY += txt.height + lineSpacing;
+            currentY += txt.height + 6;
+            container.add(txt);
             return txt;
         });
-        const hitArea = new Phaser.Geom.Rectangle(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight);
-        bg.setInteractive(hitArea, Phaser.Geom.Rectangle.Contains, { useHandCursor: true }).setDepth(0);
-        textObjects.forEach(t => t.setDepth(1));
-        bg.on('pointerover', () => {
-            bg.clear();
-            bg.fillStyle(0x0056b3, 1);
-            bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
-            textObjects.forEach(t => t.setScale(1.05));
+
+        container.addAt(bg, 0);
+        const hitArea = new Phaser.Geom.Rectangle(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight);
+        container.setInteractive(hitArea, Phaser.Geom.Rectangle.Contains, { useHandCursor: true });
+
+        container.on('pointerover', () => {
+            bg.clear(); bg.fillStyle(0x0056b3, 1);
+            bg.fillRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, 20);
         });
-        bg.on('pointerout', () => {
-            bg.clear();
-            bg.fillStyle(0x007BFF, 1);
-            bg.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, 20);
-            textObjects.forEach(t => t.setScale(1));
+        container.on('pointerout', () => {
+            bg.clear(); bg.fillStyle(0x007bff, 1);
+            bg.fillRoundedRect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight, 20);
         });
-        bg.on('pointerdown', () => textObjects.forEach(t => t.setScale(1)));
-        bg.on('pointerup', () =>{
-            textObjects.forEach(t => t.setScale(1.1));
-            this.gameManager.removeMission(this, this.mission, option, this.district);
-            this.scene.stop();
+
+        container.on('pointerup', () => {
             const audioManager = this.registry.get('audioManager');
             if (audioManager) audioManager.play('exitMission');
-            if(this.mission.isMinigame()) {
-                this.scene.start(minigameScene);
-            }else{
-                this.scene.resume('gameScene');
-            }
+            this.gameManager.removeMission(this, this.mission, option, this.district);
+            this.tweens.add({
+                targets: this.mainContainer,
+                y: this.scale.height,
+                scaleY: 0.5,
+                duration: 150,
+                onComplete: () => {
+                    this.scene.stop();
+                    if (this.mission.isMinigame()) this.scene.start(minigameScene);
+                    else this.scene.resume('gameScene');
+                }
+            });
         });
-        return { bg, texts: textObjects };
+
+        this.mainContainer.add(container);
     }
-    spawnButtons(){
-        if(this.mission.isMinigame()){
-            if(this.mission.getName() == "Cuackdle") this.createOptionButton(550,500,this.mission.getOptions()[0],'wordleMiniGame');
-            else if(this.mission.getName() == "Memory") this.createOptionButton(550,500,this.mission.getOptions()[0],'memoryMiniGame');
-            else if(this.mission.getName() == "Plinko") this.createOptionButton(550,500,this.mission.getOptions()[0],'plinkoMiniGame');
-            else if(this.mission.getName() == "whacAMole") this.createOptionButton(550,500,this.mission.getOptions()[0],'whacAMole');
-            else if(this.mission.getName() == "Sopa de letras") this.createOptionButton(550,500,this.mission.getOptions()[0],'wordSearchMiniGame');
-            else if(this.mission.getName() == "MonkeyType") this.createOptionButton(550,500,this.mission.getOptions()[0],'monkeyTypeGame');
-        }
-        else{
-            this.numberOfOptions = this.mission.getNumOptions();
-            this.optionsList = this.mission.getOptions();
-            switch(this.numberOfOptions){
-                case 2: this.missionWithTwoOptions(this.optionsList); break;
-                case 1: this.missionWithOneOption(this.optionsList); break;
+
+    spawnButtons() {
+        const options = this.mission.getOptions();
+        if (this.mission.isMinigame()) {
+            const scenes = { "Cuackdle": 'wordleMiniGame', "Memory": 'memoryMiniGame', "Plinko": 'plinkoMiniGame', "whacAMole": 'whacAMole', "Sopa de letras": 'wordSearchMiniGame', "MonkeyType": 'monkeyTypeGame' };
+            this.createOptionButton(550, 500, options[0], scenes[this.mission.getName()]);
+        } else {
+            if (this.mission.getNumOptions() === 2) {
+                options.forEach((opt, i) => this.createOptionButton(400 + (i * 350), 500, opt, null));
+            } else {
+                this.createOptionButton(550, 500, options[0], null);
             }
         }
-    }
-    missionWithTwoOptions(optionsList){
-        optionsList.forEach((option, index) => {
-            const x = 400 + (index * 350);
-            const y = 500;
-            this.createOptionButton(x,y,option,null);
-        });
-    }
-    missionWithOneOption(optionList){
-        const x = 550;
-        const y = 500;
-        this.createOptionButton(x,y,optionList[0],null);
     }
 }
