@@ -37,27 +37,34 @@ export default class Mission{
     }
     createMissionButton(scene){
         this.icon = this.itIsCorrupt() ? 'missionCorruptIcon' : 'missionIcon';
-        this.missionButton = scene.add.image(this.getPos()[0],this.getPos()[1],this.icon).setOrigin(0).setInteractive({ useHandCursor: true }); 
-        this.missionButton.on('pointerover', () => {
-            scene.tweens.add({
-                targets: this.missionButton,
-                scale: 1.1,
-                duration: 80,
-                ease: 'Power2'
-            });
-        });
-        this.missionButton.on('pointerout', () => {
-            scene.tweens.add({
-                targets: this.missionButton,
-                scale: 1,
-                duration: 80,
-                ease: 'Power2'
-            });
-        });
-        this.missionButton.on('pointerup', () => {
+        if(this.event){
             scene.scene.launch('missionScene', { mission: this});
             scene.scene.pause("gameScene");
-        });
+        }
+        else{
+            this.missionButton = scene.add.image(this.getPos()[0],this.getPos()[1],this.icon).setOrigin(0).setInteractive({ useHandCursor: true }); 
+            this.missionButton.on('pointerover', () => {
+                scene.tweens.add({
+                    targets: this.missionButton,
+                    scale: 1.1,
+                    duration: 80,
+                    ease: 'Power2'
+                });
+            });
+            this.missionButton.on('pointerout', () => {
+                scene.tweens.add({
+                    targets: this.missionButton,
+                    scale: 1,
+                    duration: 80,
+                    ease: 'Power2'
+                });
+            });
+            this.missionButton.on('pointerup', () => {
+                scene.scene.launch('missionScene', { mission: this});
+                scene.scene.pause("gameScene");
+            });
+        }
+        
     }
     deleteMissionButton() {
         if (this.missionButton) {
