@@ -190,18 +190,18 @@ export default class DistrictScene extends Phaser.Scene {
 
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '30px',
-            fontFamily: 'Margarine',
-            backgroundColor: '#000',
-            color: '#fff',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000000',
+            color: '#ffffff',
             padding: { x: 5, y: 5 }
-        }).setVisible(false).setPosition(0,0).setDepth(100);
+        }).setVisible(false).setDepth(100);
         const tooltip2 = this.add.text(0, 0, '', {
             fontSize: '30px',
-            fontFamily: 'Margarine',
-            backgroundColor: '#000',
-            color: '#ffe600',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000000',
+            color: '#d1c131',
             padding: { x: 5, y: 5 }
-        }).setVisible(false).setPosition(0,165).setDepth(100);
+        }).setVisible(false).setDepth(100);
 
         const startX = newWidth * 0.5;
         const spacing = 100;
@@ -219,9 +219,11 @@ export default class DistrictScene extends Phaser.Scene {
                 yoyo: true,
                 ease: 'Power2'
             });
-            img.on('pointerover', () => {
-                tooltip.setText(building.getBuildingInfo());
+            img.on('pointerover', (pointer) => {
+                tooltip.setText(building.getBuildingInfo(this.district.getPopulation(), this.district.getTaxesPercentage()));
                 tooltip2.setText("Si quieres vender el edificio pulsalo");
+                tooltip.setPosition(pointer.x + 5, pointer.y+5);
+                tooltip2.setPosition(pointer.x + 5, pointer.y+130);
                 tooltip.setVisible(true);
                 tooltip2.setVisible(true);
             });
@@ -274,14 +276,15 @@ export default class DistrictScene extends Phaser.Scene {
     spawnStoreButton(newHeight, positionX) {
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '30px',
-            fontFamily: 'Margarine',
+            fontFamily: 'Handjet',
             backgroundColor: '#000',
             color: '#fff',
             padding: { x: 5, y: 5 }
         }).setVisible(false).setPosition(0,0).setDepth(100);
         this.storeButton = this.add.image(positionX, newHeight - newHeight/2 + 35,'storeIcon').setScale(1.3).setOrigin(0.5,0.5).setInteractive({ useHandCursor: true }); 
-        this.storeButton.on('pointerover', () => {
+        this.storeButton.on('pointerover', (pointer) => {
             tooltip.setText(`Dale al boton si quieres ir al mercado de EDIFICIOS(${this.district.getSpaceBuildingBuilt()}/${this.district.getSpaceBuilding()})`);
+            tooltip.setPosition(pointer.x + 5, pointer.y + 5);
             tooltip.setVisible(true);
             this.tweens.add({
                 targets: this.storeButton,
@@ -399,7 +402,7 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getNormalSatisfaction < 30){
+                if(this.district.getNormalSatisfaction() < 30){
                     if(this.district.getTaxesPercentage() < 100){
                         this.district.addTaxesPercentage(5);
                         this.taxesText.setText(this.district.getTaxesPercentage());
@@ -495,7 +498,7 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getNormalSatisfaction()){
+                if(this.district.getNormalSatisfaction() < 30){
                     if(this.district.getWorkSchedule() < 24){
                         this.district.addWorkSchedule(1);
                         this.workScheduleText.setText(this.district.getWorkSchedule());
@@ -543,7 +546,7 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getNormalSatisfaction()){
+                if(this.district.getNormalSatisfaction() < 30){
                     if(this.district.getCleaningPercentage() < 100) {
                         this.district.addCleaningPercentage(1);
                         this.cleaningText.setText(this.district.getCleaningPercentage());

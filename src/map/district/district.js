@@ -168,9 +168,9 @@ export default class District {
         const buildingList = [];
         for(let i = 0 ; i < buildings.length; i++){
             //PNGBuilding,name,cost,income,satisfaction
-            if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOGAR",5000,0,2));
+            if(buildings[i] === "HOUSE") buildingList.push(new BuildingHouse('buildingHouse',"HOGAR",5000,-1,1));
             else if(buildings[i] === "CINEMA") buildingList.push(new BuildingCinema('buildingCinema',"CINE",10000,1,4));
-            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARQUE",10000,-1,2));
+            else if(buildings[i] === "PARK") buildingList.push(new BuildingPark('buildingPark',"PARQUE",10000,-1,3));
             else if(buildings[i] === "HOTEL") buildingList.push(new BuildingHotel('buildingHotel',"HOTEL",20000,1,3));
             else if(buildings[i] === "COMERCIAL") buildingList.push(new BuildingComercialCenter('buildingComercialCenter',"CENTRO COMERCIAL",30000,2,5));
             else if(buildings[i] === "FACTORY") buildingList.push(new BuildingFactory('buildingFactory',"FÁBRICA",50000,3,-5));
@@ -181,7 +181,7 @@ export default class District {
                 const income = buildingList[i].getBuildingIncome();
                 this.moneyGeneratedByBuildings.push(income);
                 this.baseMoneyGeneratedByBuildings.push(income);
-                this.updateSatisfaction(buildingList[i].getBuildingSatisfaction());
+                this.updateBuildingSatisfaction(buildingList[i].getBuildingSatisfaction());
             }
         }
         return buildingList;
