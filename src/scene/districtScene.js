@@ -385,17 +385,36 @@ export default class DistrictScene extends Phaser.Scene {
         return button;
     }
     spawnTaxesButton(newWidth, offsetX, newHeight, offsetY){
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
+
         this.botonAumentar = this.createButton(
             newWidth - offsetX*7 + 10, 
             newHeight - offsetY*15 + 40, 
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getTaxesPercentage() < 100){
-                    this.district.addTaxesPercentage(5);
-                    this.taxesText.setText(this.district.getTaxesPercentage());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getNormalSatisfaction < 30){
+                    if(this.district.getTaxesPercentage() < 100){
+                        this.district.addTaxesPercentage(5);
+                        this.taxesText.setText(this.district.getTaxesPercentage());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
@@ -415,17 +434,35 @@ export default class DistrictScene extends Phaser.Scene {
         );
     }
     spawnSecurityButton(newWidth, offsetX, newHeight, offsetY){
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
         this.botonAumentar = this.createButton(
             newWidth-offsetX*2 + 10, 
             newHeight - offsetY*15 + 40, 
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getSecurityPercentage() < 100){
-                    this.district.addSecurityPercentage(1);
-                    this.securityText.setText(this.district.getSecurityPercentage());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getNormalSatisfaction() < 30){
+                    if(this.district.getSecurityPercentage() < 100){
+                        this.district.addSecurityPercentage(1);
+                        this.securityText.setText(this.district.getSecurityPercentage());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
@@ -445,17 +482,35 @@ export default class DistrictScene extends Phaser.Scene {
         );
     }
     spawnWorkScheduleButton(newWidth,offsetX,newHeight,offsetY){
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
         this.botonAumentar = this.createButton(
             newWidth - offsetX*7 + 10, 
             newHeight - offsetY*8 + 40, 
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getWorkSchedule() < 24){
-                    this.district.addWorkSchedule(1);
-                    this.workScheduleText.setText(this.district.getWorkSchedule());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getNormalSatisfaction()){
+                    if(this.district.getWorkSchedule() < 24){
+                        this.district.addWorkSchedule(1);
+                        this.workScheduleText.setText(this.district.getWorkSchedule());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
@@ -475,17 +530,35 @@ export default class DistrictScene extends Phaser.Scene {
         );
     }
     spawnCleaningButton(newWidth,offsetX,newHeight,offsetY) { 
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false);
         this.botonAumentar = this.createButton(
             newWidth-offsetX*2 + 10, 
             newHeight - offsetY*8 + 40, 
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getCleaningPercentage() < 100) {
-                    this.district.addCleaningPercentage(1);
-                    this.cleaningText.setText(this.district.getCleaningPercentage());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getNormalSatisfaction()){
+                    if(this.district.getCleaningPercentage() < 100) {
+                        this.district.addCleaningPercentage(1);
+                        this.cleaningText.setText(this.district.getCleaningPercentage());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
@@ -505,7 +578,6 @@ export default class DistrictScene extends Phaser.Scene {
         );
     }
     // TUTORIAL
-    // FALTARIA EXPLICAR QUE EL BENEFICIO DE UN EDIFICIO ES SU VALOR N X HORAS LABORALES X NUM POBLACION
     createTutorialButton(container, x, y, text, callback) {
         const width = 220;
         const height = 48;

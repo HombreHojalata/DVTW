@@ -20,14 +20,14 @@ export default class Map {
         //PNGwithOutSpecial, PNGwithSpecial, posX, posY)
         const BORRASCAL = new DistrictBorrascal(
             "BORRASCAL", "Aquí es donde los presupuestos públicos se congelan. Sin embargo, a pesar de ello el distrito de Borrascal es famoso por sus laboratorios e investigaciones. Una pena que sean demasiado caras.",
-            7000, 20, 1,
+            7000, 16, 1,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["HOTEL"], 5,
             false, "CENTRO DE INVESTIGACIÓN",
             'districtBorrascal', 'districtBorrascalSpecial', -15, -13
         );
         const EL_NIDO = new DistrictElNido(
             "EL NIDO", "Donde el aire es puro y los impuestos son bajos. El Nido es el lujoso hogar de la aristocracia emplumada, y están muy acostumbrados a gastar su dinero en comercios de alto standing.",
-            10000, 31, 2,
+            10000, 23, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["HOSPITAL"], 3,
             false, "COPITOLIO",
             'districtElNido', 'districtElNidoSpecial', -17, -18
@@ -55,7 +55,7 @@ export default class Map {
         );
         const SOMOSAGUA = new DistrictSomosagua(
             "SOMOSAGUA", "La zona industrial de la ciudad: si el agua huele a azufre, es que el progreso va bien. Los vecinos de Somosagua están acostumbrados a la contaminación, por lo que no se quejarán mucho si ampliamos el número de fábricas.",
-            4000, 24, 2,
+            4000, 20, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["FACTORY"], 4,
             false, "FÁBRICA MUNDO JUPI",
             'districtSomosagua', 'districtSomosaguaSpecial', -17, -17

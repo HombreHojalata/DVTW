@@ -45,7 +45,7 @@ export default class gameManager{
         return this.missionL;
     }
     removeMission(scene,mission, option, district){
-        district.updateSatisfaction(option.popularity);
+        district.updateMissionSatisfaction(option.popularity);
         this.player.updateEnergy(option.energy);
         this.player.updateCorruption(option.corruption);
         this.player.updateMoney(option.money);
