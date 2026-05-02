@@ -750,7 +750,7 @@
     ]
   },
   {
-    "name": "La Gran Muralla (para que no se escapen los perros)",
+    "name": "La Gran Muralla",
     "description": "Un lobby de constructores propone un muro perimetral en los parques para que los perros no se escapen a la carretera. El muro es de mármol de Carrara y tiene sensores de movimiento.",
     "event": false,
     "corrupt": true,

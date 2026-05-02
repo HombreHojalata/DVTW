@@ -750,8 +750,8 @@
     ]
   },
   {
-    "name": "Conversión del Comedor Social en Restaurante con Estrella",
-    "description": "El local del comedor social tiene unas vistas increíbles. Sería un desperdicio no poner un restaurante de comida molecular que cobre 200€ por un aire de patata.",
+    "name": "De Comedor Social a Restaurante con Estrella",
+    "description": "Un comedor social tiene unas vistas increíbles. Sería un desperdicio no poner un restaurante de comida molecular que cobre 200€ por un aire de patata.",
     "event": false,
     "corrupt": true,
     "minigame": false,
