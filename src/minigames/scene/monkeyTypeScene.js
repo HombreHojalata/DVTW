@@ -46,7 +46,9 @@ export default class MonkeyTypeScene extends Phaser.Scene {
         this.charObjects = [];
         this.charPositions = [];
 
-        this.add.rectangle(0, 0, width, height, 0x111111, 0.97).setOrigin(0);
+        // --- CAMBIO SFONDO QUI ---
+        this.add.image(0, 0, 'sfondoMonkeyType').setOrigin(0).setDisplaySize(width, height);
+        // -------------------------
 
         this.titleText = this.add.text(width / 2, 55, 'MONKEYTYPE MODE', {
             fontFamily: 'Arial',
@@ -344,52 +346,52 @@ export default class MonkeyTypeScene extends Phaser.Scene {
     }
 
     showResults(stats, result) {
-    const { width, height } = this.scale;
+        const { width, height } = this.scale;
 
-    this.resultPayload = result;
+        this.resultPayload = result;
 
-    const panelWidth = 560;
-    const panelHeight = 380;
-    const panelX = width / 2;
-    const panelY = height / 2;
+        const panelWidth = 560;
+        const panelHeight = 380;
+        const panelX = width / 2;
+        const panelY = height / 2;
 
-    this.resultBg = this.add.rectangle(panelX, panelY, panelWidth, panelHeight, 0x000000, 0.92)
-        .setStrokeStyle(2, 0xf0f0f0);
+        this.resultBg = this.add.rectangle(panelX, panelY, panelWidth, panelHeight, 0x000000, 0.92)
+            .setStrokeStyle(2, 0xf0f0f0);
 
-    const topY = panelY - panelHeight / 2 + 35;
+        const topY = panelY - panelHeight / 2 + 35;
 
-    this.resultTitle = this.add.text(panelX, topY, 'RESULTS', {
-        fontFamily: 'Arial',
-        fontSize: '32px',
-        color: '#ffffff',
-        fontStyle: 'bold'
-    }).setOrigin(0.5, 0);
+        this.resultTitle = this.add.text(panelX, topY, 'RESULTS', {
+            fontFamily: 'Arial',
+            fontSize: '32px',
+            color: '#ffffff',
+            fontStyle: 'bold'
+        }).setOrigin(0.5, 0);
 
-    const resultLines = [
-        `WPM: ${stats.wpm}`,
-        `Accuracy: ${stats.accuracy}%`,
-        `Correct chars: ${stats.correctChars}`,
-        `Mistakes: ${stats.incorrectChars}`,
-        `Words completed: ${stats.completedWords}`,
-        `Reward: +${result.money} money`
-    ];
+        const resultLines = [
+            `WPM: ${stats.wpm}`,
+            `Accuracy: ${stats.accuracy}%`,
+            `Correct chars: ${stats.correctChars}`,
+            `Mistakes: ${stats.incorrectChars}`,
+            `Words completed: ${stats.completedWords}`,
+            `Reward: +${result.money} money`
+        ];
 
-    this.resultText = this.add.text(panelX, topY + 70, resultLines.join('\n'), {
-        fontFamily: 'Arial',
-        fontSize: '22px',
-        color: '#f2f2f2',
-        align: 'center',
-        lineSpacing: 12
-    }).setOrigin(0.5, 0);
+        this.resultText = this.add.text(panelX, topY + 70, resultLines.join('\n'), {
+            fontFamily: 'Arial',
+            fontSize: '22px',
+            color: '#f2f2f2',
+            align: 'center',
+            lineSpacing: 12
+        }).setOrigin(0.5, 0);
 
-    this.resultHint = this.add.text(panelX, panelY + panelHeight / 2 - 55, 'Press ENTER or ESC to return', {
-        fontFamily: 'Arial',
-        fontSize: '20px',
-        color: '#ffd166'
-    }).setOrigin(0.5, 0.5);
+        this.resultHint = this.add.text(panelX, panelY + panelHeight / 2 - 55, 'Press ENTER or ESC to return', {
+            fontFamily: 'Arial',
+            fontSize: '20px',
+            color: '#ffd166'
+        }).setOrigin(0.5, 0.5);
 
-    this.input.keyboard.on('keydown', this.handleResultKeyDown, this);
-}
+        this.input.keyboard.on('keydown', this.handleResultKeyDown, this);
+    }
 
     handleResultKeyDown(event) {
         if (event.key === 'Enter' || event.key === 'Escape') {

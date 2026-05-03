@@ -171,6 +171,8 @@ import bagPlinko from '../assets/minigames/plinko/bagPlinko.png';
 
 import fondoWordSearch from '../assets/minigames/wordsearch/fondoWordSearch.png';
 
+import sfondoMonkeyType from '../assets/minigames/monkeyType/sfondoMonkeyType.png';
+
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
 import configurationIcon from '../assets/icons/configurationIcon.png'
@@ -474,6 +476,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage6', memoryImage6);
     this.load.image('memoryImage7', memoryImage7);
     this.load.image('memoryImage8', memoryImage8);
+    this.load.image('sfondoMonkeyType', sfondoMonkeyType);  
     this.load.image('whacFrameInicio', whacFrameInicio);
     this.load.image('whacFrame2', whacFrame2);
     this.load.image('whacFrame3', whacFrame3);
