@@ -157,7 +157,8 @@ export default class IntroScene extends Phaser.Scene {
         createMenuButton(120, 90, 'BAD ENDING', () => { // PARA DEPURAR
             this.scene.start('finishScene', { win: false });
         });
-         */
+        */
+
         createMenuButton(120, 30, 'MEMORY', () => {
             this.scene.start('memoryMiniGame');
         });
