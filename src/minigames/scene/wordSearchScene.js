@@ -10,6 +10,8 @@ export default class wordSearchScene extends Phaser.Scene {
         const width = this.scale.width;
         const height = this.scale.height;
 
+        this.add.image(width / 2, height / 2, 'fondoWordSearch').setOrigin(0.5);
+
         this.gameManager = this.registry.get('gameManager');
 
         this.rows = 10;
@@ -25,13 +27,12 @@ export default class wordSearchScene extends Phaser.Scene {
         this.wordsToFind = Phaser.Utils.Array.GetRandom(WORD_SEARCH_WORDS);
 
         this.colors = {
-            emptyTile: 0x1a1a1b,
-            text: '#ffffff',
-            highlight: 0xb59f3b,
-            found: 0x538d4e
+            emptyTile: 0xffffff,
+            emptyAlpha: 0,
+            text: '#e0e0e0',
+            highlight: 0xfdfd96,
+            highlightAlpha: 0.4,
         }
-
-        //BACKGROUND
 
         const UI_X = width * 0.8;
 
@@ -52,6 +53,7 @@ export default class wordSearchScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.maxTimeLimit = 120;
+        this.gameStarted = false;
         this.startTime = this.time.now;
 
         this.timerText = this.add.text(UI_X, 290, `Tiempo: ${this.maxTimeLimit}s`, {
@@ -82,7 +84,7 @@ export default class wordSearchScene extends Phaser.Scene {
     }
 
     update(time) {
-        if (!this.finished) {
+        if (this.gameStarted && !this.finished) {
             const sec = Math.floor((time - this.startTime) / 1000);
             const secLeft = this.maxTimeLimit - sec;
             if (secLeft > 0)
@@ -101,7 +103,7 @@ export default class wordSearchScene extends Phaser.Scene {
         const totalWidth = this.cols * boxSize + (this.cols - 1) * gap;
 
         const centerX = width * 0.4;
-        const startX = centerX - (totalWidth / 2);
+        const startX = Math.floor(centerX - (totalWidth / 2));
         const startY = 150;
 
         const alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -121,7 +123,7 @@ export default class wordSearchScene extends Phaser.Scene {
             let done = false;
             let attempts = 0;
 
-            while (!done && attempts < 10000) {
+            while (!done && attempts < 100000) {
                 const dir = directions[Math.floor(Math.random() * directions.length)];
                 const startRow = Math.floor(Math.random() * this.rows);
                 const startCol = Math.floor(Math.random() * this.cols);
@@ -137,7 +139,7 @@ export default class wordSearchScene extends Phaser.Scene {
                         break;
                     }
 
-                    if (invisibleGrid[r][c] !== '' && invisibleGrid[r][c] !== word[i]) {
+                    if (invisibleGrid[r][c] !== '') {
                         avail = false;
                         break;
                     }
@@ -173,8 +175,8 @@ export default class wordSearchScene extends Phaser.Scene {
                 if (charVal === '')
                     charVal = alph[Math.floor(Math.random() * alph.length)];
 
-                const rect = this.add.rectangle(x, y, boxSize, boxSize, this.colors.emptyTile, 0.8)
-                    .setStrokeStyle(2, 0xffffff)
+                const rect = this.add.rectangle(x, y, boxSize, boxSize, this.colors.emptyTile, this.colors.emptyAlpha)
+                    .setStrokeStyle(2, 0xffffff, 0.2)
                     .setOrigin(0)
                     .setInteractive({ useHandCursor: true });
 
@@ -195,21 +197,26 @@ export default class wordSearchScene extends Phaser.Scene {
     }
 
     startDrag(tile) {
-        if (this.finished)
+        if (this.finished || tile.matched)
             return;
+
+        if(!this.gameStarted){
+            this.gameStarted = true;
+            this.startTime = this.time.now;
+        }
 
         this.isDragging = true;
         this.selectedTiles = [tile];
-        tile.rect.setFillStyle(this.colors.highlight);
+        tile.rect.setFillStyle(this.colors.highlight, this.colors.highlightAlpha);
     }
 
     handleDragOver(tile) {
-        if (!this.isDragging || this.finished)
+        if (!this.isDragging || this.finished || tile.matched)
             return;
 
         if (!this.selectedTiles.includes(tile)) {
             this.selectedTiles.push(tile);
-            tile.rect.setFillStyle(this.colors.highlight);
+            tile.rect.setFillStyle(this.colors.highlight, this.colors.highlightAlpha);
         }
     }
 
@@ -221,13 +228,11 @@ export default class wordSearchScene extends Phaser.Scene {
 
         const selectedWord = this.selectedTiles.map(t => t.letter).join('');
         const reverseWord = selectedWord.split('').reverse().join('');
-
         const match = [selectedWord, reverseWord].find(w => this.wordsToFind.includes(w));
 
         if (match && !this.wordsFoundList.includes(match)) {
             this.wordsFound++;
             this.wordsFoundList.push(match);
-            //this.statusText.setText(`Encontraste la palabra {${selectedWord}}`);
 
             if (this.wordListTexts[match]) {
                 const foundWord = this.wordListTexts[match];
@@ -237,17 +242,22 @@ export default class wordSearchScene extends Phaser.Scene {
 
             this.selectedTiles.forEach(t => {
                 t.matched = true;
-                t.rect.setFillStyle(this.colors.found);
+                t.rect.setFillStyle(0x000000);
+                t.rect.setStrokeStyle(2, 0x000000);
+                t.text.setColor('#000000');
             });
 
             if (this.wordsFound == this.wordsToFind.length)
                 this.finishGame();
         } else {
             this.selectedTiles.forEach(t => {
-                if (t.matched)
-                    t.rect.setFillStyle(this.colors.found);
-                else
-                    t.rect.setFillStyle(this.colors.emptyTile);
+                if (t.matched){
+                    t.rect.setFillStyle(0x000000);
+                    t.rect.setStrokeStyle(2, 0x000000);
+                }else{
+                    t.rect.setFillStyle(this.colors.emptyTile, this.colors.emptyAlpha);
+                    t.rect.setStrokeStyle(2, 0xffffff, 0.2);
+                }
             });
         }
 

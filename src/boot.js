@@ -169,6 +169,8 @@ import fondoPlinko from '../assets/minigames/plinko/fondoPlinko.png';
 import coinPlinko from '../assets/minigames/plinko/coinPlinko.png';
 import bagPlinko from '../assets/minigames/plinko/bagPlinko.png';
 
+import fondoWordSearch from '../assets/minigames/wordsearch/fondoWordSearch.png';
+
 // ICONS
 import closeIcon from '../assets/icons/closeIcon.png'
 import configurationIcon from '../assets/icons/configurationIcon.png'
@@ -491,6 +493,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('fondoPlinko', fondoPlinko);
     this.load.image('coinPlinko', coinPlinko);
     this.load.image('bagPlinko', bagPlinko);
+    this.load.image('fondoWordSearch', fondoWordSearch);
     this.load.image('vendedor', vendedor);
     this.load.image('vendedorSilueta', vendedorSilueta);
     this.load.image('news_icon', news_icon);
