@@ -264,6 +264,7 @@ export default class wordleScene extends Phaser.Scene {
             this.finished = true;
             
             this.statusText.setText('Correcto!\n Acceso Concedido');
+            this.bg = this.add.rectangle(0,0,this.scale.width,this.scale.height,0x000000,0.5).setOrigin(0).setDepth(19);
 
             this.add.text(width / 2, height / 2.5, '¡CONTRASEÑA CORRECTA!', {
                 fontSize: '64px',
@@ -271,7 +272,7 @@ export default class wordleScene extends Phaser.Scene {
                 color: '#46c83d',
                 stroke: '#000000',
                 strokeThickness: 6
-            }).setOrigin(0.5).setDepth(10);
+            }).setOrigin(0.5).setDepth(20);
 
             this.time.delayedCall(5000, () => {
                 this.scene.stop();

@@ -228,6 +228,8 @@ export default class plinkoScene extends Phaser.Scene {
         const height = this.scale.height;
 
         //mensaje de victoria
+        this.bg = this.add.rectangle(0,0,this.scale.width,this.scale.height,0x000000,0.5).setOrigin(0).setDepth(9);
+
         this.add.text(width / 2, height / 2.5, '¡ECONOMÍA SALVADA!', {
             fontSize: '64px',
             fontFamily: 'Climate Crisis',

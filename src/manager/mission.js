@@ -42,7 +42,7 @@ export default class Mission{
             scene.scene.pause("gameScene");
         }
         else{
-            this.missionButton = scene.add.image(this.getPos()[0],this.getPos()[1],this.icon).setOrigin(0).setInteractive({ useHandCursor: true }); 
+            this.missionButton = scene.add.image(this.getPos()[0],this.getPos()[1],this.icon).setOrigin(0).setDepth(2).setInteractive({ useHandCursor: true }); 
             this.missionButton.on('pointerover', () => {
                 scene.tweens.add({
                     targets: this.missionButton,

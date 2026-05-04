@@ -23,15 +23,24 @@ export default class endDayBtnUI {
         if(this.tutorial || this.currentDay === 5) {
             const size = 100;
             this.blocker = this.scene.add.rectangle(x, y, size, size, 0x000000, 0).setOrigin(0.5).setInteractive().setDepth(24);
-            this.blockedContainer = this.scene.add.container(x, y - 70);
-            
-            const bg = this.scene.add.rectangle(0, 0, 150, 50, 0xffff00).setOrigin(0.5);
-            const text = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontSize: '20px', color: '#000000', fontStyle: 'bold' }).setOrigin(0.5);
-            this.blockedContainer.add([bg, text]);
-            this.blockedContainer.setVisible(false).setDepth(14);
-            this.blocker.on('pointerover', () => { this.blockedContainer.setVisible(true); });
+            this.blockedContainer = this.scene.add.container(x, y - 70).setVisible(false),this.setDepth(25);
+    
+            if(this.currentDay === 5) {
+                const bgLastDay = this.scene.add.rectangle(0,0,330,50, 0x000000).setOrigin(0.5);
+                const textLastDay = this.scene.add.text(0, 0, 'HOY ES UN DIA MUY IMPORTANTE, SIGUE TRABAJANDO', { fontFamily: 'Handjet', fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
+                this.blockedContainer.add([bgLastDay, textLastDay]);
+            }else{
+                const bgTutorial = this.scene.add.rectangle(0, 0, 150, 50, 0x000000).setOrigin(0.5);
+                const textTutorial = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontFamily: 'Handjet', fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
+                this.blockedContainer.add([bgTutorial, textTutorial]);
+            }
+            this.blocker.on('pointerover', (pointer) => { 
+                this.blockedContainer.setVisible(true); 
+                this.blockedContainer.setPosition(pointer.x - 20, pointer.y + 5);
+            });
             this.blocker.on('pointerout', () => { this.blockedContainer.setVisible(false); });
         }
+
         this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(22).setScale(this.scaleValue);
 
         this.btn.on('pointerover', () => {
@@ -78,7 +87,14 @@ export default class endDayBtnUI {
         if (energy <= 0 && !this.isOver) {
             this.isOver = true;
             this.btn.setTexture('endDayBright');
-
+            if (this.blockedContainer) {
+                this.blockedContainer.destroy();
+                this.blockedContainer = null;
+            }
+            if (this.blocker) {
+                this.blocker.destroy();
+                this.blocker = null;
+            }
             this.scene.tweens.add({
                 targets: this.btn,
                 scale: this.scaleValue * 1.1,

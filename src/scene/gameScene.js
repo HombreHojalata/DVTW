@@ -105,19 +105,6 @@ export default class GameScene extends Phaser.Scene {
             const footerY = this.height - footerHeight;
             this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(100);
         }
-        //END DAY BUTTON BLOCKER
-        if(this.currentDay === 5){
-            this.endDayBlocker = this.add.zone(this.endDayBtnUI.innerX, this.endDayBtnUI.innerY,this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
-            this.endDayBlocker.on('pointerup',() =>{
-                tooltip.setVisible(true);
-            });
-            this.endDayBlocker.on('pointerover', (pointer) => {
-                tooltip.setText("HOY ES UN DÍA MUY IMPORTANTE, SIGUE TRABAJANDO");
-                tooltip.setPosition(pointer.x - 10, pointer.y + 5);
-                tooltip.setVisible(true);
-            });
-            this.endDayBlocker.on('pointerout', () => {tooltip.setVisible(false);});
-        }
         this.events.on('resume', () => {
             this.refreshHUD();
         });
@@ -245,7 +232,6 @@ export default class GameScene extends Phaser.Scene {
                 }
 
                 if (this.player.getEnergy() <= 0) {
-                    this.endDayBlocker.destroy();
                     if (this.audioManager)
                         this.audioManager.switchMusic('nightAmbience');
 
@@ -340,7 +326,7 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.stop();
-            this.scene.launch('summaryDayScene', { summary: this.currentDay });
+            this.scene.launch('summaryDayScene', { summary: this.day.getDaySummary() });
         });
     }
 
