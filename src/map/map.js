@@ -58,7 +58,7 @@ export default class Map {
             4000, 21, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["FACTORY"], 4,
             false, "FÁBRICA MUNDO JUPI",
-            'districtSomosagua', 'districtSomosaguaSpecial', -75, -17
+            'districtSomosagua', 'districtSomosaguaSpecial', -18, -17
         );
         const districtArray = [
             BORRASCAL,
