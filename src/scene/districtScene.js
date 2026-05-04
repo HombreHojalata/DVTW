@@ -13,9 +13,17 @@ export default class DistrictScene extends Phaser.Scene {
         this.day = data.day || 1;
         this.boughtBuilding = data.boughtBuilding || false;
     }
-       
+
     create() {
         console.log("DISTRICT: " + this.district.getName());
+
+        if (!this.registry.get('districtsDone')) {
+            this.registry.set('districtsDone', true); 
+            
+            this.scene.pause();
+            this.scene.launch('tutorialScene', { section: 'DISTRICT', parentScene: 'districtScene' });
+            this.scene.bringToTop('tutorialScene');
+        }
 
         this.baseWidth = this.scale.width;
         this.baseHeight = this.scale.height;
@@ -622,49 +630,8 @@ export default class DistrictScene extends Phaser.Scene {
 
         container.add([shadow, bg, label]);
     }
-    // ORDER 1
-    explainTutorial(width, height) {
-        const container = this.add.container(width / 2, height / 2).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 750, 425, 0x000000, 0.85).setOrigin(0.5);
-        bg.setStrokeStyle(2, 0xffffff, 0.5);
-        const text = this.add.text(0, -40, '¡Bienvenido a El Nido!\n\nAquí podrá gestionar la política interna de cada distrito. Recuerde que cada zona de Quackington DC es distinta, le recomiendo leer la descripción de cada una.\n\nEstamos trabajando en mejoras a futuro en este panel, pero por el momento dejeme explicar cómo funciona todo.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 700 }
-        }).setOrigin(0.5);
-        
-        container.add([bg, text]);
+    
 
-        this.createTutorialButton(container, 0, 120, 'Continuar', () => {
-            container.destroy();
-            this.explainDistrictAttributes(width, height);
-        });
-    }
-    explainDistrictAttributes(width, height) {
-        const container = this.add.container(width / 4 - 30, height * 0.35 + 30).setDepth(21);   
-        const bg = this.add.rectangle(0, 0, 650, 400, 0x000000, 0.85).setOrigin(0.5);
-        bg.setStrokeStyle(2, 0xffffff, 0.5);
-        const text = this.add.text(0, -50, 'Esos cuatro números debajo de la foto del distrito son: el número total de habitantes del lugar, el dinero que cobra o gasta cada ciclo este distrito, y los vecinos del distrito a favor y en contra.\n\nEl objetivo es ampliar el porcentaje de satisfacción de los distritos para aumentar los vecinos a favor. Esto influye directamente en la opinión pública global.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#ffffff',
-            align: 'center',
-            wordWrap: { width: 600 }
-        }).setOrigin(0.5);
-
-        container.add([bg, text]);
-
-        this.createTutorialButton(container, 180, 120, 'Continuar', () => {
-            container.destroy();
-            this.explainStoreButton(width, height);
-        });
-        this.createTutorialButton(container, -180, 120, 'Volver', () => {
-            container.destroy();
-            this.explainTutorial(width, height);
-        });
-    }
     explainStoreButton(width, height) {
         const container = this.add.container(width * 0.7, height * 0.6).setDepth(21);   
         this.blockerBuilding.destroy();
