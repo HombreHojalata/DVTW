@@ -34,9 +34,9 @@ export default class wordSearchScene extends Phaser.Scene {
             highlightAlpha: 0.4,
         }
 
-        const UI_X = width * 0.8;
+        const UI_X = width * 0.9;
 
-        this.add.text(UI_X, 150, 'SOPA DE LETRAS', {
+        this.add.text(UI_X, 80, 'SOPA DE LETRAS', {
             fontSize: '48px',
             fontStyle: 'bold',
             color: this.colors.text,
@@ -44,7 +44,7 @@ export default class wordSearchScene extends Phaser.Scene {
             align: 'center'
         }).setOrigin(0.5);
 
-        this.statusText = this.add.text(UI_X, 250, 'Arrastra el puntador para jugar', {
+        this.statusText = this.add.text(UI_X, 160, 'Arrastra el puntador para jugar', {
             fontSize: '20px',
             color: '#d7dadc',
             fontFamily: 'Arial',
@@ -56,7 +56,7 @@ export default class wordSearchScene extends Phaser.Scene {
         this.gameStarted = false;
         this.startTime = this.time.now;
 
-        this.timerText = this.add.text(UI_X, 290, `Tiempo: ${this.maxTimeLimit}s`, {
+        this.timerText = this.add.text(UI_X, 200, `Tiempo: ${this.maxTimeLimit}s`, {
             fontSize: '24px',
             fontFamily: 'Courier New',
             color: '#ffffff',
@@ -64,13 +64,14 @@ export default class wordSearchScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.wordListTexts = {};
-        let listStartY = 350;
+        const wordListX = width * 0.89;
+        let listStartY = 280;
 
         this.wordsToFind.forEach((word, index) => {
-            let textObj = this.add.text(UI_X, listStartY + (index * 35), word, {
+            let textObj = this.add.text(wordListX, listStartY + (index * 35), word, {
                 fontSize: '24px',
                 fontStyle: 'bold',
-                color: '#ffffff',
+                color: '#000',
                 fontFamily: 'Courier New',
                 align: 'center'
             }).setOrigin(0.5);
@@ -98,13 +99,13 @@ export default class wordSearchScene extends Phaser.Scene {
 
     createGrid(width, height) {
         this.grid = [];
-        const boxSize = 40;
+        const boxSize = 60;
         const gap = 15;
         const totalWidth = this.cols * boxSize + (this.cols - 1) * gap;
 
-        const centerX = width * 0.4;
-        const startX = Math.floor(centerX - (totalWidth / 2));
-        const startY = 150;
+        const margin = 20; 
+        const startX = margin; 
+        const startY = margin;
 
         const alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -183,7 +184,7 @@ export default class wordSearchScene extends Phaser.Scene {
                 const text = this.add.text(x + (boxSize / 2), y + (boxSize / 2), charVal, {
                     fontSize: '24px',
                     fontStyle: 'bold',
-                    color: this.colors.text,
+                    color: '#000000',
                     fontFamily: 'Courier New'
                 }).setOrigin(0.5);
 
