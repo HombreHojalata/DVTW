@@ -40,37 +40,35 @@ export default class MonkeyTypeScene extends Phaser.Scene {
         this.testString = this.generateTestString(this.totalWords);
 
         this.baseX = 100;
-        this.baseY = 250;
-        this.wrapWidth = width - 200;
+        this.baseY = 520;
+        this.wrapWidth = width - 400;
 
         this.charObjects = [];
         this.charPositions = [];
 
-        // --- CAMBIO SFONDO QUI ---
         this.add.image(0, 0, 'sfondoMonkeyType').setOrigin(0).setDisplaySize(width, height);
-        // -------------------------
 
-        this.titleText = this.add.text(width / 2, 55, 'MONKEYTYPE MODE', {
+        this.titleText = this.add.text(width / 2, 400, 'MONKEYTYPE MODE', {
             fontFamily: 'Arial',
             fontSize: '34px',
-            color: '#f5f5f5',
+            color: '#000',
             fontStyle: 'bold'
         }).setOrigin(0.5);
 
-        this.timerText = this.add.text(120, 120, `Time: ${this.timeLeft}`, {
+        this.timerText = this.add.text(120, 400, `Time: ${this.timeLeft}`, {
             fontFamily: 'Arial',
             fontSize: '28px',
             color: '#ffd166',
             fontStyle: 'bold'
         }).setOrigin(0, 0.5);
 
-        this.liveStatsText = this.add.text(width - 120, 120, 'WPM: 0   ACC: 100%', {
+        this.liveStatsText = this.add.text(width - 120, 400, 'WPM: 0   ACC: 100%', {
             fontFamily: 'Arial',
             fontSize: '24px',
-            color: '#e6e6e6'
+            color: '#8f8f8f'
         }).setOrigin(1, 0.5);
 
-        this.instructionText = this.add.text(width / 2, 170, 'Start typing to begin the test', {
+        this.instructionText = this.add.text(width / 2, 470, 'Start typing to begin the test', {
             fontFamily: 'Arial',
             fontSize: '20px',
             color: '#8f8f8f'
