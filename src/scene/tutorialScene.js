@@ -11,17 +11,10 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     init(data) {
-        this.fromScene = data && data.from ? data.from : null;
-        if (!this.registry.has('gameManager')) {
-            const GM = new gameManager(this);
-            this.registry.set('gameManager', GM)
-        }
         this.gameManager = this.registry.get('gameManager');
         this.player = this.gameManager.getPlayer();
         this.day = this.gameManager.getDay();
-        this.map = this.gameManager.getMap();
-        if (!this.registry.has('flagShow')) this.registry.set('flagShow', true);
-        this.sceneOrder = data.order || 1;
+        this.map = this.gameManager.getMap();;
     }
 
     create() {
@@ -32,25 +25,10 @@ export default class TutorialScene extends Phaser.Scene {
         
         const section = this.scene.settings.data.section || 'INTRO';
 
-        const footerHeight = 81;
-        const footerWidth = 1500;
-        const footerX = (this.width - footerWidth) / 2;
-        const footerY = this.height - footerHeight;
-        // BLOCKER AND FOOTER BLOCKER
-        this.blocker = this.add.zone(0, 0, this.width, this.height - footerHeight).setOrigin(0).setInteractive().setDepth(30);
-        this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(30);
-        // SPAWN MAP AND UI
-        this.gameManager.spawnAssets(this);
-        this.configButton = this.gameManager.spawnConfigurationButton(this);
-        this.topUI = new topUI(this);
-        this.batteryUI = new batteryUI(this);
-        this.endDayBtnUI = new endDayBtnUI(this);
-        this.footerUI = new footerUI(this, true);
-
         this.audioManager = this.registry.get('audioManager');
         this.flamingoSounds = ['flam1', 'flam2', 'flam3', 'flam4', 'flam5', 'flam6', 'flam7'];
 
-        this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(30);
+        this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(100);
 
         switch(section) {
             case 'INTRO':
@@ -129,7 +107,7 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     addHighlight(container, x, y, width, height) {
-        const graphics = this.add.graphics().setDepth(25);
+        const graphics = this.add.graphics().setDepth(105);
         graphics.lineStyle(8, 0xff0000, 1);
         graphics.strokeRect(x, y, width, height);
 
@@ -147,9 +125,9 @@ export default class TutorialScene extends Phaser.Scene {
 
     tutorialIntro() {
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
 
         const introText = this.add.text(this.width / 2 + 100, this.height / 2 - 200, '¡Bienvenido a Quackington DC!', {
             fontSize: '40px',
@@ -176,10 +154,10 @@ export default class TutorialScene extends Phaser.Scene {
     }
     tutorialIntro2() {
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const icon = this.add.image(this.width / 2 + 100, this.height / 2 - 200, 'missionIcon').setOrigin(0.5, 0.5).setDepth(33).setScale(1.5);
-        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const icon = this.add.image(this.width / 2 + 100, this.height / 2 - 200, 'missionIcon').setOrigin(0.5, 0.5).setDepth(103).setScale(1.5);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
         const text = this.add.text(this.width / 2 + 120, this.height / 2 - 70, 'En su mapa aparecerán iconos como este. Son misiones enviadas directamente por los ciudadanos.\n\nSi las completa le recompensarán con recursos y popularidad.\nTenga cuidado; si las ignora, desaparecerán.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
@@ -209,12 +187,12 @@ export default class TutorialScene extends Phaser.Scene {
     }
     tutorialIntro3() {
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
-        const container = this.add.container(0, 0).setDepth(31);
+        const container = this.add.container(0, 0).setDepth(101);
 
         this.addHighlight(container, this.width - 251, 150, 240, 545);
 
-        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
         const text = this.add.text(this.width / 2 + 100, this.height / 2 - 90, 'A su derecha está su Energía diaria. Se reduce con el tiempo y haciendo misiones.\n\nCada cuarto de la barra representa un ciclo.\nAl superar uno de estos los edificos cobran y los gastos pasivos se pagan.\n\nDebajo está el botón de \'Terminar Día\'. Lo puede pulsar cuando se acabe la energía para finalizar el día.\nPuede pulsarlo antes si quiere, pero un pato dormido no es un pato productivo. Usted verá si prefiere dormir o dirigir.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
@@ -237,12 +215,12 @@ export default class TutorialScene extends Phaser.Scene {
     }
     tutorialIntro4() {
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
-        const container = this.add.container(0, 0).setDepth(31);
+        const container = this.add.container(0, 0).setDepth(101);
 
         this.addHighlight(container, this.width / 4 - 90, 12, 908, 90);
 
-        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
         const text = this.add.text(this.width / 2 + 100, this.height / 2 - 90, 'Como sabrá, nuestra ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuede hacer click en cada uno desde el mapa, para obtener información detallada y tomar decisiones informadas.\n\nLa suma de la satifacción de cada distrito determina su opinión pública; la puede consultar en la barra superior de la pantalla.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
@@ -263,10 +241,10 @@ export default class TutorialScene extends Phaser.Scene {
     }
     tutorialIntro5() {
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const icon = this.add.image(this.width / 2 + 100, this.height / 2 - 225, 'missionCorruptIcon').setOrigin(0.5, 0.5).setDepth(33).setScale(1.5);
-        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const icon = this.add.image(this.width / 2 + 100, this.height / 2 - 225, 'missionCorruptIcon').setOrigin(0.5, 0.5).setDepth(103).setScale(1.5);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
         const text = this.add.text(this.width / 2 + 100, this.height / 2 - 70, 'Una cosa más, señor presidente.\nEs posible que encuentre algunas misiones rojas, llamadas misiones corruptas. Estas proporcionan aliados poderosos y mejores recursos, pero a cambio de aumentar la corrupción del estado.\n\nOficialmente, negamos cualquier tipo de acusación de este estilo, pero realizar demasiados favores corruptos puede complicar las cosas.\nCuanta mayor corrupción, menor será la probabilidad de encubrirla. Tengalo en cuenta.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
@@ -296,9 +274,9 @@ export default class TutorialScene extends Phaser.Scene {
     }
     tutorialIntroEnd() {
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
         const introText = this.add.text(this.width / 2 + 100, this.height / 2 - 200, '¡Alas a la obra!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
@@ -316,44 +294,20 @@ export default class TutorialScene extends Phaser.Scene {
         container.add([bg, img, introText, text]);    
 
         this.createTutorialButton(container, this.width * 0.57, this.height * 0.6, '¡Entendido!', () => {
-            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: true }); });
+            this.fadeOutContainer(container, () => {
+                const gameScene = this.scene.get('gameScene');
+                if (gameScene) gameScene.scene.resume();
+                this.scene.stop();
+            });
         });
     }
 
-    // ORDER 2
-    explainCorrupt() {
-        
-    }
-    startGameText() {
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
-        const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Alas a la obra!', {
-            fontSize: '40px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center',
-            fontStyle: 'bold',
-        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
-        const text = this.add.text(this.width / 2- 120, this.height / 2 - 70, 'Veo que está usted listo para manejar una ciudad, señor presidente. Le recuerdo que puede ver a tiempo real su popularidad pública en la barra superior.\n\nMucha suerte estos 5 días, los va a necesitar.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center'
-        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
-
-        container.add([bg, img, introText, text]);    
-
-        this.createTutorialButton(container, this.width * 0.44, this.height * 0.6, '¡Entendido!', () => {
-            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: true }); });
-        });  
-    }
-    // ORDER 3
-    explainBlackMarket() {
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(30);
+    tutorialDayTwo() {
+        this.audioManager.play('racoon', { volume: 2 } );
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(100);
         const img = this.add.image(this.width - 515, 120, 'vendedor').setOrigin(0).setScale(0.9).setDepth(130);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Saludo, señor presidente. Mi nombre es Robinson Piqui, y soy el jefe del Mercado Negro. Tengo a la venta ciertos artículos que son imposibles de encontrar en otro lugar, y que le ayudarán en su gestión de la ciudad.\n\nPuede acceder a él haciendo click en el botón de la parte inferior de la pantalla, pero solo cuando su barra de energía esté por debajo de la mitad. Negocios como estos no se peuden hacer a plena luz del día.', {
+        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Saludo, señor presidente. Mi nombre es Robinson Piqui, y soy el jefe del Mercado Negro. Tengo a la venta ciertos artículos que son imposibles de encontrar en otro lugar, y que le ayudarán en su gestión de la ciudad.\n\nPodrá venir a visitarme cuando su energía esté por debajo de la mitad. Negocios como los nuestros no se pueden hacer a plena luz del día.', {
             fontSize: '24px',
             fontFamily: 'Margarine',
             color: '#000000',
@@ -364,14 +318,19 @@ export default class TutorialScene extends Phaser.Scene {
 
         container.add([bg, img, text]);
 
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.72, 'Continuar', () => {
-            container.destroy();
-            this.explainBlackMarket2();
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.72, 'Entendido...', () => {
+            this.audioManager.play('racoon', { volume: 2 });
+            this.fadeOutContainer(container, () => {
+                const gameScene = this.scene.get('gameScene');
+                if (gameScene) gameScene.scene.resume();
+                this.scene.stop();
+            });
         });
     }
-    explainBlackMarket2(){
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(30);
+
+    explainBlackMarket2() {
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(100);
         const img = this.add.image(this.width - 515, 120, 'vendedor').setOrigin(0).setScale(0.9).setDepth(130);
         const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Recuerde visitar el Mercado Negro de vez en cuando, puede encontrar productos que antes no estaban disponibles.\nY no se preocupe por su reputación, nos enorgullecemos de nuestra confidencialidad con los clientes.\n\nEso sí: tenga cuidado que con lo que compre; no me hago responsable de las posibles consecuencias.\n Bueno tengo cosas que hacer, espero verle esta tarde.',{
             fontSize: '24px',
@@ -397,9 +356,9 @@ export default class TutorialScene extends Phaser.Scene {
 
     // ORDER 4
     explainDistrictParameters() {
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
 
         const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Hola de nuevo!', {
             fontSize: '40px',
@@ -437,9 +396,9 @@ export default class TutorialScene extends Phaser.Scene {
     }
     //ORDER 5
     finishTutorial() {
-        const container = this.add.container(0, 0).setDepth(31);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const container = this.add.container(0, 0).setDepth(101);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(100);
+        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(100);
         const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Eso es todo!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
