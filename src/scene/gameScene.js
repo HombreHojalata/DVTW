@@ -133,7 +133,7 @@ export default class GameScene extends Phaser.Scene {
         this.missionTimer = this.time.addEvent({
             delay: delay,
             callback: () => {
-                 if(this.player.getEnergy() > 0){
+                if(this.player.getEnergy() > 0){
                     this.missionList.push(this.gameManager.getMission(this));
                     this.scheduleNextMission();
                 }
@@ -211,7 +211,7 @@ export default class GameScene extends Phaser.Scene {
                         duration: 3000,
                         ease: 'Power2'
                     });
-                    if (this.day != 1) this.footerUI.openMarket();
+                    if (this.day.getDayNumber() > 1) this.footerUI.openMarket();
                 }
 
                 if (this.player.getEnergy() <= 25 && !this.afternoon) {

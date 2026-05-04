@@ -26,16 +26,19 @@ export default class TutorialScene extends Phaser.Scene {
 
     create() {
         console.log("TUTORIAL");
-        // ATRIBUTES
+        
         this.width = this.sys.game.config.width;
         this.height = this.sys.game.config.height;
+        
+        const section = this.scene.settings.data.section || 'INTRO';
+
         const footerHeight = 81;
         const footerWidth = 1500;
         const footerX = (this.width - footerWidth) / 2;
         const footerY = this.height - footerHeight;
         // BLOCKER AND FOOTER BLOCKER
-        this.blocker = this.add.zone(0, 0, this.width, this.height - footerHeight).setOrigin(0).setInteractive().setDepth(20);
-        this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(20);
+        this.blocker = this.add.zone(0, 0, this.width, this.height - footerHeight).setOrigin(0).setInteractive().setDepth(30);
+        this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(30);
         // SPAWN MAP AND UI
         this.gameManager.spawnAssets(this);
         this.configButton = this.gameManager.spawnConfigurationButton(this);
@@ -43,12 +46,41 @@ export default class TutorialScene extends Phaser.Scene {
         this.batteryUI = new batteryUI(this);
         this.endDayBtnUI = new endDayBtnUI(this);
         this.footerUI = new footerUI(this, true);
-        // TUTORIAL ORDER
-        if(this.sceneOrder === 1) this.explainTutorial();
-        else if(this.sceneOrder === 2) this.explainCorrupt();
-        else if(this.sceneOrder === 3) this.explainBlackMarket();
-        else if(this.sceneOrder === 4) this.explainDistrictParameters();
-        else if(this.sceneOrder === 5) this.finishTutorial();
+
+        this.audioManager = this.registry.get('audioManager');
+        this.flamingoSounds = ['flam1', 'flam2', 'flam3', 'flam4', 'flam5', 'flam6', 'flam7'];
+
+        this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(30);
+
+        switch(section) {
+            case 'INTRO':
+                this.tutorialIntro();
+                break;
+            case 'DISTRICT':
+                this.tutorialDistricts(); 
+                break;
+            case 'MISSIONS':
+                this.tutorialMissions();
+                break;
+            case 'CORRUPT':
+                this.tutorialCorrupt();
+                break;
+            case 'BLACK_MARKET':
+                this.tutorialBlackMarket();
+                break;
+            case 'PARAMETERS':
+                this.tutorialCorrupt();
+                break;
+            case 'DAY_TWO':
+                this.tutorialDayTwo();
+                break;
+            case 'DAY_THREE':
+                this.tutorialDayThree();
+                break;
+            case 'FINAL_DAY':
+                this.tutorialFinalDay();
+                break;
+        }
     }
 
     createTutorialButton(container, x, y, text, callback) {
@@ -95,20 +127,38 @@ export default class TutorialScene extends Phaser.Scene {
 
         container.add([shadow, bg, label]);
     }
-    // ORDER 1
-    explainTutorial() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
 
-        const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Bienvenido a Quackington DC!', {
+    addHighlight(container, x, y, width, height) {
+        const graphics = this.add.graphics().setDepth(25);
+        graphics.lineStyle(8, 0xff0000, 1);
+        graphics.strokeRect(x, y, width, height);
+
+        this.tweens.add({
+            targets: graphics,
+            alpha: 0.4,
+            duration: 800,
+            yoyo: true,
+            repeat: -1
+        });
+
+        container.add(graphics);
+    }
+
+
+    tutorialIntro() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+
+        const introText = this.add.text(this.width / 2 + 100, this.height / 2 - 200, '¡Bienvenido a Quackington DC!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
             color: '#000000',
             fontStyle: 'bold',
             align: 'center'
         }).setOrigin(0.5);
-        const text = this.add.text(this.width / 2 - 120, this.height / 2 - 50, 'Buenos días, señor presidente.\nSoy su secretaria, la que se únca que trabaja de verdad por aquí.\n\nSeré clara: su mandato es un chiste y las elecciones son solo en 5 días.\nSi no consigue suficiente apoyo político, su próxima oficina será una celda con vistas al estanque.\n\nComo veo que lo necesita ayuda, le explicaré como llevar la ciudad.',
+        const text = this.add.text(this.width / 2 + 120, this.height / 2 - 50, 'Buenos días, señor presidente.\nSoy su secretaria, la que se única que trabaja de verdad por aquí.\n\nSeré clara: su mandato es un chiste y las elecciones son solo en 5 días.\nSi no consigue suficiente apoyo político, su próxima oficina será una celda con vistas al estanque.\n\nComo veo que lo necesita ayuda, le explicaré como llevar la ciudad.',
         {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
@@ -121,37 +171,51 @@ export default class TutorialScene extends Phaser.Scene {
         this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
             //this.fadeOutContainer(container, () => this.explainMissions());
             container.destroy();
-            this.explainMissions();
+            this.tutorialIntro2();
         });
     }
-    explainMissions(){
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const icon = this.add.image(this.width / 2 - 120, this.height / 2 - 225, 'missionIcon').setOrigin(0.5, 0.5).setDepth(22).setScale(1.5);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
-        const text = this.add.text(this.width / 2 - 120, this.height / 2 - 70, 'He cancelado un puente público para que nuestros mejores ingenieros se centren en diseñar este mapa interactivo. Ahora, los ciudadanos podrán mandarle notificaciones directamente a usted.\n\nEstos iconos aparecerán por toda la ciudad. Si hace click y los completa le recompensarán con recursos y popularidad.\n\nTenga cuidado; si las ignora, desaparecerán.\nY ojo, que cada misión es distinta.', {
+    tutorialIntro2() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const icon = this.add.image(this.width / 2 + 100, this.height / 2 - 200, 'missionIcon').setOrigin(0.5, 0.5).setDepth(33).setScale(1.5);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const text = this.add.text(this.width / 2 + 120, this.height / 2 - 70, 'En su mapa aparecerán iconos como este. Son misiones enviadas directamente por los ciudadanos.\n\nSi las completa le recompensarán con recursos y popularidad.\nTenga cuidado; si las ignora, desaparecerán.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
         
+        this.tweens.add({
+            targets: icon,
+            scale: 1.7,
+            duration: 1000,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+        });
+
         container.add([bg, icon, img, text]);
 
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+        this.createTutorialButton(container, this.width * 0.67, this.height * 0.62, 'Continuar', () => {
             container.destroy();
-            this.explainEnergyAndEndDayButton();
+            this.tutorialIntro3();
         });
-        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+        this.createTutorialButton(container, this.width * 0.48, this.height * 0.62, 'Volver', () => {
             container.destroy();
-            this.explainTutorial();
+            this.tutorialIntro();
         });
     }
-    explainEnergyAndEndDayButton() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 90, 'A su derecha está su energía, dividida en 4 ciclos. Se reduce con el tiempo y haciendo misiones, pero se recarga cada día.\n\nCada cuarto de la barra representa un ciclo.\nCada ciclo los edificos cobran y los gastos pasivos se pagan.\n\nDebajo está el botón de \'Terminar Día\'. Lo puede pulsar cuando se acabe la energía para finalizar el día.\nPuede pulsarlo antes si quiere, pero un pato dormido no es un pato productivo. Usted verá si prefiere dormir o dirigir.', {
+    tutorialIntro3() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(0, 0).setDepth(31);
+
+        this.addHighlight(container, this.width - 251, 150, 240, 545);
+
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const text = this.add.text(this.width / 2 + 100, this.height / 2 - 90, 'A su derecha está su Energía diaria. Se reduce con el tiempo y haciendo misiones.\n\nCada cuarto de la barra representa un ciclo.\nAl superar uno de estos los edificos cobran y los gastos pasivos se pagan.\n\nDebajo está el botón de \'Terminar Día\'. Lo puede pulsar cuando se acabe la energía para finalizar el día.\nPuede pulsarlo antes si quiere, pero un pato dormido no es un pato productivo. Usted verá si prefiere dormir o dirigir.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
@@ -160,22 +224,26 @@ export default class TutorialScene extends Phaser.Scene {
 
         container.add([bg, img, text]);
 
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+        this.createTutorialButton(container, this.width * 0.67, this.height * 0.62, 'Continuar', () => {
             //this.fadeOutContainer(container, () => this.explainDistricts());
             container.destroy();
-            this.explainDistricts();
+            this.tutorialIntro4();
         });
-        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
+        this.createTutorialButton(container, this.width * 0.48, this.height * 0.62, 'Volver', () => {
             //this.fadeOutContainer(container, () => this.explainMissions());
             container.destroy();
-            this.explainMissions();
+            this.tutorialIntro2();
         });
     }
-    explainDistricts() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
-        const text = this.add.text(this.width / 2 - 120, this.height / 2 - 90, 'Como sabrá, nuestra ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuede hacer click en ellos para obtener información detallada y tomar decisiones informadas.\n\nEntremos en uno ahora para que pueda explicarle el funcionamiento interno de estos.', {
+    tutorialIntro4() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(0, 0).setDepth(31);
+
+        this.addHighlight(container, this.width / 4 - 90, 12, 908, 90);
+
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const text = this.add.text(this.width / 2 + 100, this.height / 2 - 90, 'Como sabrá, nuestra ciudad está dividida en distritos, cada uno con sus propias características y necesidades.\nPuede hacer click en cada uno desde el mapa, para obtener información detallada y tomar decisiones informadas.\n\nLa suma de la satifacción de cada distrito determina su opinión pública; la puede consultar en la barra superior de la pantalla.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
@@ -184,41 +252,82 @@ export default class TutorialScene extends Phaser.Scene {
         
         container.add([bg, img, text]);
 
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
-            //this.fadeOutContainer(container, () => { this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true, order: 1 }); });
-            this.scene.launch('districtScene', { district: this.map.getDistrictByName("EL_NIDO"), tutorial: true, order: 1, day: 1 });
-        });
-        this.createTutorialButton(container, this.width * 0.28, this.height * 0.62, 'Volver', () => {
-            //this.fadeOutContainer(container, () => this.explainEnergyAndEndDayButton());
+        this.createTutorialButton(container, this.width * 0.67, this.height * 0.62, 'Continuar', () => {
             container.destroy();
-            this.explainEnergyAndEndDayButton();
+            this.tutorialIntro5();
         });
-
+        this.createTutorialButton(container, this.width * 0.48, this.height * 0.62, 'Volver', () => {
+            container.destroy();
+            this.tutorialIntro3();
+        });
     }
-    // ORDER 2
-    explainCorrupt() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const icon = this.add.image(this.width / 2 - 120, this.height / 2 - 225, 'missionCorruptIcon').setOrigin(0.5, 0.5).setDepth(22).setScale(1.5);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
-        const text = this.add.text(this.width / 2 - 120, this.height / 2 - 70, 'Una cosa más, señor presidente.\nEs posible que encuentre algunas misiones rojas, consideradas por la gente como corruptas. Estas misiones proporcionan aliados poderosos y mejores recursos, pero a cambio de aumentar la corrupción del estado.\n\nOficialmente, negamos cualquier tipo de acusación de este estilo, pero realizar demasiados favores corruptos puede complicar las cosas.\nCuanta mayor corruupción, menor será la probabilidad de encubrirla. Tengalo en cuenta.', {
+    tutorialIntro5() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const icon = this.add.image(this.width / 2 + 100, this.height / 2 - 225, 'missionCorruptIcon').setOrigin(0.5, 0.5).setDepth(33).setScale(1.5);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const text = this.add.text(this.width / 2 + 100, this.height / 2 - 70, 'Una cosa más, señor presidente.\nEs posible que encuentre algunas misiones rojas, llamadas misiones corruptas. Estas proporcionan aliados poderosos y mejores recursos, pero a cambio de aumentar la corrupción del estado.\n\nOficialmente, negamos cualquier tipo de acusación de este estilo, pero realizar demasiados favores corruptos puede complicar las cosas.\nCuanta mayor corrupción, menor será la probabilidad de encubrirla. Tengalo en cuenta.', {
             fontSize: '24px',
             fontFamily: 'Times New Roman',
             color: '#000000',
             align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width/2 - 40);
         
+        this.tweens.add({
+            targets: icon,
+            scale: 1.7,
+            duration: 1000,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+        });
+
         container.add([bg, icon, img, text]);
 
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.62, 'Continuar', () => {
+        this.createTutorialButton(container, this.width * 0.67, this.height * 0.62, 'Continuar', () => {
             container.destroy();
-            this.startGameText();
+            this.tutorialIntroEnd();
+        });
+        this.createTutorialButton(container, this.width * 0.48, this.height * 0.62, 'Volver', () => {
+            container.destroy();
+            this.tutorialIntro4();
         });
     }
+    tutorialIntroEnd() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
+        const introText = this.add.text(this.width / 2 + 100, this.height / 2 - 200, '¡Alas a la obra!', {
+            fontSize: '40px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center',
+            fontStyle: 'bold',
+        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
+        const text = this.add.text(this.width / 2 + 100, this.height / 2 - 70, 'Asegurese de conseguir más de un 50% de popularidad antes del último día. Y aseguresé de no caer en una deuda demasiado grande, o no podremos salvarnos de las consecuencias.\n\nMucha suerte estos 5 días, los va a necesitar.\nVolveré más tarde para explicarle nuevas cosas.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
+        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
+
+        container.add([bg, img, introText, text]);    
+
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.6, '¡Entendido!', () => {
+            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: true }); });
+        });
+    }
+
+    // ORDER 2
+    explainCorrupt() {
+        
+    }
     startGameText() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
         const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Alas a la obra!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',
@@ -241,8 +350,8 @@ export default class TutorialScene extends Phaser.Scene {
     }
     // ORDER 3
     explainBlackMarket() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(20);
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(30);
         const img = this.add.image(this.width - 515, 120, 'vendedor').setOrigin(0).setScale(0.9).setDepth(130);
         const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Saludo, señor presidente. Mi nombre es Robinson Piqui, y soy el jefe del Mercado Negro. Tengo a la venta ciertos artículos que son imposibles de encontrar en otro lugar, y que le ayudarán en su gestión de la ciudad.\n\nPuede acceder a él haciendo click en el botón de la parte inferior de la pantalla, pero solo cuando su barra de energía esté por debajo de la mitad. Negocios como estos no se peuden hacer a plena luz del día.', {
             fontSize: '24px',
@@ -261,8 +370,8 @@ export default class TutorialScene extends Phaser.Scene {
         });
     }
     explainBlackMarket2(){
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(20);
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(30);
         const img = this.add.image(this.width - 515, 120, 'vendedor').setOrigin(0).setScale(0.9).setDepth(130);
         const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Recuerde visitar el Mercado Negro de vez en cuando, puede encontrar productos que antes no estaban disponibles.\nY no se preocupe por su reputación, nos enorgullecemos de nuestra confidencialidad con los clientes.\n\nEso sí: tenga cuidado que con lo que compre; no me hago responsable de las posibles consecuencias.\n Bueno tengo cosas que hacer, espero verle esta tarde.',{
             fontSize: '24px',
@@ -288,9 +397,9 @@ export default class TutorialScene extends Phaser.Scene {
 
     // ORDER 4
     explainDistrictParameters() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
 
         const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Hola de nuevo!', {
             fontSize: '40px',
@@ -328,9 +437,9 @@ export default class TutorialScene extends Phaser.Scene {
     }
     //ORDER 5
     finishTutorial() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
+        const container = this.add.container(0, 0).setDepth(31);
+        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(30);
+        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(30);
         const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Eso es todo!', {
             fontSize: '40px',
             fontFamily: 'Times New Roman',

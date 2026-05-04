@@ -273,6 +273,14 @@ import coin11 from '../assets/audio/coin/coin11.mp3';
 import coin12 from '../assets/audio/coin/coin12.mp3';
 import coin13 from '../assets/audio/coin/coin13.mp3';
 import moneyBag from '../assets/audio/moneyBag.mp3';
+import flam1 from '../assets/audio/animal/flam1.mp3';
+import flam2 from '../assets/audio/animal/flam2.mp3';
+import flam3 from '../assets/audio/animal/flam3.mp3';
+import flam4 from '../assets/audio/animal/flam4.mp3';
+import flam5 from '../assets/audio/animal/flam5.mp3';
+import flam6 from '../assets/audio/animal/flam6.mp3';
+import flam7 from '../assets/audio/animal/flam7.mp3';
+import racoon from '../assets/audio/animal/racoon.mp3';
 
 export default class Boot extends Phaser.Scene {
   constructor() {
@@ -598,6 +606,14 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('coin12', coin12);
     this.load.audio('coin13', coin13);
     this.load.audio('moneyBag', moneyBag);
+    this.load.audio('flam1', flam1);
+    this.load.audio('flam2', flam2);
+    this.load.audio('flam3', flam3);
+    this.load.audio('flam4', flam4);
+    this.load.audio('flam5', flam5);
+    this.load.audio('flam6', flam6);
+    this.load.audio('flam7', flam7);
+    this.load.audio('racoon', racoon);
 
     this.load.start();
 
