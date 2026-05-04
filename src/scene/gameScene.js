@@ -27,6 +27,7 @@ export default class GameScene extends Phaser.Scene {
         this.player.updatePopularity(this.map.getPopularity());
         // DAY
         this.day = this.gameManager.getDay();
+        this.currentDay = this.day.getDayNumber();
         // FLAG SHOW DAY INTRO
         if (!this.registry.has('flagShow')) this.registry.set('flagShow', true);
         // MISSION
@@ -42,77 +43,101 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
+        //AUDIO
         this.audioManager = this.registry.get('audioManager');
         if (this.audioManager) {
             this.audioManager.switchMusic('bgMusic');
         }
 
-        this.width = this.sys.game.config.width;
-        this.height = this.sys.game.config.height;
-        //FINAL DE JUEGO :
-        // SI VOTOS POR ENCIMA DEL 50 GANAS
-        // SI VOTOS POR DEBAJO DEL 50 PIERDES
-        if (this.day.getDayNumber() === 6){                                      // GAME END          
-            this.population = this.map.getTotalPopulation();
-            this.popularity = this.map.getPopularity();
-            this.win = null;
-            if (this.popularity >= this.population/2){
-                if(this.player.getMoney() < 0) this.win = false;             
-                else this.win = true;
-            } 
-            else this.win = false;
-            this.scene.stop();
-            this.scene.launch('finishScene', { win: this.win });
-        } else {                                                                  // GAME START/CONTINUE   
-            console.log("GAME: " + "DAY " + this.day.getDayNumber());
-            // SPAWN DAY VISUAL
-            if (this.registry.get('flagShow')) this.showDayIntro();
-            //FOOTER BLOCKER
-            if(this.day.getDayNumber() === 1){
-                const footerHeight = 81;
-                const footerWidth = 1500;
-                const footerX = (this.width - footerWidth) / 2;
-                const footerY = this.height - footerHeight;
-                this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(100);
-            }
-            // SPAWN MAP and MISSIONS
-            this.gameManager.spawnAssets();
-            this.presidenteBlocker = this.add.zone(15, 15, 224, 287).setOrigin(0).setInteractive().setDepth(20);
-            if (this.registry.has('missionList')) this.gameManager.spawnMissionButton();
-            this.configButton = this.gameManager.spawnConfigurationButton();
-
-            this.input.keyboard.on('keydown-ESC', () => {
-                if (!this.scene.isActive('pauseScene') && !this.scene.isActive('configurationScene')) {
-                    this.scene.pause();
-                    this.scene.launch('pauseScene', { returnScene: this.scene.key });
-                }
-            });
-
-            this.topUI = new topUI(this);
-            this.batteryUI = new batteryUI(this);
-            this.batteryUIBlocker = this.add.zone(this.batteryUI.innerX, this.batteryUI.innerY, this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
-            this.endDayBtnUI = new endDayBtnUI(this);
-            this.footerUI = new footerUI(this, this.isTutorial);
-            this.dayUI = new dayUI(this);
-            this.middayOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x00c3ff).setOrigin(0).setAlpha(0).setDepth(1);
-            this.afternoonOverlay = this.add.rectangle(0, 0, this.width, this.height, 0xff9500).setOrigin(0).setAlpha(0).setDepth(1);
-            this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
-
-            this.events.on('resume', () => {
-                this.refreshHUD();
-            });
-            this.startEnergyDrain();
-            //MISSION TEST
-            this.scheduleNextMission();
-
-            this.startPresidentBlink();
+        if (this.currentDay === 6){                                             // GAME END
+            this.finishGame();          
+        } else {                                                                // GAME START/CONTINUE   
+            this.gameLoop();
         }
 
         this.events.on('resume', () => {
             this.footerUI.refreshMoney();
             this.map.spawnDistricts(this);
         });
+    }
+    gameLoop(){
+        console.log("GAME: " + "DAY " + this.currentDay);
+        //TOOLTIP
+        const tooltip = this.add.text(0, 0, '', {
+            fontSize: '30px',
+            fontFamily: 'Handjet',
+            backgroundColor: '#000000',
+            color: '#ffffff',
+            padding: { x: 5, y: 5 }
+        }).setVisible(false).setDepth(100);
+        // SPAWN DAY VISUAL
+        if (this.registry.get('flagShow')) this.showDayIntro();
+        // SPAWN MAP and MISSIONS
+        this.gameManager.spawnAssets();
+        this.presidenteBlocker = this.add.zone(15, 15, 224, 287).setOrigin(0).setInteractive().setDepth(20);
+        // SPAWN MISSION
+        if (this.registry.has('missionList')) this.gameManager.spawnMissionButton();
+        this.configButton = this.gameManager.spawnConfigurationButton();
+
+        this.input.keyboard.on('keydown-ESC', () => {
+            if (!this.scene.isActive('pauseScene') && !this.scene.isActive('configurationScene')) {
+                this.scene.pause();
+                this.scene.launch('pauseScene', { returnScene: this.scene.key });
+            }
+        });
+        //UI
+        this.topUI = new topUI(this);
+        this.batteryUI = new batteryUI(this);
+        this.batteryUIBlocker = this.add.zone(this.batteryUI.innerX, this.batteryUI.innerY, this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
+        this.endDayBtnUI = new endDayBtnUI(this);
+        this.footerUI = new footerUI(this, this.isTutorial);
+        this.dayUI = new dayUI(this);
+        this.middayOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x00c3ff).setOrigin(0).setAlpha(0).setDepth(1);
+        this.afternoonOverlay = this.add.rectangle(0, 0, this.width, this.height, 0xff9500).setOrigin(0).setAlpha(0).setDepth(1);
+        this.nightOverlay = this.add.rectangle(0, 0, this.width, this.height, 0x000000).setOrigin(0).setAlpha(0).setDepth(1);
+        //FOOTER BLOCKER
+        if(this.currentDay === 1){
+            const footerHeight = 81;
+            const footerWidth = 1500;
+            const footerX = (this.width - footerWidth) / 2;
+            const footerY = this.height - footerHeight;
+            this.footerBlocker = this.add.zone(footerX, footerY, footerWidth, footerHeight).setOrigin(0).setInteractive().setDepth(100);
+        }
+        //END DAY BUTTON BLOCKER
+        if(this.currentDay === 5){
+            this.endDayBlocker = this.add.zone(this.endDayBtnUI.innerX, this.endDayBtnUI.innerY,this.batteryUI.innerWidth, this.batteryUI.innerHeight).setOrigin(0).setInteractive().setDepth(20);
+            this.endDayBlocker.on('pointerup',() =>{
+                tooltip.setVisible(true);
+            });
+            this.endDayBlocker.on('pointerover', (pointer) => {
+                tooltip.setText("HOY ES UN DÍA MUY IMPORTANTE, SIGUE TRABAJANDO");
+                tooltip.setPosition(pointer.x - 10, pointer.y + 5);
+                tooltip.setVisible(true);
+            });
+            this.endDayBlocker.on('pointerout', () => {tooltip.setVisible(false);});
+        }
+        this.events.on('resume', () => {
+            this.refreshHUD();
+        });
+        this.startEnergyDrain();
+        //MISSION TEST
+        this.scheduleNextMission();
+
+        this.startPresidentBlink();
+    }
+    finishGame(){
+        this.population = this.map.getTotalPopulation();
+        this.popularity = this.map.getPopularity();
+        this.win = null;
+        if (this.popularity >= this.population/2){
+            if(this.player.getMoney() < 0) this.win = false;             
+            else this.win = true;
+        } 
+        else this.win = false;
+        this.scene.stop();
+        this.scene.launch('finishScene', { win: this.win });
     }
 
     scheduleNextMission() {
@@ -128,10 +153,7 @@ export default class GameScene extends Phaser.Scene {
             }
         });
     }
-    /*
-    Refresca el panel de opinion publica, y tmb le meti lo de la energía. 
-    
-    */
+
 
     startEnergyDrain() {
         const maxEnergy = this.player.getMaxEnergy() || 100;
@@ -223,6 +245,7 @@ export default class GameScene extends Phaser.Scene {
                 }
 
                 if (this.player.getEnergy() <= 0) {
+                    this.endDayBlocker.destroy();
                     if (this.audioManager)
                         this.audioManager.switchMusic('nightAmbience');
 
@@ -264,12 +287,11 @@ export default class GameScene extends Phaser.Scene {
 
     showDayIntro() {
         const { width, height } = this.sys.game.config;
-        const currentDay = this.day.getDayNumber();
 
         const blocker = this.add.zone(0, 0, width, height).setOrigin(0).setInteractive();
         const introContainer = this.add.container(0, 0).setDepth(100);
         const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
-        this.text = (currentDay === 5) ? `DÍA ${currentDay} ` + 'ÚLTIMO DÍA' : `DÍA ${currentDay}`;
+        this.text = (this.currentDay === 5) ? `DÍA ${this.currentDay} ` + 'ÚLTIMO DÍA' : `DÍA ${this.currentDay}`;
         const dayText = this.add.text(width / 2, height / 2 - 100, this.text, {
             fontSize: '80px',
             fontFamily: 'Times New Roman',
@@ -277,7 +299,7 @@ export default class GameScene extends Phaser.Scene {
             color: '#ffffff'
         }).setOrigin(0.5);
         this.text2 = null;
-        if(currentDay != 1){
+        if(this.currentDay != 1){
             this.text2 = "DINERO INGRESADO : " +  this.map.getMoneyGenerated();
         }
         const moneyText = this.add.text(width/2, height/2 + 100, this.text2, {
@@ -296,10 +318,10 @@ export default class GameScene extends Phaser.Scene {
                 ease: 'Power2',
                 onComplete: () =>{
                     introContainer.destroy()
-                    if (currentDay === 2 && this.isTutorial) {               // TUTORIAL BLACK MARKET
+                    if (this.currentDay === 2 && this.isTutorial) {               // TUTORIAL BLACK MARKET
                         this.scene.stop();
                         this.scene.start('tutorialScene', { order: 3 });
-                    } else if (currentDay === 3 && this.isTutorial) {        // TUTORIAL BLACK MARKET 2
+                    } else if (this.currentDay === 3 && this.isTutorial) {        // TUTORIAL BLACK MARKET 2
                         this.scene.stop();
                         this.scene.start('tutorialScene', { order: 4 });
                     }
@@ -308,7 +330,7 @@ export default class GameScene extends Phaser.Scene {
         });
     }
     finishDay() {
-        console.log("GAME: " + "DAY " + this.day.getDayNumber() + " FINISH");
+        console.log("GAME: " + "DAY " + this.currentDay + " FINISH");
 
         this.gameManager.deleteAllMissions(this);
         this.input.enabled = false;
@@ -318,7 +340,7 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
             this.scene.stop();
-            this.scene.launch('summaryDayScene', { summary: this.day.getDaySummary() });
+            this.scene.launch('summaryDayScene', { summary: this.currentDay });
         });
     }
 

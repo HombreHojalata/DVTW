@@ -27,13 +27,7 @@ export default class endDayBtnUI {
             
             const bg = this.scene.add.rectangle(0, 0, 150, 50, 0xffff00).setOrigin(0.5);
             const text = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontSize: '20px', color: '#000000', fontStyle: 'bold' }).setOrigin(0.5);
-            if(this.currentDay === 5) {
-                const bg2 = this.scene.add.rectangle(0,0,150,70, 0xffff00).setOrigin(0.5);
-                const text2 = this.scene.add.text(0, 0, 'HOY ES UN DIA MUY IMPORTANTE, SIGUE TRABAJANDO', { fontSize: '20px', color: '#000000', fontStyle: 'bold' }).setOrigin(0.5);
-                this.blockedContainer.add([bg, text, bg2, text2]);
-            }else{
-                this.blockedContainer.add([bg, text]);
-            }
+            this.blockedContainer.add([bg, text]);
             this.blockedContainer.setVisible(false).setDepth(14);
             this.blocker.on('pointerover', () => { this.blockedContainer.setVisible(true); });
             this.blocker.on('pointerout', () => { this.blockedContainer.setVisible(false); });
