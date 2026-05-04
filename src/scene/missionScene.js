@@ -86,7 +86,7 @@ export default class MissionScene extends Phaser.Scene {
             nameContainer.add(letter);
             xOffset += letter.width + spacing;
         }
-        nameContainer.setAngle(-2.8);
+        nameContainer.setAngle(-2.6);
         return nameContainer;
     }
 
