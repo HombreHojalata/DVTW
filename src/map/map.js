@@ -23,14 +23,14 @@ export default class Map {
             7000, 15, 1,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["HOTEL"], 5,
             false, "CENTRO DE INVESTIGACIÓN",
-            'districtBorrascal', 'districtBorrascalSpecial', -15, -13
+            'districtBorrascal', 'districtBorrascalSpecial', 0, -13
         );
         const EL_NIDO = new DistrictElNido(
             "EL NIDO", "Donde el aire es puro y los impuestos son bajos. El Nido es el lujoso hogar de la aristocracia emplumada, y están muy acostumbrados a gastar su dinero en comercios de alto standing.",
             10000, 24, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["HOSPITAL"], 3,
             false, "COPITOLIO",
-            'districtElNido', 'districtElNidoSpecial', -17, -18
+            'districtElNido', 'districtElNidoSpecial', -14, -15
         );
         const GUINEA = new DistrictGuinea(
             "GUINEA", "Un paraíso artificial constuido para que turítas de todo el mundo vengan a finjir amor por la naturaleza. Los festivales de Guinea son conocidos por su importancia cultural, y su gran beneficio.",
@@ -44,7 +44,7 @@ export default class Map {
             14000, 13, 1,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["CINEMA"], 5,
             false, "ENPAWIRE",
-            'districtNuevaPradera', 'districtNuevaPraderaSpecial', -17, -19
+            'districtNuevaPradera', 'districtNuevaPraderaSpecial', -17, -15
         )
         const SAHAR = new DistrictSahar(
             "SAHAR", "Una explanada bajo el sol olvidada por la clase alta, pero no por el recaudador de impuestos. Sahar el sitio ideal para contruir para las grandes empresas, es lo bueno de los barrios porbes: no hay nadie importante que pueda quejarse.",
@@ -58,7 +58,7 @@ export default class Map {
             4000, 21, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["FACTORY"], 4,
             false, "FÁBRICA MUNDO JUPI",
-            'districtSomosagua', 'districtSomosaguaSpecial', -18, -17
+            'districtSomosagua', 'districtSomosaguaSpecial', -11, -14
         );
         const districtArray = [
             BORRASCAL,
@@ -91,6 +91,9 @@ export default class Map {
             "SOMOSAGUA": "somosaguaSpecCutout"
         };
 
+        const jsonsOffsetX = 5;
+        const jsonsOffsetY = 0;
+
         this.districtList.forEach(d => {
             const districtName = d.getName().toUpperCase();
 
@@ -111,7 +114,7 @@ export default class Map {
 
                     if (shape && shape.polygon) {
                         d.polygonPts = shape.polygon.map(pt => {
-                            return { x: pt.x + shape.x, y: pt.y + shape.y };
+                            return { x: pt.x + shape.x + jsonsOffsetX, y: pt.y + shape.y + jsonsOffsetY };
                         });
                     }
                 }

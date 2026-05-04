@@ -49,7 +49,7 @@ export default class District {
         this.button = scene.add.image(this.posX, this.posY, this.texture).setOrigin(0).setScale(1);
         
         this.outline = scene.add.graphics();
-        this.outline.lineStyle(3, 0xcccccc, 1);
+        this.outline.lineStyle(2, 0xFFFF99, 1);
         this.outline.setDepth(10);
         this.outline.setPosition(-5, -10);
 

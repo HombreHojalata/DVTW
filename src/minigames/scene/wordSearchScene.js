@@ -30,13 +30,13 @@ export default class wordSearchScene extends Phaser.Scene {
             emptyTile: 0xffffff,
             emptyAlpha: 0,
             text: '#e0e0e0',
-            highlight: 0xfdfd96,
-            highlightAlpha: 0.4,
+            highlight: 0xe8f056,
+            highlightAlpha: 0.6,
         }
 
         const UI_X = width * 0.9;
 
-        this.add.text(UI_X, 80, 'SOPA DE LETRAS', {
+        this.add.text(width * 0.85, 80, 'SOPA DE LETRAS', {
             fontSize: '48px',
             fontStyle: 'bold',
             color: this.colors.text,
@@ -177,7 +177,7 @@ export default class wordSearchScene extends Phaser.Scene {
                     charVal = alph[Math.floor(Math.random() * alph.length)];
 
                 const rect = this.add.rectangle(x, y, boxSize, boxSize, this.colors.emptyTile, this.colors.emptyAlpha)
-                    .setStrokeStyle(2, 0xffffff, 0.2)
+                    .setStrokeStyle(2, 0xaba6a6, 0.2)
                     .setOrigin(0)
                     .setInteractive({ useHandCursor: true });
 
@@ -257,7 +257,7 @@ export default class wordSearchScene extends Phaser.Scene {
                     t.rect.setStrokeStyle(2, 0x000000);
                 }else{
                     t.rect.setFillStyle(this.colors.emptyTile, this.colors.emptyAlpha);
-                    t.rect.setStrokeStyle(2, 0xffffff, 0.2);
+                    t.rect.setStrokeStyle(2, 0xaba6a6, 0.2);
                 }
             });
         }
@@ -271,7 +271,7 @@ export default class wordSearchScene extends Phaser.Scene {
         const width = this.scale.width;
         const height = this.scale.height;
 
-        this.add.text(width / 2, height / 2.5, 'MINIJUEGO COMPLETADO', {
+        this.add.text(width / 2, height / 2.5, '¡Detalles ocultados!', {
             fontSize: '64px',
             fontFamily: 'Climate Crisis',
             color: '#46c83d',
@@ -292,7 +292,7 @@ export default class wordSearchScene extends Phaser.Scene {
         const width = this.scale.width;
         const height = this.scale.height;
 
-        this.add.text(width / 2, height / 2.5, 'TEMPO AGOTADO', {
+        this.add.text(width / 2, height / 2.5, 'TIEMPO AGOTADO', {
             fontSize: '64px',
             fontFamily: 'Climate Crisis',
             color: '#ff3333',
