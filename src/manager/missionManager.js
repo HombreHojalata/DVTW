@@ -340,13 +340,13 @@ export default class missionManager{
         if(districtName == "BORRASCAL"){
             this.districtsWithMissions[0] = false;
         }
-        else if(districtName == "EL_NIDO"){
+        else if(districtName == "EL NIDO"){
             this.districtsWithMissions[1] = false;
         }
         else if(districtName == "GUINEA"){
             this.districtsWithMissions[2] = false;
         }
-        else if(districtName == "NUEVA_PRADERA"){
+        else if(districtName == "NUEVA PRADERA"){
             this.districtsWithMissions[3] = false;
         }
         else if(districtName == "SAHAR"){
@@ -376,54 +376,54 @@ export default class missionManager{
         let imageKey = '';
         if(missionType == "upPopularity"){
             if(districtName == "BORRASCAL"){imageKey = 'upPopularitySceneBorrascal';}
-            else if(districtName == "EL_NIDO"){imageKey = 'upPopularitySceneElNido';}
+            else if(districtName == "EL NIDO"){imageKey = 'upPopularitySceneElNido';}
             else if(districtName == "GUINEA"){imageKey = 'upPopularitySceneGuinea';}
-            else if(districtName == "NUEVA_PRADERA"){imageKey = 'upPopularitySceneNuevaPradera';}
+            else if(districtName == "NUEVA PRADERA"){imageKey = 'upPopularitySceneNuevaPradera';}
             else if(districtName == "SAHAR"){imageKey = 'upPopularitySceneSahar';}
             else{//districtName == "SOMOSAGUA"
                 imageKey = 'upPopularitySceneSomosagua';}
         }
         else if(missionType == "downPopularity"){
             if(districtName == "BORRASCAL"){imageKey = 'downPopularitySceneBorrascal';}
-            else if(districtName == "EL_NIDO"){imageKey = 'downPopularitySceneElNido';}
+            else if(districtName == "EL NIDO"){imageKey = 'downPopularitySceneElNido';}
             else if(districtName == "GUINEA"){imageKey = 'downPopularitySceneGuinea';}
-            else if(districtName == "NUEVA_PRADERA"){imageKey = 'downPopularitySceneNuevaPradera';}
+            else if(districtName == "NUEVA PRADERA"){imageKey = 'downPopularitySceneNuevaPradera';}
             else if(districtName == "SAHAR"){imageKey = 'downPopularitySceneSahar';}
             else{//districtName == "SOMOSAGUA"
                 imageKey = 'downPopularitySceneSomosagua'; }
         }
         else if(missionType == "upMoney"){
             if(districtName == "BORRASCAL"){imageKey = 'upMoneySceneBorrascal';}
-            else if(districtName == "EL_NIDO"){imageKey = 'upMoneySceneElNido';}
+            else if(districtName == "EL NIDO"){imageKey = 'upMoneySceneElNido';}
             else if(districtName == "GUINEA"){imageKey = 'upMoneySceneGuinea';}
-            else if(districtName == "NUEVA_PRADERA"){imageKey = 'upMoneySceneNuevaPradera';}
+            else if(districtName == "NUEVA PRADERA"){imageKey = 'upMoneySceneNuevaPradera';}
             else if(districtName == "SAHAR"){imageKey = 'upMoneySceneSahar';}
             else{//districtName == "SOMOSAGUA"
                 imageKey = 'upMoneySceneSomosagua';}
         }
         else if(missionType == "downMoney"){
             if(districtName == "BORRASCAL"){imageKey = 'downMoneySceneBorrascal';}
-            else if(districtName == "EL_NIDO"){imageKey = 'downMoneySceneElNido';}
+            else if(districtName == "EL NIDO"){imageKey = 'downMoneySceneElNido';}
             else if(districtName == "GUINEA"){imageKey = 'downMoneySceneGuinea';}
-            else if(districtName == "NUEVA_PRADERA"){imageKey = 'downMoneySceneNuevaPradera';}
+            else if(districtName == "NUEVA PRADERA"){imageKey = 'downMoneySceneNuevaPradera';}
             else if(districtName == "SAHAR"){imageKey = 'downMoneySceneSahar';}
             else{//districtName == "SOMOSAGUA"
             imageKey = 'downMoneySceneSomosagua';}
         }
         else if(missionType == "downCorruption"){
             if(districtName == "BORRASCAL"){imageKey = 'downCorruptionSceneBorrascal';}
-            else if(districtName == "EL_NIDO"){imageKey = 'downCorruptionSceneElNido';}
+            else if(districtName == "EL NIDO"){imageKey = 'downCorruptionSceneElNido';}
             else if(districtName == "GUINEA"){imageKey = 'downCorruptionSceneGuinea';}
-            else if(districtName == "NUEVA_PRADERA"){imageKey = 'downCorruptionSceneNuevaPradera';}
+            else if(districtName == "NUEVA PRADERA"){imageKey = 'downCorruptionSceneNuevaPradera';}
             else if(districtName == "SAHAR"){imageKey = 'downCorruptionSceneSahar';}
             else{//districtName == "SOMOSAGUA"
                 imageKey = 'downCorruptionSceneSomosagua';}
         }
         else if(missionType == "regular"){
             if(districtName == "BORRASCAL"){imageKey = 'regularSceneBorrascal';}
-            else if(districtName == "EL_NIDO"){imageKey = 'regularSceneElNido';}
+            else if(districtName == "EL NIDO"){imageKey = 'regularSceneElNido';}
             else if(districtName == "GUINEA"){imageKey = 'regularSceneGuinea';}
-            else if(districtName == "NUEVA_PRADERA"){imageKey = 'regularSceneNuevaPradera';}
+            else if(districtName == "NUEVA PRADERA"){imageKey = 'regularSceneNuevaPradera';}
             else if(districtName == "SAHAR"){imageKey = 'regularSceneSahar';}
             else{//districtName == "SOMOSAGUA"
                 imageKey = 'regularSceneSomosagua';}
