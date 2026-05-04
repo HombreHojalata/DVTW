@@ -39,34 +39,50 @@ export default class District {
     }
     // ASSETS
     spawnDistrict(scene){
+        if(this.button)
+            this.button.destroy();
+        if(this.outline)
+            this.outline.destroy();
+
         this.texture = this.is_special_built ? this.PNGwithSpecial : this.PNGwithOutSpecial;
-        const button = scene.add.image(this.posX, this.posY, this.texture).setOrigin(0).setScale(1)
-            .setInteractive({
-                useHandCursor: true,
-                pixelPerfect: true
-            });
-        const outline = scene.add.graphics();
-        outline.lineStyle(3, 0xcccccc, 1);
-        outline.setDepth(10);
-        outline.setPosition(-5, -10);
+
+        this.button = scene.add.image(this.posX, this.posY, this.texture).setOrigin(0).setScale(1);
+        
+        this.outline = scene.add.graphics();
+        this.outline.lineStyle(3, 0xcccccc, 1);
+        this.outline.setDepth(10);
+        this.outline.setPosition(-5, -10);
+
         if(this.polygonPts && this.polygonPts.length > 0){
-            outline.beginPath();
-            outline.moveTo(this.polygonPts[0].x, this.polygonPts[0].y);
+            this.outline.beginPath();
+            this.outline.moveTo(this.polygonPts[0].x, this.polygonPts[0].y);
+
             for(let i = 1; i < this.polygonPts.length; i++)
-                outline.lineTo(this.polygonPts[i].x, this.polygonPts[i].y);
-            outline.closePath();
-            outline.strokePath();
-        }
-        outline.setVisible(false);
-        button.on('pointerover', () => {outline.setVisible(true);});
-        button.on('pointerout', () => {outline.setVisible(false);});
-        button.on('pointerup', () => {
+                this.outline.lineTo(this.polygonPts[i].x, this.polygonPts[i].y);
+
+            this.outline.closePath();
+            this.outline.strokePath();
+
+            const clickArea = new Phaser.Geom.Polygon(this.polygonPts.map(pt => ({ x: pt.x - this.posX, y: pt.y - this.posY })));
+
+            this.button.setInteractive(clickArea, Phaser.Geom.Polygon.Contains);
+            this.button.input.cursor = 'pointer';
+        }else
+            this.button.setInteractive({useHandCursor: true});
+
+        this.outline.setVisible(false);
+        
+        this.button.on('pointerover', () => { this.outline.setVisible(true);});
+        this.button.on('pointerout', () => { this.outline.setVisible(false);});
+        this.button.on('pointerup', () => {
             const audioManager = scene.registry.get('audioManager');
-            if (audioManager) audioManager.play('openDistrict');
+            if (audioManager)
+                audioManager.play('openDistrict');
             scene.scene.pause('gameScene');
             scene.scene.launch('districtScene', { district: this, day: scene.day.getDayNumber() });
         });
-        return button;
+        
+        return this.button;
     }
     getPNGwithOutSpecial() {return this.PNGwithOutSpecial;}
     getPNGwithSpecial() {return this.PNGwithSpecial;}

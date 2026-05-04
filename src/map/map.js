@@ -37,7 +37,7 @@ export default class Map {
             6500, 17, 1.5,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["COMERCIAL"], 4,
             false, "TEATRO MAGNO",
-            'districtGuinea', 'districtGuineaSpecial', -10, -15
+            'districtGuinea', 'districtGuineaSpecial', -5, -15
         );
         const NUEVA_PRADERA = new DistrictNuevaPradera(
             "NUEVA PRADERA", "El hogar ideal para la clase media, llena de vallas blancas y gente obediente de las normal. Nueva Pradera es un distrito fácil de ignorar, pero hay que tener cuidado con decepcionar a sus muchos vecinos.",
@@ -51,14 +51,14 @@ export default class Map {
             2000, 9, 0.5,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], [], 6,
             false, "RESTAURANTE BAMBI",
-            'districtSahar', 'districtSaharSpecial', -10, -17
+            'districtSahar', 'districtSaharSpecial', -4, -17
         );
         const SOMOSAGUA = new DistrictSomosagua(
             "SOMOSAGUA", "La zona industrial de la ciudad: si el agua huele a azufre, es que el progreso va bien. Los vecinos de Somosagua están acostumbrados a la contaminación, por lo que no se quejarán mucho si ampliamos el número de fábricas.",
             4000, 21, 2,
             ["HOUSE", "CINEMA", "PARK", "HOTEL", "COMERCIAL", "FACTORY", "HOSPITAL"], ["FACTORY"], 4,
             false, "FÁBRICA MUNDO JUPI",
-            'districtSomosagua', 'districtSomosaguaSpecial', -17, -17
+            'districtSomosagua', 'districtSomosaguaSpecial', -75, -17
         );
         const districtArray = [
             BORRASCAL,

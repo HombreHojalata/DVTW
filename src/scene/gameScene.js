@@ -111,6 +111,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.events.on('resume', () => {
             this.footerUI.refreshMoney();
+            this.map.spawnDistricts(this);
         });
     }
 
