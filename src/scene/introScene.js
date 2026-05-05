@@ -134,15 +134,11 @@ export default class IntroScene extends Phaser.Scene {
         };
 
         //colocacion de botones en la agenda abierta
-        createMenuButton(580, 520, 'Tutorial', () => {
-            this.scene.start('tutorialScene');
-        });
-
-        createMenuButton(560, 620, 'Nueva Partida', () => {
+        createMenuButton(570, 565, 'JUGAR', () => { // antes eran 580, 520
             this.scene.start('gameScene');
         });
 
-        createMenuButton(540, 720, 'Opciones', () => {
+        createMenuButton(540, 665, 'OPCIONES', () => { // antes eran 560, 620
             this.scene.start('configurationScene', {
                 returnScene: 'introScene',
                 openedFromPause: false

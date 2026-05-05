@@ -593,4 +593,49 @@ export default class DistrictScene extends Phaser.Scene {
             }
         );
     }
+
+    createTutorialButton(container, x, y, text, callback) {
+        const width = 240;
+        const height = 50;
+
+        const shadow = this.add.rectangle(x + 4, y + 5, width, height, 0x000000, 0.18).setOrigin(0.5);
+        const bg = this.add.rectangle(x, y, width, height, 0xf7f2ea, 0.9).setOrigin(0.5).setStrokeStyle(3, 0x263b63).setInteractive({ useHandCursor: true });
+        const label = this.add.text(x, y, text, {
+            fontSize: '22px',
+            fontFamily: 'Georgia',
+            color: '#26304a',
+            fontStyle: 'bold'
+        }).setOrigin(0.5);
+
+        bg.on('pointerover', () => {
+            bg.setFillStyle(0xfff7df, 1);
+            bg.setStrokeStyle(3, 0xb68a2f);
+            label.setColor('#1b2340');
+            bg.setScale(1.05);
+            label.setScale(1.05);
+            shadow.setAlpha(0.28);
+        });
+
+        bg.on('pointerout', () => {
+            bg.setFillStyle(0xf7f2ea, 0.9);
+            bg.setStrokeStyle(3, 0x263b63);
+            label.setColor('#26304a');
+            bg.setScale(1);
+            label.setScale(1);
+            shadow.setAlpha(0.18);
+        });
+
+        bg.on('pointerdown', () => {
+            bg.setScale(0.95);
+            label.setScale(0.95);
+        });
+
+        bg.on('pointerup', () => {
+            bg.setScale(1.05);
+            label.setScale(1.05);
+            callback();
+        });
+
+        container.add([shadow, bg, label]);
+    }
 }
