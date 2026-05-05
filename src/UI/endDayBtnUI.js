@@ -19,26 +19,14 @@ export default class endDayBtnUI {
         const x = batteryX + (batteryWidth / 2);
         const y = batteryBottomY + 60;
         const { width, height } = this.scene.sys.game.config;
+        const size = 120;
 
         if(this.tutorial || this.currentDay === 5) {
-            const size = 100;
             this.blocker = this.scene.add.rectangle(x, y, size, size, 0x000000, 0).setOrigin(0.5).setInteractive().setDepth(24);
             this.blockedContainer = this.scene.add.container(x, y - 70).setVisible(false),this.setDepth(25);
-    
-            if(this.currentDay === 5) {
-                const bgLastDay = this.scene.add.rectangle(0,0,330,50, 0x000000).setOrigin(0.5);
-                const textLastDay = this.scene.add.text(0, 0, 'HOY ES UN DIA MUY IMPORTANTE, SIGUE TRABAJANDO', { fontFamily: 'Handjet', fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
-                this.blockedContainer.add([bgLastDay, textLastDay]);
-            }else{
-                const bgTutorial = this.scene.add.rectangle(0, 0, 150, 50, 0x000000).setOrigin(0.5);
-                const textTutorial = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontFamily: 'Handjet', fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
-                this.blockedContainer.add([bgTutorial, textTutorial]);
-            }
-            this.blocker.on('pointerover', (pointer) => { 
-                this.blockedContainer.setVisible(true); 
-                this.blockedContainer.setPosition(pointer.x - 20, pointer.y + 5);
-            });
-            this.blocker.on('pointerout', () => { this.blockedContainer.setVisible(false); });
+            const bgTutorial = this.scene.add.rectangle(0, 0, 150, 50, 0x000000).setOrigin(0.5);
+            const textTutorial = this.scene.add.text(0, 0, 'BLOQUEADO!!!', { fontFamily: 'Handjet', fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
+            this.blockedContainer.add([bgTutorial, textTutorial]);
         }
 
         this.btn = this.scene.add.image(x, y, 'endDayNormal').setInteractive({ useHandCursor: true }).setDepth(22).setScale(this.scaleValue);
@@ -74,11 +62,23 @@ export default class endDayBtnUI {
             } else {
                 this.btn.setTexture('endDayNormal');
                 //this.blocker =  this.scene.add.zone(x, y, width, height).setOrigin(0.5).setInteractive().setDepth(24);
-                this.confirmationUI = new confirmationUI(this.scene, () => this.finishDay()).show();
-            }
-        });
+                if(this.player.getEnergy()>0 && this.currentDay === 5){
+                    this.blocker = this.scene.add.rectangle(x, y, size, size, 0x000000, 0).setOrigin(0.5).setInteractive().setDepth(24);
+                    this.blockedContainer = this.scene.add.container(x, y - 70).setVisible(false),this.setDepth(25);
+                    const bgLastDay = this.scene.add.rectangle(0,0,330,50, 0x000000).setOrigin(0.5);
+                    const textLastDay = this.scene.add.text(0, 0, 'HOY ES UN DIA MUY IMPORTANTE, SIGUE TRABAJANDO', { fontFamily: 'Handjet', fontSize: '20px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
+                    this.blockedContainer.add([bgLastDay, textLastDay]);
 
-        
+                    this.blocker.on('pointerover', (pointer) => { 
+                        this.blockedContainer.setVisible(true); 
+                        this.blockedContainer.setPosition(pointer.x - 20, pointer.y + 5);
+                    });
+                    this.blocker.on('pointerout', () => { this.blockedContainer.setVisible(false); });
+                }else{
+                    this.confirmationUI = new confirmationUI(this.scene, () => this.finishDay()).show();
+                }
+            }
+        });        
     }
 
     refresh() {
@@ -86,6 +86,7 @@ export default class endDayBtnUI {
 
         if (energy <= 0 && !this.isOver) {
             this.isOver = true;
+            this.btn.setInteractive({ useHandCursor: true });
             this.btn.setTexture('endDayBright');
             if (this.blockedContainer) {
                 this.blockedContainer.destroy();
