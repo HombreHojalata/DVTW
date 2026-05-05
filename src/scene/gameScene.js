@@ -34,7 +34,7 @@ export default class GameScene extends Phaser.Scene {
         if (!this.registry.has('missionList')) this.registry.set('missionList',[]);
         this.missionList = this.registry.get('missionList');
         // TUTORIAL
-        if (!this.registry.has('isTutorial')) this.registry.set('isTutorial', data.tutorial || false);
+        if (!this.registry.has('isTutorial')) this.registry.set('isTutorial', data.tutorial || true);
         this.isTutorial = this.registry.get('isTutorial');
         // ENERGY CYCLE
         if(!this.registry.has('triggeredThresholds')) this.registry.set('triggeredThresholds', new Set());
@@ -133,7 +133,7 @@ export default class GameScene extends Phaser.Scene {
         this.missionTimer = this.time.addEvent({
             delay: delay,
             callback: () => {
-                 if(this.player.getEnergy() > 0){
+                if(this.player.getEnergy() > 0){
                     this.missionList.push(this.gameManager.getMission(this));
                     this.scheduleNextMission();
                 }
@@ -177,7 +177,7 @@ export default class GameScene extends Phaser.Scene {
                     }
                 });
                 // LOGICA DE CICLO DE DIA
-                if (this.player.getEnergy() > 50) {
+                if (this.player.getEnergy() > this.player.getMaxEnergy() * 0.5) {
 
                     this.midday = false;
                     this.afternoon = false;
@@ -202,7 +202,7 @@ export default class GameScene extends Phaser.Scene {
                     });
                 }
 
-                if (this.player.getEnergy() <= 50 && !this.midday) {
+                if (this.player.getEnergy() <= this.player.getMaxEnergy() * 0.5 && !this.midday) {
                     this.midday = true;
                     console.log('MITAD DEL DÍA -> ABRE EL MERCADO');
                     this.tweens.add({
@@ -211,10 +211,10 @@ export default class GameScene extends Phaser.Scene {
                         duration: 3000,
                         ease: 'Power2'
                     });
-                    if (this.day != 1) this.footerUI.openMarket();
+                    if (this.day.getDayNumber() > 1) this.footerUI.openMarket();
                 }
 
-                if (this.player.getEnergy() <= 25 && !this.afternoon) {
+                if (this.player.getEnergy() <= this.player.getMaxEnergy() * 0.25 && !this.afternoon) {
                     this.afternoon = true;
                     console.log('ATARDECE');
                     this.tweens.add({
@@ -304,12 +304,26 @@ export default class GameScene extends Phaser.Scene {
                 ease: 'Power2',
                 onComplete: () =>{
                     introContainer.destroy()
-                    if (this.currentDay === 2 && this.isTutorial) {               // TUTORIAL BLACK MARKET
-                        this.scene.stop();
-                        this.scene.start('tutorialScene', { order: 3 });
-                    } else if (this.currentDay === 3 && this.isTutorial) {        // TUTORIAL BLACK MARKET 2
-                        this.scene.stop();
-                        this.scene.start('tutorialScene', { order: 4 });
+                    if (this.currentDay === 1 && this.isTutorial && !this.registry.get('introDone')) {
+                        this.registry.set('introDone', true);
+                        this.scene.pause();
+                        this.scene.launch('tutorialScene', { section: 'INTRO' });
+                        this.scene.bringToTop('tutorialScene');          
+                    } if (this.currentDay === 2 && this.isTutorial && !this.registry.get('dayTwoDone')) {       
+                        this.registry.set('dayTwoDone', true);
+                        this.scene.pause();
+                        this.scene.launch('tutorialScene', { section: 'DAY_TWO' });
+                        this.scene.bringToTop('tutorialScene'); 
+                    } else if (this.currentDay === 3 && this.isTutorial && !this.registry.get('dayThreeDone')) {
+                        this.registry.set('dayThreeDone', true);
+                        this.scene.pause();
+                        this.scene.launch('tutorialScene', { section: 'DAY_THREE' });
+                        this.scene.bringToTop('tutorialScene'); 
+                    } else if (this.currentDay === 5 && this.isTutorial && !this.registry.get('finalDayDone')) {
+                        this.registry.set('finalDayDone', true);
+                        this.scene.pause();
+                        this.scene.launch('tutorialScene', { section: 'FINAL_DAY' });
+                        this.scene.bringToTop('tutorialScene');
                     }
                 }
             });

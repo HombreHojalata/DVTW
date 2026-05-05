@@ -12,6 +12,17 @@ export default class gameManager{
         this.missionManager = new MissionManager(this.scene,this.player);
         this.map = new Map('map',null,null);
         this.player.updatePopularity(this.map.getPopularity());
+        this.tutorialFlags = {
+            introDone: false,
+            districtsDone: false,
+            missionsDone: false,
+            corruptionDone: false,
+            blackMarketDone: false,
+            parametersDone: false,
+            dayTwoDone: false,
+            dayThreeDone: false,
+            finalDayDone: false
+        }
     }
     // GETTERS
     getPlayer(){return this.player};

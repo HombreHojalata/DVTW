@@ -99,8 +99,9 @@ export default class endDayBtnUI {
             this.scene.tweens.add({
                 targets: this.btn,
                 scale: this.scaleValue * 1.1,
-                duration: 100,
-                yoyo: true
+                duration: 300,
+                yoyo: true,
+                repeat: -1
             });
         } else if (energy > 0 && this.isOver) {
             this.isOver = false;

@@ -44,7 +44,7 @@ export default class footerUI {
                 duration: 200,
                 ease: 'Power2',
                 onComplete: () => {
-                   this.scene.tweens.add({
+                this.scene.tweens.add({
                     targets: this.moneyText,
                     scaleX: 1,
                     scaleY: 1,
@@ -94,7 +94,7 @@ export default class footerUI {
             this.blackMarketBtn.setTexture('marketBtnBright');
 
             if (this.player.getEnergy() > this.player.getMaxEnergy() / 2) {
-                tooltip.setText('Aún es muy pronto, vuelve luego.');
+                tooltip.setText('El mercado abre a partir del medidodía...');
             } else {
                 tooltip.setText('Dale click para accerder al mercado negro');
             }
@@ -136,9 +136,11 @@ export default class footerUI {
     }
 
     openMarket() {
+        const audioManager = this.scene.registry.get('audioManager');
+        if (audioManager) audioManager.play('racoon', { volumeMultiplier: 4 });
         this.scene.tweens.add({
             targets: this.blackMarketButton,
-            scale: 1.05,
+            scale: 1.1,
             duration: 200,
             yoyo: true,
             ease: 'Sine.easeInOut',
