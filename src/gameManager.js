@@ -8,7 +8,7 @@ export default class gameManager{
     constructor(scene){
         this.scene = scene;
         this.player = new Player(700000, 100, 100, 0, 0, 'photoNormal');
-        this.day = new Day(3);
+        this.day = new Day(0);
         this.missionManager = new MissionManager(this.scene,this.player);
         this.map = new Map('map',null,null);
         this.player.updatePopularity(this.map.getPopularity());
