@@ -400,6 +400,42 @@ export default class DistrictScene extends Phaser.Scene {
         });
         return button;
     }
+
+    createTutorialButton(container, x, y, text, callback) {
+        const buttonBg = this.add.rectangle(x, y, 180, 60, 0xffffff, 1)
+            .setOrigin(0.5)
+            .setStrokeStyle(3, 0x000000)
+            .setInteractive({ useHandCursor: true });
+
+        const buttonText = this.add.text(x, y, text, {
+            fontSize: '28px',
+            fontFamily: 'Handjet',
+            fontStyle: 'bold',
+            color: '#000000'
+        }).setOrigin(0.5);
+
+        buttonBg.on('pointerover', () => {
+            buttonBg.setScale(1.08);
+            buttonText.setScale(1.08);
+        });
+
+        buttonBg.on('pointerout', () => {
+            buttonBg.setScale(1);
+            buttonText.setScale(1);
+        });
+
+        buttonBg.on('pointerup', () => {
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('key');
+
+            if (callback) callback();
+        });
+
+        container.add([buttonBg, buttonText]);
+
+        return { buttonBg, buttonText };
+    }
+    
     spawnTaxesButton(newWidth, offsetX, newHeight, offsetY){
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '30px',
