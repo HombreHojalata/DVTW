@@ -2,10 +2,17 @@ import District from './district';
 import SpecialBuilding from '../building/specialBuildingSahar.js';
 
 export default class DistrictSahar extends District {
-    constructor(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building, 
+    constructor(name, desc, population, district_building, buildings, space_building, is_special_built, special_building, 
         opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY ) {
-        super(name, desc, population, satisfaction, district_building, buildings, space_building, is_special_built, special_building,
+        super(name, desc, population, district_building, buildings, space_building, is_special_built, special_building,
              opositors, PNGwithOutSpecial, PNGwithSpecial, posX, posY );
+
+        this.addTaxesPercentage(32);       //18
+        this.addSecurityPercentage(7);     //-3
+        this.addWorkSchedule(12);          //-4
+        this.addCleaningPercentage(8);     //-2
+        this.updateAfterModifyPercentage();
+
     }
     getSceneNormal() {return 'districtSaharSceneNormal';}
     getSceneSpecial() {return 'districtSaharSceneSpecial';}

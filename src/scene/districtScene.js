@@ -415,12 +415,26 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getNormalSatisfaction() < 30){
-                    if(this.district.getTaxesPercentage() < 100){
-                        this.district.addTaxesPercentage(5);
+                if(this.district.getTaxesPercentage() < 100){
+                    this.district.addTaxesPercentage(1);
+                    this.taxesText.setText(this.district.getTaxesPercentage());
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
+                }
+            }
+        );
+        this.botonReducir = this.createButton(
+            newWidth - offsetX*6 + 10, 
+            newHeight - offsetY*15 + 40, 
+            'decreaseIcon', 
+            'decreaseSelectIcon',
+            () =>  {
+                 if(this.district.getNormalSatisfaction() < 30){
+                    if(this.district.getTaxesPercentage() > 0){
+                        this.district.addTaxesPercentage(-1);
                         this.taxesText.setText(this.district.getTaxesPercentage());
-                        this.district.updateAfterModifyPercentage();
-                        this.refreshDetailsText();
+                        this.district.updateAfterModifyPercentage();  
+                        this.refreshDetailsText();                  
                     }
                 }else{
                     const pointer = this.input.activePointer;
@@ -431,20 +445,6 @@ export default class DistrictScene extends Phaser.Scene {
                     this.time.delayedCall(1500, () => {
                         tooltip.setVisible(false);
                     });
-                }
-            }
-        );
-        this.botonReducir = this.createButton(
-            newWidth - offsetX*6 + 10, 
-            newHeight - offsetY*15 + 40, 
-            'decreaseIcon', 
-            'decreaseSelectIcon',
-            () =>  {
-                if(this.district.getTaxesPercentage() > 0){
-                    this.district.addTaxesPercentage(-5);
-                    this.taxesText.setText(this.district.getTaxesPercentage());
-                    this.district.updateAfterModifyPercentage();  
-                    this.refreshDetailsText();                  
                 }
             }
         );
@@ -511,22 +511,11 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getNormalSatisfaction() < 30){
-                    if(this.district.getWorkSchedule() < 24){
-                        this.district.addWorkSchedule(1);
-                        this.workScheduleText.setText(this.district.getWorkSchedule());
-                        this.district.updateAfterModifyPercentage();
-                        this.refreshDetailsText();
-                    }
-                }else{
-                    const pointer = this.input.activePointer;
-                    tooltip.setText('No se puede aumentar, has llegado al limite');
-                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
-                    tooltip.setVisible(true);
-
-                    this.time.delayedCall(1500, () => {
-                        tooltip.setVisible(false);
-                    });
+                if(this.district.getWorkSchedule() < 24){
+                    this.district.addWorkSchedule(1);
+                    this.workScheduleText.setText(this.district.getWorkSchedule());
+                    this.district.updateAfterModifyPercentage();
+                    this.refreshDetailsText();
                 }
             }
         );
@@ -536,11 +525,23 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                if(this.district.getWorkSchedule() > 0) {
-                    this.district.addWorkSchedule(-1);
-                    this.workScheduleText.setText(this.district.getWorkSchedule());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getNormalSatisfaction() < 30){
+                    if(this.district.getWorkSchedule() > 0) {
+                        this.district.addWorkSchedule(-1);
+                        this.workScheduleText.setText(this.district.getWorkSchedule());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }
+                else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
