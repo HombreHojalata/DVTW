@@ -55,19 +55,6 @@ export const PRODUCTS = [
         }
     },
     {
-        id: 'fakeBuild',
-        name: 'PRIVATIZACIÓN DE CONTRUCTORAS',
-        desc: 'Controlar la ciudad empieza por contralar la econonmía. Todos los edificios ahora general un 5% más de recursos. (+12 Corrupción)',
-        image: 'bridge_icon',
-        price: 120000,
-        limit: 2,
-        priceStep: '+90000',
-        effect: (player) => {
-            player.addGlobalIncomeMultiplier(0.05);
-            player.updateCorruption(12);
-        }
-    },
-    {
         id: 'moveAtRandom',
         name: 'MIGRACIÓN FORZADA',
         desc: 'Desalojas a 10% de los vecinos de un distrito aleatorio para moverlos a otro elegido al azar. (+20 Corrupción)',
@@ -154,5 +141,18 @@ PRODUCTOS ANTIGUOS:
             const profit = corruption * 1000;
             player.updateMoney(profit);
         }
-    }
+    },
+    {
+        id: 'fakeBuild',
+        name: 'PRIVATIZACIÓN DE CONTRUCTORAS',
+        desc: 'Controlar la ciudad empieza por contralar la econonmía. Todos los edificios ahora general un 5% más de recursos. (+12 Corrupción)',
+        image: 'bridge_icon',
+        price: 120000,
+        limit: 2,
+        priceStep: '+90000',
+        effect: (player) => {
+            player.addGlobalIncomeMultiplier(0.05);
+            player.updateCorruption(12);
+        }
+    },
 */
