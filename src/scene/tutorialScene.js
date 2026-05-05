@@ -567,32 +567,37 @@ export default class TutorialScene extends Phaser.Scene {
         });
     }
 
-    explainBlackMarket2() {
+    // TUTORIAL DEL ÚLTIMO DÍA
+    tutorialFinalDay() {
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
         const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'blackMarketMessage').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width - 515, 120, 'vendedor').setOrigin(0).setScale(0.9).setDepth(130);
-        const text = this.add.text(this.width / 2-120, this.height / 2 - 50, 'Recuerde visitar el Mercado Negro de vez en cuando, puede encontrar productos que antes no estaban disponibles.\nY no se preocupe por su reputación, nos enorgullecemos de nuestra confidencialidad con los clientes.\n\nEso sí: tenga cuidado que con lo que compre; no me hago responsable de las posibles consecuencias.\n Bueno tengo cosas que hacer, espero verle esta tarde.',{
-            fontSize: '24px',
-            fontFamily: 'Margarine',
+        const bg = this.add.image(this.width / 4 + 100, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
+        const img = this.add.image(this.width * 0.25, this.height/2, 'flamingoTired').setOrigin(0.5, 0.5).setScale(0.60).setDepth(20);
+        const introText = this.add.text(this.width / 2 + 100, this.height / 2 - 200, '¡Último día!', {
+            fontSize: '40px',
+            fontFamily: 'Times New Roman',
             color: '#000000',
             align: 'center',
-            stroke: '#ffffff',
-            strokeThickness: 2
+            fontStyle: 'bold',
+        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
+        const text = this.add.text(this.width / 2 + 100, this.height / 2 - 70, 'Señor presidente, hoy es el último día antes de las elecciones.\nPara mejorar su imagen lo máximo posible, tendrá que trabajar todo el día de hoy.\n\nMucho animo, señor presidente.\nParece que este va a ser un día complicado...', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#000000',
+            align: 'center'
         }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
 
-        container.add([bg, img, text]);
+        container.add([bg, img, introText, text]);    
 
-        this.createTutorialButton(container, this.width * 0.57, this.height * 0.72, 'Entendido...', () => {
-            this.registry.set('flagShow', false);
-            this.fadeOutContainer(container, () => { this.scene.start('districtScene', { tutorial: true }); });
-            this.footerBlocker.destroy();
-        });
-        this.createTutorialButton(container, this.width * 0.28, this.height * 0.72, 'Volver', () => {
-            container.destroy();
-            this.explainBlackMarket();
-        });
+        this.createTutorialButton(container, this.width * 0.57, this.height * 0.6, 'Entendido...', () => {
+            this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+            this.fadeOutContainer(container, () => {
+                const gameScene = this.scene.get('gameScene');
+                if (gameScene) gameScene.scene.resume();
+                this.scene.stop();
+            });
+        }); 
     }
-
 
     fadeOutContainer(container, callback) {
         this.tweens.add({
@@ -605,30 +610,5 @@ export default class TutorialScene extends Phaser.Scene {
                 callback();
             }
         });
-    }
-    //ORDER 5
-    finishTutorial() {
-        const container = this.add.container(0, 0).setDepth(21);
-        const bg = this.add.image(this.width / 4 - 120, this.height / 3 - 140, 'tutorialInfo').setOrigin(0).setDepth(20);
-        const img = this.add.image(this.width * 0.75, this.height/2, 'flamingo').setOrigin(0.5, 0.5).setScale(0.85).setDepth(20);
-        const introText = this.add.text(this.width / 2 - 120, this.height / 2 - 200, '¡Eso es todo!', {
-            fontSize: '40px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center',
-            fontStyle: 'bold',
-        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
-        const text = this.add.text(this.width / 2- 120, this.height / 2 - 70, 'Bien, le dejo para que pruebe su nuevo jugetito.\nYa quedan pocos días para las elecciones, así que propcure conseguir el mayor apoyo posible.\n\nMucho animo, señor presidente.', {
-            fontSize: '24px',
-            fontFamily: 'Times New Roman',
-            color: '#000000',
-            align: 'center'
-        }).setOrigin(0.5).setWordWrapWidth(this.width / 2 - 40);
-
-        container.add([bg, img, introText, text]);    
-
-        this.createTutorialButton(container, this.width * 0.44, this.height * 0.6, '¡Entendido!', () => {
-            this.fadeOutContainer(container, () => { this.scene.start('gameScene', { tutorial: false }); });
-        }); 
     }
 }

@@ -12,6 +12,7 @@ import tutorialAnimals3 from '../assets/other/tutorialAnimals3.png'
 import tutorialInfo from '../assets/other/tutorialInfo.png'
 import textCloud from '../assets/other/textCloud.png'
 import flamingo from '../assets/other/flamingo.png'
+import flamingoTired from '../assets/other/flamingoTired.png'
 import blackMarketMessage from '../assets/other/blackMarketMessage.png'
 
 // PROTOTYPE ASSETS
@@ -379,6 +380,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('tutorialInfo', tutorialInfo);
     this.load.image('textCloud', textCloud);
     this.load.image('flamingo', flamingo);
+    this.load.image('flamingoTired', flamingoTired);
     this.load.image('blackMarketMessage', blackMarketMessage);
     this.load.image('presidente', presidente);
     this.load.image('photoNormal', photoNormal);

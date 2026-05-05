@@ -319,6 +319,11 @@ export default class GameScene extends Phaser.Scene {
                         this.scene.pause();
                         this.scene.launch('tutorialScene', { section: 'DAY_THREE' });
                         this.scene.bringToTop('tutorialScene'); 
+                    } else if (this.currentDay === 5 && this.isTutorial && !this.registry.get('finalDayDone')) {
+                        this.registry.set('finalDayDone', true);
+                        this.scene.pause();
+                        this.scene.launch('tutorialScene', { section: 'FINAL_DAY' });
+                        this.scene.bringToTop('tutorialScene');
                     }
                 }
             });
