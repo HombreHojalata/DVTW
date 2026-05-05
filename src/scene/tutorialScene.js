@@ -47,7 +47,7 @@ export default class TutorialScene extends Phaser.Scene {
                 this.tutorialBlackMarket();
                 break;
             case 'PARAMETERS':
-                this.tutorialCorrupt();
+                this.tutorialParameters();
                 break;
             case 'DAY_TWO':
                 this.tutorialDayTwo();
@@ -446,7 +446,7 @@ export default class TutorialScene extends Phaser.Scene {
         });
     }
 
-    tutorialDistrictsEnd() { // EDIFICIOS ESPECIALES
+    tutorialDistrictsEnd() { // EDIFICIOS ESPECIALES Y FINAL
         this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
         const container = this.add.container(this.width / 2, this.height / 2).setDepth(21);
         const bg = this.add.rectangle(0, 0, 750, 425, 0x000000, 0.85).setOrigin(0.5);
@@ -483,6 +483,87 @@ export default class TutorialScene extends Phaser.Scene {
         this.createTutorialButton(container, -200, 120, 'Volver', () => {
             container.destroy();
             this.tutorialDistricts3();
+        });
+    }
+
+    // TUTORIAL DE PARAMETROS
+    tutorialParameters() { // INICIO
+        const container = this.add.container(this.width / 2, this.height / 2).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 350, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, 'Bienvenido nuevamente al panel de distritos, señor presidente. Vengo a mostrarle los nuevos PARÁMETROS: Impuestos, Horario Laboral, Seguridad, y Limpieza de las calles.\n\nCada parámetro es un delicado equilibrio. Al ajustarlo, la satisfacción de los vecinos y el dinero del distrito irán variando.\nDebe encontrar el balance que más le convenga.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 0, 120, 'Continuar', () => {
+            container.destroy();
+            this.tutorialParameters2();
+        });
+    }
+
+    tutorialParameters2() { // EXPLICACIÓN PARÁMETROS
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(this.width / 4 - 30, this.height * 0.35 + 30).setDepth(21);
+        
+        this.addHighlight(container, 243, 172, 730, 210);
+
+        const bg = this.add.rectangle(0, 0, 650, 300, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -50, 'Los distritos aprecian cosas diferentes; por ejemplo, en El Nido aprecian mucho la limpieza.\n\nPulsando los botones de + o - puede ajustar el nivel de cada parámetro.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 600 }
+        }).setOrigin(0.5);
+
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 180, 90, 'Continuar', () => {
+            container.destroy();
+            this.tutorialParametersEnd();
+        });
+
+        this.createTutorialButton(container, -180, 90, 'Volver', () => {
+            container.destroy();
+            this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+            this.tutorialParameters();
+        });
+    }
+
+    tutorialParametersEnd() { // FINAL
+        this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+        const container = this.add.container(this.width / 2, this.height / 2).setDepth(21);   
+        const bg = this.add.rectangle(0, 0, 750, 350, 0x000000, 0.85).setOrigin(0.5);
+        bg.setStrokeStyle(2, 0xffffff, 0.5);
+        const text = this.add.text(0, -40, 'Veo que lo tiene claro, señor presidente.\n\nUse bien esta herramienta para ganarse el voto de los distritos que más se le compliquen.\nPero no deje de lado las misiones o los edificios si quiere conseguir afectar realmente a los votos.', {
+            fontSize: '24px',
+            fontFamily: 'Times New Roman',
+            color: '#ffffff',
+            align: 'center',
+            wordWrap: { width: 700 }
+        }).setOrigin(0.5);
+        
+        container.add([bg, text]);
+
+        this.createTutorialButton(container, 200, 120, '¡Entendido!', () => {
+            this.audioManager.play(Phaser.Utils.Array.GetRandom(this.flamingoSounds));
+            this.fadeOutContainer(container, () => {
+                const parentKey = this.scene.settings.data.parentScene || 'gameScene';
+                const parentScene = this.scene.get(parentKey);
+                if (parentScene) parentScene.scene.resume();
+                this.scene.stop();
+            });
+        });
+        this.createTutorialButton(container, -200, 120, 'Volver', () => {
+            container.destroy();
+            this.tutorialParameters2();
         });
     }
 
