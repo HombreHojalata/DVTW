@@ -244,8 +244,8 @@ import whacJSON15 from '../assets/jsons/whacAMole/whacFrame15.json';
 import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/rimworld.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
-import blackMarketAudio from '../assets/audio/black market.mp3';
-import introSceneAudio from '../assets/audio/il porco rosso.mp3';
+import blackMarketAudio from '../assets/audio/black_market.mp3';
+import introSceneAudio from '../assets/audio/il_porco_rosso.mp3';
 import openDistrict from '../assets/audio/openDistrict.mp3';
 import closeDistrict from '../assets/audio/closeDistrict.mp3';
 import key from '../assets/audio/key.mp3';
