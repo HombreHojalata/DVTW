@@ -609,7 +609,7 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('coin13', coin13);
     this.load.audio('moneyBag', moneyBag);
 
-    this.load.audio('flam1', flam1);
+    /*this.load.audio('flam1', flam1);
 
 
     //this.load.audio('flam2', flam2);
@@ -618,7 +618,7 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('flam4', flam4);
     this.load.audio('flam5', flam5);
     this.load.audio('flam6', flam6);
-    this.load.audio('flam7', flam7);
+    this.load.audio('flam7', flam7);*/
     this.load.audio('racoon', racoon);
 
     this.load.start();
