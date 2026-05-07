@@ -38,7 +38,7 @@ export const TYPING_CONFIG = {
         'discurso', 'prensa', 'publico', 'politica', 'alcalde', 'distrito',
         'debate', 'medios', 'escandalo', 'campaña', 'oficina', 'presupuesto',
         'lider', 'multitud', 'promesa', 'impuesto', 'control',
-        'agenda', 'ministro', 'nacion', 'crisis', 'reforma'
+        'agenda', 'ministro', 'nacion', 'reforma'
     ],
 
     REWARDS: {
