@@ -241,7 +241,7 @@ import whacJSON14 from '../assets/jsons/whacAMole/whacFrame14.json';
 import whacJSON15 from '../assets/jsons/whacAMole/whacFrame15.json';
 
 // AUDIO
-/*import AudioManager from '../src/manager/audioManager.js'
+import AudioManager from '../src/manager/audioManager.js'
 import gameAudio from '../assets/audio/rimworld.mp3';
 import quackAudio from '../assets/audio/quack.mp3';
 import blackMarketAudio from '../assets/audio/black_market.mp3';
@@ -281,7 +281,8 @@ import flam4 from '../assets/audio/animal/flam4.mp3';
 import flam5 from '../assets/audio/animal/flam5.mp3';
 import flam6 from '../assets/audio/animal/flam6.mp3';
 import flam7 from '../assets/audio/animal/flam7.mp3';
-import racoon from '../assets/audio/animal/racoon.mp3';*/
+import racoon from '../assets/audio/animal/racoon.mp3';
+
 export default class Boot extends Phaser.Scene {
   constructor() {
     super({ key: 'boot' });
