@@ -211,12 +211,19 @@ import downCorruptionMission from '../assets/jsons/downCorruption.json';
 import downPopularityMission from '../assets/jsons/downPopularity.json';
 import downMoneyMission from '../assets/jsons/downMoney.json';
 import minigameMission from '../assets/jsons/minigame.json';
+
+// MAPA JSONS
 import borrascalCutout from '../assets/jsons/distritos/BORRASCAL.json';
 import nidoCutout from '../assets/jsons/distritos/EL_NIDO.json';
 import guineaCutout from '../assets/jsons/distritos/GUINEA.json';
 import praderaCutout from '../assets/jsons/distritos/NUEVA_PRADERA.json';
 import saharCutout from '../assets/jsons/distritos/SAHAR.json';
 import somosaguaCutout from '../assets/jsons/distritos/SOMOSAGUA.json';
+
+import borrascalNidoSpecCutout from '../assets/jsons/distritosIntermedios/BORRASCAL_NIDO.json';
+import borrascalSomosSpecCutout from '../assets/jsons/distritosIntermedios/BORRASCAL_SOMOS.json';
+import somosaguaNidoSpecCutout from '../assets/jsons/distritosIntermedios/SOMOSAGUA_NIDO.json';
+
 import borrascalSpecCutout from '../assets/jsons/distritosEspeciales/BORRASCAL.json';
 import nidoSpecCutout from '../assets/jsons/distritosEspeciales/EL_NIDO.json';
 import guineaSpecCutout from '../assets/jsons/distritosEspeciales/GUINEA.json';
@@ -401,7 +408,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('districtSaharSceneSpecial', districtSaharSceneSpecial);
     this.load.image('districtSomosaguaSceneNormal', districtSomosaguaSceneNormal);
     this.load.image('districtSomosaguaSceneSpecial', districtSomosaguaSceneSpecial);
-    
+
     this.load.image('districtBorrascal', districtBorrascal);
     this.load.image('districtElNido', districtElNido);
     this.load.image('districtGuinea', districtGuinea);
@@ -484,7 +491,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image('memoryImage6', memoryImage6);
     this.load.image('memoryImage7', memoryImage7);
     this.load.image('memoryImage8', memoryImage8);
-    this.load.image('sfondoMonkeyType', sfondoMonkeyType);  
+    this.load.image('sfondoMonkeyType', sfondoMonkeyType);
     this.load.image('whacFrameInicio', whacFrameInicio);
     this.load.image('whacFrame2', whacFrame2);
     this.load.image('whacFrame3', whacFrame3);
@@ -552,6 +559,9 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('praderaCutout', praderaCutout);
     this.cache.json.add('saharCutout', saharCutout);
     this.cache.json.add('somosaguaCutout', somosaguaCutout);
+    this.cache.json.add('borrascalNidoSpecCutout', borrascalNidoSpecCutout);
+    this.cache.json.add('borrascalSomosSpecCutout', borrascalSomosSpecCutout);
+    this.cache.json.add('somosaguaNidoSpecCutout', somosaguaNidoSpecCutout);
     this.cache.json.add('borrascalSpecCutout', borrascalSpecCutout);
     this.cache.json.add('nidoSpecCutout', nidoSpecCutout);
     this.cache.json.add('guineaSpecCutout', guineaSpecCutout);
@@ -624,7 +634,7 @@ export default class Boot extends Phaser.Scene {
 
     this.load.audio('flam2', flam2);
     this.load.audio('flam3', flam3);
-    
+
     this.load.audio('flam4', flam4);
     this.load.audio('flam5', flam5);
     this.load.audio('flam6', flam6);
