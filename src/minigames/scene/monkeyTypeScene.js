@@ -265,7 +265,7 @@ export default class MonkeyTypeScene extends Phaser.Scene {
 
             if (i < currentIndex) {
                 if (typed === expected) {
-                    obj.setColor('#f5f5f5');
+                    obj.setColor('#419045');
                     obj.setBackgroundColor(null);
                     obj.setAlpha(1);
                 } else {
@@ -278,7 +278,7 @@ export default class MonkeyTypeScene extends Phaser.Scene {
                 obj.setBackgroundColor('#2a2a2a');
                 obj.setAlpha(1);
             } else {
-                obj.setColor('#666666');
+                obj.setColor('#9b9b9b');
                 obj.setBackgroundColor(null);
                 obj.setAlpha(1);
             }
