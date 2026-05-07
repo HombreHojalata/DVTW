@@ -574,7 +574,7 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('whacJSON15', whacJSON15);
 
     //AUDIO PART
-    /*this.load.audio('quack', quackAudio);
+    this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
     this.load.audio('openDistrict', openDistrict);
     this.load.audio('closeDistrict', closeDistrict);
@@ -587,7 +587,7 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('corruptMission', corruptMission);
     this.load.audio('exitMission', exitMission);
     this.load.audio('alarm', alarm);
-    this.load.audio('closeBriefcase', closeBriefcase);
+    /*this.load.audio('closeBriefcase', closeBriefcase);
     this.load.audio('trumpet', trumpet);
     this.load.audio('nightAmbience', nightAmbience);
     this.load.audio('coin1', coin1);
