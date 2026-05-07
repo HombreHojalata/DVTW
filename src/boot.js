@@ -576,7 +576,7 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('whacJSON15', whacJSON15);
 
     //AUDIO PART
-    this.load.audio('quack', quackAudio);
+    /*this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
     this.load.audio('introSceneAudio', introSceneAudio);
     this.load.audio('bgMusic', gameAudio);
@@ -615,7 +615,7 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('flam5', flam5);
     this.load.audio('flam6', flam6);
     this.load.audio('flam7', flam7);
-    this.load.audio('racoon', racoon);
+    this.load.audio('racoon', racoon);*/
 
     this.load.start();
 
