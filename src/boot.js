@@ -297,8 +297,8 @@ export default class Boot extends Phaser.Scene {
 
 
     //AUDIO PART
-    //this.load.audio('bgMusic', gameAudio);
-    //this.load.audio('introSceneAudio', introSceneAudio);
+    this.load.audio('bgMusic', gameAudio);
+    this.load.audio('introSceneAudio', introSceneAudio);
   }
 
   create() {
@@ -576,8 +576,8 @@ export default class Boot extends Phaser.Scene {
     //AUDIO PART
     this.load.audio('quack', quackAudio);
     this.load.audio('blackMarketAudio', blackMarketAudio);
-    this.load.audio('introSceneAudio', introSceneAudio);
-    this.load.audio('bgMusic', gameAudio);
+    //this.load.audio('introSceneAudio', introSceneAudio);
+    //this.load.audio('bgMusic', gameAudio);
     this.load.audio('openDistrict', openDistrict);
     this.load.audio('closeDistrict', closeDistrict);
     this.load.audio('key', key);
