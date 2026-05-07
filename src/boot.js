@@ -610,8 +610,10 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('moneyBag', moneyBag);
 
     this.load.audio('flam1', flam1);
-    /*this.load.audio('flam2', flam2);
-    this.load.audio('flam3', flam3);*/
+
+    
+    this.load.audio('flam2', flam2);
+    //this.load.audio('flam3', flam3);
     
     this.load.audio('flam4', flam4);
     this.load.audio('flam5', flam5);
