@@ -578,15 +578,15 @@ export default class Boot extends Phaser.Scene {
     this.load.audio('blackMarketAudio', blackMarketAudio);
     this.load.audio('openDistrict', openDistrict);
     this.load.audio('closeDistrict', closeDistrict);
+    this.load.audio('key', key);
+    this.load.audio('money', money);
 
 
 
 
-
-    /*this.load.audio('key', key);
-    this.load.audio('money', money);*/
-    this.load.audio('ball1', ball1);
-    this.load.audio('ball2', ball2);
+    
+    //this.load.audio('ball1', ball1);
+    //this.load.audio('ball2', ball2);
     this.load.audio('ball3', ball3);
 
 
