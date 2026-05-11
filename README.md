@@ -325,3 +325,64 @@ Los principales videojuegos que inspiran nuestro diseño son:
 - **Plague Inc.:** Por el gameloop de observar un mapa y aumentar tu influencia en él.
 - **Overcooked:** Por el elemento caótico a medida que avanza el juego.
 - **Papers, please:** Por la crítica política y los días unitarios conectados por una historia.
+
+---
+
+# 1. Informe de contribución
+## Safia Boufera
+Trabajo realizado:
+- Diseño del mapa
+- Tiled del mapa
+- Diseño assets de personajes
+- Diseño assets escenas de misiones
+- Diseño assets escenas de distritos
+- Diseño minijuego wordSearch
+
+## Manuel Del Caño Rodríguez
+Trabajo realizado:
+- Diseño de plantillas de distrito y misiones
+- Diseño minijuego plinko
+- Diseño de las escenas: blackMarketScene y tutorialScene.
+- Diseño de las UI: batteryUI, confirmationUI, dayUI, endDayBtnUI, marketFooterUI
+- Diseño de la página del videojuego
+  
+## Zheng Li Fu
+Trabajo realizado:
+- Producción de la música y su uso
+- Diseño minijuego monkeyType
+- Diseño minijuego wordle
+- Diseño de las escenas: configurationScene y pauseMenuScene
+  
+## Viola Pieruccetti
+Trabajo realizado:
+- Diseño assets de personajes, iconos y pantallas de videojuego
+- Diseño minijuego whacAMole
+- Diseño de la escena: introScene
+ - Diseño pantalla de carga
+ - Diseño pantalla inicio
+
+## Pedro Tobalina Navarro
+Trabajo realizado:
+- Diseño estructura de las misiones, jugador y día
+- Diseño lógica de las misiones, jugador y día
+- Diseño de todas las misiones
+- Diseño minijuego memory
+  
+## Jun Daniel Wang
+Trabajo realizado:
+- Diseño estructura del mapa, distritos y edificios
+- Diseño lógica del mapa, distritos y edificios
+ - Creación del mapa con sus distritos y sus edificios
+- Diseño de las escenas: districtScene, districtStoreScene, missionScene, summaryDayScene
+ - districtScene:
+  - Lógica de los parametros de cada distrito
+  - Lógica de compra-venta de los edificios
+  - Visualización de edificios y variables de cada distrito
+ - districtStoreScene:
+  - Lógica de compra de edificios
+ - missionScene:
+  - Visualización de las misiones y sus opciones   
+ - summaryDayScene
+  - Visualización de todas las acciones ocurridas en el día
+- Diseño de las UI: footerUI y topUI
+
