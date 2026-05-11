@@ -372,17 +372,16 @@ Trabajo realizado:
 Trabajo realizado:
 - Diseño estructura del mapa, distritos y edificios
 - Diseño lógica del mapa, distritos y edificios
- - Creación del mapa con sus distritos y sus edificios
-- Diseño de las escenas: districtScene, districtStoreScene, missionScene, summaryDayScene
- - districtScene:
-  - Lógica de los parametros de cada distrito
-  - Lógica de compra-venta de los edificios
-  - Visualización de edificios y variables de cada distrito
- - districtStoreScene:
-  - Lógica de compra de edificios
- - missionScene:
-  - Visualización de las misiones y sus opciones   
- - summaryDayScene
-  - Visualización de todas las acciones ocurridas en el día
+- Creación del mapa con sus distritos y sus edificios
+- Diseño de la escena districtScene:
+	- Lógica de los parametros de cada distrito
+ 	- Lógica de compra-venta de los edificios
+  	- Visualización de edificios y variables de cada distrito
+- Diseño de la escena districtStoreScene:
+  	- Lógica de compra de edificios
+- Diseño de la escena missionScene:
+  	- Visualización de las misiones y sus opciones   
+- summaryDayScene
+  	- Visualización de todas las acciones ocurridas en el día
 - Diseño de las UI: footerUI y topUI
 
