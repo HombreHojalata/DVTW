@@ -364,7 +364,7 @@ Trabajo realizado:
 ## Pedro Tobalina Navarro
 Trabajo realizado:
 - Diseño estructura de las misiones, jugador y día
-- Diseño lógica de las misiones, jugador y día
+- Diseño lógica de las misiones, jugador, día y recursos
 - Diseño de todas las misiones
 - Diseño minijuego memory
   
