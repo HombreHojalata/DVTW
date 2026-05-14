@@ -148,14 +148,7 @@ export default class Map {
                     tiledObj = objLayer.objects;
 
                     const shape = tiledObj.find(obj => obj.name.toLowerCase() === districtName.toLowerCase()) || tiledObj[0];
-                    // TODO: IF DISTRICT = BORRASCAL || ELNIDO CHECK somos
-                    /*this.district = this.getDistrictByName(districtName)
-                    if(districtName === "SOMOSAGUA"){
-                        this.districtNeighbour = this.getDistrictByName("EL NIDO");
-                        if(this.districtNeighbour.isSpecialBuildingBuilt()){
-                            //USE spec2Cutout
-                        }
-                    }*/
+                    
                     if (shape && shape.polygon) {
                         d.polygonPts = shape.polygon.map(pt => {
                             return { x: pt.x + shape.x + jsonsOffsetX, y: pt.y + shape.y + jsonsOffsetY };
