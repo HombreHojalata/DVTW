@@ -337,13 +337,24 @@ Trabajo realizado:
 - Diseño assets escenas de distritos
 - Diseño minijuego wordSearch
 
-## Manuel Del Caño Rodríguez
+## Manuel del Caño Rodríguez
 Trabajo realizado:
 - Diseño de plantillas de distrito y misiones
+	- Responsibidad de botones variados
+ 	- Animación notificación de misiones
+  	- Audio de interfaces
 - Diseño minijuego plinko
 - Diseño de las escenas: blackMarketScene y tutorialScene.
+	- Lógica de compra en el Black Market
+	- Productos del Black Market
+ 	- Lógica del tutorial
+    - Diseño gráfico del tutorial
 - Diseño de las UI: batteryUI, confirmationUI, dayUI, endDayBtnUI, marketFooterUI
+	- Lógica del botón de Terminar el Día
+ 	- Lógica del botón del Mercado Negro
+  	- Pantalla de confirmación de saltar el día
 - Diseño de la página del videojuego
+- Diseño de las escenas de victoria y derrota
   
 ## Zheng Li Fu
 Trabajo realizado:
