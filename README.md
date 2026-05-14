@@ -328,14 +328,23 @@ Los principales videojuegos que inspiran nuestro diseño son:
 
 ---
 
-# 1. Informe de contribución
-## Safia Boufera
+# 1. Informe de contribución  
+## Jun Daniel Wang
 Trabajo realizado:
-- Diseño del mapa
-- Tiled del mapa
-- Diseño assets de personajes
-- Diseño assets escenas de distritos
-- Diseño minijuego wordSearch
+- Diseño estructura del mapa, distritos y edificios
+- Diseño lógica del mapa, distritos y edificios
+- Creación del mapa con sus distritos y sus edificios
+- Diseño de la escena districtScene:
+	- Lógica de los parametros de cada distrito
+ 	- Lógica de compra-venta de los edificios
+  	- Visualización de edificios y variables de cada distrito
+- Diseño de la escena districtStoreScene:
+  	- Lógica de compra de edificios
+- Diseño de la escena missionScene:
+  	- Visualización de las misiones y sus opciones   
+- summaryDayScene
+  	- Visualización de todas las acciones ocurridas en el día
+- Diseño de las UI: footerUI y topUI
 
 ## Manuel del Caño Rodríguez
 Trabajo realizado:
@@ -355,13 +364,21 @@ Trabajo realizado:
   	- Pantalla de confirmación de saltar el día
 - Diseño de la página del videojuego
 - Diseño de las escenas de victoria y derrota
-  
-## Zheng Li Fu
+
+## Pedro Tobalina Navarro
 Trabajo realizado:
-- Producción de la música y su uso
-- Diseño minijuego monkeyType
-- Diseño minijuego wordle
-- Diseño de las escenas: configurationScene y pauseMenuScene
+- Diseño estructura de las misiones, jugador y día
+- Diseño lógica de las misiones, jugador, día y recursos
+- Diseño de todas las misiones
+- Diseño minijuego memory
+
+## Safia Boufera
+Trabajo realizado:
+- Diseño del mapa
+- Tiled del mapa
+- Diseño assets de personajes
+- Diseño assets escenas de distritos
+- Diseño minijuego wordSearch
   
 ## Viola Pieruccetti
 Trabajo realizado:
@@ -371,27 +388,10 @@ Trabajo realizado:
  - Diseño pantalla de carga
  - Diseño pantalla inicio
 
-## Pedro Tobalina Navarro
+## Zheng Li Fu
 Trabajo realizado:
-- Diseño estructura de las misiones, jugador y día
-- Diseño lógica de las misiones, jugador, día y recursos
-- Diseño de todas las misiones
-- Diseño minijuego memory
-  
-## Jun Daniel Wang
-Trabajo realizado:
-- Diseño estructura del mapa, distritos y edificios
-- Diseño lógica del mapa, distritos y edificios
-- Creación del mapa con sus distritos y sus edificios
-- Diseño de la escena districtScene:
-	- Lógica de los parametros de cada distrito
- 	- Lógica de compra-venta de los edificios
-  	- Visualización de edificios y variables de cada distrito
-- Diseño de la escena districtStoreScene:
-  	- Lógica de compra de edificios
-- Diseño de la escena missionScene:
-  	- Visualización de las misiones y sus opciones   
-- summaryDayScene
-  	- Visualización de todas las acciones ocurridas en el día
-- Diseño de las UI: footerUI y topUI
+- Producción de la música y su uso
+- Diseño minijuego monkeyType
+- Diseño minijuego wordle
+- Diseño de las escenas: configurationScene y pauseMenuScene
 
