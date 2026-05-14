@@ -91,22 +91,52 @@ export default class Map {
             "SOMOSAGUA": "somosaguaSpecCutout"
         };
 
-        /*
-        const spec2Cutout = {
-            "BORRASCAL" 
-            "SOMOSAGUAS"
-        }
-        */ 
+        const spec2Cutouts = {
+            "BORRASCAL_NIDO": "borrascalNidoSpecCutout",
+            "BORRASCAL_SOMOS": "borrascalSomosSpecCutout",
+            "SOMOSAGUA_NIDO": "somosaguaNidoSpecCutout",
+            "SOMOSAGUA_NIDO2": "somosaguaNido2SpecCutout"
+        };
 
         const jsonsOffsetX = 5;
         const jsonsOffsetY = 0;
 
         this.districtList.forEach(d => {
             const districtName = d.getName().toUpperCase();
-
             const spec = d.is_special_built;
+            let cutout = spec ? specCutouts[districtName] : cutouts[districtName];
 
-            const cutout = spec ? specCutouts[districtName] : cutouts[districtName];
+            if (districtName === "BORRASCAL"){
+                const nido = this.getDistrictByName("EL NIDO");
+                const somos = this.getDistrictByName("SOMOSAGUA");
+
+                const nidoSpec = nido && nido.is_special_built;
+                const somosSpec = somos && somos.is_special_built;
+                
+                if(spec){
+                    if (!nidoSpec && !somosSpec)
+                        cutout = cutouts["BORRASCAL"];
+                    else if (!nidoSpec && somosSpec)
+                        cutout = spec2Cutouts["BORRASCAL_SOMOS"];
+                    else if (nidoSpec && !somosSpec)
+                        cutout = spec2Cutouts["BORRASCAL_NIDO"];
+                }else{
+                    if(nidoSpec && !somosSpec)
+                        cutout = spec2Cutouts["BORRASCAL_NIDO"];
+                }
+            }else if(districtName === "SOMOSAGUA"){
+                const nido = this.getDistrictByName("EL NIDO");
+                const nidoSpec = nido && nido.is_special_built;
+
+                if(spec){
+                    if(!nidoSpec)
+                        cutout = spec2Cutouts["SOMOSAGUA_NIDO"];
+                }else{
+                    if(nidoSpec)
+                        cutout = spec2Cutouts["SOMOSAGUA_NIDO2"];
+                }
+            }
+
             const districtCutout = scene.cache.json.get(cutout);
 
             let tiledObj = [];

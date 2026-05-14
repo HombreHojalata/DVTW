@@ -223,6 +223,7 @@ import somosaguaCutout from '../assets/jsons/distritos/SOMOSAGUA.json';
 import borrascalNidoSpecCutout from '../assets/jsons/distritosIntermedios/BORRASCAL_NIDO.json';
 import borrascalSomosSpecCutout from '../assets/jsons/distritosIntermedios/BORRASCAL_SOMOS.json';
 import somosaguaNidoSpecCutout from '../assets/jsons/distritosIntermedios/SOMOSAGUA_NIDO.json';
+import somosaguaNido2SpecCutout from '../assets/jsons/distritosIntermedios/SOMOSAGUA_NIDO2.json';
 
 import borrascalSpecCutout from '../assets/jsons/distritosEspeciales/BORRASCAL.json';
 import nidoSpecCutout from '../assets/jsons/distritosEspeciales/EL_NIDO.json';
@@ -562,6 +563,7 @@ export default class Boot extends Phaser.Scene {
     this.cache.json.add('borrascalNidoSpecCutout', borrascalNidoSpecCutout);
     this.cache.json.add('borrascalSomosSpecCutout', borrascalSomosSpecCutout);
     this.cache.json.add('somosaguaNidoSpecCutout', somosaguaNidoSpecCutout);
+    this.cache.json.add('somosaguaNido2SpecCutout', somosaguaNido2SpecCutout);
     this.cache.json.add('borrascalSpecCutout', borrascalSpecCutout);
     this.cache.json.add('nidoSpecCutout', nidoSpecCutout);
     this.cache.json.add('guineaSpecCutout', guineaSpecCutout);
