@@ -334,7 +334,6 @@ Trabajo realizado:
 - Diseño del mapa
 - Tiled del mapa
 - Diseño assets de personajes
-- Diseño assets escenas de misiones
 - Diseño assets escenas de distritos
 - Diseño minijuego wordSearch
 
