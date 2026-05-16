@@ -24,8 +24,8 @@ export default class SummaryDayScene extends Phaser.Scene {
 
         // TITTLE
         const titleStyle = {
-            fontSize: '80px',
-            fontFamily: 'Times New Roman',
+            fontSize: '100px',
+            fontFamily: 'Handjet',
             fontStyle: 'bold',
             color: '#ffffff',
             align: 'center'
@@ -33,16 +33,16 @@ export default class SummaryDayScene extends Phaser.Scene {
         addLine(`RESUMEN DÍA ${this.summary.dayNumber}`, titleStyle, 120);
         // DECISIONS TAKEN
         const textStyle = {
-            fontSize: '34px',
-            fontFamily: 'Times New Roman',
+            fontSize: '40px',
+            fontFamily: 'Handjet',
             color: '#ffffff',
             align: 'center'
         };
         this.summary.decisionsTaken.forEach((d, i) => {addLine(`${i + 1}. ${d}`, textStyle, 60);});
         // RESOURCES GAINED
         const smallStyle = {
-            fontSize: '28px',
-            fontFamily: 'Times New Roman',
+            fontSize: '35px',
+            fontFamily: 'Handjet',
             color: '#ffffff',
             align: 'center'
         };

@@ -279,8 +279,8 @@ export default class GameScene extends Phaser.Scene {
         const bg = this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
         this.text = (this.currentDay === 5) ? `DÍA ${this.currentDay} ` + 'ÚLTIMO DÍA' : `DÍA ${this.currentDay}`;
         const dayText = this.add.text(width / 2, height / 2 - 100, this.text, {
-            fontSize: '80px',
-            fontFamily: 'Times New Roman',
+            fontSize: '120px',
+            fontFamily: 'Handjet',
             fontWeight: 'bold',
             color: '#ffffff'
         }).setOrigin(0.5);
@@ -289,9 +289,9 @@ export default class GameScene extends Phaser.Scene {
             this.text2 = "DINERO INGRESADO : " +  this.map.getMoneyGenerated();
         }
         const moneyText = this.add.text(width/2, height/2 + 100, this.text2, {
-            fontSize: '50px',
-            fontFamily: 'Times New Roman',
-            fontWeight: 'bolf',
+            fontSize: '70px',
+            fontFamily: 'Handjet',
+            fontWeight: 'bold',
             color: '#ffffff'
         }).setOrigin(0.5);
         introContainer.add([blocker, bg, dayText, moneyText]);

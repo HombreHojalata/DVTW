@@ -71,7 +71,6 @@ export default class Map {
         return districtArray;
     }
     spawnMap(scene) { return scene.add.image(0, -10, this.mapSiluete).setOrigin(0); }
-    //spawnDistricts(scene){this.districtList.forEach(d => d.spawnDistrict(scene,true));}
     spawnDistricts(scene) {
         const cutouts = {
             "BORRASCAL": "borrascalCutout",
@@ -81,7 +80,6 @@ export default class Map {
             "SAHAR": "saharCutout",
             "SOMOSAGUA": "somosaguaCutout"
         };
-
         const specCutouts = {
             "BORRASCAL": "borrascalSpecCutout",
             "EL NIDO": "nidoSpecCutout",
@@ -90,7 +88,6 @@ export default class Map {
             "SAHAR": "saharSpecCutout",
             "SOMOSAGUA": "somosaguaSpecCutout"
         };
-
         const spec2Cutouts = {
             "BORRASCAL_NIDO": "borrascalNidoSpecCutout",
             "BORRASCAL_SOMOS": "borrascalSomosSpecCutout",
@@ -191,6 +188,7 @@ export default class Map {
         totalMoneyGenerated += this.getDistrictByName("NUEVA PRADERA").getMoneyGenerated();
         totalMoneyGenerated += this.getDistrictByName("SAHAR").getMoneyGenerated();
         totalMoneyGenerated += this.getDistrictByName("SOMOSAGUA").getMoneyGenerated();
-        return totalMoneyGenerated;
+
+        return Math.round(totalMoneyGenerated);
     }
 }

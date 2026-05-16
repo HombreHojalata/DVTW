@@ -105,12 +105,12 @@ export default class District {
     //this.satisfaction max 30
     //this.buildingSatisfaction max 20
     //this.missionSatisfaction max 50
-    getSatisfaction() {return this.satisfaction + this.buildingSatisfaction + this.missionSatisfaction;}
+    getSatisfaction() {return Math.max(0,this.satisfaction + this.buildingSatisfaction + this.missionSatisfaction);}
     getNormalSatisfaction(){return this.satisfaction;}
     getBuildingSatisfaction(){return this.buildingSatisfaction;}
     updateSatisfaction(value){
-        this.satisfaction = Math.min(30, this.satisfaction + value);
-        this.baseSatisfaction = Math.min(30,this.baseSatisfaction + value);
+        this.satisfaction = Math.max(0,Math.min(30, this.satisfaction + value));
+        this.baseSatisfaction = Math.max(0,Math.min(30,this.baseSatisfaction + value));
     }
     updateBuildingSatisfaction(value){
         this.buildingSatisfaction = Math.min(20,this.buildingSatisfaction + value);
@@ -129,22 +129,22 @@ export default class District {
         // IF CLEANING INCREASE, SATISFACTION INCREASES. IF CLEANING DECREASE, SATISFACTION DECREASES
         console.log(this.name + ' ' + this.satisfaction);
         this.satisfaction = 0;
-        console.log('TAXES' + this.taxes + ',SECURITY' + this.security + ',WORK '+ this.workSchedule + ',CLEAN' + this.cleaning);
+        console.log('TAXES ' + this.taxes + ',SECURITY ' + this.security + ',WORK ' + this.workSchedule + ',CLEAN ' + this.cleaning);
         if(this.taxes > 50) this.satisfaction -= (this.taxes - 50);
         else if(this.taxes < 50) this.satisfaction += (50 - this.taxes);
-                console.log('TAXES SATIS' + this.satisfaction);
+        console.log('TAXES SATIS' + this.satisfaction);
 
         if(this.security > 10) this.satisfaction += (this.security - 10);
         else if(this.security < 10) this.satisfaction -= (10 - this.security);
-                console.log('SECURITY SATIS' + this.satisfaction);
+        console.log('SECURITY SATIS' + this.satisfaction);
 
         if(this.workSchedule > 8) this.satisfaction -= (this.workSchedule - 8);
         else if(this.workSchedule < 8) this.satisfaction += (8 - this.workSchedule);
-                console.log('WORK SATIS' + this.satisfaction);
+        console.log('WORK SATIS' + this.satisfaction);
 
         if(this.cleaning > 10) this.satisfaction += (this.cleaning - 10);
         else if(this.cleaning < 10) this.satisfaction -= (10 - this.cleaning);
-                console.log('CLEAN SATIS' + this.satisfaction);
+        console.log('CLEAN SATIS' + this.satisfaction);
         this.satisfaction = Math.min(30, this.satisfaction);
         console.log(this.satisfaction);
     }

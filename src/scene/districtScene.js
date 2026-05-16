@@ -176,7 +176,7 @@ export default class DistrictScene extends Phaser.Scene {
     refreshDetailsText(callback = null){
         this.districtDetail.population.setText(this.district.getPopulation());
         this.districtDetail.inFavor.setText(this.district.getPopulation() * this.district.getSatisfaction() / 100);
-        this.districtDetail.money.setText(this.district.getMoneyGenerated());
+        this.districtDetail.money.setText(Math.trunc(this.district.getMoneyGenerated()));
         this.districtDetail.noFavor.setText(this.district.getPopulation() * (100 - this.district.getSatisfaction()) / 100);
         const texts = [this.districtDetail.population, this.districtDetail.money, this.districtDetail.inFavor, this.districtDetail.noFavor];
         let completedTweens = 0;
@@ -257,11 +257,11 @@ export default class DistrictScene extends Phaser.Scene {
 
                 container.add([bg, text]);
 
-                this.createTutorialButton(container, -180, 120, 'Rechazar', () => {
+                this.createTextButton(container, -180, 120, 'Rechazar', () => {
                     container.destroy();
                     this.blocker.destroy();
                 });
-                this.createTutorialButton(container, 180, 120, 'Aceptar', () => {
+                this.createTextButton(container, 180, 120, 'Aceptar', () => {
                     container.destroy();
                     this.blocker.destroy();
                     this.player.updateMoney(-10000);
@@ -284,6 +284,33 @@ export default class DistrictScene extends Phaser.Scene {
             ease: 'Sine.easeInOut'
         });
         return newWidth * 0.5 + (offsetX + 25) * this.builtList.length;
+    }
+    // FOOTER
+    spawnAllFooter(newWidth,offsetX,newHeight,offsetY){
+        this.taxesText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*15 + 50, this.district.getTaxesPercentage(), {
+            fontSize: '30px',
+            color: '#333333',
+            fontStyle: 'bold'
+        });
+        this.spawnTaxesButton(newWidth,offsetX,newHeight,offsetY);
+        this.securityText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*15 + 50, this.district.getSecurityPercentage(), {
+            fontSize: '30px',
+            color: '#333333',
+            fontStyle: 'bold'
+        });
+        this.spawnSecurityButton(newWidth,offsetX,newHeight,offsetY);
+        this.workScheduleText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*7 + 50, this.district.getWorkSchedule(), {
+            fontSize: '30px',
+            color: '#333333',
+            fontStyle: 'bold'
+        });
+        this.spawnWorkScheduleButton(newWidth,offsetX,newHeight,offsetY);
+        this.cleaningText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*7 + 50, this.district.getCleaningPercentage(), {
+            fontSize: '30px',
+            color: '#333333',
+            fontStyle: 'bold'
+        });
+        this.spawnCleaningButton(newWidth,offsetX,newHeight,offsetY);
     }
     // BUTTONS
     spawnStoreButton(newHeight, positionX) {
@@ -352,56 +379,7 @@ export default class DistrictScene extends Phaser.Scene {
         });
         return this.closeButton;
     }
-    // FOOTER
-    spawnAllFooter(newWidth,offsetX,newHeight,offsetY){
-        this.taxesText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*15 + 50, this.district.getTaxesPercentage(), {
-            fontSize: '30px',
-            color: '#333333',
-            fontStyle: 'bold'
-        });
-        this.spawnTaxesButton(newWidth,offsetX,newHeight,offsetY);
-        this.securityText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*15 + 50, this.district.getSecurityPercentage(), {
-            fontSize: '30px',
-            color: '#333333',
-            fontStyle: 'bold'
-        });
-        this.spawnSecurityButton(newWidth,offsetX,newHeight,offsetY);
-        this.workScheduleText = this.add.text(newWidth-offsetX*9,  newHeight - offsetY*7 + 50, this.district.getWorkSchedule(), {
-            fontSize: '30px',
-            color: '#333333',
-            fontStyle: 'bold'
-        });
-        this.spawnWorkScheduleButton(newWidth,offsetX,newHeight,offsetY);
-        this.cleaningText = this.add.text(newWidth-offsetX*4,  newHeight - offsetY*7 + 50, this.district.getCleaningPercentage(), {
-            fontSize: '30px',
-            color: '#333333',
-            fontStyle: 'bold'
-        });
-        this.spawnCleaningButton(newWidth,offsetX,newHeight,offsetY);
-    }
-    createButton(x, y, image, swapImage,callback) {
-        const button = this.add.image(x, y, image).setScale(1);
-        button.setInteractive({ useHandCursor: true });
-        button.on('pointerover', () => {
-            button.setScale(1.1);
-            button.setTexture(swapImage);
-        });
-        button.on('pointerout', () => {
-            button.setScale(1); 
-            button.setTexture(image);
-        });
-        button.on('pointerdown', () => {button.setScale(1); button.setTexture(image);});
-        button.on('pointerup', () => {
-            const audioManager = this.registry.get('audioManager');
-            if (audioManager) audioManager.play('key');
-            button.setScale(1);
-            button.setTexture(swapImage);
-            if (callback) callback();
-        });
-        return button;
-    }
-
-    createTutorialButton(container, x, y, text, callback) {
+    createTextButton(container, x, y, text, callback) {
         const buttonBg = this.add.rectangle(x, y, 180, 60, 0xffffff, 1)
             .setOrigin(0.5)
             .setStrokeStyle(3, 0x000000)
@@ -435,7 +413,27 @@ export default class DistrictScene extends Phaser.Scene {
 
         return { buttonBg, buttonText };
     }
-    
+    createButton(x, y, image, swapImage,callback) {
+        const button = this.add.image(x, y, image).setScale(1);
+        button.setInteractive({ useHandCursor: true });
+        button.on('pointerover', () => {
+            button.setScale(1.1);
+            button.setTexture(swapImage);
+        });
+        button.on('pointerout', () => {
+            button.setScale(1); 
+            button.setTexture(image);
+        });
+        button.on('pointerdown', () => {button.setScale(1); button.setTexture(image);});
+        button.on('pointerup', () => {
+            const audioManager = this.registry.get('audioManager');
+            if (audioManager) audioManager.play('key');
+            button.setScale(1);
+            button.setTexture(swapImage);
+            if (callback) callback();
+        });
+        return button;
+    }
     spawnTaxesButton(newWidth, offsetX, newHeight, offsetY){
         const tooltip = this.add.text(0, 0, '', {
             fontSize: '30px',
@@ -451,12 +449,24 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getTaxesPercentage() < 100){
-                    this.district.addTaxesPercentage(1);
-                    this.taxesText.setText(this.district.getTaxesPercentage());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getPopulation() * this.district.getSatisfaction() / 100 > 0){
+                    if(this.district.getTaxesPercentage() < 100){
+                        this.district.addTaxesPercentage(1);
+                        this.taxesText.setText(this.district.getTaxesPercentage());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
+
             }
         );
         this.botonReducir = this.createButton(
@@ -465,7 +475,7 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                 if(this.district.getNormalSatisfaction() < 30){
+                if(this.district.getNormalSatisfaction() < 30){
                     if(this.district.getTaxesPercentage() > 0){
                         this.district.addTaxesPercentage(-1);
                         this.taxesText.setText(this.district.getTaxesPercentage());
@@ -524,11 +534,22 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                if(this.district.getSecurityPercentage() > 0){
-                    this.district.addSecurityPercentage(-1);
-                    this.securityText.setText(this.district.getSecurityPercentage());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getPopulation() * this.district.getSatisfaction() / 100 > 0){
+                    if(this.district.getSecurityPercentage() > 0){
+                        this.district.addSecurityPercentage(-1);
+                        this.securityText.setText(this.district.getSecurityPercentage());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);
+
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
@@ -547,11 +568,21 @@ export default class DistrictScene extends Phaser.Scene {
             'increaseIcon',
             'increaseSelectIcon',
             () => {
-                if(this.district.getWorkSchedule() < 24){
-                    this.district.addWorkSchedule(1);
-                    this.workScheduleText.setText(this.district.getWorkSchedule());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getPopulation() * this.district.getSatisfaction() / 100 > 0){
+                    if(this.district.getWorkSchedule() < 24){
+                        this.district.addWorkSchedule(1);
+                        this.workScheduleText.setText(this.district.getWorkSchedule());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);   
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
@@ -621,58 +652,24 @@ export default class DistrictScene extends Phaser.Scene {
             'decreaseIcon', 
             'decreaseSelectIcon',
             () =>  {
-                if(this.district.getCleaningPercentage() > 0) {
-                    this.district.addCleaningPercentage(-1);
-                    this.cleaningText.setText(this.district.getCleaningPercentage());
-                    this.district.updateAfterModifyPercentage();
-                    this.refreshDetailsText();
+                if(this.district.getPopulation() * this.district.getSatisfaction() / 100 > 0){
+                    if(this.district.getCleaningPercentage() > 0) {
+                        this.district.addCleaningPercentage(-1);
+                        this.cleaningText.setText(this.district.getCleaningPercentage());
+                        this.district.updateAfterModifyPercentage();
+                        this.refreshDetailsText();
+                    }
+                }else{
+                    const pointer = this.input.activePointer;
+                    tooltip.setText('No se puede aumentar, has llegado al limite');
+                    tooltip.setPosition(pointer.x + 15, pointer.y + 15);
+                    tooltip.setVisible(true);   
+                    this.time.delayedCall(1500, () => {
+                        tooltip.setVisible(false);
+                    });
                 }
             }
         );
     }
 
-    createTutorialButton(container, x, y, text, callback) {
-        const width = 240;
-        const height = 50;
-
-        const shadow = this.add.rectangle(x + 4, y + 5, width, height, 0x000000, 0.18).setOrigin(0.5);
-        const bg = this.add.rectangle(x, y, width, height, 0xf7f2ea, 0.9).setOrigin(0.5).setStrokeStyle(3, 0x263b63).setInteractive({ useHandCursor: true });
-        const label = this.add.text(x, y, text, {
-            fontSize: '22px',
-            fontFamily: 'Georgia',
-            color: '#26304a',
-            fontStyle: 'bold'
-        }).setOrigin(0.5);
-
-        bg.on('pointerover', () => {
-            bg.setFillStyle(0xfff7df, 1);
-            bg.setStrokeStyle(3, 0xb68a2f);
-            label.setColor('#1b2340');
-            bg.setScale(1.05);
-            label.setScale(1.05);
-            shadow.setAlpha(0.28);
-        });
-
-        bg.on('pointerout', () => {
-            bg.setFillStyle(0xf7f2ea, 0.9);
-            bg.setStrokeStyle(3, 0x263b63);
-            label.setColor('#26304a');
-            bg.setScale(1);
-            label.setScale(1);
-            shadow.setAlpha(0.18);
-        });
-
-        bg.on('pointerdown', () => {
-            bg.setScale(0.95);
-            label.setScale(0.95);
-        });
-
-        bg.on('pointerup', () => {
-            bg.setScale(1.05);
-            label.setScale(1.05);
-            callback();
-        });
-
-        container.add([shadow, bg, label]);
-    }
 }

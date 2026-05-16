@@ -7,7 +7,10 @@ export default class Building {
         this.satisfaction = satisfaction;
     }
     getName(){return this.name;}
-    getBuildingInfo(population,taxes){return ` Edificio: ${this.name}\n Coste:  ${this.cost}$\n Genera: ${this.income * population * (taxes/100)}$ \n Satisfaccion: ${this.satisfaction}`;}
+    getBuildingInfo(population,taxes){
+        const generatedIncome = Math.round(this.income * population * (taxes / 100));
+        return ` Edificio: ${this.name}\n Coste:  ${this.cost}$\n Genera: ${generatedIncome}$ \n Satisfaccion: ${this.satisfaction}`;
+    }
     getBuildingCost(){return this.cost};
     getBuildingIncome(){return this.income;}
     getBuildingSatisfaction(){return this.satisfaction;}
