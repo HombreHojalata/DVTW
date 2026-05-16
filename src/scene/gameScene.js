@@ -50,13 +50,13 @@ export default class GameScene extends Phaser.Scene {
         if (this.audioManager) {
             this.audioManager.switchMusic('bgMusic');
         }
-
+        // GAME LOGIC
         if (this.currentDay === 6){                                             // GAME END
             this.finishGame();          
         } else {                                                                // GAME START/CONTINUE   
             this.gameLoop();
         }
-
+        // EVENTS
         this.events.on('resume', () => {
             this.footerUI.refreshMoney();
             this.map.spawnDistricts(this);
@@ -242,7 +242,6 @@ export default class GameScene extends Phaser.Scene {
                     if (this.blinkEvent) this.blinkEvent.remove();
                     if (this.gameManager.presidente) this.gameManager.presidente.setTexture('photoSleep');
                     if (this.triggeredThresholds) this.triggeredThresholds.clear();
-                    //if (this.audioManager) this.audioManager.play('nightAmbience');
 
                     console.log('ENERGÍA AGOTADA');
                     this.blocker = this.add.zone(0, 0, this.width, this.height).setOrigin(0).setInteractive().setDepth(20);
@@ -264,8 +263,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     refreshHUD() {
-        //this.topUI.refresh();
-        //this.footerUI.refreshMoney();
         this.batteryUI.refresh();
         this.endDayBtnUI.refresh();
         this.topUI.refresh();

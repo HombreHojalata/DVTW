@@ -10,7 +10,6 @@ export default class IntroScene extends Phaser.Scene {
         //comprobar si la agenda ya estaba abierta
         const agendaAbierta = this.registry.get('agendaAbierta') || false;
 
-
         this.audioManager = this.registry.get('audioManager');
         if (this.audioManager) {
             this.audioManager.switchMusic('introSceneAudio');
@@ -145,33 +144,17 @@ export default class IntroScene extends Phaser.Scene {
             });
         });
 
-        /*
-        createMenuButton(120, 30, 'GOOD ENDING', () => { // PARA DEPURAR
-            this.scene.start('finishScene', { win: true });
-        });
-
-        createMenuButton(120, 90, 'BAD ENDING', () => { // PARA DEPURAR
-            this.scene.start('finishScene', { win: false });
-        });
+        /* DEBUG FINAL ENDINGS
+        createMenuButton(120, 30, 'GOOD ENDING', () => {this.scene.start('finishScene', { win: true });});
+        createMenuButton(120, 90, 'BAD ENDING', () => { // this.scene.start('finishScene', { win: false });});
         */
-
-        createMenuButton(120, 30, 'MEMORY', () => {
-            this.scene.start('memoryMiniGame');
-        });
-        createMenuButton(120, 90, 'PLINKO', () => {
-            this.scene.start('plinkoMiniGame');
-        });
-        createMenuButton(120, 150, 'WHACAMOLE', () => {
-            this.scene.start('whacAMole');
-        });
-        createMenuButton(120, 210, 'WORDLE', () => {
-            this.scene.start('wordleMiniGame');
-        });
-        createMenuButton(120, 270, 'MONKEYTYPE',() => {
-            this.scene.start('monkeyTypeGame');
-        });
-        createMenuButton(120, 330, 'WORD SEARCH', () => {
-            this.scene.start('wordSearchMiniGame');
-        });
+        /* DEBUG MINI GAMES
+        createMenuButton(120, 30, 'MEMORY', () => {this.scene.start('memoryMiniGame');});
+        createMenuButton(120, 90, 'PLINKO', () => {this.scene.start('plinkoMiniGame');});
+        createMenuButton(120, 150, 'WHACAMOLE', () => {this.scene.start('whacAMole');});
+        createMenuButton(120, 210, 'WORDLE', () => {this.scene.start('wordleMiniGame');});
+        createMenuButton(120, 270, 'MONKEYTYPE',() => {this.scene.start('monkeyTypeGame');});
+        createMenuButton(120, 330, 'WORD SEARCH', () => {this.scene.start('wordSearchMiniGame');});
+        */
     }   
 }
