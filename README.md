@@ -391,7 +391,10 @@ Trabajo realizado:
 ## Zheng Li Fu
 Trabajo realizado:
 - Producción de la música y su uso
+- Implementación de clases para gestionar la música y el audio del juego
 - Diseño minijuego monkeyType
 - Diseño minijuego wordle
 - Diseño de las escenas: configurationScene y pauseMenuScene
-
+- Diseño estructura a seguir para implementar los minijuegos
+- Cambios Quality Of Life, e.g. algunas HotKeys dentro del juego
+- Parte de la documentación del GDD
