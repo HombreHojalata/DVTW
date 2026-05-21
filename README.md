@@ -119,7 +119,7 @@ Cada distrito debe controlar su satisfacción, edificios y parámetros generales
 
 ### 3.7.1. Edificios
 Cada distrito tiene una cantidad específica de edificios que construir. Las opciones generales son las siguientes:
-| Edificio | Coste de Construcción | Efecto | Impacto Social |
+| Edificio | Coste de Construcción | Impacto Económico | Impacto Social |
 | :--- | :--- | :--- | :--- |
 | **Centro Comercial** | Muy Alto | Genera **Dinero** cada ciclo | Aumenta la **Satisfacción** |
 | **Hotel de Lujo** | Alto | Genera **Dinero** cada ciclo |  Aumenta la **Satisfacción** |
@@ -173,10 +173,11 @@ Debido a sus controles simples, existe la posibilidad de ser jugables tanto en d
   <i>Boceto del HUD del mapa principal de Quackington DC</i>
 </p>
 
-En la pantalla principal se muestra el mapa de Quackington DC en el centro de la pantalla. Al tocar en un distrito, este se ilumina y queda seleccionado. Las misiones también surgen aquí.
-En la parte superior se encuentra una barra dividida en tres segmentos representando la opinión pública: los habitantes afines en verde, los neutrales en gris, y los opositores en rojo. A la izquierda de esta barra se muestra una imagen del protagonista.
-En la zona izquierda se muestra la barra de energía dividida en segmentos para representar los ciclos. Debajo de esta está el botón de “Terminar el Día”.
-En la zona inferior izquierda se encuentra la cantidad de dinero que tiene el jugador en ese momento. En la zona derecha el botón para abrir el Mercado Negro y los ajutstes. Por último, en el centro inferior se encuentra el nombre del distrito seleccionado (si no hay ninguno por el momento muestra el nombre de la ciudad) y el botón de información.
+En la pantalla principal se muestra el mapa de Quackington DC en el centro de la pantalla. Al pasar el cursor por un distrito, este se ilumina y queda seleccionado. Las misiones también surgen aquí.
+En la parte superior se encuentra una barra dividida en 2 segmentos representando la opinión pública: los habitantes afines en verde y los opositores en rojo. 
+En la esquina superior izquierda se muestra una imagen del protagonista.
+En la zona derecha se muestra la barra de energía dividida en segmentos para representar los diferentes momentos del día. Debajo está el botón de “Terminar el Día”.
+En la zona inferior izquierda se encuentra la cantidad de dinero que tiene el jugador en ese momento. En la zona derecha el botón para abrir el Mercado Negro y los ajustes. Por último, en el centro inferior se encuentra el nombre del distrito seleccionado (si no hay ninguno por el momento muestra el nombre de la ciudad).
 
 <p align="center">
   <img width="700" alt="prototipoPrincipal" src="https://github.com/user-attachments/assets/820b75d8-eff9-4e7f-baeb-e90e50331770">
@@ -191,7 +192,7 @@ En la zona inferior izquierda se encuentra la cantidad de dinero que tiene el ju
   <i>Boceto del HUD de las misiones en el mapa</i>
 </p>
 
-La pantalla muestra un título de la misión o el evento, acompañado de un texto descriptivo y una imagen relacionada. En la parte inferior, se encuentran los elementos interactuables de la misión, ya sean opciones a elegir, botón de aceptar o una previsualización del minijuego. Además, muestra las recompensas y costes que tiene (o puede tener) las distintas acciones del jugador. En la zona superior derecha hay un botón con una “X” para salir de la misión, pero los eventos no tienen esta opción.
+La pantalla muestra un título de la misión o el evento, acompañado de un texto descriptivo y una imagen relacionada. En la parte inferior, se encuentran los elementos interactuables de la misión. Además, muestra las recompensas y costes que tiene (o puede tener) las distintas acciones del jugador. En la zona superior derecha hay un botón con una “X” para salir de la misión, pero los eventos no tienen esta opción.
 
 Cuando se despliega este panel, este cubre el mapa principal y lo oscurece de fondo. La energía sigue pudiendo verse para que el jugador pueda recapacitar si le merece la pena gastarla, sin embargo, está no baja mientras haya una misión abierta.
 
@@ -203,7 +204,7 @@ Cuando se despliega este panel, este cubre el mapa principal y lo oscurece de fo
 
 ### 4.2.3. HUD de los distritos
 
-El panel muestra una imágen del distrito escogido y una pequeña descripción de este. Además muestra el número de vecinos y la satisfacción debajo de la imagen. A la derecha, debajo del texto explicativo, se encuentra el panel de edificios construibles que se va rellenando con las construcciones que elija el jugador. Debajo de ese panel, se encuentran unas barras deslizantes para representar los parámetros del distrito, además de un botón de información que muestra una descripción del parámetro en cuestión al pasar el cursor por encima. Estos dos últimos paneles empiezan bloqueados y se van desbloqueando con el paso de los días.
+El panel muestra una imágen del distrito escogido y una pequeña descripción de este. Además muestra el número de vecinos y la satisfacción debajo de la imagen. A la derecha, debajo del texto explicativo, se encuentra el panel de edificios construibles que se va rellenando con las construcciones que elija el jugador. Debajo de ese panel, los parámetros modificables del distrito. Estos dos últimos paneles empiezan bloqueados y se van desbloqueando con el paso de los días.
 
 <p align="center">
   <img width="700" alt="prototipoDistrito" src="https://github.com/user-attachments/assets/cfd0993f-e7c4-48f7-9bd6-59d4d5253c96" />
@@ -213,7 +214,7 @@ El panel muestra una imágen del distrito escogido y una pequeña descripción d
 
 ### 4.2.4. HUD del Mercado Negro
 
-Muestra una lista ordenada de nombres de mejoras o productos junto a una pequeña descripción de estos. A su derecha se muestra el precio y un botón de “Comprar”. Las mejoras o productos que se puedan comprar más de una vez también muestran el nivel o cantidad de compra que lleva hasta el momento. No todos los productos están disponibles, y algunos se muestran bloqueados. En la zona superior se muestran la corrupción del jugador, y un botón informativo para recordarle lo que hace.
+Muestra una lista ordenada de nombres de mejoras o productos junto a una pequeña descripción de estos. A su derecha se muestra el precio y un botón de “Comprar”. Las mejoras o productos que se puedan comprar más de una vez también muestran el nivel o cantidad de compra que lleva hasta el momento. No todos los productos están disponibles, y algunos se muestran bloqueados. En la zona inferior se muestran la corrupción del jugador.
 
 <p align="center">
   <img width="700" alt="prototipoMercado" src="https://github.com/user-attachments/assets/0bfd869d-7294-4b89-824f-c4751ed33ddb" />
@@ -230,6 +231,7 @@ En esta interfaz se incluyen:
 - **Control de volumen de música:** mediante un deslizador que ajusta el nivel de la música de fondo.
 - **Control de efectos de sonido (SFX):** permite regular el volumen de los sonidos asociados a acciones y eventos del juego.
 - **Botón de retorno:** permite volver a la escena anterior desde la que se accedió al menú de opciones.
+- **Botón de guardar:** permite que los cambios de sonido tengan efecto y se guarden los cambios
 
 La pantalla está diseñada como un panel superpuesto o escena independiente, manteniendo coherencia visual con el resto de la interfaz del juego. Su función principal es ofrecer al jugador una forma rápida y accesible de ajustar la experiencia audiovisual sin interrumpir significativamente el flujo de la partida.
 
@@ -254,13 +256,8 @@ El protagonista del juego: Donald J. Duck, el presidente pato. Es un pato blanco
 <img width="100" alt="Protagonista Pato" src="https://github.com/user-attachments/assets/e7bc0c12-45c8-4c63-8b11-6a5e42160929"/>
 <br clear="left"/>
 
-### 5.1.2. Líder de la mafia
-La mafia de ratas está liderada por don Bigotes Corleonne, un pequeño ratón que viste un traje morado. Este puede ser amistoso u hostil hacia el jugador dependiendo de sus acciones. Pendiente a futuras implementaciones. 
 
-<img width="100" alt="RataMafiosa" src="https://github.com/user-attachments/assets/8915b6c9-d3d3-4256-8461-b52ce916115c" />
-<br clear="left"/>
-
-### 5.1.3. Secretaria
+### 5.1.2. Secretaria
 La secretaria del presidente es la encargada de hacer los tutoriales y comentarle ciertos eventos a este.
 
 ## 5.2. Ciudad
@@ -279,9 +276,9 @@ Cada distrito cuenta con un número de habitantes independiente, además de otra
 La estética de **Lame Duck** combina un estilo caricaturesco y satírico con una presentación visual clara y diferenciada por escenas.
 
 El proyecto utiliza:
-- **arte ilustrado y animado** para personajes, fondos, escenas y presentación general,
-- **iconografía visual específica** para botones, misiones, edificios y elementos interactivos,
-- una línea visual exagerada y expresiva, coherente con el tono político-humorístico del juego.
+- **Arte ilustrado y animado** para personajes, fondos, escenas y presentación general,
+- **Iconografía visual específica** para botones, misiones, edificios y elementos interactivos,
+- Una línea visual exagerada y expresiva, coherente con el tono político-humorístico del juego.
 
 La dirección artística busca reforzar tanto la legibilidad de la interfaz como la identidad cómica del mundo.
 
@@ -322,7 +319,7 @@ Trabajo realizado:
   	- Lógica de compra de edificios
 - Diseño de la escena missionScene:
   	- Visualización de las misiones y sus opciones   
-- summaryDayScene
+- SummaryDayScene
   	- Visualización de todas las acciones ocurridas en el día
 - Diseño de las UI: footerUI y topUI
 
@@ -339,18 +336,29 @@ Trabajo realizado:
  	- Lógica del tutorial
     - Diseño gráfico del tutorial
 - Diseño de las UI: batteryUI, confirmationUI, dayUI, endDayBtnUI, marketFooterUI
-	- Lógica del botón de Terminar el Día
- 	- Lógica del botón del Mercado Negro
-  	- Pantalla de confirmación de saltar el día
-- Diseño de la página del videojuego
+	- Botón de Terminar el Día
+    - Pantalla de confirmación de saltar el día
+ 	- Lógica del botón del Mercado Negro	
+- Diseño de la página web del videojuego
 - Diseño de las escenas de victoria y derrota
 
 ## Pedro Tobalina Navarro
 Trabajo realizado:
-- Diseño estructura de las misiones, jugador y día
-- Diseño lógica de las misiones, jugador, día y recursos
-- Diseño de todas las misiones
-- Diseño minijuego memory
+- Seletor de misiones y eventos:
+  - Lógica de braquets de recursos diarios
+  - Diseño e implementación de prioridades de misiones
+  - Diseño e implementación de prioridades de recursos
+  - Diseño e implementación de sistema semi aleatorio de seleccion de tipos de misiones y eventos
+  - Diseño e implementación de sistema de adjudicación de distritos a las misiones y eventos
+  - Diseño e implementación de sistema de parse de json de las misiones y eventos
+  - Diseño e implementación de sistema de adjudicación de imagen a las misiones y eventos
+  - Diseño e implementación de sistema anti repetición de misiones y eventos
+  - Diseño e implementación de los minijuegos en el sistema de misiones
+- Desarrollo de cada una de las 206 misiones y eventos diferentes
+- Diseño e implmentacion de sistema de recogida de decisiones diarias para el resumen del día
+- Diseño de la lógica de cambio de día
+- Diseño e implementación del sistema económico de los distritos en función de sus atributos variables.
+- Diseño e implementación minijuego memory
 
 ## Safia Boufera
 Trabajo realizado:
