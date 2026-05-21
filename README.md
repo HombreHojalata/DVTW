@@ -11,7 +11,7 @@
 ## 1.1. Descripción
 **Lame Duck** es un juego de gestión de recursos y estrategía, en el que controlas al pato presidente de la ciudad de Quackington DC durante los últimos días de su mandato intentando contentar lo máximo posible a los ciudadanos para conseguir su apoyo en las elecciones venideras y ser reelegidos.
 
-El juego muestra una visión aérea de un mapa de la ciudad dividida en sus respectivos distritos. Cada cierto tiempo, surgen misiones en el mapa y eventos que permiten conseguir subir la satisfacción de las zonas, lo que se traduce en votos. Las misiones tienen un coste de energía y otros recursos, y una vez terminadas todos los días, el jugador gana si ha conseguido más del 80% de la población a su favor.
+El juego muestra una visión aérea de un mapa de la ciudad dividida en sus respectivos distritos. Cada cierto tiempo, surgen misiones en el mapa y eventos que permiten conseguir subir la satisfacción de las zonas, lo que se traduce en votos. Las misiones tienen un coste de energía y otros recursos, y una vez terminadas todos los días, el jugador gana si ha conseguido más del 50% de la población a su favor.
 
 A medida que la partida avanza se van desbloqueando nuevas formas de controlar la ciudad, como construyendo edificios o gestionando parámetros de los diferentes distritos.
 
@@ -44,110 +44,90 @@ El **primer día** se usa como tutorial para enseñar al jugador los controles b
 
 Este mismo día, también se seleccionará la *narrativa* que seguirá el jugador durante el resto de la partida, y mostrará las primeras pistas y misiones de esta a lo largo del día, desarrollándose más y más durante los siguientes días, hasta el **día final**, donde surgirá una *catástrofe* como desenlace de la narrativa llevada hasta el momento.
 
-## 2.3 Narrativas y finales
-Existen varias narrativas que dictaminan las misiones y eventos que surgen a lo largo de los últimos días, además de la *catástrofe* del día final:
-- *El Caso de la Mafia:* Comienzas a recibir información acerca de los paraderos del jefe de la mafia local. Está en tus manos si decides desarmarla o unirte a ellos.
-- *La Purga:* La criminalidad crece en la ciudad y los ricos exigen realizar una Purga. Te unas o no a su causa, llega el funesto día. Debes hacer algo al respecto.
-$$\dots$$
+## 2.3 Diferentes finales
+En caso de que el jugador se quede sin recursos, la partida terminará antes de que transcurran todos los días. En caso de conseguir superar todos los días, el jugador será victorioso si ha conseguido reunir un *50%* de los votos.
 
-En caso de que el jugador se quede sin recursos, o se vea envuelto en una situación inescapable de la narrativa, la partida terminará antes de que transcurran todos los días. En caso de conseguir superar todos los días, el jugador será victorioso si ha conseguido reunir un *80%* de los votos.
-
-Pendiente de más investigación.
 
 # 3. Mecánicas
 ## 3.1. Mapa de la ciudad
-Durante el juego se observa al mapa de Quackington DC desde arriba. La ciudad está dividida en 6 distritos: El Nido, Nueva Pradera, Somosagua, Borrascal, Sahar y Guinea. Seleccionar un distrito muestra su nombre al jugador, y si este además selecciona la opción de “Información”, despliega una pantalla con los datos del distrito: una imagen de la zona, una descripción escrita, el nivel de satisfacción, el número de ciudadanos en el distrito, los parámetros manejables y los edificios (las últimas dos secciones empiezan bloqueadas y se van desbloqueando con el transcurso de los días).
+Durante el juego se observa al mapa de Quackington DC desde arriba. La ciudad está dividida en 6 distritos: El Nido, Nueva Pradera, Somosagua, Borrascal, Sahar y Guinea. Al seleccionar un distrito, se despliega una pantalla con los datos del distrito: el nombre, una descripción,una imagen de la zona, el nivel de satisfacción, el número de ciudadanos en el distrito, los edificios y los parámetros manejables (la última sección empieza bloqueada y se  desbloqueará con el transcurso de los días).
 
 ## 3.2 Recursos y variables
 ### 3.2.1 Recursos del jugador
 **Dinero:** Representa la economía de la ciudad. Esta se utiliza para una gran variedad de acciones: desde financiar misiones y sobornos, hasta construir edificios, pasando por comprar mejoras en el Mercado Negro.
-- ***Obtención:*** Las fuentes más consistentes son la recaudación pasiva de impuestos, las cuales se pueden gestionar en cada distrito por separado; y, sobre todo, los edificios como hoteles, fábricas o tiendas. También se puede obtener mediante misiones o eventos, en especial si son corruptas (como sobornos de la mafia).
+- ***Obtención:*** Las fuentes más consistentes son la recaudación pasiva de impuestos, las cuales se pueden gestionar en cada distrito por separado; y, sobre todo, los edificios como hoteles, fábricas o tiendas. También se puede obtener mediante misiones o eventos, en especial si son corruptas.
 - ***Gestión:*** Si se termina un día con saldo negativo, puede provocar una crisis financiera que reduzca la popularidad del presidente. En caso de superar un umbral de deuda, la partida termina con el jugador siendo expulsado del cargo.
 
 **Energía:** Actúa como el tiempo y esfuerzo del jugador. Esta limita la cantidad de misiones que se pueden hacer antes de terminar una jornada. La energía se recupera en su totalidad al empezar un nuevo día.
 - ***Temporizador:*** La energía decrece a un ritmo lento pero constante durante el día, dificultando que el jugador simplemente se quede esperando a que surjan mejores misiones.
 - ***Gestión:*** Cada misión aceptada requiere un pago inmediato de energía. El valor requerido varía dependiendo de la misión.
-- ***Ciclos:*** La barra de energía está dividida en secciones. Cada vez que una de esas secciones se vacía por completo (por gasto pasivo o por hacer misiones) se completa un ciclo. Estos ciclos afectan a eventos pasivos, como la generación de ingresos por edificios o eventos de la historia.
+- ***Ciclos:*** La barra de energía está dividida en secciones. Cada vez que una de esas secciones se vacía por completo (por gasto pasivo o por hacer misiones) se completa un ciclo. Estos ciclos afectan a eventos pasivos, como la generación de ingresos por edificios.
 
 ### 3.2.2. Variables de gestión
-**Opinión Pública:** La marca métrica global que determina la puntuación del jugador, y se muestra en todo momento en una barra en la parte superior de la pantalla. Representa la población total del Quackington DC dividida en tres segmentos:
-- ***Afines:*** Ciudadanos que han decidido apoyar al jugador. El objetivo del juego es conseguir cierta cantidad de ciudadanos afines.
-- ***Opositores:*** Ciudadanos activamente en contra del jugador. Estos requieren medidas específicas para ser convencidos, y reducen la satisfacción obtenida en distritos donde se aglomeran.
+**Opinión Pública:** La marca métrica global que determina la puntuación del jugador, y se muestra en todo momento en una barra en la parte superior de la pantalla. Representa la población total del Quackington DC dividida en 2 segmentos:
+- ***Afines:*** Ciudadanos que han decidido apoyar al jugador. El objetivo del juego es conseguir un 50% de ciudadanos afines.
+- ***Opositores:*** Ciudadanos activamente en contra del jugador. Estos requieren medidas específicas para ser convencidos, y reducen la satisfacción obtenida sus distritos.
 
-**Satisfacción:** Cada distrito tiene un nivel de satisfacción independiente (del -100% al 100%). Este aumenta con al completar ciertas misiones de la zona o construir edificios de bienestar, y disminuye como resultado de acciones negativas contra el distrito. La satisfacción se puede ver en la pestaña de información de cada distrito.
+**Satisfacción:** Cada distrito tiene un nivel de satisfacción independiente (del 0% al 100%). Este aumenta con al completar ciertas misiones de la zona o construir edificios de bienestar, y disminuye como resultado de acciones negativas contra el distrito. La satisfacción se puede ver en la pestaña de información de cada distrito.
 - ***Conversión de votos:*** El porcentaje de satisfacción se traduce directamente en el porcentaje de vecinos del distrito *afines* al jugador (cada distrito tiene un número de población distinto).
-- ***Umbral negativo:*** Si la satisfacción cae por debajo de 0, el distrito comienza a generar *opositores* de forma proporcional. Estos tienen un efecto pasivo en que reducen la obtención de satisfacción positiva porcentualmente según su cantidad (por ejemplo, si un distrito cuenta con un 20% de opositores en él, una misión que normalmente proporciona +10 de satisfacción, tan solo generará +8 de satisfacción). El jugador deberá hacer misiones específicas o subir por encima del 100% la satisfacción para convertir de vuelta a los *opositores*.
+
 
 **Corrupción:** Es una variable que representa el grado de corrupción del jugador. Esta se muestra de forma directa al jugador, en la pestaña del Mercado Negro. Esta valor aumenta cada vez que se lleva a cabo una *acción corrupta*, sea comprar mejoras en el Mercado Negro por ejemplo.
-- ***Aumento de corrupción:*** Cada vez que se aumente el valor de la corrupción, se comprobará si el presidente es “pillado”, subiendo la posibilidad cuanto más corrupción tenga. Si esto ocurre, repercutirá en una bajada generalizada de satisfacción en todos los distritos, además de otros posibles efectos dependiendo del nivel de corrupción al ser pillado.
-- ***Blanqueo:*** Para reducir el nivel de corrupción se pueden hacer ciertas misiones, aunque la forma más efectiva es pagar a la prensa en el mercado negro para conseguirlo. El precio de esta compra irá en aumento exponencial para obligar al jugador a poder siempre librarse de las consecuencias de las elecciones corruptas.
+- ***Aumento de corrupción:*** Cada vez que se aumente el valor de la corrupción, se comprobará si el presidente es “pillado”, subiendo la posibilidad cuanto más corrupción tenga. Si esto ocurre, el presidente se verá envuelto en situaciones poco favorables, en las que perderá mucha satisfacción y dinero.
+- ***Blanqueo:*** Para reducir el nivel de corrupción puedes pagar a la prensa en el mercado negro para conseguirlo. El precio de esta compra irá en aumento exponencial para obligar al jugador a poder siempre librarse de las consecuencias de las elecciones corruptas.
 
 ## 3.3. Misiones
-A lo largo del día van surgiendo misiones sobre el mapa de la ciudad. Pinchar en una muestra un texto explicativo que resume la misión, además de enseñar el coste que esta tiene. Todas las misiones cuestan *energía*, y la mayoría cuestan también dinero u otros recursos (alguna incluso cuestan satisfacción, en especial las corruptas). También se visualiza lo que la misión ofrece como recompensa, para que el jugador pueda recapacitar si le merece la pena la inversión.
+A lo largo del día van surgiendo misiones sobre el mapa de la ciudad. Pinchar en una muestra un texto explicativo que resume la misión, además de enseñar el coste que esta tiene. Todas las misiones cuestan *energía*, y la mayoría cuestan también dinero u otros recursos. También se visualiza lo que la misión ofrece como recompensa, para que el jugador pueda recapacitar si le merece la pena la inversión.
 
-Las misiones son elegidas aleatoriamente de una lista de misiones que varía dependiendo de la situación del jugador (sobretodo influye el día). Además, a las listas de misiones aleatorias genéricas se le añaden las misiones específicas de la narrativa que el jugador esté viviendo en ese momento. Una vez aparecen, comienzan a perder opacidad si son ignoradas, caducando al pasar un tiempo y desapareciendo.
+Las misiones son elegidas aleatoriamente de una lista de misiones que varía dependiendo de la situación del jugador, si tiene demasiado dinero, pocos votos... 
 
-Algunas misiones pertenecen a una **rama de misiones**, provocando que se añadan continuaciones de estas a la lista de misiones aleatorias.
 
 Existen varios tipos distintos de misiones:
 ### 3.3.1. Misiones básicas
-Las misiones básicas son una transacción sencilla: te proporcionan una recompensa a cambio de un gasto.
-**Ejemplo:** *”Los castores de la presa hidráulica exigen un aumento de sueldo” Esta misión proporciona satisfacción de los vecinos a cambio de dinero.*
+Las misiones básicas son una transacción sencilla: te proponen una situación y 2 opciones para resolverla. Cada una de las 2 opciones tendrá sus beneficios y consecuencias.
+**Ejemplo:** *”Fútbol Gratis para Todos. El partido de la final de copa es de pago. Podrías usar fondos públicos para comprar los derechos y emitirlo en abierto. Es tirar el dinero, pero nadie se acordará de las listas de espera del hospital.” Podrás elegir si pagar los derechos para emitirlo en abierto o si intalar pantallas gigantes en las plazas para que los ciudadanos vayan a verlo*
 ### 3.3.2. Misiones de minijuegos
-Las misiones de minijuegos presentan una pequeña tarea o desafío que debe superar el jugador para completar la misión. En caso de fallarlo, esta no dará recompensa. Suelen estar reservadas para misiones importantes de narrativas, pero también hay algunas genéricas.
-**Ejemplo:** *”¡Controla la protesta frente al ayuntamiento!” Muestra un minijuego estilo matatopos.*
-### 3.3.3. Misiones de elección
-Las misiones de elección proporcionan más de una opción de resolverlas. Pueden contener elementos de otros tipos de misiones.
-**Ejemplo:** *”Los reptiles te piden construir nuevas casas en Sahar.” Esta misión te da la opción de contratar a una empresa que desconoces que tal lo hará (probabilidad), o ir tú mismo a construirlas (minijuego).*
-### 3.3.4. Misiones corruptas
-Las misiones corruptas son menos comunes que el resto. Estas pueden ser de cualquier tipo, y prometen una recompensa mucho mayor a las misiones corrientes. A cambio, estas suelen venir con alguna penalización, normalmente en forma de bajar la satisfacción en algún distrito. Además, aceptar una misión corrupta subirá el nivel de *corrupción* general.
+Las misiones de minijuegos presentan una pequeña tarea o desafío que debe superar el jugador para completar la misión. En caso de fallarlo, esta no dará recompensa. 
+**Ejemplo:** *”¡Rápido! Se van a publicar unos documentos incriminantes, date prisa para censurarlos.” Muestra un minijuego estilo monkeyType.*
+
+### 3.3.3. Misiones corruptas
+Las misiones corruptas son menos comunes que el resto. Estas prometen una recompensa mucho mayor a las misiones básicas. A cambio, aceptar una misión corrupta subirá el nivel de *corrupción* general.
 
 ## 3.4. Eventos
-Los eventos son misiones obligatorias. A lo largo del día y de forma aleatoria, aunque también surgen como respuesta a las acciones del jugador, aparecen eventos que frenan la acción y obligan al jugador a realizar una misión. Estas pueden ser de cualquier tipo: básicas, de probabilidad, de minijuegos, de elección y hasta corruptas.
-
-En ocasiones, pueden surgir eventos que no tengan ningún beneficio, como una invasión, o una huelga. Estos sirven para asegurarse que el jugador nunca esté muy cómodo en su situación y tenga que reaccionar a esto. En contraposición, también existen eventos meramente positivos, como la inauguración de una nueva estatua que sube la satisfacción de su distrito.
+Los eventos son misiones obligatorias. A lo largo del día y de forma aleatoria, aunque también surgen como respuesta a las acciones del jugador, aparecen eventos que frenan la acción y obligan al jugador a realizar una misión. Estas pueden ser de cualquier tipo: básicas, de minijuegos y corruptas.
 
 ## 3.5. Mercado Negro
-En una pestaña en la parte inferior de la pantalla se encuentra el Mercado Negro. En él se pueden comprar ciertas mejoras que afectan a la jugabilidad: aumento de rango de aparición de misiones, disminuir el coste de algunos edificios, adquirir un comodín para pasar una misión de probabilidad, etc. Existe también la opción de comprar a la prensa para reducir la corrupción, pero el precio aumenta exponencialmente con cada compra para evitar que el jugador nunca tenga que lidiar con las consecuencias de sus acciones.
+En una pestaña en la parte inferior de la pantalla se encuentra el Mercado Negro. En él se pueden comprar ciertas mejoras que afectan a la jugabilidad como aumentar la energía del jugador. Existe también la opción de comprar a la prensa para reducir la corrupción, pero el precio aumenta exponencialmente con cada compra para evitar que el jugador nunca tenga que lidiar con las consecuencias de sus acciones.
 
-Algunas opciones del Mercado Negro se van desbloqueando al pasar los días, conseguir ciertos objetivos, o completar ramas de misiones específicas. También cuenta con compras específicas para ciertas narrativas.
-
-## 3.6. Selección de narrativas
-A partir del tercer día, se selecciona la narrativa que el jugador irá viviendo a lo largo de la partida. Diferentes narrativas causan diferentes efectos y misiones, empezando por cambios de comportamientos (por ejemplo, si se trata de una narrativa sobre la mafia, esta empezará a cobrar más protagonismo antes de comenzar a proponer misiones de sobre investigarla).
-
-Todas la narrativas añaden una **catástrofe** al día final: un evento con causas negativas para poner a prueba la capacidad de adaptarse del jugador. Además, mientras dure la catástrofe, las misiones se reemplazarán por únicamente las de la narrativa. Durante este tiempo, el día no se puede saltar.
-
-Cuando termine este evento, el jugador tendrá la posibilidad de hacer control de daños los últimos momentos del día final. Aún pendiente por implementar. 
-
-## 3.7. Final del día
-Debajo de la barra de energía se muestra el botón de “Terminar el Día”. Este puede ser pulsado por el jugador en cualquier momento (si no está en medio de una catástrofe) para finalizar el día si así quiere. Si aún le queda energía restante, se muestra un mensaje preguntando si de verdad quiere finalizar el día antes de tiempo, para así decidir si acabar el día o no.
+## 3.6. Final del día
+Debajo de la barra de energía se muestra el botón de “Terminar el Día”. Este puede ser pulsado por el jugador en cualquier momento (salvo en el último día) para finalizar el día si así quiere. Si aún le queda energía restante, se muestra un mensaje preguntando si de verdad quiere finalizar el día antes de tiempo, para así decidir si acabar el día o no.
 
 Una vez se termina una jornada, se presenta un resumen de lo hecho durante el día como si fuera un reportaje sobre el presidente. También aparecen noticias relacionadas con la narrativa o acciones tomadas.
 
-## 3.8. Distritos
-Los distritos de la ciudad de Quackington DC cuentan con diferencias mecánicas:
+## 3.7. Distritos
+Los distritos de la ciudad de Quackington DC cuentan con diferentes tipos de población:
 | Distrito | Característica |
 | :--- | :--- |
-| **El Nido** | Los Hoteles y Centros Comerciales son más efectivos, pero la suciedad causa más insatisfacción.  |
-| **Nueva Pradera** | Es el distrito que empieza con más población, pero las casas cuestan más. |
-| *Somosagua* | Las Fábricas no disminuyen tanto la satisfacción del distrito. |
-| *Borrascal* | Tienen menos espacio para construir edificios, pero los parámetros del distrito tienen mayor efecto. |
-| *Sahar* | Cuenta con mucho espacio para edificios y son más baratos, pero son menos efectivos y es el distrito que empieza con menor población. |
-| *Guinea* | Los Hoteles y Parques son más efectivos, pero los parámetros del distrito tienen menor efecto. | ---
+| **El Nido** | Habitado por las aves de la aristocracia.  |
+| **Nueva Pradera** | Es el distrito que empieza con más población, abundan los animales de las praderas. |
+| *Somosagua* | Lleno de agua y vida marina rebosante. |
+| *Borrascal* | Perfecto para los animales más calurosos, los osos polares y pingüinos conviven en armonía. |
+| *Sahar* | Condiciones de vida solo aptas para animales deserticos. |
+| *Guinea* | Animales de la jungla son bienvenidos aquí. | ---
 
-Cada distrito debe controlar su número de vecinos, así como su satisfacción, edificios y parámetros generales.
+Cada distrito debe controlar su satisfacción, edificios y parámetros generales.
 
-### 3.8.1. Edificios
+### 3.7.1. Edificios
 Cada distrito tiene una cantidad específica de edificios que construir. Las opciones generales son las siguientes:
 | Edificio | Coste de Construcción | Efecto | Impacto Social |
 | :--- | :--- | :--- | :--- |
 | **Centro Comercial** | Muy Alto | Genera **Dinero** cada ciclo | Aumenta la **Satisfacción** |
-| **Hotel de Lujo** | Alto | Genera **Dinero** cada ciclo | *Ninguno* |
-| **Mega-Fábrica** | Alto | Genera mucho **Dinero** cada ciclo.  | Disminuye la **Satisfacción**, y puede provocar *Opositores* |
-| **Hospital** | Alto | Aumenta un poco la **Satisfacción** | Reduce la pérdida de **Satisfacción** ante un crisis |
-| **Cine** | Medio | Aumenta la **Satisfacción** | *Ninguno* |
-|**Bloque de Viviendas**| Medio | Aumenta la población del distrito | Sube un poco la **Satisfacción** |
-| **Parque Municipal** | Bajo | Aumenta un poco la **Satisfacción** | *Ninguno* | ---
+| **Hotel de Lujo** | Alto | Genera **Dinero** cada ciclo |  Aumenta la **Satisfacción** |
+| **Mega-Fábrica** | Alto | Genera mucho **Dinero** cada ciclo.  | Disminuye la **Satisfacción** |
+| **Hospital** | Alto | Requiere de **Dinero** en cada ciclo | Aumenta la **Satisfacción** |
+| **Cine** | Medio | Genera **Dinero** cada ciclo | Aumenta la **Satisfacción** |
+|**Bloque de Viviendas**| Medio | Requiere de **Dinero** en cada ciclo | Sube un poco la **Satisfacción** |
+| **Parque Municipal** | Bajo | Requiere de **Dinero** en cada ciclo | Aumenta la **Satisfacción**| ---
 
 Además, existen edificios específicos de cada distrito que se consiguen al aumentar la satisfacción de estos a cierto nivel:
 | Distrito | Edificio |
@@ -159,7 +139,7 @@ Además, existen edificios específicos de cada distrito que se consiguen al aum
 | *Sahar* | **Restaurante Bambi** |
 | *Guinea* | **Teatro Magno** | 
 
-### 3.8.2. Parámetros
+### 3.7.2. Parámetros
 Tras un par de días, se desbloquea la opción de manejar los parámetros de cada distrito, manejando una serie de barras, presentando un coste por modificarlas:
 1. **Impuestos (Fiscalidad):**
 	 - **Pros:** Genera más dinero por día de forma pasiva.
