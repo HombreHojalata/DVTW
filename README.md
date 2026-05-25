@@ -370,11 +370,14 @@ Trabajo realizado:
   
 ## Viola Pieruccetti
 Trabajo realizado:
-- Diseño assets de personajes, iconos y pantallas de videojuego
-- Diseño minijuego whacAMole
+- Diseño de assets de personajes, iconos y minijuegos
+- Ajuste y mejora del estilo visual y codigo de los minijuegos
 - Diseño de la escena: introScene
- - Diseño pantalla de carga
- - Diseño pantalla inicio
+	- Diseño de pantalla de carga
+	- Implementación de las animaciones y funcionalidad de la pantalla de carga
+	- Diseño de pantalla de inicio
+	- Implementación de las animaciones y funcionalidad de la pantalla de inicio
+- Diseño e implementación del codigo del minijuego whacAMole
 
 ## Zheng Li Fu
 Trabajo realizado:
