@@ -66,8 +66,14 @@ export default class MissionScene extends Phaser.Scene {
     }
 
     spawnTemplate(newWidth, newHeight, offsetX, offsetY) {
-        const key = this.mission.itIsCorrupt() ? 'missionCorruptTemplate' : 'missionTemplate';
-        return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY + 20, key).setDisplaySize(newWidth, newHeight);
+        let key;
+        if (this.mission.itIsEvent()) {
+            key = this.mission.itIsCorrupt() ? 'eventCorruptTemplate' : 'eventTemplate';
+            return this.add.image(newWidth / 2 + offsetX + 10, newHeight / 2 + offsetY + 15, key).setDisplaySize(newWidth, newHeight);
+        } else {
+            key = this.mission.itIsCorrupt() ? 'missionCorruptTemplate' : 'missionTemplate';
+            return this.add.image(newWidth / 2 + offsetX, newHeight / 2 + offsetY + 20, key).setDisplaySize(newWidth, newHeight);
+        }
     }
 
     spawnNameText(offsetX, offsetY) {
@@ -86,7 +92,7 @@ export default class MissionScene extends Phaser.Scene {
             nameContainer.add(letter);
             xOffset += letter.width + spacing;
         }
-        nameContainer.setAngle(-2.6);
+        if (!this.mission.itIsEvent()) nameContainer.setAngle(-2.6);
         return nameContainer;
     }
 
@@ -111,7 +117,7 @@ export default class MissionScene extends Phaser.Scene {
         const formattedName = toTitleCase(this.district.getName());
 
         const startX = newWidth - offsetX * 5 - 10;
-        const startY = newHeight - offsetY * 11;
+        const startY = newHeight - offsetY * 11 + 15;
         const spacingY = 26;
 
         const populationInfo = this.add.text(startX, startY, 'Distrito: ' + formattedName, {
@@ -130,7 +136,7 @@ export default class MissionScene extends Phaser.Scene {
     }
 
     spawnScene(newWidth, newHeight, offsetX, offsetY) {
-        return this.add.image(newWidth - offsetX * 3, newHeight - newHeight / 2 + 20, this.mission.getScene()).setDisplaySize(350, 350);
+        return this.add.image(newWidth - offsetX * 3, newHeight - newHeight / 2 + 35, this.mission.getScene()).setDisplaySize(350, 350);
     }
 
     spawnCloseButton(newWidth, offsetX, offsetY) {

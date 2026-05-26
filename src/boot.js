@@ -76,6 +76,8 @@ import blockerDistrict from '../assets/map/districtScenes/blockerDistrict.png'
 // MISSION ASSETS
 import missionTemplate from '../assets/mission/missionTemplate.png'
 import missionCorruptTemplate from '../assets/mission/missionCorruptTemplate.png'
+import eventTemplate from '../assets/mission/eventTemplate.png'
+import eventCorruptTemplate from '../assets/mission/eventCorruptTemplate.png'
 
 // MISSION DISTRICT SCENES (CONTINUAZIONE...)
 import regularSceneBorrascal from '../assets/mission/scenes/districtBorrascal/regularScene.png'
@@ -440,6 +442,8 @@ export default class Boot extends Phaser.Scene {
     this.load.image('blockerDistrict', blockerDistrict);
     this.load.image('missionTemplate', missionTemplate);
     this.load.image('missionCorruptTemplate', missionCorruptTemplate);
+    this.load.image('eventTemplate', eventTemplate);
+    this.load.image('eventCorruptTemplate', eventCorruptTemplate);
     this.load.image('regularSceneBorrascal', regularSceneBorrascal);
     this.load.image('upMoneySceneBorrascal', upMoneySceneBorrascal);
     this.load.image('downMoneySceneBorrascal', downMoneySceneBorrascal);
