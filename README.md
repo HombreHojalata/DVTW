@@ -389,3 +389,6 @@ Trabajo realizado:
 - Diseño estructura a seguir para implementar los minijuegos
 - Cambios Quality Of Life, e.g. algunas HotKeys dentro del juego
 - Parte de la documentación del GDD
+
+---
+[Vídeo explicativo del gameplay](https://drive.google.com/file/d/1y6Jv3A7LCmsBhjp2-J2qSQ71kw717PB1/view?usp=sharing)
