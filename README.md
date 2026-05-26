@@ -362,11 +362,11 @@ Trabajo realizado:
 
 ## Safia Boufera
 Trabajo realizado:
-- Diseño del mapa
-- Tiled del mapa
-- Diseño assets de personajes
-- Diseño assets escenas de distritos
-- Diseño minijuego wordSearch
+- Diseño de assets de mapa y distritos
+- Diseño de assets de escenas de distritos
+- Diseño de assets de personajes e iconos edificios especiales 
+- Tiled del mapa y implementación del los botones de los distritos 
+- Diseño e implementación del codigo del minijuego wordSearch
   
 ## Viola Pieruccetti
 Trabajo realizado:
